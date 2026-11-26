@@ -1,0 +1,16 @@
+{
+  "name": "ice-flags",
+  "ticks": 300,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 1, 2], "state": "minecraft:stone"},
+    {"min": [0, 2, 0], "max": [6, 2, 2], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 1, 1], "state": "minecraft:frosted_ice[age=0]", "flags": 2},
+    {"tick": 1, "type": "set", "pos": [2, 1, 1], "state": "minecraft:frosted_ice[age=0]", "flags": 2},
+    {"tick": 2, "type": "set", "pos": [4, 1, 1], "state": "minecraft:frosted_ice[age=3]", "flags": 514},
+    {"tick": 3, "type": "set", "pos": [5, 1, 1], "state": "minecraft:frosted_ice[age=3]", "flags": 2},
+    {"tick": 50, "type": "set", "pos": [4, 1, 1], "state": "minecraft:stone", "flags": 2}
+  ]
+}

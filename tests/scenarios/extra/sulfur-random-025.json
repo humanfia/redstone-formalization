@@ -1,0 +1,39 @@
+{
+  "name": "sulfur-random-025",
+  "ticks": 400,
+  "box": {"min": [0, 0, 0], "max": [6, 9, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 1, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:magma_block"},
+    {"pos": [1, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]", "nbt": "{countdown:1}"},
+    {"pos": [2, 3, 1], "state": "minecraft:glass"},
+    {"pos": [0, 3, 1], "state": "minecraft:glass"},
+    {"pos": [1, 3, 2], "state": "minecraft:glass"},
+    {"pos": [1, 3, 0], "state": "minecraft:glass"},
+    {"pos": [1, 3, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [2, 4, 1], "state": "minecraft:glass"},
+    {"pos": [0, 4, 1], "state": "minecraft:glass"},
+    {"pos": [1, 4, 2], "state": "minecraft:glass"},
+    {"pos": [1, 4, 0], "state": "minecraft:glass"},
+    {"pos": [1, 4, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [4, 1, 1], "state": "minecraft:magma_block"},
+    {"pos": [4, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dry]", "nbt": "{countdown:4}"},
+    {"pos": [5, 3, 1], "state": "minecraft:glass"},
+    {"pos": [3, 3, 1], "state": "minecraft:glass"},
+    {"pos": [4, 3, 2], "state": "minecraft:glass"},
+    {"pos": [4, 3, 0], "state": "minecraft:glass"},
+    {"pos": [4, 3, 1], "state": "minecraft:water[level=0]"}
+  ],
+  "actions": [
+    {"tick": 41, "type": "set", "pos": [2, 2, 1], "state": "minecraft:air"},
+    {"tick": 87, "type": "set", "pos": [2, 2, 1], "state": "minecraft:stone"},
+    {"tick": 125, "type": "set", "pos": [1, 1, 1], "state": "minecraft:magma_block"},
+    {"tick": 193, "type": "set", "pos": [4, 3, 1], "state": "minecraft:water[level=0]"},
+    {"tick": 221, "type": "set", "pos": [5, 2, 1], "state": "minecraft:glass"},
+    {"tick": 260, "type": "set", "pos": [4, 1, 1], "state": "minecraft:stone"},
+    {"tick": 342, "type": "set", "pos": [4, 1, 1], "state": "minecraft:magma_block"},
+    {"tick": 400, "type": "set", "pos": [2, 2, 1], "state": "minecraft:glass"}
+  ]
+}

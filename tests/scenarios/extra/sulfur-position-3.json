@@ -1,0 +1,10 @@
+{
+  "name": "sulfur-position-3",
+  "ticks": 460,
+  "box": {"min": [7, 300, -1], "max": [9, 301, -1]},
+  "blocks": [
+    {"pos": [7, 300, -1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"},
+    {"pos": [9, 300, -1], "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"}
+  ],
+  "actions": []
+}

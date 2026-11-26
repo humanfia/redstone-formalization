@@ -1,0 +1,39 @@
+{
+  "name": "sulfur-random-000",
+  "ticks": 700,
+  "box": {"min": [0, 0, 0], "max": [6, 9, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 1, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:magma_block"},
+    {"pos": [1, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dry]", "nbt": "{countdown:4}"},
+    {"pos": [2, 3, 1], "state": "minecraft:glass"},
+    {"pos": [0, 3, 1], "state": "minecraft:glass"},
+    {"pos": [1, 3, 2], "state": "minecraft:glass"},
+    {"pos": [1, 3, 0], "state": "minecraft:glass"},
+    {"pos": [1, 3, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [4, 1, 1], "state": "minecraft:magma_block"},
+    {"pos": [4, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]", "nbt": "{countdown:2}"},
+    {"pos": [5, 3, 1], "state": "minecraft:glass"},
+    {"pos": [3, 3, 1], "state": "minecraft:glass"},
+    {"pos": [4, 3, 2], "state": "minecraft:glass"},
+    {"pos": [4, 3, 0], "state": "minecraft:glass"},
+    {"pos": [4, 3, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [5, 4, 1], "state": "minecraft:glass"},
+    {"pos": [3, 4, 1], "state": "minecraft:glass"},
+    {"pos": [4, 4, 2], "state": "minecraft:glass"},
+    {"pos": [4, 4, 0], "state": "minecraft:glass"},
+    {"pos": [4, 4, 1], "state": "minecraft:water[level=0]"}
+  ],
+  "actions": [
+    {"tick": 111, "type": "set", "pos": [1, 3, 1], "state": "minecraft:water[level=0]"},
+    {"tick": 186, "type": "set", "pos": [4, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]"},
+    {"tick": 225, "type": "set", "pos": [2, 2, 1], "state": "minecraft:air"},
+    {"tick": 351, "type": "set", "pos": [4, 1, 1], "state": "minecraft:magma_block"},
+    {"tick": 356, "type": "set", "pos": [2, 2, 1], "state": "minecraft:air"},
+    {"tick": 478, "type": "set", "pos": [4, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]", "flags": 2},
+    {"tick": 494, "type": "set", "pos": [1, 3, 1], "state": "minecraft:water[level=0]"},
+    {"tick": 664, "type": "set", "pos": [1, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"}
+  ]
+}

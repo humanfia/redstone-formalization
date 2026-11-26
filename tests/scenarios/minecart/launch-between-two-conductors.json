@@ -1,0 +1,20 @@
+{
+  "name": "launch-between-two-conductors",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [4, 1, 4], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:stone"},
+    {"pos": [5, 1, 4], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [11, 1, 11], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [11, 1, 10], "state": "minecraft:stone"},
+    {"pos": [11, 1, 12], "state": "minecraft:stone"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [4.5, 1.0625, 4.5]},
+    {"type": "minecraft:minecart", "pos": [11.5, 1.0625, 11.5]}
+  ]
+}

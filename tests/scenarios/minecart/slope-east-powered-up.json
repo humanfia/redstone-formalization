@@ -1,0 +1,28 @@
+{
+  "name": "slope-east-powered-up",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [15, 5, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [8, 1, 7], "max": [8, 1, 7], "state": "minecraft:stone"},
+    {"min": [9, 1, 7], "max": [9, 2, 7], "state": "minecraft:stone"},
+    {"min": [10, 1, 7], "max": [10, 3, 7], "state": "minecraft:stone"},
+    {"min": [11, 1, 7], "max": [11, 3, 7], "state": "minecraft:stone"},
+    {"min": [12, 1, 7], "max": [12, 3, 7], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [4, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [6, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [7, 1, 7], "state": "minecraft:powered_rail[powered=true,shape=ascending_east,waterlogged=false]"},
+    {"pos": [8, 2, 7], "state": "minecraft:powered_rail[powered=true,shape=ascending_east,waterlogged=false]"},
+    {"pos": [9, 3, 7], "state": "minecraft:powered_rail[powered=true,shape=ascending_east,waterlogged=false]"},
+    {"pos": [10, 4, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [11, 4, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [12, 4, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [4.5, 1.0625, 7.5], "nbt": "{Motion:[0.2d,0.0d,0.0d]}"}
+  ]
+}

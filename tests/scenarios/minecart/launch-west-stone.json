@@ -1,0 +1,15 @@
+{
+  "name": "launch-west-stone",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [3, 1, 7], "max": [12, 1, 7], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"}
+  ],
+  "blocks": [
+    {"pos": [6, 1, 7], "state": "minecraft:stone"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [7.5, 1.0625, 7.5]}
+  ]
+}

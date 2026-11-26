@@ -1,0 +1,24 @@
+{
+  "name": "verify-double-extender-back-first",
+  "ticks": 34,
+  "box": {"min": [0, 0, 0], "max": [16, 16, 16]},
+  "blocks": [
+    {"pos": [5, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [5, 8, 9], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [5, 8, 10], "state": "minecraft:stone"},
+    {"pos": [6, 8, 6], "state": "minecraft:stone"},
+    {"pos": [6, 8, 7], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [6, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [7, 8, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [5, 8, 9], "face": "up"},
+    {"tick": 2, "type": "use", "pos": [6, 8, 7], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [5, 8, 9], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [6, 8, 7], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [5, 8, 9], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [6, 8, 7], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [5, 8, 9], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [6, 8, 7], "face": "up"}
+  ]
+}

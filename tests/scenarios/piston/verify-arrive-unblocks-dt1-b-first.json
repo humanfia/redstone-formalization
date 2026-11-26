@@ -1,0 +1,22 @@
+{
+  "name": "verify-arrive-unblocks-dt1-b-first",
+  "ticks": 34,
+  "box": {"min": [0, 0, 0], "max": [16, 16, 16]},
+  "blocks": [
+    {"pos": [4, 7, 9], "state": "minecraft:stone"},
+    {"pos": [4, 8, 8], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [4, 8, 9], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [5, 8, 8], "state": "minecraft:stone"},
+    {"pos": [6, 7, 6], "state": "minecraft:stone"},
+    {"pos": [6, 8, 6], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [6, 8, 7], "state": "minecraft:sticky_piston[extended=false,facing=south]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [6, 8, 6], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [4, 8, 9], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [4, 8, 9], "face": "up"},
+    {"tick": 15, "type": "use", "pos": [6, 8, 6], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [6, 8, 6], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [4, 8, 9], "face": "up"}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "adv-copper-convert",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 1], "state": "minecraft:copper_chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [2, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:2}]}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 3, "type": "set", "pos": [3, 1, 1], "state": "minecraft:exposed_copper_chest[facing=north,type=right,waterlogged=false]"},
+    {"tick": 10, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 12, "type": "set", "pos": [3, 1, 1], "state": "minecraft:waxed_weathered_copper_chest[facing=north,type=right,waterlogged=false]"},
+    {"tick": 20, "type": "use", "pos": [5, 1, 1], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 26, "type": "destroy", "pos": [2, 2, 1], "drop": false},
+    {"tick": 27, "type": "set", "pos": [2, 2, 1], "state": "minecraft:stone"},
+    {"tick": 28, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 29, "type": "use", "pos": [3, 1, 1], "face": "up"}
+  ]
+}

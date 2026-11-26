@@ -1,0 +1,32 @@
+{
+  "name": "adv-reopen",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [8, 1, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:trapped_chest[facing=south,type=single,waterlogged=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:hopper[enabled=true,facing=down]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 6, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [7, 1, 1], "face": "up"},
+    {"tick": 27, "type": "use", "pos": [7, 1, 1], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 31, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 32, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 33, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 45, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

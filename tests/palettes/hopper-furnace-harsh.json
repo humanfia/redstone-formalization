@@ -1,0 +1,159 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:hopper[enabled=true,facing=*]",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:hopper[enabled=true,facing=*]",
+   "weight": 3,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:6},{Slot:2b,id:\"minecraft:porkchop\",count:2}]}"
+  },
+  {
+   "state": "minecraft:hopper[enabled=true,facing=*]",
+   "weight": 3,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stick\",count:3},{Slot:1b,id:\"minecraft:bucket\",count:1},{Slot:2b,id:\"minecraft:glass_bottle\",count:3},{Slot:3b,id:\"minecraft:blaze_powder\",count:2},{Slot:4b,id:\"minecraft:nether_wart\",count:2}]}"
+  },
+  {
+   "state": "minecraft:hopper[enabled=true,facing=*]",
+   "weight": 2,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:wet_sponge\",count:1},{Slot:1b,id:\"minecraft:lava_bucket\",count:1},{Slot:2b,id:\"minecraft:cobblestone\",count:4}]}"
+  },
+  {
+   "state": "minecraft:chest[facing=*,type=*]",
+   "weight": 2,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:potato\",count:5}]}"
+  },
+  {
+   "state": "minecraft:barrel[facing=*,open=false]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:furnace[facing=*,lit=false]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:furnace[facing=*,lit=*]",
+   "weight": 2,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:stick\",count:1}],lit_time_remaining:20,lit_total_time:100,cooking_time_spent:17,cooking_total_time:200}"
+  },
+  {
+   "state": "minecraft:blast_furnace[facing=*,lit=false]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:blast_furnace[facing=*,lit=false]",
+   "weight": 1,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:5}],cooking_time_spent:31,cooking_total_time:77}"
+  },
+  {
+   "state": "minecraft:smoker[facing=*,lit=false]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:smoker[facing=*,lit=false]",
+   "weight": 1,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:beef\",count:2},{Slot:1b,id:\"minecraft:scaffolding\",count:3},{Slot:2b,id:\"minecraft:cooked_beef\",count:63}]}"
+  },
+  {
+   "state": "minecraft:brewing_stand[has_bottle_0=*,has_bottle_1=*,has_bottle_2=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:brewing_stand",
+   "weight": 1,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:glass_bottle\",count:1},{Slot:3b,id:\"minecraft:glass_bottle\",count:2},{Slot:4b,id:\"minecraft:blaze_powder\",count:1}],BrewTime:7}"
+  },
+  {
+   "state": "minecraft:furnace[facing=*,lit=*]",
+   "weight": 2,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:wet_sponge\",count:2},{Slot:1b,id:\"minecraft:bucket\",count:1}],lit_time_remaining:3,lit_total_time:100,cooking_time_spent:195,cooking_total_time:200}"
+  },
+  {
+   "state": "minecraft:smoker[facing=*,lit=*]",
+   "weight": 2,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:potato\",count:2},{Slot:1b,id:\"minecraft:stick\",count:4}],cooking_time_spent:33,cooking_total_time:47}"
+  },
+  {
+   "state": "minecraft:blast_furnace[facing=*,lit=*]",
+   "weight": 2,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_copper\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:7}],cooking_time_spent:3,cooking_total_time:7}"
+  },
+  {
+   "state": "minecraft:brewing_stand",
+   "weight": 2,
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:potion\",count:1},{Slot:3b,id:\"minecraft:nether_wart\",count:2},{Slot:4b,id:\"minecraft:blaze_powder\",count:2}],Fuel:0}"
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 1
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    3,
+    8
+   ],
+   "targets": [
+    "minecraft:lever",
+    "minecraft:lever",
+    "minecraft:furnace",
+    "minecraft:brewing_stand",
+    "minecraft:chest",
+    "minecraft:barrel",
+    "minecraft:smoker",
+    "minecraft:blast_furnace",
+    "minecraft:hopper"
+   ],
+   "faces": [
+    "up",
+    "south",
+    "east"
+   ]
+  },
+  "set": {
+   "count": [
+    4,
+    10
+   ],
+   "states": [
+    "minecraft:stone",
+    "minecraft:air",
+    "minecraft:air",
+    "minecraft:hopper[enabled=*,facing=*]",
+    "minecraft:furnace[facing=*,lit=*]",
+    "minecraft:smoker[facing=*,lit=*]",
+    "minecraft:blast_furnace[facing=*,lit=*]",
+    "minecraft:brewing_stand[has_bottle_0=*,has_bottle_1=*,has_bottle_2=*]",
+    "minecraft:lever[face=*,facing=*,powered=*]",
+    "minecraft:chest[facing=*,type=*]"
+   ],
+   "flags": 259
+  },
+  "destroy": {
+   "count": [
+    1,
+    4
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:lever",
+    "minecraft:redstone_lamp"
+   ]
+  }
+ }
+}

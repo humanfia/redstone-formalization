@@ -42,6 +42,8 @@ world, and the model has no other players.
 * Brewing: every brewing recipe asks for potion contents, a data component, so with the stacks
   of the model a brewing stand never brews. It still burns its fuel and shows its bottles.
 * A cat sitting on a chest, which blocks it.
+* Waterlogged chests: a shape update of one schedules a fluid tick, which the engine does not
+  have, so it sets `Level.overflow`.
 * Containers of other components (dispenser, dropper, crafter, jukebox, chiseled bookshelf,
   decorated pot, shelf, composter) are not part of the view of this file yet: a hopper that
   meets one sets `Level.overflow`.
@@ -193,14 +195,15 @@ structure ChestState where
   facing : Direction
   kind : ChestType
   trapped : Bool
+  waterlogged : Bool
 
 /-- The chest properties of a block state, if the block is a `ChestBlock`: a chest, a trapped
 chest or a copper chest. -/
 def chestState? : Block → Option ChestState
-  | .chest s => some ⟨s.facing.toDirection, s.type, false⟩
-  | .trappedChest s => some ⟨s.facing.toDirection, s.type, true⟩
-  | .copperChest _ s => some ⟨s.facing.toDirection, s.type, false⟩
-  | .weatheringCopperChest _ s => some ⟨s.facing.toDirection, s.type, false⟩
+  | .chest s => some ⟨s.facing.toDirection, s.type, false, s.waterlogged⟩
+  | .trappedChest s => some ⟨s.facing.toDirection, s.type, true, s.waterlogged⟩
+  | .copperChest _ s => some ⟨s.facing.toDirection, s.type, false, s.waterlogged⟩
+  | .weatheringCopperChest _ s => some ⟨s.facing.toDirection, s.type, false, s.waterlogged⟩
   | _ => none
 
 /-- The chest state with another `ChestBlock.TYPE`. -/
@@ -585,7 +588,8 @@ def base (self : Block) : Behaviour :=
 
 /-- `ChestBlock.updateShape`: a single chest joins a neighbouring half that points at it, and a
 half whose other half is gone becomes single again. A copper chest then takes the block of the
-half it is joined to (`CopperChestBlock.updateShape`). Waterlogging is left out. -/
+half it is joined to (`CopperChestBlock.updateShape`). The fluid tick that a waterlogged chest
+schedules first is not part of this function: the behaviour sets `Level.overflow` for it. -/
 def chestUpdateShape (self : Block) (c : ChestState) (d : Direction) (neighbour : Block) :
     Block :=
   let canConnect := if isCopperChest self then isCopperChest neighbour else neighbour.is self.id
@@ -626,7 +630,10 @@ def chest (self : Block) (c : ChestState) : Behaviour :=
       | some container => redstoneSignal (container.items l)
       | none => 0
     keepsBlockEntity := fun old => isCopperChest self && isCopperChest old
-    updateShape := fun _ d _ neighbour => pure (chestUpdateShape self c d neighbour)
+    updateShape := fun _ d _ neighbour => do
+      -- `ticks.scheduleTick(pos, Fluids.WATER, ...)`: fluid ticks are not modelled.
+      if c.waterlogged then Level.setOverflow
+      pure (chestUpdateShape self c d neighbour)
     useWithoutItem := fun p _ => do
       if let some container := combine (← get) self p false then openMenu container.positions
       return true

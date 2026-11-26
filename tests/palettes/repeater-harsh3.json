@@ -1,0 +1,75 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:smooth_stone_slab[type=*,waterlogged=false]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:glass",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 6
+  },
+  {
+   "state": "minecraft:repeater[delay=*,facing=*,locked=*,powered=*]",
+   "weight": 16
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    6,
+    14
+   ],
+   "targets": [
+    "minecraft:lever",
+    "minecraft:repeater"
+   ]
+  },
+  "set": {
+   "count": [
+    4,
+    10
+   ],
+   "states": [
+    "minecraft:stone",
+    "minecraft:air",
+    "minecraft:air",
+    "minecraft:redstone_lamp[lit=false]",
+    "minecraft:smooth_stone_slab[type=*,waterlogged=false]",
+    "minecraft:lever[face=*,facing=*,powered=*]",
+    "minecraft:repeater[delay=*,facing=*,locked=*,powered=*]",
+    "minecraft:repeater[delay=*,facing=*,locked=false,powered=*]"
+   ],
+   "flags": 3
+  },
+  "destroy": {
+   "count": [
+    3,
+    8
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:redstone_lamp",
+    "minecraft:lever",
+    "minecraft:repeater",
+    "minecraft:smooth_stone_slab"
+   ]
+  }
+ }
+}

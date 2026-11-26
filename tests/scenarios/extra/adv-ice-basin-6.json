@@ -1,0 +1,311 @@
+{
+ "name": "adv-ice-basin-6",
+ "ticks": 650,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   3,
+   4,
+   5
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    3,
+    3,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:frosted_ice[age=3]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:frosted_ice[age=2]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    4
+   ],
+   "state": "minecraft:frosted_ice[age=1]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:frosted_ice[age=1]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:frosted_ice[age=2]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:frosted_ice[age=2]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:frosted_ice[age=0]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    1,
+    3,
+    1
+   ],
+   "state": "minecraft:frosted_ice[age=0]",
+   "flags": 2
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:frosted_ice[age=1]",
+   "flags": 2
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:frosted_ice[age=1]",
+   "flags": 2
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:frosted_ice[age=0]",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:frosted_ice[age=2]",
+   "flags": 2
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:frosted_ice[age=3]",
+   "flags": 18
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "state": "minecraft:frosted_ice[age=1]",
+   "flags": 2
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:frosted_ice[age=1]",
+   "flags": 18
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:frosted_ice[age=3]",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:frosted_ice[age=0]",
+   "flags": 2
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:frosted_ice[age=2]",
+   "flags": 18
+  },
+  {
+   "tick": 82,
+   "type": "set",
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:frosted_ice[age=0]",
+   "flags": 3
+  },
+  {
+   "tick": 123,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 129,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 168,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 177,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "state": "minecraft:frosted_ice[age=2]",
+   "flags": 3
+  },
+  {
+   "tick": 329,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 2
+  },
+  {
+   "tick": 346,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:stone",
+   "flags": 2
+  },
+  {
+   "tick": 357,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:frosted_ice[age=2]",
+   "flags": 2
+  },
+  {
+   "tick": 436,
+   "type": "set",
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:frosted_ice[age=3]",
+   "flags": 2
+  }
+ ]
+}

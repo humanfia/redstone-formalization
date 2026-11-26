@@ -43,6 +43,16 @@ server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`.
   lets a geyser through is read from its collision shape in an empty world; this is wrong for
   a moving piston, whose shape is that of its block entity. The world seed, from which the
   phase lengths are drawn, is the constant `worldSeed`.
+* A ticker bound to another state than the block's. When sulfur is put where a block stood
+  whose removal makes a neighbour change (a powered lever next to a skull, say), the shape
+  update of that neighbour turns the new sulfur `dry` inside `LevelChunk.setBlockState`, before
+  its block entity exists; the outer call then binds the ticker of the state that was asked for
+  (`BlockEntity.setBlockState` followed by `updateBlockEntityTicker`). The game so runs the
+  countdown ticker of an `erupting` block on a `dry` one, which becomes `dormant` at the next
+  multiple of 20 ticks. The model keeps the ticker in the list, as the game does, but runs the
+  ticker of the state the block has, which for `dry` does nothing. Modelling this needs the
+  level to remember the state each ticker was bound with
+  (`tests/pending/scenarios/extra/adv-fuzz-a-020.json`).
 * `WitherSkullBlock.setPlacedBy` (building a wither), `getStateForPlacement`: players do not
   place blocks.
 * `SlimeBlock.fallOn`, `HoneyBlock.fallOn` and `HoneyBlock.entityInside`: fall damage and the

@@ -1,0 +1,631 @@
+{
+ "name": "adv-skull-conductor-swap",
+ "ticks": 55,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   3,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:skeleton_skull[powered=false,rotation=0]",
+   "nbt": "{note_block_sound:\"minecraft:block.note_block.imitate.skeleton\",custom_name:\"n0\"}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:wither_skeleton_skull[powered=true,rotation=5]",
+   "nbt": "{note_block_sound:\"minecraft:block.note_block.imitate.wither_skeleton\",custom_name:\"n1\"}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:zombie_head[powered=false,rotation=10]",
+   "nbt": "{note_block_sound:\"minecraft:block.note_block.imitate.zombie\",custom_name:\"n2\"}"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:player_head[powered=true,rotation=15]",
+   "nbt": "{note_block_sound:\"minecraft:block.note_block.imitate.ender_dragon\",custom_name:\"n3\"}"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:creeper_head[powered=false,rotation=4]",
+   "nbt": "{note_block_sound:\"minecraft:block.note_block.imitate.creeper\",custom_name:\"n4\"}"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    1
+   ],
+   "state": "minecraft:dragon_head[powered=true,rotation=9]",
+   "nbt": "{note_block_sound:\"minecraft:block.note_block.imitate.ender_dragon\",custom_name:\"n5\"}"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "state": "minecraft:piglin_head[powered=false,rotation=14]",
+   "nbt": "{note_block_sound:\"minecraft:block.note_block.imitate.piglin\",custom_name:\"n6\"}"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 14,
+   "type": "use",
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 17,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 22,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 24,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 25,
+   "type": "set",
+   "pos": [
+    11,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 26,
+   "type": "set",
+   "pos": [
+    13,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 30,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 32,
+   "type": "use",
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 33,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 34,
+   "type": "use",
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 35,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 36,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:wither_skeleton_skull[powered=false,rotation=3]",
+   "flags": 3
+  },
+  {
+   "tick": 36,
+   "type": "use",
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 37,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    1
+   ]
+  },
+  {
+   "tick": 38,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:player_head[powered=false,rotation=3]",
+   "flags": 2
+  },
+  {
+   "tick": 39,
+   "type": "destroy",
+   "pos": [
+    7,
+    1,
+    1
+   ]
+  },
+  {
+   "tick": 40,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:dragon_head[powered=false,rotation=3]",
+   "flags": 18
+  },
+  {
+   "tick": 41,
+   "type": "destroy",
+   "pos": [
+    11,
+    1,
+    1
+   ]
+  },
+  {
+   "tick": 42,
+   "type": "set",
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "state": "minecraft:skeleton_skull[powered=false,rotation=3]",
+   "flags": 3
+  },
+  {
+   "tick": 44,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 45,
+   "type": "use",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 46,
+   "type": "use",
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 47,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 48,
+   "type": "use",
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 49,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 50,
+   "type": "use",
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "face": "up"
+  }
+ ]
+}

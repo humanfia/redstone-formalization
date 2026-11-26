@@ -1,2 +1,7 @@
-/.lake
+# Based on https://github.com/github/gitignore/blob/main/Lean.gitignore
+
+# cache and other artifacts produced by Lean's Lake build tool
+.lake/
+
+# Python bytecode of the tools
 __pycache__/

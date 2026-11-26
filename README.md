@@ -1,9 +1,12 @@
-# Redstone formalization
+# redstone-formalization
 
-A formalization of Minecraft redstone in [Lean 4](https://lean-lang.org), built on
-[Mathlib](https://github.com/leanprover-community/mathlib4).
+> A formalization of Minecraft: Java Edition redstone in Lean 4.
 
-The project has three parts:
+This project formalizes Minecraft redstone in [Lean 4](https://lean-lang.org), built on
+[Mathlib](https://github.com/leanprover-community/mathlib4). The Lean library is called
+`Redstone`.
+
+It has three parts:
 
 1. **Components.** The redstone blocks themselves: lever, dust, torch, repeater, comparator,
    piston, observer and so on, with the block state each one carries.
@@ -15,6 +18,70 @@ The project has three parts:
 The reference is **Minecraft: Java Edition 26.3**. The model is executable, and it is tested
 against the real 26.3 server: a scenario is run on the server and in Lean, and the two must
 agree after every game tick (see [Testing against the server](#testing-against-the-server)).
+
+## Install
+
+Install [elan](https://github.com/leanprover/elan), then clone the repository and build it:
+
+```sh
+git clone https://github.com/humanfia/redstone-formalization.git
+cd redstone-formalization
+lake exe cache get
+lake build
+lake test
+```
+
+`lake exe cache get` downloads a prebuilt Mathlib, which saves compiling it yourself.
+`lake test` runs the recorded scenarios through the model; it needs no Minecraft.
+
+## Usage
+
+Import the whole library, or only the modules you need:
+
+```lean
+import Redstone
+```
+
+To use it from another Lake project, add it to that project's `lakefile.toml`:
+
+```toml
+[[require]]
+name = "Redstone"
+git = "https://github.com/humanfia/redstone-formalization.git"
+rev = "main"
+```
+
+### How a component is written
+
+Every block class of the game overrides some methods of `BlockBehaviour`. A component defines
+`behaviour : Block → Behaviour` for its blocks, starting from `Behaviour.inert` and overriding
+the same methods; `Redstone.Component.Lever` and `Redstone.Component.Lamp` are the models to
+follow. Reactions run in the monad `M` and use the operations of `Redstone.Mechanics.Update`
+and `Redstone.Mechanics.Power`, which carry the names of the game's own methods
+(`Level.setBlock`, `Level.scheduleTick`, `Level.hasNeighborSignal`, ...).
+
+A component owns its file under `Redstone/Component` (or `Redstone/Entity`), the data of its
+block entities under `Redstone/Block/Entity` (or of its entities under `Redstone/Entity/Data`),
+and its scenarios. Which Java classes belong to which component is listed in
+`tools/gen/components.json`.
+
+### Testing against the server
+
+`tools/mc/setup.sh` installs the reference environment outside the repository: a JDK, the
+official 26.3 server and its decompiled sources, for reading. Then:
+
+```sh
+tools/fuzz.py --palette tests/palettes/lever.json --count 60 --size 5x3x5 --ticks 30 --seed 1 --out tests/scenarios/lever
+tools/record.sh tests/scenarios/lever        # runs the real server, writes tests/traces/lever
+lake exe difftest tests/scenarios/lever      # runs the model and compares
+```
+
+The formats, and exactly what is compared, are described in [tests/FORMAT.md](tests/FORMAT.md);
+the harness in [tools/harness/README.md](tools/harness/README.md). Traces come from the server
+only. When the model disagrees with a trace, the model is wrong.
+
+The block inventory is generated from the server as well:
+`tools/harness/run.sh dump`, then `tools/gen/gen_blocks.py` and `tools/gen/gen_dispatch.py`.
 
 ## Status
 
@@ -42,52 +109,11 @@ What the model leaves out: fluids do not flow, there is no light, destroyed bloc
 every chunk is loaded, players and mobs only exist as inputs, and the experimental redstone
 wire is off.
 
-## Building
+## Contributing
 
-Install [elan](https://github.com/leanprover/elan), then:
-
-```
-lake exe cache get
-lake build
-lake test
-```
-
-`lake exe cache get` downloads a prebuilt Mathlib, which saves compiling it yourself.
-`lake test` runs the recorded scenarios through the model; it needs no Minecraft.
-
-## How a component is written
-
-Every block class of the game overrides some methods of `BlockBehaviour`. A component defines
-`behaviour : Block → Behaviour` for its blocks, starting from `Behaviour.inert` and overriding
-the same methods; `Redstone.Component.Lever` and `Redstone.Component.Lamp` are the models to
-follow. Reactions run in the monad `M` and use the operations of `Redstone.Mechanics.Update`
-and `Redstone.Mechanics.Power`, which carry the names of the game's own methods
-(`Level.setBlock`, `Level.scheduleTick`, `Level.hasNeighborSignal`, ...).
-
-A component owns its file under `Redstone/Component` (or `Redstone/Entity`), the data of its
-block entities under `Redstone/Block/Entity` (or of its entities under `Redstone/Entity/Data`),
-and its scenarios. Which Java classes belong to which component is listed in
-`tools/gen/components.json`.
-
-## Testing against the server
-
-`tools/mc/setup.sh` installs the reference environment outside the repository: a JDK, the
-official 26.3 server and its decompiled sources, for reading. Then:
-
-```
-tools/fuzz.py --palette tests/palettes/lever.json --count 60 --size 5x3x5 --ticks 30 --seed 1 --out tests/scenarios/lever
-tools/record.sh tests/scenarios/lever        # runs the real server, writes tests/traces/lever
-lake exe difftest tests/scenarios/lever      # runs the model and compares
-```
-
-The formats, and exactly what is compared, are described in [tests/FORMAT.md](tests/FORMAT.md);
-the harness in [tools/harness/README.md](tools/harness/README.md). Traces come from the server
-only. When the model disagrees with a trace, the model is wrong.
-
-The block inventory is generated from the server as well:
-`tools/harness/run.sh dump`, then `tools/gen/gen_blocks.py` and `tools/gen/gen_dispatch.py`.
-
-## Conventions
+Questions and bug reports go to
+[GitHub issues](https://github.com/humanfia/redstone-formalization/issues). Pull requests are
+welcome. Please follow the project conventions:
 
 * Coordinates follow the game: east is `+x`, up is `+y`, south is `+z`.
 * Definitions follow the game's code and carry its names, so that they can be read side by
@@ -97,4 +123,4 @@ The block inventory is generated from the server as well:
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+[MIT](LICENSE) © 2026 Humanfia

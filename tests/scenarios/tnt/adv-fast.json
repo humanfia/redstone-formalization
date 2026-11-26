@@ -1,0 +1,223 @@
+{
+ "name": "adv-fast",
+ "ticks": 78,
+ "box": {
+  "min": [
+   -25,
+   -3,
+   -25
+  ],
+  "max": [
+   45,
+   70,
+   45
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    20,
+    0,
+    20
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    20,
+    5
+   ],
+   "state": "minecraft:ladder[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    21,
+    5
+   ],
+   "state": "minecraft:ladder[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    15,
+    5
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    9,
+    16,
+    5
+   ],
+   "state": "minecraft:vine[east=false,north=false,south=false,up=true,west=false]"
+  },
+  {
+   "pos": [
+    13,
+    12,
+    5
+   ],
+   "state": "minecraft:stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    10,
+    12
+   ],
+   "state": "minecraft:ladder[facing=east,waterlogged=false]"
+  },
+  {
+   "pos": [
+    12,
+    8,
+    12
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    16
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    16,
+    2,
+    16
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    16
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.5,
+    40.0,
+    5.5
+   ],
+   "nbt": "{Motion:[0.0d,-2.0d,0.0d],fuse:70s,explosion_power:0.0f,fall_distance:10.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.9,
+    45.0,
+    5.1
+   ],
+   "nbt": "{Motion:[0.0d,-3.3d,0.0d],fuse:70s,explosion_power:0.0f,fall_distance:3.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    9.5,
+    40.0,
+    5.5
+   ],
+   "nbt": "{Motion:[0.0d,-1.2d,0.0d],fuse:70s,explosion_power:0.0f,fall_distance:7.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    9.2,
+    30.0,
+    5.8
+   ],
+   "nbt": "{Motion:[0.01d,-2.2d,-0.01d],fuse:70s,explosion_power:0.0f,fall_distance:7.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    13.5,
+    40.0,
+    5.5
+   ],
+   "nbt": "{Motion:[0.0d,-9.0d,0.0d],fuse:70s,explosion_power:0.0f,fall_distance:1.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.5,
+    10.6,
+    12.5
+   ],
+   "nbt": "{Motion:[1.6d,0.0d,0.0d],fuse:70s,explosion_power:0.0f,fall_distance:2.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    9.0,
+    12.4
+   ],
+   "nbt": "{Motion:[3.1d,0.1d,0.02d],fuse:70s,explosion_power:0.0f,fall_distance:2.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.5,
+    1.0,
+    2.5
+   ],
+   "nbt": "{Motion:[4.0d,0.0d,3.9d],fuse:70s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    18.5,
+    1.2,
+    18.5
+   ],
+   "nbt": "{Motion:[-2.5d,2.0d,-2.6d],fuse:70s,explosion_power:0.0f,fall_distance:0.5d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    10.5,
+    3.0,
+    16.5
+   ],
+   "nbt": "{Motion:[-2.9d,-0.4d,0.0d],fuse:70s,explosion_power:0.0f,fall_distance:4.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    10.5,
+    60.0,
+    10.5
+   ],
+   "nbt": "{Motion:[0.3d,-12.0d,-0.2d],fuse:70s,explosion_power:2.0f,fall_distance:50.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    16.5,
+    1.0,
+    10.5
+   ],
+   "nbt": "{Motion:[0.0d,6.0d,0.0d],fuse:70s,explosion_power:0.0f}"
+  }
+ ]
+}

@@ -1,0 +1,127 @@
+{
+ "name": "adv-destroy-drop-redstone-ore",
+ "ticks": 12,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   10,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_ore[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 4,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ]
+}

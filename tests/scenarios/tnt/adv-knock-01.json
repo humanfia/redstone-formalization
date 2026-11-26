@@ -1,0 +1,630 @@
+{
+ "name": "adv-knock-01",
+ "ticks": 75,
+ "box": {
+  "min": [
+   -10,
+   -4,
+   -10
+  ],
+  "max": [
+   20,
+   14,
+   20
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    5
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    6
+   ],
+   "state": "minecraft:stone_stairs[facing=west,half=bottom,shape=outer_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    9
+   ],
+   "state": "minecraft:end_portal_frame[eye=false,facing=north]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:stone_stairs[facing=north,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:stone_stairs[facing=north,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    6
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    9
+   ],
+   "state": "minecraft:stone_stairs[facing=north,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:stone_stairs[facing=north,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=low,south=low,up=false,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:iron_bars[east=false,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:stone_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_bars[east=false,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    7
+   ],
+   "state": "minecraft:stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    9
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    1
+   ],
+   "state": "minecraft:stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=low,south=low,up=false,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    9
+   ],
+   "state": "minecraft:iron_bars[east=false,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    2
+   ],
+   "state": "minecraft:iron_bars[east=false,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    3
+   ],
+   "state": "minecraft:stone_stairs[facing=north,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "state": "minecraft:iron_bars[east=false,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    9
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=low,south=low,up=false,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    3
+   ],
+   "state": "minecraft:stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    5
+   ],
+   "state": "minecraft:end_portal_frame[eye=false,facing=north]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    7
+   ],
+   "state": "minecraft:stone_stairs[facing=west,half=bottom,shape=outer_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    9
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.258125400291962,
+    1.1121671051074729,
+    5.7783272207989285
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:4s,explosion_power:1.2f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.29836079118577,
+    3.9707477592280065,
+    7.196282922417599
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:43s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.647607924563831,
+    1.5134298634053833,
+    9.124175722024198
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:46s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.506366254252726,
+    2.360987936130584,
+    5.508012485399066
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:40s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.136687733746722,
+    3.9918694993282626,
+    8.48503006212802
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:39s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.841913568152252,
+    3.6645423454906974,
+    4.557611798440561
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:53s,explosion_power:1.4f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.4702305328243948,
+    1.3721086229278585,
+    6.133714036099974
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:44s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.857862402426434,
+    1.0595337422782634,
+    7.975608881556255
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:48s,explosion_power:1.4f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.7647741253167775,
+    1.4756918599437676,
+    3.031068363845838
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:59s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.2666517231722363,
+    1.160686500384016,
+    8.23247055175207
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:43s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    9.425206271166644,
+    3.0957666932776533,
+    4.501699561747401
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:45s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.132553654415216,
+    3.24330526675297,
+    8.584185487955127
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:49s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.814517941774664,
+    3.3046768897860925,
+    4.058579561577157
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:49s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.461852069638718,
+    2.3984305959306966,
+    8.264642429682215
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:35s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    8.521721842080765,
+    1.3837861634689723,
+    3.41119214672416
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:28s,explosion_power:1.4f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    8.861805727165592,
+    3.874020628660771,
+    4.229147976805644
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:44s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    8.73058362146855,
+    2.0886375152739114,
+    8.85403218046477
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:26s,explosion_power:1.4f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.7757276548678425,
+    1.0453444856108884,
+    2.539384273877242
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:35s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.442464070601847,
+    2.0380564461979507,
+    2.7104766729011684
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:36s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.9154823479021665,
+    1.076025933951311,
+    9.197226181037411
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:48s,explosion_power:1.4f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.484132422702132,
+    1.7008771491764723,
+    1.8831976186345019
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:25s,explosion_power:1.4f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.139577658521928,
+    2.3746477609014844,
+    5.377312449514443
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:43s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.203079027731688,
+    3.94129701599238,
+    8.675584426029156
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:58s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.435109455916146,
+    1.9747789395740312,
+    9.323761540617749
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:56s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.2135761076755545,
+    4.347147229697531,
+    7.142062829178864
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:52s,explosion_power:1.4f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.6527844493371955,
+    3.12688274914338,
+    7.784834993229701
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:33s,explosion_power:1.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5614744058647243,
+    1.3785009867006133,
+    1.7582028079976104
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:28s,explosion_power:0.0f}"
+  }
+ ]
+}

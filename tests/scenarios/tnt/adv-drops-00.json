@@ -1,0 +1,1021 @@
+{
+ "name": "adv-drops-00",
+ "ticks": 110,
+ "box": {
+  "min": [
+   -12,
+   -12,
+   -12
+  ],
+  "max": [
+   17,
+   17,
+   17
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    1
+   ],
+   "state": "minecraft:quartz_block"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    2
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    3
+   ],
+   "state": "minecraft:pumpkin"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:white_stained_glass"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:amethyst_block"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:hay_block[axis=y]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:amethyst_block"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:ancient_debris"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    1
+   ],
+   "state": "minecraft:white_stained_glass"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    2
+   ],
+   "state": "minecraft:bone_block[axis=y]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    3
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    4
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    0
+   ],
+   "state": "minecraft:packed_ice"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    1
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    2
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    3
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    4
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    0
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "state": "minecraft:amethyst_block"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    2
+   ],
+   "state": "minecraft:hay_block[axis=y]"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    3
+   ],
+   "state": "minecraft:ancient_debris"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    4
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:nether_bricks"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:white_stained_glass"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:purpur_block"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    4
+   ],
+   "state": "minecraft:tinted_glass"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    1
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:purpur_block"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    4
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    0
+   ],
+   "state": "minecraft:netherrack"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    2
+   ],
+   "state": "minecraft:stone_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    3
+   ],
+   "state": "minecraft:oak_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    4
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    0
+   ],
+   "state": "minecraft:ancient_debris"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    2
+   ],
+   "state": "minecraft:sandstone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:snow_block"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:crafting_table"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:netherrack"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:sponge"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:purpur_block"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:sponge"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:cobblestone"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "state": "minecraft:white_stained_glass"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    0
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    1
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:bricks"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    3
+   ],
+   "state": "minecraft:nether_bricks"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    4
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    0
+   ],
+   "state": "minecraft:sponge"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    1
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    2
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    3
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    4
+   ],
+   "state": "minecraft:snow_block"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:bricks"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    0
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:sandstone"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:purpur_block"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    0
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    4
+   ],
+   "state": "minecraft:quartz_block"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    0
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    1
+   ],
+   "state": "minecraft:tinted_glass"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    2
+   ],
+   "state": "minecraft:bone_block[axis=y]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "state": "minecraft:purpur_block"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    4
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    0
+   ],
+   "state": "minecraft:amethyst_block"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:purpur_block"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:hay_block[axis=y]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:ancient_debris"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:sponge"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:quartz_block"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    1
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:sandstone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    0
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    1
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    2
+   ],
+   "state": "minecraft:oak_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    3
+   ],
+   "state": "minecraft:tinted_glass"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    4
+   ],
+   "state": "minecraft:clay"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.5,
+    2.0,
+    2.5
+   ],
+   "nbt": "{fuse:3s}"
+  }
+ ]
+}

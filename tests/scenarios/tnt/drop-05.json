@@ -1,0 +1,190 @@
+{
+ "name": "drop-05",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:ladder[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:cobblestone_wall[east=low,north=tall,south=low,up=true,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    4
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:bedrock"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=outer_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    4
+   ],
+   "state": "minecraft:iron_bars[east=true,north=true,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:grindstone[face=floor,facing=west]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:iron_bars[east=true,north=true,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:lightning_rod[facing=north,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:grindstone[face=floor,facing=east]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    5
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:grindstone[face=floor,facing=east]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:flower_pot"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.685,
+    6.075,
+    1.391
+   ],
+   "nbt": "{Motion:[-0.16d,-0.194d,-0.731d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.573,
+    1.588,
+    6.264
+   ],
+   "nbt": "{Motion:[-0.049d,-0.289d,0.211d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.901,
+    1.891,
+    2.655
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  }
+ ]
+}

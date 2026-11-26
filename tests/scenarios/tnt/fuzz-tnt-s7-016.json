@@ -1,0 +1,45 @@
+{
+  "name": "fuzz-tnt-s7-016",
+  "ticks": 140,
+  "box": {"min": [0, 0, 0], "max": [2, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:stone"},
+    {"pos": [0, 1, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 3, 0], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [0, 3, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 4, 0], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [0, 4, 1], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [0, 4, 2], "state": "minecraft:glass"},
+    {"pos": [0, 5, 0], "state": "minecraft:stone"},
+    {"pos": [1, 1, 0], "state": "minecraft:stone"},
+    {"pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"pos": [1, 2, 0], "state": "minecraft:tnt[unstable=true]"},
+    {"pos": [1, 2, 2], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [1, 4, 1], "state": "minecraft:lever[face=floor,facing=west,powered=true]"},
+    {"pos": [1, 5, 2], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:glass"},
+    {"pos": [2, 2, 0], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:stone"},
+    {"pos": [2, 3, 0], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [2, 3, 1], "state": "minecraft:tnt[unstable=true]"},
+    {"pos": [2, 4, 1], "state": "minecraft:obsidian"},
+    {"pos": [2, 5, 1], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 23, "type": "set", "pos": [1, 5, 0], "state": "minecraft:air"},
+    {"tick": 32, "type": "set", "pos": [0, 1, 0], "state": "minecraft:lever[face=wall,facing=south,powered=true]"},
+    {"tick": 37, "type": "set", "pos": [2, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 65, "type": "use", "pos": [2, 2, 0], "face": "up"},
+    {"tick": 91, "type": "set", "pos": [1, 3, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 94, "type": "use", "pos": [0, 4, 0], "face": "up"},
+    {"tick": 117, "type": "use", "pos": [2, 3, 0], "face": "up"},
+    {"tick": 126, "type": "destroy", "pos": [1, 1, 1], "drop": false},
+    {"tick": 140, "type": "destroy", "pos": [2, 1, 0], "drop": false}
+  ]
+}

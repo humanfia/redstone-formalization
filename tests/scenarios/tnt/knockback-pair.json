@@ -1,0 +1,69 @@
+{
+ "name": "knockback-pair",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -8,
+   -8,
+   -8
+  ],
+  "max": [
+   14,
+   12,
+   14
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.5,
+    1.0,
+    3.5
+   ],
+   "nbt": "{fuse:10s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.6,
+    1.0,
+    3.7
+   ],
+   "nbt": "{fuse:40s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.0,
+    3.0,
+    2.0
+   ],
+   "nbt": "{fuse:45s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.5,
+    1.0,
+    3.5
+   ],
+   "nbt": "{fuse:50s}"
+  }
+ ]
+}

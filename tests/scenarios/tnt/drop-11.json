@@ -1,0 +1,199 @@
+{
+ "name": "drop-11",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:bedrock"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=low,south=tall,up=false,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=4]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:glass_pane[east=false,north=false,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:cauldron"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:oak_fence[east=false,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:bedrock"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    1
+   ],
+   "state": "minecraft:iron_chain[axis=x,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    4
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:cake[bites=0]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.166,
+    5.933,
+    6.274
+   ],
+   "nbt": "{Motion:[0.354d,-0.239d,0.129d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.439,
+    4.552,
+    0.681
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    6.211,
+    3.27,
+    3.038
+   ],
+   "nbt": "{Motion:[0.592d,0.54d,-0.587d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.547,
+    5.463,
+    3.52
+   ],
+   "nbt": "{Motion:[0.758d,0.693d,0.789d]}"
+  }
+ ]
+}

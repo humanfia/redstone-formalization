@@ -1,0 +1,141 @@
+{
+ "name": "drop-37",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    4
+   ],
+   "state": "minecraft:oak_fence_gate[facing=east,in_wall=true,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_fence[east=true,north=true,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:oak_fence[east=true,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=inner_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:grindstone[face=ceiling,facing=west]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=top,shape=outer_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:chorus_plant[down=false,east=false,north=false,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "state": "minecraft:end_rod[facing=east]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    5
+   ],
+   "state": "minecraft:flower_pot"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    6.298,
+    4.96,
+    3.339
+   ],
+   "nbt": "{Motion:[-0.683d,0.134d,0.572d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.661,
+    1.58,
+    1.186
+   ],
+   "nbt": "{Motion:[0.543d,-0.357d,-0.533d]}"
+  }
+ ]
+}

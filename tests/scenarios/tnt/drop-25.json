@@ -1,0 +1,143 @@
+{
+ "name": "drop-25",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=north,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:candle[candles=2,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:cake[bites=1]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=north,half=bottom,shape=outer_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:amethyst_cluster[facing=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    6
+   ],
+   "state": "minecraft:glass_pane[east=false,north=true,south=false,waterlogged=false,west=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.757,
+    2.54,
+    5.279
+   ],
+   "nbt": "{Motion:[-0.005d,0.068d,-0.094d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.876,
+    6.276,
+    1.338
+   ],
+   "nbt": "{Motion:[0.025d,0.067d,-0.07d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.942,
+    5.01,
+    6.123
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.42,
+    2.706,
+    3.29
+   ],
+   "nbt": "{Motion:[0.013d,0.421d,0.546d]}"
+  }
+ ]
+}

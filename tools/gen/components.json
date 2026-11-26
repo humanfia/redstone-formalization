@@ -1,0 +1,31 @@
+{
+  "comment": "Which component module defines the behaviour of which Java block classes. A block belongs to the first entry that names a class in its class chain. Read by tools/gen/gen_dispatch.py.",
+  "components": [
+    {"module": "Dust", "classes": ["RedstoneWireBlock"]},
+    {"module": "Torch", "classes": ["RedstoneTorchBlock", "RedstoneWallTorchBlock", "PoweredBlock"]},
+    {"module": "Repeater", "classes": ["RepeaterBlock"]},
+    {"module": "Comparator", "classes": ["ComparatorBlock"]},
+    {"module": "Lever", "classes": ["LeverBlock"]},
+    {"module": "Button", "classes": ["ButtonBlock"]},
+    {"module": "PressurePlate", "classes": ["BasePressurePlateBlock"]},
+    {"module": "Tripwire", "classes": ["TripWireBlock", "TripWireHookBlock"]},
+    {"module": "Observer", "classes": ["ObserverBlock"]},
+    {"module": "Piston", "classes": ["PistonBaseBlock", "PistonHeadBlock", "MovingPistonBlock"]},
+    {"module": "Sensor", "classes": ["TargetBlock", "LightningRodBlock", "DaylightDetectorBlock"]},
+    {"module": "Sculk", "classes": ["SculkSensorBlock", "SculkShriekerBlock", "SculkCatalystBlock"]},
+    {"module": "Lamp", "classes": ["RedstoneLampBlock", "CopperBulbBlock"]},
+    {"module": "NoteBlock", "classes": ["NoteBlock"]},
+    {"module": "Bell", "classes": ["BellBlock"]},
+    {"module": "Dripleaf", "classes": ["BigDripleafBlock"]},
+    {"module": "Door", "classes": ["DoorBlock", "TrapDoorBlock", "FenceGateBlock"]},
+    {"module": "Dispenser", "classes": ["DispenserBlock"]},
+    {"module": "Crafter", "classes": ["CrafterBlock"]},
+    {"module": "Hopper", "classes": ["HopperBlock"]},
+    {"module": "Container", "classes": ["AbstractChestBlock", "BarrelBlock", "ShulkerBoxBlock", "AbstractFurnaceBlock", "BrewingStandBlock"]},
+    {"module": "AnalogSource", "classes": ["LecternBlock", "JukeboxBlock", "CakeBlock", "CandleCakeBlock", "AbstractCauldronBlock", "ComposterBlock", "EndPortalFrameBlock", "BeehiveBlock", "ChiseledBookShelfBlock", "DecoratedPotBlock", "RespawnAnchorBlock", "CopperGolemStatueBlock", "CreakingHeartBlock", "ShelfBlock"]},
+    {"module": "Rail", "classes": ["BaseRailBlock"]},
+    {"module": "Tnt", "classes": ["TntBlock"]},
+    {"module": "CommandBlock", "classes": ["CommandBlock", "StructureBlock", "TestBlock"]},
+    {"module": "Extra", "classes": ["AbstractSkullBlock", "SpongeBlock", "FrostedIceBlock", "PotentSulfurBlock", "SlimeBlock", "HoneyBlock"]}
+  ]
+}

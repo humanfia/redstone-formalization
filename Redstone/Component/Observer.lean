@@ -1,10 +1,23 @@
 module
 
+public import Redstone.Mechanics.Tick
+
 /-!
 # Observer
 
-To be formalized: detection of shape updates on the watched face, the delay before the pulse,
-and the length of the pulse.
+Java classes: `ObserverBlock`.
 
-This module is a placeholder: nothing is formalized here yet.
+To be formalized: detection of shape updates on the watched face, the delay before the pulse, and
+the length of the pulse.
+
+Nothing is formalized yet: these blocks are inert.
 -/
+
+@[expose] public section
+
+namespace Redstone.Component.Observer
+
+/-- The behaviour of the blocks of this component. -/
+def behaviour (self : Block) : Behaviour := .inert self
+
+end Redstone.Component.Observer

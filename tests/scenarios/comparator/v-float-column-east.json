@@ -1,0 +1,126 @@
+{
+ "name": "v-float-column-east",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   5,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:comparator[facing=west,mode=subtract,powered=true]",
+   "nbt": "{OutputSignal:3}"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    6
+   ],
+   "state": "minecraft:comparator[facing=south,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    7
+   ],
+   "state": "minecraft:comparator[facing=south,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:15}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    7,
+    3,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    6
+   ],
+   "state": "minecraft:glass",
+   "flags": 2
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  }
+ ]
+}

@@ -1,0 +1,224 @@
+{
+ "name": "v-lever-pulse-east",
+ "ticks": 34,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "state": "minecraft:lever[face=wall,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=subtract,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    7
+   ],
+   "state": "minecraft:comparator[facing=south,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:15}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 17,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 19,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 22,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 26,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  }
+ ]
+}

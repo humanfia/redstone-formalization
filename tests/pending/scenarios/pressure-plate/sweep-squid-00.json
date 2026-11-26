@@ -1,0 +1,41 @@
+{
+  "name": "sweep-squid-00",
+  "ticks": 24,
+  "box": {"min": [0, 24, 0], "max": [49, 24, 20]},
+  "blocks": [
+    {"pos": [5, 24, 5], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [15, 24, 5], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [25, 24, 5], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [35, 24, 5], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [45, 24, 5], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"pos": [5, 24, 15], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [15, 24, 15], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [25, 24, 15], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [35, 24, 15], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [45, 24, 15], "state": "minecraft:stone_pressure_plate[powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:glow_squid", "pos": [4.663499994039536, 24, 5.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:glow_squid", "pos": [14.661499994039536, 24, 5.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:glow_squid", "pos": [25.5, 23.200999988079072, 5.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:glow_squid", "pos": [35.5, 23.19899998807907, 5.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:glow_squid", "pos": [45.5, 24, 5.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:squid", "pos": [4.663499994039536, 24, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:squid", "pos": [14.661499994039536, 24, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:squid", "pos": [25.5, 23.200999988079072, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:squid", "pos": [35.5, 23.19899998807907, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:squid", "pos": [45.5, 24, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "kill", "entity": 0},
+    {"tick": 3, "type": "kill", "entity": 1},
+    {"tick": 3, "type": "kill", "entity": 2},
+    {"tick": 3, "type": "kill", "entity": 3},
+    {"tick": 3, "type": "kill", "entity": 4},
+    {"tick": 3, "type": "kill", "entity": 5},
+    {"tick": 3, "type": "kill", "entity": 6},
+    {"tick": 3, "type": "kill", "entity": 7},
+    {"tick": 3, "type": "kill", "entity": 8},
+    {"tick": 3, "type": "kill", "entity": 9}
+  ]
+}

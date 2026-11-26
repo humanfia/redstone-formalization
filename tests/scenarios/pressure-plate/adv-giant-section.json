@@ -1,0 +1,29 @@
+{
+  "name": "adv-giant-section",
+  "ticks": 30,
+  "box": {"min": [0, 16, 0], "max": [30, 22, 3]},
+  "blocks": [
+    {"pos": [2, 19, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [7, 20, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [12, 20, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [17, 20, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [22, 21, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [27, 22, 1], "state": "minecraft:oak_pressure_plate[powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:giant", "pos": [2.5, 7.5, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:giant", "pos": [7.5, 8.5, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:giant", "pos": [12.5, 15.5, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:giant", "pos": [17.5, 16.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:giant", "pos": [22.5, 15.9, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:giant", "pos": [27.5, 10.5, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": [
+    {"tick": 4, "type": "kill", "entity": 0},
+    {"tick": 4, "type": "kill", "entity": 1},
+    {"tick": 4, "type": "kill", "entity": 2},
+    {"tick": 4, "type": "kill", "entity": 3},
+    {"tick": 4, "type": "kill", "entity": 4},
+    {"tick": 4, "type": "kill", "entity": 5}
+  ]
+}

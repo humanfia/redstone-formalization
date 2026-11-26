@@ -34,9 +34,9 @@ everything else is taken from the entity type:
 * `Block.stepOn` for the block an entity on the ground stands on.
 * Fluids (`FluidState.entityInside`).
 * Everything else these entities do in a tick: mobs push each other, age, burn, and so on.
-* The entity sections: the game only finds entities whose position is within two blocks (and
-  at most a chunk section) of the search box, which matters for the ender dragon only, and its
-  parts are not modelled.
+  A squid or glow squid out of water changes its velocity every tick even with `NoAI`, so the
+  model does not reproduce it (pending scenario `sweep-squid-00`).
+* The parts of the ender dragon (the dragon is not in the type table at all).
 -/
 
 @[expose] public section
@@ -103,8 +103,8 @@ structure TypeInfo where
   interactions, markers, ominous item spawners and bats). -/
   ignoresBlockTriggers : Bool
   /-- How many times an entity of the type that does not move calls
-  `Entity.applyEffectsFromBlocks` in a game tick: once for a `LivingEntity` (`aiStep`) and an
-  end crystal, twice for a boat or raft, never for the other types. -/
+  `Entity.applyEffectsFromBlocks` in a game tick: once for a `LivingEntity` (`aiStep`), an end
+  crystal and an experience orb, twice for a boat or raft, never for the other types. -/
   effects : ℕ
 
 /-- The entity types of the game: registry name, the bits of the width and of the height
@@ -115,8 +115,11 @@ server's block dump (`entityTypes`); the three other columns are read off the cl
 Left out, so that the model does not see them at all: the types whose bounding box is not the
 box of these dimensions around their position (item frames, paintings and leash knots, which
 hang on a block, and the pufferfish, which is scaled), and the ender dragon, which has parts
-and its own `aiStep`. The last column is zero for the types that the model moves itself or
-that cannot be at rest in the game (items, projectiles, experience orbs, ...). -/
+and its own `aiStep`. The last column is zero for the types that the model moves itself (items,
+falling blocks, TNT, minecarts, projectiles) and for those that have no such call. It is also
+zero, wrongly, for types that do call it but always move or vanish at once, which the model
+cannot keep still anyway: shulker bullets, fishing bobbers, dragon fireballs, wither skulls and
+breeze wind charges. An experience orb can be at rest (it then calls it once per tick). -/
 def typeTable : List (String × UInt32 × UInt32 × Bool × Bool × ℕ) := [
     ("minecraft:acacia_boat", 0x3fb00000, 0x3f100000, false, false, 2),
     ("minecraft:acacia_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
@@ -167,7 +170,7 @@ def typeTable : List (String × UInt32 × UInt32 × Bool × Bool × ℕ) := [
     ("minecraft:evoker", 0x3f19999a, 0x3ff9999a, true, false, 1),
     ("minecraft:evoker_fangs", 0x3f000000, 0x3f4ccccd, false, false, 0),
     ("minecraft:experience_bottle", 0x3e800000, 0x3e800000, false, false, 0),
-    ("minecraft:experience_orb", 0x3f000000, 0x3f000000, false, false, 0),
+    ("minecraft:experience_orb", 0x3f000000, 0x3f000000, false, false, 1),
     ("minecraft:eye_of_ender", 0x3e800000, 0x3e800000, false, false, 0),
     ("minecraft:falling_block", 0x3f7ae148, 0x3f7ae148, false, false, 0),
     ("minecraft:fireball", 0x3f800000, 0x3f800000, false, false, 0),
@@ -291,17 +294,33 @@ def makeBoundingBox (info : TypeInfo) (pos : Vec3) : AABB :=
 def boundingBox? (e : Entity) : Option AABB :=
   (typeInfo? e.data.typeName).map fun info => makeBoundingBox info e.base.pos
 
+/-- `SectionPos.posToSectionCoord(double)`: the coordinate of the 16-block section of `v`. -/
+def sectionCoord (v : Float) : ℤ := (AABB.floor v).fdiv 16
+
+/-- `EntitySectionStorage.forEachAccessibleNonEmptySection(box, ...)`: the entity search only
+looks at the sections that the box, grown by 2 blocks horizontally and by 4 blocks downwards,
+reaches; an entity is stored in the section of its position (`blockPosition`). An entity whose
+box meets `box` is therefore missed when its position lies in a section outside this range:
+a giant (12 blocks high) whose feet are in the section below, for instance. -/
+def inSearchedSections (pos : Vec3) (box : AABB) : Bool :=
+  let within (lo v hi : Float) : Bool :=
+    sectionCoord lo ≤ sectionCoord v && sectionCoord v ≤ sectionCoord hi
+  within (box.minX - 2.0) pos.x (box.maxX + 2.0) &&
+    within (box.minY - 4.0) pos.y (box.maxY + 0.0) &&
+    within (box.minZ - 2.0) pos.z (box.maxZ + 2.0)
+
 /-- `getEntitiesOfClass(class, box, selector)` with the selector of the block triggers
 (`NO_SPECTATORS` and not `isIgnoringBlockTriggers`): the entities whose bounding box meets
-`box`, among the living entities only if `livingOnly` is set (`LivingEntity.class` instead of
-`Entity.class`). Entities of a type the table does not know are not found. -/
+`box` and whose position is in a section the search looks at, among the living entities only
+if `livingOnly` is set (`LivingEntity.class` instead of `Entity.class`). Entities of a type the
+table does not know are not found. -/
 def getTriggeringEntities (l : Level) (box : AABB) (livingOnly : Bool) : List Entity :=
   l.entities.filter fun e =>
     match typeInfo? e.data.typeName with
     | none => false
     | some info =>
       (info.living || !livingOnly) && !info.ignoresBlockTriggers &&
-        (makeBoundingBox info e.base.pos).intersects box
+        inSearchedSections e.base.pos box && (makeBoundingBox info e.base.pos).intersects box
 
 /-- The amount by which `checkInsideBlocks` shrinks the bounding box: `1.0E-5F`. -/
 def insideMargin : Float := (1.0e-5 : Float32).toFloat

@@ -1,0 +1,26 @@
+{
+  "name": "adv-xp-orb",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [7, 1, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [7, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"pos": [5, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:experience_orb", "pos": [1.5, 1.1, 1.5], "nbt": "{NoGravity:1b,Value:1s}"},
+    {"type": "minecraft:experience_orb", "pos": [3.5, 1.1, 1.5], "nbt": "{NoGravity:1b,Value:1s}"},
+    {"type": "minecraft:experience_orb", "pos": [5.5, 1.1, 1.5], "nbt": "{NoGravity:1b,Value:1s}"}
+  ],
+  "actions": [
+    {"tick": 8, "type": "kill", "entity": 0},
+    {"tick": 9, "type": "kill", "entity": 1},
+    {"tick": 10, "type": "kill", "entity": 2}
+  ]
+}

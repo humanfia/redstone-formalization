@@ -1,0 +1,19 @@
+{
+  "name": "front-obsidian-normal-behind",
+  "ticks": 30,
+  "box": {"min": [5, 5, 3], "max": [13, 11, 11]},
+  "blocks": [
+    {"pos": [8, 8, 6], "state": "minecraft:stone"},
+    {"pos": [8, 8, 7], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [9, 8, 8], "state": "minecraft:stone"},
+    {"pos": [10, 8, 8], "state": "minecraft:obsidian"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [8, 8, 7], "face": "up"}
+  ]
+}

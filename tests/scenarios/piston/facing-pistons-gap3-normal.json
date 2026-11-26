@@ -1,0 +1,24 @@
+{
+  "name": "facing-pistons-gap3-normal",
+  "ticks": 30,
+  "box": {"min": [3, 5, 5], "max": [17, 11, 11]},
+  "blocks": [
+    {"pos": [6, 8, 8], "state": "minecraft:stone"},
+    {"pos": [7, 8, 8], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [10, 8, 8], "state": "minecraft:stone"},
+    {"pos": [12, 8, 8], "state": "minecraft:piston[extended=false,facing=west]"},
+    {"pos": [13, 8, 8], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [14, 8, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 2, "type": "use", "pos": [13, 8, 8], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [13, 8, 8], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [13, 8, 8], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 23, "type": "use", "pos": [7, 8, 8], "face": "up"}
+  ]
+}

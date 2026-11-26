@@ -1,0 +1,26 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 30},
+    {"state": "minecraft:stone", "weight": 6},
+    {"state": "minecraft:glass", "weight": 2},
+    {"state": "minecraft:obsidian", "weight": 1},
+    {"state": "minecraft:pumpkin", "weight": 1},
+    {"state": "minecraft:white_glazed_terracotta[facing=north]", "weight": 1},
+    {"state": "minecraft:slime_block", "weight": 4},
+    {"state": "minecraft:honey_block", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 4},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 8},
+    {"state": "minecraft:piston[extended=false,facing=*]", "weight": 6},
+    {"state": "minecraft:sticky_piston[extended=false,facing=*]", "weight": 6},
+    {"state": "minecraft:piston[extended=true,facing=*]", "weight": 1},
+    {"state": "minecraft:sticky_piston[extended=true,facing=*]", "weight": 1},
+    {"state": "minecraft:piston_head[facing=*,short=*,type=*]", "weight": 1},
+    {"state": "minecraft:moving_piston[facing=*,type=*]", "weight": 1}
+  ],
+  "actions": {
+    "use": {"count": [3, 10], "targets": ["minecraft:lever", "minecraft:moving_piston"]},
+    "set": {"count": [0, 4], "states": ["minecraft:stone", "minecraft:air", "minecraft:slime_block", "minecraft:redstone_lamp[lit=false]", "minecraft:lever[face=*,facing=*,powered=*]", "minecraft:piston[extended=false,facing=*]", "minecraft:sticky_piston[extended=*,facing=*]"]},
+    "destroy": {"count": [0, 3], "targets": ["minecraft:stone", "minecraft:lever", "minecraft:piston", "minecraft:sticky_piston", "minecraft:piston_head", "minecraft:slime_block"]}
+  }
+}

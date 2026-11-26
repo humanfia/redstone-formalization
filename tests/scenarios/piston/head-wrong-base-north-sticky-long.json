@@ -1,0 +1,14 @@
+{
+  "name": "head-wrong-base-north-sticky-long",
+  "ticks": 12,
+  "box": {"min": [5, 5, 5], "max": [11, 11, 12]},
+  "blocks": [
+    {"pos": [8, 8, 8], "state": "minecraft:piston_head[facing=north,short=false,type=sticky]"},
+    {"pos": [8, 8, 9], "state": "minecraft:piston[extended=true,facing=north]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [8, 8, 9], "state": "minecraft:sticky_piston[extended=true,facing=north]"},
+    {"tick": 6, "type": "set", "pos": [8, 8, 9], "state": "minecraft:sticky_piston[extended=false,facing=north]"},
+    {"tick": 9, "type": "destroy", "pos": [8, 8, 8], "drop": false}
+  ]
+}

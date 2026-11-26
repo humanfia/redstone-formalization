@@ -1,0 +1,16 @@
+{
+  "name": "set-piston-flags3-normal",
+  "ticks": 24,
+  "box": {"min": [5, 5, 3], "max": [12, 11, 12]},
+  "blocks": [
+    {"pos": [8, 8, 6], "state": "minecraft:stone"},
+    {"pos": [8, 8, 7], "state": "minecraft:lever[face=wall,facing=south,powered=true]"},
+    {"pos": [9, 8, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=east]", "flags": 3},
+    {"tick": 10, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 18, "type": "set", "pos": [8, 8, 9], "state": "minecraft:glass"}
+  ]
+}

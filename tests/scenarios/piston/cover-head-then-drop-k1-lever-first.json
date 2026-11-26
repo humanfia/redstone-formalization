@@ -1,0 +1,18 @@
+{
+  "name": "cover-head-then-drop-k1-lever-first",
+  "ticks": 24,
+  "box": {"min": [5, 5, 3], "max": [12, 11, 11]},
+  "blocks": [
+    {"pos": [8, 8, 6], "state": "minecraft:stone"},
+    {"pos": [8, 8, 7], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [9, 8, 8], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 4, "type": "set", "pos": [9, 8, 8], "state": "minecraft:stone"},
+    {"tick": 14, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [8, 8, 7], "face": "up"}
+  ]
+}

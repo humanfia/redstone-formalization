@@ -1,0 +1,17 @@
+{"scenario":"only-back-up","version":"26.3","frames":[
+{"tick":0,"gameTime":0,"blocks":{"1,2,2":"minecraft:redstone_lamp[lit=false]","2,1,2":"minecraft:redstone_lamp[lit=false]","2,2,1":"minecraft:redstone_lamp[lit=false]","2,2,2":"minecraft:observer[facing=up,powered=false]","2,2,3":"minecraft:redstone_lamp[lit=false]","3,2,2":"minecraft:redstone_lamp[lit=false]"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":1,"gameTime":1,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":2,"gameTime":2,"blocks":{"2,3,2":"minecraft:stone"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[{"pos":[2,2,2],"block":"minecraft:observer","delay":1,"priority":0}],"blockEvents":[],"entities":[]},
+{"tick":3,"gameTime":3,"blocks":{"2,1,2":"minecraft:redstone_lamp[lit=true]","2,2,2":"minecraft:observer[facing=up,powered=true]","2,3,2":"minecraft:air"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[{"pos":[2,2,2],"block":"minecraft:observer","delay":2,"priority":0}],"blockEvents":[],"entities":[]},
+{"tick":4,"gameTime":4,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[{"pos":[2,2,2],"block":"minecraft:observer","delay":1,"priority":0}],"blockEvents":[],"entities":[]},
+{"tick":5,"gameTime":5,"blocks":{"2,2,2":"minecraft:observer[facing=up,powered=false]"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[{"pos":[2,1,2],"block":"minecraft:redstone_lamp","delay":4,"priority":0}],"blockEvents":[],"entities":[]},
+{"tick":6,"gameTime":6,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[{"pos":[2,1,2],"block":"minecraft:redstone_lamp","delay":3,"priority":0}],"blockEvents":[],"entities":[]},
+{"tick":7,"gameTime":7,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[{"pos":[2,1,2],"block":"minecraft:redstone_lamp","delay":2,"priority":0}],"blockEvents":[],"entities":[]},
+{"tick":8,"gameTime":8,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[{"pos":[2,1,2],"block":"minecraft:redstone_lamp","delay":1,"priority":0}],"blockEvents":[],"entities":[]},
+{"tick":9,"gameTime":9,"blocks":{"2,1,2":"minecraft:redstone_lamp[lit=false]"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":10,"gameTime":10,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":11,"gameTime":11,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":12,"gameTime":12,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":13,"gameTime":13,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":14,"gameTime":14,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]}
+]}

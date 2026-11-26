@@ -1,0 +1,304 @@
+{
+  "name": "adv-hill-powered_rail",
+  "ticks": 34,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      13,
+      5,
+      4
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        13,
+        0,
+        4
+      ],
+      "state": "minecraft:stone"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        1,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        3,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        4,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=ascending_east,waterlogged=false]"
+    },
+    {
+      "pos": [
+        5,
+        1,
+        2
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "pos": [
+        5,
+        2,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=ascending_east,waterlogged=false]"
+    },
+    {
+      "pos": [
+        6,
+        1,
+        2
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "pos": [
+        6,
+        2,
+        2
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "pos": [
+        6,
+        3,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        7,
+        1,
+        2
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "pos": [
+        7,
+        2,
+        2
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "pos": [
+        7,
+        3,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        8,
+        1,
+        2
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "pos": [
+        8,
+        2,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=ascending_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        9,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=ascending_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        10,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        11,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        12,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        0,
+        1,
+        2
+      ],
+      "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+    },
+    {
+      "pos": [
+        13,
+        1,
+        2
+      ],
+      "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+    }
+  ],
+  "actions": [
+    {
+      "tick": 2,
+      "type": "use",
+      "pos": [
+        0,
+        1,
+        2
+      ],
+      "face": "up"
+    },
+    {
+      "tick": 5,
+      "type": "use",
+      "pos": [
+        13,
+        1,
+        2
+      ],
+      "face": "up"
+    },
+    {
+      "tick": 8,
+      "type": "use",
+      "pos": [
+        0,
+        1,
+        2
+      ],
+      "face": "up"
+    },
+    {
+      "tick": 11,
+      "type": "destroy",
+      "pos": [
+        6,
+        3,
+        2
+      ]
+    },
+    {
+      "tick": 14,
+      "type": "use",
+      "pos": [
+        13,
+        1,
+        2
+      ],
+      "face": "up"
+    },
+    {
+      "tick": 16,
+      "type": "use",
+      "pos": [
+        0,
+        1,
+        2
+      ],
+      "face": "up"
+    },
+    {
+      "tick": 19,
+      "type": "set",
+      "pos": [
+        6,
+        3,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]",
+      "flags": 2
+    },
+    {
+      "tick": 21,
+      "type": "set",
+      "pos": [
+        6,
+        4,
+        2
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "tick": 24,
+      "type": "use",
+      "pos": [
+        0,
+        1,
+        2
+      ],
+      "face": "up"
+    },
+    {
+      "tick": 27,
+      "type": "destroy",
+      "pos": [
+        5,
+        1,
+        2
+      ]
+    },
+    {
+      "tick": 30,
+      "type": "use",
+      "pos": [
+        13,
+        1,
+        2
+      ],
+      "face": "up"
+    }
+  ]
+}

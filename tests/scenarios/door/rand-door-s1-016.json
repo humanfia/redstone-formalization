@@ -1,0 +1,32 @@
+{
+  "name": "rand-door-s1-016",
+  "ticks": 32,
+  "box": {"min": [0, 0, 0], "max": [3, 6, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 4, 2], "state": "minecraft:poplar_fence_gate[facing=south,in_wall=false,open=false,powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [1, 3, 2], "state": "minecraft:waxed_copper_trapdoor[facing=south,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [1, 4, 1], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [2, 3, 0], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [2, 3, 2], "state": "minecraft:crimson_fence_gate[facing=west,in_wall=false,open=true,powered=false]"},
+    {"pos": [2, 4, 2], "state": "minecraft:crimson_fence_gate[facing=south,in_wall=false,open=true,powered=false]"},
+    {"pos": [2, 5, 1], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:lever[face=ceiling,facing=south,powered=false]"},
+    {"pos": [3, 1, 3], "state": "minecraft:lever[face=ceiling,facing=east,powered=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"},
+    {"pos": [3, 4, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [2, 3, 1], "state": "minecraft:oxidized_copper_trapdoor[facing=north,half=top,open=false,powered=false,waterlogged=false]", "flags": 18},
+    {"tick": 6, "type": "use", "pos": [2, 5, 1], "face": "up"},
+    {"tick": 7, "type": "use", "pos": [3, 1, 3], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [3, 2, 1], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [3, 1, 3], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [1, 4, 1], "face": "up"},
+    {"tick": 32, "type": "destroy", "pos": [1, 0, 1], "drop": false},
+    {"tick": 32, "type": "set", "pos": [0, 0, 0], "state": "minecraft:lever[face=wall,facing=east,powered=false]", "flags": 3}
+  ]
+}

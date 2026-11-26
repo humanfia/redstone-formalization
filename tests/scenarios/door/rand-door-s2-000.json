@@ -1,0 +1,40 @@
+{
+  "name": "rand-door-s2-000",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [6, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:iron_door[facing=west,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:poplar_fence_gate[facing=west,in_wall=false,open=false,powered=false]"},
+    {"pos": [1, 2, 0], "state": "minecraft:iron_door[facing=west,half=upper,hinge=left,open=false,powered=false]"},
+    {"pos": [1, 4, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:stone"},
+    {"pos": [2, 2, 0], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:lever[face=ceiling,facing=south,powered=false]"},
+    {"pos": [3, 3, 2], "state": "minecraft:stone"},
+    {"pos": [3, 4, 2], "state": "minecraft:stone"},
+    {"pos": [4, 1, 1], "state": "minecraft:cherry_trapdoor[facing=north,half=top,open=false,powered=false,waterlogged=false]"},
+    {"pos": [4, 1, 2], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [4, 2, 0], "state": "minecraft:stone"},
+    {"pos": [4, 2, 1], "state": "minecraft:warped_door[facing=west,half=lower,hinge=right,open=true,powered=false]"},
+    {"pos": [4, 2, 2], "state": "minecraft:copper_door[facing=west,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [4, 3, 0], "state": "minecraft:stone"},
+    {"pos": [4, 3, 1], "state": "minecraft:warped_door[facing=west,half=upper,hinge=right,open=true,powered=false]"},
+    {"pos": [4, 3, 2], "state": "minecraft:copper_door[facing=west,half=upper,hinge=left,open=false,powered=false]"},
+    {"pos": [4, 4, 0], "state": "minecraft:oak_trapdoor[facing=east,half=top,open=false,powered=false,waterlogged=false]"},
+    {"pos": [5, 1, 0], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [6, 1, 0], "state": "minecraft:oak_door[facing=south,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [6, 2, 0], "state": "minecraft:oak_door[facing=south,half=upper,hinge=left,open=false,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 2, 2], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [2, 2, 2], "face": "up"},
+    {"tick": 7, "type": "use", "pos": [1, 2, 0], "face": "west"},
+    {"tick": 12, "type": "use", "pos": [5, 1, 0], "face": "up"},
+    {"tick": 13, "type": "destroy", "pos": [3, 0, 1], "drop": false},
+    {"tick": 15, "type": "destroy", "pos": [1, 2, 0], "drop": false}
+  ]
+}

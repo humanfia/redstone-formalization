@@ -1,0 +1,30 @@
+{
+  "name": "door-sound-random-dropper",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [12, 4, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [12, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:oak_door[facing=north,half=upper,hinge=left,open=false,powered=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:oak_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:8},{Slot:1b,id:\"minecraft:glass\",count:8},{Slot:2b,id:\"minecraft:stick\",count:8},{Slot:3b,id:\"minecraft:lever\",count:8}]}"},
+    {"pos": [9, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "north"},
+    {"tick": 3, "type": "use", "pos": [3, 1, 2], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [5, 1, 1], "face": "north"},
+    {"tick": 4, "type": "use", "pos": [9, 1, 2], "face": "up"},
+    {"tick": 7, "type": "use", "pos": [9, 1, 2], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [5, 1, 2], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 9, "type": "use", "pos": [9, 1, 2], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [9, 1, 2], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [9, 1, 2], "face": "up"}
+  ]
+}

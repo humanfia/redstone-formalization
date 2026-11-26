@@ -1,0 +1,141 @@
+{
+ "name": "adv-crafter-honey-remainders-into-crafter",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    5,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:honey_bottle\",count:2},{Slot:1b,id:\"minecraft:honey_bottle\",count:2},{Slot:3b,id:\"minecraft:honey_bottle\",count:3},{Slot:4b,id:\"minecraft:honey_bottle\",count:2}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:glass_bottle\",count:1},{Slot:1b,id:\"minecraft:honey_block\",count:1}],disabled_slots:[I;7,8]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 17,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 19,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 25,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 27,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

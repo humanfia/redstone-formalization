@@ -1,0 +1,36 @@
+{
+  "name": "fuzz-items-s2-013",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:dropper[facing=east,triggered=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:stick\",count:37},{Slot:5b,id:\"minecraft:iron_block\",count:49},{Slot:8b,id:\"minecraft:dirt\",count:46}]}"},
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [0, 1, 2], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:dirt\",count:27}]}"},
+    {"pos": [0, 2, 0], "state": "minecraft:dropper[facing=down,triggered=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:crafter[crafting=false,orientation=down_south,triggered=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:brick\",count:54},{Slot:8b,id:\"minecraft:iron_block\",count:17}],disabled_slots:[I;7]}"},
+    {"pos": [1, 1, 0], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:ender_pearl\",count:6},{Slot:3b,id:\"minecraft:snowball\",count:4},{Slot:5b,id:\"minecraft:red_mushroom\",count:57},{Slot:6b,id:\"minecraft:iron_block\",count:34},{Slot:7b,id:\"minecraft:dirt\",count:48},{Slot:8b,id:\"minecraft:red_mushroom\",count:37}]}"},
+    {"pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"pos": [1, 1, 2], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:stone\",count:60},{Slot:7b,id:\"minecraft:brown_mushroom\",count:22}]}"},
+    {"pos": [1, 2, 0], "state": "minecraft:dropper[facing=west,triggered=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:stone"},
+    {"pos": [2, 1, 2], "state": "minecraft:crafter[crafting=false,orientation=west_up,triggered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:birch_planks\",count:45},{Slot:2b,id:\"minecraft:iron_block\",count:60},{Slot:7b,id:\"minecraft:birch_planks\",count:5},{Slot:8b,id:\"minecraft:red_mushroom\",count:31}]}"},
+    {"pos": [2, 2, 1], "state": "minecraft:dropper[facing=south,triggered=false]", "nbt": "{Items:[{Slot:2b,id:\"minecraft:honey_bottle\",count:4},{Slot:8b,id:\"minecraft:iron_block\",count:57}]}"},
+    {"pos": [2, 2, 2], "state": "minecraft:crafter[crafting=false,orientation=down_east,triggered=false]", "nbt": "{disabled_slots:[I;0,3,8]}"}
+  ],
+  "actions": [
+    {"tick": 12, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 27, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 28, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 40, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 46, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 48, "type": "use", "pos": [1, 2, 2], "face": "up"}
+  ]
+}

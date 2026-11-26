@@ -1,0 +1,157 @@
+{
+ "name": "dropper-into-barrel-furnace",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   5,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:1b,id:\"minecraft:dirt\",count:7},{Slot:2b,id:\"minecraft:ender_pearl\",count:16},{Slot:3b,id:\"minecraft:cobblestone\",count:64},{Slot:4b,id:\"minecraft:iron_sword\",count:1},{Slot:5b,id:\"minecraft:oak_planks\",count:2},{Slot:6b,id:\"minecraft:stick\",count:9},{Slot:7b,id:\"minecraft:redstone\",count:1},{Slot:8b,id:\"minecraft:snowball\",count:5}]}"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:barrel[facing=up,open=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:dropper[facing=north,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:1b,id:\"minecraft:dirt\",count:7},{Slot:2b,id:\"minecraft:ender_pearl\",count:16},{Slot:3b,id:\"minecraft:cobblestone\",count:64},{Slot:4b,id:\"minecraft:iron_sword\",count:1},{Slot:5b,id:\"minecraft:oak_planks\",count:2},{Slot:6b,id:\"minecraft:stick\",count:9},{Slot:7b,id:\"minecraft:redstone\",count:1},{Slot:8b,id:\"minecraft:snowball\",count:5}]}"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:furnace[facing=north,lit=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 22,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 25,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

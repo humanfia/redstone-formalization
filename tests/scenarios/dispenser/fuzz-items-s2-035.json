@@ -1,0 +1,32 @@
+{
+  "name": "fuzz-items-s2-035",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:dropper[facing=east,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:iron_sword\",count:1},{Slot:4b,id:\"minecraft:stone\",count:61},{Slot:5b,id:\"minecraft:iron_ingot\",count:53}]}"},
+    {"pos": [0, 1, 1], "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]", "nbt": "{disabled_slots:[I;7]}"},
+    {"pos": [0, 1, 2], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{disabled_slots:[I;0,7]}"},
+    {"pos": [0, 2, 1], "state": "minecraft:dropper[facing=north,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:iron_ingot\",count:38},{Slot:1b,id:\"minecraft:oak_log\",count:49},{Slot:4b,id:\"minecraft:milk_bucket\",count:1},{Slot:5b,id:\"minecraft:cobblestone\",count:20}]}"},
+    {"pos": [0, 2, 2], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:dropper[facing=west,triggered=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:brown_mushroom\",count:64},{Slot:1b,id:\"minecraft:red_mushroom\",count:64},{Slot:2b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":2}},{Slot:3b,id:\"minecraft:honey_bottle\",count:16},{Slot:4b,id:\"minecraft:stone\",count:64},{Slot:5b,id:\"minecraft:iron_block\",count:64},{Slot:6b,id:\"minecraft:stone\",count:34},{Slot:7b,id:\"minecraft:ender_pearl\",count:11},{Slot:8b,id:\"minecraft:stick\",count:64}]}"},
+    {"pos": [1, 1, 2], "state": "minecraft:dropper[facing=north,triggered=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:oak_log\",count:25},{Slot:4b,id:\"minecraft:cobblestone\",count:13},{Slot:5b,id:\"minecraft:iron_sword\",count:1},{Slot:6b,id:\"minecraft:brown_mushroom\",count:56},{Slot:7b,id:\"minecraft:brown_mushroom\",count:57}]}"},
+    {"pos": [1, 2, 0], "state": "minecraft:dispenser[facing=north,triggered=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:dispenser[facing=north,triggered=false]"}
+  ],
+  "actions": [
+    {"tick": 7, "type": "use", "pos": [0, 2, 2], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 35, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 49, "type": "use", "pos": [0, 1, 2], "face": "up"},
+    {"tick": 54, "type": "use", "pos": [1, 2, 2], "face": "up"}
+  ]
+}

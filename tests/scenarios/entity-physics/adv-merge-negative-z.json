@@ -1,0 +1,60 @@
+{
+ "name": "adv-merge-negative-z",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -3,
+   0,
+   -3
+  ],
+  "max": [
+   3,
+   2,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    -3,
+    0,
+    -3
+   ],
+   "max": [
+    3,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    1.0,
+    0.1
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:30}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    1.0,
+    -0.2
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:30}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    1.0,
+    0.4
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:20}}"
+  }
+ ]
+}

@@ -127,9 +127,10 @@ def onLand (p : Pos) (state replaced : Block) : M Unit := do
   if isConcretePowder state && (canSolidify replaced || touchesLiquid (← get) p) then
     if let some concrete := concreteOf state then discard <| Level.setBlock p concrete
 
-/-- `spawnAtLocation(level, block)`: the falling block drops as an item where it is. -/
-def dropItem (pos : Vec3) (b : Block) : M Unit := do
-  if isFallable b then discard <| Item.spawnAtLocation pos b.id.name
+/-- `spawnAtLocation(level, block)`: the falling block with index `i` drops as an item where it
+is. -/
+def dropItem (i : ℕ) (pos : Vec3) (b : Block) : M Unit := do
+  if isFallable b then discard <| Item.spawnAtLocation pos b.id.name (i + 1)
   else Level.setOverflow
 
 /-- The part of `FallingBlockEntity.tick` that runs when the entity is on the ground: it turns
@@ -156,10 +157,10 @@ def land (i : ℕ) (block : Block) : M Unit := do
       if dt.hasBlockData && dt.blockState.hasBlockEntity then Level.setOverflow
     else if dt.dropItem then
       Level.removeEntity i
-      dropItem e.base.pos block
+      dropItem i e.base.pos block
   else
     Level.removeEntity i
-    if dt.dropItem then dropItem e.base.pos block
+    if dt.dropItem then dropItem i e.base.pos block
 
 /-- `FallingBlockEntity.tick`. -/
 def tick (i : ℕ) : M Unit := do
@@ -180,7 +181,7 @@ def tick (i : ℕ) : M Unit := do
     let y := e.base.pos.blockPos.y
     if (dt.time > 100 && (y ≤ -64 || y > 319)) || dt.time > 600 then
       Level.removeEntity i
-      if dt.dropItem then dropItem e.base.pos block
+      if dt.dropItem then dropItem i e.base.pos block
   else land i block
   Level.modifyEntity i fun e =>
     let drag := kind.airDrag

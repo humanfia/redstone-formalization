@@ -1,0 +1,150 @@
+{
+ "name": "adv-anvil-settings",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   7,
+   14,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    7,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    0.5,
+    12.0,
+    0.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"north\"}},Time:1,HurtEntities:1b,FallHurtAmount:2.0f,FallHurtMax:40}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    1.5,
+    12.0,
+    0.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"east\"}},Time:1,HurtEntities:1b,FallHurtAmount:0.0f}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    2.5,
+    12.0,
+    0.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"south\"}},Time:1,HurtEntities:1b,FallHurtAmount:2.0f,FallHurtMax:0}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    3.5,
+    12.0,
+    0.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"west\"}},Time:1,HurtEntities:0b,FallHurtAmount:2.0f}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    4.5,
+    12.0,
+    0.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"north\"}},Time:1}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    5.5,
+    12.0,
+    0.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:chipped_anvil\",properties:{facing:\"east\"}},Time:1,FallHurtAmount:0.1f}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    6.5,
+    12.0,
+    0.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:damaged_anvil\",properties:{facing:\"south\"}},Time:1,FallHurtAmount:9.0f,FallHurtMax:3}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    7.5,
+    12.0,
+    0.5
+   ],
+   "nbt": "{BlockState:\"minecraft:sand\",Time:1,HurtEntities:1b,FallHurtAmount:2.0f}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    0.5,
+    13.5,
+    1.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"north\"}},Time:1,FallHurtAmount:2.0f,fall_distance:30.0d}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    1.5,
+    13.5,
+    1.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:damaged_anvil\",properties:{facing:\"west\"}},Time:1,FallHurtAmount:2.0f,fall_distance:30.0d}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    2.5,
+    13.5,
+    1.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:damaged_anvil\",properties:{facing:\"west\"}},Time:1,FallHurtAmount:2.0f,fall_distance:30.0d,DropItem:0b}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    3.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"south\"}},Time:1,FallHurtAmount:2.0f,fall_distance:1.2d}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    4.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"south\"}},Time:1,FallHurtAmount:2.0f,fall_distance:-5.0d}"
+  }
+ ]
+}

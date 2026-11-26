@@ -1,0 +1,355 @@
+{
+ "name": "adv-place-flags",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "state": "minecraft:dragon_egg"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    4,
+    0
+   ],
+   "state": "minecraft:sand",
+   "flags": 2
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    1,
+    4,
+    0
+   ],
+   "state": "minecraft:gravel",
+   "flags": 18
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    4,
+    0
+   ],
+   "state": "minecraft:sand",
+   "flags": 514
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    3,
+    4,
+    0
+   ],
+   "state": "minecraft:dragon_egg",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    3,
+    5,
+    0
+   ],
+   "state": "minecraft:sand",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    4,
+    4,
+    0
+   ],
+   "state": "minecraft:red_concrete_powder",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    4,
+    5,
+    0
+   ],
+   "state": "minecraft:dragon_egg",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    5,
+    4,
+    0
+   ],
+   "state": "minecraft:anvil[facing=west]",
+   "flags": 16
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    2,
+    4,
+    1
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    5,
+    5,
+    0
+   ],
+   "state": "minecraft:chipped_anvil[facing=east]",
+   "flags": 3
+  },
+  {
+   "tick": 12,
+   "type": "destroy",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "drop": false
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 14,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:air",
+   "flags": 2
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    3,
+    5,
+    3
+   ],
+   "state": "minecraft:dragon_egg",
+   "flags": 3
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    5,
+    4,
+    1
+   ],
+   "state": "minecraft:sand",
+   "flags": 3
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:air",
+   "flags": 16
+  },
+  {
+   "tick": 22,
+   "type": "set",
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    5,
+    5,
+    1
+   ],
+   "state": "minecraft:lime_concrete_powder",
+   "flags": 3
+  },
+  {
+   "tick": 24,
+   "type": "set",
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 25,
+   "type": "set",
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 30,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:sand",
+   "flags": 3
+  },
+  {
+   "tick": 31,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:gravel",
+   "flags": 3
+  },
+  {
+   "tick": 32,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 33,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:dragon_egg",
+   "flags": 3
+  },
+  {
+   "tick": 34,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:sand",
+   "flags": 3
+  },
+  {
+   "tick": 36,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:dragon_egg",
+   "flags": 3
+  }
+ ]
+}

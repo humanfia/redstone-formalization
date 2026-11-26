@@ -19,8 +19,11 @@ disappears.
 * Data components: two stacks of the same item of which one has components are not compared;
   the model sets `Level.overflow` instead of deciding whether they merge.
 * The owner of an item (`Owner`), which the game compares before merging.
-* When more than two items could merge in one tick, the game takes them in the order of its
-  entity sections; the model takes them by section and then by index.
+* The order in which an item meets the items it could merge with is that of the game's entity
+  sections, and inside a section the order in which the entities entered it. The model knows
+  that order for the entities whose motion it models (`Entities.Physics.sectionEntry`); an item
+  that another part of the model creates or moves counts as having been in its section from the
+  start.
 -/
 
 @[expose] public section
@@ -65,22 +68,24 @@ def toDouble (n : ℕ) : Float := Float.ofNat n * Phys.d 0x3ca0000000000000
 
 /-- `new ItemEntity(level, x, y, z, stack)` followed by `setDefaultPickUpDelay` and
 `addFreshEntity`, as `Entity.spawnAtLocation` does: one item of the kind named `item` appears at
-`pos` with a random horizontal velocity and cannot be picked up for 10 ticks. Returns the index
-of the new entity. -/
-def spawnAtLocation (pos : Vec3) (item : String) : M ℕ := do
+`pos` with a random horizontal velocity and cannot be picked up for 10 ticks. `actor` tells
+what makes the item, as in `Entities.Physics.sectionEntry`: `0` before the entities are ticked,
+`i + 1` in the tick of the entity with index `i`. Returns the index of the new entity. -/
+def spawnAtLocation (pos : Vec3) (item : String) (actor : ℕ) : M ℕ := do
   let id := (← get).nextEntityIndex + 2
   let r := Entity.randomAfterUuid id
   let r := r.nextFloat24.2
   let (yaw, r) := r.nextFloat24
   let (dx, r) := r.nextDouble53
   let (dz, r) := r.nextDouble53
+  let now := (← get).gameTime
   let scale := Phys.d 0x3fc999999999999a
   let shift := Phys.d 0x3fb999999999999a
   let motion : Vec3 := ⟨toDouble dx * scale - shift, scale, toDouble dz * scale - shift⟩
   let data : Entities.Item :=
     { item := item, count := 1, pickupDelay := 10
       yRot := (toFloat32 yaw * 360).toBits.toNat
-      phys := { random := some r } }
+      phys := { random := some r, sectionEntry := (now, actor) } }
   Level.addEntity ⟨pos, motion, false⟩ (.item data)
 
 /-- `Entity.moveTowardsClosestSpace(x, y, z)`: an item stuck inside blocks is pushed towards
@@ -133,20 +138,21 @@ def tryToMerge (i j : ℕ) : M Unit := do
   modifyData src fun dt => { dt with count := dt.count - moved }
   if srcData.count - moved == 0 then Level.removeEntity src
 
-/-- The entity section a point lies in (`SectionPos`), in the order in which
-`EntitySectionStorage` goes through sections: x, then z, then y. -/
-def sectionKey (p : Vec3) : ℤ × ℤ × ℤ :=
-  (Phys.floor p.x / 16, Phys.floor p.z / 16, Phys.floor p.y / 16)
+/-- The place of an entity in the order in which `EntitySectionStorage` goes through the
+entities of a region: sections by x, then by z and y, the last two as the unsigned numbers that
+`SectionPos.asLong` packs (sections with a negative coordinate come last); inside a section the
+entities in the order in which they entered it (see `Entities.Physics.sectionEntry`; entities
+that entered at the same moment are in the order of their creation). -/
+def sectionKey (e : Entity) : List ℤ :=
+  let p := e.base.pos
+  let entry := e.phys.sectionEntry
+  [Phys.floor p.x / 16, (Phys.floor p.z / 16) % 2 ^ 22, (Phys.floor p.y / 16) % 2 ^ 20,
+    entry.1, entry.2, e.index]
 
-/-- Inserts an entity into a list ordered by section and then by index. -/
+/-- Inserts an entity into a list ordered by `sectionKey`. -/
 def insertBySection (e : Entity) : List Entity → List Entity
   | [] => [e]
-  | o :: os =>
-    let (ax, az, ay) := sectionKey e.base.pos
-    let (bx, bz, bY) := sectionKey o.base.pos
-    let before := ax < bx || (ax == bx && (az < bz || (az == bz && (ay < bY ||
-      (ay == bY && e.index < o.index)))))
-    if before then e :: o :: os else o :: insertBySection e os
+  | o :: os => if sectionKey e < sectionKey o then e :: o :: os else o :: insertBySection e os
 
 /-- `ItemEntity.mergeWithNeighbours`: the item tries to merge with every mergable item whose
 box meets its own, widened by half a block on each side. -/

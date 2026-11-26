@@ -1,0 +1,431 @@
+{
+ "name": "adv-merge-negative-all",
+ "ticks": 100,
+ "box": {
+  "min": [
+   -3,
+   -3,
+   -3
+  ],
+  "max": [
+   3,
+   1,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    -3,
+    -3,
+    -3
+   ],
+   "max": [
+    3,
+    -3,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    -3,
+    -2,
+    -3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -3,
+    -2,
+    -1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -3,
+    -2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -3,
+    -2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -2,
+    -2,
+    -2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -2,
+    -2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -2,
+    -2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -1,
+    -2,
+    -3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -1,
+    -2,
+    -1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -1,
+    -2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -1,
+    -2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    -2,
+    -2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    -2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    -2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    -2,
+    -3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    -2,
+    -1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    -2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    -2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    -2,
+    -2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    -2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    -2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    -2,
+    -3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    -2,
+    -1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    -2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    -2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -3,
+    -1,
+    -3
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    -3,
+    -1,
+    -1
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    -3,
+    -1,
+    1
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    -3,
+    -1,
+    3
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    0,
+    -1,
+    -2
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    0,
+    -1,
+    0
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    0,
+    -1,
+    2
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    3,
+    -1,
+    -3
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    3,
+    -1,
+    -1
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    3,
+    -1,
+    1
+   ],
+   "state": "minecraft:snow[layers=7]"
+  },
+  {
+   "pos": [
+    3,
+    -1,
+    3
+   ],
+   "state": "minecraft:snow[layers=7]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    -0.3,
+    6.0,
+    -0.35
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    -0.09,
+    14.7,
+    -0.11999999999999997
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:5}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.12,
+    8.9,
+    0.11000000000000004
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:7}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.33,
+    17.6,
+    -0.35
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:9}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    -0.3,
+    11.8,
+    -0.11999999999999997
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:11}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    -0.09,
+    6.0,
+    0.11000000000000004
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:13}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.12,
+    14.7,
+    -0.35
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:15}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.33,
+    8.9,
+    -0.11999999999999997
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:17}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    -0.3,
+    17.6,
+    0.11000000000000004
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:19}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    -0.09,
+    11.8,
+    -0.35
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:21}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.12,
+    6.0,
+    -0.11999999999999997
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:23}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.33,
+    14.7,
+    0.11000000000000004
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:25}}"
+  }
+ ]
+}

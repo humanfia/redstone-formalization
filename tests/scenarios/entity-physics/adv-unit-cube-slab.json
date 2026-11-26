@@ -1,0 +1,106 @@
+{
+ "name": "adv-unit-cube-slab",
+ "ticks": 40,
+ "box": {
+  "min": [
+   -1,
+   -1,
+   -1
+  ],
+  "max": [
+   2,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    -1,
+    -1,
+    -1
+   ],
+   "max": [
+    2,
+    -1,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.25,
+    0.5,
+    0.75
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.75,
+    0.75,
+    0.25
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.50000005,
+    0.5,
+    0.25
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.25,
+    0.50000005,
+    0.25
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.75,
+    0.49999995,
+    0.75
+   ],
+   "nbt": "{Item:{id:\"minecraft:ice\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.625,
+    0.375,
+    0.375
+   ],
+   "nbt": "{Item:{id:\"minecraft:oak_log\",count:1}}"
+  }
+ ]
+}

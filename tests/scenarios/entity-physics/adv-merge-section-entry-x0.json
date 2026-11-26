@@ -1,0 +1,60 @@
+{
+ "name": "adv-merge-section-entry-x0",
+ "ticks": 90,
+ "box": {
+  "min": [
+   13,
+   0,
+   0
+  ],
+  "max": [
+   19,
+   2,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    13,
+    0,
+    0
+   ],
+   "max": [
+    19,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    16.3,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:30}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    15.2,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:30},Motion:[0.5d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    16.9,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:20}}"
+  }
+ ]
+}

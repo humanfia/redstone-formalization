@@ -1,0 +1,95 @@
+{
+ "name": "adv-falling-bottom",
+ "ticks": 160,
+ "box": {
+  "min": [
+   0,
+   -64,
+   0
+  ],
+  "max": [
+   2,
+   -60,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    1,
+    -64,
+    1
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    0,
+    -63,
+    0
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    0,
+    -64,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    -62,
+    2
+   ],
+   "state": "minecraft:anvil[facing=east]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    -63,
+    1
+   ],
+   "state": "minecraft:sand",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "destroy",
+   "pos": [
+    0,
+    -64,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    2,
+    -61,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    -61,
+    2
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  }
+ ]
+}

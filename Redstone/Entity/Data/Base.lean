@@ -77,6 +77,11 @@ structure Physics where
   /-- `Entity.random`, the entity's own generator, once the model has drawn from it. `none`
   stands for the generator as the constructor of the entity left it. Not saved. -/
   random : Option JavaRandom := none
+  /-- When the entity was last put into the entity section it is in (`EntitySection.add`, on
+  creation and whenever `Entity.setPos` takes it to another section): the game time, and what
+  did it, `0` for something that happens before the entities are ticked and `i + 1` for the tick
+  of the entity with index `i`. A section lists its entities in this order. Not saved. -/
+  sectionEntry : ℕ × ℕ := (0, 0)
   deriving Repr, Inhabited
 
 instance : BEq Physics :=

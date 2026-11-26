@@ -733,6 +733,18 @@ def getEntity (i : ℕ) : M (Option Entity) := return (← get).entity? i
 /-- Replaces the entity that has the index of `e`. -/
 def setEntity (e : Entity) : M Unit := modifyEntity e.index fun _ => e
 
+/-- The entity section a point lies in (`SectionPos.of(BlockPos.containing(p))`). -/
+def sectionOf (p : Vec3) : ℤ × ℤ × ℤ :=
+  (Phys.floor p.x / 16, Phys.floor p.y / 16, Phys.floor p.z / 16)
+
+/-- `Entity.setPos(pos)`: the entity moves to `pos`. When that takes it to another entity
+section it is added at the end of that section (`EntitySection.add`); `actor` tells what moves
+the entity, as in `Entities.Physics.sectionEntry`. -/
+def setPos (e : Entity) (pos : Vec3) (gameTime actor : ℕ) : Entity :=
+  let moved : Entity := { e with base := { e.base with pos := pos } }
+  if sectionOf e.base.pos == sectionOf pos then moved
+  else moved.modifyPhys fun p => { p with sectionEntry := (gameTime, actor) }
+
 /-- `Entity.checkFallDamage(ya, onGround, onState, pos)` followed by the bounce and the block
 speed factor: the end of `Entity.move`, from the point where the entity has its new position
 and its collision flags. -/
@@ -767,7 +779,7 @@ def moveEntity (k : Entity.Kind) (i : ℕ) (delta : Vec3) : M Unit := do
   let some e ← getEntity i | return
   let l ← get
   if e.phys.noPhysics then
-    let e := { e with base := { e.base with pos := e.base.pos.add delta } }
+    let e := setPos e (e.base.pos.add delta) l.gameTime (i + 1)
     setEntity (e.modifyPhys fun p => { p with
       horizontalCollision := false, verticalCollision := false, verticalCollisionBelow := false })
   else
@@ -785,7 +797,7 @@ def moveEntity (k : Entity.Kind) (i : ℕ) (delta : Vec3) : M Unit := do
     if moves && e.phys.fallDistance != 0 && movementLength ≥ 1.0 &&
         Entity.fallResetPossible l e.base.pos movement then
       setOverflow
-    let e := if moves then { e with base := { e.base with pos := e.base.pos.add movement } } else e
+    let e := if moves then setPos e (e.base.pos.add movement) l.gameTime (i + 1) else e
     let xCollision := !Phys.equal delta.x movement.x
     let zCollision := !Phys.equal delta.z movement.z
     let horizontalCollision := xCollision || zCollision

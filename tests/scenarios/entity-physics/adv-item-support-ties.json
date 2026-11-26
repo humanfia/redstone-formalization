@@ -1,0 +1,422 @@
+{
+ "name": "adv-item-support-ties",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   2,
+   5
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    4
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    5
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    3
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    5
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    0
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    4
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    5
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    1
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    3
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    5
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    0
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    5
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    1
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    3
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    5
+   ],
+   "state": "minecraft:blue_ice"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.0,
+    1.0,
+    2.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1},Motion:[0.05d,0.0d,0.05d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.0,
+    1.0,
+    2.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.0d,0.0d,0.2d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.5,
+    1.0,
+    3.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:1},Motion:[0.2d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.0,
+    1.0,
+    4.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1},Motion:[-0.3d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.0,
+    1.0,
+    3.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.0,
+    1.0,
+    1.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:ice\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.0,
+    1.0,
+    4.125
+   ],
+   "nbt": "{Item:{id:\"minecraft:oak_log\",count:1},Motion:[0.0d,0.0d,-0.1d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.125,
+    1.0,
+    1.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:oak_planks\",count:1},Motion:[0.1d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.875,
+    1.0,
+    3.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:cobblestone\",count:1},Motion:[-0.15d,0.0d,0.0d]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 30,
+   "type": "destroy",
+   "pos": [
+    2,
+    0,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 31,
+   "type": "destroy",
+   "pos": [
+    3,
+    0,
+    3
+   ],
+   "drop": false
+  },
+  {
+   "tick": 40,
+   "type": "set",
+   "pos": [
+    2,
+    0,
+    2
+   ],
+   "state": "minecraft:packed_ice",
+   "flags": 3
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "name": "adv-top-of-world",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   314,
+   0
+  ],
+  "max": [
+   6,
+   319,
+   6
+  ]
+ },
+ "fill": [],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    318,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    319,
+    3
+   ],
+   "state": "minecraft:oak_button[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    319,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    2,
+    319,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    319,
+    3
+   ],
+   "state": "minecraft:stone_button[face=wall,facing=south,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    319,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    319,
+    5
+   ],
+   "state": "minecraft:birch_button[face=ceiling,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    3,
+    319,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    319,
+    3
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    5,
+    319,
+    5
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    5,
+    319,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 15,
+   "type": "destroy",
+   "pos": [
+    3,
+    318,
+    3
+   ]
+  }
+ ]
+}

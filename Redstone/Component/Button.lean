@@ -25,6 +25,10 @@ the release tick looks for one and, if it finds one, schedules itself again.
 
 `entityInside` is defined, but nothing in the engine calls it yet: that is for the model of
 entities, which decides which blocks an entity is inside of.
+Until then the model is wrong whenever an arrow touches an unpressed wooden button. This
+includes an arrow that reaches the unpressed shape (2 thick) but not the pressed one (1 thick):
+in the game the release tick releases the button and the arrow presses it again in the same game
+tick.
 -/
 
 @[expose] public section
@@ -136,6 +140,11 @@ def button (id : Blocks.Button.Id) (s : Blocks.Button) : Behaviour :=
       return true
     affectNeighborsAfterRemoval := fun p moved => do
       if !moved && s.powered then updateNeighbours id s p
+    -- `BlockBehaviour.useItemOn` is not overridden and answers `TRY_WITH_EMPTY_HAND`, upon which
+    -- the game calls `useWithoutItem`; that always consumes the click, so the item is never used.
+    useItemOn := fun p _ _ => do
+      if !s.powered then press id s p
+      return true
     tick := fun p => do
       if s.powered then checkPressed id s p
     entityInside := fun p _ => do

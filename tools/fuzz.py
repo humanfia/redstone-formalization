@@ -45,7 +45,7 @@ STATE_RE = re.compile(r"^([a-z0-9_.-]+:[a-z0-9_/.-]+)(?:\[(.*)\])?$")
 
 
 def default_blockdump():
-    home = os.environ.get("MC_HOME", "/data/zijian/redstone-formalization/mc")
+    home = os.environ.get("MC_HOME", os.path.join("/data", os.environ.get("USER", ""), "redstone-formalization", "mc"))
     return os.environ.get("MC_REPORTS", os.path.join(home, "reports")) + "/blockdump.json"
 
 

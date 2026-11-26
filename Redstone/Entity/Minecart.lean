@@ -27,6 +27,12 @@ longer a faithful image of the game, when it meets one of these:
 * another entity within four blocks (minecarts push and block each other and pick up mobs, and
   a hopper minecart collects items);
 * a fluid in or next to the minecart's box;
+* a hopper or a dropper next to the box of a minecart with a container (hoppers pull items out
+  of such a minecart and push items into it);
+* redstone ore under a minecart on the ground (it lights up);
+* a block next to the minecart's path whose collision shape depends on more than its state
+  (bamboo, pointed dripstone and sulfur spikes, which are shifted by their position; scaffolding,
+  powder snow, moving pistons);
 * a TNT minecart that explodes;
 * a command block minecart with a command on an active activator rail;
 * a hopper minecart that is enabled under a block with a block entity or a composter;
@@ -36,9 +42,9 @@ longer a faithful image of the game, when it meets one of these:
 
 Left out silently: the hurt animation that an activator rail starts in a plain minecart, the
 world border, portals, fire and freezing, blocks that slow an entity inside them (cobweb, sweet
-berries, powder snow), and the collision shapes that depend on the entity (scaffolding, powder
-snow) or on a block entity (shulker boxes, moving pistons). A shape of several boxes is treated
-box by box, which differs from the game only for an entity that already overlaps the shape.
+berries, powder snow), damage (cactus, magma) and the collision shape of an open shulker box.
+Hooks of other blocks that act on an entity (`Block.stepOn` of slime, `entityInside` of honey)
+are theirs to model: here they are only called.
 
 The helpers of the first sections (Java arithmetic, boxes, collision with block shapes, the
 supporting block) are not particular to minecarts. They are private copies, to be shared with
@@ -280,11 +286,90 @@ def blockCollisions (l : Level) (box : AABB) : List (Pos × List AABB) :=
         let boxes := collisionBoxes l p
         if boxes.any (·.intersects box) then some (p, boxes) else none
 
-/-- `VoxelShape.collide(axis, moving, distance)` for a shape given by its boxes: how far `moving`
-can travel along `axis` before it meets the shape, at most `distance`. Boxes that `moving`
-already overlaps along `axis` do not stop it. -/
-def collideShape (axis : Axis3) (moving : AABB) (boxes : List AABB) (distance : Float) : Float :=
-  if boxes.isEmpty then distance
+/-- A collision shape in the world, as the game keeps it (`VoxelShape`): a grid, given by the
+coordinates of its planes along each axis, some of whose cells are full. The full cells are the
+ones inside one of `boxes`. The grid can be finer than the boxes show: the shape of a hopper has a
+plane every eighth of a block. -/
+structure Solid where
+  /-- The planes of the grid along x (`VoxelShape.getCoords`), in world coordinates. -/
+  xs : Array Float
+  /-- The planes along y. -/
+  ys : Array Float
+  /-- The planes along z. -/
+  zs : Array Float
+  /-- The boxes that make up the shape, in world coordinates. -/
+  boxes : List AABB
+
+namespace Solid
+
+/-- The planes of the grid along `axis`. -/
+def coords (s : Solid) : Axis3 → Array Float
+  | .x => s.xs
+  | .y => s.ys
+  | .z => s.zs
+
+/-- `DiscreteVoxelShape.isFullWide(x, y, z)`: the cell with the given indices is full; a cell
+outside the grid is not. -/
+def isFull (s : Solid) (i j k : ℕ) : Bool :=
+  match s.xs[i]?, s.xs[i + 1]?, s.ys[j]?, s.ys[j + 1]?, s.zs[k]?, s.zs[k + 1]? with
+  | some x0, some x1, some y0, some y1, some z0, some z1 =>
+    s.boxes.any fun b =>
+      b.minX ≤ x0 && x1 ≤ b.maxX && b.minY ≤ y0 && y1 ≤ b.maxY && b.minZ ≤ z0 && z1 ≤ b.maxZ
+  | _, _, _, _, _, _ => false
+
+/-- `VoxelShape.findIndex(axis, coord)`: the index of the last plane that is not beyond `coord`,
+or `-1`. -/
+def findIndex (planes : Array Float) (coord : Float) : ℤ :=
+  Int.ofNat (planes.toList.takeWhile (· ≤ coord)).length - 1
+
+end Solid
+
+/-- The planes of a shape of the table along one axis: those of the game, or the faces of the
+boxes for a shape that is no block's collision shape. -/
+def gridPlanes (bits : List UInt64) (boxes : List AABB) (axis : Axis3) : Array Float :=
+  if !bits.isEmpty then (bits.map Float.ofBits).toArray
+  else
+    let faces := (boxes.flatMap fun b => [b.lo axis, b.hi axis]).mergeSort (· ≤ ·)
+    (faces.foldr (fun v acc => if acc.head? == some v then acc else v :: acc) []).toArray
+
+/-- The grid of each shape of the server's shape table, in the block's own coordinates. -/
+def gridTable : Array (Array Float × Array Float × Array Float) :=
+  (Array.range shapeTable.size).map fun index =>
+    let boxes := shapeTable.getD index []
+    let (xs, ys, zs) := Tables.gridBits.getD index ([], [], [])
+    (gridPlanes xs boxes .x, gridPlanes ys boxes .y, gridPlanes zs boxes .z)
+
+/-- The collision shape of the block at `p` (`VoxelShape.move`). -/
+def solidAt (l : Level) (p : Pos) : Solid :=
+  let index := (l.blockAt p).attrs.collision
+  let (xs, ys, zs) := gridTable.getD index (#[], #[], #[])
+  { xs := xs.map (· + ofInt p.x), ys := ys.map (· + ofInt p.y), zs := zs.map (· + ofInt p.z)
+    boxes := shapeAt index p }
+
+/-- The blocks whose collision shape is not a function of the block state alone, so that the
+shape table does not have it: bamboo, pointed dripstone and sulfur spikes are shifted sideways by
+an amount that depends on their position (`BlockBehaviour.OffsetType.XZ`), scaffolding and powder
+snow carry some entities and not others, and a moving piston takes its shape from its block
+entity. -/
+def hasDynamicShape (b : Block) : Bool :=
+  b.id == .bamboo || b.id == .pointed_dripstone || b.id == .sulfur_spike || b.id == .scaffolding
+    || b.id == .powder_snow || b.id == .moving_piston
+
+/-- One of the blocks that `BlockCollisions` looks at for `box` has a shape that is not
+modelled. -/
+def dynamicShapeNear (l : Level) (box : AABB) : Bool :=
+  (intRange (floor (box.minX - 1.0E-7) - 1) (floor (box.maxX + 1.0E-7) + 1)).any fun x =>
+    (intRange (floor (box.minY - 1.0E-7) - 1) (floor (box.maxY + 1.0E-7) + 1)).any fun y =>
+      (intRange (floor (box.minZ - 1.0E-7) - 1) (floor (box.maxZ + 1.0E-7) + 1)).any fun z =>
+        hasDynamicShape (l.blockAt ⟨x, y, z⟩)
+
+/-- `VoxelShape.collide(axis, moving, distance)`: how far `moving` can travel along `axis` before
+it meets the shape, at most `distance`. The game looks at the cells of the shape's grid beyond
+the cell that the leading face of `moving` is in, so a box that already reaches into the shape
+is stopped by the next plane of the grid with a full cell behind it, and passes freely only when
+there is none. -/
+def collideShape (axis : Axis3) (moving : AABB) (s : Solid) (distance : Float) : Float :=
+  if s.boxes.isEmpty then distance
   else if distance.abs < 1.0E-7 then 0.0
   else
     let (b, c) : Axis3 × Axis3 :=
@@ -292,28 +377,40 @@ def collideShape (axis : Axis3) (moving : AABB) (boxes : List AABB) (distance : 
       | .x => (.y, .z)
       | .y => (.z, .x)
       | .z => (.x, .y)
-    let beside := boxes.filter fun s =>
-      s.lo b ≤ moving.hi b - 1.0E-7 && s.hi b > moving.lo b + 1.0E-7
-        && s.lo c ≤ moving.hi c - 1.0E-7 && s.hi c > moving.lo c + 1.0E-7
+    let full (ia ib ic : ℤ) : Bool :=
+      match axis with
+      | .x => s.isFull ia.toNat ib.toNat ic.toNat
+      | .y => s.isFull ic.toNat ia.toNat ib.toNat
+      | .z => s.isFull ib.toNat ic.toNat ia.toNat
+    let planes := s.coords axis
+    let size (axis : Axis3) : ℤ := Int.ofNat (s.coords axis).size - 1
+    let maxA := moving.hi axis
+    let minA := moving.lo axis
+    let aMin := Solid.findIndex planes (minA + 1.0E-7)
+    let aMax := Solid.findIndex planes (maxA - 1.0E-7)
+    let bMin := max 0 (Solid.findIndex (s.coords b) (moving.lo b + 1.0E-7))
+    let bMax := min (size b) (Solid.findIndex (s.coords b) (moving.hi b - 1.0E-7) + 1)
+    let cMin := max 0 (Solid.findIndex (s.coords c) (moving.lo c + 1.0E-7))
+    let cMax := min (size c) (Solid.findIndex (s.coords c) (moving.hi c - 1.0E-7) + 1)
+    let hit (ia : ℤ) : Bool :=
+      (intRange bMin (bMax - 1)).any fun ib =>
+        (intRange cMin (cMax - 1)).any fun ic => full ia ib ic
     if distance > 0 then
-      let maxA := moving.hi axis
-      let ahead := (beside.filter fun s => !(s.lo axis ≤ maxA - 1.0E-7)).map (·.lo axis)
-      match ahead with
-      | [] => distance
-      | f :: fs =>
-        let newDistance := fs.foldl (fun m v => if v < m then v else m) f - maxA
+      match (intRange (aMax + 1) (size axis - 1)).find? hit with
+      | some ia =>
+        let newDistance := planes.getD ia.toNat 0.0 - maxA
         if newDistance ≥ -1.0E-7 then jmin distance newDistance else distance
-    else
-      let minA := moving.lo axis
-      let behind := (beside.filter fun s => s.hi axis ≤ minA + 1.0E-7).map (·.hi axis)
-      match behind with
-      | [] => distance
-      | f :: fs =>
-        let newDistance := fs.foldl (fun m v => if v > m then v else m) f - minA
+      | none => distance
+    else if distance < 0 then
+      match (intRange 0 (aMin - 1)).reverse.find? hit with
+      | some ia =>
+        let newDistance := planes.getD (ia.toNat + 1) 0.0 - minA
         if newDistance ≤ 1.0E-7 then jmax distance newDistance else distance
+      | none => distance
+    else distance
 
 /-- `Shapes.collide(axis, moving, shapes, distance)`. -/
-def collideShapes (axis : Axis3) (moving : AABB) (shapes : List (List AABB)) (distance : Float) :
+def collideShapes (axis : Axis3) (moving : AABB) (shapes : List Solid) (distance : Float) :
     Float :=
   match shapes with
   | [] => distance
@@ -326,7 +423,7 @@ can make among the blocks. The vertical axis is resolved first, then the horizon
 the larger movement (`Direction.axisStepOrder`). -/
 def collideBoundingBox (l : Level) (aabb : AABB) (movement : Vec3) : Vec3 :=
   let shapes := (blockCollisions l (aabb.expandTowards movement.x movement.y movement.z)).map
-    (·.2)
+    fun (p, _) => solidAt l p
   if shapes.isEmpty then movement
   else
     let order : List Axis3 :=
@@ -570,6 +667,11 @@ def blockSpeedFactor (l : Level) (c : Cart) : Float32 :=
     let f := speedFactor here
     if f.toFloat == 1.0 then speedFactor (l.blockAt (getOnPos l c 0.500001)) else f
 
+/-- The blocks with a `Block.stepOn` that changes the world and that no component models:
+redstone ore lights up under anything that steps on it (`RedStoneOreBlock.stepOn`). -/
+def stepOnUnmodelled (b : Block) : Bool :=
+  b.id == .redstone_ore || b.id == .deepslate_redstone_ore
+
 /-- The blocks whose `getEntityInsideCollisionShape` is not the full block and not modelled. -/
 def insideShapeUnmodelled (b : Block) : Bool :=
   b.id == .water_cauldron || b.id == .powder_snow_cauldron || b.id == .lava_cauldron
@@ -596,7 +698,9 @@ def applyEffectsFromBlocks : CartM Unit := do
   let c ← getThe Cart
   if !c.alive then return
   if c.onGround then
-    let p := getOnPosLegacy (← level) c
+    let l ← level
+    let p := getOnPosLegacy l c
+    if stepOnUnmodelled (l.blockAt p) then unmodelled
     withLevel do (← Level.behaviour (← Level.getBlock p)).stepOn p c.index
   let c ← getThe Cart
   let v := (1.0E-5 : Float32).toFloat
@@ -693,6 +797,7 @@ def move (delta : Vec3) (onRails : Bool) : CartM Unit := do
   let c ← getThe Cart
   let l ← level
   -- Entity.collide
+  if dynamicShapeNear l ((boundingBox c.pos).expandTowards delta.x delta.y delta.z) then unmodelled
   let movement :=
     if lengthSqr delta == 0.0 then delta else collideBoundingBox l (boundingBox c.pos) delta
   let movementLength := lengthSqr movement
@@ -911,7 +1016,8 @@ def moveAlongTrack (pos : Pos) (state : Block) (shape : Shape) : CartM Unit := d
 /-! ### The tick -/
 
 /-- The model's check for what it leaves out around the minecart: another entity within four
-blocks, or a fluid in or next to the minecart's box. -/
+blocks, a fluid in or next to the minecart's box, or a hopper or a dropper next to the box of a
+minecart with a container. -/
 def checkSurroundings : CartM Unit := do
   let c ← getThe Cart
   let l ← level
@@ -922,9 +1028,14 @@ def checkSurroundings : CartM Unit := do
   let bb := boundingBox c.pos
   let lo := blockPosOf ⟨bb.minX, bb.minY, bb.minZ⟩
   let hi := blockPosOf ⟨bb.maxX, bb.maxY, bb.maxZ⟩
-  let wet := (intRange (lo.x - 1) (hi.x + 1)).any fun x => (intRange (lo.y - 1) (hi.y + 1)).any
-    fun y => (intRange (lo.z - 1) (hi.z + 1)).any fun z => (l.blockAt ⟨x, y, z⟩).attrs.fluid != ""
-  if wet then unmodelled
+  let around (test : Block → Bool) : Bool :=
+    (intRange (lo.x - 1) (hi.x + 1)).any fun x => (intRange (lo.y - 1) (hi.y + 1)).any
+      fun y => (intRange (lo.z - 1) (hi.z + 1)).any fun z => test (l.blockAt ⟨x, y, z⟩)
+  if around (·.attrs.fluid != "") then unmodelled
+  -- `HopperBlockEntity.getContainerAt` finds the minecarts with a container whose box meets the
+  -- block a hopper pulls from or pushes into, and a dropper pushes into them as well.
+  if (containerSize c.kind).isSome && around (fun b => b.id == .hopper || b.id == .dropper) then
+    unmodelled
 
 /-- `OldMinecartBehavior.tick` on the server. `old` and `yRotO` are the position and the yaw
 before the tick (`Entity.xo`, `zo`, `yRotO`). -/

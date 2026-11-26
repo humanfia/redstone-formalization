@@ -1,0 +1,15 @@
+{
+  "name": "verify-slide-down-honey",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [15, 6, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [7, 1, 7], "state": "minecraft:honey_block"},
+    {"pos": [7, 2, 7], "state": "minecraft:honey_block"},
+    {"pos": [7, 3, 7], "state": "minecraft:honey_block"},
+    {"pos": [7, 4, 7], "state": "minecraft:honey_block"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [6.54, 5.2, 7.5], "nbt": "{Motion:[0.0d,-0.2d,0.0d]}"}]
+}

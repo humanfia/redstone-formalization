@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Generates Redstone/Entity/Minecart/Tables.lean.
 
-    tests/palettes/minecart-tables.py $MC_REPORTS/blockdump.json atan.txt > Redstone/Entity/Minecart/Tables.lean
+    tests/palettes/minecart-tables.py $MC_REPORTS/blockdump.json tests/palettes/minecart-atan.txt \\
+        tests/palettes/minecart-grid.txt > Redstone/Entity/Minecart/Tables.lean
 
 `blockdump.json` is the block dump of the harness (tests/FORMAT.md). `atan.txt` has 257 lines
 `asin cos`, the raw bits (16 hex digits each) of `Math.asin(i / 256.0)` and of the cosine of that
 value, computed by the JDK of the reference server; this is how the game fills the tables of
-`Mth.atan2` when the class is loaded.
+`Mth.atan2` when the class is loaded. `minecart-grid.txt` is the output of
+tests/palettes/MinecartShapeGrid.java: the grid planes of every collision shape of the game
+(`VoxelShape.getCoords`), keyed by the boxes of the shape.
 """
 
 import json
@@ -19,6 +22,11 @@ def main():
     with open(sys.argv[2]) as f:
         atan = [line.split() for line in f if line.strip()]
     assert len(atan) == 257
+    grids = {}
+    with open(sys.argv[3]) as f:
+        for line in f:
+            key, xs, ys, zs = line.rstrip("\n").split("\t")
+            grids[key] = (xs.split(","), ys.split(","), zs.split(","))
     out = []
     w = out.append
     w("module")
@@ -33,6 +41,8 @@ def main():
     w("")
     w("* the boxes of every shape of the dump's shape table (`Attrs.collision` and `Attrs.outline`")
     w("  are indices into it), as the raw bits of their `double` coordinates;")
+    w("* the grid planes of every collision shape (`VoxelShape.getCoords`), which the boxes do not")
+    w("  determine and on which `VoxelShape.collide` works;")
     w("* the two tables of `Mth.atan2`;")
     w("* the items whose maximum stack size is not 64.")
     w("")
@@ -54,6 +64,20 @@ def main():
         boxes = ", ".join("[" + ", ".join("0x" + c for c in box) + "]" for box in shape)
         w(f"  [{boxes}]" + ("," if i + 1 < len(shapes) else ""))
     w("]")
+    w("")
+    w("/-- The coordinates of the grid planes of each shape along x, y and z (`VoxelShape.getCoords`),")
+    w("as raw `double` bits. A shape that is the collision shape of no block state has no entry")
+    w("(three empty lists). -/")
+    w("def gridBits : Array (List UInt64 × List UInt64 × List UInt64) := #[")
+    used = 0
+    for i, shape in enumerate(shapes):
+        key = json.dumps(shape, separators=(",", ":"))
+        grid = grids.get(key, ([], [], []))
+        used += key in grids
+        lists = ", ".join("[" + ", ".join("0x" + c for c in cs) + "]" for cs in grid)
+        w(f"  ({lists})" + ("," if i + 1 < len(shapes) else ""))
+    w("]")
+    assert used == len(grids), "a grid has no shape in the dump"
     w("")
     w("/-- `Mth.ASIN_TAB`: the bits of `Math.asin(i / 256.0)` for `i = 0, ..., 256`. -/")
     w("def asinBits : Array UInt64 := #[")

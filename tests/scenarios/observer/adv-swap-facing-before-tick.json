@@ -1,0 +1,137 @@
+{
+ "name": "adv-swap-facing-before-tick",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   2,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=west,powered=false]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=up,powered=true]",
+   "flags": 2
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    0,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=down,powered=true]",
+   "flags": 18
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=down,powered=false]",
+   "flags": 18
+  }
+ ]
+}

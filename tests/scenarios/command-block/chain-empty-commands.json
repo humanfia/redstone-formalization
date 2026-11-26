@@ -1,0 +1,18 @@
+{
+  "name": "chain-empty-commands",
+  "ticks": 8,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:command_block[conditional=false,facing=east]"},
+    {"pos": [1, 1, 1], "state": "minecraft:chain_command_block[conditional=false,facing=east]", "nbt": "{auto:1b,SuccessCount:2}"},
+    {"pos": [2, 1, 1], "state": "minecraft:chain_command_block[conditional=true,facing=east]", "nbt": "{auto:1b,SuccessCount:2}"},
+    {"pos": [3, 1, 1], "state": "minecraft:chain_command_block[conditional=false,facing=east]", "nbt": "{auto:1b}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [0, 1, 0], "face": "up"}
+  ]
+}

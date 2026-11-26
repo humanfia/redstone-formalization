@@ -1,0 +1,41 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 14},
+    {"state": "minecraft:stone", "weight": 3},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 3},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 6},
+    {"state": "minecraft:command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"Searge\"}"},
+    {"state": "minecraft:command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"state": "minecraft:command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{Command:\"nope\",TrackOutput:0b,SuccessCount:2}"},
+    {"state": "minecraft:command_block[conditional=*,facing=*]", "weight": 1},
+    {"state": "minecraft:command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b,powered:1b}"},
+    {"state": "minecraft:repeating_command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"Searge\"}"},
+    {"state": "minecraft:repeating_command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"state": "minecraft:repeating_command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{Command:\"nope\",TrackOutput:0b,SuccessCount:2,powered:1b}"},
+    {"state": "minecraft:repeating_command_block[conditional=*,facing=*]", "weight": 1},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 3, "nbt": "{Command:\"Searge\",auto:1b}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 3, "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{Command:\"say y\",TrackOutput:0b,auto:0b}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{Command:\"nope\",TrackOutput:0b,auto:1b,SuccessCount:3}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{Command:\"Searge\",auto:1b,UpdateLastExecution:0b}"},
+    {"state": "minecraft:test_block[mode=*]", "weight": 1},
+    {"state": "minecraft:test_block[mode=start]", "weight": 1, "nbt": "{mode:\"start\",powered:1b}"},
+    {"state": "minecraft:test_block[mode=*]", "weight": 1, "nbt": "{mode:\"log\"}"},
+    {"state": "minecraft:structure_block[mode=*]", "weight": 1}
+  ],
+  "actions": {
+    "use": {"count": [3, 8], "targets": ["minecraft:lever"]},
+    "set": {"count": [0, 4], "states": [
+      "minecraft:stone", "minecraft:air", "minecraft:redstone_lamp[lit=false]",
+      "minecraft:lever[face=wall,facing=*,powered=*]",
+      "minecraft:command_block[conditional=*,facing=*]",
+      "minecraft:repeating_command_block[conditional=*,facing=*]",
+      "minecraft:chain_command_block[conditional=*,facing=*]",
+      "minecraft:test_block[mode=*]", "minecraft:structure_block[mode=*]"]},
+    "destroy": {"count": [0, 3], "targets": [
+      "minecraft:stone", "minecraft:lever", "minecraft:command_block", "minecraft:repeating_command_block",
+      "minecraft:chain_command_block", "minecraft:test_block"]}
+  }
+}

@@ -1,0 +1,315 @@
+{
+ "name": "adv-chunk-border",
+ "ticks": 30,
+ "box": {
+  "min": [
+   13,
+   0,
+   0
+  ],
+  "max": [
+   18,
+   3,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    13,
+    0,
+    0
+   ],
+   "max": [
+    18,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=wall,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=south,lit=true]"
+  },
+  {
+   "pos": [
+    14,
+    3,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=wall,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=south,lit=true]"
+  },
+  {
+   "pos": [
+    15,
+    3,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=wall,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=south,lit=true]"
+  },
+  {
+   "pos": [
+    16,
+    3,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=wall,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=south,lit=true]"
+  },
+  {
+   "pos": [
+    17,
+    3,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    14,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    16,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    17,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    14,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    16,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    17,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    14,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    16,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    17,
+    1,
+    1
+   ],
+   "face": "north"
+  }
+ ]
+}

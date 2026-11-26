@@ -1,0 +1,61 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:redstone_torch[lit=*]",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:redstone_wall_torch[facing=*,lit=*]",
+   "weight": 6
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    60,
+    110
+   ],
+   "targets": [
+    "minecraft:lever"
+   ]
+  },
+  "set": {
+   "count": [
+    0,
+    3
+   ],
+   "states": [
+    "minecraft:stone",
+    "minecraft:redstone_torch[lit=*]",
+    "minecraft:redstone_wall_torch[facing=*,lit=*]"
+   ]
+  },
+  "destroy": {
+   "count": [
+    0,
+    1
+   ],
+   "targets": [
+    "minecraft:redstone_torch",
+    "minecraft:redstone_wall_torch"
+   ]
+  }
+ }
+}

@@ -24,13 +24,20 @@ from the cell to a source, and 0 if there is no such path of length at most 14.
 
 * `lightDampening` follows `BlockBehaviour.getLightDampening` and the default
   `propagatesSkylightDown`, with the override of `TransparentBlock` for glass. The overrides of
-  the other classes are not modelled: stained and tinted glass, leaves, panes, fences, bamboo,
-  barriers, light blocks, glow lichen, hanging moss, mossy carpets, chorus plants, shulker
-  boxes.
+  the other classes are not modelled: stained and tinted glass, copper grates (the other
+  `TransparentBlock`s), leaves, panes, fences, walls, vines, bamboo, barriers, light blocks,
+  glow lichen, hanging moss, mossy carpets, chorus plants, shulker boxes. Measured against the
+  server, the model is wrong for stained glass, tinted glass, copper grates, barriers, glow
+  lichen, vines and chorus plants above a detector; for the others the override happens to
+  agree with the default in the states tried.
 * Of the blocks whose shape occludes light (`useShapeForLightOcclusion`), only the daylight
   detector is modelled: light does not pass through its bottom face. Slabs, stairs, farmland,
   paths, snow layers, enchanting tables, end portal frames, lecterns, sculk sensors, sculk
-  shriekers, shelves and stonecutters are treated as if they had no such shape.
+  shriekers, shelves, stonecutters, **extended piston bases and piston heads** are treated as
+  if they had no such shape: a detector below one of them reads the open sky where the game
+  reads darkness (`tests/pending/scenarios/sensor/dd-piston-roof.json`). A faithful model
+  needs the occlusion shapes of both blocks at a face (`Shapes.faceShapeOccludes` joins them),
+  which the block attributes do not carry.
 * The world is the overworld: sky light comes from above the build height, `y = 319`. The
   light engine keeps one more section of 16 layers below and above the build limits, which is
   enough for every path of 14 steps, so the search is not bounded in space.

@@ -53,9 +53,10 @@ which sets `Level.overflow`: the level is then no longer a faithful image of the
   (`entityInside`), and the interactions that need item components (water bottles, dyed armour,
   banners).
 * Projectiles hitting a decorated pot or an unlit candle cake (`unmodelled`), explosions, the
-  hopper side of the composter and of the jukebox, the menu of the lectern as an interface
-  (`setPage` and `takeBook` are defined, but nothing calls them), and fluid ticks of
-  waterlogged blocks.
+  hopper side of the composter and of the jukebox, and the menu of the lectern as an interface
+  (`setPage` and `takeBook` are defined, but nothing calls them).
+* Fluid ticks: a waterlogged shelf, decorated pot or copper golem statue that gets a shape update
+  schedules a fluid tick, after which its water flows (`unmodelled`).
 * Components of stored items: two stacks are the same when the items are.
 -/
 
@@ -157,6 +158,13 @@ def counterClockWise : HorizontalDirection → Direction
   | .south => .east
   | .east => .north
 
+/-- `updateShape` of a block that can be waterlogged (shelf, decorated pot, copper golem statue):
+a waterlogged block schedules a fluid tick for its water, which then flows. The model has no
+fluid ticks, so this is `unmodelled`. -/
+def waterloggedUpdateShape (self : Block) (waterlogged : Bool) : M Block := do
+  if waterlogged then unmodelled
+  return self
+
 /-! ### Cake and candle cake -/
 
 /-- `ItemTags.CANDLES`. -/
@@ -172,9 +180,17 @@ def candles : List String :=
 def cakeCanSurvive (l : Level) (p : Pos) : Bool := (l.blockAt (p.step .down)).attrs.solid
 
 /-- `CakeBlock.updateShape` and `CandleCakeBlock.updateShape`: the cake breaks when the block
-below can no longer carry it. -/
+below can no longer carry it. The game then destroys it with drops (`Block.updateOrDestroy`,
+`Level.destroyBlock(pos, true)`), and `dropResources` draws the position of the candle of a
+candle cake from the level's generator before anything else happens, even when blocks drop
+nothing; a cake drops nothing. `Level.destroyBlock` of the model does not know about drops, so
+the numbers are drawn here. (This is wrong for a shape update with the flag
+`UPDATE_SUPPRESS_DROPS`, which draws nothing.) -/
 def cakeUpdateShape (self : Block) (p : Pos) (d : Direction) : M Block := do
-  if d = .down && !cakeCanSurvive (← get) p then return .AIR else return self
+  if d = .down && !cakeCanSurvive (← get) p then
+    if let .candleCake _ _ := self then popResource
+    return .AIR
+  else return self
 
 /-- `CakeBlock.eat` for a player that can eat: one more bite, or the end of the cake. -/
 def eat (s : Blocks.Cake) (p : Pos) : M Bool := do
@@ -629,6 +645,7 @@ def shelf (id : Blocks.Shelf.Id) (s : Blocks.Shelf) : Behaviour :=
           let bit (i : ℕ) : ℕ := if (slot e.items i).isSome then 1 else 0
           bit 0 + 2 * bit 1 + 4 * bit 2
         | _ => 0
+    updateShape := fun _ _ _ _ => waterloggedUpdateShape self s.waterlogged
     neighborChanged := fun p _ _ => do
       let signal ← Level.hasNeighborSignal p
       if s.powered != signal then
@@ -695,6 +712,7 @@ def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
       match l.blockEntities p with
       | some (.decoratedPot d) => potSignal d
       | _ => 0
+    updateShape := fun _ _ _ _ => waterloggedUpdateShape self s.waterlogged
     affectNeighborsAfterRemoval := fun p _ => updateNeighboursAfterDestroy p .decorated_pot
     preRemoveSideEffects := fun p => do
       if let some d ← getPot p then dropContents [d.item]
@@ -778,10 +796,11 @@ def isCopperGolemStatue : Block → Bool
 /-- The behaviour of a copper golem statue, waxed (`weathering = false`) or not. `withPose`
 gives the block with another pose. Any item but an axe (and, on a statue that is not waxed,
 honeycomb) changes the pose. -/
-def copperGolemStatue (self : Block) (block : BlockId) (pose : Pose) (weathering : Bool)
-    (withPose : Pose → Block) : Behaviour :=
+def copperGolemStatue (self : Block) (block : BlockId) (pose : Pose)
+    (weathering waterlogged : Bool) (withPose : Pose → Block) : Behaviour :=
   { Behaviour.inert self with
     analogSignal := fun _ _ _ => poseSignal pose
+    updateShape := fun _ _ _ _ => waterloggedUpdateShape self waterlogged
     keepsBlockEntity := isCopperGolemStatue
     affectNeighborsAfterRemoval := fun p _ => Level.updateNeighbourForOutputSignal p block
     useItemOn := fun p _ item => do
@@ -1062,10 +1081,10 @@ def behaviour (self : Block) : Behaviour :=
   | .decoratedPot s => decoratedPot s
   | .respawnAnchor s => respawnAnchor s
   | .copperGolemStatue id s =>
-    copperGolemStatue self id.toBlockId s.copper_golem_pose false
+    copperGolemStatue self id.toBlockId s.copper_golem_pose false s.waterlogged
       fun pose => .copperGolemStatue id { s with copper_golem_pose := pose }
   | .weatheringCopperGolemStatue id s =>
-    copperGolemStatue self id.toBlockId s.copper_golem_pose true
+    copperGolemStatue self id.toBlockId s.copper_golem_pose true s.waterlogged
       fun pose => .weatheringCopperGolemStatue id { s with copper_golem_pose := pose }
   | .creakingHeart s => creakingHeart s
   | .jukebox s => jukebox s

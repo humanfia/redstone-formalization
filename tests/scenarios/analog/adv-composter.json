@@ -1,0 +1,44 @@
+{
+  "name": "adv-composter",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [12, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [12, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"pos": [3, 1, 1], "state": "minecraft:composter[level=6]"},
+    {"pos": [5, 1, 1], "state": "minecraft:composter[level=0]"},
+    {"pos": [7, 1, 1], "state": "minecraft:composter[level=8]"},
+    {"pos": [9, 1, 1], "state": "minecraft:composter[level=3]"},
+    {"pos": [11, 1, 1], "state": "minecraft:composter[level=5]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 3, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 4, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 5, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:stick"},
+    {"tick": 6, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 7, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:air"},
+    {"tick": 8, "type": "set", "pos": [9, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 10, "type": "set", "pos": [9, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 12, "type": "set", "pos": [11, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 14, "type": "set", "pos": [11, 1, 1], "state": "minecraft:composter[level=6]"},
+    {"tick": 15, "type": "use_item", "pos": [11, 1, 1], "face": "up", "item": "minecraft:cake"},
+    {"tick": 16, "type": "set", "pos": [7, 1, 1], "state": "minecraft:composter[level=7]", "flags": 2},
+    {"tick": 40, "type": "set", "pos": [1, 1, 1], "state": "minecraft:composter[level=7]", "flags": 2},
+    {"tick": 41, "type": "set", "pos": [1, 1, 1], "state": "minecraft:composter[level=0]"},
+    {"tick": 42, "type": "set", "pos": [1, 1, 1], "state": "minecraft:composter[level=7]", "flags": 18},
+    {"tick": 45, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 46, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 47, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 48, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 49, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 50, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 51, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 52, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 53, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"},
+    {"tick": 54, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:melon_slice"}
+  ]
+}

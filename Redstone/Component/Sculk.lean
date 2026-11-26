@@ -26,6 +26,10 @@ clicking of activated sensors, and shrieks when a player caused it.
 * Of the source entity of an event only the following is used: whether it is a player (for the
   shrieker), and that it is kept in the vibration. Sneaking, spectators and entities that dampen
   vibrations (`Entity.dampensVibrations`) are not modelled, nor is the owner of a projectile.
+  A vibration read from saved data only has the UUID of its source, which the game looks up
+  when the vibration arrives; no entity is ever found (`GameEventSource.resolve`). The UUID of
+  the tests' player is the exception: it is read as the live player, which is wrong for a
+  scenario that starts with such a vibration (pending scenarios `v-saved-player-uuid-*`).
 * The shrieker never warns and never summons a warden (`canRespond` is false): the tests run
   with the game rule `spawn_wardens` off, and the warning level of a player is not part of the
   model. With that, `tryRespond` and `preRemoveSideEffects` do nothing.
@@ -378,8 +382,8 @@ def canReceiveVibration (be : BlockEntity) (state : Block) (q src : Pos) (event 
 /-- `VibrationSelector.shouldReplaceVibration`: among the events heard in one game tick the
 nearest wins, and among equally near ones the one of highest frequency. A candidate left from
 an earlier game tick is kept. -/
-def shouldReplaceVibration (selector : Option (VibrationInfo × ℕ)) (new : VibrationInfo)
-    (now : ℕ) : Bool :=
+def shouldReplaceVibration (selector : Option (VibrationInfo × ℤ)) (new : VibrationInfo)
+    (now : ℤ) : Bool :=
   match selector with
   | none => true
   | some (previous, tick) =>
@@ -392,7 +396,7 @@ def shouldReplaceVibration (selector : Option (VibrationInfo × ℕ)) (new : Vib
 listener at `q` (`VibrationSelector.addCandidate`). -/
 def scheduleVibration (q : Pos) (event : String) (source : Option GameEventSource)
     (origin : Vec3) : M Unit := do
-  let now := (← get).gameTime
+  let now : ℤ := (← get).gameTime
   let new := vibrationInfo event origin (centerOf q) source
   modifyData q fun d =>
     if shouldReplaceVibration d.selector new now then { d with selector := some (new, now) }
@@ -513,9 +517,11 @@ def tryShriek (q : Pos) (source : Option GameEventSource) : M Unit := do
 /-- `VibrationSystem.Ticker.receiveVibration`: the vibration arrives at the listener at `q`. -/
 def receiveVibration (q : Pos) (be : BlockEntity) (vibration : VibrationInfo) : M Bool := do
   let origin := blockContaining (posOf vibration)
+  -- `currentVibration.getEntity(serverLevel).orElse(null)`
+  let source := GameEventSource.resolve vibration.source
   match be with
-  | .sculkShrieker _ => tryShriek q vibration.source
-  | _ => sensorOnReceiveVibration be q origin vibration.gameEvent vibration.source
+  | .sculkShrieker _ => tryShriek q source
+  | _ => sensorOnReceiveVibration be q origin vibration.gameEvent source
   -- `data.setCurrentVibration(null)`, which changes nothing in the world if the listener was
   -- removed meanwhile
   if let some be ← Level.getBlockEntity q then
@@ -531,7 +537,7 @@ def vibrationTick (q : Pos) : M Unit := do
   let some be ← Level.getBlockEntity q | return
   let some data := vibrationData? be | return
   let block := listenerBlock be
-  let now := (← get).gameTime
+  let now : ℤ := (← get).gameTime
   if data.currentVibration.isNone then
     if let some (info, tick) := data.selector then
       if tick < now then

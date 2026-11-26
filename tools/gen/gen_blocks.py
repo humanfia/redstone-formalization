@@ -3,8 +3,10 @@
 
     python3 tools/gen/gen_blocks.py $MC_REPORTS/blockdump.json Redstone/Block/Generated
 
-The dump is written by `tools/harness/run.sh dump` (see tests/FORMAT.md). Everything under
-`Redstone/Block/Generated` is produced by this script and must not be edited by hand.
+The dump is written by `tools/harness/run.sh dump` (see tests/FORMAT.md). The grids of the
+collision shapes are read from `shapegrids.json` next to the dump, which `tools/gen/ShapeGrids.java`
+writes. Everything under `Redstone/Block/Generated` is produced by this script and must not be
+edited by hand.
 
 Blocks are grouped into *families*: blocks with the same Java class and the same properties.
 A family becomes one constructor of `Redstone.Block`, carrying the block id (when the family
@@ -12,6 +14,7 @@ has several blocks) and a structure with one field per property. All blocks with
 form the single family `Plain`.
 """
 import json
+import os
 import re
 import sys
 from collections import OrderedDict, defaultdict
@@ -542,13 +545,69 @@ def gen_block_entities(g, out, stub_dir):
         f.write("\n".join(o) + FOOTER)
 
 
+def gen_shapes(g, grids):
+    """`Shapes.lean`: the boxes of every shape of the dump, as the bits of their coordinates, and
+    the grids of the collision shapes (`grids`: shapegrids.json, written by ShapeGrids.java)."""
+    o = [g.header("Block shapes", ["Mathlib.Tactic"])]
+    o.append("namespace Block\n")
+    o.append("/-- The shapes that blocks have (`VoxelShape`), numbered as `Attrs.collision`, `Attrs.outline`\n"
+             "and `Attrs.supportShape` number them. A shape is given by its boxes, in the order of\n"
+             "`VoxelShape.forAllBoxes`; a box is six doubles `minX, minY, minZ, maxX, maxY, maxZ`, given by\n"
+             "their IEEE bits, relative to the block. Shape 0 is the empty shape. -/")
+    o.append("def shapeBits : Array (Array UInt64) := #[")
+    rows = []
+    for shape in g.dump["shapes"]:
+        rows.append("  #[" + ", ".join("0x" + c for box in shape for c in box) + "]")
+    o.append(",\n".join(rows) + "]\n")
+    by_boxes = {json.dumps(e["boxes"], separators=(",", ":")): e["coords"] for e in grids["grids"]}
+    o.append("/-- The grid of each shape that is the collision shape of some block state: the coordinates\n"
+             "of the shape along x, y and z (`VoxelShape.getCoords`), as IEEE bits. The grid cuts the block\n"
+             "into cells, and the boxes are unions of cells; it can have more coordinates than the faces of\n"
+             "the boxes. The entry of a shape that is no collision shape is empty. -/")
+    o.append("def shapeGridBits : Array (Array (Array UInt64)) := #[")
+    rows = []
+    for shape in g.dump["shapes"]:
+        coords = by_boxes.get(json.dumps(shape, separators=(",", ":")))
+        if coords is None:
+            rows.append("  #[]")
+        else:
+            rows.append("  #[" + ", ".join("#[" + ", ".join("0x" + c for c in axis) + "]" for axis in coords) + "]")
+    o.append(",\n".join(rows) + "]")
+    o.append("\nend Block")
+    return "\n".join(o) + FOOTER
+
+
+def gen_items(g):
+    """`Items.lean`: the maximal stack size of every item."""
+    o = [g.header("Items", ["Mathlib.Tactic"])]
+    by_size = defaultdict(list)
+    for item in g.dump["items"]:
+        by_size[item["maxStackSize"]].append(item["id"])
+    common = max(by_size, key=lambda k: len(by_size[k]))
+    for size in sorted(by_size):
+        if size == common:
+            continue
+        o.append(f"/-- The items that stack up to {size}. -/")
+        o.append(f"def itemsStackingTo{size} : List String := [")
+        o.append(",\n".join("  " + lean_str(i) for i in by_size[size]) + "]\n")
+    o.append("/-- `Item.getDefaultMaxStackSize`: how many items of the kind named `id` fit in one stack. -/")
+    o.append("def itemMaxStackSize (id : String) : ℕ :=")
+    for size in sorted(by_size):
+        if size != common:
+            o.append(f"  if itemsStackingTo{size}.contains id then {size} else")
+    o.append(f"  {common}\n")
+    return "\n".join(o) + FOOTER
+
+
 def main():
     dump_path, out = sys.argv[1], sys.argv[2]
     g = Gen(json.load(open(dump_path)))
     gen_block_entities(g, out, f"{out}/../Entity")
     state = g.gen_state()  # also decides which index functions `gen_props` must emit
     attrs = g.gen_attrs()
-    files = {"Props": g.gen_props(), "Id": g.gen_id(), "State": state, "Attrs": attrs}
+    grids = json.load(open(os.path.join(os.path.dirname(os.path.abspath(dump_path)), "shapegrids.json")))
+    files = {"Props": g.gen_props(), "Id": g.gen_id(), "State": state, "Attrs": attrs,
+             "Shapes": gen_shapes(g, grids), "Items": gen_items(g)}
     for name, text in files.items():
         with open(f"{out}/{name}.lean", "w") as f:
             f.write(text)

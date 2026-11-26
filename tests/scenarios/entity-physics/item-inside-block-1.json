@@ -1,0 +1,16 @@
+{
+  "name": "item-inside-block-1",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [3, 4, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"pos": [0, 1, 1], "state": "minecraft:stone"}
+  ],
+  "entities": [
+    {"type": "minecraft:item", "pos": [1.2, 1.4, 1.6], "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"},
+    {"type": "minecraft:item", "pos": [1.15, 1.4, 1.62], "nbt": "{Item:{id:\"minecraft:gravel\",count:1}}"}
+  ]
+}

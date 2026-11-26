@@ -1,13 +1,20 @@
 module
 
 public import Redstone.Basic.Nbt
+public import Redstone.Basic.Pos
+public import Redstone.Basic.Random
 public import Redstone.Block.Basic
 
 /-!
 # Entity data: what every entity has
 
-The state every entity has (`Entity`): where it is and how it moves. Only the position is kept so
-far; the rest is to be added by the entity physics component.
+The state every entity has (`Entity`): where it is and how it moves.
+
+`Base` holds what a trace records for every entity: position, velocity and the `onGround` flag.
+`Physics` holds the other fields of `Entity` that `Entity.move` reads and writes. It is kept
+next to `Base`, inside the data of the entity kinds whose motion is modelled
+(`Entities.Item`, `Entities.FallingBlock`), so that kinds that do not model their motion are
+compared with the server exactly as before.
 -/
 
 @[expose] public section
@@ -41,6 +48,48 @@ structure Base where
 and `onGround` flag, and the rest of its saved NBT. -/
 def Base.ofTrace? (pos motion : Vec3) (onGround : Bool) (_nbt : Nbt) : Option Base :=
   some ⟨pos, motion, onGround⟩
+
+/-- The fields of `Entity` used by `Entity.move`, besides those of `Base`. Two values are equal
+(`==`) when the fields that the game saves agree: `fallDistance` and `noGravity`. The other
+fields are not saved, so they cannot be compared with the server; they start from the values of
+a newly created entity. -/
+structure Physics where
+  /-- `Entity.fallDistance`, saved as `fall_distance`. -/
+  fallDistance : Float := 0
+  /-- `Entity.isNoGravity()`, saved as `NoGravity`. -/
+  noGravity : Bool := false
+  /-- `Entity.tickCount`: the number of game ticks the entity has been ticked. Not saved. -/
+  tickCount : ℕ := 0
+  /-- `Entity.noPhysics`: the entity moves through blocks. Not saved. -/
+  noPhysics : Bool := false
+  /-- `Entity.horizontalCollision`. Not saved. -/
+  horizontalCollision : Bool := false
+  /-- `Entity.verticalCollision`. Not saved. -/
+  verticalCollision : Bool := false
+  /-- `Entity.verticalCollisionBelow`. Not saved. -/
+  verticalCollisionBelow : Bool := false
+  /-- `Entity.mainSupportingBlockPos`: the block the entity stands on. Not saved. -/
+  mainSupportingBlockPos : Option Pos := none
+  /-- `Entity.onGroundNoBlocks`. Not saved. -/
+  onGroundNoBlocks : Bool := false
+  /-- `Entity.stuckSpeedMultiplier`, set by blocks such as cobwebs. Not saved. -/
+  stuckSpeedMultiplier : Vec3 := ⟨0, 0, 0⟩
+  /-- `Entity.random`, the entity's own generator, once the model has drawn from it. `none`
+  stands for the generator as the constructor of the entity left it. Not saved. -/
+  random : Option JavaRandom := none
+  deriving Repr, Inhabited
+
+instance : BEq Physics :=
+  ⟨fun a b => a.fallDistance.toBits == b.fallDistance.toBits && a.noGravity == b.noGravity⟩
+
+/-- Reads the saved fields from the entity's NBT; the fields that are not saved get the values
+of a newly created entity. -/
+def Physics.ofNbt? (nbt : Nbt) : Option Physics :=
+  let fall :=
+    match nbt.get? "fall_distance" with
+    | some (.double bits) => Float.ofBits (UInt64.ofNat bits)
+    | _ => 0
+  some { fallDistance := fall, noGravity := nbt.boolD "NoGravity" false }
 
 end Entities
 

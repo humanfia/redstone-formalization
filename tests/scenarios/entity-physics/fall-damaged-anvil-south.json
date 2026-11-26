@@ -1,0 +1,14 @@
+{
+  "name": "fall-damaged-anvil-south",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [4, 14, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 2, 1], "state": "minecraft:damaged_anvil[facing=south]", "flags": 3},
+    {"tick": 2, "type": "set", "pos": [3, 4, 3], "state": "minecraft:damaged_anvil[facing=south]", "flags": 3},
+    {"tick": 3, "type": "set", "pos": [1, 13, 3], "state": "minecraft:damaged_anvil[facing=south]", "flags": 3},
+    {"tick": 4, "type": "set", "pos": [3, 9, 1], "state": "minecraft:damaged_anvil[facing=south]", "flags": 3}
+  ]
+}

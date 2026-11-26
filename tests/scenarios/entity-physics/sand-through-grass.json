@@ -1,0 +1,21 @@
+{
+  "name": "sand-through-grass",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [3, 5, 1]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 1], "state": "minecraft:dirt"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:short_grass"},
+    {"pos": [1, 1, 1], "state": "minecraft:snow[layers=1]"},
+    {"pos": [2, 1, 1], "state": "minecraft:short_grass"},
+    {"pos": [3, 1, 1], "state": "minecraft:snow[layers=2]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [0, 2, 1], "state": "minecraft:sand", "flags": 3},
+    {"tick": 2, "type": "set", "pos": [1, 2, 1], "state": "minecraft:gravel", "flags": 3},
+    {"tick": 3, "type": "set", "pos": [2, 2, 1], "state": "minecraft:anvil[facing=north]", "flags": 3},
+    {"tick": 4, "type": "set", "pos": [3, 2, 1], "state": "minecraft:sand", "flags": 3},
+    {"tick": 20, "type": "set", "pos": [0, 4, 1], "state": "minecraft:red_sand", "flags": 3}
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "fuzz-entity-physics-s2-000",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [2, 8, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:gravel"},
+    {"pos": [0, 1, 1], "state": "minecraft:gravel"},
+    {"pos": [0, 1, 2], "state": "minecraft:stone"},
+    {"pos": [0, 2, 0], "state": "minecraft:sand"},
+    {"pos": [0, 2, 2], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [0, 3, 0], "state": "minecraft:stone"},
+    {"pos": [0, 3, 1], "state": "minecraft:dragon_egg"},
+    {"pos": [0, 4, 1], "state": "minecraft:sand"},
+    {"pos": [0, 5, 2], "state": "minecraft:dragon_egg"},
+    {"pos": [0, 6, 0], "state": "minecraft:damaged_anvil[facing=east]"},
+    {"pos": [0, 7, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [0, 8, 0], "state": "minecraft:stone"},
+    {"pos": [0, 8, 1], "state": "minecraft:sand"},
+    {"pos": [1, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 4, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 4, 2], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:dragon_egg"},
+    {"pos": [2, 3, 0], "state": "minecraft:damaged_anvil[facing=west]"},
+    {"pos": [2, 4, 1], "state": "minecraft:lever[face=wall,facing=north,powered=true]"},
+    {"pos": [2, 6, 0], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [2, 6, 1], "state": "minecraft:gravel"},
+    {"pos": [2, 6, 2], "state": "minecraft:gravel"},
+    {"pos": [2, 7, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [2, 7, 2], "state": "minecraft:anvil[facing=south]"},
+    {"pos": [2, 8, 2], "state": "minecraft:sand"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [0, 2, 2], "state": "minecraft:gravel"},
+    {"tick": 11, "type": "set", "pos": [2, 3, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 17, "type": "set", "pos": [2, 7, 2], "state": "minecraft:anvil[facing=south]"},
+    {"tick": 18, "type": "set", "pos": [2, 3, 0], "state": "minecraft:air"},
+    {"tick": 34, "type": "destroy", "pos": [1, 4, 2], "drop": false},
+    {"tick": 37, "type": "destroy", "pos": [0, 8, 0], "drop": false},
+    {"tick": 45, "type": "set", "pos": [0, 7, 2], "state": "minecraft:red_concrete_powder"},
+    {"tick": 52, "type": "set", "pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"tick": 57, "type": "destroy", "pos": [0, 2, 2], "drop": false},
+    {"tick": 64, "type": "set", "pos": [1, 1, 1], "state": "minecraft:red_concrete_powder"},
+    {"tick": 65, "type": "set", "pos": [1, 2, 2], "state": "minecraft:sand"}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 30},
+    {"state": "minecraft:stone", "weight": 5},
+    {"state": "minecraft:glass", "weight": 2},
+    {"state": "minecraft:sand", "weight": 6},
+    {"state": "minecraft:gravel", "weight": 4},
+    {"state": "minecraft:red_sand", "weight": 2},
+    {"state": "minecraft:anvil[facing=*]", "weight": 2},
+    {"state": "minecraft:chipped_anvil[facing=*]", "weight": 1},
+    {"state": "minecraft:damaged_anvil[facing=*]", "weight": 1},
+    {"state": "minecraft:white_concrete_powder", "weight": 2},
+    {"state": "minecraft:dragon_egg", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 2},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 3}
+  ],
+  "actions": {
+    "use": {"count": [0, 3], "targets": ["minecraft:lever"]},
+    "set": {"count": [3, 8], "states": ["minecraft:stone", "minecraft:air", "minecraft:sand", "minecraft:gravel", "minecraft:anvil[facing=*]", "minecraft:red_concrete_powder", "minecraft:dragon_egg", "minecraft:lever[face=floor,facing=*,powered=*]", "minecraft:redstone_lamp[lit=false]"]},
+    "destroy": {"count": [2, 6], "targets": ["minecraft:stone", "minecraft:glass", "minecraft:sand", "minecraft:gravel", "minecraft:redstone_lamp", "minecraft:lever", "minecraft:anvil"]}
+  }
+}

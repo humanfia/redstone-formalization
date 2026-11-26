@@ -26,6 +26,7 @@ public import Redstone.Component.Rail
 public import Redstone.Component.Tnt
 public import Redstone.Component.CommandBlock
 public import Redstone.Component.Extra
+public import Redstone.Component.FallingBlock
 public import Redstone.Entity.Item
 public import Redstone.Entity.FallingBlock
 public import Redstone.Entity.PrimedTnt
@@ -54,6 +55,7 @@ def blockBehaviour (b : Block) : Behaviour :=
   match b with
   | .plain i =>
     match i with
+    | .sand | .red_sand | .gravel | .dragon_egg | .white_concrete_powder | .orange_concrete_powder | .magenta_concrete_powder | .light_blue_concrete_powder | .yellow_concrete_powder | .lime_concrete_powder | .pink_concrete_powder | .gray_concrete_powder | .light_gray_concrete_powder | .cyan_concrete_powder | .purple_concrete_powder | .blue_concrete_powder | .brown_concrete_powder | .green_concrete_powder | .red_concrete_powder | .black_concrete_powder => Component.FallingBlock.behaviour b
     | .sponge | .slime_block | .honey_block => Component.Extra.behaviour b
     | .cauldron | .lava_cauldron => Component.AnalogSource.behaviour b
     | .redstone_block => Component.Torch.behaviour b
@@ -149,7 +151,7 @@ def blockBehaviour (b : Block) : Behaviour :=
   | .playerHead _ => Component.Extra.behaviour b
   | .playerWallHead _ => Component.Extra.behaviour b
   | .piglinWallSkull _ => Component.Extra.behaviour b
-  | .anvil _ _ => .inert b
+  | .anvil _ _ => Component.FallingBlock.behaviour b
   | .trappedChest _ => Component.Container.behaviour b
   | .weightedPressurePlate _ _ => Component.PressurePlate.behaviour b
   | .comparator _ => Component.Comparator.behaviour b

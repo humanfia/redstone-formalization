@@ -1,0 +1,30 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 40},
+    {"state": "minecraft:stone", "weight": 4},
+    {"state": "minecraft:sand", "weight": 8},
+    {"state": "minecraft:gravel", "weight": 5},
+    {"state": "minecraft:anvil[facing=*]", "weight": 3},
+    {"state": "minecraft:black_concrete_powder", "weight": 2},
+    {"state": "minecraft:smooth_stone_slab[type=*]", "weight": 3},
+    {"state": "minecraft:oak_stairs[facing=*,half=*,shape=*]", "weight": 3},
+    {"state": "minecraft:oak_fence[east=*,north=*,south=*,west=*]", "weight": 2},
+    {"state": "minecraft:cobblestone_wall[east=*,north=*,south=*,up=true,west=*]", "weight": 2},
+    {"state": "minecraft:oak_trapdoor[facing=*,half=*,open=*]", "weight": 2},
+    {"state": "minecraft:white_carpet", "weight": 2},
+    {"state": "minecraft:snow[layers=*]", "weight": 3},
+    {"state": "minecraft:short_grass", "weight": 2},
+    {"state": "minecraft:torch", "weight": 2},
+    {"state": "minecraft:glass_pane[east=*,north=*,south=*,west=*]", "weight": 2},
+    {"state": "minecraft:ice", "weight": 2},
+    {"state": "minecraft:red_bed[facing=*,part=*]", "weight": 1},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=false]", "weight": 1}
+  ],
+  "actions": {
+    "use": {"count": [0, 2], "targets": ["minecraft:lever"]},
+    "set": {"count": [3, 8], "states": ["minecraft:stone", "minecraft:air", "minecraft:sand", "minecraft:gravel", "minecraft:chipped_anvil[facing=*]", "minecraft:lime_concrete_powder", "minecraft:smooth_stone_slab[type=bottom]", "minecraft:ice"]},
+    "destroy": {"count": [2, 6], "targets": ["minecraft:stone", "minecraft:sand", "minecraft:gravel", "minecraft:smooth_stone_slab", "minecraft:oak_stairs", "minecraft:oak_fence", "minecraft:ice", "minecraft:snow"]}
+  }
+}

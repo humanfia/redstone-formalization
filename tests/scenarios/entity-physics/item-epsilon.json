@@ -1,0 +1,24 @@
+{
+  "name": "item-epsilon",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:stone"},
+    {"pos": [0, 1, 0], "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:item", "pos": [1.5, 0.99999995, 0.5], "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"},
+    {"type": "minecraft:item", "pos": [3.5, 1.00000005, 0.5], "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"},
+    {"type": "minecraft:item", "pos": [1.5, 0.9999998, 3.5], "nbt": "{Item:{id:\"minecraft:gravel\",count:1}}"},
+    {"type": "minecraft:item", "pos": [1.87500005, 1.0, 2.5], "nbt": "{Item:{id:\"minecraft:sand\",count:1},Motion:[0.1d,0.0d,0.0d]}"},
+    {"type": "minecraft:item", "pos": [1.87499995, 1.0, 2.3], "nbt": "{Item:{id:\"minecraft:glass\",count:1},Motion:[0.1d,0.0d,0.0d]}"},
+    {"type": "minecraft:item", "pos": [2.5, 1.0, 3.12499995], "nbt": "{Item:{id:\"minecraft:ice\",count:1},Motion:[0.0d,0.0d,-0.1d]}"},
+    {"type": "minecraft:item", "pos": [0.5, 1.49999995, 0.5], "nbt": "{Item:{id:\"minecraft:stone\",count:2}}"},
+    {"type": "minecraft:item", "pos": [0.3, 1.50000005, 0.7], "nbt": "{Item:{id:\"minecraft:dirt\",count:2}}"},
+    {"type": "minecraft:item", "pos": [2.5, 1.99999995, 2.5], "nbt": "{Item:{id:\"minecraft:oak_planks\",count:1}}"},
+    {"type": "minecraft:item", "pos": [2.2, 1.99999985, 2.2], "nbt": "{Item:{id:\"minecraft:oak_log\",count:1}}"}
+  ]
+}

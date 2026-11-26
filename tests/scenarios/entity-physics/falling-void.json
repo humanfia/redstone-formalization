@@ -1,0 +1,10 @@
+{
+  "name": "falling-void",
+  "ticks": 125,
+  "box": {"min": [0, 0, 0], "max": [2, 3, 2]},
+  "entities": [
+    {"type": "minecraft:falling_block", "pos": [1.5, 2.0, 1.5], "nbt": "{BlockState:\"minecraft:sand\",Time:1}"},
+    {"type": "minecraft:falling_block", "pos": [0.5, 2.0, 0.5], "nbt": "{BlockState:\"minecraft:gravel\",Time:1,DropItem:0b}"},
+    {"type": "minecraft:falling_block", "pos": [2.5, -30.0, 2.5], "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"south\"}},Time:590}"}
+  ]
+}

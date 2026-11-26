@@ -1,0 +1,18 @@
+{
+  "name": "sand-on-wall",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [4, 7, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [3, 1, 0], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 5, 1], "state": "minecraft:sand", "flags": 3},
+    {"tick": 2, "type": "set", "pos": [3, 6, 0], "state": "minecraft:anvil[facing=west]", "flags": 3},
+    {"tick": 9, "type": "set", "pos": [1, 6, 1], "state": "minecraft:gravel", "flags": 3},
+    {"tick": 14, "type": "set", "pos": [3, 4, 0], "state": "minecraft:red_concrete_powder", "flags": 3}
+  ]
+}

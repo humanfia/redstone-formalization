@@ -1,0 +1,26 @@
+{
+  "name": "sand-updates",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [4, 5, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 3, 1], "state": "minecraft:sand"},
+    {"pos": [3, 3, 3], "state": "minecraft:gravel"},
+    {"pos": [0, 4, 3], "state": "minecraft:sand"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [1, 3, 2], "state": "minecraft:stone", "flags": 3},
+    {"tick": 10, "type": "set", "pos": [3, 4, 3], "state": "minecraft:stone", "flags": 2},
+    {"tick": 15, "type": "set", "pos": [3, 4, 3], "state": "minecraft:glass", "flags": 1},
+    {"tick": 20, "type": "set", "pos": [0, 3, 3], "state": "minecraft:stone", "flags": 18},
+    {"tick": 25, "type": "set", "pos": [2, 4, 0], "state": "minecraft:sand", "flags": 2},
+    {"tick": 26, "type": "set", "pos": [2, 3, 0], "state": "minecraft:stone", "flags": 3},
+    {"tick": 27, "type": "set", "pos": [2, 3, 0], "state": "minecraft:air", "flags": 3},
+    {"tick": 30, "type": "set", "pos": [0, 4, 0], "state": "minecraft:sand", "flags": 3},
+    {"tick": 31, "type": "set", "pos": [0, 4, 0], "state": "minecraft:glass", "flags": 3},
+    {"tick": 32, "type": "set", "pos": [0, 4, 0], "state": "minecraft:sand", "flags": 3},
+    {"tick": 33, "type": "set", "pos": [0, 3, 0], "state": "minecraft:stone", "flags": 3}
+  ]
+}

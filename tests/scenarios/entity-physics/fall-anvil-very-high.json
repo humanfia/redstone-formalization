@@ -1,0 +1,15 @@
+{
+  "name": "fall-anvil-very-high",
+  "ticks": 110,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 2], "state": "minecraft:stone"}
+  ],
+  "entities": [
+    {"type": "minecraft:falling_block", "pos": [0.5, 150.0, 0.5], "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"west\"}},Time:1,HurtEntities:1b,FallHurtAmount:2.0f,FallHurtMax:40}"},
+    {"type": "minecraft:falling_block", "pos": [1.5, 170.0, 0.5], "nbt": "{BlockState:{id:\"minecraft:chipped_anvil\",properties:{facing:\"west\"}},Time:1,HurtEntities:1b,FallHurtAmount:2.0f,FallHurtMax:40}"},
+    {"type": "minecraft:falling_block", "pos": [2.5, 190.0, 0.5], "nbt": "{BlockState:{id:\"minecraft:damaged_anvil\",properties:{facing:\"west\"}},Time:1,HurtEntities:1b,FallHurtAmount:2.0f,FallHurtMax:40}"},
+    {"type": "minecraft:falling_block", "pos": [3.5, 210.0, 0.5], "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"west\"}},Time:1,HurtEntities:1b,FallHurtAmount:2.0f,FallHurtMax:40}"},
+    {"type": "minecraft:falling_block", "pos": [4.5, 230.0, 0.5], "nbt": "{BlockState:{id:\"minecraft:damaged_anvil\",properties:{facing:\"west\"}},Time:1,HurtEntities:1b,FallHurtAmount:2.0f,FallHurtMax:40}"}
+  ]
+}

@@ -225,6 +225,13 @@ inventory is generated:
   (`EmptyBlockGetter`); an attribute whose query throws would be left out (none does in 26.3).
 * A shape is a list of boxes `[minX, minY, minZ, maxX, maxY, maxZ]` in hex doubles, in the order
   of `VoxelShape.forAllBoxes`; shape 0 is the empty shape.
+* The boxes of a shape do not determine its grid (`VoxelShape.getCoords`), which decides how a
+  box that overlaps the shape collides with it. `tools/gen/ShapeGrids.java` writes the grids of
+  all collision shapes to `$MC_REPORTS/shapegrids.json`:
+  `{"grids": [{"boxes": [...], "coords": [[x...], [y...], [z...]]}], "conflicts": 0}`, where
+  `boxes` is the shape as in `shapes` and the coordinates are hex doubles. `conflicts` counts
+  block states whose collision shape has the boxes of another shape but a different grid (none in
+  26.3). `tools/gen/gen_blocks.py` reads both files.
 * `blockEntityTypes[].class` and `entityTypes[].class` are simple Java class names;
   `minecraft:player` has `class` null (it cannot be created from its type). `width` and `height`
   are hex floats.
@@ -237,8 +244,8 @@ compares it with their traces after every tick; without arguments it runs everyt
 
 * The model takes its initial state from frame 0 of the trace, so it never reads `fill`,
   `blocks`, `entities` or `settings`. From the scenario it uses `ticks`, `box` and `actions`.
-* It supports the actions `use`, `use_item`, `set` and `destroy`. A scenario with `summon` or
-  `kill` cannot be run yet.
+* It supports the actions `use`, `use_item`, `set`, `destroy` and `kill`. A scenario with
+  `summon` cannot be run yet.
 * After every tick it compares: `gameTime`; the block state and the block entity of every
   position in the box; `blockEntityTickers`; `scheduled`; `blockEvents`; and the entities.
   Block entities and entities are compared after decoding the server's NBT into the model's

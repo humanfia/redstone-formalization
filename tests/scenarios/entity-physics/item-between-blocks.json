@@ -1,0 +1,33 @@
+{
+  "name": "item-between-blocks",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [3, 2, 7]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 7], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 0, 0], "state": "minecraft:ice"},
+    {"pos": [0, 0, 1], "state": "minecraft:ice"},
+    {"pos": [0, 0, 2], "state": "minecraft:ice"},
+    {"pos": [0, 0, 3], "state": "minecraft:ice"},
+    {"pos": [0, 0, 4], "state": "minecraft:ice"},
+    {"pos": [0, 0, 5], "state": "minecraft:ice"},
+    {"pos": [0, 0, 6], "state": "minecraft:ice"},
+    {"pos": [0, 0, 7], "state": "minecraft:ice"},
+    {"pos": [2, 0, 0], "state": "minecraft:blue_ice"},
+    {"pos": [2, 0, 1], "state": "minecraft:blue_ice"},
+    {"pos": [2, 0, 2], "state": "minecraft:blue_ice"},
+    {"pos": [2, 0, 3], "state": "minecraft:blue_ice"},
+    {"pos": [2, 0, 4], "state": "minecraft:blue_ice"},
+    {"pos": [2, 0, 5], "state": "minecraft:blue_ice"},
+    {"pos": [2, 0, 6], "state": "minecraft:blue_ice"},
+    {"pos": [2, 0, 7], "state": "minecraft:blue_ice"}
+  ],
+  "entities": [
+    {"type": "minecraft:item", "pos": [1.0, 1.0, 0.5], "nbt": "{Item:{id:\"minecraft:stone\",count:1},Motion:[0.0d,0.0d,0.4d]}"},
+    {"type": "minecraft:item", "pos": [2.0, 1.0, 0.5], "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.0d,0.0d,0.4d]}"},
+    {"type": "minecraft:item", "pos": [3.0, 1.0, 0.5], "nbt": "{Item:{id:\"minecraft:gravel\",count:1},Motion:[0.0d,0.0d,0.4d]}"},
+    {"type": "minecraft:item", "pos": [1.0, 1.0, 7.5], "nbt": "{Item:{id:\"minecraft:sand\",count:1},Motion:[0.0d,0.0d,-0.4d]}"},
+    {"type": "minecraft:item", "pos": [2.0, 1.0, 7.5], "nbt": "{Item:{id:\"minecraft:glass\",count:1},Motion:[0.0d,0.0d,-0.4d]}"}
+  ]
+}

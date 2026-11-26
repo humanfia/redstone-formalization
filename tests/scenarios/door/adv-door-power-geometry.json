@@ -1,0 +1,1459 @@
+{
+ "name": "adv-door-power-geometry",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   17,
+   6,
+   11
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    16,
+    1,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=lower,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=upper,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    3,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    3,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    2,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=south,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=south,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    3
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=south,half=lower,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=south,half=upper,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    3,
+    3
+   ],
+   "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    2,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=west,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=west,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    6
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=west,half=lower,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=west,half=upper,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    6
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=north,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=north,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    3,
+    6
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    6
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    3,
+    6
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    3,
+    6
+   ],
+   "state": "minecraft:weathered_copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    2,
+    6
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=east,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=east,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    9
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=east,half=lower,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=east,half=upper,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    9
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=north,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=north,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    3,
+    9
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    9
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    3,
+    9
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    3,
+    9
+   ],
+   "state": "minecraft:waxed_oxidized_copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    2,
+    9
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    7,
+    3,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    3
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    7,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    6
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    7,
+    3,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    9
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    7,
+    3,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    15,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    15,
+    2,
+    3
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    15,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    15,
+    2,
+    9
+   ],
+   "drop": false
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    3
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    9
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=true]",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=true]",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    6
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=true]",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    11,
+    2,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    9
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=true]",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    7,
+    3,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    3
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    7,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    6
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    7,
+    3,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    9
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    7,
+    3,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    3
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    9
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    0
+   ],
+   "state": "minecraft:air",
+   "flags": 2
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    3,
+    3
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    3
+   ],
+   "state": "minecraft:air",
+   "flags": 2
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    3,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    6
+   ],
+   "state": "minecraft:air",
+   "flags": 2
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    3,
+    9
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    9
+   ],
+   "state": "minecraft:air",
+   "flags": 2
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    14,
+    4,
+    0
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    14,
+    4,
+    3
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    14,
+    4,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    14,
+    4,
+    9
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    10,
+    3,
+    3
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    10,
+    3,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    10,
+    3,
+    9
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    0
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    3
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    6
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    9
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 14,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 14,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 14,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 14,
+   "type": "use",
+   "pos": [
+    9,
+    3,
+    9
+   ],
+   "face": "up"
+  }
+ ]
+}

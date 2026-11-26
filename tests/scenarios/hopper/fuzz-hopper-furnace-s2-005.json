@@ -1,0 +1,49 @@
+{
+  "name": "fuzz-hopper-furnace-s2-005",
+  "ticks": 130,
+  "box": {"min": [0, 0, 0], "max": [3, 3, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=ceiling,facing=south,powered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:hopper[enabled=true,facing=west]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stick\",count:3},{Slot:1b,id:\"minecraft:bucket\",count:1},{Slot:2b,id:\"minecraft:glass_bottle\",count:3},{Slot:3b,id:\"minecraft:blaze_powder\",count:2},{Slot:4b,id:\"minecraft:nether_wart\",count:2}]}"},
+    {"pos": [0, 1, 3], "state": "minecraft:hopper[enabled=true,facing=south]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:wet_sponge\",count:1},{Slot:1b,id:\"minecraft:lava_bucket\",count:1},{Slot:2b,id:\"minecraft:cobblestone\",count:4}]}"},
+    {"pos": [0, 2, 0], "state": "minecraft:chest[facing=south,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:potato\",count:5}]}"},
+    {"pos": [0, 2, 2], "state": "minecraft:hopper[enabled=true,facing=west]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:wet_sponge\",count:1},{Slot:1b,id:\"minecraft:lava_bucket\",count:1},{Slot:2b,id:\"minecraft:cobblestone\",count:4}]}"},
+    {"pos": [0, 2, 3], "state": "minecraft:blast_furnace[facing=west,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:5}],cooking_time_spent:31,cooking_total_time:77}"},
+    {"pos": [0, 3, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=true]"},
+    {"pos": [0, 3, 3], "state": "minecraft:chest[facing=west,type=left,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:potato\",count:5}]}"},
+    {"pos": [1, 1, 0], "state": "minecraft:hopper[enabled=true,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stick\",count:3},{Slot:1b,id:\"minecraft:bucket\",count:1},{Slot:2b,id:\"minecraft:glass_bottle\",count:3},{Slot:3b,id:\"minecraft:blaze_powder\",count:2},{Slot:4b,id:\"minecraft:nether_wart\",count:2}]}"},
+    {"pos": [1, 1, 1], "state": "minecraft:smoker[facing=south,lit=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:6},{Slot:2b,id:\"minecraft:porkchop\",count:2}]}"},
+    {"pos": [1, 1, 3], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=true]"},
+    {"pos": [1, 2, 0], "state": "minecraft:hopper[enabled=true,facing=east]"},
+    {"pos": [1, 2, 1], "state": "minecraft:blast_furnace[facing=west,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:5}],cooking_time_spent:31,cooking_total_time:77}"},
+    {"pos": [1, 2, 2], "state": "minecraft:blast_furnace[facing=south,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:5}],cooking_time_spent:31,cooking_total_time:77}"},
+    {"pos": [1, 2, 3], "state": "minecraft:furnace[facing=west,lit=false]"},
+    {"pos": [1, 3, 2], "state": "minecraft:chest[facing=south,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:potato\",count:5}]}"},
+    {"pos": [2, 1, 0], "state": "minecraft:smoker[facing=east,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:beef\",count:2},{Slot:1b,id:\"minecraft:scaffolding\",count:3},{Slot:2b,id:\"minecraft:cooked_beef\",count:63}]}"},
+    {"pos": [2, 1, 1], "state": "minecraft:lever[face=wall,facing=north,powered=true]"},
+    {"pos": [2, 2, 0], "state": "minecraft:lever[face=ceiling,facing=east,powered=true]"},
+    {"pos": [2, 2, 2], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:6},{Slot:2b,id:\"minecraft:porkchop\",count:2}]}"},
+    {"pos": [2, 2, 3], "state": "minecraft:chest[facing=east,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:potato\",count:5}]}"},
+    {"pos": [2, 3, 0], "state": "minecraft:hopper[enabled=true,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:wet_sponge\",count:1},{Slot:1b,id:\"minecraft:lava_bucket\",count:1},{Slot:2b,id:\"minecraft:cobblestone\",count:4}]}"},
+    {"pos": [2, 3, 2], "state": "minecraft:smoker[facing=north,lit=false]"},
+    {"pos": [2, 3, 3], "state": "minecraft:chest[facing=west,type=left,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:potato\",count:5}]}"},
+    {"pos": [3, 1, 0], "state": "minecraft:hopper[enabled=true,facing=west]"},
+    {"pos": [3, 1, 1], "state": "minecraft:barrel[facing=west,open=false]"},
+    {"pos": [3, 1, 3], "state": "minecraft:lever[face=floor,facing=south,powered=true]"},
+    {"pos": [3, 3, 1], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [3, 3, 2], "state": "minecraft:blast_furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:5}],cooking_time_spent:31,cooking_total_time:77}"},
+    {"pos": [3, 3, 3], "state": "minecraft:blast_furnace[facing=south,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:5}],cooking_time_spent:31,cooking_total_time:77}"}
+  ],
+  "actions": [
+    {"tick": 13, "type": "use", "pos": [1, 1, 1], "face": "south"},
+    {"tick": 36, "type": "use", "pos": [0, 3, 0], "face": "south"},
+    {"tick": 60, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 76, "type": "use", "pos": [0, 3, 0], "face": "up"},
+    {"tick": 92, "type": "set", "pos": [3, 2, 0], "state": "minecraft:furnace[facing=west,lit=true]", "flags": 259},
+    {"tick": 125, "type": "destroy", "pos": [3, 1, 3], "drop": false}
+  ]
+}

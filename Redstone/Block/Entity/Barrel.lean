@@ -1,14 +1,12 @@
 module
 
-public import Redstone.Basic.Nbt
-public import Redstone.Block.Generated.State
+public import Redstone.Block.Entity.Chest
 
 /-!
 # Block entity `minecraft:barrel`
 
-The data that the model keeps of the block entity `BarrelBlockEntity`.
-Nothing is modelled yet: the structure is empty and is to be filled in by the component that
-owns this block entity.
+The data that the model keeps of the block entity `BarrelBlockEntity`. It is the data of a
+chest: 27 slots and the state of the openers counter.
 -/
 
 @[expose] public section
@@ -16,14 +14,13 @@ owns this block entity.
 namespace Redstone.BlockEntities
 
 /-- The data of a `minecraft:barrel` block entity. -/
-structure Barrel where
-  deriving DecidableEq, Repr, Inhabited
+abbrev Barrel := Chest
 
 namespace Barrel
 
 /-- Reads the data from the block entity's saved NBT. Fields the model does not keep are
 ignored. -/
-def ofNbt? (_ : Nbt) : Option Barrel := some {}
+def ofNbt? (t : Nbt) : Option Barrel := Chest.ofNbt? t
 
 end Barrel
 

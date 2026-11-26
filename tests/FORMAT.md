@@ -244,6 +244,9 @@ compares it with their traces after every tick; without arguments it runs everyt
   Block entities and entities are compared after decoding the server's NBT into the model's
   types (`ofNbt?`), so data the model does not represent is not compared. In particular a
   block entity or entity type whose model is still an empty structure always compares equal.
+  A model type may also keep data that the game does not save (the openers counter of a chest,
+  for instance). A trace cannot show such data, so those fields are reset before the comparison
+  (`Redstone.Component.Container.savedData`).
 * `tests/pending/scenarios` and `tests/pending/traces` hold scenarios that have been recorded
   but that the model does not reproduce yet. They are not run by `lake test`. Run them with
   `lake exe difftest tests/pending/scenarios/<unit>` and move them to `tests/scenarios` and

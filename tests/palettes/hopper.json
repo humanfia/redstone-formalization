@@ -1,0 +1,29 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 16},
+    {"state": "minecraft:stone", "weight": 3},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 2},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 4},
+    {"state": "minecraft:hopper[enabled=true,facing=*]", "weight": 4},
+    {"state": "minecraft:hopper[enabled=*,facing=*]", "weight": 4, "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:3},{Slot:3b,id:\"minecraft:ender_pearl\",count:2}]}"},
+    {"state": "minecraft:hopper[enabled=true,facing=*]", "weight": 2, "nbt": "{TransferCooldown:5,Items:[{Slot:0b,id:\"minecraft:stone\",count:64},{Slot:1b,id:\"minecraft:redstone\",count:63},{Slot:2b,id:\"minecraft:diamond_sword\",count:1},{Slot:3b,id:\"minecraft:ender_pearl\",count:16},{Slot:4b,id:\"minecraft:coal\",count:2}]}"},
+    {"state": "minecraft:hopper[enabled=true,facing=*]", "weight": 2, "nbt": "{TransferCooldown:12,Items:[{Slot:2b,id:\"minecraft:raw_iron\",count:2},{Slot:4b,id:\"minecraft:oak_planks\",count:2}]}"},
+    {"state": "minecraft:chest[facing=*,type=*]", "weight": 2},
+    {"state": "minecraft:chest[facing=*,type=*]", "weight": 3, "nbt": "{Items:[{Slot:1b,id:\"minecraft:redstone\",count:62},{Slot:4b,id:\"minecraft:stone\",count:2},{Slot:26b,id:\"minecraft:ender_pearl\",count:15}]}"},
+    {"state": "minecraft:trapped_chest[facing=*,type=*]", "weight": 3},
+    {"state": "minecraft:trapped_chest[facing=*,type=*]", "weight": 1, "nbt": "{Items:[{Slot:0b,id:\"minecraft:diamond_sword\",count:1},{Slot:1b,id:\"minecraft:coal\",count:3}]}"},
+    {"state": "minecraft:barrel[facing=*,open=*]", "weight": 2, "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:1},{Slot:9b,id:\"minecraft:raw_iron\",count:1}]}"},
+    {"state": "minecraft:copper_chest[facing=*,type=*]", "weight": 1},
+    {"state": "minecraft:waxed_exposed_copper_chest[facing=*,type=*]", "weight": 1, "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:1}]}"},
+    {"state": "minecraft:shulker_box[facing=*]", "weight": 1, "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3}]}"},
+    {"state": "minecraft:furnace[facing=*,lit=false]", "weight": 1, "nbt": "{Items:[{Slot:1b,id:\"minecraft:stick\",count:1}]}"},
+    {"state": "minecraft:brewing_stand", "weight": 1}
+  ],
+  "actions": {
+    "use": {"count": [3, 9], "targets": ["minecraft:lever", "minecraft:lever", "minecraft:chest", "minecraft:trapped_chest", "minecraft:barrel", "minecraft:hopper", "minecraft:furnace", "minecraft:brewing_stand", "minecraft:copper_chest"], "faces": ["up", "north", "east"]},
+    "set": {"count": [1, 5], "states": ["minecraft:stone", "minecraft:air", "minecraft:redstone_lamp[lit=false]", "minecraft:lever[face=wall,facing=*,powered=*]", "minecraft:hopper[enabled=true,facing=*]", "minecraft:chest[facing=*,type=*]", "minecraft:trapped_chest[facing=*,type=*]", "minecraft:barrel[facing=*,open=false]", "minecraft:exposed_copper_chest[facing=*,type=*]"], "flags": 259},
+    "destroy": {"count": [0, 2], "targets": ["minecraft:stone", "minecraft:redstone_lamp", "minecraft:lever", "minecraft:glass"]}
+  }
+}

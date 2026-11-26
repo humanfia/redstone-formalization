@@ -1,0 +1,14 @@
+{
+  "name": "drop-contents",
+  "ticks": 20,
+  "box": {"min": [0, 0, 0], "max": [2, 1, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:5b,id:\"minecraft:redstone\",count:40}]}"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "destroy", "pos": [1, 1, 1], "drop": false}
+  ]
+}

@@ -137,6 +137,10 @@ structure Level where
   nesting depth of block reactions or the length of a loop. A level with this flag is not a
   faithful image of the game any more. -/
   overflow : Bool
+  /-- The containers whose menu the player of the `use` actions has open (`containerMenu`): the
+  positions of the chests or the barrel on which closing the menu will call `stopOpen`. Empty
+  when the player has no menu open, or one whose container does not count its viewers. -/
+  playerMenu : List Pos := []
 
 namespace Level
 

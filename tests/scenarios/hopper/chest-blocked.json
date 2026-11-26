@@ -1,0 +1,33 @@
+{
+  "name": "chest-blocked",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [9, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [9, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:stone"},
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:glass"},
+    {"pos": [4, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=left,waterlogged=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=right,waterlogged=false]"},
+    {"pos": [7, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:barrel[facing=up,open=false]"},
+    {"pos": [9, 2, 1], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "north"},
+    {"tick": 5, "type": "use", "pos": [3, 1, 1], "face": "north"},
+    {"tick": 8, "type": "use", "pos": [6, 1, 1], "face": "north"},
+    {"tick": 11, "type": "use", "pos": [7, 1, 1], "face": "north"},
+    {"tick": 14, "type": "use", "pos": [9, 1, 1], "face": "north"},
+    {"tick": 20, "type": "destroy", "pos": [1, 2, 1], "drop": false},
+    {"tick": 21, "type": "destroy", "pos": [7, 2, 1], "drop": false},
+    {"tick": 22, "type": "use", "pos": [1, 1, 1], "face": "north"},
+    {"tick": 26, "type": "use", "pos": [6, 1, 1], "face": "north"}
+  ]
+}

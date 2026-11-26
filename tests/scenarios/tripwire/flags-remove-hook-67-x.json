@@ -1,0 +1,194 @@
+{
+ "name": "flags-remove-hook-67-x",
+ "ticks": 30,
+ "box": {
+  "min": [
+   2,
+   -1,
+   2
+  ],
+  "max": [
+   12,
+   3,
+   6
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=true,facing=east,powered=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=true,south=false,west=true]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=true]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:air",
+   "flags": 67
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    4
+   ],
+   "state": "minecraft:air",
+   "flags": 67
+  }
+ ]
+}

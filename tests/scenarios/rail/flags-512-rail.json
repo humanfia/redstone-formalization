@@ -1,0 +1,20 @@
+{
+  "name": "flags-512-rail",
+  "ticks": 8,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 2], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 0, 3], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 1, 2], "state": "minecraft:rail[shape=north_south,waterlogged=false]", "flags": 512},
+    {"tick": 4, "type": "set", "pos": [2, 0, 2], "state": "minecraft:glass", "flags": 512},
+    {"tick": 5, "type": "set", "pos": [1, 1, 2], "state": "minecraft:air", "flags": 512},
+    {"tick": 6, "type": "set", "pos": [2, 1, 2], "state": "minecraft:air", "flags": 512}
+  ]
+}

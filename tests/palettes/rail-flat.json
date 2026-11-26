@@ -1,0 +1,25 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 6},
+    {"state": "minecraft:stone", "weight": 1},
+    {"state": "minecraft:lever[face=floor,facing=*,powered=*]", "weight": 3},
+    {"state": "minecraft:redstone_lamp[lit=false]", "weight": 1},
+    {"state": "minecraft:rail[shape=north_south,waterlogged=false]", "weight": 3},
+    {"state": "minecraft:rail[shape=east_west,waterlogged=false]", "weight": 3},
+    {"state": "minecraft:rail[shape=south_east,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:rail[shape=south_west,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:rail[shape=north_west,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:rail[shape=north_east,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:powered_rail[powered=*,shape=north_south,waterlogged=false]", "weight": 6},
+    {"state": "minecraft:powered_rail[powered=*,shape=east_west,waterlogged=false]", "weight": 6},
+    {"state": "minecraft:activator_rail[powered=*,shape=north_south,waterlogged=false]", "weight": 2},
+    {"state": "minecraft:activator_rail[powered=*,shape=east_west,waterlogged=false]", "weight": 2},
+    {"state": "minecraft:detector_rail[powered=*,shape=east_west,waterlogged=false]", "weight": 1}
+  ],
+  "actions": {
+    "use": {"count": [3, 8], "targets": ["minecraft:lever"]},
+    "set": {"count": [2, 8], "states": ["minecraft:air", "minecraft:rail", "minecraft:powered_rail", "minecraft:activator_rail", "minecraft:detector_rail[powered=*]", "minecraft:powered_rail[powered=true,shape=east_west]", "minecraft:lever[face=floor,facing=north,powered=true]"]},
+    "destroy": {"count": [1, 4], "targets": ["minecraft:rail", "minecraft:powered_rail", "minecraft:activator_rail", "minecraft:detector_rail", "minecraft:lever"]}
+  }
+}

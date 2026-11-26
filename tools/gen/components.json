@@ -16,7 +16,7 @@
     {"module": "Lamp", "classes": ["RedstoneLampBlock", "CopperBulbBlock"]},
     {"module": "NoteBlock", "classes": ["NoteBlock"]},
     {"module": "Bell", "classes": ["BellBlock"]},
-    {"module": "Dripleaf", "classes": ["BigDripleafBlock"]},
+    {"module": "Dripleaf", "classes": ["BigDripleafBlock", "BigDripleafStemBlock"]},
     {"module": "Door", "classes": ["DoorBlock", "TrapDoorBlock", "FenceGateBlock"]},
     {"module": "Dispenser", "classes": ["DispenserBlock"]},
     {"module": "Crafter", "classes": ["CrafterBlock"]},

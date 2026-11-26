@@ -1,0 +1,35 @@
+{
+  "name": "dripleaf-item-power",
+  "ticks": 60,
+  "box": {"min": [-1, -1, -1], "max": [9, 3, 9]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 8], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:clay"},
+    {"pos": [1, 2, 1], "state": "minecraft:big_dripleaf[facing=north,tilt=none,waterlogged=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:clay"},
+    {"pos": [4, 2, 1], "state": "minecraft:big_dripleaf[facing=north,tilt=none,waterlogged=false]"},
+    {"pos": [4, 1, 2], "state": "minecraft:stone"},
+    {"pos": [4, 2, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:clay"},
+    {"pos": [7, 2, 1], "state": "minecraft:big_dripleaf[facing=north,tilt=none,waterlogged=false]"},
+    {"pos": [7, 1, 2], "state": "minecraft:stone"},
+    {"pos": [7, 2, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:item", "pos": [1.5, 2.95, 1.5], "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"},
+    {"type": "minecraft:item", "pos": [4.5, 2.95, 1.5], "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"},
+    {"type": "minecraft:item", "pos": [7.5, 2.95, 1.5], "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"}
+  ],
+  "actions": [
+    {"tick": 12, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [4, 2, 2], "face": "up"},
+    {"tick": 27, "type": "use", "pos": [4, 2, 2], "face": "up"},
+    {"tick": 40, "type": "use", "pos": [7, 2, 2], "face": "up"},
+    {"tick": 45, "type": "use", "pos": [7, 2, 2], "face": "up"}
+  ]
+}

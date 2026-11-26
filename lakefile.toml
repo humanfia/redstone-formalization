@@ -1,7 +1,8 @@
 name = "Redstone"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["Redstone"]
+defaultTargets = ["Redstone", "difftest"]
+testDriver = "difftest"
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
@@ -17,3 +18,7 @@ rev = "v4.37.0-rc1"
 
 [[lean_lib]]
 name = "Redstone"
+
+[[lean_exe]]
+name = "difftest"
+root = "Difftest"

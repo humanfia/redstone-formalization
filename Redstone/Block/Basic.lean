@@ -1,94 +1,78 @@
 module
 
-public import Redstone.Basic.Direction
-public import Redstone.Basic.Signal
+public import Redstone.Block.Generated.Attrs
+public import Redstone.Block.Generated.BlockEntity
 
 /-!
 # Blocks
 
-The blocks the formalization knows about, together with the part of their block state that
-matters for redstone.
+The block inventory itself is generated from the server (`Redstone.Block.Generated`): the type
+`Block` of block states, `BlockId`, the attributes `Block.attrs` and the block entities. This
+file adds the few definitions about blocks that everything else uses.
 
-This inventory is provisional. It is meant to be extended as components are formalized, and the
-following points are left open on purpose:
-
-* Blocks in motion (the moving piston block) are not represented yet.
-* The connection shape of redstone dust is not stored; whether it becomes part of the state or
-  is derived from the neighbourhood is to be decided in `Redstone.Component.Dust`.
-* Constraints between fields (a repeater faces a horizontal direction, a lever is attached to
-  a face that can support it, ...) are not enforced by the type. They will be stated as
-  well-formedness predicates on worlds.
-
-No behaviour is defined here: which blocks conduct, which can be pushed and so on belongs to
-`Redstone.Mechanics`.
+A block state is written `minecraft:id[prop=value,...]`, with every property listed and the
+properties sorted by name.
 -/
 
 @[expose] public section
 
 namespace Redstone
 
-/-- The two kinds of piston. -/
-inductive PistonKind
-  | normal
-  | sticky
-  deriving DecidableEq, Repr, Fintype
+namespace BlockId
 
-/-- The two modes of a comparator. -/
-inductive ComparatorMode
-  | compare
-  | subtract
-  deriving DecidableEq, Repr, Fintype
+/-- The block with the given registry name. -/
+def ofName? (name : String) : Option BlockId := all.find? (·.name == name)
 
-/-- The delay setting of a repeater. The value `n` stands for a delay of `n + 1` redstone
-ticks, so the four settings are 1 to 4 redstone ticks. -/
-abbrev RepeaterDelay := Fin 4
-
-/-- A block together with its redstone-relevant state. -/
-inductive Block
-  /-- An empty cell. -/
-  | air
-  /-- An ordinary opaque full block, such as stone. -/
-  | solid
-  /-- A full block that pistons cannot move, such as obsidian. -/
-  | immovable
-  /-- A slime block. -/
-  | slime
-  /-- A honey block. -/
-  | honey
-  /-- A block of redstone. -/
-  | redstoneBlock
-  /-- A lever attached to the neighbouring block in direction `attached`. -/
-  | lever (attached : Direction) (on : Bool)
-  /-- Redstone dust carrying the signal `power`. -/
-  | dust (power : Signal)
-  /-- A redstone torch attached to the neighbouring block in direction `attached`. -/
-  | torch (attached : Direction) (lit : Bool)
-  /-- A repeater whose output points in direction `facing`. -/
-  | repeater (facing : Direction) (delay : RepeaterDelay) (powered : Bool) (locked : Bool)
-  /-- A comparator whose output points in direction `facing`. -/
-  | comparator (facing : Direction) (mode : ComparatorMode) (output : Signal)
-  /-- The base of a piston whose head points in direction `facing`. -/
-  | piston (kind : PistonKind) (facing : Direction) (extended : Bool)
-  /-- The head of an extended piston, pointing in direction `facing`. -/
-  | pistonHead (kind : PistonKind) (facing : Direction)
-  /-- An observer watching the neighbouring block in direction `facing`. Its output is on the
-  opposite side. -/
-  | observer (facing : Direction) (powered : Bool)
-  deriving DecidableEq, Repr
+end BlockId
 
 namespace Block
 
-instance : Inhabited Block := ⟨air⟩
+/-- Air: the state of an empty cell. -/
+def AIR : Block := Block.default .air
 
-/-- A cell is empty when it holds `air`. -/
-def IsAir (b : Block) : Prop := b = air
+instance : Inhabited Block := ⟨AIR⟩
 
-instance : DecidablePred IsAir := fun b => by
-  unfold IsAir
-  infer_instance
+/-- `BlockState.isAir`. There are three kinds of air, so this is weaker than `b = AIR`. -/
+def isAir (b : Block) : Bool := b.attrs.air
 
-@[simp]
-theorem isAir_air : IsAir air := rfl
+/-- `BlockState.is(Block)`: the state belongs to the block `id`. -/
+def is (b : Block) (id : BlockId) : Bool := b.id == id
+
+/-- `BlockState.isRedstoneConductor`: the block passes on the power it receives. -/
+def isConductor (b : Block) : Bool := b.attrs.conductor
+
+/-- The block is a rail of some kind (`BaseRailBlock`). -/
+def isRail (b : Block) : Bool :=
+  b.id == .rail || b.id == .powered_rail || b.id == .detector_rail || b.id == .activator_rail
+
+/-- `BlockState.hasBlockEntity`. -/
+def hasBlockEntity (b : Block) : Bool := b.attrs.hasBlockEntity
+
+/-- The state written as a string. -/
+def toString (b : Block) : String :=
+  match b.toProps with
+  | [] => b.id.name
+  | props => b.id.name ++ "[" ++ ",".intercalate (props.map fun (k, v) => k ++ "=" ++ v) ++ "]"
+
+instance : ToString Block := ⟨toString⟩
+
+/-- Reads a state from a string. Every property of the block must be given. -/
+def parse? (s : String) : Option Block := do
+  let (name, rest) :=
+    match s.splitOn "[" with
+    | [name] => (name, "")
+    | [name, rest] => (name, rest.replace "]" "")
+    | _ => ("", "")
+  let id ← BlockId.ofName? name
+  let props := (rest.splitOn ",").filterMap fun (kv : String) =>
+    match kv.splitOn "=" with
+    | [k, v] => some (k, v)
+    | _ => none
+  ofProps? id fun k => (props.find? (·.1 == k)).map (·.2)
+
+/-- `getFluidState().createLegacyBlock()`: what is left when the block is removed. This is air,
+except for a block that holds a fluid, which leaves the fluid behind. -/
+def fluidBlock (b : Block) : Block := (parse? b.attrs.fluid).getD AIR
 
 end Block
 

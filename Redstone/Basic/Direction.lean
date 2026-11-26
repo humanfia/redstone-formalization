@@ -32,6 +32,20 @@ inductive Direction
 
 namespace Direction
 
+/-- The directions in the order of Java's `Direction.values()`. -/
+def values : List Direction := [down, up, north, south, west, east]
+
+/-- The order in which a block's neighbours receive neighbour updates
+(`NeighborUpdater.UPDATE_ORDER`). -/
+def updateOrder : List Direction := [west, east, down, up, north, south]
+
+/-- The order in which a block's neighbours receive shape updates
+(`BlockBehaviour.UPDATE_SHAPE_ORDER`). -/
+def shapeOrder : List Direction := [west, east, north, south, down, up]
+
+/-- The horizontal directions in the order of `Direction.Plane.HORIZONTAL`. -/
+def horizontals : List Direction := [north, east, south, west]
+
 /-- The direction pointing the other way. -/
 def opposite : Direction → Direction
   | west => east

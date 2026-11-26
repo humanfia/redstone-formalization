@@ -99,6 +99,14 @@ inductive NeighborUpdate
   | multi (source : Pos) (block : BlockId) (skip : Option Direction) (idx : ℕ)
   deriving DecidableEq, Repr
 
+/-- The weather of the overworld. Only the three settled states are modelled: the rain level and
+the thunder level of the game are `0` or `1`, never in between. -/
+inductive Weather
+  | clear
+  | rain
+  | thunder
+  deriving DecidableEq, Repr
+
 /-- The state of a world. -/
 structure Level where
   /-- The block at each position. -/
@@ -137,6 +145,18 @@ structure Level where
   nesting depth of block reactions or the length of a loop. A level with this flag is not a
   faithful image of the game any more. -/
   overflow : Bool
+  /-- The overworld clock (`WorldClocks.OVERWORLD`, `totalTicks`): the time of day is this value
+  modulo 24000. -/
+  dayTime : ℕ := 6000
+  /-- The game rule `advance_time`: the overworld clock advances by one every game tick. -/
+  advanceTime : Bool := false
+  /-- The weather. It does not change. -/
+  weather : Weather := .clear
+  /-- The blocks as the light engine last saw them. The light engine runs between two game
+  ticks, so light read during a game tick is the light of the world as it was when the tick
+  began. `Level.tick` copies `world` here; a level that is built by hand and used before its
+  first tick has to set both. -/
+  lightWorld : World := world
 
 namespace Level
 

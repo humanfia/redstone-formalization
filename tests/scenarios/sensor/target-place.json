@@ -1,0 +1,24 @@
+{
+  "name": "target-place",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:target[power=9]"},
+    {"pos": [4, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 1, 1], "state": "minecraft:target[power=7]"},
+    {"tick": 5, "type": "set", "pos": [3, 1, 1], "state": "minecraft:target[power=3]"},
+    {"tick": 8, "type": "set", "pos": [3, 1, 1], "state": "minecraft:target[power=0]"},
+    {"tick": 11, "type": "set", "pos": [3, 1, 1], "state": "minecraft:target[power=12]", "flags": 2},
+    {"tick": 14, "type": "set", "pos": [2, 1, 1], "state": "minecraft:target[power=15]"},
+    {"tick": 15, "type": "set", "pos": [2, 1, 1], "state": "minecraft:target[power=6]"},
+    {"tick": 20, "type": "destroy", "pos": [3, 1, 1], "drop": false},
+    {"tick": 22, "type": "set", "pos": [3, 1, 1], "state": "minecraft:target[power=1]", "flags": 18},
+    {"tick": 25, "type": "set", "pos": [0, 1, 1], "state": "minecraft:target[power=15]", "flags": 515}
+  ]
+}

@@ -8,14 +8,15 @@ public import Redstone.Mechanics.Power
 One game tick of the level (`ServerLevel.tick`). The phases that matter for redstone run in
 this order:
 
-1. the game time advances;
+1. the overworld clock advances (if the game rule `advance_time` is set), and so does the game
+   time; the light engine has caught up with the blocks since the previous tick;
 2. the scheduled block ticks that are due run;
 3. the block events run, including those queued while running them;
 4. the entities are ticked;
 5. the block entities are ticked.
 
-Weather, the world border, raids, random ticks, mob spawning and fluid ticks are left out. The
-game runs at most 65536 scheduled ticks per game tick; this limit is not modelled.
+The weather cycle, the world border, raids, random ticks, mob spawning and fluid ticks are left
+out. The game runs at most 65536 scheduled ticks per game tick; this limit is not modelled.
 
 Actions of players reach the server between two ticks, so a tick is the unit of time at which
 the world can be observed.
@@ -87,7 +88,10 @@ def tickBlockEntities : M Unit := do
 
 /-- One game tick. -/
 def tick : M Unit := do
-  modify fun l => { l with gameTime := l.gameTime + 1 }
+  modify fun l => { l with
+    gameTime := l.gameTime + 1
+    dayTime := if l.advanceTime then l.dayTime + 1 else l.dayTime
+    lightWorld := l.world }
   runScheduledTicks
   runBlockEvents
   tickEntities

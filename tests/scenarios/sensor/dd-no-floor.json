@@ -1,0 +1,11 @@
+{
+  "name": "dd-no-floor",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [1, 0, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": []
+}

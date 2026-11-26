@@ -1,0 +1,25 @@
+{
+  "name": "dd-set-destroy",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=11]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [1, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=7]"},
+    {"tick": 8, "type": "set", "pos": [3, 1, 1], "state": "minecraft:daylight_detector[inverted=true,power=7]"},
+    {"tick": 27, "type": "destroy", "pos": [1, 1, 1], "drop": false},
+    {"tick": 28, "type": "set", "pos": [1, 1, 1], "state": "minecraft:daylight_detector[inverted=true,power=15]"},
+    {"tick": 29, "type": "set", "pos": [3, 1, 1], "state": "minecraft:stone"},
+    {"tick": 31, "type": "set", "pos": [3, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"tick": 33, "type": "set", "pos": [4, 1, 1], "state": "minecraft:daylight_detector[inverted=true,power=11]"},
+    {"tick": 34, "type": "set", "pos": [4, 1, 1], "state": "minecraft:daylight_detector[inverted=true,power=2]", "flags": 2},
+    {"tick": 45, "type": "set", "pos": [4, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=15]", "flags": 18},
+    {"tick": 65, "type": "destroy", "pos": [4, 1, 1], "drop": false},
+    {"tick": 65, "type": "destroy", "pos": [3, 1, 1], "drop": false}
+  ]
+}

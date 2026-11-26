@@ -1,0 +1,18 @@
+{
+  "name": "target-snowball",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [2, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:target[power=0]"},
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:snowball", "pos": [1.5, 4.0, 1.5]}
+  ],
+  "actions": [
+    {"tick": 12, "type": "summon", "entity": {"type": "minecraft:snowball", "pos": [1.25, 4.0, 1.5]}}
+  ]
+}

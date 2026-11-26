@@ -1,0 +1,33 @@
+{
+  "name": "fuzz-sensor-s2-012",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:daylight_detector[inverted=true,power=6]"},
+    {"pos": [0, 1, 1], "state": "minecraft:target[power=9]"},
+    {"pos": [0, 1, 2], "state": "minecraft:glass"},
+    {"pos": [0, 2, 1], "state": "minecraft:daylight_detector[inverted=true,power=12]"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 2, 0], "state": "minecraft:daylight_detector[inverted=true,power=11]"},
+    {"pos": [1, 2, 1], "state": "minecraft:target[power=3]"},
+    {"pos": [1, 2, 2], "state": "minecraft:lightning_rod[facing=north,powered=false,waterlogged=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:glass"},
+    {"pos": [2, 1, 2], "state": "minecraft:stone"},
+    {"pos": [2, 2, 0], "state": "minecraft:target[power=0]"},
+    {"pos": [2, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 6, "type": "set", "pos": [1, 2, 2], "state": "minecraft:stone"},
+    {"tick": 7, "type": "use", "pos": [0, 2, 1], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [1, 2, 0], "face": "north"},
+    {"tick": 10, "type": "use", "pos": [1, 2, 0], "face": "down"},
+    {"tick": 13, "type": "set", "pos": [2, 1, 2], "state": "minecraft:air"},
+    {"tick": 15, "type": "use", "pos": [1, 2, 0], "face": "down"},
+    {"tick": 23, "type": "set", "pos": [1, 2, 0], "state": "minecraft:glass"},
+    {"tick": 23, "type": "destroy", "pos": [2, 1, 1], "drop": false}
+  ]
+}

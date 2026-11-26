@@ -1,0 +1,41 @@
+{
+  "name": "fuzz-sensor-s2-001",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:glass"},
+    {"pos": [0, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:target[power=10]"},
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=ceiling,facing=east,powered=true]"},
+    {"pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"pos": [1, 2, 0], "state": "minecraft:glass"},
+    {"pos": [1, 2, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [2, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:daylight_detector[inverted=true,power=8]"},
+    {"pos": [2, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:daylight_detector[inverted=false,power=8]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [1, 1, 0], "state": "minecraft:lightning_rod[facing=south,powered=false,waterlogged=false]"},
+    {"tick": 7, "type": "set", "pos": [0, 2, 1], "state": "minecraft:waxed_lightning_rod[facing=west,powered=true,waterlogged=false]"},
+    {"tick": 9, "type": "use", "pos": [2, 2, 2], "face": "up"},
+    {"tick": 10, "type": "set", "pos": [0, 1, 0], "state": "minecraft:air"},
+    {"tick": 11, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [2, 1, 2], "face": "north"},
+    {"tick": 15, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [2, 2, 0], "face": "up"},
+    {"tick": 17, "type": "destroy", "pos": [0, 1, 0], "drop": false},
+    {"tick": 20, "type": "use", "pos": [2, 2, 2], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [2, 1, 2], "face": "down"},
+    {"tick": 21, "type": "set", "pos": [1, 2, 0], "state": "minecraft:stone"},
+    {"tick": 23, "type": "use", "pos": [2, 2, 2], "face": "down"},
+    {"tick": 25, "type": "set", "pos": [0, 2, 2], "state": "minecraft:oxidized_lightning_rod[facing=down,powered=true,waterlogged=false]"},
+    {"tick": 25, "type": "set", "pos": [0, 2, 0], "state": "minecraft:stone"}
+  ]
+}

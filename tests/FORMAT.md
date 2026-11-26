@@ -47,6 +47,9 @@ Files: `tests/scenarios/<unit>/<name>.json` and `tests/traces/<unit>/<name>.trac
     The first calls are made by the construction of the player, the later ones by whatever the
     game constructs, in order (every entity makes one for its private random when constructed);
   * the list of recent redstone torch toggles (burn-out) is cleared;
+  * `Level.skyDarken`, which the game only recomputes at the start of a tick, is recomputed from
+    the scenario's clock and weather, so the actions of tick 1 do not see the sky of the previous
+    scenario;
   * between two ticks the harness waits until the light engine (a separate thread) is idle, and
     runs all queued main-thread tasks, so nothing depends on thread timing.
 
@@ -236,7 +239,8 @@ compares it with their traces after every tick; without arguments it runs everyt
 `tests/scenarios`, which is what `lake test` and the CI do.
 
 * The model takes its initial state from frame 0 of the trace, so it never reads `fill`,
-  `blocks`, `entities` or `settings`. From the scenario it uses `ticks`, `box` and `actions`.
+  `blocks` or `entities`. From the scenario it uses `ticks`, `box`, `actions` and, of the
+  `settings`, `dayTime`, `advanceTime` and `weather`.
 * It supports the actions `use`, `use_item`, `set` and `destroy`. A scenario with `summon` or
   `kill` cannot be run yet.
 * After every tick it compares: `gameTime`; the block state and the block entity of every

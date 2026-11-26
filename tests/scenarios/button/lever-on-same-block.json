@@ -1,0 +1,128 @@
+{
+ "name": "lever-on-same-block",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   4
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:oak_button[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=wall,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 33,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "face": "up"
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "chunk-border",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [19, 2, 19]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [19, 0, 19], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [14, 1, 15], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [15, 1, 15], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"pos": [16, 1, 15], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"pos": [17, 1, 15], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"},
+    {"pos": [14, 1, 16], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [15, 1, 16], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"pos": [16, 1, 16], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"pos": [17, 1, 16], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"},
+    {"pos": [14, 1, 14], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [14, 1, 17], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [15, 1, 14], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [15, 1, 17], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [16, 1, 14], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [16, 1, 17], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [17, 1, 14], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [17, 1, 17], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:pig", "pos": [14.5, 1.0, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [15.5, 1.0, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [16.5, 1.0, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [17.5, 1.0, 15.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [14.5, 1.0, 16.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [15.5, 1.0, 16.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [16.5, 1.0, 16.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [17.5, 1.0, 16.5], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": [
+    {"tick": 13, "type": "kill", "entity": 7},
+    {"tick": 13, "type": "kill", "entity": 6},
+    {"tick": 13, "type": "kill", "entity": 5},
+    {"tick": 13, "type": "kill", "entity": 4},
+    {"tick": 13, "type": "kill", "entity": 3},
+    {"tick": 13, "type": "kill", "entity": 2},
+    {"tick": 13, "type": "kill", "entity": 1},
+    {"tick": 13, "type": "kill", "entity": 0}
+  ]
+}

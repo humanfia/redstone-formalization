@@ -1,0 +1,194 @@
+{
+ "name": "verify-test-block-entity-mode",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   3,
+   5
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:test_block[mode=log]",
+   "nbt": "{mode:\"start\",powered:1b}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:test_block[mode=start]",
+   "nbt": "{mode:\"accept\",powered:1b}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:test_block[mode=start]",
+   "nbt": "{mode:\"fail\"}"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

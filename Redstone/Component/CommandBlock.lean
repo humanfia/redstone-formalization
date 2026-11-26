@@ -28,8 +28,8 @@ the world is nil:
 
 * a text whose first word is not the name of a command fails: it succeeds zero times and
   changes nothing;
-* `say <message>`, with a message that contains no `@`, succeeds once and changes nothing, and
-  `say` without a message fails;
+* `say <message>`, with a message that contains no `@`, succeeds once and changes nothing;
+  `say` without a message fails, and so does a message of more than 256 UTF-16 code units;
 * any other command is unknown to the model. It is treated as failing, and `Level.overflow` is
   set to record that the level no longer follows the game. For such a command `behaviourWith`
   has to be given an oracle that describes it.
@@ -107,13 +107,21 @@ def rootLiterals : List String :=
    "transfer", "trigger", "unpublish", "version", "w", "waypoint", "weather", "whitelist",
    "worldborder", "xp"]
 
+/-- `String.length` of Java: the length of a text in UTF-16 code units. -/
+def utf16Length (text : List Char) : ℕ :=
+  (text.map fun c => if c.toNat < 0x10000 then 1 else 2).sum
+
+/-- `MessageArgument.Message.parseText`: a message of more than 256 UTF-16 code units does not
+parse (`argument.message.too_long`). -/
+def maxMessageLength : ℕ := 256
+
 /-- The oracle of the commands without effect on the world.
 
 * A text whose first word is not a root literal does not parse (`dispatcherUnknownCommand`): no
   success, no effect.
 * `say <message>` succeeds once (`SayCommand`) and only sends a chat message. A message with
   an `@` may contain an entity selector and is not covered. `say` without a message does not
-  parse.
+  parse, and neither does a message longer than `maxMessageLength`.
 * Any other command is unknown to the model: it is treated as failing and `Level.overflow` is
   set. -/
 def default : Oracle := fun _ command => do
@@ -123,6 +131,7 @@ def default : Oracle := fun _ command => do
   match text with
   | ['s', 'a', 'y'] | ['s', 'a', 'y', ' '] => return 0
   | 's' :: 'a' :: 'y' :: ' ' :: message =>
+    if utf16Length message > maxMessageLength then return 0
     if !message.contains '@' then return 1
     Level.setOverflow
     return 0

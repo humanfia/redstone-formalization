@@ -1,0 +1,320 @@
+{
+ "name": "verify-structure-entity-mode",
+ "ticks": 8,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   2,
+   2,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    2,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:structure_block[mode=data]",
+   "nbt": "{mode:\"LOAD\",name:\"nonexistent:thing\"}"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:structure_block[mode=load]",
+   "nbt": "{mode:\"CORNER\",name:\"foo:bar\"}"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:structure_block[mode=save]",
+   "nbt": "{powered:1b}"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    7
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "state": "minecraft:structure_block[mode=save]",
+   "nbt": "{mode:\"SAVE\"}"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    9
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    9
+   ],
+   "state": "minecraft:structure_block[mode=corner]",
+   "nbt": "{mode:\"LOAD\",name:\"Bad Name!\"}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    9
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    9
+   ],
+   "face": "up"
+  }
+ ]
+}

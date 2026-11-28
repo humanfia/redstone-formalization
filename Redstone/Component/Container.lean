@@ -106,6 +106,7 @@ def savedData : BlockEntity → BlockEntity
   | .trappedChest d => .trappedChest { d with openCount := 0, viewed := false }
   | .barrel d => .barrel { d with openCount := 0, viewed := false }
   | .brewingStand d => .brewingStand { d with lastPotionCount := none }
+  | .creakingHeart d => .creakingHeart { d with ticker := 0, ticksExisted := 0 }
   | be => be
 
 /-- The three kinds of furnace, which differ in their recipes and in how fast they burn. -/

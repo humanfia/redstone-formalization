@@ -27,6 +27,29 @@ the centre of the face. As in the game, `useItemOn` falls back to the empty-hand
 when the block asks for it (`TRY_WITH_EMPTY_HAND`). The player is in creative mode, so it can
 always eat.
 
+## The scenarios that waited in `tests/pending/scenarios/analog`
+
+Thirty-eight scenarios did not agree with the server when the ticker of the creaking heart was
+written. By cause:
+
+| cause | scenarios | state |
+|---|---|---|
+| ticker of the creaking heart | `heart-dormant`, `heart-uproot` | pass, moved to the tests |
+| explosion of a respawn anchor | `adv-fuzz-*` (32) | wait for explosions and fire |
+| water of a waterlogged block | `adv-waterlogged`, `adv-cauldron-underwater` | wait for fluids |
+| inventory of the player | `adv-inventory-leak`, `shelf-swap-twice` | left out |
+
+* The ticker is `heartServerTick`.
+* A charged respawn anchor that is used explodes (`RespawnAnchorBlock.explode`, here still
+  `unmodelled`); every one of the 32 scenarios uses one. With the explosion in place they go on
+  until the fire that the explosion leaves, which is another component.
+* A waterlogged block that gets a shape update schedules a fluid tick (`waterloggedUpdateShape`).
+* The recorder uses one player for a whole scenario, whose inventory keeps what it was given;
+  the model has no player (see below).
+
+No scenario waited for the order of block entity tickers, the lectern, the jukebox, the
+composter, the cauldron interactions, bees or the copper golem statue.
+
 ## What is left out
 
 Where the game does something the model cannot represent, the reaction calls `unmodelled`,
@@ -38,14 +61,22 @@ which sets `Level.overflow`: the level is then no longer a faithful image of the
 * What an item does by itself after the block has passed (`Item.useOn`): placing a block,
   lighting a candle cake, putting an eye in an end portal frame. The reaction then returns
   `false` and nothing happens.
-* The inventory of the player, which is not part of the level. A powered shelf swaps its items
-  with the hotbar; every such interaction is modelled for a player whose hotbar is empty except
-  for the held item, so what the shelf gave to the player earlier does not come back.
+* The inventory of the player, which is not part of the level: the player as an entity is left
+  out of the model by decision. Every interaction is that of a player in creative mode whose
+  inventory is empty except for the held item. A powered shelf swaps its items with the hotbar
+  (`swapHotbar`), and some interactions put an item into the inventory (a book taken from a
+  chiseled bookshelf, the bucket or bottle a cauldron fills or empties in creative mode, a
+  washed shulker box); in the game these stay there, and a later swap with a powered shelf
+  brings them back. The model does not follow them, so it agrees with the game only as long as
+  no powered shelf is used after the player received something.
 * Bees: a hive that holds bees releases them over time and when it is harvested
   (`unmodelled`).
-* The creaking of a creaking heart, and the heart's ticker (`unmodelled`), whose counters the
-  game does not save. A heart that gets its logs back becomes dormant, as it does by day; from
-  then on its ticker runs.
+* The creaking of a creaking heart, which is a mob. A heart never has one: an awake heart
+  spawns it only with a player within 32 blocks, and the level has neither players nor mobs (in
+  the tests the game rule `spawn_monsters` is off as well); a heart whose saved data names a
+  creaking does not find it and forgets it (`heartServerTick`).
+  The counters of the hurt effect (`creakingHurt`, `emitter`) and the resin it spreads need the
+  creaking and are left out with it.
 * Cauldrons: dripstone (`tick`), rain and snow (`handlePrecipitation`), burning entities
   (`entityInside`), and the interactions that need item components (water bottles, dyed armour,
   banners).
@@ -784,25 +815,72 @@ def hasRequiredLogs (s : Blocks.CreakingHeart) (l : Level) (p : Pos) : Bool :=
     | .rotatedPillar id log => paleOakLogs.contains id.toBlockId && log.axis = s.axis
     | _ => false
 
+/-- `EnvironmentAttributes.CREAKING_ACTIVE` in the overworld: the timeline of the day turns it
+on at 12600 and off at 23401 (`Timelines.DAY`). Nothing else sets it there. -/
+def creakingActive (l : Level) : Bool :=
+  let time := l.dayTime % 24000
+  decide (12600 ≤ time ∧ time < 23401)
+
+/-- The state of a heart that has its logs: awake by night, dormant by day. -/
+def rootedState (l : Level) : CreakingHeartState := if creakingActive l then .awake else .dormant
+
+/-- The block entity of the creaking heart at `p`. -/
+def getHeart (p : Pos) : M (Option BlockEntities.CreakingHeart) := do
+  match ← Level.getBlockEntity p with
+  | some (.creakingHeart d) => return some d
+  | _ => return none
+
+/-- `CreakingHeartBlockEntity.serverTick`, which runs while the heart is not uprooted.
+
+A heart whose saved data names a creaking looks for it every tick (`getCreakingProtector`, from
+`computeAnalogOutputSignal`). The level has no mobs, so it is never found, and from the 30th
+tick on the heart forgets it (`clearCreakingInfo`). The signal the heart computes is therefore
+always 0, the value the block entity starts with. The game counts these ticks in
+`ticksExisted` and reads the count only here; the model counts while there is a creaking to
+forget.
+
+When the counter `ticker` is negative it is set to a random number from 20 to 24 and the heart
+looks at its logs (`updateCreakingState`): without them, and without a creaking, it is uprooted,
+and otherwise it is awake by night and dormant by day. An awake heart without a creaking then
+spawns one if a player is within 32 blocks and monsters spawn. The level has no players, so
+none is spawned (in the tests the game rule `spawn_monsters` is off as well). -/
+def heartServerTick (s : Blocks.CreakingHeart) (p : Pos) : M Unit := do
+  let some d ← getHeart p | return
+  let ticksExisted := if d.creaking then d.ticksExisted + 1 else d.ticksExisted
+  let forgets := d.creaking && decide (ticksExisted ≥ 30)
+  let creaking := d.creaking && !forgets
+  if forgets then
+    Level.setBlockEntity p (.creakingHeart { d with creaking, ticksExisted })
+    setChanged p .creaking_heart
+  if d.ticker ≥ 0 then
+    Level.setBlockEntity p (.creakingHeart { creaking, ticksExisted, ticker := d.ticker - 1 })
+  else
+    let r ← nextInt 5
+    Level.setBlockEntity p (.creakingHeart { creaking, ticksExisted, ticker := r + 20 })
+    let l ← get
+    let newState : CreakingHeartState :=
+      if !hasRequiredLogs s l p && !creaking then .uprooted else rootedState l
+    if newState ≠ s.creaking_heart_state then
+      discard <| Level.setBlock p (.creakingHeart { s with creaking_heart_state := newState })
+
 /-- The behaviour of a creaking heart. Every shape update schedules a tick, in which an
-uprooted heart with its logs becomes dormant (it would be awake at night, which the model does
-not have). A comparator reads 0 from a heart without a creaking. The block entity's ticker
-(`CreakingHeartBlockEntity.serverTick`), which runs while the heart is not uprooted, is not
-modelled: about once a second it draws a random number, uproots a heart that has lost its logs
-and may spawn the creaking. -/
+uprooted heart with its logs becomes awake or dormant. A comparator reads 0 from a heart
+without a creaking. -/
 def creakingHeart (s : Blocks.CreakingHeart) : Behaviour :=
   let self : Block := .creakingHeart s
   { Behaviour.inert self with
     analogSignal := fun _ _ _ => 0
     ticksBlockEntity := s.creaking_heart_state != .uprooted
-    blockEntityTick := fun _ => unmodelled
+    blockEntityTick := heartServerTick s
     affectNeighborsAfterRemoval := fun p _ => updateNeighboursAfterDestroy p .creaking_heart
     updateShape := fun p _ _ _ => do
       Level.scheduleTick p .creaking_heart 1
       return self
     tick := fun p => do
-      if s.creaking_heart_state = .uprooted && hasRequiredLogs s (← get) p then
-        discard <| Level.setBlock p (.creakingHeart { s with creaking_heart_state := .dormant }) }
+      let l ← get
+      if s.creaking_heart_state = .uprooted && hasRequiredLogs s l p then
+        discard <| Level.setBlock p
+          (.creakingHeart { s with creaking_heart_state := rootedState l }) }
 
 /-! ### Jukebox -/
 

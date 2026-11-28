@@ -1,0 +1,41 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 40},
+    {"state": "minecraft:stone", "weight": 10},
+    {"state": "minecraft:glass", "weight": 2},
+    {"state": "minecraft:jungle_log[axis=*]", "weight": 4},
+    {"state": "minecraft:pale_oak_log[axis=*]", "weight": 2},
+    {"state": "minecraft:smooth_stone_slab[type=*]", "weight": 3},
+    {"state": "minecraft:oak_fence", "weight": 2},
+    {"state": "minecraft:iron_chain[axis=*]", "weight": 2},
+    {"state": "minecraft:honey_block", "weight": 1},
+    {"state": "minecraft:ladder[facing=*]", "weight": 3},
+    {"state": "minecraft:lantern[hanging=*]", "weight": 2},
+    {"state": "minecraft:soul_lantern[hanging=*]", "weight": 1},
+    {"state": "minecraft:copper_lantern[hanging=*]", "weight": 1},
+    {"state": "minecraft:waxed_oxidized_copper_lantern[hanging=*]", "weight": 1},
+    {"state": "minecraft:oak_sign[rotation=*]", "weight": 2},
+    {"state": "minecraft:birch_wall_sign[facing=*]", "weight": 2},
+    {"state": "minecraft:cherry_hanging_sign[attached=*,rotation=*]", "weight": 2},
+    {"state": "minecraft:bamboo_wall_hanging_sign[facing=*]", "weight": 1},
+    {"state": "minecraft:flower_pot", "weight": 1},
+    {"state": "minecraft:potted_cactus", "weight": 1},
+    {"state": "minecraft:candle[candles=*,lit=*]", "weight": 2},
+    {"state": "minecraft:amethyst_cluster[facing=*]", "weight": 2},
+    {"state": "minecraft:small_amethyst_bud[facing=*]", "weight": 1},
+    {"state": "minecraft:cocoa[age=*,facing=*]", "weight": 3},
+    {"state": "minecraft:hanging_roots", "weight": 2},
+    {"state": "minecraft:spore_blossom", "weight": 2},
+    {"state": "minecraft:pale_hanging_moss[tip=*]", "weight": 4},
+    {"state": "minecraft:pale_moss_carpet[bottom=*,east=*,north=*,south=*,west=*]", "weight": 5},
+    {"state": "minecraft:end_rod[facing=*]", "weight": 1},
+    {"state": "minecraft:grindstone[face=*,facing=*]", "weight": 1},
+    {"state": "minecraft:shelf_mushroom[age=*,facing=*]", "weight": 3}
+  ],
+  "actions": {
+    "use": {"count": [0, 3], "targets": ["minecraft:flower_pot", "minecraft:potted_cactus", "minecraft:grindstone", "minecraft:oak_sign", "minecraft:candle"], "faces": ["up", "north", "east"]},
+    "set": {"count": [4, 10], "states": ["minecraft:stone", "minecraft:air", "minecraft:air", "minecraft:glass", "minecraft:jungle_log[axis=*]", "minecraft:oak_fence", "minecraft:smooth_stone_slab[type=*]", "minecraft:pale_moss_carpet[bottom=true]", "minecraft:pale_hanging_moss[tip=true]", "minecraft:ladder[facing=*]", "minecraft:iron_chain[axis=*]"]},
+    "destroy": {"count": [3, 8], "targets": ["minecraft:stone", "minecraft:glass", "minecraft:jungle_log", "minecraft:pale_oak_log", "minecraft:smooth_stone_slab", "minecraft:oak_fence", "minecraft:iron_chain", "minecraft:honey_block", "minecraft:pale_moss_carpet", "minecraft:pale_hanging_moss"]}
+  }
+}

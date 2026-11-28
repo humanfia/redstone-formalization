@@ -1,0 +1,108 @@
+{
+ "name": "cart-wet-unpowered-rails",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   9,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    9,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=true]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=true]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    2.5,
+    1.0625,
+    1.5
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,0.0d]}"
+  }
+ ]
+}

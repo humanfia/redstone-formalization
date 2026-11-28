@@ -21,15 +21,13 @@ Java classes: `TargetBlock`, `LightningRodBlock`, `WeatheringLightningRodBlock`,
 ## What is modelled, and what is not
 
 * Target: `ownSignal`, `tick`, `onPlace`, and `updateRedstoneOutput` with `getRedstoneStrength`.
-  `onProjectileHit` needs the point where the projectile hit. The hook passes it, but the
-  target does not read it yet: the position of the projectile stands in for it, which is not
-  the same point in general. Statistics and advancements are left out. No projectile flies in
-  the model yet, so nothing calls `onProjectileHit`, and `tick` cannot be reached either.
+  `onProjectileHit` reads the point and the face of the hit, as `Redstone.Entity.Projectile`
+  finds them. Statistics and advancements are left out.
 * Lightning rod: `ownSignal`, `getDirectSignal`, `onLightningStrike`, `tick`, `onPlace`,
   `affectNeighborsAfterRemoval`, and `updateShape`, which schedules a fluid tick for a
   waterlogged rod. `randomTick` (the oxidation of copper) and the level
-  event of a strike (particles) are left out. No lightning is modelled yet, so nothing calls
-  `strike`.
+  event of a strike (particles) are left out. A lightning bolt calls `strike` for the block
+  under it (`Redstone.Entity.Lightning`), and cleans the copper of a rod that weathers.
 * Daylight detector: `ownSignal`, `useWithoutItem`, the ticker, `updateSignalStrength`. The sun
   angle and the darkening of the sky are computed from the clock and the weather in
   `Redstone.Component.Sensor.Sky`, the sky light of the cell in `Redstone.Component.Sensor.Light`;
@@ -74,9 +72,9 @@ def target (s : Blocks.Target) : Behaviour :=
   { Behaviour.inert self with
     signal := fun _ _ _ => s.power
     ownSignal := fun _ _ => s.power
-    onProjectileHit := fun p face _ index => do
+    onProjectileHit := fun p face hit index => do
       if let some e := (← get).entity? index then
-        let strength := redstoneStrength face e.base.pos
+        let strength := redstoneStrength face hit
         updateRedstoneOutput s p ⟨strength % 16, Nat.mod_lt _ (by decide)⟩
           (arrowTypes.contains e.data.typeName)
     tick := fun p => do

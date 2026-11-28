@@ -12,10 +12,18 @@ A falling block falls under gravity. When it lands it becomes a block again if t
 landed in can be replaced and the block below is not free; otherwise it breaks and drops as an
 item. A falling anvil can be damaged by its fall.
 
+A falling block never updates its fluid interaction, so fluids neither push it nor slow it
+down: it falls through water and lava as through air (lava sets it on fire, which shows in
+nothing). Falling concrete powder that is in water (`isStuckInWater`) lands there and then turns
+to concrete, and a block with the property `waterlogged` that lands in a water source is
+waterlogged.
+
 ## What is left out
 
-* Fluids: a falling block that touches water or lava sets `Level.overflow`. In particular a
-  falling concrete powder never turns to concrete in mid-fall, and waterlogging is not handled.
+* The ray that a falling concrete powder faster than one block per tick casts for a water
+  source it passed (`ClipContext.Fluid.SOURCE_ONLY`): such an entity with water on its way sets
+  `Level.overflow`. So does any falling block that falls fast with a fluid on its way
+  (`Redstone.Entity.Physics`).
 * The damage a falling anvil does to living entities.
 * The block entity data a falling block can carry: landing with such data sets
   `Level.overflow`.
@@ -107,7 +115,7 @@ def canBeReplaced (b : Block) : Bool :=
   else b.attrs.replaceable
 
 /-- `ConcretePowderBlock.canSolidify(state)`: the block holds water. -/
-def canSolidify (b : Block) : Bool := b.attrs.fluid.startsWith "minecraft:water"
+def canSolidify (b : Block) : Bool := b.fluidState.fluid.isWater
 
 /-- `ConcretePowderBlock.touchesLiquid(level, pos)`: a neighbour other than the one below holds
 water and does not turn a sturdy face towards the block. -/
@@ -133,13 +141,20 @@ def dropItem (i : ℕ) (pos : Vec3) (b : Block) : M Unit := do
   if isFallable b then discard <| Item.spawnAtLocation pos b.id.name (i + 1)
   else Level.setOverflow
 
-/-- The part of `FallingBlockEntity.tick` that runs when the entity is on the ground: it turns
-into a block, or breaks. `block` is the block state the entity had at the start of the tick:
-the game drops the item of that block, even if the fall has damaged an anvil since. -/
-def land (i : ℕ) (block : Block) : M Unit := do
+/-- `blockState.setValue(WATERLOGGED, true)` for a block that has the property. -/
+def waterlog (b : Block) : Block :=
+  if b.toProps.any (·.1 == "waterlogged") then
+    (Block.ofProps? b.id fun k =>
+      if k == "waterlogged" then some "true" else (b.toProps.find? (·.1 == k)).map (·.2)).getD b
+  else b
+
+/-- The part of `FallingBlockEntity.tick` that runs when the entity is on the ground, or is
+concrete powder in water (`isStuckInWater`): it turns into a block at `pos`, or breaks. `block`
+is the block state the entity had at the start of the tick: the game drops the item of that
+block, even if the fall has damaged an anvil since. -/
+def land (i : ℕ) (block : Block) (pos : Pos) (isStuckInWater : Bool) : M Unit := do
   let some (e, dt) ← get? i | return
   let l ← get
-  let pos := e.base.pos.blockPos
   let currentState := l.blockAt pos
   Level.setEntity { e with base := { e.base with motion := e.base.motion.mul 0.7 (-0.5) 0.7 } }
   if currentState.is .moving_piston then return
@@ -147,13 +162,17 @@ def land (i : ℕ) (block : Block) : M Unit := do
     Level.removeEntity i
     return
   let mayReplace := canBeReplaced currentState
-  let wouldContinueFalling := isFree (l.blockAt (pos.step .down))
+  let wouldContinueFalling := isFree (l.blockAt (pos.step .down)) && !isStuckInWater
   let wouldSurvive :=
     (← Level.behaviour dt.blockState).canSurvive l pos && !wouldContinueFalling
   if mayReplace && wouldSurvive then
-    if ← Level.setBlock pos dt.blockState then
+    -- a block that can be waterlogged takes the water source it lands in
+    let placed :=
+      if (l.fluidStateAt pos).fluid == .water then waterlog dt.blockState else dt.blockState
+    if placed != dt.blockState then modifyData i fun dt => { dt with blockState := placed }
+    if ← Level.setBlock pos placed then
       Level.removeEntity i
-      onLand pos dt.blockState currentState
+      onLand pos placed currentState
       if dt.hasBlockData && dt.blockState.hasBlockEntity then Level.setOverflow
     else if dt.dropItem then
       Level.removeEntity i
@@ -162,6 +181,11 @@ def land (i : ℕ) (block : Block) : M Unit := do
     Level.removeEntity i
     if dt.dropItem then dropItem i e.base.pos block
 
+/-- A block that holds water lies in the box spanned by the points `a` and `b`. -/
+def waterBetween (l : Level) (a b : Vec3) : Bool :=
+  let box := AABB.of a.x a.y a.z b.x b.y b.z
+  box.blocks.any fun p => (l.fluidStateAt p).fluid.isWater
+
 /-- `FallingBlockEntity.tick`. -/
 def tick (i : ℕ) : M Unit := do
   let some (_, dt) ← get? i | return
@@ -169,20 +193,27 @@ def tick (i : ℕ) : M Unit := do
     Level.removeEntity i
     return
   let block := dt.blockState
-  Level.checkNoFluid kind i
   modifyData i fun dt => { dt with time := dt.time + 1 }
   Level.modifyEntity i fun e => e.modifyPhys fun p => { p with tickCount := p.tickCount + 1 }
   Level.applyGravity kind i
   let some (e, _) ← get? i | return
+  let old := e.base.pos
   Level.moveEntity kind i e.base.motion
-  Level.applyEffectsFromBlocks kind i e.base.pos
+  Level.applyEffectsFromBlocks kind i old
   let some (e, dt) ← get? i | return
-  if !e.base.onGround then
-    let y := e.base.pos.blockPos.y
+  let l ← get
+  let pos := e.base.pos.blockPos
+  let isConcrete := isConcretePowder dt.blockState
+  let isStuckInWater := isConcrete && (l.fluidStateAt pos).fluid.isWater
+  -- fast concrete powder looks back for a water source it went through; the ray is not modelled
+  if isConcrete && e.base.motion.lengthSqr > 1.0 && waterBetween l old e.base.pos then
+    Level.setOverflow
+  if !e.base.onGround && !isStuckInWater then
+    let y := pos.y
     if (dt.time > 100 && (y ≤ -64 || y > 319)) || dt.time > 600 then
       Level.removeEntity i
       if dt.dropItem then dropItem i e.base.pos block
-  else land i block
+  else land i block pos isStuckInWater
   Level.modifyEntity i fun e =>
     let drag := kind.airDrag
     { e with base := { e.base with motion := e.base.motion.mul drag drag drag } }

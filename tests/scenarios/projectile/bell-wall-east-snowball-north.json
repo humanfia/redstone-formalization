@@ -1,0 +1,61 @@
+{
+ "name": "bell-wall-east-snowball-north",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:bell[attachment=single_wall,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:snowball",
+   "pos": [
+    3.55,
+    2.5,
+    1.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.8d]}"
+  }
+ ],
+ "actions": []
+}

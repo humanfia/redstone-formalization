@@ -1,0 +1,44 @@
+{
+  "name": "fuzz-s1-003",
+  "ticks": 240,
+  "box": {"min": [-1, 0, -1], "max": [5, 4, 5]},
+  "settings": {"fireSpreadRadiusAroundPlayer": -1},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 4], "state": "minecraft:spruce_log[axis=y]"},
+    {"pos": [0, 2, 0], "state": "minecraft:bookshelf"},
+    {"pos": [0, 2, 1], "state": "minecraft:red_carpet"},
+    {"pos": [0, 2, 4], "state": "minecraft:hay_block[axis=x]"},
+    {"pos": [0, 3, 0], "state": "minecraft:stone"},
+    {"pos": [1, 1, 4], "state": "minecraft:glass"},
+    {"pos": [1, 2, 0], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:spruce_log[axis=x]"},
+    {"pos": [1, 2, 4], "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"},
+    {"pos": [1, 3, 1], "state": "minecraft:soul_sand"},
+    {"pos": [1, 3, 2], "state": "minecraft:oak_planks"},
+    {"pos": [1, 3, 4], "state": "minecraft:bookshelf"},
+    {"pos": [2, 1, 0], "state": "minecraft:spruce_log[axis=z]"},
+    {"pos": [2, 1, 3], "state": "minecraft:bookshelf"},
+    {"pos": [2, 2, 1], "state": "minecraft:stone"},
+    {"pos": [2, 2, 3], "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"},
+    {"pos": [2, 2, 4], "state": "minecraft:hay_block[axis=y]"},
+    {"pos": [2, 3, 0], "state": "minecraft:red_carpet"},
+    {"pos": [2, 3, 2], "state": "minecraft:netherrack"},
+    {"pos": [3, 1, 0], "state": "minecraft:stone"},
+    {"pos": [3, 1, 1], "state": "minecraft:glass"},
+    {"pos": [3, 2, 0], "state": "minecraft:oak_planks"},
+    {"pos": [4, 1, 3], "state": "minecraft:target[power=0]"},
+    {"pos": [4, 2, 3], "state": "minecraft:netherrack"},
+    {"pos": [4, 3, 2], "state": "minecraft:soul_sand"},
+    {"pos": [4, 3, 4], "state": "minecraft:white_wool"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "destroy", "pos": [2, 2, 1], "drop": false},
+    {"tick": 95, "type": "set", "pos": [4, 1, 0], "state": "minecraft:fire[age=0,east=false,north=false,south=false,up=false,west=false]"},
+    {"tick": 138, "type": "set", "pos": [2, 3, 2], "state": "minecraft:fire[age=0,east=false,north=false,south=false,up=false,west=false]"},
+    {"tick": 174, "type": "destroy", "pos": [2, 3, 0], "drop": false},
+    {"tick": 240, "type": "set", "pos": [1, 3, 0], "state": "minecraft:fire[age=0,east=false,north=false,south=false,up=false,west=false]"}
+  ]
+}

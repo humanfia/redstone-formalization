@@ -1,0 +1,39 @@
+{
+  "name": "fuzz-s1-010",
+  "ticks": 240,
+  "box": {"min": [-1, 0, -1], "max": [5, 4, 5]},
+  "settings": {"fireSpreadRadiusAroundPlayer": -1},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 3], "state": "minecraft:stone"},
+    {"pos": [0, 1, 4], "state": "minecraft:stone"},
+    {"pos": [0, 2, 1], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [0, 2, 4], "state": "minecraft:glass"},
+    {"pos": [0, 3, 2], "state": "minecraft:stone"},
+    {"pos": [0, 3, 3], "state": "minecraft:glass"},
+    {"pos": [1, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 2, 0], "state": "minecraft:stone"},
+    {"pos": [1, 3, 1], "state": "minecraft:netherrack"},
+    {"pos": [1, 3, 4], "state": "minecraft:stone"},
+    {"pos": [2, 2, 3], "state": "minecraft:red_carpet"},
+    {"pos": [2, 3, 1], "state": "minecraft:white_wool"},
+    {"pos": [2, 3, 2], "state": "minecraft:hay_block[axis=z]"},
+    {"pos": [2, 3, 4], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:white_wool"},
+    {"pos": [3, 2, 1], "state": "minecraft:glass"},
+    {"pos": [3, 2, 2], "state": "minecraft:coal_block"},
+    {"pos": [4, 2, 1], "state": "minecraft:hay_block[axis=z]"},
+    {"pos": [4, 2, 4], "state": "minecraft:spruce_log[axis=z]"},
+    {"pos": [4, 3, 1], "state": "minecraft:netherrack"}
+  ],
+  "actions": [
+    {"tick": 16, "type": "set", "pos": [0, 3, 1], "state": "minecraft:fire[age=0,east=false,north=false,south=false,up=false,west=false]"},
+    {"tick": 55, "type": "set", "pos": [1, 1, 1], "state": "minecraft:fire[age=3,east=false,north=false,south=false,up=false,west=false]"},
+    {"tick": 71, "type": "set", "pos": [1, 3, 3], "state": "minecraft:air"},
+    {"tick": 71, "type": "destroy", "pos": [0, 1, 4], "drop": false},
+    {"tick": 149, "type": "destroy", "pos": [1, 3, 4], "drop": false},
+    {"tick": 237, "type": "destroy", "pos": [2, 3, 2], "drop": false}
+  ]
+}

@@ -15,8 +15,8 @@ and is left out of the comparison. Fields that belong to one kind of minecart ke
 default value in the others.
 
 Not kept: the hurt animation (`hurtTime`, `hurtDir`, `damage`), fire and air, the display block,
-the name, the loot table seed, the explosion parameters of a TNT minecart, the output and
-bookkeeping of a command block minecart, and whether the minecart is in water.
+the name, the loot table seed, the explosion parameters of a TNT minecart, and the output and
+bookkeeping of a command block minecart.
 -/
 
 @[expose] public section
@@ -64,6 +64,14 @@ structure Minecart where
   /-- `Entity.nextStep`: the value of `moveDist` beyond which the next step event is due. Not
   saved. -/
   nextStep : Float32
+  /-- `Entity.wasTouchingWater` (`isInWater()`): the minecart was in water when it last updated
+  its fluid interaction, after it moved. Not saved. -/
+  wasTouchingWater : Bool := false
+  /-- `Entity.firstTick`. A minecart saves it as `HasTicked` and reads it back with `false` for
+  a missing key, so a minecart that is loaded from saved data (as `/summon` and the scenarios
+  do) is never in its first tick; one that the game constructs is, until its first tick ends.
+  It is not compared with the server. -/
+  firstTick : Bool := false
   deriving Repr
 
 namespace Minecart
@@ -128,7 +136,8 @@ def ofNbt? (t : Nbt) : Option Minecart := do
     items
     hasLootTable := (t.get? "LootTable").isSome
     command := ((t.get? "Command").bind Nbt.toString?).getD ""
-    noGravity := t.boolD "NoGravity" false }
+    noGravity := t.boolD "NoGravity" false
+    firstTick := t.boolD "HasTicked" false }
 
 end Minecart
 

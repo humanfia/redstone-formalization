@@ -1,0 +1,17 @@
+{
+  "name": "rod-west",
+  "ticks": 20,
+  "box": {"min": [0, 0, 0], "max": [4, 4, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [2, 2, 2], "state": "minecraft:lightning_rod[facing=west,powered=false,waterlogged=false]"},
+    {"pos": [3, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 3.0, 2.5]}},
+    {"tick": 5, "type": "kill", "entity": 0}
+  ]
+}

@@ -1,5 +1,6 @@
 module
 
+public import Redstone.Basic.Float32
 public import Redstone.Entity.ItemDrop
 public import Redstone.Component.AnalogSource.ItemData
 
@@ -48,10 +49,11 @@ which sets `Level.overflow`: the level is then no longer a faithful image of the
 * Cauldrons: dripstone (`tick`), rain and snow (`handlePrecipitation`), burning entities
   (`entityInside`), and the interactions that need item components (water bottles, dyed armour,
   banners).
-* Projectiles hitting a decorated pot or an unlit candle cake (`unmodelled`), explosions, and the
-  menu of the lectern as an interface (`setPage` and `takeBook` are defined, but nothing calls
-  them). The side of these blocks that hoppers and droppers see is in
-  `Redstone.Component.Container`.
+* Explosions, and the menu of the lectern as an interface (`setPage` and `takeBook` are
+  defined, but nothing calls them). The side of these blocks that hoppers and droppers see is
+  in `Redstone.Component.Container`.
+* A burning projectile lights a candle cake and any projectile of the tag `impact_projectiles`
+  shatters a decorated pot (`onProjectileHit`); the owner of the projectile is not modelled.
 * Components of stored items: the stacks keep their component patch (`Redstone.ItemStack`), but
   whether an item is a record, a book or compostable is read from the item, not from the patch.
 -/
@@ -84,13 +86,15 @@ def setChanged (p : Pos) (block : BlockId) : M Unit :=
 def updateNeighboursAfterDestroy (p : Pos) (block : BlockId) : M Unit :=
   Level.updateNeighbourForOutputSignal p block
 
-/-- `Block.popResource(level, pos, stack)` while blocks drop nothing (the game rule
-`block_drops` is off, as in every test): three doubles are drawn for the position of the item
-before the rule is looked at. -/
+/-- `Block.popResource(level, pos, stack)` for a stack the model does not make (the honeycombs
+of a beehive, which come from a loot table): three doubles are drawn for the position of the
+item before the game rule `block_drops` is looked at. While the rule is on, the item is
+missing, and `Level.overflow` is set. -/
 def popResource : M Unit := do
   nextDouble
   nextDouble
   nextDouble
+  if (← get).blockDrops then Level.setOverflow
 
 /-- `ItemStack.isEmpty` for an item given by name: the empty hand is `minecraft:air`. -/
 def isEmptyHand (item : String) : Bool := item = "minecraft:air"
@@ -168,21 +172,42 @@ def cake (s : Blocks.Cake) : Behaviour :=
         return true
       else eat s p }
 
+/-- `Entity.isOnFire()` for the projectile with the given index. -/
+def projectileOnFire (l : Level) (index : ℕ) : Bool :=
+  (l.entity? index).any fun e =>
+    match e.data with
+    | .projectile _ d => d.fire > 0
+    | _ => false
+
+/-- `Projectile.mayBreak(level, pos)` for the projectile with the given index, which has no
+owner: it is in the entity tag `impact_projectiles`. The game rule
+`projectiles_can_break_blocks` is taken to be on, as it is by default. -/
+def projectileBreaksBlocks (l : Level) (index : ℕ) : Bool :=
+  (l.entity? index).any fun e =>
+    match e.data with
+    | .projectile type _ =>
+      type ∈ ["minecraft:arrow", "minecraft:spectral_arrow", "minecraft:firework_rocket",
+        "minecraft:snowball", "minecraft:fireball", "minecraft:small_fireball", "minecraft:egg",
+        "minecraft:trident", "minecraft:dragon_fireball", "minecraft:wither_skull",
+        "minecraft:wind_charge", "minecraft:breeze_wind_charge"]
+    | _ => false
+
 /-- The behaviour of a cake with a candle. Eating from it leaves a cake with one bite taken and
 drops the candle (`dropResources`: one stack). -/
 def candleCake (id : Blocks.CandleCake.Id) (s : Blocks.CandleCake) : Behaviour :=
   let self : Block := .candleCake id s
   let eatCake (p : Pos) : M Bool := do
     discard <| eat ⟨0⟩ p
-    popResource
+    Level.dropResources self p
     return true
   { Behaviour.inert self with
     analogSignal := fun _ _ _ => 14
     canSurvive := cakeCanSurvive
     updateShape := fun p d _ _ => cakeUpdateShape self p d
     -- `AbstractCandleBlock.onProjectileHit`: a burning projectile lights the candle.
-    onProjectileHit := fun _ _ _ _ => do
-      if !s.lit then unmodelled
+    onProjectileHit := fun p _ _ index => do
+      if !s.lit && projectileOnFire (← get) index then
+        discard <| Level.setBlock p (.candleCake id { s with lit := true }) 11
     useWithoutItem := fun p _ => eatCake p
     useItemOn := fun p face item => do
       -- Flint and steel and fire charges pass; lighting the candle is up to the item.
@@ -666,8 +691,14 @@ def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
     affectNeighborsAfterRemoval := fun p _ => updateNeighboursAfterDestroy p .decorated_pot
     preRemoveSideEffects := fun p => do
       if let some d ← getPot p then ItemDrop.dropContents p [d.item]
-    -- A projectile that may break blocks shatters the pot.
-    onProjectileHit := fun _ _ _ _ => unmodelled
+    -- `DecoratedPotBlock.onProjectileHit`: a projectile that may break blocks (the entity tag
+    -- `impact_projectiles`, with the game rule `projectiles_can_break_blocks` on, as it is by
+    -- default) cracks the pot and destroys it.
+    onProjectileHit := fun p _ _ index => do
+      if projectileBreaksBlocks (← get) index then
+        -- `UPDATE_INVISIBLE | UPDATE_SKIP_BLOCK_ENTITY_SIDEEFFECTS`
+        discard <| Level.setBlock p (.decoratedPot { s with cracked := true }) 260
+        discard <| Level.destroyBlock p true
     triggerEvent := fun p a b => do
       -- `DecoratedPotBlockEntity.triggerEvent`: the pot wobbles, which nothing here observes.
       return (← getPot p).isSome && decide (a = 1 ∧ 0 ≤ b ∧ b < 2)
@@ -904,26 +935,9 @@ def jukebox (s : Blocks.Jukebox) : Behaviour :=
 /-- `ItemTags.LECTERN_BOOKS`. -/
 def lecternBooks : List String := ["minecraft:written_book", "minecraft:writable_book"]
 
-/-- The integer `e` with `2 ^ e ≤ q < 2 ^ (e + 1)`, for a positive rational `q`. -/
-def floorLog2 (q : ℚ) : ℤ :=
-  let e : ℤ := (Nat.log2 q.num.toNat : ℤ) - (Nat.log2 q.den : ℤ)
-  if (2 : ℚ) ^ e ≤ q then e else e - 1
-
-/-- The `float` nearest to a rational number that is not negative, rounding ties to even, as
-the arithmetic of the game does. Only meant for numbers in the range of normal floats. -/
-def roundFloat (q : ℚ) : ℚ :=
-  if q ≤ 0 then 0
-  else
-    let ulp : ℚ := (2 : ℚ) ^ (floorLog2 q - 23)
-    let scaled := q / ulp
-    let lower := scaled.floor
-    let rest := scaled - lower
-    let mantissa : ℤ :=
-      if rest < 1 / 2 then lower
-      else if rest > 1 / 2 then lower + 1
-      else if lower % 2 = 0 then lower
-      else lower + 1
-    mantissa * ulp
+/-- The `float` nearest to a rational number, rounding ties to even, as the arithmetic of the
+game does (`F32.roundFloat`). -/
+abbrev roundFloat (q : ℚ) : ℚ := F32.roundFloat q
 
 /-- `LecternBlockEntity.getRedstoneSignal`: `floor(page / (pageCount - 1.0F) * 14.0F)`, plus one
 if the lectern holds a book with content. The progress is 1 for a book of at most one page. -/

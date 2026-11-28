@@ -20,7 +20,6 @@ The game rule `tnt_explodes` is taken to be on, as it is by default.
 
 * `playerWillDestroy`: an unstable TNT block is primed when a player breaks it. Players do not
   break blocks in the model, so the property `unstable` has no effect.
-* `onProjectileHit`: a burning projectile primes the block. Projectiles are not modelled.
 * The owner of the primed TNT, sounds, and the wear of the flint and steel.
 -/
 
@@ -46,6 +45,15 @@ def behaviour (self : Block) : Behaviour :=
             if (← prime p) then discard <| Level.removeBlock p false
       neighborChanged := fun p _ _ => do
         if (← Level.hasNeighborSignal p) then
+          if (← prime p) then discard <| Level.removeBlock p false
+      -- A burning projectile primes the block (`Projectile.mayInteract` holds for a
+      -- projectile without owner).
+      onProjectileHit := fun p _ _ index => do
+        let burning := ((← get).entity? index).any fun e =>
+          match e.data with
+          | .projectile _ d => d.fire > 0
+          | _ => false
+        if burning then
           if (← prime p) then discard <| Level.removeBlock p false
       useItemOn := fun p _ item => do
         if item != "minecraft:flint_and_steel" && item != "minecraft:fire_charge" then

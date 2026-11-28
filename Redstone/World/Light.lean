@@ -9,8 +9,10 @@ Java classes: `LevelLightEngine`, `BlockAndLightGetter`, `LevelReader`.
 
 This is a stub: every cell is as bright as can be, 15. That is what the model has assumed so
 far wherever the game asks for the light of a cell and the model did not ask (the plants and
-mushrooms that need or shun light never break for lack or excess of it, ice and snow never
-melt): none of those places calls these definitions yet, so nothing changes by them.
+mushrooms that need or shun light never break for lack or excess of it). The random ticks of
+ice and of snow layers ask `blockLight`, so until light is modelled they melt on their first
+random tick whatever the light is (`Redstone.Component.RandomTicked`,
+`Redstone.Component.Supported`).
 
 They are here so that a block whose behaviour depends on light can be written against the
 game's own questions now, and gets the right answers once light is modelled, without its file

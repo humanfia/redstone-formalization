@@ -1,0 +1,56 @@
+{
+ "name": "destroy-infested",
+ "ticks": 30,
+ "box": {
+  "min": [
+   -4,
+   0,
+   -4
+  ],
+  "max": [
+   20,
+   4,
+   10
+  ]
+ },
+ "settings": {
+  "blockDrops": true
+ },
+ "fill": [
+  {
+   "min": [
+    -4,
+    0,
+    -4
+   ],
+   "max": [
+    20,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:infested_stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "drop": true
+  }
+ ]
+}

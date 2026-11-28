@@ -1,0 +1,53 @@
+{
+ "name": "shape-stairs-snowball-south",
+ "ticks": 25,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:snowball",
+   "pos": [
+    3.3,
+    1.7,
+    5.5
+   ],
+   "nbt": "{Motion:[0.02d,-0.01d,-0.7d]}"
+  }
+ ],
+ "actions": []
+}

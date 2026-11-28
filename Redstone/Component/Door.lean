@@ -22,11 +22,8 @@ will check them once droppers work.
 
 Not modelled:
 
-* Fluid ticks. A waterlogged trapdoor schedules a tick of its water whenever it is toggled or
-  receives a shape update; the trapdoor does not schedule it yet (`Level.scheduleFluidTick`),
-  and fluids do not flow.
-* `randomTick` of the weathering copper variants (oxidation): the hook exists
-  (`BehaviourOf.randomTick`), but no block gets a random tick yet.
+* `randomTick` of the weathering copper variants (oxidation) is not here but in
+  `Redstone.Component.Weathering`, which the random-tick engine calls for all copper.
 * `getStateForPlacement` and `setPlacedBy`: the model has no placement of blocks by items.
 * `onExplosionHit`: `Behaviour.onExplosionHit` does not say whether the explosion can trigger
   blocks. The reaction to an explosion that can (a wind charge) is defined here as
@@ -179,11 +176,12 @@ end TrapDoorId
 
 namespace TrapDoorBlock
 
-/-- `TrapDoorBlock.toggle`: opens or closes the trapdoor. The tick of the water of a
-waterlogged trapdoor is not modelled. -/
+/-- `TrapDoorBlock.toggle`: opens or closes the trapdoor. A waterlogged trapdoor asks for a
+tick of its water. -/
 def toggle (k : TrapDoorId) (s : Blocks.TrapDoor) (p : Pos) : M Unit := do
   let s := { s with «open» := !s.open }
   discard <| Level.setBlock p (k.block s) 2
+  if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
   playSound
   Level.gameEvent (openEvent s.open) p
 
@@ -194,8 +192,8 @@ def useWithoutItem (k : TrapDoorId) (s : Blocks.TrapDoor) (p : Pos) : M Bool := 
   toggle k s p
   return true
 
-/-- `TrapDoorBlock.neighborChanged`: the trapdoor follows the signal it receives. The tick of
-the water of a waterlogged trapdoor is not modelled. -/
+/-- `TrapDoorBlock.neighborChanged`: the trapdoor follows the signal it receives. A
+waterlogged trapdoor that changes asks for a tick of its water. -/
 def neighborChanged (k : TrapDoorId) (s : Blocks.TrapDoor) (p : Pos) : M Unit := do
   let signal ← Level.hasNeighborSignal p
   if signal != s.powered then
@@ -203,16 +201,20 @@ def neighborChanged (k : TrapDoorId) (s : Blocks.TrapDoor) (p : Pos) : M Unit :=
       playSound
       Level.gameEvent (openEvent signal) p
     discard <| Level.setBlock p (k.block { s with «open» := signal, powered := signal }) 2
+    if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
 
 /-- The part of `TrapDoorBlock.onExplosionHit` that runs when `explosion.canTriggerBlocks()`.
 Not part of `behaviour`; see the module docstring. -/
 def explosionTrigger (k : TrapDoorId) (s : Blocks.TrapDoor) (p : Pos) : M Unit := do
   if k.canOpenByWindCharge && !s.powered then toggle k s p
 
-/-- The behaviour of a trapdoor. `TrapDoorBlock.updateShape` only schedules the tick of the
-water and leaves the state as it is, so it is not overridden. -/
+/-- The behaviour of a trapdoor. `TrapDoorBlock.updateShape` asks for a tick of the water of a
+waterlogged trapdoor and leaves the state as it is. -/
 def behaviour (k : TrapDoorId) (s : Blocks.TrapDoor) : Behaviour :=
   { Behaviour.inert (k.block s) with
+    updateShape := fun p _ _ _ => do
+      if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+      return k.block s
     useWithoutItem := fun p _ => useWithoutItem k s p
     neighborChanged := fun p _ _ => neighborChanged k s p }
 

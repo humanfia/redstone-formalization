@@ -17,7 +17,14 @@ only component the model reads is `max_stack_size`. A block whose behaviour depe
 components (a furnace, a brewing stand) does not accept stacks with a patch; see
 `Redstone.Component.Container`.
 
-The maximal stack size of an item comes from the one table `Redstone.itemMaxStackSize`.
+The maximal stack size of an item comes from the one table `Redstone.itemMaxStackSize`, a
+search tree on a number made of the item's name (`Redstone.itemKey`): theorems about circuits
+are checked by letting the Lean kernel run the model, every item a hopper moves asks for this
+size, and the kernel compares numbers far faster than it scans a list of names.
+`ItemStack.isEmpty` does compare the name with that of air. That is one comparison, which the
+kernel decides on the first bytes that differ, in less time than it takes to compute the key of
+the name (measured: 1.8 ms against 2.7 ms for a name it has not seen yet); see
+`docs/proof-feasibility.md`.
 
 Saved data in which a container has a loot table or a lock is not read (`Nbt.plainContainer`).
 -/

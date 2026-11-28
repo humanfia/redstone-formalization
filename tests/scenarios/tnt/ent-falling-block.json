@@ -1,0 +1,60 @@
+{
+ "name": "ent-falling-block",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   6,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:5}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    9.5,
+    2.0,
+    7.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:sand\"},Time:1,NoGravity:1b}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    7.5,
+    4.0,
+    9.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:gravel\"},Time:1,NoGravity:1b}"
+  }
+ ]
+}

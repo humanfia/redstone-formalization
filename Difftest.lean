@@ -13,8 +13,10 @@ is `tests/traces/<unit>/<name>.trace.json`.
 The model starts from frame 0 of the trace. Before each game tick the scenario's actions for
 that tick are applied; after it the model is compared with the frame: every block and block
 entity in the box, the order in which block entities tick, the scheduled ticks, the block
-events and the entities. The scheduled fluid ticks are read from the trace and loaded, but
-they are not compared yet (`compareFluidTicks`): fluids do not flow in the model.
+events, the scheduled fluid ticks (`compareFluidTicks`) and the entities.
+
+A run without arguments first checks the model's container signal against the same
+computation in `Float32` (`signalSelfCheck`); a difference fails the run.
 
 This program is a test tool and not part of the formalization.
 -/
@@ -233,6 +235,7 @@ structure Scenario where
   weather : Weather
   randomTickSpeed : ℕ
   blockDrops : Bool
+  fireSpreadRadiusAroundPlayer : ℤ
 
 /-- A coordinate of an entity in a scenario: a JSON number. -/
 def parseCoordinate (j : Json) : Except String Float := do
@@ -276,6 +279,9 @@ def parseScenario (j : Json) : Except String Scenario := do
     | "rain" => pure Weather.rain
     | "thunder" => pure Weather.thunder
     | w => throw s!"not a weather: {w}"
+  let fireSpreadRadiusAroundPlayer ← setting ℤ "fireSpreadRadiusAroundPlayer" 128
+  if fireSpreadRadiusAroundPlayer < -1 then
+    throw s!"settings.fireSpreadRadiusAroundPlayer must be >= -1: {fireSpreadRadiusAroundPlayer}"
   return {
     name := ← (← j.getObjVal? "name").getStr?
     ticks := ← (← j.getObjVal? "ticks").getNat?
@@ -286,7 +292,8 @@ def parseScenario (j : Json) : Except String Scenario := do
     advanceTime := ← setting Bool "advanceTime" false
     weather
     randomTickSpeed := ← setting ℕ "randomTickSpeed" 0
-    blockDrops := ← setting Bool "blockDrops" false }
+    blockDrops := ← setting Bool "blockDrops" false
+    fireSpreadRadiusAroundPlayer }
 
 structure Frame where
   gameTime : ℕ
@@ -372,10 +379,11 @@ def normalize (s : Scenario) (l : Level) : Level :=
     blockEntities := PosMap.ofList (ps.filterMap fun p =>
       (l.blockEntities p).map fun be => (p, be)) }
 
-/-- Whether the scheduled fluid ticks of the model are compared with the trace. Not yet: no
-block of the model schedules a fluid tick, while the traces of scenarios with waterlogged
-blocks have them. -/
-def compareFluidTicks : Bool := false
+/-- Whether the scheduled fluid ticks of the model are compared with the trace. A trace lists
+the ticks inside the box of the scenario, so those of the model outside it are not compared
+(nor is anything else out there: the runner forgets the blocks outside the box after every
+tick, so a scenario should keep its fluids inside). -/
+def compareFluidTicks : Bool := true
 
 def initialLevel (s : Scenario) (f : Frame) : Level :=
   let e := ({} : Expected).apply f
@@ -397,6 +405,7 @@ def initialLevel (s : Scenario) (f : Frame) : Level :=
     weather := s.weather
     randomTickSpeed := s.randomTickSpeed
     blockDrops := s.blockDrops
+    fireSpreadRadiusAroundPlayer := s.fireSpreadRadiusAroundPlayer
     randomTickBox := some (s.lo, s.hi) }
   { l with lightWorld := l.world }
 
@@ -428,7 +437,10 @@ def compare (s : Scenario) (l : Level) (e : Expected) (f : Frame) : List String 
       ts.map fun (p, b, d, pr) => s!"{b.name}@{showPos p} in {d} priority {pr}"
     out := s!"scheduled ticks: expected {show' f.scheduled}, got {show' scheduled}" :: out
   if compareFluidTicks then
-    let fluidTicks := (ScheduledTickOf.sortTicks l.fluidTicks).map fun t =>
+    -- The trace lists the fluid ticks inside the box only.
+    let inBox (p : Pos) : Bool :=
+      s.lo.x ≤ p.x && p.x ≤ s.hi.x && s.lo.y ≤ p.y && p.y ≤ s.hi.y && s.lo.z ≤ p.z && p.z ≤ s.hi.z
+    let fluidTicks := (ScheduledTickOf.sortTicks (l.fluidTicks.filter (inBox ·.pos))).map fun t =>
       (t.pos, t.fluid, (t.trigger : ℤ) - l.gameTime, t.priority.value)
     if fluidTicks ≠ f.fluidTicks then
       let show' (ts : List (Pos × Fluid × ℤ × ℤ)) :=
@@ -501,6 +513,94 @@ def runFile (path : System.FilePath) : IO Bool := do
     IO.println s!"ok   {path}"
     return true
 
+/-! ### Self-check: the signal of a container
+
+The model computes the signal a comparator reads from a container with exact arithmetic that
+is rounded to single precision after each operation (`Container.redstoneSignal`), so that the
+kernel can evaluate it. The check below compares it with the same computation done in
+`Float32`, as the game does it. -/
+
+/-- `AbstractContainerMenu.getRedstoneSignalFromContainer` computed in `Float32`, as the model
+did before it was made exact. Only the self-check uses it. -/
+def redstoneSignalF32 (items : Inventory) (limit : ℕ := 99) : ℕ :=
+  let total : Float32 := items.foldl (init := 0) fun acc s =>
+    if s.isEmpty then acc
+    else acc + s.count.toFloat32 / (s.containerMaxStackSize limit).toFloat32
+  let total := total / items.length.toFloat32
+  -- `Mth.lerpDiscrete(totalPercent, 0, 15)`
+  (total * 14).floor.toUInt32.toNat + (if total > 0 then 1 else 0)
+
+/-- The numbers of slots the containers of the game have. -/
+def containerSizes : List ℕ := [1, 3, 5, 9, 27, 54]
+
+/-- A stack of `count` items that stacks up to `max`. -/
+def stackOf (count max : ℕ) : ItemStack :=
+  { id := "minecraft:redstone", count
+    components := [("minecraft:max_stack_size", toString max)] }
+
+/-- Every container with one stack in its first slot: `count ≤ max ≤ 99`, in each size. -/
+def singleSlotCases : List (Inventory × ℕ) := Id.run do
+  let mut out := []
+  for slots in containerSizes do
+    for max in List.range 100 do
+      for count in List.range (max + 1) do
+        if count > 0 then
+          out := ((Inventory.empty slots).setItem 0 (stackOf count max), 99) :: out
+  return out
+
+/-- A step of a linear congruential generator (the constants of Knuth's MMIX). -/
+def nextSeed (seed : UInt64) : UInt64 := seed * 6364136223846793005 + 1442695040888963407
+
+/-- A number below `bound` from the high bits of the seed. -/
+def below (seed : UInt64) (bound : ℕ) : ℕ := (seed >>> 33).toNat % bound
+
+/-- Inventories filled by a fixed generator: each slot is empty or holds a stack whose greatest
+size is 1, 16, 64 or any number up to 99, with any count up to that size; the container's own
+limit is 99, 64 or 1. The same inventories every run. -/
+def randomCases (n : ℕ) : List (Inventory × ℕ) := Id.run do
+  let mut seed : UInt64 := 20261128
+  let mut out := []
+  for _ in List.range n do
+    seed := nextSeed seed
+    let slots := containerSizes.getD (below seed containerSizes.length) 1
+    seed := nextSeed seed
+    let limit := [99, 99, 64, 1].getD (below seed 4) 99
+    let mut items : Inventory := []
+    for _ in List.range slots do
+      seed := nextSeed seed
+      let kind := below seed 6
+      seed := nextSeed seed
+      let max :=
+        match kind with
+        | 0 => 1
+        | 1 => 16
+        | 2 | 3 => 64
+        | _ => below seed 99 + 1
+      seed := nextSeed seed
+      let count := below seed max + 1
+      seed := nextSeed seed
+      -- One slot in four is empty, and some containers are full to the brim.
+      let stack :=
+        if below seed 4 = 0 then ItemStack.empty
+        else if below seed 4 = 1 then stackOf max max
+        else stackOf count max
+      items := stack :: items
+    out := (items, limit) :: out
+  return out
+
+/-- Compares the two computations of the container signal. Returns the number of cases and
+the ones on which they differ. -/
+def signalSelfCheck (_ : Unit) : ℕ × List String :=
+  let cases := singleSlotCases ++ randomCases 20000
+  let bad := cases.filterMap fun (items, limit) =>
+    let exact := Component.Container.redstoneSignal items limit
+    let float := redstoneSignalF32 items limit
+    if exact = float then none
+    else
+      let slots := items.map fun s => (s.count, s.containerMaxStackSize limit)
+      some s!"limit {limit}, slots {slots}: exact {exact}, Float32 {float}"
+  (cases.length, bad)
+
 end Difftest
 
 def main (args : List String) : IO UInt32 := do
@@ -509,8 +609,13 @@ def main (args : List String) : IO UInt32 := do
   if files.isEmpty then
     IO.println "no scenarios found"
     return 1
+  -- The self-check belongs to the full run, which is what `lake test` does.
+  let (cases, bad) := if args.isEmpty then Difftest.signalSelfCheck () else (0, [])
+  for b in bad.take 8 do IO.println s!"FAIL container signal: {b}"
+  if args.isEmpty then
+    IO.println s!"container signal: {cases - bad.length} of {cases} cases agree with Float32"
   let mut failed := 0
   for f in files do
     if !(← Difftest.runFile f) then failed := failed + 1
   IO.println s!"{files.length - failed} of {files.length} scenarios agree with the server"
-  return if failed == 0 then 0 else 1
+  return if failed == 0 && bad.isEmpty then 0 else 1

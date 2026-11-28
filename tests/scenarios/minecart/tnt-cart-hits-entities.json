@@ -1,0 +1,87 @@
+{
+ "name": "tnt-cart-hits-entities",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    7
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:5}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    7.5,
+    1.0,
+    11.5
+   ]
+  },
+  {
+   "type": "minecraft:armor_stand",
+   "pos": [
+    11.5,
+    1.0,
+    11.5
+   ],
+   "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    7.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:redstone\",count:3}}"
+  }
+ ]
+}

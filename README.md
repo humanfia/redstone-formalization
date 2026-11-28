@@ -107,9 +107,9 @@ component's module docstring says what it does not model.
 | `Redstone.Mechanics.Power` | strong and weak power, conductors | defined |
 | `Redstone.Mechanics.Tick` | the phases of a game tick | defined |
 | `Redstone.Mechanics.Input` | the actions of a scenario (use, set, destroy, summon, kill) and schedules of them | defined |
-| `Redstone.Mechanics.Fluid` | what a fluid tick does: the flow of water and lava | stub |
-| `Redstone.Mechanics.RandomTick` | the random ticks of the chunks, in the game's order over the chunks of the test world | verified; the random tick of lava sets `overflow` |
-| `Redstone.Component.Weathering` | copper of every kind weathering on random ticks | verified |
+| `Redstone.Mechanics.Fluid` | what a fluid tick does: the flow of water and lava | defined, tested |
+| `Redstone.Mechanics.RandomTick` | the random ticks of the chunks, in the game's order over the chunks of the test world | defined, tested; the random tick of lava sets `overflow` |
+| `Redstone.Component.Weathering` | copper of every kind weathering on random ticks | defined, tested |
 | `Redstone.Mechanics.Dispatch` | which component gives each block its behaviour (generated) | defined |
 | `Redstone.Mechanics.PistonMotion` | which blocks a piston moves, and in which order | defined, tested |
 | `Redstone.Component.Dust`, `Torch`, `Repeater`, `Diode`, `Comparator`, `Observer` | wire, torches and the block of redstone, repeater, comparator, observer | defined, tested |
@@ -120,18 +120,19 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Supported`, `Connecting` | blocks that react to shape updates: carpets, snow layers, torches, plants and beds, which break without support; fences, bars and panes, walls and stairs, which join their neighbours | defined, tested |
 | `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
 | `Redstone.Entity.Geometry`, `Redstone.Entity.Touch` | the boxes of entities, and how an entity tells the blocks it steps on and passes through (`Entity.applyEffectsFromBlocks`), shared by all entity units | defined, tested |
-| `Redstone.Entity.Projectile` | arrows and other projectiles | an arrow stuck in a block is defined and tested; flight is not |
-| `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | stub |
+| `Redstone.Entity.Projectile`, `Redstone.Entity.Clip` | arrows, snowballs and eggs: flight, the hit of a block, an arrow in the ground; the ray that finds the block | defined, tested; hits on entities and the other projectiles are not |
+| `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | defined, tested; lava sets nothing on fire yet |
 | `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
 | `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
 | `Redstone.Component.SpecialBlock` | campfire, powder snow, cobweb, nether portal, carved pumpkin, dried ghast, eggs | stub |
 | `Redstone.Component.Vine` | cactus, sugar cane, bamboo, chorus plants, kelp and vines, glow lichen and sculk veins | stub |
 | `Redstone.Component.Ground` | farmland, paths, leaves, grass, nylium, mushroom blocks, mud | stub |
 | `Redstone.Component.Fire` | fire and soul fire | stub |
-| `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners | stub |
+| `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners; what they release is in `Level.spawnAfterBreak` (`Redstone.Mechanics.Update`), next to the loot of every block | defined, tested |
 | `Redstone.World.Light` | the light of a cell: block light and raw brightness, for the blocks that need or shun light | stub: every cell has light 15 |
-| `Redstone.Component.RandomTicked` | ice melting, budding amethyst growing buds (the copper blocks weather through `Weathering`) | verified where light does not matter |
-| `Redstone.Entity.Lightning`, `Redstone.Entity.Hanging`, `Redstone.Entity.ExperienceOrb` | lightning bolts, item frames, experience orbs | stub |
+| `Redstone.Component.RandomTicked` | ice melting, budding amethyst growing buds (the copper blocks weather through `Weathering`) | defined, tested where light does not matter |
+| `Redstone.Entity.Lightning`, `Redstone.Entity.Hanging` | lightning bolts, item frames | stub |
+| `Redstone.Entity.ExperienceOrb` | experience orbs: falling, sliding, merging, expiring; what a broken ore or a removed furnace releases | defined, tested |
 | `Redstone.Proof.Smoke` | four small circuits proved by kernel evaluation: lever and lamp, a lever losing its support, a sticky piston, two hoppers | proved |
 | `Redstone.Contraption.PistonDoor`, `Redstone.Theorems.PistonDoor3x3` | piston doors | placeholder |
 
@@ -143,11 +144,14 @@ one part of the engine), `Redstone/Theorems` and `Redstone/Contraption` (circuit
 under these four directories is built by `lake build` without being listed anywhere. How
 circuits are proved, what it costs and what does not work is in
 [docs/proof-feasibility.md](docs/proof-feasibility.md).
+To prove a circuit, follow [Redstone/Proof/README.md](Redstone/Proof/README.md); the eight
+circuits of `Redstone/Theorems/Basics` (lever and lamp, torch inverter, repeater delay, dust
+decay, RS latch, sticky piston, hopper pair, repeater clock) are the worked examples.
 
-What the model leaves out: fluids do not flow (the phase of the game tick is there, and
-empty), random ticks reach copper, redstone ore, ice, snow layers and budding amethyst but not
-the plants, light is modelled only as far as the daylight detector needs
-it, destroyed blocks drop nothing (the random numbers of the drops are drawn), every chunk is
+What the model leaves out: random ticks reach copper, redstone ore, ice, snow layers and
+budding amethyst but not the plants, and ice and snow melt whatever the light is (block light
+is still 15 everywhere), light is modelled only as far as the daylight detector needs
+it, every chunk is
 loaded, players and mobs only exist as inputs, and the experimental redstone wire is off. Where the model meets something it does not cover it sets `Level.overflow` instead
 of going on with a wrong state.
 

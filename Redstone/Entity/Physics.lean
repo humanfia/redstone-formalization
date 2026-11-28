@@ -10,7 +10,8 @@ public import Redstone.Entity.Touch
 How an entity moves through the blocks of the world: `Entity.move` with `Entity.collide`,
 `Shapes.collide` and `VoxelShape.collide`, the supporting block, fall distance, the bounce of
 `restituteMovementAfterCollisions`, gravity, and the effects of the blocks an entity touches
-(through `Redstone.Entity.Touch`).
+(through `Redstone.Entity.Touch`), and what fluids do to it: `Entity.updateFluidInteraction`
+(through `Redstone.Entity.Fluid`) and the fire that lava sets.
 
 The arithmetic is that of the game: every operation on `double` and `float` values is done in
 the same order, so results agree bit for bit. Constants that are not exactly representable are
@@ -18,7 +19,9 @@ given by their bits.
 
 ## What is left out
 
-* Fluids. An entity that touches a block holding a fluid sets `Level.overflow`.
+* The ray that `Entity.move` casts for an entity that falls fast, which ends the fall when it
+  meets water: such an entity with a fluid on its way sets `Level.overflow`.
+* What sets an entity on fire other than lava (fire, campfires, lightning), and rain.
 * Collisions with other entities (boats, shulkers) and with the world border.
 * Stepping up (`Entity.maxUpStep`), which is zero for the entities modelled here.
 * Collision shapes that depend on the entity or on the position of the block (scaffolding,
@@ -335,7 +338,8 @@ def blockCollisions (l : Level) (box : AABB) : List PlacedShape × Bool := Id.ru
 /-- `Level.noCollision(entity, box)`, for blocks only: no collision shape overlaps `box`. -/
 def noBlockCollision (l : Level) (box : AABB) : Bool := (l.blockCollisions box).1.isEmpty
 
-/-- A block that holds a fluid touches `box`. -/
+/-- A block that holds a fluid touches `box`. Entities whose contact with fluids the model does
+not follow (projectiles) ask this and set `Level.overflow`. -/
 def touchesFluid (l : Level) (box : AABB) : Bool :=
   (PlacedShape.range (Phys.floor box.minX) (Phys.floor box.maxX + 1)).any fun x =>
     (PlacedShape.range (Phys.floor box.minY) (Phys.floor box.maxY + 1)).any fun y =>
@@ -422,6 +426,7 @@ def phys (e : Entity) : Entities.Physics :=
   match e.data with
   | .item dt => dt.phys
   | .fallingBlock dt => dt.phys
+  | .experienceOrb dt => dt.phys
   | _ => {}
 
 /-- Replaces the state `Entity.move` works with. -/
@@ -429,6 +434,7 @@ def withPhys (e : Entity) (p : Entities.Physics) : Entity :=
   match e.data with
   | .item dt => { e with data := .item { dt with phys := p } }
   | .fallingBlock dt => { e with data := .fallingBlock { dt with phys := p } }
+  | .experienceOrb dt => { e with data := .experienceOrb { dt with phys := p } }
   | _ => e
 
 /-- Changes the state `Entity.move` works with. -/
@@ -447,6 +453,18 @@ structure Kind where
   movementOffset : Float := Phys.f 0x3f000011
   /-- `causeFallDamage(fallDistance, ...)` for the entity with the given index. -/
   causeFallDamage : ℕ → Float → M Unit := fun _ _ => pure ()
+  /-- `fireImmune()`. -/
+  fireImmune : Entity → Bool := fun _ => false
+  /-- `lavaHurt()` for the entity with the given index, which is not immune to fire. -/
+  lavaHurt : ℕ → M Unit := fun _ => pure ()
+  /-- `Entity.random` of the entity with the given id, as its constructor left it. -/
+  initialRandom : ℕ → JavaRandom := randomAfterUuid
+
+/-- `Entity.random`: the entity's own generator. -/
+def random (k : Kind) (e : Entity) : JavaRandom := e.phys.random.getD (k.initialRandom e.id)
+
+/-- `Entity.isOnFire()` on the server. -/
+def isOnFire (k : Kind) (e : Entity) : Bool := !k.fireImmune e && e.phys.remainingFireTicks > 0
 
 /-- `Entity.getOnPos(offset)` for an entity at `pos` whose supporting block
 (`mainSupportingBlockPos`) is `support`: the block below the entity that is `offset` under its
@@ -588,7 +606,8 @@ def finishMove (k : Entity.Kind) (i : ℕ) (delta movement : Vec3) (xCollision z
   let effectState := l.blockAt effectPos
   -- `checkFallDamage`
   let fall := e.phys.fallDistance
-  let fall := if movement.y < 0 then fall - Phys.toFloat32 movement.y else fall
+  let fall :=
+    if !e.phys.wasTouchingWater && movement.y < 0 then fall - Phys.toFloat32 movement.y else fall
   setEntity (e.modifyPhys fun p => { p with fallDistance := fall })
   if e.base.onGround then
     if fall > 0 then
@@ -656,15 +675,49 @@ def applyGravity (k : Entity.Kind) (i : ℕ) : M Unit :=
     if e.phys.noGravity || k.gravity == 0 then e
     else { e with base := { e.base with motion := e.base.motion.add ⟨0.0, -k.gravity, 0.0⟩ } }
 
+/-- `insideEffectCollector.applyAndClear(entity)` for the entity with index `i`: the effects
+that the fluids on its way asked for are applied, as long as the entity is there. Lava sets an
+entity that is not immune to fire on fire for 15 seconds (`lavaIgnite`) and hurts it
+(`lavaHurt`); water puts it out (`clearFire`). -/
+def applyFluidEffects (k : Entity.Kind) (i : ℕ) (effects : List Entity.Touch.FluidEffect) :
+    M Unit := do
+  for effect in effects do
+    let some e ← getEntity i | return
+    match effect with
+    | .lavaIgnite =>
+      if !k.fireImmune e && e.phys.remainingFireTicks < 300 then
+        setEntity (e.modifyPhys fun p => { p with remainingFireTicks := 300 })
+    | .lavaHurt => if !k.fireImmune e then k.lavaHurt i
+    | .extinguish =>
+      setEntity (e.modifyPhys fun p => { p with remainingFireTicks := min 0 p.remainingFireTicks })
+
 /-- `Entity.applyEffectsFromBlocksForLastMovements` for the entity with index `i`: the block the
 entity stands on is told (`stepOn`), and so are the blocks it met (`entityInside`) during the
-movements for which the effects of blocks were last applied (`Entity.Touch`). -/
+movements for which the effects of blocks were last applied (`Entity.Touch`). Then the fluids
+it met act on it. An entity that was burning and was put out makes a sound, whose pitch takes
+two numbers from the entity's generator; an entity that does not burn and was not set on fire
+gets `remainingFireTicks` of `-1` (`getFireImmuneTicks`). -/
 def applyEffectsFromBlocksForLastMovements (k : Entity.Kind) (i : ℕ) : M Unit := do
   let some e ← getEntity i | return
   if e.phys.noPhysics then return
   let l ← get
   let effectPos := if e.base.onGround then some (Entity.getOnPosLegacy l e) else none
+  let wasOnFire := e.isOnFire k
+  let previous := e.phys.remainingFireTicks
   Entity.Touch.applyEffectsFromBlocks k.dims i effectPos e.phys.finalMovementsThisTick
+    (applyFluidEffects k i)
+  let some e ← getEntity i | return
+  let e :=
+    if wasOnFire && !e.isOnFire k then
+      -- `playEntityOnFireExtinguishedSound`
+      let r := ((e.random k).next 24).2
+      e.modifyPhys fun p => { p with random := some (r.next 24).2 }
+    else e
+  let wasIgnitedThisTick := e.phys.remainingFireTicks > previous
+  setEntity <|
+    if !e.isOnFire k && !wasIgnitedThisTick then
+      e.modifyPhys fun p => { p with remainingFireTicks := -1 }
+    else e
 
 /-- `Entity.applyEffectsFromBlocks()` for the entity with index `i`: the effects of blocks are
 applied for the movements the entity made since the last time. `old` is where the entity was
@@ -676,10 +729,27 @@ def applyEffectsFromBlocks (k : Entity.Kind) (i : ℕ) (old : Vec3) : M Unit := 
     { p with movementThisTick := [], finalMovementsThisTick := final })
   applyEffectsFromBlocksForLastMovements k i
 
-/-- The entity with index `i` touches a fluid, which the model does not handle: records it. -/
-def checkNoFluid (k : Entity.Kind) (i : ℕ) : M Unit := do
-  let some e ← getEntity i | return
-  if (← get).touchesFluid (k.dims.box e.base.pos) then setOverflow
+/-- `Entity.updateFluidInteraction()` for the entity with index `i`, which fluids push
+(`isPushedByFluid`) and whose width is the `float` with the bits `width`. The entity finds the
+fluids its box reaches (`Entity.Fluid.update`). In water its fall ends, and if it was not in
+water before it makes a splash, unless this is its first tick (`firstTick`): the splash draws
+from the entity's generator and is a game event. Then water and lava push it. Returns what the
+entity found, which the game keeps until the next update (`getFluidHeight`, `isInLava`). -/
+def updateFluidInteraction (k : Entity.Kind) (width : UInt32) (i : ℕ) (firstTick : Bool) :
+    M Entity.Fluid.Interaction := do
+  let some e ← getEntity i | return {}
+  let found := Entity.Fluid.update (← get) (k.dims.box e.base.pos)
+  let inWater := found.inWater
+  let splashes := inWater && !e.phys.wasTouchingWater && !firstTick
+  let e := if inWater then e.modifyPhys fun p => { p with fallDistance := 0 } else e
+  let e :=
+    if splashes then
+      e.modifyPhys fun p => { p with random := some (Entity.Fluid.splashRandom (e.random k) width) }
+    else e
+  let e := e.modifyPhys fun p => { p with wasTouchingWater := inWater }
+  setEntity { e with base := { e.base with motion := found.push e.base.motion } }
+  if splashes then gameEvent "minecraft:splash" e.base.pos.blockPos
+  return found
 
 end Level
 

@@ -26,8 +26,6 @@ Left out:
   game it only melts next to a light source: the scenario with ice in the dark waits in
   `tests/pending/scenarios/random-tick` (`ice-dark`) until light is modelled
   (`Redstone.World.Light`).
-* The water that the ice becomes does not flow (`Redstone.Mechanics.Fluid` is a stub): the
-  scenario in which it can flow away waits as well (`ice-melt-open`).
 * `IceBlock.playerDestroy`: players do not break blocks.
 -/
 

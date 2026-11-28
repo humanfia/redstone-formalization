@@ -30,8 +30,13 @@ Files: `tests/scenarios/<unit>/<name>.json` and `tests/traces/<unit>/<name>.trac
 * Random ticks are disabled (`random_tick_speed` 0), mob spawning is off (`spawn_mobs` and the
   other spawn rules false), weather is clear and does not change (`advance_weather` false), the
   day time is 6000 and does not advance (`advance_time` false), and destroyed blocks drop nothing
-  (`block_drops` false; loot tables are not modelled), unless the scenario's `settings` say
+  (`block_drops` false), unless the scenario's `settings` say
   otherwise. All other game rules have their default values; the difficulty is easy.
+* No player is in the world, and with the default of the game rule
+  `fire_spread_radius_around_player` (128) fire spreads, burns blocks and goes out only near a
+  player: a fire then does nothing but schedule its next tick, and lightning lights none. A
+  scenario that wants fire to burn sets `settings.fireSpreadRadiusAroundPlayer` to -1 (fire
+  spreads everywhere).
 * What is pinned at the start of every scenario, so that a trace depends on the scenario only
   (recording a scenario twice, alone or among others, gives byte-identical traces):
   * the level game time is set to 0, so frame `t` has `gameTime` `t`, and tick `t` runs with game
@@ -88,7 +93,8 @@ Files: `tests/scenarios/<unit>/<name>.json` and `tests/traces/<unit>/<name>.trac
 * `settings` (all optional): `dayTime` (ticks of the overworld clock, default 6000),
   `advanceTime` (default false), `weather` (`"clear"`, `"rain"` or `"thunder"`, default clear;
   the rain and thunder levels are set to 0 or 1 at once), `randomTickSpeed` (default 0),
-  `blockDrops` (default false).
+  `blockDrops` (default false), `fireSpreadRadiusAroundPlayer` (the game rule of that name,
+  default 128; -1 for everywhere).
 * `fill` is applied first, then `blocks`; later entries overwrite earlier ones. `nbt` is SNBT
   for the block entity (loaded into the freshly created block entity as `/setblock` does).
   Initial blocks are placed **silently**: no `onPlace`, no neighbour or shape updates, no
@@ -252,9 +258,9 @@ compares it with their traces after every tick; without arguments it runs everyt
 * The model takes its initial state from frame 0 of the trace, so it never reads `fill`,
   `blocks` or `entities`. From the scenario it uses `ticks`, `box`, `actions` and the
   `settings`. The settings `randomTickSpeed` and `blockDrops` are loaded into the level. With
-  a positive `randomTickSpeed` the model gives random ticks to the blocks inside `box`, with
-  the chunks of the harness world in the server's order (`Redstone.Mechanics.RandomTick`). The
-  model has no drops yet, so a scenario that sets `blockDrops` will not agree with its trace.
+  `blockDrops` a destroyed block leaves its loot and its experience (`Level.dropResources`).
+  With a positive `randomTickSpeed` the model gives random ticks to the blocks inside `box`,
+  with the chunks of the harness world in the server's order (`Redstone.Mechanics.RandomTick`).
 * It supports all the actions; they are the inputs of the model
   (`Redstone.Mechanics.Input`). The entity of a `summon` is read from its `type`, its `pos` and
   its `nbt`, as the model reads an entity of a trace; what the game adds to a summoned entity

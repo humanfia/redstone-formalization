@@ -1,0 +1,68 @@
+{
+ "name": "tnt-collide-diagonal",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    10,
+    1,
+    7
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    8
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    6
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    6.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{Motion:[0.6d,0.0d,0.3d]}"
+  }
+ ]
+}

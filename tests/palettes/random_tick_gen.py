@@ -4,7 +4,7 @@
     tests/palettes/random_tick_gen.py tests/scenarios/random-tick tests/pending/scenarios/random-tick
 
 The second directory receives the scenarios that the model cannot follow yet (block light,
-flowing water, the random tick of lava).
+the random tick of lava).
 
 The output is a function of this file and of blockdump.json (for the canonical block states).
 
@@ -22,7 +22,8 @@ How the scenarios are built:
   about one tick in eighteen: `random_tick_speed` is set high enough for things to happen within
   the scenario. Every scenario costs the model 576 * speed draws per tick (one batch per ticking
   chunk), which is what limits speed times ticks.
-* Water must not flow (fluids do not flow in the model): ice that melts sits in a pit.
+* Water must not leave the box of the scenario (the test runner forgets what is outside it
+  after every tick): ice that melts sits in a pit, or in a pit that opens into a walled basin.
 """
 
 import json
@@ -237,9 +238,17 @@ def amethyst(speed=1000, ticks=80):
 
 
 def pits(name, block_of, lit, speed=1000, ticks=60, open_side=False):
-    """Blocks in pits of stone, one wall of which is glowstone when `lit`."""
+    """Blocks in pits of stone, one wall of which is glowstone when `lit`. With `open_side` the
+    pits open into a basin with a wall of stone around it: what flows out of a pit stays inside
+    the box of the scenario (the test runner knows nothing outside it)."""
     s = Scenario(name, ticks, speed)
     s.box((0, 0, 0), (12, 0, 6), STONE)
+    if open_side:
+        s.box((0, 1, 6), (12, 1, 6), STONE)
+        for z in range(2, 6):
+            s.put((12, 1, z), STONE)
+        for z in range(3, 6):
+            s.put((0, 1, z), STONE)
     for i in range(4):
         x, z = 1 + 3 * i, 2
         for q in [(x - 1, 1, z), (x + 1, 1, z), (x, 1, z + 1)]:
@@ -319,6 +328,8 @@ def main():
         mixed(),
         pits("ice-lit", lambda i: st("ice"), True),
         pits("snow-lit", lambda i: st(f"snow[layers={[1, 3, 5, 7][i]}]"), True),
+        # The water of the melted ice flows out of the pits into a walled basin.
+        pits("ice-melt-basin", lambda i: st("ice"), True, open_side=True),
     ]
     ready += [copper_kind(kind) for kind in KINDS]
     rng = random.Random(7)
@@ -326,7 +337,6 @@ def main():
     waiting = [
         pits("ice-dark", lambda i: st("ice"), False),
         pits("snow-dark", lambda i: st(f"snow[layers={[1, 3, 7, 8][i]}]"), False),
-        pits("ice-melt-open", lambda i: st("ice"), True, open_side=True),
         # A full snow layer lets no light in: the light of its own cell is 0, and it stays.
         pits("snow-full-lit", lambda i: st(f"snow[layers={[8, 8, 7, 8][i]}]"), True),
         lava_pit(),

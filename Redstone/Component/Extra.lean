@@ -29,8 +29,6 @@ server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`,
 
 ## What is left out
 
-* Fluids do not flow in the model. A sponge that leaves water behind, or ice that melts next to
-  an empty cell, is followed on the server by flowing water that the model does not have.
 * Light. `FrostedIceBlock.tick` melts only where `getMaxLocalRawBrightness` exceeds
   `11 - age - getLightDampening`; the model takes this to hold, as it does under the open sky
   by day. Frosted ice in the dark does not melt in the game.

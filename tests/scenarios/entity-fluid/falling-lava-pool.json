@@ -1,0 +1,65 @@
+{
+ "name": "falling-lava-pool",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   9,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    1,
+    1,
+    1
+   ],
+   "max": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:lava[level=0]"
+  }
+ ],
+ "blocks": [],
+ "entities": [
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    2.5,
+    7.0,
+    2.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:sand\"},Time:1}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    1.5,
+    6.0,
+    3.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:red_sand\"},Time:1}"
+  }
+ ]
+}

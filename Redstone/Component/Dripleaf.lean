@@ -17,13 +17,11 @@ below and a stem or leaf above; otherwise it breaks one game tick after a shape 
 above or below.
 
 The two ways a leaf starts to tilt are `entityInside`, which the entity units call
-(`Redstone.Entity.Touch`), and `onProjectileHit`, which nothing calls yet, because the flight of
-projectiles is not modelled.
+(`Redstone.Entity.Touch`), and `onProjectileHit`, which a projectile that hits the leaf calls
+(`Redstone.Entity.Projectile`).
 
 Not modelled:
 
-* The fluid tick that `updateShape` schedules for a waterlogged leaf or stem (the model has no
-  fluid ticks).
 * Bone meal (`performBonemeal`) and world generation (`placeWithRandomHeight`).
 * The sounds. The pitch of a tilt sound is drawn from the level's random generator, and this
   draw is modelled.
@@ -99,7 +97,8 @@ def behaviour (self : Block) : Behaviour :=
       canSurvive := canSurvive
       updateShape := fun p d _ neighbour => do
         if d = .down && !canSurvive (← get) p then return .AIR
-        else if d = .up && neighbour.is .big_dripleaf then
+        if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+        if d = .up && neighbour.is .big_dripleaf then
           return .bigDripleafStem ⟨s.facing, s.waterlogged⟩
         else return self
       entityInside := fun p i => do
@@ -117,12 +116,13 @@ def behaviour (self : Block) : Behaviour :=
           | .none => pure ()
       neighborChanged := fun p _ _ => do
         if ← Level.hasNeighborSignal p then resetTilt s p }
-  | .bigDripleafStem _ =>
+  | .bigDripleafStem s =>
     { Behaviour.inert self with
       canSurvive := stemCanSurvive
       updateShape := fun p d _ _ => do
         if (d = .down || d = .up) && !stemCanSurvive (← get) p then
           Level.scheduleTick p .big_dripleaf_stem 1
+        if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
         return self
       tick := fun p => do
         if !stemCanSurvive (← get) p then discard <| Level.destroyBlock p true }

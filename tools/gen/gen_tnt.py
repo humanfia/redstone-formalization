@@ -13,19 +13,25 @@ this gives `Redstone/Entity/Tnt/Tables.lean`, which must not be edited by hand.
 
 The loot tables are evaluated here, for every block state, as the game evaluates them when a
 block is destroyed without a tool: by an explosion that does not decay drops (`explosionDrops`)
-and by losing its support (`brokenDropStacks`). The model drops nothing, but the game draws
-random numbers for every dropped stack, so the number of stacks is part of the model.
+and by losing its support (`brokenDrops`, and `brokenDropStacks` for the number of stacks alone:
+while the game rule `block_drops` is off nothing is dropped, but the game still draws random
+numbers for every stack).
 
 Where the loot of a broken block depends on chance, the table is not evaluated but translated
 (`brokenChanceLoot`) into the types of `Redstone/Basic/Loot.lean`, which the model evaluates
 with the table's random sequence. The hash of the key of the sequence, from which the game
 seeds it, is computed here (MD5).
 
+What a block does in `spawnAfterBreak` (`afterBreak`: experience, silverfish) is not in any data
+file: the experience of the `DropExperienceBlock`s is read from the decompiled `Blocks.java`
+(`$MC_SRC`), and that of the other classes is written here, next to the class names.
+
 `--no-dump` reuses an existing `tntdump.json`.
 """
 import hashlib
 import json
 import os
+import re
 import struct
 import subprocess
 import sys
@@ -146,10 +152,60 @@ MANY_PROPERTIES = {"minecraft:resin_clump", "minecraft:glow_lichen", "minecraft:
 # for a block that breaks because it lost its support.
 THIS_ENTITY = [True]
 
-# Blocks that override `spawnAfterBreak`: broken with drops they may release experience or
-# silverfish, which draws from the level's generator.
-SPAWN_AFTER_BREAK = {"InfestedBlock", "DropExperienceBlock", "SculkCatalystBlock", "SpawnerBlock",
-                     "SculkShriekerBlock", "RedStoneOreBlock", "SculkSensorBlock"}
+# The classes that override `spawnAfterBreak`, with what they do there as an `AfterBreak`
+# (`Redstone/Basic/Loot.lean`); None for `DropExperienceBlock`, whose experience is an argument
+# of the constructor (see `drop_experience`). A block has the entry of the first of its classes
+# that is listed.
+SPAWN_AFTER_BREAK = {
+    "SculkBlock": ".experience 1",  # `super(ConstantInt.of(1), properties)`
+    "DropExperienceBlock": None,
+    "RedStoneOreBlock": ".uniformExperience 1 5",
+    "SculkSensorBlock": ".experience 5",
+    "SculkShriekerBlock": ".experience 5",
+    "SculkCatalystBlock": ".experience 5",
+    "SpawnerBlock": ".spawner",
+    "InfestedBlock": ".infested",
+}
+
+
+def drop_experience(src):
+    """The experience of every `DropExperienceBlock` registered in `Blocks.java`, by block id, as
+    an `AfterBreak`."""
+    with open(os.path.join(src, "net/minecraft/world/level/block/Blocks.java")) as f:
+        text = f.read()
+    out = {}
+    pattern = r"BlockItemIds\.(\w+),\s*p -> new DropExperienceBlock\((\w+)\.of\(([^)]*)\), p\)"
+    for m in re.finditer(pattern, text):
+        args = [int(a) for a in m.group(3).split(",")]
+        if m.group(2) == "ConstantInt":
+            rule = f".experience {args[0]}"
+        else:
+            assert m.group(2) == "UniformInt" and args[0] < args[1], m.group(0)
+            rule = f".uniformExperience {args[0]} {args[1]}"
+        out["minecraft:" + m.group(1).lower()] = rule
+    return out
+
+
+def after_break(o, dump, src):
+    """`afterBreak : BlockId → AfterBreak`."""
+    experience = drop_experience(src)
+    rules = {}
+    for b in dump["blocks"]:
+        first = next((c for c in b["classes"] if c in SPAWN_AFTER_BREAK), None)
+        if first is None:
+            continue
+        rule = SPAWN_AFTER_BREAK[first]
+        if rule is None:
+            rule = experience.pop(b["id"])  # a KeyError: the block was not found in `Blocks.java`
+        rules.setdefault(rule, []).append(b["id"])
+    assert not experience, experience
+    o.append("/-- What the block does in `spawnAfterBreak`, which the game calls for a block that was")
+    o.append("broken with drops and for one an explosion destroyed. -/")
+    o.append("def afterBreak : BlockId → AfterBreak")
+    for rule in sorted(rules):
+        o.append(match_arms(o, [lean_id(i) for i in rules[rule]]) + " => " + rule)
+    o.append("  | _ => .nothing")
+    o.append("")
 
 
 CHANCE_DOC = """/-- The loot table of a block that is broken with drops, without tool and without breaker
@@ -161,11 +217,9 @@ rolls and one entry, an item or alternatives of items, with the conditions `rand
 `table_bonus` on the items and the functions `set_count` (constant, uniform, binomial),
 `apply_bonus`, `limit_count` and `explosion_decay`: short grass, ferns, dead bushes, leaves,
 gravel, glowstone, melons, sea lanterns, mushroom blocks, ripe crops, stems, vines, chorus
-plants, gilded blackstone and the like.
+plants, gilded blackstone, the ores that drop more than one item and the like.
 
 Not evaluated, so that `Level.dropResources` sets `Level.overflow`:
-* blocks that override `spawnAfterBreak` (ores, sculk, spawners, infested blocks): they may
-  release experience or silverfish, which draws from the level's generator;
 * tall grass and large ferns, whose table reads the other half of the plant (`location_check`);
 * tables that read a block entity (`copy_components`, `dynamic`: shulker boxes, banners, heads,
   decorated pots, copper golem statues) and blocks with one item for each face (glow lichen,
@@ -173,7 +227,8 @@ Not evaluated, so that `Level.dropResources` sets `Level.overflow`:
 * tables with a weighted choice among several entries, with a number of rolls that is not
   constant, or with a condition that depends on chance on anything but an item.
 
-Explosions (`explosionDrops`) do not evaluate chance at all. -/"""
+The table is the same for a block that an explosion destroys, wherever `explosionDrops` is
+`none` (the generator checks this), so `Level.getExplosionDrops` evaluates it too. -/"""
 
 
 class Unknown(Exception):
@@ -455,7 +510,7 @@ def loot_chance(table, block_id, props, max_stack):
                 draws |= d
             draws |= bool(chances)
             items.append(f"⟨[{', '.join(map(str, chances))}], [{', '.join(functions)}], "
-                         f"{max_stack[entry['name']]}⟩")
+                         f"{max_stack[entry['name']]}, {json.dumps(entry['name'])}⟩")
         pools.append(f"⟨{integer(pool['rolls'])}, [{', '.join(items)}]⟩")
     if not draws:
         return None
@@ -463,6 +518,34 @@ def loot_chance(table, block_id, props, max_stack):
     digest = hashlib.md5(key.encode()).digest()  # `RandomSupport.seedFromHashOf`
     return (f"⟨{json.dumps(key)}, 0x{digest[:8].hex()}, 0x{digest[8:].hex()}, "
             f"[{', '.join(pools)}]⟩")
+
+
+def check_explosion_chance(dump, tnt, loot_dir):
+    """Checks that `brokenChanceLoot`, which is made for a block that is broken, is also right
+    for a block an explosion destroys, wherever the drops of the explosion depend on chance:
+    the two differ in the loot context (the exploding entity is `this`), and no table that
+    depends on chance reads it."""
+    max_stack = {i["id"]: i["maxStackSize"] for i in dump["items"]}
+
+    def evaluate(f, this, *args):
+        THIS_ENTITY[0] = this
+        try:
+            return f(*args)
+        except Unknown:
+            return "unknown"
+
+    for b, tb in zip(dump["blocks"], tnt["blocks"]):
+        if tb["lootTable"] is None:
+            continue
+        name = tb["lootTable"].rstrip("]").split(" / ")[1].split(":", 1)[1]
+        with open(os.path.join(loot_dir, name + ".json")) as f:
+            table = json.load(f)
+        for s in b["states"]:
+            props = {p["name"]: p["values"][v] for p, v in zip(b["properties"], s["values"])}
+            if evaluate(loot_drops, True, table, b["id"], props, max_stack) != "unknown":
+                continue
+            assert (evaluate(loot_chance, True, table, b["id"], props, max_stack)
+                    == evaluate(loot_chance, False, table, b["id"], props, max_stack)), b["id"]
 
 
 def match_arms(o, ids):
@@ -478,11 +561,13 @@ def match_arms(o, ids):
 
 def drops_table(o, dump, tnt, loot_dir, mode):
     """`explosionDrops : Block → Option (List (String × ℕ))` (mode `explosion`),
+    `brokenDrops : Block → Option (List (String × ℕ))` (mode `drops`),
     `brokenDropStacks : Block → Option ℕ` (mode `broken`) or
     `brokenChanceLoot : Block → Option ChanceLoot` (mode `chance`), as a match on the block id
     and, where the drops depend on the state, on up to three properties."""
     broken = mode != "explosion"
     chance = mode == "chance"
+    counted = mode == "broken"
     THIS_ENTITY[0] = not broken
     max_stack = {i["id"]: i["maxStackSize"] for i in dump["items"]}
     rules = {}  # rule text -> block ids
@@ -493,7 +578,7 @@ def drops_table(o, dump, tnt, loot_dir, mode):
             return "none"
         if chance:
             return "some " + drops
-        if broken:
+        if counted:
             return f"some {len(drops)}"
         for item, _ in drops:
             used_items.add(item)
@@ -520,8 +605,6 @@ def drops_table(o, dump, tnt, loot_dir, mode):
                 else:
                     drops = [] if table is None else loot_drops(table, b["id"], props, max_stack)
             except Unknown:
-                drops = None
-            if broken and SPAWN_AFTER_BREAK & set(b["classes"]):
                 drops = None
             per_state.append((props, lean(drops, b["id"])))
         texts = {t for _, t in per_state}
@@ -557,15 +640,22 @@ def drops_table(o, dump, tnt, loot_dir, mode):
         default = "    none"
         o.append(CHANCE_DOC)
         o.append("def brokenChanceLoot (b : Block) : Option ChanceLoot :=")
-    elif broken:
+    elif counted:
         default = "    some 1"
         o.append("/-- The number of stacks `Block.dropResources` drops for a block that is broken")
         o.append("with drops, without tool and without breaker (a block that lost its support,")
         o.append("for instance), where `brokenChanceLoot` is `none`: the stacks of the block's")
         o.append("loot table. `none` when that is not a function of the block state (chance, a")
-        o.append("block entity, neighbouring blocks), or when the block overrides")
-        o.append("`spawnAfterBreak`. -/")
+        o.append("block entity, neighbouring blocks). This is the length of `brokenDrops`. -/")
         o.append("def brokenDropStacks (b : Block) : Option ℕ :=")
+    elif broken:
+        default = "    some [(b.id.name, 1)]"
+        o.append("/-- `Block.getDrops` for a block that is broken with drops, without tool and")
+        o.append("without breaker (a block that lost its support, for instance), where")
+        o.append("`brokenChanceLoot` is `none`: the stacks of the block's loot table, as item and")
+        o.append("count. `none` when they are not a function of the block state (chance, a block")
+        o.append("entity, neighbouring blocks). -/")
+        o.append("def brokenDrops (b : Block) : Option (List (String × ℕ)) :=")
     else:
         default = "    some [(b.id.name, 1)]"
         o.append("/-- The value of the property `key` of a block state; empty if it has none. -/")
@@ -657,9 +747,12 @@ def main():
     predicate(o, "isFenceGate", "The block is a `FenceGateBlock`.",
               [b["id"] for b in dump["blocks"] if "FenceGateBlock" in b["classes"]], known)
     loot_dir = os.path.join(os.environ["MC_SRC"], "data", "minecraft", "loot_table")
+    check_explosion_chance(dump, tnt, loot_dir)
     drops_table(o, dump, tnt, loot_dir, "explosion")
+    drops_table(o, dump, tnt, loot_dir, "drops")
     drops_table(o, dump, tnt, loot_dir, "broken")
     drops_table(o, dump, tnt, loot_dir, "chance")
+    after_break(o, dump, os.environ["MC_SRC"])
     o.append(FOOTER)
     with open(out_path, "w") as f:
         f.write("\n".join(o))

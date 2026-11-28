@@ -1,0 +1,60 @@
+{
+ "name": "ent-falling-block-lands",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   6,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:5}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    10.5,
+    3.0,
+    7.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:sand\"},Time:1}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    7.5,
+    6.0,
+    5.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:anvil\",Properties:{facing:\"north\"}},Time:1}"
+  }
+ ]
+}

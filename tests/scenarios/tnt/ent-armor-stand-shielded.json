@@ -1,0 +1,95 @@
+{
+ "name": "ent-armor-stand-shielded",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   6,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    9,
+    1,
+    7
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    7
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    9,
+    3,
+    7
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:8}"
+  },
+  {
+   "type": "minecraft:armor_stand",
+   "pos": [
+    10.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"
+  },
+  {
+   "type": "minecraft:armor_stand",
+   "pos": [
+    14.9,
+    1.0,
+    7.5
+   ],
+   "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    12.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  }
+ ]
+}

@@ -119,7 +119,7 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Supported`, `Connecting` | blocks that react to shape updates: carpets, snow layers, torches, plants and beds, which break without support; fences, bars and panes, walls and stairs, which join their neighbours | defined, tested |
 | `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
 | `Redstone.Entity.Geometry`, `Redstone.Entity.Touch` | the boxes of entities, and how an entity tells the blocks it steps on and passes through (`Entity.applyEffectsFromBlocks`), shared by all entity units | defined, tested |
-| `Redstone.Entity.Projectile` | arrows and other projectiles | an arrow stuck in a block is defined and tested; flight is not |
+| `Redstone.Entity.Projectile`, `Redstone.Entity.Clip` | arrows, snowballs and eggs: flight, the hit of a block, an arrow in the ground; the ray that finds the block | defined, tested; hits on entities and the other projectiles are not |
 | `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | stub |
 | `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
 | `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
@@ -143,6 +143,9 @@ one part of the engine), `Redstone/Theorems` and `Redstone/Contraption` (circuit
 under these four directories is built by `lake build` without being listed anywhere. How
 circuits are proved, what it costs and what does not work is in
 [docs/proof-feasibility.md](docs/proof-feasibility.md).
+To prove a circuit, follow [Redstone/Proof/README.md](Redstone/Proof/README.md); the eight
+circuits of `Redstone/Theorems/Basics` (lever and lamp, torch inverter, repeater delay, dust
+decay, RS latch, sticky piston, hopper pair, repeater clock) are the worked examples.
 
 What the model leaves out: fluids do not flow and blocks get no random ticks (the phases of the
 game tick are there, and empty), light is modelled only as far as the daylight detector needs

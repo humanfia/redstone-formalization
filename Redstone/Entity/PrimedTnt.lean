@@ -13,12 +13,19 @@ Every game tick a primed TNT is pulled down by gravity, moves and collides with 
 speed, and counts its fuse down. When the fuse runs out it disappears and explodes at one
 sixteenth of its height above its position (`Redstone.Entity.Tnt.explode`).
 
+At the end of a tick in which it did not explode, a primed TNT updates its fluid interaction
+(`Redstone.Entity.Fluid`): in water its fall distance is reset and stays at zero while it is
+there, and water and lava push it along their flow. It never makes a splash, because the tick of
+a primed TNT does not run `Entity.baseTick`, which is what ends the first tick of an entity; and
+it is immune to fire, so lava does not hurt it. (An explosion in a fluid breaks no blocks
+because of the resistance of the fluid: see `Redstone.Entity.Tnt.Explosion`.)
+
 ## What is left out
 
 * Blocks whose `entityInside` would change the entity itself in a way no component models
-  (cobweb, sweet berry bush, powder snow, bubble column, the portals), and fluids, which push it
-  (`updateFluidInteraction`): when the entity comes near one of them the model sets
-  `Level.overflow`.
+  (cobweb, sweet berry bush, powder snow, bubble column, the portals): when the entity comes
+  near one of them the model sets `Level.overflow`.
+* The ray that `Entity.move` casts for an entity that falls fast, where it would meet water.
 * Portals (`handlePortal`), the world border, and collisions with other entities (boats,
   shulkers).
 * Collision shapes that do not depend on the block state alone; see
@@ -159,7 +166,7 @@ def move (base : Entities.Base) (d : Entities.Tnt) :
   let effectPos := getOnPosLegacy l pos support
   let effectState := l.blockAt effectPos
   -- `checkFallDamage`
-  if movement.y < 0.0 then fall := fall - movement.y.toFloat32.toFloat
+  if !d.wasTouchingWater && movement.y < 0.0 then fall := fall - movement.y.toFloat32.toFloat
   if onGround then
     if fall > 0.0 then
       -- `FarmlandBlock.fallOn` draws a number before it looks at the entity
@@ -179,7 +186,7 @@ def move (base : Entities.Base) (d : Entities.Tnt) :
     made)
 
 /-- Whether the entity, moving from `old` to `new`, comes near a block that would act on it in
-a way the model does not have: a fluid, or a block whose `entityInside` changes the entity. -/
+a way the model does not have: a block whose `entityInside` changes the entity. -/
 def touchesUnmodelled (l : Level) (old new : Vec3) : Bool :=
   let a := entityBox old
   let b := entityBox new
@@ -187,9 +194,21 @@ def touchesUnmodelled (l : Level) (old new : Vec3) : Bool :=
     (intRange (floorInt (jmin a.minY b.minY)) (floorInt (jmax a.maxY b.maxY) + 1)).any fun y =>
       (intRange (floorInt (jmin a.minZ b.minZ)) (floorInt (jmax a.maxZ b.maxZ) + 1)).any fun z =>
         let block := l.blockAt ⟨x, y, z⟩
-        !block.attrs.fluid.isEmpty ||
-          [BlockId.cobweb, .sweet_berry_bush, .powder_snow, .bubble_column, .nether_portal,
-            .end_portal, .end_gateway].contains block.id
+        [BlockId.cobweb, .sweet_berry_bush, .powder_snow, .bubble_column, .nether_portal,
+          .end_portal, .end_gateway].contains block.id
+
+/-- `Entity.updateFluidInteraction()` for the primed TNT with the given index, at the end of its
+tick. In water the fall distance is reset; then water and lava push the entity. The entity is
+always in its first tick as far as `Entity.firstTick` goes, so it makes no splash. -/
+def updateFluidInteraction (index : ℕ) : M Unit := do
+  let some e := (← get).entity? index | return
+  let .tnt d := e.data | return
+  let found := Entity.Fluid.update (← get) (entityBox e.base.pos)
+  let inWater := found.inWater
+  let d := { d with wasTouchingWater := inWater }
+  let d := if inWater then { d with fallDistance := 0.0 } else d
+  Level.modifyEntity index fun e =>
+    { e with base := { e.base with motion := found.push e.base.motion }, data := .tnt d }
 
 /-- `PrimedTnt.tick()`. -/
 def tick (index : ℕ) : M Unit := do
@@ -204,8 +223,9 @@ def tick (index : ℕ) : M Unit := do
   let l ← get
   let effectPos :=
     if base.onGround then some (getOnPosLegacy l base.pos d.supportingBlock) else none
+  -- a primed TNT is immune to fire: lava and water on the way do nothing to it
   Touch.applyEffectsFromBlocks dims index effectPos
-    (Touch.finalMovements made.toList e.base.pos base.pos)
+    (Touch.finalMovements made.toList e.base.pos base.pos) (fun _ => pure ())
   let some e := (← get).entity? index | return
   let .tnt d := e.data | return
   let motion := vscale e.base.motion (wide 0x3f7ae148)
@@ -219,6 +239,7 @@ def tick (index : ℕ) : M Unit := do
   else
     Level.modifyEntity index fun e =>
       { e with base := { e.base with motion := motion }, data := .tnt { d with fuse := fuse } }
+    updateFluidInteraction index
 
 /-- The behaviour of the entity. -/
 def behaviour : EntityBehaviour := ⟨tick⟩

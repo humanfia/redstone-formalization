@@ -1,0 +1,259 @@
+{
+ "name": "signal-f32-rounding-a",
+ "ticks": 8,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   1,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:22,components:{\"minecraft:max_stack_size\":28}},{Slot:2b,id:\"minecraft:stone\",count:8,components:{\"minecraft:max_stack_size\":28}}]}"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:20,components:{\"minecraft:max_stack_size\":35}},{Slot:3b,id:\"minecraft:stone\",count:7,components:{\"minecraft:max_stack_size\":7}},{Slot:4b,id:\"minecraft:stone\",count:12,components:{\"minecraft:max_stack_size\":21}}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:1b,id:\"minecraft:stone\",count:14,components:{\"minecraft:max_stack_size\":49}},{Slot:2b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":7}},{Slot:4b,id:\"minecraft:stone\",count:5,components:{\"minecraft:max_stack_size\":14}}]}"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:1b,id:\"minecraft:stone\",count:18,components:{\"minecraft:max_stack_size\":21}},{Slot:2b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":14}},{Slot:3b,id:\"minecraft:stone\",count:28,components:{\"minecraft:max_stack_size\":98}},{Slot:4b,id:\"minecraft:stone\",count:1,components:{\"minecraft:max_stack_size\":14}}]}"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:1b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":7}},{Slot:2b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":7}},{Slot:3b,id:\"minecraft:stone\",count:7,components:{\"minecraft:max_stack_size\":14}},{Slot:4b,id:\"minecraft:stone\",count:11,components:{\"minecraft:max_stack_size\":14}}]}"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:dropper[facing=up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":14}},{Slot:3b,id:\"minecraft:stone\",count:5,components:{\"minecraft:max_stack_size\":14}},{Slot:4b,id:\"minecraft:stone\",count:4,components:{\"minecraft:max_stack_size\":7}},{Slot:7b,id:\"minecraft:stone\",count:28,components:{\"minecraft:max_stack_size\":28}},{Slot:8b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":7}}]}"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:dropper[facing=up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:55,components:{\"minecraft:max_stack_size\":70}},{Slot:1b,id:\"minecraft:stone\",count:7,components:{\"minecraft:max_stack_size\":49}},{Slot:2b,id:\"minecraft:stone\",count:49,components:{\"minecraft:max_stack_size\":49}},{Slot:3b,id:\"minecraft:stone\",count:12,components:{\"minecraft:max_stack_size\":63}},{Slot:5b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":7}},{Slot:6b,id:\"minecraft:stone\",count:24,components:{\"minecraft:max_stack_size\":63}},{Slot:7b,id:\"minecraft:stone\",count:5,components:{\"minecraft:max_stack_size\":7}},{Slot:8b,id:\"minecraft:stone\",count:15,components:{\"minecraft:max_stack_size\":70}}]}"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    0
+   ],
+   "state": "minecraft:dropper[facing=up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:24,components:{\"minecraft:max_stack_size\":49}},{Slot:1b,id:\"minecraft:stone\",count:1,components:{\"minecraft:max_stack_size\":21}},{Slot:3b,id:\"minecraft:stone\",count:8,components:{\"minecraft:max_stack_size\":21}},{Slot:4b,id:\"minecraft:stone\",count:16,components:{\"minecraft:max_stack_size\":28}},{Slot:5b,id:\"minecraft:stone\",count:64,components:{\"minecraft:max_stack_size\":98}},{Slot:7b,id:\"minecraft:stone\",count:12,components:{\"minecraft:max_stack_size\":21}},{Slot:8b,id:\"minecraft:stone\",count:7,components:{\"minecraft:max_stack_size\":14}}]}"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  }
+ ]
+}

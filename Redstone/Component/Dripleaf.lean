@@ -17,8 +17,8 @@ below and a stem or leaf above; otherwise it breaks one game tick after a shape 
 above or below.
 
 The two ways a leaf starts to tilt are `entityInside`, which the entity units call
-(`Redstone.Entity.Touch`), and `onProjectileHit`, which nothing calls yet, because the flight of
-projectiles is not modelled.
+(`Redstone.Entity.Touch`), and `onProjectileHit`, which a projectile that hits the leaf calls
+(`Redstone.Entity.Projectile`).
 
 Not modelled:
 

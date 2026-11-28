@@ -1,0 +1,69 @@
+{
+ "name": "bell-double-ew-arrow-south-high",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:bell[attachment=double_wall,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    3.5,
+    2.86,
+    5.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,-1.0d]}"
+  }
+ ],
+ "actions": []
+}

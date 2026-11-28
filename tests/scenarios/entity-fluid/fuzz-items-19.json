@@ -1,0 +1,632 @@
+{
+ "name": "fuzz-items-19",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   6,
+   5
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    5,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:water[level=8]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=4]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    5
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    3
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    4
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    5
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=bottom,shape=straight,waterlogged=true]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    4
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    5
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=west,half=bottom,shape=straight,waterlogged=true]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    4
+   ],
+   "state": "minecraft:lava[level=7]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    5
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:water[level=4]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=bottom,shape=straight,waterlogged=true]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    5
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    0
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    5
+   ],
+   "state": "minecraft:lava[level=1]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:lava[level=7]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:water[level=8]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:water[level=8]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    5
+   ],
+   "state": "minecraft:water[level=8]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:water[level=4]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    3
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    3
+   ],
+   "state": "minecraft:water[level=5]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.306,
+    3.456,
+    1.298
+   ],
+   "nbt": "{Item:{id:\"minecraft:netherite_ingot\",count:2},Motion:[0.178d,-0.034d,-0.225d],Health:40s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.54,
+    3.421,
+    2.898
+   ],
+   "nbt": "{Item:{id:\"minecraft:netherite_ingot\",count:4},Motion:[-0.063d,-0.069d,0.26d],Health:5s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.018,
+    3.125,
+    1.522
+   ],
+   "nbt": "{Item:{id:\"minecraft:redstone\",count:1},Motion:[0.177d,0.052d,0.246d],Health:9s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.961,
+    1.96,
+    4.16
+   ],
+   "nbt": "{Item:{id:\"minecraft:redstone\",count:1},Motion:[0.272d,0.152d,-0.085d],Health:5s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.288,
+    2.7,
+    1.741
+   ],
+   "nbt": "{Item:{id:\"minecraft:redstone\",count:2},Motion:[0.265d,0.157d,0.065d],Health:9s}"
+  }
+ ]
+}

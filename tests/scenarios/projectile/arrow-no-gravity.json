@@ -1,0 +1,62 @@
+{
+ "name": "arrow-no-gravity",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    0.5,
+    2.5,
+    3.5
+   ],
+   "nbt": "{Motion:[0.2d,0.0d,0.0d],NoGravity:1b}"
+  },
+  {
+   "type": "minecraft:snowball",
+   "pos": [
+    0.5,
+    2.3,
+    3.4
+   ],
+   "nbt": "{Motion:[0.15d,0.0d,0.0d],NoGravity:1b}"
+  }
+ ],
+ "actions": []
+}

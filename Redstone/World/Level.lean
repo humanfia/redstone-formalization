@@ -226,6 +226,11 @@ structure Level where
   game gives every such generator a seed that depends on how many were made before; entities
   with a generator of their own are seeded this way (`Level.createRandomSource`). -/
   randomSourceCount : ℕ := 0
+  /-- The game rule `fire_spread_radius_around_player`: fire spreads, burns blocks and goes out
+  only within this distance of a player, and everywhere if the value is -1
+  (`ServerLevel.canSpreadFireAround`). There is no player in the model, so fire is active only
+  with -1; with the default of the game it burns for ever and does nothing else. -/
+  fireSpreadRadiusAroundPlayer : ℤ := 128
   /-- The block state for which the game bound the ticker of a block entity, where that is not
   the state at its position any more (`LevelChunk.updateBlockEntityTicker` binds the ticker
   when the block entity is added, and a ticker keeps running after the block changed to

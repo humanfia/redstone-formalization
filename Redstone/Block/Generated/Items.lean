@@ -1,6 +1,6 @@
 module
 
-public import Mathlib.Tactic
+public import Redstone.Basic.ItemKey
 
 /-!
 # Items
@@ -16,332 +16,1087 @@ set_option maxHeartbeats 0
 
 namespace Redstone
 
-/-- The items that stack up to 1. -/
-def itemsStackingTo1 : List String := [
-  "minecraft:shulker_box",
-  "minecraft:white_shulker_box",
-  "minecraft:orange_shulker_box",
-  "minecraft:magenta_shulker_box",
-  "minecraft:light_blue_shulker_box",
-  "minecraft:yellow_shulker_box",
-  "minecraft:lime_shulker_box",
-  "minecraft:pink_shulker_box",
-  "minecraft:gray_shulker_box",
-  "minecraft:light_gray_shulker_box",
-  "minecraft:cyan_shulker_box",
-  "minecraft:purple_shulker_box",
-  "minecraft:blue_shulker_box",
-  "minecraft:brown_shulker_box",
-  "minecraft:green_shulker_box",
-  "minecraft:red_shulker_box",
-  "minecraft:black_shulker_box",
-  "minecraft:saddle",
-  "minecraft:white_harness",
-  "minecraft:orange_harness",
-  "minecraft:magenta_harness",
-  "minecraft:light_blue_harness",
-  "minecraft:yellow_harness",
-  "minecraft:lime_harness",
-  "minecraft:pink_harness",
-  "minecraft:gray_harness",
-  "minecraft:light_gray_harness",
-  "minecraft:cyan_harness",
-  "minecraft:purple_harness",
-  "minecraft:blue_harness",
-  "minecraft:brown_harness",
-  "minecraft:green_harness",
-  "minecraft:red_harness",
-  "minecraft:black_harness",
-  "minecraft:minecart",
-  "minecraft:chest_minecart",
-  "minecraft:furnace_minecart",
-  "minecraft:tnt_minecart",
-  "minecraft:hopper_minecart",
-  "minecraft:carrot_on_a_stick",
-  "minecraft:warped_fungus_on_a_stick",
-  "minecraft:elytra",
-  "minecraft:oak_boat",
-  "minecraft:oak_chest_boat",
-  "minecraft:spruce_boat",
-  "minecraft:spruce_chest_boat",
-  "minecraft:birch_boat",
-  "minecraft:birch_chest_boat",
-  "minecraft:jungle_boat",
-  "minecraft:jungle_chest_boat",
-  "minecraft:acacia_boat",
-  "minecraft:acacia_chest_boat",
-  "minecraft:cherry_boat",
-  "minecraft:cherry_chest_boat",
-  "minecraft:dark_oak_boat",
-  "minecraft:dark_oak_chest_boat",
-  "minecraft:pale_oak_boat",
-  "minecraft:pale_oak_chest_boat",
-  "minecraft:mangrove_boat",
-  "minecraft:mangrove_chest_boat",
-  "minecraft:poplar_boat",
-  "minecraft:poplar_chest_boat",
-  "minecraft:bamboo_raft",
-  "minecraft:bamboo_chest_raft",
-  "minecraft:turtle_helmet",
-  "minecraft:wolf_armor",
-  "minecraft:flint_and_steel",
-  "minecraft:bow",
-  "minecraft:wooden_sword",
-  "minecraft:wooden_shovel",
-  "minecraft:wooden_pickaxe",
-  "minecraft:wooden_axe",
-  "minecraft:wooden_hoe",
-  "minecraft:copper_sword",
-  "minecraft:copper_shovel",
-  "minecraft:copper_pickaxe",
-  "minecraft:copper_axe",
-  "minecraft:copper_hoe",
-  "minecraft:stone_sword",
-  "minecraft:stone_shovel",
-  "minecraft:stone_pickaxe",
-  "minecraft:stone_axe",
-  "minecraft:stone_hoe",
-  "minecraft:golden_sword",
-  "minecraft:golden_shovel",
-  "minecraft:golden_pickaxe",
-  "minecraft:golden_axe",
-  "minecraft:golden_hoe",
-  "minecraft:iron_sword",
-  "minecraft:iron_shovel",
-  "minecraft:iron_pickaxe",
-  "minecraft:iron_axe",
-  "minecraft:iron_hoe",
-  "minecraft:diamond_sword",
-  "minecraft:diamond_shovel",
-  "minecraft:diamond_pickaxe",
-  "minecraft:diamond_axe",
-  "minecraft:diamond_hoe",
-  "minecraft:netherite_sword",
-  "minecraft:netherite_shovel",
-  "minecraft:netherite_pickaxe",
-  "minecraft:netherite_axe",
-  "minecraft:netherite_hoe",
-  "minecraft:mushroom_stew",
-  "minecraft:leather_helmet",
-  "minecraft:leather_chestplate",
-  "minecraft:leather_leggings",
-  "minecraft:leather_boots",
-  "minecraft:copper_helmet",
-  "minecraft:copper_chestplate",
-  "minecraft:copper_leggings",
-  "minecraft:copper_boots",
-  "minecraft:chainmail_helmet",
-  "minecraft:chainmail_chestplate",
-  "minecraft:chainmail_leggings",
-  "minecraft:chainmail_boots",
-  "minecraft:iron_helmet",
-  "minecraft:iron_chestplate",
-  "minecraft:iron_leggings",
-  "minecraft:iron_boots",
-  "minecraft:diamond_helmet",
-  "minecraft:diamond_chestplate",
-  "minecraft:diamond_leggings",
-  "minecraft:diamond_boots",
-  "minecraft:golden_helmet",
-  "minecraft:golden_chestplate",
-  "minecraft:golden_leggings",
-  "minecraft:golden_boots",
-  "minecraft:netherite_helmet",
-  "minecraft:netherite_chestplate",
-  "minecraft:netherite_leggings",
-  "minecraft:netherite_boots",
-  "minecraft:water_bucket",
-  "minecraft:lava_bucket",
-  "minecraft:powder_snow_bucket",
-  "minecraft:milk_bucket",
-  "minecraft:pufferfish_bucket",
-  "minecraft:salmon_bucket",
-  "minecraft:cod_bucket",
-  "minecraft:tropical_fish_bucket",
-  "minecraft:axolotl_bucket",
-  "minecraft:sulfur_cube_bucket",
-  "minecraft:tadpole_bucket",
-  "minecraft:bundle",
-  "minecraft:white_bundle",
-  "minecraft:orange_bundle",
-  "minecraft:magenta_bundle",
-  "minecraft:light_blue_bundle",
-  "minecraft:yellow_bundle",
-  "minecraft:lime_bundle",
-  "minecraft:pink_bundle",
-  "minecraft:gray_bundle",
-  "minecraft:light_gray_bundle",
-  "minecraft:cyan_bundle",
-  "minecraft:purple_bundle",
-  "minecraft:blue_bundle",
-  "minecraft:brown_bundle",
-  "minecraft:green_bundle",
-  "minecraft:red_bundle",
-  "minecraft:black_bundle",
-  "minecraft:fishing_rod",
-  "minecraft:spyglass",
-  "minecraft:cake",
-  "minecraft:white_bed",
-  "minecraft:orange_bed",
-  "minecraft:magenta_bed",
-  "minecraft:light_blue_bed",
-  "minecraft:yellow_bed",
-  "minecraft:lime_bed",
-  "minecraft:pink_bed",
-  "minecraft:gray_bed",
-  "minecraft:light_gray_bed",
-  "minecraft:cyan_bed",
-  "minecraft:purple_bed",
-  "minecraft:blue_bed",
-  "minecraft:brown_bed",
-  "minecraft:green_bed",
-  "minecraft:red_bed",
-  "minecraft:black_bed",
-  "minecraft:shears",
-  "minecraft:potion",
-  "minecraft:writable_book",
-  "minecraft:mace",
-  "minecraft:enchanted_book",
-  "minecraft:rabbit_stew",
-  "minecraft:copper_horse_armor",
-  "minecraft:iron_horse_armor",
-  "minecraft:golden_horse_armor",
-  "minecraft:diamond_horse_armor",
-  "minecraft:netherite_horse_armor",
-  "minecraft:leather_horse_armor",
-  "minecraft:command_block_minecart",
-  "minecraft:beetroot_soup",
-  "minecraft:splash_potion",
-  "minecraft:lingering_potion",
-  "minecraft:shield",
-  "minecraft:wooden_spear",
-  "minecraft:stone_spear",
-  "minecraft:copper_spear",
-  "minecraft:iron_spear",
-  "minecraft:golden_spear",
-  "minecraft:diamond_spear",
-  "minecraft:netherite_spear",
-  "minecraft:totem_of_undying",
-  "minecraft:knowledge_book",
-  "minecraft:debug_stick",
-  "minecraft:music_disc_13",
-  "minecraft:music_disc_cat",
-  "minecraft:music_disc_blocks",
-  "minecraft:music_disc_bounce",
-  "minecraft:music_disc_chirp",
-  "minecraft:music_disc_creator",
-  "minecraft:music_disc_creator_music_box",
-  "minecraft:music_disc_far",
-  "minecraft:music_disc_lava_chicken",
-  "minecraft:music_disc_mall",
-  "minecraft:music_disc_mellohi",
-  "minecraft:music_disc_stal",
-  "minecraft:music_disc_strad",
-  "minecraft:music_disc_ward",
-  "minecraft:music_disc_11",
-  "minecraft:music_disc_wait",
-  "minecraft:music_disc_otherside",
-  "minecraft:music_disc_relic",
-  "minecraft:music_disc_5",
-  "minecraft:music_disc_pigstep",
-  "minecraft:music_disc_precipice",
-  "minecraft:music_disc_tears",
-  "minecraft:trident",
-  "minecraft:iron_nautilus_armor",
-  "minecraft:golden_nautilus_armor",
-  "minecraft:diamond_nautilus_armor",
-  "minecraft:netherite_nautilus_armor",
-  "minecraft:copper_nautilus_armor",
-  "minecraft:crossbow",
-  "minecraft:suspicious_stew",
-  "minecraft:flower_banner_pattern",
-  "minecraft:creeper_banner_pattern",
-  "minecraft:skull_banner_pattern",
-  "minecraft:mojang_banner_pattern",
-  "minecraft:globe_banner_pattern",
-  "minecraft:piglin_banner_pattern",
-  "minecraft:flow_banner_pattern",
-  "minecraft:guster_banner_pattern",
-  "minecraft:field_masoned_banner_pattern",
-  "minecraft:bordure_indented_banner_pattern",
-  "minecraft:goat_horn",
-  "minecraft:brush"]
+/-- The items that do not stack up to 64, each with the size of its stacks, in
+ascending order of `itemKey`: shorter names first, names of one length in the order of
+their bytes. -/
+def itemStackSizes : List (String × ℕ) := [
+  ("minecraft:bow", 1),
+  ("minecraft:egg", 16),
+  ("minecraft:cake", 1),
+  ("minecraft:mace", 1),
+  ("minecraft:brush", 1),
+  ("minecraft:bucket", 16),
+  ("minecraft:bundle", 1),
+  ("minecraft:elytra", 1),
+  ("minecraft:potion", 1),
+  ("minecraft:saddle", 1),
+  ("minecraft:shears", 1),
+  ("minecraft:shield", 1),
+  ("minecraft:red_bed", 1),
+  ("minecraft:trident", 1),
+  ("minecraft:blue_bed", 1),
+  ("minecraft:blue_egg", 16),
+  ("minecraft:crossbow", 1),
+  ("minecraft:cyan_bed", 1),
+  ("minecraft:gray_bed", 1),
+  ("minecraft:iron_axe", 1),
+  ("minecraft:iron_hoe", 1),
+  ("minecraft:lime_bed", 1),
+  ("minecraft:minecart", 1),
+  ("minecraft:oak_boat", 1),
+  ("minecraft:oak_sign", 16),
+  ("minecraft:pink_bed", 1),
+  ("minecraft:snowball", 16),
+  ("minecraft:spyglass", 1),
+  ("minecraft:black_bed", 1),
+  ("minecraft:brown_bed", 1),
+  ("minecraft:brown_egg", 16),
+  ("minecraft:goat_horn", 1),
+  ("minecraft:green_bed", 1),
+  ("minecraft:stone_axe", 1),
+  ("minecraft:stone_hoe", 1),
+  ("minecraft:straw_bed", 16),
+  ("minecraft:white_bed", 1),
+  ("minecraft:birch_boat", 1),
+  ("minecraft:birch_sign", 16),
+  ("minecraft:cod_bucket", 1),
+  ("minecraft:copper_axe", 1),
+  ("minecraft:copper_hoe", 1),
+  ("minecraft:golden_axe", 1),
+  ("minecraft:golden_hoe", 1),
+  ("minecraft:iron_boots", 1),
+  ("minecraft:iron_spear", 1),
+  ("minecraft:iron_sword", 1),
+  ("minecraft:orange_bed", 1),
+  ("minecraft:purple_bed", 1),
+  ("minecraft:red_banner", 16),
+  ("minecraft:red_bundle", 1),
+  ("minecraft:wolf_armor", 1),
+  ("minecraft:wooden_axe", 1),
+  ("minecraft:wooden_hoe", 1),
+  ("minecraft:yellow_bed", 1),
+  ("minecraft:acacia_boat", 1),
+  ("minecraft:acacia_sign", 16),
+  ("minecraft:armor_stand", 16),
+  ("minecraft:bamboo_raft", 1),
+  ("minecraft:bamboo_sign", 16),
+  ("minecraft:blue_banner", 16),
+  ("minecraft:blue_bundle", 1),
+  ("minecraft:cherry_boat", 1),
+  ("minecraft:cherry_sign", 16),
+  ("minecraft:cyan_banner", 16),
+  ("minecraft:cyan_bundle", 1),
+  ("minecraft:debug_stick", 1),
+  ("minecraft:diamond_axe", 1),
+  ("minecraft:diamond_hoe", 1),
+  ("minecraft:ender_pearl", 16),
+  ("minecraft:fishing_rod", 1),
+  ("minecraft:gray_banner", 16),
+  ("minecraft:gray_bundle", 1),
+  ("minecraft:iron_helmet", 1),
+  ("minecraft:iron_shovel", 1),
+  ("minecraft:jungle_boat", 1),
+  ("minecraft:jungle_sign", 16),
+  ("minecraft:lava_bucket", 1),
+  ("minecraft:lime_banner", 16),
+  ("minecraft:lime_bundle", 1),
+  ("minecraft:magenta_bed", 1),
+  ("minecraft:milk_bucket", 1),
+  ("minecraft:pink_banner", 16),
+  ("minecraft:pink_bundle", 1),
+  ("minecraft:poplar_boat", 1),
+  ("minecraft:poplar_sign", 16),
+  ("minecraft:rabbit_stew", 1),
+  ("minecraft:red_cushion", 16),
+  ("minecraft:red_harness", 1),
+  ("minecraft:shulker_box", 1),
+  ("minecraft:spruce_boat", 1),
+  ("minecraft:spruce_sign", 16),
+  ("minecraft:stone_spear", 1),
+  ("minecraft:stone_sword", 1),
+  ("minecraft:warped_sign", 16),
+  ("minecraft:black_banner", 16),
+  ("minecraft:black_bundle", 1),
+  ("minecraft:blue_cushion", 16),
+  ("minecraft:blue_harness", 1),
+  ("minecraft:brown_banner", 16),
+  ("minecraft:brown_bundle", 1),
+  ("minecraft:copper_boots", 1),
+  ("minecraft:copper_spear", 1),
+  ("minecraft:copper_sword", 1),
+  ("minecraft:crimson_sign", 16),
+  ("minecraft:cyan_cushion", 16),
+  ("minecraft:cyan_harness", 1),
+  ("minecraft:golden_boots", 1),
+  ("minecraft:golden_spear", 1),
+  ("minecraft:golden_sword", 1),
+  ("minecraft:gray_cushion", 16),
+  ("minecraft:gray_harness", 1),
+  ("minecraft:green_banner", 16),
+  ("minecraft:green_bundle", 1),
+  ("minecraft:honey_bottle", 16),
+  ("minecraft:iron_pickaxe", 1),
+  ("minecraft:lime_cushion", 16),
+  ("minecraft:lime_harness", 1),
+  ("minecraft:music_disc_5", 1),
+  ("minecraft:pink_cushion", 16),
+  ("minecraft:pink_harness", 1),
+  ("minecraft:stone_shovel", 1),
+  ("minecraft:tnt_minecart", 1),
+  ("minecraft:water_bucket", 1),
+  ("minecraft:white_banner", 16),
+  ("minecraft:white_bundle", 1),
+  ("minecraft:wooden_spear", 1),
+  ("minecraft:wooden_sword", 1),
+  ("minecraft:written_book", 16),
+  ("minecraft:beetroot_soup", 1),
+  ("minecraft:black_cushion", 16),
+  ("minecraft:black_harness", 1),
+  ("minecraft:brown_cushion", 16),
+  ("minecraft:brown_harness", 1),
+  ("minecraft:copper_helmet", 1),
+  ("minecraft:copper_shovel", 1),
+  ("minecraft:dark_oak_boat", 1),
+  ("minecraft:dark_oak_sign", 16),
+  ("minecraft:diamond_boots", 1),
+  ("minecraft:diamond_spear", 1),
+  ("minecraft:diamond_sword", 1),
+  ("minecraft:golden_helmet", 1),
+  ("minecraft:golden_shovel", 1),
+  ("minecraft:green_cushion", 16),
+  ("minecraft:green_harness", 1),
+  ("minecraft:iron_leggings", 1),
+  ("minecraft:leather_boots", 1),
+  ("minecraft:mangrove_boat", 1),
+  ("minecraft:mangrove_sign", 16),
+  ("minecraft:mushroom_stew", 1),
+  ("minecraft:music_disc_11", 1),
+  ("minecraft:music_disc_13", 1),
+  ("minecraft:netherite_axe", 1),
+  ("minecraft:netherite_hoe", 1),
+  ("minecraft:orange_banner", 16),
+  ("minecraft:orange_bundle", 1),
+  ("minecraft:pale_oak_boat", 1),
+  ("minecraft:pale_oak_sign", 16),
+  ("minecraft:purple_banner", 16),
+  ("minecraft:purple_bundle", 1),
+  ("minecraft:salmon_bucket", 1),
+  ("minecraft:splash_potion", 1),
+  ("minecraft:stone_pickaxe", 1),
+  ("minecraft:turtle_helmet", 1),
+  ("minecraft:white_cushion", 16),
+  ("minecraft:white_harness", 1),
+  ("minecraft:wooden_shovel", 1),
+  ("minecraft:writable_book", 1),
+  ("minecraft:yellow_banner", 16),
+  ("minecraft:yellow_bundle", 1),
+  ("minecraft:axolotl_bucket", 1),
+  ("minecraft:chest_minecart", 1),
+  ("minecraft:copper_pickaxe", 1),
+  ("minecraft:diamond_helmet", 1),
+  ("minecraft:diamond_shovel", 1),
+  ("minecraft:enchanted_book", 1),
+  ("minecraft:golden_pickaxe", 1),
+  ("minecraft:knowledge_book", 1),
+  ("minecraft:leather_helmet", 1),
+  ("minecraft:light_blue_bed", 1),
+  ("minecraft:light_gray_bed", 1),
+  ("minecraft:magenta_banner", 16),
+  ("minecraft:magenta_bundle", 1),
+  ("minecraft:music_disc_cat", 1),
+  ("minecraft:music_disc_far", 1),
+  ("minecraft:oak_chest_boat", 1),
+  ("minecraft:orange_cushion", 16),
+  ("minecraft:orange_harness", 1),
+  ("minecraft:purple_cushion", 16),
+  ("minecraft:purple_harness", 1),
+  ("minecraft:tadpole_bucket", 1),
+  ("minecraft:wooden_pickaxe", 1),
+  ("minecraft:yellow_cushion", 16),
+  ("minecraft:yellow_harness", 1),
+  ("minecraft:chainmail_boots", 1),
+  ("minecraft:copper_leggings", 1),
+  ("minecraft:diamond_pickaxe", 1),
+  ("minecraft:flint_and_steel", 1),
+  ("minecraft:golden_leggings", 1),
+  ("minecraft:hopper_minecart", 1),
+  ("minecraft:iron_chestplate", 1),
+  ("minecraft:magenta_cushion", 16),
+  ("minecraft:magenta_harness", 1),
+  ("minecraft:music_disc_mall", 1),
+  ("minecraft:music_disc_stal", 1),
+  ("minecraft:music_disc_wait", 1),
+  ("minecraft:music_disc_ward", 1),
+  ("minecraft:netherite_boots", 1),
+  ("minecraft:netherite_spear", 1),
+  ("minecraft:netherite_sword", 1),
+  ("minecraft:red_shulker_box", 1),
+  ("minecraft:suspicious_stew", 1),
+  ("minecraft:birch_chest_boat", 1),
+  ("minecraft:blue_shulker_box", 1),
+  ("minecraft:chainmail_helmet", 1),
+  ("minecraft:cyan_shulker_box", 1),
+  ("minecraft:diamond_leggings", 1),
+  ("minecraft:furnace_minecart", 1),
+  ("minecraft:gray_shulker_box", 1),
+  ("minecraft:iron_horse_armor", 1),
+  ("minecraft:leather_leggings", 1),
+  ("minecraft:lime_shulker_box", 1),
+  ("minecraft:lingering_potion", 1),
+  ("minecraft:music_disc_chirp", 1),
+  ("minecraft:music_disc_relic", 1),
+  ("minecraft:music_disc_strad", 1),
+  ("minecraft:music_disc_tears", 1),
+  ("minecraft:netherite_helmet", 1),
+  ("minecraft:netherite_shovel", 1),
+  ("minecraft:oak_hanging_sign", 16),
+  ("minecraft:pink_shulker_box", 1),
+  ("minecraft:totem_of_undying", 1),
+  ("minecraft:acacia_chest_boat", 1),
+  ("minecraft:bamboo_chest_raft", 1),
+  ("minecraft:black_shulker_box", 1),
+  ("minecraft:brown_shulker_box", 1),
+  ("minecraft:carrot_on_a_stick", 1),
+  ("minecraft:cherry_chest_boat", 1),
+  ("minecraft:copper_chestplate", 1),
+  ("minecraft:golden_chestplate", 1),
+  ("minecraft:green_shulker_box", 1),
+  ("minecraft:jungle_chest_boat", 1),
+  ("minecraft:light_blue_banner", 16),
+  ("minecraft:light_blue_bundle", 1),
+  ("minecraft:light_gray_banner", 16),
+  ("minecraft:light_gray_bundle", 1),
+  ("minecraft:music_disc_blocks", 1),
+  ("minecraft:music_disc_bounce", 1),
+  ("minecraft:netherite_pickaxe", 1),
+  ("minecraft:poplar_chest_boat", 1),
+  ("minecraft:pufferfish_bucket", 1),
+  ("minecraft:spruce_chest_boat", 1),
+  ("minecraft:white_shulker_box", 1),
+  ("minecraft:birch_hanging_sign", 16),
+  ("minecraft:chainmail_leggings", 1),
+  ("minecraft:copper_horse_armor", 1),
+  ("minecraft:diamond_chestplate", 1),
+  ("minecraft:golden_horse_armor", 1),
+  ("minecraft:leather_chestplate", 1),
+  ("minecraft:light_blue_cushion", 16),
+  ("minecraft:light_blue_harness", 1),
+  ("minecraft:light_gray_cushion", 16),
+  ("minecraft:light_gray_harness", 1),
+  ("minecraft:music_disc_creator", 1),
+  ("minecraft:music_disc_mellohi", 1),
+  ("minecraft:music_disc_pigstep", 1),
+  ("minecraft:netherite_leggings", 1),
+  ("minecraft:orange_shulker_box", 1),
+  ("minecraft:powder_snow_bucket", 1),
+  ("minecraft:purple_shulker_box", 1),
+  ("minecraft:sulfur_cube_bucket", 1),
+  ("minecraft:yellow_shulker_box", 1),
+  ("minecraft:acacia_hanging_sign", 16),
+  ("minecraft:bamboo_hanging_sign", 16),
+  ("minecraft:cherry_hanging_sign", 16),
+  ("minecraft:dark_oak_chest_boat", 1),
+  ("minecraft:diamond_horse_armor", 1),
+  ("minecraft:flow_banner_pattern", 1),
+  ("minecraft:iron_nautilus_armor", 1),
+  ("minecraft:jungle_hanging_sign", 16),
+  ("minecraft:leather_horse_armor", 1),
+  ("minecraft:magenta_shulker_box", 1),
+  ("minecraft:mangrove_chest_boat", 1),
+  ("minecraft:pale_oak_chest_boat", 1),
+  ("minecraft:poplar_hanging_sign", 16),
+  ("minecraft:spruce_hanging_sign", 16),
+  ("minecraft:warped_hanging_sign", 16),
+  ("minecraft:chainmail_chestplate", 1),
+  ("minecraft:crimson_hanging_sign", 16),
+  ("minecraft:globe_banner_pattern", 1),
+  ("minecraft:music_disc_otherside", 1),
+  ("minecraft:music_disc_precipice", 1),
+  ("minecraft:netherite_chestplate", 1),
+  ("minecraft:skull_banner_pattern", 1),
+  ("minecraft:tropical_fish_bucket", 1),
+  ("minecraft:copper_nautilus_armor", 1),
+  ("minecraft:dark_oak_hanging_sign", 16),
+  ("minecraft:flower_banner_pattern", 1),
+  ("minecraft:golden_nautilus_armor", 1),
+  ("minecraft:guster_banner_pattern", 1),
+  ("minecraft:mangrove_hanging_sign", 16),
+  ("minecraft:mojang_banner_pattern", 1),
+  ("minecraft:netherite_horse_armor", 1),
+  ("minecraft:pale_oak_hanging_sign", 16),
+  ("minecraft:piglin_banner_pattern", 1),
+  ("minecraft:command_block_minecart", 1),
+  ("minecraft:creeper_banner_pattern", 1),
+  ("minecraft:diamond_nautilus_armor", 1),
+  ("minecraft:light_blue_shulker_box", 1),
+  ("minecraft:light_gray_shulker_box", 1),
+  ("minecraft:music_disc_lava_chicken", 1),
+  ("minecraft:netherite_nautilus_armor", 1),
+  ("minecraft:warped_fungus_on_a_stick", 1),
+  ("minecraft:field_masoned_banner_pattern", 1),
+  ("minecraft:music_disc_creator_music_box", 1),
+  ("minecraft:bordure_indented_banner_pattern", 1)]
 
-/-- The items that stack up to 16. -/
-def itemsStackingTo16 : List String := [
-  "minecraft:oak_sign",
-  "minecraft:spruce_sign",
-  "minecraft:birch_sign",
-  "minecraft:jungle_sign",
-  "minecraft:acacia_sign",
-  "minecraft:cherry_sign",
-  "minecraft:dark_oak_sign",
-  "minecraft:pale_oak_sign",
-  "minecraft:mangrove_sign",
-  "minecraft:poplar_sign",
-  "minecraft:bamboo_sign",
-  "minecraft:crimson_sign",
-  "minecraft:warped_sign",
-  "minecraft:oak_hanging_sign",
-  "minecraft:spruce_hanging_sign",
-  "minecraft:birch_hanging_sign",
-  "minecraft:jungle_hanging_sign",
-  "minecraft:acacia_hanging_sign",
-  "minecraft:cherry_hanging_sign",
-  "minecraft:dark_oak_hanging_sign",
-  "minecraft:pale_oak_hanging_sign",
-  "minecraft:mangrove_hanging_sign",
-  "minecraft:poplar_hanging_sign",
-  "minecraft:bamboo_hanging_sign",
-  "minecraft:crimson_hanging_sign",
-  "minecraft:warped_hanging_sign",
-  "minecraft:bucket",
-  "minecraft:snowball",
-  "minecraft:egg",
-  "minecraft:blue_egg",
-  "minecraft:brown_egg",
-  "minecraft:white_cushion",
-  "minecraft:orange_cushion",
-  "minecraft:magenta_cushion",
-  "minecraft:light_blue_cushion",
-  "minecraft:yellow_cushion",
-  "minecraft:lime_cushion",
-  "minecraft:pink_cushion",
-  "minecraft:gray_cushion",
-  "minecraft:light_gray_cushion",
-  "minecraft:cyan_cushion",
-  "minecraft:purple_cushion",
-  "minecraft:blue_cushion",
-  "minecraft:brown_cushion",
-  "minecraft:green_cushion",
-  "minecraft:red_cushion",
-  "minecraft:black_cushion",
-  "minecraft:straw_bed",
-  "minecraft:ender_pearl",
-  "minecraft:written_book",
-  "minecraft:armor_stand",
-  "minecraft:white_banner",
-  "minecraft:orange_banner",
-  "minecraft:magenta_banner",
-  "minecraft:light_blue_banner",
-  "minecraft:yellow_banner",
-  "minecraft:lime_banner",
-  "minecraft:pink_banner",
-  "minecraft:gray_banner",
-  "minecraft:light_gray_banner",
-  "minecraft:cyan_banner",
-  "minecraft:purple_banner",
-  "minecraft:blue_banner",
-  "minecraft:brown_banner",
-  "minecraft:green_banner",
-  "minecraft:red_banner",
-  "minecraft:black_banner",
-  "minecraft:honey_bottle"]
+/-- `itemStackSizes` as a search tree on `itemKey`. -/
+def itemStackSizeTable : ItemTable :=
+  (.node
+   (.node
+    (.node
+     (.node
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a626f77 1 .leaf) -- minecraft:bow
+          0x16d696e6563726166743a656767 16 -- minecraft:egg
+          .leaf
+         )
+         0x16d696e6563726166743a63616b65 1 -- minecraft:cake
+         (.node .leaf 0x16d696e6563726166743a6d616365 1 .leaf) -- minecraft:mace
+        )
+        0x16d696e6563726166743a6272757368 1 -- minecraft:brush
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6275636b6574 16 .leaf) -- minecraft:bucket
+          0x16d696e6563726166743a62756e646c65 1 -- minecraft:bundle
+          .leaf
+         )
+         0x16d696e6563726166743a656c79747261 1 -- minecraft:elytra
+         (.node .leaf 0x16d696e6563726166743a706f74696f6e 1 .leaf) -- minecraft:potion
+        )
+       )
+       0x16d696e6563726166743a736164646c65 1 -- minecraft:saddle
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a736865617273 1 .leaf) -- minecraft:shears
+          0x16d696e6563726166743a736869656c64 1 -- minecraft:shield
+          .leaf
+         )
+         0x16d696e6563726166743a7265645f626564 1 -- minecraft:red_bed
+         (.node .leaf 0x16d696e6563726166743a74726964656e74 1 .leaf) -- minecraft:trident
+        )
+        0x16d696e6563726166743a626c75655f626564 1 -- minecraft:blue_bed
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a626c75655f656767 16 .leaf) -- minecraft:blue_egg
+          0x16d696e6563726166743a63726f7373626f77 1 -- minecraft:crossbow
+          .leaf
+         )
+         0x16d696e6563726166743a6379616e5f626564 1 -- minecraft:cyan_bed
+         (.node .leaf 0x16d696e6563726166743a677261795f626564 1 .leaf) -- minecraft:gray_bed
+        )
+       )
+      )
+      0x16d696e6563726166743a69726f6e5f617865 1 -- minecraft:iron_axe
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a69726f6e5f686f65 1 .leaf) -- minecraft:iron_hoe
+          0x16d696e6563726166743a6c696d655f626564 1 -- minecraft:lime_bed
+          .leaf
+         )
+         0x16d696e6563726166743a6d696e6563617274 1 -- minecraft:minecart
+         (.node .leaf 0x16d696e6563726166743a6f616b5f626f6174 1 .leaf) -- minecraft:oak_boat
+        )
+        0x16d696e6563726166743a6f616b5f7369676e 16 -- minecraft:oak_sign
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a70696e6b5f626564 1 .leaf) -- minecraft:pink_bed
+          0x16d696e6563726166743a736e6f7762616c6c 16 -- minecraft:snowball
+          .leaf
+         )
+         0x16d696e6563726166743a737079676c617373 1 -- minecraft:spyglass
+         (.node .leaf 0x16d696e6563726166743a626c61636b5f626564 1 .leaf) -- minecraft:black_bed
+        )
+       )
+       0x16d696e6563726166743a62726f776e5f626564 1 -- minecraft:brown_bed
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a62726f776e5f656767 16 .leaf) -- minecraft:brown_egg
+          0x16d696e6563726166743a676f61745f686f726e 1 -- minecraft:goat_horn
+          .leaf
+         )
+         0x16d696e6563726166743a677265656e5f626564 1 -- minecraft:green_bed
+         (.node .leaf 0x16d696e6563726166743a73746f6e655f617865 1 .leaf) -- minecraft:stone_axe
+        )
+        0x16d696e6563726166743a73746f6e655f686f65 1 -- minecraft:stone_hoe
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a73747261775f626564 16 .leaf) -- minecraft:straw_bed
+          0x16d696e6563726166743a77686974655f626564 1 -- minecraft:white_bed
+          .leaf
+         )
+         0x16d696e6563726166743a62697263685f626f6174 1 -- minecraft:birch_boat
+         (.node .leaf 0x16d696e6563726166743a62697263685f7369676e 16 .leaf) -- minecraft:birch_sign
+        )
+       )
+      )
+     )
+     0x16d696e6563726166743a636f645f6275636b6574 1 -- minecraft:cod_bucket
+     (.node
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a636f707065725f617865 1 .leaf) -- minecraft:copper_axe
+          0x16d696e6563726166743a636f707065725f686f65 1 -- minecraft:copper_hoe
+          .leaf
+         )
+         0x16d696e6563726166743a676f6c64656e5f617865 1 -- minecraft:golden_axe
+         (.node .leaf 0x16d696e6563726166743a676f6c64656e5f686f65 1 .leaf) -- minecraft:golden_hoe
+        )
+        0x16d696e6563726166743a69726f6e5f626f6f7473 1 -- minecraft:iron_boots
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a69726f6e5f7370656172 1 .leaf) -- minecraft:iron_spear
+          0x16d696e6563726166743a69726f6e5f73776f7264 1 -- minecraft:iron_sword
+          .leaf
+         )
+         0x16d696e6563726166743a6f72616e67655f626564 1 -- minecraft:orange_bed
+         (.node .leaf 0x16d696e6563726166743a707572706c655f626564 1 .leaf) -- minecraft:purple_bed
+        )
+       )
+       0x16d696e6563726166743a7265645f62616e6e6572 16 -- minecraft:red_banner
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a7265645f62756e646c65 1 .leaf) -- minecraft:red_bundle
+          0x16d696e6563726166743a776f6c665f61726d6f72 1 -- minecraft:wolf_armor
+          .leaf
+         )
+         0x16d696e6563726166743a776f6f64656e5f617865 1 -- minecraft:wooden_axe
+         (.node .leaf 0x16d696e6563726166743a776f6f64656e5f686f65 1 .leaf) -- minecraft:wooden_hoe
+        )
+        0x16d696e6563726166743a79656c6c6f775f626564 1 -- minecraft:yellow_bed
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6163616369615f626f6174 1 .leaf) -- minecraft:acacia_boat
+          0x16d696e6563726166743a6163616369615f7369676e 16 -- minecraft:acacia_sign
+          .leaf
+         )
+         0x16d696e6563726166743a61726d6f725f7374616e64 16 -- minecraft:armor_stand
+         (.node .leaf 0x16d696e6563726166743a62616d626f6f5f72616674 1 .leaf) -- minecraft:bamboo_raft
+        )
+       )
+      )
+      0x16d696e6563726166743a62616d626f6f5f7369676e 16 -- minecraft:bamboo_sign
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a626c75655f62616e6e6572 16 .leaf) -- minecraft:blue_banner
+          0x16d696e6563726166743a626c75655f62756e646c65 1 -- minecraft:blue_bundle
+          .leaf
+         )
+         0x16d696e6563726166743a6368657272795f626f6174 1 -- minecraft:cherry_boat
+         (.node .leaf 0x16d696e6563726166743a6368657272795f7369676e 16 .leaf) -- minecraft:cherry_sign
+        )
+        0x16d696e6563726166743a6379616e5f62616e6e6572 16 -- minecraft:cyan_banner
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6379616e5f62756e646c65 1 .leaf) -- minecraft:cyan_bundle
+          0x16d696e6563726166743a64656275675f737469636b 1 -- minecraft:debug_stick
+          .leaf
+         )
+         0x16d696e6563726166743a6469616d6f6e645f617865 1 -- minecraft:diamond_axe
+         (.node .leaf 0x16d696e6563726166743a6469616d6f6e645f686f65 1 .leaf) -- minecraft:diamond_hoe
+        )
+       )
+       0x16d696e6563726166743a656e6465725f706561726c 16 -- minecraft:ender_pearl
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a66697368696e675f726f64 1 .leaf) -- minecraft:fishing_rod
+          0x16d696e6563726166743a677261795f62616e6e6572 16 -- minecraft:gray_banner
+          .leaf
+         )
+         0x16d696e6563726166743a677261795f62756e646c65 1 -- minecraft:gray_bundle
+         (.node .leaf 0x16d696e6563726166743a69726f6e5f68656c6d6574 1 .leaf) -- minecraft:iron_helmet
+        )
+        0x16d696e6563726166743a69726f6e5f73686f76656c 1 -- minecraft:iron_shovel
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6a756e676c655f626f6174 1 .leaf) -- minecraft:jungle_boat
+          0x16d696e6563726166743a6a756e676c655f7369676e 16 -- minecraft:jungle_sign
+          .leaf
+         )
+         0x16d696e6563726166743a6c6176615f6275636b6574 1 -- minecraft:lava_bucket
+         (.node .leaf 0x16d696e6563726166743a6c696d655f62616e6e6572 16 .leaf) -- minecraft:lime_banner
+        )
+       )
+      )
+     )
+    )
+    0x16d696e6563726166743a6c696d655f62756e646c65 1 -- minecraft:lime_bundle
+    (.node
+     (.node
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6d6167656e74615f626564 1 .leaf) -- minecraft:magenta_bed
+          0x16d696e6563726166743a6d696c6b5f6275636b6574 1 -- minecraft:milk_bucket
+          .leaf
+         )
+         0x16d696e6563726166743a70696e6b5f62616e6e6572 16 -- minecraft:pink_banner
+         (.node .leaf 0x16d696e6563726166743a70696e6b5f62756e646c65 1 .leaf) -- minecraft:pink_bundle
+        )
+        0x16d696e6563726166743a706f706c61725f626f6174 1 -- minecraft:poplar_boat
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a706f706c61725f7369676e 16 .leaf) -- minecraft:poplar_sign
+          0x16d696e6563726166743a7261626269745f73746577 1 -- minecraft:rabbit_stew
+          .leaf
+         )
+         0x16d696e6563726166743a7265645f63757368696f6e 16 -- minecraft:red_cushion
+         (.node .leaf 0x16d696e6563726166743a7265645f6861726e657373 1 .leaf) -- minecraft:red_harness
+        )
+       )
+       0x16d696e6563726166743a7368756c6b65725f626f78 1 -- minecraft:shulker_box
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a7370727563655f626f6174 1 .leaf) -- minecraft:spruce_boat
+          0x16d696e6563726166743a7370727563655f7369676e 16 -- minecraft:spruce_sign
+          .leaf
+         )
+         0x16d696e6563726166743a73746f6e655f7370656172 1 -- minecraft:stone_spear
+         (.node .leaf 0x16d696e6563726166743a73746f6e655f73776f7264 1 .leaf) -- minecraft:stone_sword
+        )
+        0x16d696e6563726166743a7761727065645f7369676e 16 -- minecraft:warped_sign
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a626c61636b5f62616e6e6572 16 .leaf) -- minecraft:black_banner
+          0x16d696e6563726166743a626c61636b5f62756e646c65 1 -- minecraft:black_bundle
+          .leaf
+         )
+         0x16d696e6563726166743a626c75655f63757368696f6e 16 -- minecraft:blue_cushion
+         (.node .leaf 0x16d696e6563726166743a626c75655f6861726e657373 1 .leaf) -- minecraft:blue_harness
+        )
+       )
+      )
+      0x16d696e6563726166743a62726f776e5f62616e6e6572 16 -- minecraft:brown_banner
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a62726f776e5f62756e646c65 1 .leaf) -- minecraft:brown_bundle
+          0x16d696e6563726166743a636f707065725f626f6f7473 1 -- minecraft:copper_boots
+          .leaf
+         )
+         0x16d696e6563726166743a636f707065725f7370656172 1 -- minecraft:copper_spear
+         (.node .leaf 0x16d696e6563726166743a636f707065725f73776f7264 1 .leaf) -- minecraft:copper_sword
+        )
+        0x16d696e6563726166743a6372696d736f6e5f7369676e 16 -- minecraft:crimson_sign
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6379616e5f63757368696f6e 16 .leaf) -- minecraft:cyan_cushion
+          0x16d696e6563726166743a6379616e5f6861726e657373 1 -- minecraft:cyan_harness
+          .leaf
+         )
+         0x16d696e6563726166743a676f6c64656e5f626f6f7473 1 -- minecraft:golden_boots
+         (.node .leaf 0x16d696e6563726166743a676f6c64656e5f7370656172 1 .leaf) -- minecraft:golden_spear
+        )
+       )
+       0x16d696e6563726166743a676f6c64656e5f73776f7264 1 -- minecraft:golden_sword
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a677261795f63757368696f6e 16 .leaf) -- minecraft:gray_cushion
+          0x16d696e6563726166743a677261795f6861726e657373 1 -- minecraft:gray_harness
+          .leaf
+         )
+         0x16d696e6563726166743a677265656e5f62616e6e6572 16 -- minecraft:green_banner
+         (.node .leaf 0x16d696e6563726166743a677265656e5f62756e646c65 1 .leaf) -- minecraft:green_bundle
+        )
+        0x16d696e6563726166743a686f6e65795f626f74746c65 16 -- minecraft:honey_bottle
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a69726f6e5f7069636b617865 1 .leaf) -- minecraft:iron_pickaxe
+          0x16d696e6563726166743a6c696d655f63757368696f6e 16 -- minecraft:lime_cushion
+          .leaf
+         )
+         0x16d696e6563726166743a6c696d655f6861726e657373 1 -- minecraft:lime_harness
+         (.node .leaf 0x16d696e6563726166743a6d757369635f646973635f35 1 .leaf) -- minecraft:music_disc_5
+        )
+       )
+      )
+     )
+     0x16d696e6563726166743a70696e6b5f63757368696f6e 16 -- minecraft:pink_cushion
+     (.node
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a70696e6b5f6861726e657373 1 .leaf) -- minecraft:pink_harness
+          0x16d696e6563726166743a73746f6e655f73686f76656c 1 -- minecraft:stone_shovel
+          .leaf
+         )
+         0x16d696e6563726166743a746e745f6d696e6563617274 1 -- minecraft:tnt_minecart
+         (.node .leaf 0x16d696e6563726166743a77617465725f6275636b6574 1 .leaf) -- minecraft:water_bucket
+        )
+        0x16d696e6563726166743a77686974655f62616e6e6572 16 -- minecraft:white_banner
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a77686974655f62756e646c65 1 .leaf) -- minecraft:white_bundle
+          0x16d696e6563726166743a776f6f64656e5f7370656172 1 -- minecraft:wooden_spear
+          .leaf
+         )
+         0x16d696e6563726166743a776f6f64656e5f73776f7264 1 -- minecraft:wooden_sword
+         (.node .leaf 0x16d696e6563726166743a7772697474656e5f626f6f6b 16 .leaf) -- minecraft:written_book
+        )
+       )
+       0x16d696e6563726166743a62656574726f6f745f736f7570 1 -- minecraft:beetroot_soup
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a626c61636b5f63757368696f6e 16 .leaf) -- minecraft:black_cushion
+          0x16d696e6563726166743a626c61636b5f6861726e657373 1 -- minecraft:black_harness
+          .leaf
+         )
+         0x16d696e6563726166743a62726f776e5f63757368696f6e 16 -- minecraft:brown_cushion
+         (.node .leaf 0x16d696e6563726166743a62726f776e5f6861726e657373 1 .leaf) -- minecraft:brown_harness
+        )
+        0x16d696e6563726166743a636f707065725f68656c6d6574 1 -- minecraft:copper_helmet
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a636f707065725f73686f76656c 1 .leaf) -- minecraft:copper_shovel
+          0x16d696e6563726166743a6461726b5f6f616b5f626f6174 1 -- minecraft:dark_oak_boat
+          .leaf
+         )
+         0x16d696e6563726166743a6461726b5f6f616b5f7369676e 16 -- minecraft:dark_oak_sign
+         (.node .leaf 0x16d696e6563726166743a6469616d6f6e645f626f6f7473 1 .leaf) -- minecraft:diamond_boots
+        )
+       )
+      )
+      0x16d696e6563726166743a6469616d6f6e645f7370656172 1 -- minecraft:diamond_spear
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6469616d6f6e645f73776f7264 1 .leaf) -- minecraft:diamond_sword
+          0x16d696e6563726166743a676f6c64656e5f68656c6d6574 1 -- minecraft:golden_helmet
+          .leaf
+         )
+         0x16d696e6563726166743a676f6c64656e5f73686f76656c 1 -- minecraft:golden_shovel
+         (.node .leaf 0x16d696e6563726166743a677265656e5f63757368696f6e 16 .leaf) -- minecraft:green_cushion
+        )
+        0x16d696e6563726166743a677265656e5f6861726e657373 1 -- minecraft:green_harness
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a69726f6e5f6c656767696e6773 1 .leaf) -- minecraft:iron_leggings
+          0x16d696e6563726166743a6c6561746865725f626f6f7473 1 -- minecraft:leather_boots
+          .leaf
+         )
+         0x16d696e6563726166743a6d616e67726f76655f626f6174 1 -- minecraft:mangrove_boat
+         (.node .leaf 0x16d696e6563726166743a6d616e67726f76655f7369676e 16 .leaf) -- minecraft:mangrove_sign
+        )
+       )
+       0x16d696e6563726166743a6d757368726f6f6d5f73746577 1 -- minecraft:mushroom_stew
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6d757369635f646973635f3131 1 .leaf) -- minecraft:music_disc_11
+          0x16d696e6563726166743a6d757369635f646973635f3133 1 -- minecraft:music_disc_13
+          .leaf
+         )
+         0x16d696e6563726166743a6e65746865726974655f617865 1 -- minecraft:netherite_axe
+         (.node .leaf 0x16d696e6563726166743a6e65746865726974655f686f65 1 .leaf) -- minecraft:netherite_hoe
+        )
+        0x16d696e6563726166743a6f72616e67655f62616e6e6572 16 -- minecraft:orange_banner
+        (.node
+         (.node .leaf 0x16d696e6563726166743a6f72616e67655f62756e646c65 1 .leaf) -- minecraft:orange_bundle
+         0x16d696e6563726166743a70616c655f6f616b5f626f6174 1 -- minecraft:pale_oak_boat
+         (.node .leaf 0x16d696e6563726166743a70616c655f6f616b5f7369676e 16 .leaf) -- minecraft:pale_oak_sign
+        )
+       )
+      )
+     )
+    )
+   )
+   0x16d696e6563726166743a707572706c655f62616e6e6572 16 -- minecraft:purple_banner
+   (.node
+    (.node
+     (.node
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a707572706c655f62756e646c65 1 .leaf) -- minecraft:purple_bundle
+          0x16d696e6563726166743a73616c6d6f6e5f6275636b6574 1 -- minecraft:salmon_bucket
+          .leaf
+         )
+         0x16d696e6563726166743a73706c6173685f706f74696f6e 1 -- minecraft:splash_potion
+         (.node .leaf 0x16d696e6563726166743a73746f6e655f7069636b617865 1 .leaf) -- minecraft:stone_pickaxe
+        )
+        0x16d696e6563726166743a747572746c655f68656c6d6574 1 -- minecraft:turtle_helmet
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a77686974655f63757368696f6e 16 .leaf) -- minecraft:white_cushion
+          0x16d696e6563726166743a77686974655f6861726e657373 1 -- minecraft:white_harness
+          .leaf
+         )
+         0x16d696e6563726166743a776f6f64656e5f73686f76656c 1 -- minecraft:wooden_shovel
+         (.node .leaf 0x16d696e6563726166743a7772697461626c655f626f6f6b 1 .leaf) -- minecraft:writable_book
+        )
+       )
+       0x16d696e6563726166743a79656c6c6f775f62616e6e6572 16 -- minecraft:yellow_banner
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a79656c6c6f775f62756e646c65 1 .leaf) -- minecraft:yellow_bundle
+          0x16d696e6563726166743a61786f6c6f746c5f6275636b6574 1 -- minecraft:axolotl_bucket
+          .leaf
+         )
+         0x16d696e6563726166743a63686573745f6d696e6563617274 1 -- minecraft:chest_minecart
+         (.node .leaf 0x16d696e6563726166743a636f707065725f7069636b617865 1 .leaf) -- minecraft:copper_pickaxe
+        )
+        0x16d696e6563726166743a6469616d6f6e645f68656c6d6574 1 -- minecraft:diamond_helmet
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6469616d6f6e645f73686f76656c 1 .leaf) -- minecraft:diamond_shovel
+          0x16d696e6563726166743a656e6368616e7465645f626f6f6b 1 -- minecraft:enchanted_book
+          .leaf
+         )
+         0x16d696e6563726166743a676f6c64656e5f7069636b617865 1 -- minecraft:golden_pickaxe
+         (.node .leaf 0x16d696e6563726166743a6b6e6f776c656467655f626f6f6b 1 .leaf) -- minecraft:knowledge_book
+        )
+       )
+      )
+      0x16d696e6563726166743a6c6561746865725f68656c6d6574 1 -- minecraft:leather_helmet
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6c696768745f626c75655f626564 1 .leaf) -- minecraft:light_blue_bed
+          0x16d696e6563726166743a6c696768745f677261795f626564 1 -- minecraft:light_gray_bed
+          .leaf
+         )
+         0x16d696e6563726166743a6d6167656e74615f62616e6e6572 16 -- minecraft:magenta_banner
+         (.node .leaf 0x16d696e6563726166743a6d6167656e74615f62756e646c65 1 .leaf) -- minecraft:magenta_bundle
+        )
+        0x16d696e6563726166743a6d757369635f646973635f636174 1 -- minecraft:music_disc_cat
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6d757369635f646973635f666172 1 .leaf) -- minecraft:music_disc_far
+          0x16d696e6563726166743a6f616b5f63686573745f626f6174 1 -- minecraft:oak_chest_boat
+          .leaf
+         )
+         0x16d696e6563726166743a6f72616e67655f63757368696f6e 16 -- minecraft:orange_cushion
+         (.node .leaf 0x16d696e6563726166743a6f72616e67655f6861726e657373 1 .leaf) -- minecraft:orange_harness
+        )
+       )
+       0x16d696e6563726166743a707572706c655f63757368696f6e 16 -- minecraft:purple_cushion
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a707572706c655f6861726e657373 1 .leaf) -- minecraft:purple_harness
+          0x16d696e6563726166743a746164706f6c655f6275636b6574 1 -- minecraft:tadpole_bucket
+          .leaf
+         )
+         0x16d696e6563726166743a776f6f64656e5f7069636b617865 1 -- minecraft:wooden_pickaxe
+         (.node .leaf 0x16d696e6563726166743a79656c6c6f775f63757368696f6e 16 .leaf) -- minecraft:yellow_cushion
+        )
+        0x16d696e6563726166743a79656c6c6f775f6861726e657373 1 -- minecraft:yellow_harness
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a636861696e6d61696c5f626f6f7473 1 .leaf) -- minecraft:chainmail_boots
+          0x16d696e6563726166743a636f707065725f6c656767696e6773 1 -- minecraft:copper_leggings
+          .leaf
+         )
+         0x16d696e6563726166743a6469616d6f6e645f7069636b617865 1 -- minecraft:diamond_pickaxe
+         (.node .leaf 0x16d696e6563726166743a666c696e745f616e645f737465656c 1 .leaf) -- minecraft:flint_and_steel
+        )
+       )
+      )
+     )
+     0x16d696e6563726166743a676f6c64656e5f6c656767696e6773 1 -- minecraft:golden_leggings
+     (.node
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a686f707065725f6d696e6563617274 1 .leaf) -- minecraft:hopper_minecart
+          0x16d696e6563726166743a69726f6e5f6368657374706c617465 1 -- minecraft:iron_chestplate
+          .leaf
+         )
+         0x16d696e6563726166743a6d6167656e74615f63757368696f6e 16 -- minecraft:magenta_cushion
+         (.node .leaf 0x16d696e6563726166743a6d6167656e74615f6861726e657373 1 .leaf) -- minecraft:magenta_harness
+        )
+        0x16d696e6563726166743a6d757369635f646973635f6d616c6c 1 -- minecraft:music_disc_mall
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6d757369635f646973635f7374616c 1 .leaf) -- minecraft:music_disc_stal
+          0x16d696e6563726166743a6d757369635f646973635f77616974 1 -- minecraft:music_disc_wait
+          .leaf
+         )
+         0x16d696e6563726166743a6d757369635f646973635f77617264 1 -- minecraft:music_disc_ward
+         (.node .leaf 0x16d696e6563726166743a6e65746865726974655f626f6f7473 1 .leaf) -- minecraft:netherite_boots
+        )
+       )
+       0x16d696e6563726166743a6e65746865726974655f7370656172 1 -- minecraft:netherite_spear
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6e65746865726974655f73776f7264 1 .leaf) -- minecraft:netherite_sword
+          0x16d696e6563726166743a7265645f7368756c6b65725f626f78 1 -- minecraft:red_shulker_box
+          .leaf
+         )
+         0x16d696e6563726166743a737573706963696f75735f73746577 1 -- minecraft:suspicious_stew
+         (.node .leaf 0x16d696e6563726166743a62697263685f63686573745f626f6174 1 .leaf) -- minecraft:birch_chest_boat
+        )
+        0x16d696e6563726166743a626c75655f7368756c6b65725f626f78 1 -- minecraft:blue_shulker_box
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a636861696e6d61696c5f68656c6d6574 1 .leaf) -- minecraft:chainmail_helmet
+          0x16d696e6563726166743a6379616e5f7368756c6b65725f626f78 1 -- minecraft:cyan_shulker_box
+          .leaf
+         )
+         0x16d696e6563726166743a6469616d6f6e645f6c656767696e6773 1 -- minecraft:diamond_leggings
+         (.node .leaf 0x16d696e6563726166743a6675726e6163655f6d696e6563617274 1 .leaf) -- minecraft:furnace_minecart
+        )
+       )
+      )
+      0x16d696e6563726166743a677261795f7368756c6b65725f626f78 1 -- minecraft:gray_shulker_box
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a69726f6e5f686f7273655f61726d6f72 1 .leaf) -- minecraft:iron_horse_armor
+          0x16d696e6563726166743a6c6561746865725f6c656767696e6773 1 -- minecraft:leather_leggings
+          .leaf
+         )
+         0x16d696e6563726166743a6c696d655f7368756c6b65725f626f78 1 -- minecraft:lime_shulker_box
+         (.node .leaf 0x16d696e6563726166743a6c696e676572696e675f706f74696f6e 1 .leaf) -- minecraft:lingering_potion
+        )
+        0x16d696e6563726166743a6d757369635f646973635f6368697270 1 -- minecraft:music_disc_chirp
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6d757369635f646973635f72656c6963 1 .leaf) -- minecraft:music_disc_relic
+          0x16d696e6563726166743a6d757369635f646973635f7374726164 1 -- minecraft:music_disc_strad
+          .leaf
+         )
+         0x16d696e6563726166743a6d757369635f646973635f7465617273 1 -- minecraft:music_disc_tears
+         (.node .leaf 0x16d696e6563726166743a6e65746865726974655f68656c6d6574 1 .leaf) -- minecraft:netherite_helmet
+        )
+       )
+       0x16d696e6563726166743a6e65746865726974655f73686f76656c 1 -- minecraft:netherite_shovel
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6f616b5f68616e67696e675f7369676e 16 .leaf) -- minecraft:oak_hanging_sign
+          0x16d696e6563726166743a70696e6b5f7368756c6b65725f626f78 1 -- minecraft:pink_shulker_box
+          .leaf
+         )
+         0x16d696e6563726166743a746f74656d5f6f665f756e6479696e67 1 -- minecraft:totem_of_undying
+         (.node .leaf 0x16d696e6563726166743a6163616369615f63686573745f626f6174 1 .leaf) -- minecraft:acacia_chest_boat
+        )
+        0x16d696e6563726166743a62616d626f6f5f63686573745f72616674 1 -- minecraft:bamboo_chest_raft
+        (.node
+         (.node .leaf 0x16d696e6563726166743a626c61636b5f7368756c6b65725f626f78 1 .leaf) -- minecraft:black_shulker_box
+         0x16d696e6563726166743a62726f776e5f7368756c6b65725f626f78 1 -- minecraft:brown_shulker_box
+         (.node .leaf 0x16d696e6563726166743a636172726f745f6f6e5f615f737469636b 1 .leaf) -- minecraft:carrot_on_a_stick
+        )
+       )
+      )
+     )
+    )
+    0x16d696e6563726166743a6368657272795f63686573745f626f6174 1 -- minecraft:cherry_chest_boat
+    (.node
+     (.node
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a636f707065725f6368657374706c617465 1 .leaf) -- minecraft:copper_chestplate
+          0x16d696e6563726166743a676f6c64656e5f6368657374706c617465 1 -- minecraft:golden_chestplate
+          .leaf
+         )
+         0x16d696e6563726166743a677265656e5f7368756c6b65725f626f78 1 -- minecraft:green_shulker_box
+         (.node .leaf 0x16d696e6563726166743a6a756e676c655f63686573745f626f6174 1 .leaf) -- minecraft:jungle_chest_boat
+        )
+        0x16d696e6563726166743a6c696768745f626c75655f62616e6e6572 16 -- minecraft:light_blue_banner
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6c696768745f626c75655f62756e646c65 1 .leaf) -- minecraft:light_blue_bundle
+          0x16d696e6563726166743a6c696768745f677261795f62616e6e6572 16 -- minecraft:light_gray_banner
+          .leaf
+         )
+         0x16d696e6563726166743a6c696768745f677261795f62756e646c65 1 -- minecraft:light_gray_bundle
+         (.node .leaf 0x16d696e6563726166743a6d757369635f646973635f626c6f636b73 1 .leaf) -- minecraft:music_disc_blocks
+        )
+       )
+       0x16d696e6563726166743a6d757369635f646973635f626f756e6365 1 -- minecraft:music_disc_bounce
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6e65746865726974655f7069636b617865 1 .leaf) -- minecraft:netherite_pickaxe
+          0x16d696e6563726166743a706f706c61725f63686573745f626f6174 1 -- minecraft:poplar_chest_boat
+          .leaf
+         )
+         0x16d696e6563726166743a707566666572666973685f6275636b6574 1 -- minecraft:pufferfish_bucket
+         (.node .leaf 0x16d696e6563726166743a7370727563655f63686573745f626f6174 1 .leaf) -- minecraft:spruce_chest_boat
+        )
+        0x16d696e6563726166743a77686974655f7368756c6b65725f626f78 1 -- minecraft:white_shulker_box
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a62697263685f68616e67696e675f7369676e 16 .leaf) -- minecraft:birch_hanging_sign
+          0x16d696e6563726166743a636861696e6d61696c5f6c656767696e6773 1 -- minecraft:chainmail_leggings
+          .leaf
+         )
+         0x16d696e6563726166743a636f707065725f686f7273655f61726d6f72 1 -- minecraft:copper_horse_armor
+         (.node .leaf 0x16d696e6563726166743a6469616d6f6e645f6368657374706c617465 1 .leaf) -- minecraft:diamond_chestplate
+        )
+       )
+      )
+      0x16d696e6563726166743a676f6c64656e5f686f7273655f61726d6f72 1 -- minecraft:golden_horse_armor
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6c6561746865725f6368657374706c617465 1 .leaf) -- minecraft:leather_chestplate
+          0x16d696e6563726166743a6c696768745f626c75655f63757368696f6e 16 -- minecraft:light_blue_cushion
+          .leaf
+         )
+         0x16d696e6563726166743a6c696768745f626c75655f6861726e657373 1 -- minecraft:light_blue_harness
+         (.node .leaf 0x16d696e6563726166743a6c696768745f677261795f63757368696f6e 16 .leaf) -- minecraft:light_gray_cushion
+        )
+        0x16d696e6563726166743a6c696768745f677261795f6861726e657373 1 -- minecraft:light_gray_harness
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6d757369635f646973635f63726561746f72 1 .leaf) -- minecraft:music_disc_creator
+          0x16d696e6563726166743a6d757369635f646973635f6d656c6c6f6869 1 -- minecraft:music_disc_mellohi
+          .leaf
+         )
+         0x16d696e6563726166743a6d757369635f646973635f70696773746570 1 -- minecraft:music_disc_pigstep
+         (.node .leaf 0x16d696e6563726166743a6e65746865726974655f6c656767696e6773 1 .leaf) -- minecraft:netherite_leggings
+        )
+       )
+       0x16d696e6563726166743a6f72616e67655f7368756c6b65725f626f78 1 -- minecraft:orange_shulker_box
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a706f776465725f736e6f775f6275636b6574 1 .leaf) -- minecraft:powder_snow_bucket
+          0x16d696e6563726166743a707572706c655f7368756c6b65725f626f78 1 -- minecraft:purple_shulker_box
+          .leaf
+         )
+         0x16d696e6563726166743a73756c6675725f637562655f6275636b6574 1 -- minecraft:sulfur_cube_bucket
+         (.node .leaf 0x16d696e6563726166743a79656c6c6f775f7368756c6b65725f626f78 1 .leaf) -- minecraft:yellow_shulker_box
+        )
+        0x16d696e6563726166743a6163616369615f68616e67696e675f7369676e 16 -- minecraft:acacia_hanging_sign
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a62616d626f6f5f68616e67696e675f7369676e 16 .leaf) -- minecraft:bamboo_hanging_sign
+          0x16d696e6563726166743a6368657272795f68616e67696e675f7369676e 16 -- minecraft:cherry_hanging_sign
+          .leaf
+         )
+         0x16d696e6563726166743a6461726b5f6f616b5f63686573745f626f6174 1 -- minecraft:dark_oak_chest_boat
+         (.node .leaf 0x16d696e6563726166743a6469616d6f6e645f686f7273655f61726d6f72 1 .leaf) -- minecraft:diamond_horse_armor
+        )
+       )
+      )
+     )
+     0x16d696e6563726166743a666c6f775f62616e6e65725f7061747465726e 1 -- minecraft:flow_banner_pattern
+     (.node
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a69726f6e5f6e617574696c75735f61726d6f72 1 .leaf) -- minecraft:iron_nautilus_armor
+          0x16d696e6563726166743a6a756e676c655f68616e67696e675f7369676e 16 -- minecraft:jungle_hanging_sign
+          .leaf
+         )
+         0x16d696e6563726166743a6c6561746865725f686f7273655f61726d6f72 1 -- minecraft:leather_horse_armor
+         (.node .leaf 0x16d696e6563726166743a6d6167656e74615f7368756c6b65725f626f78 1 .leaf) -- minecraft:magenta_shulker_box
+        )
+        0x16d696e6563726166743a6d616e67726f76655f63686573745f626f6174 1 -- minecraft:mangrove_chest_boat
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a70616c655f6f616b5f63686573745f626f6174 1 .leaf) -- minecraft:pale_oak_chest_boat
+          0x16d696e6563726166743a706f706c61725f68616e67696e675f7369676e 16 -- minecraft:poplar_hanging_sign
+          .leaf
+         )
+         0x16d696e6563726166743a7370727563655f68616e67696e675f7369676e 16 -- minecraft:spruce_hanging_sign
+         (.node .leaf 0x16d696e6563726166743a7761727065645f68616e67696e675f7369676e 16 .leaf) -- minecraft:warped_hanging_sign
+        )
+       )
+       0x16d696e6563726166743a636861696e6d61696c5f6368657374706c617465 1 -- minecraft:chainmail_chestplate
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6372696d736f6e5f68616e67696e675f7369676e 16 .leaf) -- minecraft:crimson_hanging_sign
+          0x16d696e6563726166743a676c6f62655f62616e6e65725f7061747465726e 1 -- minecraft:globe_banner_pattern
+          .leaf
+         )
+         0x16d696e6563726166743a6d757369635f646973635f6f7468657273696465 1 -- minecraft:music_disc_otherside
+         (.node .leaf 0x16d696e6563726166743a6d757369635f646973635f707265636970696365 1 .leaf) -- minecraft:music_disc_precipice
+        )
+        0x16d696e6563726166743a6e65746865726974655f6368657374706c617465 1 -- minecraft:netherite_chestplate
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a736b756c6c5f62616e6e65725f7061747465726e 1 .leaf) -- minecraft:skull_banner_pattern
+          0x16d696e6563726166743a74726f706963616c5f666973685f6275636b6574 1 -- minecraft:tropical_fish_bucket
+          .leaf
+         )
+         0x16d696e6563726166743a636f707065725f6e617574696c75735f61726d6f72 1 -- minecraft:copper_nautilus_armor
+         (.node .leaf 0x16d696e6563726166743a6461726b5f6f616b5f68616e67696e675f7369676e 16 .leaf) -- minecraft:dark_oak_hanging_sign
+        )
+       )
+      )
+      0x16d696e6563726166743a666c6f7765725f62616e6e65725f7061747465726e 1 -- minecraft:flower_banner_pattern
+      (.node
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a676f6c64656e5f6e617574696c75735f61726d6f72 1 .leaf) -- minecraft:golden_nautilus_armor
+          0x16d696e6563726166743a6775737465725f62616e6e65725f7061747465726e 1 -- minecraft:guster_banner_pattern
+          .leaf
+         )
+         0x16d696e6563726166743a6d616e67726f76655f68616e67696e675f7369676e 16 -- minecraft:mangrove_hanging_sign
+         (.node .leaf 0x16d696e6563726166743a6d6f6a616e675f62616e6e65725f7061747465726e 1 .leaf) -- minecraft:mojang_banner_pattern
+        )
+        0x16d696e6563726166743a6e65746865726974655f686f7273655f61726d6f72 1 -- minecraft:netherite_horse_armor
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a70616c655f6f616b5f68616e67696e675f7369676e 16 .leaf) -- minecraft:pale_oak_hanging_sign
+          0x16d696e6563726166743a7069676c696e5f62616e6e65725f7061747465726e 1 -- minecraft:piglin_banner_pattern
+          .leaf
+         )
+         0x16d696e6563726166743a636f6d6d616e645f626c6f636b5f6d696e6563617274 1 -- minecraft:command_block_minecart
+         (.node .leaf 0x16d696e6563726166743a637265657065725f62616e6e65725f7061747465726e 1 .leaf) -- minecraft:creeper_banner_pattern
+        )
+       )
+       0x16d696e6563726166743a6469616d6f6e645f6e617574696c75735f61726d6f72 1 -- minecraft:diamond_nautilus_armor
+       (.node
+        (.node
+         (.node
+          (.node .leaf 0x16d696e6563726166743a6c696768745f626c75655f7368756c6b65725f626f78 1 .leaf) -- minecraft:light_blue_shulker_box
+          0x16d696e6563726166743a6c696768745f677261795f7368756c6b65725f626f78 1 -- minecraft:light_gray_shulker_box
+          .leaf
+         )
+         0x16d696e6563726166743a6d757369635f646973635f6c6176615f636869636b656e 1 -- minecraft:music_disc_lava_chicken
+         (.node .leaf 0x16d696e6563726166743a6e65746865726974655f6e617574696c75735f61726d6f72 1 .leaf) -- minecraft:netherite_nautilus_armor
+        )
+        0x16d696e6563726166743a7761727065645f66756e6775735f6f6e5f615f737469636b 1 -- minecraft:warped_fungus_on_a_stick
+        (.node
+         (.node .leaf 0x16d696e6563726166743a6669656c645f6d61736f6e65645f62616e6e65725f7061747465726e 1 .leaf) -- minecraft:field_masoned_banner_pattern
+         0x16d696e6563726166743a6d757369635f646973635f63726561746f725f6d757369635f626f78 1 -- minecraft:music_disc_creator_music_box
+         (.node .leaf 0x16d696e6563726166743a626f72647572655f696e64656e7465645f62616e6e65725f7061747465726e 1 .leaf) -- minecraft:bordure_indented_banner_pattern
+        )
+       )
+      )
+     )
+    )
+   )
+  )
 
-/-- `Item.getDefaultMaxStackSize`: how many items of the kind named `id` fit in one stack. -/
+/-- `Item.getDefaultMaxStackSize`: how many items of the kind named `id` fit in one stack.
+It is the size `itemStackSizes` lists for the name, and 64 for a name that is not
+listed (`itemMaxStackSize_eq_lookup`). -/
 def itemMaxStackSize (id : String) : ℕ :=
-  if itemsStackingTo1.contains id then 1 else
-  if itemsStackingTo16.contains id then 16 else
-  64
+  (itemStackSizeTable.find? (itemKey id)).getD 64
 
 end Redstone

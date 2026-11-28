@@ -1,6 +1,6 @@
 module
 
-public import Mathlib.Data.Int.Log
+public import Redstone.Basic.Float32
 public import Redstone.Component.AnalogSource
 public import Redstone.Component.CookingTable
 
@@ -204,18 +204,9 @@ def FurnaceKind.totalCookTimeOf (k : FurnaceKind) (d : BlockEntities.Furnace) : 
   | some (_, _, time) => totalCookTime time d.speedMultiplier
   | none => 200
 
-/-- The `float` nearest to a rational number, ties going to the even mantissa. Valid for the
-normal range of `float`, which is all the furnace needs. -/
-def roundFloat (q : ℚ) : ℚ :=
-  if q = 0 then 0
-  else
-    let a := |q|
-    let ulp : ℚ := 2 ^ (Int.log 2 a - 23)
-    let m := a / ulp
-    let f := ⌊m⌋
-    let r := m - f
-    let n := if r < 1 / 2 then f else if r > 1 / 2 then f + 1 else if f % 2 = 0 then f else f + 1
-    (if q < 0 then -1 else 1) * n * ulp
+/-- The `float` nearest to a rational number, ties going to the even mantissa
+(`F32.roundFloat`). -/
+abbrev roundFloat (q : ℚ) : ℚ := F32.roundFloat q
 
 /-! ### Chests -/
 
@@ -323,16 +314,32 @@ def combine (l : Level) (state : Block) (p : Pos) (ignoreBeingBlocked : Bool) :
 
 /-! ### The signal a comparator reads -/
 
+/-- One turn of the loop of `getRedstoneSignalFromContainer`: a slot that is not empty adds
+`(float) count / maxStackSize` to the sum. Both the quotient and the sum are rounded to a
+`float`. -/
+def addSlot (limit : ℕ) (totalPercent : ℚ) (s : ItemStack) : ℚ :=
+  if s.isEmpty then totalPercent
+  else
+    roundFloat
+      (totalPercent + roundFloat ((s.count : ℚ) / (s.containerMaxStackSize limit : ℚ)))
+
 /-- `AbstractContainerMenu.getRedstoneSignalFromContainer` for a container with these slots,
 each of which holds at most `limit` items: 0 for an empty container, else 1 to 15 with the
-fullness, computed in single precision as the game does. -/
+fullness.
+
+The game computes the fullness in single precision. Here every operation is done exactly, on
+rational numbers, and its result is rounded to the nearest `float` (`F32.roundFloat`), in
+the order of the game's code, which gives the same number and can be evaluated by the kernel.
+For a container whose stacks all have a power of two as their greatest size, the signal is
+`14 * filled / capacity`, rounded down, plus one if anything is in it
+(`Redstone.Lemmas.ContainerSignal`).
+
+Not represented: a stack whose greatest size is zero, for which the game divides by zero. No
+item has such a size, and the game refuses a `max_stack_size` component below 1. -/
 def redstoneSignal (items : Inventory) (limit : ℕ := 99) : ℕ :=
-  let total : Float32 := items.foldl (init := 0) fun acc s =>
-    if s.isEmpty then acc
-    else acc + s.count.toFloat32 / (s.containerMaxStackSize limit).toFloat32
-  let total := total / items.length.toFloat32
+  let totalPercent := roundFloat (items.foldl (addSlot limit) 0 / (items.length : ℚ))
   -- `Mth.lerpDiscrete(totalPercent, 0, 15)`
-  (total * 14).floor.toUInt32.toNat + (if total > 0 then 1 else 0)
+  ⌊roundFloat (totalPercent * 14)⌋.toNat + (if totalPercent > 0 then 1 else 0)
 
 /-- The slots of a container, those of a double chest one after the other. A composter has
 none here: what it holds is its fill level. -/

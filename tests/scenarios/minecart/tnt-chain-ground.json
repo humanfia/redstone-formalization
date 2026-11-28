@@ -1,0 +1,66 @@
+{
+ "name": "tnt-chain-ground",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    3.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:5}"
+  },
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    7.5,
+    1.0,
+    12.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    12.5,
+    1.0,
+    3.5
+   ]
+  }
+ ]
+}

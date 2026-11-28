@@ -1,0 +1,53 @@
+{
+ "name": "anchor-explode-obsidian-floor",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   10,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    4,
+    0
+   ],
+   "max": [
+    15,
+    4,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    5,
+    7
+   ],
+   "state": "minecraft:respawn_anchor[charges=1]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    7,
+    5,
+    7
+   ],
+   "face": "up"
+  }
+ ]
+}

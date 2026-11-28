@@ -1,0 +1,56 @@
+{
+ "name": "anchor-explode-charges",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   10,
+   15
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    7,
+    5,
+    7
+   ],
+   "state": "minecraft:respawn_anchor[charges=4]"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    3
+   ],
+   "state": "minecraft:respawn_anchor[charges=0]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    5,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    7,
+    5,
+    7
+   ],
+   "face": "north"
+  }
+ ]
+}

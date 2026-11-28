@@ -1,0 +1,13 @@
+{"scenario":"anchor-explode-void","version":"26.3","frames":[
+{"tick":0,"gameTime":0,"blocks":{"7,5,7":"minecraft:respawn_anchor[charges=1]"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":1,"gameTime":1,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":2,"gameTime":2,"blocks":{"7,5,7":"minecraft:air"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":3,"gameTime":3,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":4,"gameTime":4,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":5,"gameTime":5,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":6,"gameTime":6,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":7,"gameTime":7,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":8,"gameTime":8,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":9,"gameTime":9,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":10,"gameTime":10,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]}
+]}

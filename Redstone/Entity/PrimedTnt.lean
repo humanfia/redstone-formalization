@@ -236,6 +236,7 @@ def tick (index : ℕ) : M Unit := do
     Level.removeEntity index
     let pos := e.base.pos
     explode ⟨pos.x, pos.y + wide 0x3f7ae148 * 0.0625, pos.z⟩ (Float32.ofBits d.explosionPower)
+      false .tnt {} none (index + 1)
   else
     Level.modifyEntity index fun e =>
       { e with base := { e.base with motion := motion }, data := .tnt { d with fuse := fuse } }

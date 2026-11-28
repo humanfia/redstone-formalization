@@ -37,9 +37,9 @@ whether it hatches.
 * A trident is an arrow here: its owner (loyalty) and its enchantments (channeling, which calls
   lightning on a rod) are not modelled.
 * Every other projectile: ender pearls, potions, experience bottles, fireworks, fireballs and
-  wind charges do nothing in the model. One that has a velocity sets
-  `Level.overflow`; one without is left where it is, which is right for a fireball at rest and
-  wrong for whatever gravity pulls.
+  wind charges do nothing in the model. A fireball, a wither skull or a wind charge without a
+  velocity stays where it is, as in the game (`restingTypes`). Every other one sets
+  `Level.overflow`: gravity pulls it, or it has a life of its own.
 * Fluids: a projectile whose box touches a fluid sets `Level.overflow` (water slows it down and
   puts out its fire, bubble columns push it). So does a burning projectile while it rains.
 * An egg that hatches (one in eight): the chicken is a mob, and the model sets
@@ -47,10 +47,20 @@ whether it hatches.
 * The owner of a projectile (`leftOwner`, statistics, advancements, the sender of vibrations),
   the rotation, critical arrows, the pierce level and enchanted weapons, the world border
   (`clipIncludingBorder`), portals, and `noPhysics` (a trident coming back).
-* A block of amethyst chimes when it is hit, at a pitch drawn from the generator of the level
-  (`AmethystBlock.onProjectileHit`): the draw is made here, since the block has no behaviour of
-  its own.
-* Blocks that set an entity on fire as it passes (fire, lava) do not light a projectile.
+* A block of amethyst, a cluster or a bud chimes when it is hit, at a pitch drawn from the
+  generator of the level (`AmethystBlock.onProjectileHit`), and a burning projectile lights a
+  candle (`AbstractCandleBlock.onProjectileHit`): both are done here (`onHitBlock`), since
+  these blocks have no behaviour of their own for it.
+* A burning projectile that hits an unlit campfire lights it, and a projectile that may break
+  blocks destroys a chorus flower (`CampfireBlock.onProjectileHit`,
+  `ChorusFlowerBlock.onProjectileHit`): the model sets `Level.overflow`.
+* Blocks that light or put out an entity that passes through them do not do so to a projectile:
+  when its way meets fire, soul fire or a cauldron of lava, or, while it burns, powder snow or a
+  cauldron of water or powder snow, the model sets `Level.overflow` (`meetsFire`).
+* Sculk sensors: a game event of the model has the centre of a block as its origin, where the
+  game has the position of the projectile, and the vibration of the game records the UUID of
+  the projectile, which the model does not have. So when a sculk sensor is near enough to hear
+  the shot or the landing, the model sets `Level.overflow` (`sensorNear`).
 
 ## Scenarios that wait in `tests/pending/scenarios/projectile`
 
@@ -58,9 +68,7 @@ whether it hatches.
 * `pot-*`: a projectile shatters a decorated pot. The pot does what the game does
   (`Component.AnalogSource.decoratedPot`), but the loot of a pot is not evaluated yet
   (`Level.getDrops`), so the model stops at `Level.overflow`.
-* `sculk-*`: a sculk sensor hears the shot or the landing. A game event of the model has the
-  centre of a block as its origin, where the game has the position of the projectile, and the
-  vibration of the game records the UUID of the projectile, which the model does not have.
+* `sculk-*`: a sculk sensor hears the shot or the landing, see above.
 -/
 
 @[expose] public section
@@ -75,6 +83,12 @@ def arrowTypes : List String :=
 /-- The entity types whose tick is that of `ThrowableProjectile` and that disappear on a hit
 without doing more to blocks. -/
 def throwableTypes : List String := ["minecraft:snowball", "minecraft:egg"]
+
+/-- The entity types that stay where they are while they have no velocity: the tick of
+`AbstractHurtingProjectile` adds nothing to a velocity of zero, and no gravity pulls them. -/
+def restingTypes : List String :=
+  ["minecraft:fireball", "minecraft:small_fireball", "minecraft:dragon_fireball",
+    "minecraft:wither_skull", "minecraft:wind_charge", "minecraft:breeze_wind_charge"]
 
 /-- `EntityType.getDimensions` of an arrow, which is `0.5F` wide and `0.5F` high. -/
 def arrowDims : Dimensions := .ofBits 0x3f000000 0x3f000000
@@ -160,6 +174,36 @@ def meetsEntity (l : Level) (i : ℕ) (area : AABB) (start stop : Vec3) (margin 
             ((!arrow || margin > 0.0) &&
               ((box.inflate margin margin margin).clip start stop).isSome))
 
+/-- A block that would light an entity touches `box` (fire, soul fire, a cauldron of lava:
+`InsideBlockEffectType.FIRE_IGNITE`, `LAVA_IGNITE`), or, if the entity burns, one that would put
+it out (powder snow, a cauldron of water or of powder snow). The model does neither to a
+projectile; the caller sets `Level.overflow`. The game asks for more than the box (the shape
+of the block has to be met), so this holds more often than the game acts. -/
+def meetsFire (l : Level) (box : AABB) (burning : Bool) : Bool :=
+  (PlacedShape.range (Phys.floor box.minX) (Phys.floor box.maxX + 1)).any fun x =>
+    (PlacedShape.range (Phys.floor box.minY) (Phys.floor box.maxY + 1)).any fun y =>
+      (PlacedShape.range (Phys.floor box.minZ) (Phys.floor box.maxZ + 1)).any fun z =>
+        let b := l.blockAt ⟨x, y, z⟩
+        b.is .fire || b.is .soul_fire || b.is .lava_cauldron ||
+          (burning && (b.is .powder_snow || b.is .water_cauldron || b.is .powder_snow_cauldron))
+
+/-- A sculk sensor is near enough to `p` to hear a game event there: within 16 blocks, the
+radius of a calibrated sensor, and one more, because the game has the event at the exact
+position of the projectile, which may lie in the block next to `p`. The sensors are found as
+the listeners are (`Component.Sculk.onGameEventAt`), among the ticking block entities. -/
+def sensorNear (l : Level) (p : Pos) : Bool :=
+  (l.blockEntityTickers ++ l.pendingBlockEntityTickers).any fun q =>
+    let b := l.blockAt q
+    (b.is .sculk_sensor || b.is .calibrated_sculk_sensor) &&
+      (q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y) + (q.z - p.z) * (q.z - p.z) ≤
+        17 * 17
+
+/-- `Level.gameEvent(event, pos, context)` for an event of a projectile. A sculk sensor that
+could hear it would hear it from another point than in the game, so the model gives up. -/
+def gameEvent (event : String) (p : Pos) (context : GameEventContext := {}) : M Unit := do
+  if sensorNear (← get) p then Level.setOverflow
+  Level.gameEvent event p context
+
 /-- The block the entity with index `i` steps on (`getOnPosLegacy`), if it is on the ground. -/
 def effectPos (i : ℕ) : M (Option Pos) := do
   let l ← get
@@ -172,7 +216,7 @@ that fell out of the world is removed. -/
 def baseTick (dims : Dimensions) (i : ℕ) : M Unit := do
   let some (e, _, d) ← get? i | return
   if !d.hasBeenShot then
-    Level.gameEvent "minecraft:projectile_shoot" e.base.pos.blockPos
+    gameEvent "minecraft:projectile_shoot" e.base.pos.blockPos
     modifyData i fun d => { d with hasBeenShot := true }
   if (← get).touchesFluid (dims.box e.base.pos) then Level.setOverflow
   modifyData i fun d =>
@@ -183,14 +227,29 @@ def baseTick (dims : Dimensions) (i : ℕ) : M Unit := do
 /-- `Projectile.onHitBlock(hitResult)`: the block that was hit is told. -/
 def onHitBlock (i : ℕ) (hit : BlockHitResult) : M Unit := do
   let state ← Level.getBlock hit.blockPos
-  if state.is .amethyst_block || state.is .budding_amethyst then
+  let burning := ((← get? i).any fun (_, _, d) => d.fire > 0)
+  match state with
+  | .amethystCluster _ _ =>
     -- `AmethystBlock.onProjectileHit`: the pitch of the chime
     modify fun l => { l with random := l.random.nextFloat24.2 }
+  | .candle id s =>
+    -- `AbstractCandleBlock.onProjectileHit`, `CandleBlock.canBeLit`, `setLit`
+    if burning && !s.lit && !s.waterlogged then
+      discard <| Level.setBlock hit.blockPos (.candle id { s with lit := true }) 11
+  | .campfire _ s =>
+    -- `CampfireBlock.onProjectileHit`: a burning projectile lights the fire
+    if burning && !s.lit && !s.waterlogged then Level.setOverflow
+  | .chorusFlower _ =>
+    -- `ChorusFlowerBlock.onProjectileHit`: the flower breaks, if the projectile may break blocks
+    Level.setOverflow
+  | _ =>
+    if state.is .amethyst_block || state.is .budding_amethyst then
+      modify fun l => { l with random := l.random.nextFloat24.2 }
   (← Level.behaviour state).onProjectileHit hit.blockPos hit.direction hit.location i
 
 /-- The end of `Projectile.onHit(hitResult)` for a block: the game event of the landing. -/
 def landed (i : ℕ) (hit : BlockHitResult) : M Unit := do
-  Level.gameEvent "minecraft:projectile_land" hit.blockPos
+  gameEvent "minecraft:projectile_land" hit.blockPos
     { sourceEntity := some (.entity i), affectedState := some (← Level.getBlock hit.blockPos) }
 
 /-! ### Arrows -/
@@ -244,6 +303,8 @@ def arrowFly (i : ℕ) : M Unit := do
   let start := e.base.pos
   let movement := e.base.motion
   if l.touchesFluid (arrowDims.box start) then Level.setOverflow
+  if meetsFire l ((arrowDims.box start).expandTowards movement) (d.fire > 0) then
+    Level.setOverflow
   let (hit, unmodelled) := l.clip start (start.add movement)
   if unmodelled then Level.setOverflow
   -- `stepMoveAndHit`
@@ -284,6 +345,7 @@ def arrowTick (i : ℕ) : M Unit := do
   if d.fire > 0 && (l.weather != .clear || l.touchesFluid (arrowDims.box pos)) then
     Level.setOverflow
   if d.inGround || stuck then
+    if meetsFire l (arrowDims.box pos) (d.fire > 0) then Level.setOverflow
     let falls ←
       if d.lastState == some blockState then pure false
       else
@@ -318,6 +380,8 @@ def throwableTick (i : ℕ) : M Unit := do
   setMotion i movement
   modifyData i fun d => { d with tickCount := d.tickCount + 1 }
   -- `ProjectileUtil.getHitResultOnMoveVector`
+  if meetsFire l ((throwableDims.box start).expandTowards movement) (d.fire > 0) then
+    Level.setOverflow
   let (hit, unmodelled) := l.clip start (start.add movement)
   if unmodelled then Level.setOverflow
   let area := ((throwableDims.box start).expandTowards movement).inflate 1.0 1.0 1.0
@@ -343,7 +407,7 @@ def tick (i : ℕ) : M Unit := do
   let some (e, type, d) ← get? i | return
   if arrowTypes.contains type then arrowTick i
   else if throwableTypes.contains type then throwableTick i
-  else if d.inGround || e.base.motion == .zero then pure ()
+  else if restingTypes.contains type && e.base.motion == .zero then pure ()
   else Level.setOverflow
 
 /-- The behaviour of the entity. -/

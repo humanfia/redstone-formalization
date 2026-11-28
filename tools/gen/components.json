@@ -27,6 +27,8 @@
     {"module": "Tnt", "classes": ["TntBlock"]},
     {"module": "CommandBlock", "classes": ["CommandBlock", "StructureBlock", "TestBlock"]},
     {"module": "Extra", "classes": ["AbstractSkullBlock", "SpongeBlock", "FrostedIceBlock", "PotentSulfurBlock", "SlimeBlock", "HoneyBlock"]},
-    {"module": "FallingBlock", "classes": ["FallingBlock"]}
+    {"module": "FallingBlock", "classes": ["FallingBlock"]},
+    {"module": "Supported", "classes": ["CarpetBlock", "SnowLayerBlock", "TorchBlock", "VegetationBlock", "AbstractBedBlock"]},
+    {"module": "Connecting", "classes": ["FenceBlock", "IronBarsBlock", "WallBlock", "StairBlock"]}
   ]
 }

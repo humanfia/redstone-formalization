@@ -1,0 +1,30 @@
+{
+  "name": "carpet-stack",
+  "ticks": 17,
+  "box": {"min": [0, 0, 0], "max": [4, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:stone"},
+    {"pos": [0, 2, 0], "state": "minecraft:white_carpet"},
+    {"pos": [0, 3, 0], "state": "minecraft:moss_carpet"},
+    {"pos": [0, 4, 0], "state": "minecraft:red_carpet"},
+    {"pos": [2, 1, 0], "state": "minecraft:glass_pane[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:orange_carpet"},
+    {"pos": [4, 1, 0], "state": "minecraft:torch"},
+    {"pos": [4, 2, 0], "state": "minecraft:black_carpet"},
+    {"pos": [0, 1, 2], "state": "minecraft:white_carpet"},
+    {"pos": [2, 1, 2], "state": "minecraft:stone"},
+    {"pos": [2, 2, 2], "state": "minecraft:lime_carpet"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "destroy", "pos": [0, 1, 0], "drop": false},
+    {"tick": 4, "type": "destroy", "pos": [2, 1, 0], "drop": false},
+    {"tick": 6, "type": "set", "pos": [4, 1, 0], "state": "minecraft:air"},
+    {"tick": 8, "type": "set", "pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"tick": 10, "type": "set", "pos": [2, 1, 2], "state": "minecraft:glass"},
+    {"tick": 12, "type": "set", "pos": [2, 1, 2], "state": "minecraft:air", "flags": 2},
+    {"tick": 14, "type": "set", "pos": [2, 3, 2], "state": "minecraft:stone"}
+  ]
+}

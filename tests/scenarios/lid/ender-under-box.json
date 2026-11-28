@@ -1,0 +1,96 @@
+{
+ "name": "ender-under-box",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   1,
+   2,
+   1
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:shulker_box[facing=east]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 30,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 50,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "north"
+  }
+ ]
+}

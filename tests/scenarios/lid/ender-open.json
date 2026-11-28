@@ -1,0 +1,38 @@
+{
+ "name": "ender-open",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   0,
+   0,
+   0
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "face": "up"
+  }
+ ]
+}

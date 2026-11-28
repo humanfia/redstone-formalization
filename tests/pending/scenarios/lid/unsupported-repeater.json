@@ -1,0 +1,46 @@
+{
+ "name": "unsupported-repeater",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   1,
+   2,
+   1
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:shulker_box[facing=north]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "south"
+  }
+ ]
+}

@@ -270,10 +270,25 @@ except for a `moving_piston`, whose shape comes from its block entity
   contains that of the extended base, so whatever the extended base supports is supported, the
   face at its back in particular; the head that is still moving in is not taken into account;
 * a moved block that has arrived (`progress` is 1) has its own shape;
-* any other `moving_piston` is treated as supporting nothing. -/
+* any other `moving_piston` is treated as supporting nothing.
+
+A shulker box has the collision shape of its block entity. While that is larger than a block
+(`ShulkerBox.isFullBlock` is false: the lid is up) the box is no conductor
+(`isCollisionShapeFullBlock`). While its lid is not closed (`ShulkerBoxBlockEntity.isClosed`),
+which begins a little earlier and ends a little later, its support shape is the plate under the
+box (`ShulkerBoxBlock.getBlockSupportShape`): only the face opposite to its lid is sturdy. The
+index of the collision shape is left as it is. -/
 def supportAttrs (l : Level) (p : Pos) : Attrs :=
   let b := l.blockAt p
   match b, l.blockEntities p with
+  | .shulkerBox _ s, some (.shulkerBox e) =>
+    if e.isClosed && e.isFullBlock then b.attrs
+    else
+      let a := if e.isFullBlock then b.attrs else { b.attrs with conductor := false }
+      if e.isClosed then a
+      else
+        let face := 2 ^ s.facing.opposite.bit
+        { a with sturdyFull := face, sturdyCenter := face, sturdyRigid := face }
   | .movingPiston _, some (.piston e) =>
     if e.isSourcePiston then
       match e.movedState with

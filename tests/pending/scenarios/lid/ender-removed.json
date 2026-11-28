@@ -1,0 +1,76 @@
+{
+ "name": "ender-removed",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   2,
+   0,
+   0
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    0
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 5,
+   "type": "destroy",
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    2,
+    0,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    2,
+    0,
+    0
+   ],
+   "face": "north"
+  }
+ ]
+}

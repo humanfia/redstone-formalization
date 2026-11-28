@@ -1,0 +1,96 @@
+{
+ "name": "lid-twice-open",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   3,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=up]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:observer[facing=up,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:observer[facing=south,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=east]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:observer[facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "state": "minecraft:observer[facing=down,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:barrel[facing=up,open=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "up"
+  }
+ ]
+}

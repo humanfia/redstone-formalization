@@ -1,0 +1,49 @@
+{
+ "name": "item-on-lid",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   1,
+   1,
+   1
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:shulker_box[facing=up]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    2.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

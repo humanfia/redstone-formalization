@@ -1,0 +1,47 @@
+{
+  "name": "fuzz-command-block-s2-009",
+  "ticks": 20,
+  "box": {"min": [0, 0, 0], "max": [3, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:test_block[mode=start]", "nbt": "{mode:\"start\",powered:1b}"},
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [0, 1, 2], "state": "minecraft:repeating_command_block[conditional=false,facing=down]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [0, 1, 3], "state": "minecraft:command_block[conditional=false,facing=south]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [0, 2, 0], "state": "minecraft:command_block[conditional=false,facing=up]", "nbt": "{Command:\"Searge\"}"},
+    {"pos": [0, 2, 1], "state": "minecraft:test_block[mode=start]", "nbt": "{mode:\"log\"}"},
+    {"pos": [0, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 3], "state": "minecraft:chain_command_block[conditional=false,facing=west]", "nbt": "{Command:\"say y\",TrackOutput:0b,auto:0b}"},
+    {"pos": [1, 1, 0], "state": "minecraft:repeating_command_block[conditional=true,facing=north]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:repeating_command_block[conditional=true,facing=south]", "nbt": "{Command:\"nope\",TrackOutput:0b,SuccessCount:2,powered:1b}"},
+    {"pos": [1, 2, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:repeating_command_block[conditional=false,facing=south]"},
+    {"pos": [1, 2, 3], "state": "minecraft:command_block[conditional=true,facing=west]", "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b,powered:1b}"},
+    {"pos": [2, 1, 2], "state": "minecraft:test_block[mode=start]"},
+    {"pos": [2, 1, 3], "state": "minecraft:command_block[conditional=true,facing=up]", "nbt": "{Command:\"Searge\"}"},
+    {"pos": [2, 2, 0], "state": "minecraft:chain_command_block[conditional=true,facing=south]", "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b}"},
+    {"pos": [2, 2, 2], "state": "minecraft:repeating_command_block[conditional=true,facing=south]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [2, 2, 3], "state": "minecraft:chain_command_block[conditional=false,facing=north]", "nbt": "{Command:\"Searge\",auto:1b}"},
+    {"pos": [3, 1, 2], "state": "minecraft:chain_command_block[conditional=false,facing=east]", "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b}"},
+    {"pos": [3, 1, 3], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:chain_command_block[conditional=true,facing=south]", "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b}"},
+    {"pos": [3, 2, 2], "state": "minecraft:repeating_command_block[conditional=false,facing=up]"},
+    {"pos": [3, 2, 3], "state": "minecraft:lever[face=ceiling,facing=south,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 6, "type": "use", "pos": [3, 2, 3], "face": "up"},
+    {"tick": 7, "type": "use", "pos": [3, 1, 3], "face": "up"},
+    {"tick": 7, "type": "use", "pos": [1, 2, 0], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [3, 1, 3], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [3, 1, 3], "face": "up"},
+    {"tick": 14, "type": "set", "pos": [3, 1, 0], "state": "minecraft:stone"},
+    {"tick": 14, "type": "set", "pos": [1, 1, 3], "state": "minecraft:stone"},
+    {"tick": 15, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 15, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 15, "type": "set", "pos": [2, 2, 1], "state": "minecraft:test_block[mode=start]"},
+    {"tick": 17, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

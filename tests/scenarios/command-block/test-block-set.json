@@ -1,0 +1,20 @@
+{
+  "name": "test-block-set",
+  "ticks": 10,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 1, 1], "state": "minecraft:test_block[mode=accept]"},
+    {"tick": 3, "type": "set", "pos": [3, 1, 1], "state": "minecraft:stone"},
+    {"tick": 5, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 6, "type": "set", "pos": [2, 1, 1], "state": "minecraft:test_block[mode=log]"},
+    {"tick": 7, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 8, "type": "set", "pos": [2, 1, 1], "state": "minecraft:test_block[mode=start]"},
+    {"tick": 9, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

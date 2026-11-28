@@ -139,11 +139,12 @@ the kernel evaluation of one game tick; the times are per tick.
 | What happens in the tick | Step | Peak memory of the file |
 |---|---|---|
 | nothing (a scheduled tick counts down, or the level is at rest) | 15 to 30 ms | 1.3 GB |
-| a hopper on cooldown is ticked | 30 to 70 ms | 1.5 GB |
+| a hopper on cooldown is ticked | 30 to 100 ms | 1.3 GB |
 | a lever is used, a lamp or a torch switches | 70 to 160 ms | 1.3 GB |
 | a repeater switches a lamp | 120 to 140 ms | 1.3 GB |
 | a piston starts to move one block; the block arrives | 330 to 390 ms; 170 to 250 ms | 1.4 GB |
-| a hopper moves an item | 600 to 660 ms | 1.5 GB |
+| a hopper moves an item | 100 to 170 ms | 1.3 GB |
+| a comparator looks at a hopper with items in four slots; it then switches on | 1.0 s; 130 ms | 1.3 GB |
 | a repeater of the clock switches (one corner of dust goes on, one off) | 1.2 to 1.7 s | 2.5 GB |
 | a line of 5 dust goes on (RS latch) | 1.3 to 2.9 s | |
 | a line of 5 dust goes off behind a torch (RS latch) | 17 s | 5.6 GB |
@@ -165,12 +166,25 @@ file by its dust: count the switch-offs and their length. Where the time goes in
 proving large dust circuits.
 
 **Memory is per tick, and files build in parallel.** The kernel frees its cache between
-declarations, so the peak of a file is the peak of its worst tick. Lake builds several files
-at once and the CI runner has 16 GB. A file with a tick above about 4 GB should import the
-other heavy files of its unit, so that they are checked one after the other (in
-`Redstone/Theorems/Basics`, `DustDecay.lean` imports `RSLatch.lean`, which imports
-`RepeaterClock.lean`, for this reason only). On the cluster, give such a
-build `--mem 48G`.
+declarations, so the peak of a file is the peak of its worst tick. Lake builds independent
+files at once, as many as the machine has cores, and the CI runner has 4 cores and 16 GB. The
+rule is for the whole repository, not for one directory:
+
+* A file is *heavy* if one of its ticks needs more than about 4 GB (the peak resident
+  memory of `lean` run on the file alone; a dust line that switches off is the usual cause). No file may need more than about 10 GB: split the run or shorten the circuit.
+* **All heavy files of the repository form one chain of imports**, so that no two of them
+  are ever checked at the same time. A heavy file imports the heavy file before it, on a line
+  under the comment `-- Heavy chain:`, which is how the chain is found:
+  `git grep -n -A2 'Heavy chain:' -- Redstone`. The chain today is `RepeaterClock.lean` ←
+  `RSLatch.lean` ← `DustDecay.lean`, all in `Redstone/Theorems/Basics`; its end is the heavy
+  file that no other file imports under that comment.
+* A new heavy file imports the end of the chain and becomes the end. Two branches written at
+  the same time will both import the same end; whoever merges second moves its first heavy
+  file behind the end that is then on `main`. This is part of merging a branch with proofs.
+* The files that are not heavy (below 4 GB, almost all of them below 2 GB) need no care: three
+  of them next to one heavy file fit.
+
+On the cluster, give a build with heavy files `--mem 48G`.
 
 ## Do
 
@@ -205,9 +219,10 @@ build `--mem 48G`.
   first such tick. Dropped items, minecarts, primed TNT and projectiles are out of reach of
   this method.
 * Do not assume a path is cheap, or reduces at all, because compiled code runs it. A
-  comparator that reads a container goes through `Container.redstoneSignal`, which is exact
-  rational arithmetic now; what a tick with it costs in the kernel was not measured here. Time
-  the first tick of a new kind with `checkpoints (timing)` before building on it.
+  comparator that reads a container goes through `Container.redstoneSignal`, which was
+  `Float32` and stuck in the kernel until it was made exact arithmetic; it costs a second now
+  (the table above). Time the first tick of a new kind with `checkpoints (timing)` before
+  building on it.
 * Do not name a theorem with a Lean keyword (`extends`), and do not write the three words the
   CI check rejects, even in a comment.
 * Do not claim more than was checked: a bounded run is a bounded run, a cycle certificate is

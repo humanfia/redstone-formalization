@@ -1,6 +1,6 @@
 import Redstone.Proof.Circuit
--- Imported only so that the memory-heavy files of this directory are checked one after the
--- other (Lake builds independent files in parallel): the clock, this file, the dust line.
+-- Heavy chain: imported only so that the memory-heavy files of the repository are checked one
+-- after the other; see "What it costs" in `Redstone/Proof/README.md`.
 import Redstone.Theorems.Basics.RepeaterClock
 
 /-!

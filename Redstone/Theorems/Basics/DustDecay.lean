@@ -1,6 +1,6 @@
 import Redstone.Proof.Circuit
--- Imported only so that the memory-heavy files of this directory are checked one after the
--- other (9 GB here, 5.6 GB there): Lake builds independent files in parallel.
+-- Heavy chain: imported only so that the memory-heavy files of the repository are checked one
+-- after the other (9 GB here, 5.6 GB there); see "What it costs" in `Redstone/Proof/README.md`.
 import Redstone.Theorems.Basics.RSLatch
 
 /-!

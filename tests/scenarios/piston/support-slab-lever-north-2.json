@@ -1,0 +1,118 @@
+{
+ "name": "support-slab-lever-north-2",
+ "ticks": 14,
+ "box": {
+  "min": [
+   -2,
+   2,
+   -2
+  ],
+  "max": [
+   10,
+   10,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    3,
+    0
+   ],
+   "max": [
+    8,
+    3,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    4,
+    4
+   ],
+   "state": "minecraft:piston[extended=false,facing=north]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    3
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  }
+ ],
+ "entities": [],
+ "actions": [
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    4,
+    4,
+    5
+   ],
+   "state": "minecraft:redstone_block",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    5,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    4,
+    1
+   ],
+   "state": "minecraft:lever[face=wall,facing=north,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    3,
+    4,
+    2
+   ],
+   "state": "minecraft:lever[face=wall,facing=west,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    5,
+    4,
+    2
+   ],
+   "state": "minecraft:lever[face=wall,facing=east,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    4,
+    2
+   ],
+   "state": "minecraft:moving_piston[facing=north,type=sticky]",
+   "flags": 3
+  }
+ ]
+}

@@ -100,6 +100,11 @@ structure Physics where
   /-- `Entity.finalMovementsThisTick`: the movements for which the effects of blocks were last
   applied. Not saved. -/
   finalMovementsThisTick : List Movement := []
+  /-- `Entity.pistonDeltas`: how far pistons have moved the entity along each axis in the game
+  tick `pistonDeltasGameTime`. Not saved. -/
+  pistonDeltas : Vec3 := ⟨0, 0, 0⟩
+  /-- `Entity.pistonDeltasGameTime`. Not saved. -/
+  pistonDeltasGameTime : ℕ := 0
   deriving Repr, Inhabited
 
 instance : BEq Physics :=

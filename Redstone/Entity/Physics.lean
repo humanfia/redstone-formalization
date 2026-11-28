@@ -22,8 +22,9 @@ given by their bits.
 * Collisions with other entities (boats, shulkers) and with the world border.
 * Stepping up (`Entity.maxUpStep`), which is zero for the entities modelled here.
 * Collision shapes that depend on the entity or on the position of the block (scaffolding,
-  powder snow, bamboo, pointed dripstone, moving pistons, shulker boxes). Meeting one of these
-  sets `Level.overflow`.
+  powder snow, bamboo, pointed dripstone, shulker boxes). Meeting one of these sets
+  `Level.overflow`. The shape of a block that a piston is moving is modelled
+  (`Level.movingPistonShape`), unless the moved block is one of these.
 * The box of an entity is always taken as a shape with its own coordinates. The game snaps a
   box that lies in the unit cube on multiples of one eighth to that grid, with a tolerance.
 * Blocks whose `fallOn` does more than pass the fall on to the entity (farmland, turtle eggs,
@@ -295,12 +296,84 @@ def fallDistanceReductionBits (b : Block) : UInt32 :=
 
 end Block
 
+/-- A rational number as a `double`. Exact for the progress of a piston, which is 0, 1/2 or 1. -/
+def Phys.ofRat (q : ℚ) : Float := Float.ofInt q.num / Float.ofNat q.den
+
+/-- `Direction.getStepX()`, `getStepY()` and `getStepZ()`, as `double` values. -/
+def Direction.stepVec : Direction → Vec3
+  | .down => ⟨0.0, -1.0, 0.0⟩
+  | .up => ⟨0.0, 1.0, 0.0⟩
+  | .north => ⟨0.0, 0.0, -1.0⟩
+  | .south => ⟨0.0, 0.0, 1.0⟩
+  | .west => ⟨-1.0, 0.0, 0.0⟩
+  | .east => ⟨1.0, 0.0, 0.0⟩
+
 namespace Level
+
+/-- `PistonMovingBlockEntity.getExtendedProgress(progress)`: how far the moving block at its
+current progress is from the position of its block entity, along the facing of the piston. -/
+def pistonExtendedProgress (e : BlockEntities.Piston) : Float :=
+  Phys.ofRat (if e.extending then e.progress - 1 else 1 - e.progress)
+
+/-- `MovingPistonBlock.getCollisionShape`, which is `PistonMovingBlockEntity.getCollisionShape`
+of the block entity at `p`: the shape of the moved block, displaced by what is left of its way;
+for the base of a retracting piston, the extended base and the head that moves back into it. A
+`moving_piston` without its block entity has no shape.
+
+`noClip` is the thread-local `NOCLIP` of the game: while a piston moves an entity in a
+direction, the blocks that move in that direction and are still on their way are not in the
+way of the entity.
+
+The game joins the two parts with `Shapes.or`, which rebuilds the grid of the shape from its
+boxes; here the grid is made by the faces of the boxes, which cuts space in the same places.
+Where the two parts make up the full cube (the base of a piston whose head has come back in),
+the game has `Shapes.block()`, and so has the model. The flag tells that the moved block has a
+collision shape that is not modelled. -/
+def movingPistonShape (l : Level) (p : Pos) (noClip : Option Direction := none) : Shape × Bool :=
+  match l.blockEntities p with
+  | some (.piston e) =>
+    let pistonHeadShape : List AABB :=
+      match e.movedState with
+      | .pistonBase id s =>
+        if !e.extending && e.isSourcePiston then
+          (Block.pistonBase id { s with extended := true }).collisionShape.boxes
+        else []
+      | _ => []
+    if e.progress < 1 && noClip == some e.movementDirection then
+      (Shape.ofBoxes pistonHeadShape, false)
+    else
+      let blockState : Block :=
+        if e.isSourcePiston then
+          .pistonHead ⟨e.direction, e.extending != decide (1 - e.progress < 1 / 4), .normal⟩
+        else e.movedState
+      let extendedProgress := pistonExtendedProgress e
+      let step := e.direction.stepVec
+      let d : Vec3 := ⟨step.x * extendedProgress, step.y * extendedProgress,
+        step.z * extendedProgress⟩
+      if !pistonHeadShape.isEmpty && e.progress = 1 && e.collisionFaceShape.isFullBlock then
+        (Shape.ofBoxes [⟨0.0, 0.0, 0.0, 1.0, 1.0, 1.0⟩], false)
+      else
+        (Shape.ofBoxes (pistonHeadShape ++ blockState.collisionShape.boxes.map (·.move d)),
+          blockState.collisionUnmodelled)
+  | _ => (Shape.ofBoxes [], false)
+
+/-- `BlockState.isCollisionShapeFullBlock(level, pos)` for the block at `p`. A `moving_piston`
+is asked for the shape of its block entity (it has no cached shape). -/
+def isCollisionShapeFullBlock (l : Level) (p : Pos) : Bool :=
+  let state := l.blockAt p
+  if state.is .moving_piston then
+    match l.blockEntities p with
+    | some (.piston e) => e.collisionFaceShape.isFullBlock
+    | _ => false
+  else state.isCollisionShapeFullBlock
 
 /-- `BlockCollisions`: the blocks whose collision shape overlaps `box`, in the order in which
 the game finds them, each with its shape. The flag tells that a block whose collision shape is
-not modelled was among the candidates. -/
-def blockCollisions (l : Level) (box : AABB) : List PlacedShape × Bool := Id.run do
+not modelled was among the candidates. A `moving_piston` counts as having a large shape (it has
+no cached one), and is also looked at on the edges of the region; `noClip` is as in
+`movingPistonShape`. -/
+def blockCollisions (l : Level) (box : AABB) (noClip : Option Direction := none) :
+    List PlacedShape × Bool := Id.run do
   let x0 := Phys.floor (box.minX - Phys.eps7) - 1
   let x1 := Phys.floor (box.maxX + Phys.eps7) + 1
   let y0 := Phys.floor (box.minY - Phys.eps7) - 1
@@ -322,7 +395,15 @@ def blockCollisions (l : Level) (box : AABB) : List PlacedShape × Bool := Id.ru
     if type != 3 then
       let p : Pos := ⟨x0 + x, y0 + y, z0 + z⟩
       let state := l.blockAt p
-      if state.collisionUnmodelled then unmodelled := true
+      if state.is .moving_piston then
+        let (shape, bad) := l.movingPistonShape p noClip
+        if bad then unmodelled := true
+        else if !shape.isEmpty then
+          let placed : PlacedShape := ⟨shape, p⟩
+          if shape.isBlock then
+            if box.intersects (AABB.ofBlock p) then out := placed :: out
+          else if placed.intersectsBox box then out := placed :: out
+      else if state.collisionUnmodelled then unmodelled := true
       else if state.attrs.collision != 0 then
         let shape := state.collisionShape
         if type == 0 || (type == 1 && shape.isLarge) then
@@ -344,7 +425,8 @@ def touchesFluid (l : Level) (box : AABB) : Bool :=
 
 /-- `CollisionGetter.findSupportingBlock(entity, box)`: among the blocks that collide with
 `box`, the one whose centre is closest to the position `at` of the entity. -/
-def findSupportingBlock (l : Level) (pos : Vec3) (box : AABB) : Option Pos :=
+def findSupportingBlock (l : Level) (pos : Vec3) (box : AABB)
+    (noClip : Option Direction := none) : Option Pos :=
   let step (best : Option (Pos × Float)) (s : PlacedShape) : Option (Pos × Float) :=
     let p := s.pos
     let dx := Phys.ofInt p.x + 0.5 - pos.x
@@ -358,7 +440,7 @@ def findSupportingBlock (l : Level) (pos : Vec3) (box : AABB) : Option Pos :=
       let before := q.y < p.y || (q.y == p.y && (q.z < p.z || (q.z == p.z && q.x < p.x)))
       if distance < bestDistance || (distance == bestDistance && before) then some (p, distance)
       else best
-  ((l.blockCollisions box).1.foldl step none).map (·.1)
+  ((l.blockCollisions box noClip).1.foldl step none).map (·.1)
 
 end Level
 
@@ -387,10 +469,11 @@ def collideWithShapes (movement : Vec3) (box : AABB) (shapes : List PlacedShape)
 
 /-- `Entity.collide(movement)` for an entity that cannot step up, in a world without entities
 to collide with. The flag tells that a block whose collision shape is not modelled was near. -/
-def collide (l : Level) (box : AABB) (movement : Vec3) : Vec3 × Bool :=
+def collide (l : Level) (box : AABB) (movement : Vec3) (noClip : Option Direction := none) :
+    Vec3 × Bool :=
   if movement.lengthSqr == 0 then (movement, false)
   else
-    let (shapes, unmodelled) := l.blockCollisions (box.expandTowards movement)
+    let (shapes, unmodelled) := l.blockCollisions (box.expandTowards movement) noClip
     (collideWithShapes movement box shapes, unmodelled)
 
 end Phys
@@ -471,18 +554,19 @@ def getOnPosLegacy (l : Level) (e : Entity) : Pos := getOnPos l e (Phys.f 0x3e4c
 
 /-- `Entity.checkSupportingBlock(onGround, movement)`. -/
 def checkSupportingBlock (l : Level) (dims : Dimensions) (e : Entity) (onGround : Bool)
-    (movement : Option Vec3) : Entity :=
+    (movement : Option Vec3) (noClip : Option Direction := none) : Entity :=
   if onGround then
     let box := dims.box e.base.pos
     let testArea := AABB.of box.minX (box.minY - Phys.eps6) box.minZ box.maxX box.minY box.maxZ
-    let found := l.findSupportingBlock e.base.pos testArea
+    let found := l.findSupportingBlock e.base.pos testArea noClip
     if found.isSome || e.phys.onGroundNoBlocks then
       e.modifyPhys fun p =>
         { p with mainSupportingBlockPos := found, onGroundNoBlocks := found.isNone }
     else
       match movement with
       | some m =>
-        let found := l.findSupportingBlock e.base.pos (testArea.move ⟨-m.x, 0.0, -m.z⟩)
+        let found :=
+          l.findSupportingBlock e.base.pos (testArea.move ⟨-m.x, 0.0, -m.z⟩) noClip
         e.modifyPhys fun p =>
           { p with mainSupportingBlockPos := found, onGroundNoBlocks := found.isNone }
       | none => e.modifyPhys fun p => { p with onGroundNoBlocks := true }
@@ -555,6 +639,30 @@ def restitute (k : Kind) (effectState : Block) (e : Entity) (xCollision zCollisi
     (after.set .y ((gravityCompensation - current.y) * effectiveDrag * restitution), bounced)
   else (after, bounced)
 
+/-- `Entity.limitPistonMovement(vec)` at game time `gameTime`: pistons move an entity by at most
+0.51 along each axis in one game tick (`pistonDeltas`), and one push moves it along one axis.
+Returns the movement that is left, and the state with the movement counted. -/
+def limitPistonMovement (gameTime : ℕ) (p : Entities.Physics) (vec : Vec3) :
+    Vec3 × Entities.Physics :=
+  if vec.lengthSqr ≤ Phys.eps7 then (vec, p)
+  else
+    let p :=
+      if gameTime != p.pistonDeltasGameTime then
+        { p with pistonDeltas := .zero, pistonDeltasGameTime := gameTime }
+      else p
+    -- `applyPistonMovementRestriction(axis, amount)`
+    let restricted (ax : Axis) : Vec3 × Entities.Physics :=
+      let before := p.pistonDeltas.get ax
+      let sum := vec.get ax + before
+      let clamped := if sum < -0.51 then -0.51 else Phys.min sum 0.51
+      let amount := clamped - before
+      let p := { p with pistonDeltas := p.pistonDeltas.set ax clamped }
+      if amount.abs ≤ Phys.eps5f then (.zero, p) else (Vec3.zero.set ax amount, p)
+    if vec.x != 0 then restricted .x
+    else if vec.y != 0 then restricted .y
+    else if vec.z != 0 then restricted .z
+    else (.zero, p)
+
 end Entity
 
 namespace Level
@@ -606,23 +714,41 @@ def finishMove (k : Entity.Kind) (i : ℕ) (delta movement : Vec3) (xCollision z
   let factor := Entity.getBlockSpeedFactor (← get) k e
   setEntity { e with base := { e.base with motion := e.base.motion.mul factor 1.0 factor } }
 
-/-- `Entity.move(MoverType.SELF, delta)` for the entity with index `i`. -/
-def moveEntity (k : Entity.Kind) (i : ℕ) (delta : Vec3) : M Unit := do
+/-- `Entity.move(moverType, delta)` for the entity with index `i`: `MoverType.SELF` without
+`piston`, and `MoverType.PISTON` with it. `piston` is then the direction in which the piston
+moves (the `NOCLIP` of `PistonMovingBlockEntity.moveEntityByPiston`, see
+`movingPistonShape`), and the movement is limited by `Entity.limitPistonMovement`.
+
+When the movement takes the entity to another entity section, it enters that section after
+every entity that entered it during the ticks of the entities (pistons move entities while the
+block entities are ticked); two entities that pistons take to the same section in one game
+tick are kept in the order of their creation. -/
+def moveEntity (k : Entity.Kind) (i : ℕ) (delta : Vec3) (piston : Option Direction := none) :
+    M Unit := do
   let some e ← getEntity i | return
   let l ← get
+  let actor := if piston.isSome then l.nextEntityIndex + 1 else i + 1
   if e.phys.noPhysics then
-    let e := setPos e (e.base.pos.add delta) l.gameTime (i + 1)
+    let e := setPos e (e.base.pos.add delta) l.gameTime actor
     setEntity (e.modifyPhys fun p => { p with
       horizontalCollision := false, verticalCollision := false, verticalCollisionBelow := false })
   else
+    let (delta, e) :=
+      if piston.isSome then
+        let (delta, p) := Entity.limitPistonMovement l.gameTime e.phys delta
+        (delta, e.withPhys p)
+      else (delta, e)
+    if piston.isSome && delta == Vec3.zero then
+      setEntity e
+      return
     let stuck := e.phys.stuckSpeedMultiplier
     let (delta, e) :=
       if stuck.lengthSqr > Phys.eps7 then
-        (delta.mul stuck.x stuck.y stuck.z,
+        (if piston.isSome then delta else delta.mul stuck.x stuck.y stuck.z,
           { e.modifyPhys fun p => { p with stuckSpeedMultiplier := .zero } with
             base := { e.base with motion := .zero } })
       else (delta, e)
-    let (movement, unmodelled) := Phys.collide l (k.dims.box e.base.pos) delta
+    let (movement, unmodelled) := Phys.collide l (k.dims.box e.base.pos) delta piston
     if unmodelled then setOverflow
     let movementLength := movement.lengthSqr
     let moves := movementLength > Phys.eps7 || delta.lengthSqr - movementLength < Phys.eps7
@@ -633,7 +759,7 @@ def moveEntity (k : Entity.Kind) (i : ℕ) (delta : Vec3) : M Unit := do
     let e :=
       if moves then
         let target := e.base.pos.add movement
-        (setPos e target l.gameTime (i + 1)).modifyPhys fun p =>
+        (setPos e target l.gameTime actor).modifyPhys fun p =>
           { p with movementThisTick := p.movementThisTick ++ [⟨e.base.pos, target, some delta⟩] }
       else e
     let xCollision := !Phys.equal delta.x movement.x
@@ -647,7 +773,8 @@ def moveEntity (k : Entity.Kind) (i : ℕ) (delta : Vec3) : M Unit := do
       verticalCollisionBelow := verticalCollisionBelow }
     -- `setOnGroundWithMovement(verticalCollisionBelow, horizontalCollision, movement)`
     let e := { e with base := { e.base with onGround := verticalCollisionBelow } }
-    setEntity (Entity.checkSupportingBlock l k.dims e verticalCollisionBelow (some movement))
+    setEntity
+      (Entity.checkSupportingBlock l k.dims e verticalCollisionBelow (some movement) piston)
     finishMove k i delta movement xCollision zCollision
 
 /-- `Entity.applyGravity` for the entity with index `i`. -/

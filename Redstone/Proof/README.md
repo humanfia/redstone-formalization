@@ -145,11 +145,16 @@ the kernel evaluation of one game tick; the times are per tick.
 | a piston starts to move one block; the block arrives | 330 to 390 ms; 170 to 250 ms | 1.4 GB |
 | a hopper moves an item | 100 to 170 ms | 1.3 GB |
 | a comparator looks at a hopper with items in four slots; it then switches on | 1.0 s; 130 ms | 1.3 GB |
-| a repeater of the clock switches (one corner of dust goes on, one off) | 1.2 to 1.7 s | 2.5 GB |
-| a line of 5 dust goes on (RS latch) | 1.3 to 2.9 s | |
-| a line of 5 dust goes off behind a torch (RS latch) | 17 s | 5.6 GB |
-| a line of 15 dust goes on | 7.1 s | |
-| a line of 15 dust goes off | 34 s | 9.0 GB |
+| a repeater of the clock switches (one corner of dust goes on, one off) | 0.53 to 0.60 s | 2.3 GB |
+| a line of 5 dust goes on (RS latch) | 0.4 to 1.2 s | |
+| a line of 5 dust goes off behind a torch (RS latch) | 7.8 s | 3.1 GB |
+| a line of 15 dust goes on | 4.2 s | |
+| a line of 15 dust goes off | 14 s | 4.5 GB |
+
+The five rows with dust were measured again after the dust was profiled
+(`docs/proof-feasibility.md`, "Redstone dust: where the kernel time went"); they were 1.2 to
+1.7 s, 1.3 to 2.9 s, 17 s and 5.6 GB, 7.1 s, and 34 s and 9.0 GB. The other rows were not
+measured again.
 
 Besides the step: the literal of a checkpoint takes 10 to 60 ms to elaborate, and **joining
 costs 2 to 5 ms per game tick, whatever the size of the level and the length of the run** (18
@@ -157,13 +162,14 @@ ticks of the clock: 64 ms in all). Joining applies `Rules.runSchedule_take_succ`
 of the checkpoints, so the kernel compares names and never unfolds a level. Reading a fact off
 a checkpoint (`rw [state_run_k]; circuit_decide`) costs milliseconds.
 
-The whole of `Redstone/Theorems/Basics` is 87 s of kernel time: 42 s for the dust line, 26 s
-for the RS latch, 13.5 s for the clock, and under 2 s for each of the other five.
+The whole of `Redstone/Theorems/Basics` was 87 s of kernel time: 42 s for the dust line, 26 s
+for the RS latch, 13.5 s for the clock, and under 2 s for each of the other five. The three
+with dust are now 19 s, 13 s and 6 s.
 
 **Dust is the expensive block, and switching it off is the expensive direction.** Budget a
-file by its dust: count the switch-offs and their length. Where the time goes inside
-`Redstone/Component/Dust.lean` has not been profiled; it is the first thing to look at before
-proving large dust circuits.
+file by its dust: about 0.2 s for every time a dust changes its power, and switching a line
+off changes each dust several times (64 changes for 15 dust). Where the time went, what was
+changed for it and what is left is in `docs/proof-feasibility.md`.
 
 **Memory is per tick, and files build in parallel.** The kernel frees its cache between
 declarations, so the peak of a file is the peak of its worst tick. Lake builds independent
@@ -175,9 +181,11 @@ rule is for the whole repository, not for one directory:
 * **All heavy files of the repository form one chain of imports**, so that no two of them
   are ever checked at the same time. A heavy file imports the heavy file before it, on a line
   under the comment `-- Heavy chain:`, which is how the chain is found:
-  `git grep -n -A2 'Heavy chain:' -- Redstone`. The chain today is `RepeaterClock.lean` ←
-  `RSLatch.lean` ← `DustDecay.lean`, all in `Redstone/Theorems/Basics`; its end is the heavy
-  file that no other file imports under that comment.
+  `git grep -n -A4 'Heavy chain:' -- Redstone`. The chain today is `Redstone/Proof/Smoke.lean`
+  (5.4 GB, for its line of 15 dust) ← `RepeaterClock.lean` ← `RSLatch.lean` ← `DustDecay.lean`
+  (4.5 GB), the last three in `Redstone/Theorems/Basics`; its end is the heavy file that no
+  other file imports under that comment. The clock and the latch are no longer heavy (2.3 and
+  3.1 GB) and stay in the chain as they are.
 * A new heavy file imports the end of the chain and becomes the end. Two branches written at
   the same time will both import the same end; whoever merges second moves its first heavy
   file behind the end that is then on `main`. This is part of merging a branch with proofs.

@@ -14,10 +14,10 @@ besides the three standard axioms.
 This file is a regression guard for the model. Kernel evaluation only works while everything
 on the path it takes can be reduced by the kernel in reasonable time: no `Float`, no opaque or
 well-founded definitions, no string processing on the path of a block. A change to the model
-that puts such a thing on the path of a lever, a lamp, a piston, a hopper or a comparator that
-reads a container makes this file fail or slow down, long before the theorems about real
-contraptions do. The whole file is meant to build in well under three minutes; if a change
-makes it slower, the change has made every proof slower.
+that puts such a thing on the path of a lever, a lamp, a piston, a hopper, a comparator that
+reads a container or redstone dust makes this file fail or slow down, long before the theorems
+about real contraptions do. The whole file is meant to build in well under three minutes; if a
+change makes it slower, the change has made every proof slower.
 
 The measurements behind the method, and its limits, are in `docs/proof-feasibility.md`.
 
@@ -235,5 +235,45 @@ theorem comparator_reads_hopper :
   decide +kernel
 
 assert_standard_axioms comparator_reads_hopper
+
+/-! ### A line of redstone dust goes on and off -/
+
+/-- A lever on a stone floor with 15 redstone dust in a row east of it; the dust `i` cells east
+of the lever, for `i` from 1 to 15, has the power `power i`. -/
+def dustLine (on : Bool) (power : ℕ → ℕ) : Level :=
+  level <|
+    ((List.range 16).map fun x => ((⟨x, 0, 0⟩ : Pos), Block.plain .stone)) ++
+    [(⟨0, 1, 0⟩, .lever ⟨.floor, .east, on⟩)] ++
+    (List.range 15).map fun (x : ℕ) => ((⟨(x : ℤ) + 1, 1, 0⟩ : Pos),
+      Block.redstoneWire ⟨.side, .none, Fin.ofNat 16 (power (x + 1)), .none, .side⟩)
+
+/-- The line with the lever off and no power in the dust. -/
+def dustLineOff : Level := dustLine false fun _ => 0
+
+/-- The line with the lever on: the dust next to the lever has power 15, the next one 14, and
+so on down to 1 at the far end. -/
+def dustLineOn : Level := dustLine true fun i => 16 - i
+
+/-- Using the lever lights the line in the same game tick: the dust carries 15, 14, ..., 1, and
+no other block changes. The game changes a block 15 times for this, and each change sends 42
+neighbour updates. Kernel time: 3.0 s, at 2.7 GB. -/
+theorem dust_line_lights :
+    (run [[.use ⟨0, 1, 0⟩ .up]] dustLineOff).world = dustLineOn.world ∧
+      (run [[.use ⟨0, 1, 0⟩ .up]] dustLineOff).overflow = false := by
+  decide +kernel
+
+assert_standard_axioms dust_line_lights
+
+/-- Using the lever again makes the line go dark in the same game tick. This is the worst case
+of the game's wire algorithm: the power of a dust goes down by two at a time, so the dust is
+changed 64 times in all, with 2688 neighbour updates and 384 shape updates. It is the most
+expensive single tick among the circuits measured in `docs/proof-feasibility.md`. Kernel
+time: 13 s, at 5.1 GB (30 s before the changes described there). -/
+theorem dust_line_goes_dark :
+    (run [[.use ⟨0, 1, 0⟩ .up]] dustLineOn).world = dustLineOff.world ∧
+      (run [[.use ⟨0, 1, 0⟩ .up]] dustLineOn).overflow = false := by
+  decide +kernel
+
+assert_standard_axioms dust_line_goes_dark
 
 end Redstone.Proof.Smoke

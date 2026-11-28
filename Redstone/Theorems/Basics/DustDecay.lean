@@ -1,6 +1,6 @@
 import Redstone.Proof.Circuit
 -- Heavy chain: imported only so that the memory-heavy files of the repository are checked one
--- after the other (9 GB here, 5.6 GB there); see "What it costs" in `Redstone/Proof/README.md`.
+-- after the other (4.5 GB here); see "What it costs" in `Redstone/Proof/README.md`.
 import Redstone.Theorems.Basics.RSLatch
 
 /-!

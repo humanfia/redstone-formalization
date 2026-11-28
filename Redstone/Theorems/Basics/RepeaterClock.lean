@@ -1,4 +1,8 @@
 import Redstone.Proof.Circuit
+-- Heavy chain: imported only so that the memory-heavy files of the repository are checked one
+-- after the other (the dust line of the smoke test is 5.4 GB); see "What it costs" in
+-- `Redstone/Proof/README.md`.
+import Redstone.Proof.Smoke
 
 /-!
 # The four-repeater clock

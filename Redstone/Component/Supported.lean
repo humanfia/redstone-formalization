@@ -37,7 +37,6 @@ again, and a block that cannot stay becomes air (`updateShape`), which breaks it
 * Picking sweet berries (`SweetBerryBushBlock.useWithoutItem` at age 2 and 3) and using a bed
   (`AbstractBedBlock.useWithoutItem`: sleeping, the explosion outside the overworld) set
   `Level.overflow`.
-* The fluid tick a waterlogged block schedules on a shape update: fluids do not flow.
 * Collision shapes that come from a block entity (a moving piston, a shulker box), where a
   snow layer or a sea pickle reads the shape of the block below: the shape of the block state
   is used.
@@ -158,9 +157,16 @@ def canSurvive (self : Block) (l : Level) (p : Pos) : Bool :=
 /-! ### Shape updates -/
 
 /-- `updateShape` of `CarpetBlock`, `SnowLayerBlock`, `VegetationBlock`, `SeaPickleBlock` and
-`MangrovePropaguleBlock`: a block that cannot stay becomes air. -/
+`MangrovePropaguleBlock`: a block that cannot stay becomes air. A waterlogged sea pickle that
+stays asks for a tick of its water, and a waterlogged propagule does so in any case. -/
 def updateShape (self : Block) (p : Pos) : M Block := do
-  if canSurvive self (← get) p then return self else return .AIR
+  let logged := self.waterlogged? = some true
+  if logged && self.is .mangrove_propagule then
+    Level.scheduleFluidTick p .water Fluid.water.tickDelay
+  if canSurvive self (← get) p then
+    if logged && self.is .sea_pickle then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+    return self
+  else return .AIR
 
 /-- `BaseTorchBlock.updateShape` and `WallTorchBlock.updateShape`: the torch checks its support
 only when the update comes from the block it is attached to, in direction `attachment`. -/
@@ -269,7 +275,11 @@ def behaviour (self : Block) : Behaviour :=
   | .doublePlant _ s => doublePlant self s.half
   | .tallFlower _ s => doublePlant self s.half
   | .tallSeagrass s => doublePlant self s.half
-  | .smallDripleaf s => doublePlant self s.half
+  | .smallDripleaf s =>
+    { doublePlant self s.half with
+      updateShape := fun p d _ neighbour => do
+        if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+        doubleUpdateShape self s.half p d neighbour }
   | .plain _ =>
     if BlockClass.carpetBlock self.id ||
         (BlockClass.vegetationBlock self.id && !BlockClass.mushroomBlock self.id) then

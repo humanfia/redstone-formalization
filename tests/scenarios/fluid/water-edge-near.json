@@ -1,0 +1,110 @@
+{
+ "name": "water-edge-near",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   16,
+   7,
+   16
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    16,
+    0,
+    16
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    16,
+    6,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    16
+   ],
+   "max": [
+    16,
+    6,
+    16
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    6,
+    16
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    16,
+    1,
+    0
+   ],
+   "max": [
+    16,
+    6,
+    16
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    6,
+    1,
+    6
+   ],
+   "max": [
+    10,
+    4,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    10,
+    5,
+    8
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+{
+ "name": "bubble-column-open",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   6,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    10,
+    5,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    10
+   ],
+   "max": [
+    10,
+    5,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    5,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    10,
+    1,
+    0
+   ],
+   "max": [
+    10,
+    5,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    0,
+    5
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:bubble_column[drag=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:bubble_column[drag=false]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    5
+   ],
+   "state": "minecraft:bubble_column[drag=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  }
+ ]
+}

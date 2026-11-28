@@ -1,0 +1,13 @@
+{
+  "name": "fire-natural",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [6, 6, 6]},
+  "settings": {"fireSpreadRadiusAroundPlayer": -1},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 6], "state": "minecraft:stone"},
+    {"min": [1, 1, 1], "max": [5, 1, 5], "state": "minecraft:oak_planks"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [3.5, 2.0, 3.5]}}
+  ]
+}

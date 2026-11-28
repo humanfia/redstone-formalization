@@ -1,0 +1,553 @@
+{
+ "name": "fuzz-items-06",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   6,
+   5
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    5,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:water[level=1]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:water[level=8]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    4
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    5
+   ],
+   "state": "minecraft:water[level=4]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    5
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    5
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    5
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:water[level=2]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:water[level=2]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:water[level=2]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=1]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=west,half=bottom,shape=straight,waterlogged=true]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    4
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    5
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=4]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:water[level=6]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    0
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    5
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=true]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.192,
+    2.076,
+    1.744
+   ],
+   "nbt": "{Item:{id:\"minecraft:netherite_ingot\",count:4},Motion:[-0.152d,-0.027d,-0.034d],Health:40s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.598,
+    3.538,
+    0.401
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:2},Motion:[-0.027d,0.236d,0.264d],Health:9s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.14,
+    3.489,
+    1.7
+   ],
+   "nbt": "{Item:{id:\"minecraft:netherite_ingot\",count:1},Motion:[0.193d,0.273d,-0.222d],Health:40s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.958,
+    2.244,
+    1.39
+   ],
+   "nbt": "{Item:{id:\"minecraft:oak_planks\",count:3},Motion:[0.192d,0.207d,-0.212d],Health:9s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.491,
+    1.05,
+    4.532
+   ],
+   "nbt": "{Item:{id:\"minecraft:redstone\",count:3},Motion:[0.276d,-0.021d,-0.195d],Health:9s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.323,
+    3.734,
+    3.141
+   ],
+   "nbt": "{Item:{id:\"minecraft:redstone\",count:2},Motion:[-0.127d,0.055d,0.073d],Health:5s}"
+  }
+ ]
+}

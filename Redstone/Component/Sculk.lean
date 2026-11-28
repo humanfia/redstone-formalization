@@ -33,7 +33,6 @@ clicking of activated sensors, and shrieks when a player caused it.
 * The shrieker never warns and never summons a warden (`canRespond` is false): the tests run
   with the game rule `spawn_wardens` off, and the warning level of a player is not part of the
   model. With that, `tryRespond` and `preRemoveSideEffects` do nothing.
-* A waterlogged block does not schedule the fluid tick of `updateShape`; fluids do not flow.
 * The catalyst does not react to deaths (mobs are not modelled) and its charge cursors do not
   spread; a catalyst that has cursors sets `Level.overflow`.
 * `requiresAdjacentChunksToBeTicking`: every chunk is loaded and ticking.
@@ -559,6 +558,9 @@ def vibrationTick (q : Pos) : M Unit := do
 def sensor (self : Block) (st : SensorState) : Behaviour :=
   let signal (d : Direction) : ℕ := if st.facing = some d then 0 else st.power
   { Behaviour.inert self with
+    updateShape := fun p _ _ _ => do
+      if st.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+      return self
     signal := fun _ _ d => signal d
     ownSignal := fun _ _ => st.power
     directSignal := fun _ _ d => if d = .up then signal d else 0
@@ -602,6 +604,9 @@ player sets off the shrieker, and players do not walk in the model. -/
 def shrieker (s : Blocks.SculkShrieker) : Behaviour :=
   let self : Block := .sculkShrieker s
   { Behaviour.inert self with
+    updateShape := fun p _ _ _ => do
+      if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+      return self
     ticksBlockEntity := true
     blockEntityTick := vibrationTick
     tick := fun p => do

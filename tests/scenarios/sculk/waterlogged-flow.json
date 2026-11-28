@@ -1,0 +1,121 @@
+{
+ "name": "waterlogged-flow",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -1,
+   0,
+   -1
+  ],
+  "max": [
+   7,
+   2,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    -1,
+    0,
+    -1
+   ],
+   "max": [
+    7,
+    2,
+    -1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    -1,
+    0,
+    4
+   ],
+   "max": [
+    7,
+    2,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    -1,
+    0,
+    0
+   ],
+   "max": [
+    -1,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    7,
+    0,
+    0
+   ],
+   "max": [
+    7,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=true]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

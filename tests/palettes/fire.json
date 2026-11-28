@@ -1,0 +1,30 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 60},
+    {"state": "minecraft:stone", "weight": 5},
+    {"state": "minecraft:netherrack", "weight": 2},
+    {"state": "minecraft:soul_sand", "weight": 2},
+    {"state": "minecraft:oak_planks", "weight": 5},
+    {"state": "minecraft:spruce_log[axis=*]", "weight": 3},
+    {"state": "minecraft:white_wool", "weight": 3},
+    {"state": "minecraft:bookshelf", "weight": 2},
+    {"state": "minecraft:hay_block[axis=*]", "weight": 2},
+    {"state": "minecraft:coal_block", "weight": 1},
+    {"state": "minecraft:oak_slab[type=*,waterlogged=false]", "weight": 3},
+    {"state": "minecraft:oak_fence[waterlogged=false]", "weight": 2},
+    {"state": "minecraft:red_carpet", "weight": 2},
+    {"state": "minecraft:target[power=0]", "weight": 1},
+    {"state": "minecraft:glass", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=false]", "weight": 1}
+  ],
+  "actions": {
+    "set": {"count": [2, 6], "states": [
+      "minecraft:fire[age=0,east=false,north=false,south=false,up=false,west=false]",
+      "minecraft:fire[age=0,east=false,north=false,south=false,up=false,west=false]",
+      "minecraft:fire[age=*,east=false,north=false,south=false,up=false,west=false]",
+      "minecraft:soul_fire", "minecraft:air", "minecraft:stone", "minecraft:oak_planks"]},
+    "destroy": {"count": [0, 3]}
+  },
+  "settings": {"fireSpreadRadiusAroundPlayer": -1}
+}

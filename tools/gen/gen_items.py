@@ -11,7 +11,8 @@ Sources:
 
 * the cooking recipes: the recipe files of the server's built-in data pack
   (`data/minecraft/recipe/*.json`, types `smelting`, `blasting`, `smoking`), with the item tags
-  of `data/minecraft/tags/item`;
+  of `data/minecraft/tags/item`; the name of a recipe and the experience it gives are in the
+  tables `*Experience`, apart from the tables `*Recipes`;
 * the fuels: the item registrations in the decompiled `Items.java` (`cookingFuel(...)`,
   `brewingFuel(...)`, `craftRemainder(...)`) and the providers they name, under
   `data/minecraft/context_int_provider`.
@@ -23,6 +24,7 @@ in every kind of furnace.
 import json
 import os
 import re
+import struct
 import sys
 
 HEADER = """module
@@ -98,8 +100,8 @@ def ingredient_items(ing, tags):
 
 
 def load_recipes(src, tags):
-    """type -> [(recipe id, ingredient items, result id, result count, cooking time)], in the
-    order of the recipe ids."""
+    """type -> [(recipe id, ingredient items, result id, result count, cooking time,
+    experience)], in the order of the recipe ids."""
     root = os.path.join(src, "data/minecraft/recipe")
     out = {"smelting": [], "blasting": [], "smoking": []}
     for f in sorted(os.listdir(root)):
@@ -112,7 +114,7 @@ def load_recipes(src, tags):
         result = r["result"]
         assert set(result) <= {"id", "count"}, (f, result)
         out[kind].append((f[:-5], ingredient_items(r["ingredient"], tags), result["id"],
-                          result.get("count", 1), r["cookingtime"]))
+                          result.get("count", 1), r["cookingtime"], r.get("experience", 0.0)))
     return out
 
 
@@ -253,16 +255,26 @@ def gen_cooking_table(dump, src):
         tags["minecraft:furnace_fuel_bottom_takeable"], 2) + "\n"
     for kind in ("smelting", "blasting", "smoking"):
         table = {}
-        for rid, items, result, count, time in recipes[kind]:
+        for rid, items, result, count, time, experience in recipes[kind]:
             for item in items:
                 # No item has two recipes of one type, so the order of the lookup is irrelevant.
-                assert item not in table or table[item][:3] == (result, count, time), (rid, item)
-                table.setdefault(item, (result, count, time, rid))
+                assert item not in table, (rid, item)
+                table[item] = (result, count, time, rid, experience)
         out += (f"/-- The recipes of type `minecraft:{kind}`: ingredient, result, number of\n"
                 "results, cooking time. -/\n"
                 f"def {kind}Recipes : List (String × String × ℕ × ℕ) := [\n")
         out += ",\n".join(
             f"  ({lean_str(i)}, {lean_str(table[i][0])}, {table[i][1]}, {table[i][2]})"
+            for i in order if i in table)
+        out += "\n]\n\n"
+        float_bits = lambda v: struct.unpack("<I", struct.pack("<f", v))[0]
+        out += (f"/-- The recipes of type `minecraft:{kind}`: ingredient, name of the recipe\n"
+                "(the key under which a furnace counts it in `RecipesUsed`) and the experience\n"
+                "one use of it gives, as the bits of a `float`. -/\n"
+                f"def {kind}Experience : List (String × String × ℕ) := [\n")
+        out += ",\n".join(
+            f"  ({lean_str(i)}, {lean_str('minecraft:' + table[i][3])}, "
+            f"0x{float_bits(table[i][4]):08x})"
             for i in order if i in table)
         out += "\n]\n\n"
     return out.rstrip("\n") + "\n" + FOOTER

@@ -1,0 +1,139 @@
+{
+ "name": "item-water-channel",
+ "ticks": 140,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   9,
+   4,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    9,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=1]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=2]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=4]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=6]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=7]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.5,
+    1.2,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:redstone\",count:2}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.5,
+    1.0,
+    1.4
+   ],
+   "nbt": "{Item:{id:\"minecraft:diamond\",count:1},Motion:[-0.2d,0.0d,0.0d]}"
+  }
+ ]
+}

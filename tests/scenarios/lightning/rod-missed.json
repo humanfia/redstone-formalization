@@ -1,0 +1,23 @@
+{
+  "name": "rod-missed",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [4, 5, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"pos": [2, 0, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 3.0, 2.5]}},
+    {"tick": 4, "type": "kill", "entity": 0},
+    {"tick": 5, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [3.5, 2.0, 2.5]}},
+    {"tick": 7, "type": "kill", "entity": 1},
+    {"tick": 8, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 2.0000001, 2.5]}},
+    {"tick": 10, "type": "kill", "entity": 2},
+    {"tick": 11, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.999, 2.0, 2.001]}},
+    {"tick": 13, "type": "kill", "entity": 3}
+  ]
+}

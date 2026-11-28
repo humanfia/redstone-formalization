@@ -55,6 +55,7 @@ def beqBlocks (a b : Level) : Bool :=
   decide (a.randValue = b.randValue) && decide (a.randomTickSpeed = b.randomTickSpeed) &&
   decide (a.blockDrops = b.blockDrops) && decide (a.randomTickBox = b.randomTickBox) &&
   decide (a.randomSourceCount = b.randomSourceCount) &&
+  decide (a.fireSpreadRadiusAroundPlayer = b.fireSpreadRadiusAroundPlayer) &&
   decide (a.blockEntityTickerStates = b.blockEntityTickerStates)
 
 /-- Soundness of the checkpoint comparison: two levels that `beqBlocks` accepts are equal.

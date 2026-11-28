@@ -5,7 +5,7 @@ import Redstone.Proof.Axioms
 /-!
 # Smoke test of the proof method
 
-Four small circuits, each proved by letting the Lean kernel run the model (`decide +kernel`):
+Five small circuits, each proved by letting the Lean kernel run the model (`decide +kernel`):
 the statement is a decidable fact about the level after some inputs and game ticks, and the
 kernel evaluates `Level.tick` on a concrete level to check it. Nothing is trusted but the
 kernel: the check at the end of each theorem fails the build if the proof depends on anything
@@ -14,10 +14,10 @@ besides the three standard axioms.
 This file is a regression guard for the model. Kernel evaluation only works while everything
 on the path it takes can be reduced by the kernel in reasonable time: no `Float`, no opaque or
 well-founded definitions, no string processing on the path of a block. A change to the model
-that puts such a thing on the path of a lever, a lamp, a piston or a hopper makes this file
-fail or slow down, long before the theorems about real contraptions do. The whole file is
-meant to build in well under three minutes; if a change makes it slower, the change has made
-every proof slower.
+that puts such a thing on the path of a lever, a lamp, a piston, a hopper or a comparator that
+reads a container makes this file fail or slow down, long before the theorems about real
+contraptions do. The whole file is meant to build in well under three minutes; if a change
+makes it slower, the change has made every proof slower.
 
 The measurements behind the method, and its limits, are in `docs/proof-feasibility.md`.
 
@@ -131,5 +131,44 @@ theorem hopper_moves_item :
   decide +kernel
 
 assert_standard_axioms hopper_moves_item
+
+/-! ### A comparator measures a hopper -/
+
+/-- The output a comparator at `p` holds in its block entity. -/
+def comparatorOutput (l : Level) (p : Pos) : ℕ :=
+  match l.blockEntities p with
+  | some (.comparator d) => d.output
+  | _ => 0
+
+/-- A hopper that is locked, so that it keeps what it holds: three full stacks of redstone and
+four ender pearls, which stack to 16. That is three and a quarter of its five slots. East of
+it, on a stone block, a comparator that reads it and is still off. -/
+def hopperComparator : Level :=
+  let l := level [(⟨0, 1, 0⟩, .hopper ⟨false, .down⟩), (⟨1, 0, 0⟩, .plain .stone),
+    (⟨1, 1, 0⟩, .comparator ⟨.west, .compare, false⟩)]
+  let items : Inventory :=
+    [.of "minecraft:redstone" 64, .of "minecraft:redstone" 64, .of "minecraft:redstone" 64,
+      .of "minecraft:ender_pearl" 4, .empty]
+  { l with
+    blockEntities := PosMap.ofList [(⟨0, 1, 0⟩, .hopper { items }), (⟨1, 1, 0⟩, .comparator {})]
+    blockEntityTickers := [⟨0, 1, 0⟩] }
+
+/-- The level after a stone block is put next to the comparator, which makes the comparator
+look at its input, and three game ticks have run. -/
+def hopperComparatorRead : Level :=
+  run (.first [.set ⟨1, 1, 1⟩ (.plain .stone)] 3) hopperComparator
+
+/-- The comparator comes on with the signal of the hopper, `⌊14 * 3.25 / 5⌋ + 1 = 10`. The
+fullness of a container is computed as the game does, in single precision; the kernel can
+check this because the model does it with exact arithmetic that is rounded after each
+operation (`Redstone.F32`). -/
+theorem comparator_reads_hopper :
+    comparatorOutput hopperComparator ⟨1, 1, 0⟩ = 0 ∧
+      comparatorOutput hopperComparatorRead ⟨1, 1, 0⟩ = 10 ∧
+      hopperComparatorRead.blockAt ⟨1, 1, 0⟩ = .comparator ⟨.west, .compare, true⟩ ∧
+      hopperComparatorRead.overflow = false := by
+  decide +kernel
+
+assert_standard_axioms comparator_reads_hopper
 
 end Redstone.Proof.Smoke

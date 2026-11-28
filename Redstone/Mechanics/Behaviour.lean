@@ -241,14 +241,19 @@ structure Rules where
 namespace Rules
 
 /-- The environment in which reactions may nest `depth` deep. At depth zero every reaction
-stops and sets `Level.overflow`. -/
+stops and sets `Level.overflow`.
+
+The behaviour of a block is looked up through `Block.pinned`, which changes nothing
+(`Block.pinned_eq`) but lets the kernel look up the behaviour of air, or of stone, once in an
+evaluation and not once for every cell that holds it: the lookup was a quarter of the kernel's
+time in a neighbour update of redstone dust (`docs/proof-feasibility.md`). -/
 def env (r : Rules) : ℕ → Env
   | 0 =>
     { block := fun b => (r.block b).exhausted
       entity := fun _ => ⟨fun _ => modify fun l => { l with overflow := true }⟩
       gameEvent := fun _ _ _ => modify fun l => { l with overflow := true } }
   | depth + 1 =>
-    { block := fun b => (r.block b).close (r.env depth)
+    { block := fun b => b.pinned fun b => (r.block b).close (r.env depth)
       entity := fun e => (r.entity e).close (r.env depth)
       gameEvent := fun n p c => (r.gameEvent n p c).run (r.env depth) }
 

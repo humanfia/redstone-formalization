@@ -1,0 +1,120 @@
+{
+ "name": "dispenser-item-south",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   5,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:dispenser[facing=south,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:2},{Slot:4b,id:\"minecraft:ender_pearl\",count:16},{Slot:7b,id:\"minecraft:cobblestone\",count:1}]}"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:lever[face=wall,facing=east,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

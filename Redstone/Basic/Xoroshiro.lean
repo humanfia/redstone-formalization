@@ -3,12 +3,17 @@ module
 public import Redstone.Basic.Pos
 
 /-!
-# The game's positional random generator
+# The game's other random generator
 
-`XoroshiroRandomSource` (the generator `Xoroshiro128PlusPlus`) and the positional generators
-derived from it (`XoroshiroPositionalRandomFactory`). Potent sulfur draws the length of a
-geyser's phases from a generator that depends only on the world seed and on the position of the
-block.
+`XoroshiroRandomSource` (the generator `Xoroshiro128PlusPlus`), with what the game derives from
+it:
+
+* the positional generators (`XoroshiroPositionalRandomFactory`). Potent sulfur draws the length
+  of a geyser's phases from a generator that depends only on the world seed and on the position
+  of the block;
+* the server's random sequences (`RandomSequences`): one generator for each key, made on first
+  use from the world seed and the key. A loot table draws from the sequence named after it, so
+  these generators are part of the state of the world (`Level.lootSequences`).
 
 A `long` is represented by the natural number below `2 ^ 64` with the same bits.
 -/
@@ -16,6 +21,10 @@ A `long` is represented by the natural number below `2 ^ 64` with the same bits.
 @[expose] public section
 
 namespace Redstone
+
+/-- The seed of the world (`WorldOptions.seed`; `level-seed` in `server.properties`). The
+harness sets it to 0. -/
+def worldSeed : ℕ := 0
 
 /-- The state of a `Xoroshiro128PlusPlus`: two 64-bit words. -/
 structure Xoroshiro where
@@ -56,6 +65,16 @@ def ofSeed (seed : ℕ) : Xoroshiro :=
   let hi := (lo + goldenRatio) % two64
   ofSeeds (mixStafford13 lo) (mixStafford13 hi)
 
+/-- The generator of a new random sequence (`RandomSequences.createSequence` with the defaults:
+salt 0, the world seed and the key both included): `RandomSupport.upgradeSeedTo128bitUnmixed`
+of the world seed, combined with the hash of the key of the sequence, each half mixed.
+`hashLo` and `hashHi` are `RandomSupport.seedFromHashOf(key)`: the first and the second eight
+bytes, big-endian, of the MD5 hash of the key (e.g. `minecraft:blocks/short_grass`). -/
+def sequence (seed hashLo hashHi : ℕ) : Xoroshiro :=
+  let lo := seed ^^^ silverRatio
+  let hi := (lo + goldenRatio) % two64
+  ofSeeds (mixStafford13 (lo ^^^ hashLo)) (mixStafford13 (hi ^^^ hashHi))
+
 /-- `Xoroshiro128PlusPlus.nextLong()`. -/
 def nextLong (r : Xoroshiro) : ℕ × Xoroshiro :=
   let s0 := r.lo
@@ -86,6 +105,12 @@ def nextInt (r : Xoroshiro) (bound : ℕ) : ℕ × Xoroshiro :=
   let product := bits * bound
   if product % 2 ^ 32 < bound then nextIntLoop bound ((2 ^ 32 - bound) % bound) 128 product r
   else (product >>> 32, r)
+
+/-- `XoroshiroRandomSource.nextFloat()` as the numerator of a fraction with denominator
+`2 ^ 24`: the high 24 bits of a `long`. -/
+def nextFloat24 (r : Xoroshiro) : ℕ × Xoroshiro :=
+  let (v, r) := r.nextLong
+  (v >>> 40, r)
 
 /-- `RandomSource.nextIntBetweenInclusive(min, max)`. -/
 def nextIntBetweenInclusive (r : Xoroshiro) (min max : ℕ) : ℕ × Xoroshiro :=

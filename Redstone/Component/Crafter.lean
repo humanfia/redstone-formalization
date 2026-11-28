@@ -1,6 +1,6 @@
 module
 
-public import Redstone.Component.Dispenser.Container
+public import Redstone.Component.Container
 public import Redstone.Component.Crafter.Data
 
 /-!
@@ -24,8 +24,8 @@ disabled.
   shulker box dyeing). When one of these matches, or may match (`SpecialRecipe.mayMatch` and
   `repairMayMatch` are necessary conditions), the model sets `Level.overflow`, even if a
   modelled recipe matches as well: which of the two the game picks is not modelled.
-* Containers other than dispensers, droppers and crafters, and what an item entity holds: see
-  `Redstone.Component.Dispenser.Container`.
+* What an item entity holds: see `Redstone.ItemDrop`. The containers a crafter pushes its
+  results into are those of `Redstone.Component.Container`.
 * `setPlacedBy` (a player places an already powered crafter) and menus: using the block opens
   its menu and changes nothing in the level. Players change `disabled` through the menu only.
 * Sounds, particles and advancements.
@@ -35,12 +35,7 @@ disabled.
 
 namespace Redstone.Component.Crafter
 
-open Redstone.BlockEntities.Dispenser (Slots)
-
--- `Redstone.ItemStack` is the stack of the hopper unit; in this namespace the name stands for
--- the stack with components that the dispenser, the dropper and the crafter hold.
-export Redstone.BlockEntities.Dispenser (ItemStack)
-open Redstone.Component.Dispenser
+open Container ItemDrop
 
 /-- `FrontAndTop.front`: the direction a crafter faces. -/
 def front : FrontAndTop → Direction
@@ -63,10 +58,10 @@ inductive Potential
 /-- A necessary condition for `RepairItemRecipe.matches`: two stacks of the same item, both
 with the component `max_damage`. -/
 def repairMayMatch (input : CraftingInput) : Bool :=
-  match input.items.filterMap id with
+  match input.items.filter (!·.isEmpty) with
   | [a, b] =>
-    a.id == b.id && hasComponent a "minecraft:max_damage" Data.damageable &&
-      hasComponent b "minecraft:max_damage" Data.damageable
+    a.id == b.id && a.hasComponent "minecraft:max_damage" Data.damageable &&
+      b.hasComponent "minecraft:max_damage" Data.damageable
   | _ => false
 
 /-- `CrafterBlock.getPotentialResults(level, input)`: the recipe for a crafting grid. The cache
@@ -84,35 +79,37 @@ def getPotentialResults (input : CraftingInput) : Potential :=
     | _ => .unmodelled
 
 /-- `Item.getCraftingRemainder`: what an item leaves behind when it is used in a recipe. -/
-def craftingRemainder (id : String) : Option ItemStack :=
+def craftingRemainder (id : String) : ItemStack :=
   if id == "minecraft:water_bucket" || id == "minecraft:lava_bucket" ||
-      id == "minecraft:milk_bucket" then some ⟨"minecraft:bucket", 1, []⟩
+      id == "minecraft:milk_bucket" then .of "minecraft:bucket"
   else if id == "minecraft:dragon_breath" || id == "minecraft:honey_bottle" then
-    some ⟨"minecraft:glass_bottle", 1, []⟩
-  else none
+    .of "minecraft:glass_bottle"
+  else .empty
 
 /-- `CrafterBlockEntity.getRedstoneSignal`: the number of slots that are filled or disabled. -/
 def redstoneSignal (c : BlockEntities.Crafter) : ℕ :=
-  (List.range 9).countP fun i => (c.items.getD i none).isSome || c.isSlotDisabled i
+  (List.range 9).countP fun i => !(c.items.getItem i).isEmpty || c.isSlotDisabled i
 
-/-- The first loop of `CrafterBlock.dispenseItem`: pushes the stack into the container of
-`block` at `q` one item at a time, until an item does not fit. Returns what is left. -/
-def pushOneByOne (q : Pos) (block : BlockId) : ℕ → Option ItemStack → M (Option ItemStack)
-  | _, none => pure none
-  | 0, some s => pure (some s)
-  | fuel + 1, some s => do
-    if (← addItem q block { s with count := 1 }).isSome then return some s
-    pushOneByOne q block fuel (s.withCount (s.count - 1))
+/-- The first loop of `CrafterBlock.dispenseItem`: pushes the stack into the container `into`
+through the face `face`, one item at a time, until an item does not fit. Returns what is
+left. -/
+def pushOneByOne (into : ContainerRef) (face : Direction) : ℕ → ItemStack → M ItemStack
+  | 0, s => pure s
+  | fuel + 1, s => do
+    if s.isEmpty then return s
+    if !(← addItem none into (s.withCount 1) (some face)).isEmpty then return s
+    pushOneByOne into face fuel (s.withCount (s.count - 1))
 
 /-- The second loop of `CrafterBlock.dispenseItem`: pushes the whole stack into the container
-of `block` at `q`, again and again until nothing more goes in. Returns what is left. -/
-def pushStack (q : Pos) (block : BlockId) : ℕ → Option ItemStack → M (Option ItemStack)
-  | _, none => pure none
-  | 0, some s => pure (some s)
-  | fuel + 1, some s => do
-    let left ← addItem q block s
-    if (left.map (·.count)) == some s.count then return left
-    pushStack q block fuel left
+`into` through the face `face`, again and again until nothing more goes in. Returns what is
+left. -/
+def pushStack (into : ContainerRef) (face : Direction) : ℕ → ItemStack → M ItemStack
+  | 0, s => pure s
+  | fuel + 1, s => do
+    if s.isEmpty then return s
+    let left ← addItem none into s (some face)
+    if left.count == s.count then return left
+    pushStack into face fuel left
 
 /-- `CrafterBlock.dispenseItem(level, pos, blockEntity, results, blockState, recipe)`: sends a
 stack out of the crafter at `p` in direction `d`: into the container in front as far as it
@@ -120,17 +117,14 @@ fits, the rest as an item entity. -/
 def dispenseItem (p : Pos) (d : Direction) (results : ItemStack) : M Unit := do
   let front := p.step d
   let left ←
-    match ← containerAt front with
-    | .unmodelled =>
-      Level.setOverflow
-      pure none
-    | .absent => pure (some results)
-    | .known block =>
+    match ← getContainerAt front with
+    | none => pure results
+    | some into =>
       let intoCrafter := (← Level.getBlockEntity front) matches some (.crafter _)
-      if intoCrafter || results.count > containerMaxStackSize results then
-        pushOneByOne front block results.count (some results)
-      else pushStack front block results.count (some results)
-  if let some left := left then spawnItem left 6 d (centerRelative p d 0.7)
+      if intoCrafter || results.count > results.containerMaxStackSize (← into.maxStackSize) then
+        pushOneByOne into d.opposite results.count results
+      else pushStack into d.opposite results.count results
+  if !left.isEmpty then spawnItem left 6 d (centerRelative p d 0.7)
 
 /-- `CrafterBlock.dispenseFrom(state, level, pos)` for the crafter `s` at `p`. -/
 def dispenseFrom (s : Blocks.Crafter) (p : Pos) : M Unit := do
@@ -144,13 +138,14 @@ def dispenseFrom (s : Blocks.Crafter) (p : Pos) : M Unit := do
     Level.setBlockEntity p (.crafter { be with craftingTicksRemaining := 6 })
     discard <| Level.setBlock p (.crafter { s with crafting := true }) 2
     let d := front s.orientation
-    dispenseItem p d ⟨recipe.result, recipe.count, []⟩
+    dispenseItem p d (.of recipe.result recipe.count)
     for stack in input.items do
-      if let some remainder := stack.bind (craftingRemainder ·.id) then dispenseItem p d remainder
+      let remainder := craftingRemainder stack.item
+      if !remainder.isEmpty then dispenseItem p d remainder
     if let some (.crafter be) ← Level.getBlockEntity p then
-      let items := be.items.map fun stack => stack.bind fun st => st.withCount (st.count - 1)
+      let items := be.items.map fun stack => stack.withCount (stack.count - 1)
       Level.setBlockEntity p (.crafter { be with items })
-    setChanged p .crafter
+    blockEntityChanged p
 
 /-- `CrafterBlock.setBlockEntityTriggered`: records in the block entity at `p` whether the
 crafter is triggered. -/
@@ -190,8 +185,7 @@ def crafter (s : Blocks.Crafter) : Behaviour :=
         setBlockEntityTriggered p false
     tick := dispenseFrom s
     affectNeighborsAfterRemoval := fun p _ => Level.updateNeighbourForOutputSignal p .crafter
-    preRemoveSideEffects := fun p => do
-      if let some items := (← Level.getBlockEntity p).bind items? then dropContents p items
+    preRemoveSideEffects := dropContents
     useWithoutItem := fun _ _ => return true }
 
 /-- The behaviour of the blocks of this component. -/

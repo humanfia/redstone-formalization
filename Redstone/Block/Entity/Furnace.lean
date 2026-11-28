@@ -41,15 +41,18 @@ namespace Furnace
 instance : Inhabited Furnace := ⟨{}⟩
 
 /-- Reads the data from the block entity's saved NBT (`loadAdditional`). Fields the model does
-not keep are ignored. -/
+not keep are ignored. A furnace whose stacks have data components is not read: its fuels and
+recipes are those of the items. -/
 def ofNbt? (t : Nbt) : Option Furnace := do
   if !t.plainContainer then none
+  let items := Inventory.ofNbt 3 t
+  if items.hasComponents then none
   let used :=
     match t.get? "RecipesUsed" with
     | none | some (.compound []) => false
     | _ => true
   return {
-    items := ← Inventory.ofNbt? 3 t
+    items := items
     litTimeRemaining := t.intD "lit_time_remaining" 0
     litTotalTime := t.intD "lit_total_time" 0
     cookingTimer := t.intD "cooking_time_spent" 0

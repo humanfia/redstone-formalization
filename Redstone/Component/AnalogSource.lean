@@ -1,6 +1,6 @@
 module
 
-public import Redstone.Mechanics.Tick
+public import Redstone.Entity.ItemDrop
 public import Redstone.Component.AnalogSource.ItemData
 
 /-!
@@ -31,10 +31,6 @@ always eat.
 Where the game does something the model cannot represent, the reaction calls `unmodelled`,
 which sets `Level.overflow`: the level is then no longer a faithful image of the game.
 
-* Item entities: a jukebox that ejects its record, a lectern that is destroyed with a book, a
-  composter that is emptied, and a chiseled bookshelf, shelf or decorated pot that is removed
-  with items inside drop items. The random numbers the game draws from the level's generator
-  are drawn, but the entities are not created (`unmodelled`).
 * The explosion of a respawn anchor used outside the Nether (`unmodelled`).
 * An axe or honeycomb used on a copper golem statue (`unmodelled`): scraping, waxing and
   bringing the golem back are behaviours of the items and of a mob.
@@ -52,19 +48,19 @@ which sets `Level.overflow`: the level is then no longer a faithful image of the
 * Cauldrons: dripstone (`tick`), rain and snow (`handlePrecipitation`), burning entities
   (`entityInside`), and the interactions that need item components (water bottles, dyed armour,
   banners).
-* Projectiles hitting a decorated pot or an unlit candle cake (`unmodelled`), explosions, the
-  hopper side of the composter and of the jukebox, and the menu of the lectern as an interface
-  (`setPage` and `takeBook` are defined, but nothing calls them).
+* Projectiles hitting a decorated pot or an unlit candle cake (`unmodelled`), explosions, and the
+  menu of the lectern as an interface (`setPage` and `takeBook` are defined, but nothing calls
+  them). The side of these blocks that hoppers and droppers see is in
+  `Redstone.Component.Container`.
 * Fluid ticks: a waterlogged shelf, decorated pot or copper golem statue that gets a shape update
   schedules a fluid tick, after which its water flows (`unmodelled`).
-* Components of stored items: two stacks are the same when the items are.
+* Components of stored items: the stacks keep their component patch (`Redstone.ItemStack`), but
+  whether an item is a record, a book or compostable is read from the item, not from the patch.
 -/
 
 @[expose] public section
 
 namespace Redstone.Component.AnalogSource
-
-open BlockEntities (StoredItem)
 
 /-! ### Shared helpers -/
 
@@ -76,10 +72,6 @@ def nextInt (bound : ℕ) : M ℕ :=
   modifyGet fun l =>
     let (v, r) := l.random.nextInt bound
     (v, { l with random := r })
-
-/-- `RandomSource.nextFloat()` on the level's generator; only the draw matters here. -/
-def nextFloat : M Unit :=
-  modify fun l => { l with random := l.random.nextFloat24.2 }
 
 /-- `RandomSource.nextDouble()` on the level's generator; only the draw matters here. -/
 def nextDouble : M Unit :=
@@ -94,14 +86,6 @@ def setChanged (p : Pos) (block : BlockId) : M Unit :=
 def updateNeighboursAfterDestroy (p : Pos) (block : BlockId) : M Unit :=
   Level.updateNeighbourForOutputSignal p block
 
-/-- An item entity thrown out above a block (`JukeboxBlockEntity.popOutTheItem`,
-`ComposterBlock.extractProduce`): `offsetRandomXZ` draws two floats for its position. The
-entity itself is not created. -/
-def popItemAbove : M Unit := do
-  nextFloat
-  nextFloat
-  unmodelled
-
 /-- `Block.popResource(level, pos, stack)` while blocks drop nothing (the game rule
 `block_drops` is off, as in every test): three doubles are drawn for the position of the item
 before the rule is looked at. -/
@@ -110,39 +94,12 @@ def popResource : M Unit := do
   nextDouble
   nextDouble
 
-/-- The loop of `Containers.dropItemStack` for a stack of `count` items: item entities of 10 to
-30 items each, with a random velocity, until the stack is used up. Only the random numbers are
-drawn; `fuel` bounds the number of entities. -/
-def dropItemStackLoop : ℕ → ℕ → M Unit
-  | 0, _ => pure ()
-  | fuel + 1, count => do
-    if count ≠ 0 then
-      let n ← nextInt 21
-      -- three calls of `triangle`, two doubles each
-      (List.range 6).forM fun _ => nextDouble
-      dropItemStackLoop fuel (count - (n + 10))
-
-/-- `Containers.dropContents`, which `BlockEntity.preRemoveSideEffects` calls for a block entity
-that is a container: for every slot, empty or not, three doubles are drawn for a position, and
-the stack is dropped there. The item entities are not created. -/
-def dropContents (items : List (Option StoredItem)) : M Unit :=
-  items.forM fun item => do
-    nextDouble
-    nextDouble
-    nextDouble
-    if let some i := item then
-      dropItemStackLoop i.count i.count
-      if i.count ≠ 0 then unmodelled
-
 /-- `ItemStack.isEmpty` for an item given by name: the empty hand is `minecraft:air`. -/
 def isEmptyHand (item : String) : Bool := item = "minecraft:air"
 
 /-- The stack of one `item` that a player holds; nothing for the empty hand. -/
-def heldStack (item : String) : Option StoredItem :=
-  if isEmptyHand item then none else some ⟨item, 1⟩
-
-/-- The slot `i` of a list of slots; empty when out of range. -/
-def slot (items : List (Option StoredItem)) (i : ℕ) : Option StoredItem := items[i]?.join
+def heldStack (item : String) : ItemStack :=
+  if isEmptyHand item then .empty else .of item
 
 /-- `Direction.getClockWise` of a horizontal direction. -/
 def clockWise : HorizontalDirection → Direction
@@ -329,11 +286,15 @@ def composterAddLayer (s : Blocks.Composter) (p : Pos) (chance : ℕ) : M Unit :
     Level.gameEvent "minecraft:block_change" p
     if newLevel = 7 then Level.scheduleTick p .composter 20
 
-/-- `ComposterBlock.extractProduce`: the bone meal pops out and the composter is empty again. -/
-def composterExtract (s : Blocks.Composter) (p : Pos) : M Unit := do
-  popItemAbove
+/-- `ComposterBlock.empty`: the composter is empty again. -/
+def composterEmpty (s : Blocks.Composter) (p : Pos) : M Unit := do
   discard <| Level.setBlock p (.composter { s with level := 0 })
   Level.gameEvent "minecraft:block_change" p
+
+/-- `ComposterBlock.extractProduce`: the bone meal pops out and the composter is empty again. -/
+def composterExtract (s : Blocks.Composter) (p : Pos) : M Unit := do
+  ItemDrop.popOutAbove p (.of "minecraft:bone_meal")
+  composterEmpty s p
 
 /-- The behaviour of a composter. -/
 def composter (s : Blocks.Composter) : Behaviour :=
@@ -435,16 +396,16 @@ def getBookshelf (p : Pos) : M (Option BlockEntities.ChiseledBookshelf) := do
 /-- `ChiseledBookShelfBlockEntity.updateState(slot)` after the slots became `items`: the slot is
 remembered and the block shows which slots hold a book. -/
 def bookshelfUpdateState (s : Blocks.ChiseledBookShelf) (p : Pos)
-    (items : List (Option StoredItem)) (interacted : ℕ) : M Unit := do
+    (items : Inventory) (interacted : ℕ) : M Unit := do
   Level.setBlockEntity p (.chiseledBookshelf ⟨items, interacted⟩)
   let updated : Blocks.ChiseledBookShelf :=
     { s with
-      slot_0_occupied := (slot items 0).isSome
-      slot_1_occupied := (slot items 1).isSome
-      slot_2_occupied := (slot items 2).isSome
-      slot_3_occupied := (slot items 3).isSome
-      slot_4_occupied := (slot items 4).isSome
-      slot_5_occupied := (slot items 5).isSome }
+      slot_0_occupied := !(items.getItem 0).isEmpty
+      slot_1_occupied := !(items.getItem 1).isEmpty
+      slot_2_occupied := !(items.getItem 2).isEmpty
+      slot_3_occupied := !(items.getItem 3).isEmpty
+      slot_4_occupied := !(items.getItem 4).isEmpty
+      slot_5_occupied := !(items.getItem 5).isEmpty }
   discard <| Level.setBlock p (.chiseledBookShelf updated)
   Level.gameEvent "minecraft:block_change" p
 
@@ -457,8 +418,8 @@ def chiseledBookShelf (s : Blocks.ChiseledBookShelf) : Behaviour :=
     if face ≠ s.facing.toDirection then return false
     if !slotOccupied s bookshelfHitSlot then return true
     -- `removeBook`: the book goes to the player.
-    if (slot d.items bookshelfHitSlot).isSome then
-      bookshelfUpdateState s p (d.items.set bookshelfHitSlot none) bookshelfHitSlot
+    if !(d.items.getItem bookshelfHitSlot).isEmpty then
+      bookshelfUpdateState s p (d.items.setItem bookshelfHitSlot .empty) bookshelfHitSlot
     Level.gameEvent "minecraft:block_change" p
     return true
   { Behaviour.inert self with
@@ -468,7 +429,7 @@ def chiseledBookShelf (s : Blocks.ChiseledBookShelf) : Behaviour :=
       | _ => 0
     affectNeighborsAfterRemoval := fun p _ => updateNeighboursAfterDestroy p .chiseled_bookshelf
     preRemoveSideEffects := fun p => do
-      if let some d ← getBookshelf p then dropContents d.items
+      if let some d ← getBookshelf p then ItemDrop.dropContents p d.items
     useWithoutItem := useWithoutItem
     useItemOn := fun p face item => do
       let some d ← getBookshelf p | return false
@@ -477,8 +438,7 @@ def chiseledBookShelf (s : Blocks.ChiseledBookShelf) : Behaviour :=
       else if slotOccupied s bookshelfHitSlot then useWithoutItem p face
       else
         -- `addBook`.
-        bookshelfUpdateState s p (d.items.set bookshelfHitSlot (some ⟨item, 1⟩))
-          bookshelfHitSlot
+        bookshelfUpdateState s p (d.items.setItem bookshelfHitSlot (.of item)) bookshelfHitSlot
         return true }
 
 /-! ### Shelf -/
@@ -622,7 +582,7 @@ def swapHotbar (p : Pos) (item : String) : M Unit := do
   connected.zipIdx.forM fun (q, i) => do
     if let some d ← getShelf q then
       let items := (List.range 3).map fun k =>
-        if 9 + k = (n - i) * 3 then heldStack item else none
+        if 9 + k = (n - i) * 3 then heldStack item else .empty
       Level.setBlockEntity q (.shelf { d with items := items })
       shelfSetChanged q ((← Level.getBlock q).id) (some "minecraft:entity_interact")
 
@@ -636,7 +596,7 @@ def shelf (id : Blocks.Shelf.Id) (s : Blocks.Shelf) : Behaviour :=
       else
         match l.blockEntities p with
         | some (.shelf e) =>
-          let bit (i : ℕ) : ℕ := if (slot e.items i).isSome then 1 else 0
+          let bit (i : ℕ) : ℕ := if (e.items.getItem i).isEmpty then 0 else 1
           bit 0 + 2 * bit 1 + 4 * bit 2
         | _ => 0
     updateShape := fun _ _ _ _ => waterloggedUpdateShape self s.waterlogged
@@ -657,21 +617,21 @@ def shelf (id : Blocks.Shelf.Id) (s : Blocks.Shelf) : Behaviour :=
       updateNeighboursAfterDestroy p id.toBlockId
       updateNeighborsAfterPoweringDown p s.facing
     preRemoveSideEffects := fun p => do
-      if let some d ← getShelf p then dropContents d.items
+      if let some d ← getShelf p then ItemDrop.dropContents p d.items
     useItemOn := fun p face item => do
       let some d ← getShelf p | return false
       if face ≠ s.facing.toDirection then return false
       if !s.powered then
         -- `swapSingleItem`: the held stack takes the place of what was in the slot, which the
         -- player gets; a player in creative mode keeps the held item if the slot was empty.
-        let removed := slot d.items shelfHitSlot
-        let inHand := (removed.map (·.id)).getD item
+        let removed := d.items.getItem shelfHitSlot
+        let inHand := if removed.isEmpty then item else removed.id
         Level.setBlockEntity p
-          (.shelf { d with items := d.items.set shelfHitSlot (heldStack item) })
+          (.shelf { d with items := d.items.setItem shelfHitSlot (heldStack item) })
         shelfSetChanged p id.toBlockId
           (if silentItems.contains inHand then none else some "minecraft:item_interact_finish")
         -- An empty hand on an empty slot passes.
-        return removed.isSome || !isEmptyHand item
+        return !removed.isEmpty || !isEmptyHand item
       else
         swapHotbar p item
         return true }
@@ -685,12 +645,11 @@ def getPot (p : Pos) : M (Option BlockEntities.DecoratedPot) := do
   | _ => return none
 
 /-- `AbstractContainerMenu.getRedstoneSignalFromContainer` for a container of one slot:
-`Mth.lerpDiscrete(count / maxStackSize, 0, 15)`. The stack sizes are powers of two, so the
-`float` arithmetic of the game is exact. -/
+`Mth.lerpDiscrete(count / maxStackSize, 0, 15)`. The stack sizes of the items are powers of
+two, so the `float` arithmetic of the game is exact for a stack without a `max_stack_size` of
+its own. -/
 def potSignal (d : BlockEntities.DecoratedPot) : ℕ :=
-  match d.item with
-  | none => 0
-  | some i => if i.count = 0 then 0 else i.count * 14 / maxStackSize i.id + 1
+  if d.item.isEmpty then 0 else d.item.count * 14 / d.item.containerMaxStackSize + 1
 
 /-- The behaviour of a decorated pot. A comparator reads how full its one slot is. -/
 def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
@@ -709,7 +668,7 @@ def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
     updateShape := fun _ _ _ _ => waterloggedUpdateShape self s.waterlogged
     affectNeighborsAfterRemoval := fun p _ => updateNeighboursAfterDestroy p .decorated_pot
     preRemoveSideEffects := fun p => do
-      if let some d ← getPot p then dropContents [d.item]
+      if let some d ← getPot p then ItemDrop.dropContents p [d.item]
     -- A projectile that may break blocks shatters the pot.
     onProjectileHit := fun _ _ _ => unmodelled
     triggerEvent := fun p a b => do
@@ -720,17 +679,14 @@ def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
       let some d ← getPot p | return false
       let fits :=
         !isEmptyHand item &&
-          match d.item with
-          | none => true
-          | some i => i.id = item && i.count < maxStackSize i.id
+          (d.item.isEmpty ||
+            (d.item.isSameItemSameComponents (.of item) && d.item.count < d.item.maxStackSize))
       if fits then
         -- `wobble(POSITIVE)`.
         Level.blockEvent p .decorated_pot 1 0
-        let newItem : StoredItem :=
-          match d.item with
-          | none => ⟨item, 1⟩
-          | some i => { i with count := i.count + 1 }
-        Level.setBlockEntity p (.decoratedPot ⟨some newItem⟩)
+        let newItem : ItemStack :=
+          if d.item.isEmpty then .of item else d.item.withCount (d.item.count + 1)
+        Level.setBlockEntity p (.decoratedPot ⟨newItem⟩)
         setChanged p .decorated_pot
         Level.gameEvent "minecraft:block_change" p
         return true
@@ -868,34 +824,30 @@ def stopSong (p : Pos) : M Unit := do
     Level.gameEvent "minecraft:jukebox_stop_play" p
     onSongChanged p
 
-/-- `JukeboxBlockEntity.setTheItem` for a record: the jukebox shows that it has a record, and
-the song of the record starts. -/
-def insertRecord (s : Blocks.Jukebox) (p : Pos) (item : String) : M Unit := do
+/-- `JukeboxBlockEntity.setTheItem(itemStack)`: the jukebox shows whether it has a record, and
+the song of the record starts, or the song that was playing stops. `s` is the state the block
+entity knows (`getBlockState()`), which is no longer the state of the level when the jukebox is
+being removed. The song of a stack is that of its item. -/
+def setTheItem (s : Blocks.Jukebox) (p : Pos) (stack : ItemStack) : M Unit := do
   let some d ← getJukebox p | return
-  Level.setBlockEntity p (.jukebox { d with record := some ⟨item, 1⟩ })
-  -- `notifyItemChangedInJukebox(true)`.
+  Level.setBlockEntity p (.jukebox { d with record := stack.normalize })
+  -- `notifyItemChangedInJukebox(itemWasInserted)`.
   if (← Level.getBlock p) = .jukebox s then
-    discard <| Level.setBlock p (.jukebox { s with has_record := true }) 2
+    discard <| Level.setBlock p (.jukebox { s with has_record := !stack.isEmpty }) 2
     Level.gameEvent "minecraft:block_change" p
-  if (jukeboxSong item).isSome then
+  if !stack.isEmpty && (jukeboxSong stack.id).isSome then
     -- `JukeboxSongPlayer.play`.
     if let some d ← getJukebox p then Level.setBlockEntity p (.jukebox { d with song := some 0 })
     onSongChanged p
   else stopSong p
 
-/-- `JukeboxBlockEntity.popOutTheItem`: the record is thrown out and the song stops. `s` is the
-state the block entity knows (`getBlockState()`), which is no longer the state of the level
-when the jukebox is being removed. -/
+/-- `JukeboxBlockEntity.popOutTheItem`: the record is thrown out and the song stops. -/
 def popOutTheItem (s : Blocks.Jukebox) (p : Pos) : M Unit := do
   let some d ← getJukebox p | return
-  if d.record.isSome then
+  if !d.record.isEmpty then
     -- `removeTheItem`, which is `setTheItem(ItemStack.EMPTY)`.
-    Level.setBlockEntity p (.jukebox { d with record := none })
-    if (← Level.getBlock p) = .jukebox s then
-      discard <| Level.setBlock p (.jukebox { s with has_record := false }) 2
-      Level.gameEvent "minecraft:block_change" p
-    stopSong p
-    popItemAbove
+    setTheItem s p .empty
+    ItemDrop.popOutAbove p d.record
     onSongChanged p
 
 /-- `JukeboxSongPlayer.tick`: a song that is over stops; otherwise it goes on, and once a second
@@ -903,7 +855,7 @@ the jukebox announces that it plays and draws a random colour for a note particl
 def jukeboxTick (p : Pos) : M Unit := do
   let some d ← getJukebox p | return
   let some ticks := d.song | return
-  let length := ((d.record.bind fun r => jukeboxSong r.id).map (·.2)).getD 0
+  let length := ((jukeboxSong d.record.item).map (·.2)).getD 0
   if ticks ≥ length + 20 then stopSong p
   else
     if ticks % 20 = 0 then
@@ -929,7 +881,7 @@ def jukebox (s : Blocks.Jukebox) : Behaviour :=
     ownSignal := playing
     analogSignal := fun l p _ =>
       match l.blockEntities p with
-      | some (.jukebox d) => ((d.record.bind fun r => jukeboxSong r.id).map (·.1)).getD 0
+      | some (.jukebox d) => ((jukeboxSong d.record.item).map (·.1)).getD 0
       | _ => 0
     ticksBlockEntity := s.has_record
     blockEntityTick := jukeboxTick
@@ -945,7 +897,7 @@ def jukebox (s : Blocks.Jukebox) : Behaviour :=
       else if (jukeboxSong item).isSome then
         -- `JukeboxPlayable.tryInsertIntoJukebox`.
         if (← getJukebox p).isSome then
-          insertRecord s p item
+          setTheItem s p (.of item)
           Level.gameEvent "minecraft:block_change" p
         return true
       else return false }
@@ -1042,9 +994,15 @@ def lectern (s : Blocks.Lectern) : Behaviour :=
     tick := fun p => changePowered s p false
     affectNeighborsAfterRemoval := fun p _ => do
       if s.powered then updateBelow p
-    preRemoveSideEffects := fun _ => do
-      -- The book is dropped as an item entity.
-      if s.has_book then unmodelled
+    preRemoveSideEffects := fun p => do
+      -- `LecternBlockEntity.preRemoveSideEffects`: the book is dropped as an item entity.
+      if s.has_book then
+        if let some book := (← getLectern p).bind (·.book) then
+          let front := ItemDrop.stepVec s.facing.toDirection
+          ItemDrop.spawnWithPickUpDelay
+            ⟨Float.ofInt p.x + 0.5 + 0.25 * front.x, Float.ofInt p.y + 1,
+              Float.ofInt p.z + 0.5 + 0.25 * front.z⟩
+            { id := book.id, count := 1, components := book.components }
     -- With a book the lectern opens its menu; without one it consumes the click.
     useWithoutItem := fun _ _ => return true
     useItemOn := fun p _ item => do

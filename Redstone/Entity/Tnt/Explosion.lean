@@ -3,6 +3,7 @@ module
 public import Redstone.Entity.Tnt.Physics
 public import Redstone.Entity.Tnt.JavaMath
 public import Redstone.Entity.Tnt.HashSet
+public import Redstone.Block.Generated.Items
 
 /-!
 # Explosions
@@ -231,7 +232,7 @@ def addOrAppendStack (collected : Array (String × ℕ)) (item : String) (count 
     Array (String × ℕ) :=
   if count == 0 then (if collected.isEmpty then collected.push (item, 0) else collected)
   else
-    let size : ℤ := maxStackSize item
+    let size : ℤ := itemMaxStackSize item
     let (collected, rest) := collected.foldl
       (fun ((acc, n) : Array (String × ℕ) × ℤ) (it, c) =>
         if n > 0 && c > 0 && it == item && n + c ≤ size then

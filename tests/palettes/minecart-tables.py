@@ -43,8 +43,7 @@ def main():
     w("  are indices into it), as the raw bits of their `double` coordinates;")
     w("* the grid planes of every collision shape (`VoxelShape.getCoords`), which the boxes do not")
     w("  determine and on which `VoxelShape.collide` works;")
-    w("* the two tables of `Mth.atan2`;")
-    w("* the items whose maximum stack size is not 64.")
+    w("* the two tables of `Mth.atan2`.")
     w("")
     w("The shape table is not particular to minecarts and should move to the block inventory once")
     w("another component needs it.")
@@ -90,20 +89,6 @@ def main():
     for i in range(0, 257, 4):
         w("  " + ", ".join("0x" + c for _, c in atan[i:i + 4]) + ("," if i + 4 < 257 else ""))
     w("]")
-    for size in (1, 16):
-        ids = sorted(i["id"] for i in dump["items"] if i["maxStackSize"] == size)
-        w("")
-        w(f"/-- The items whose maximum stack size is {size}. -/")
-        w(f"def maxStack{size} : List String := [")
-        line = "  "
-        for j, name in enumerate(ids):
-            piece = json.dumps(name) + ("," if j + 1 < len(ids) else "")
-            if len(line) + len(piece) + 1 > 100:
-                w(line.rstrip())
-                line = "  "
-            line += piece + " "
-        w(line.rstrip())
-        w("]")
     w("")
     w("end Redstone.Entity.Minecart.Tables")
     print("\n".join(out))

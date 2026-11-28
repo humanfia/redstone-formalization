@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Component.Container
+public import Redstone.Entity.Item
 
 /-!
 # Hopper
@@ -12,14 +13,20 @@ block entity moves items: every game tick in which its cooldown has run out it f
 one item into the container it faces, then pulls one item out of the container above it, and
 if either worked it waits eight ticks. A comparator reads how full it is.
 
-The containers a hopper can reach are those of `Redstone.Component.Container`.
+The containers a hopper can reach, and how items go into them, are in
+`Redstone.Component.Container`.
+
+A hopper also picks up the item entities that lie in its bowl or in the block above it: one
+per attempt when it pulls (`suckInItems`), and each one that touches it when that entity is
+ticked (`entityInside`).
 
 ## What is left out
 
-* Item entities: a hopper neither picks up the items lying in it or above it (`suckInItems`
-  without a container, `entityInside`) nor reaches containers that are entities (minecarts,
-  boats). When an enabled hopper that is ready to move items has an item entity in reach, or
-  looks for a container where such an entity may be, the model sets `Level.overflow`.
+* Containers that are entities (minecarts, boats): see `Redstone.Component.Container`.
+* The components of the stack of an item entity (`Entities.Item`): a hopper that would take in
+  an item entity whose stack has components sets `Level.overflow`.
+* `entityInside` is called for the blocks an entity overlaps at the end of its move, not for
+  those it only passed through (`Level.applyEffectsFromBlocks`).
 -/
 
 @[expose] public section
@@ -27,16 +34,6 @@ The containers a hopper can reach are those of `Redstone.Component.Container`.
 namespace Redstone.Component.Hopper
 
 open Container
-
-/-- The data of the hopper at `p`. -/
-def getHopper (p : Pos) : M (Option BlockEntities.Hopper) := do
-  match ← Level.getBlockEntity p with
-  | some (.hopper d) => return some d
-  | _ => return none
-
-/-- Changes the data of the hopper at `p`. -/
-def modifyHopper (p : Pos) (f : BlockEntities.Hopper → BlockEntities.Hopper) : M Unit := do
-  if let some d ← getHopper p then Level.setBlockEntity p (.hopper (f d))
 
 /-- `HopperBlockEntity.inventoryFull`: every slot holds exactly a full stack. -/
 def inventoryFull (items : Inventory) : Bool :=
@@ -49,101 +46,40 @@ def isFullContainer (c : ContainerRef) (d : Direction) : M Bool := do
     let s ← c.getItem slot
     return !s.isEmpty && s.count ≥ s.maxStackSize
 
-/-- The entity is a `Container` (`EntitySelector.CONTAINER_ENTITY_SELECTOR`): a minecart with a
-chest or a hopper, or a boat with a chest. -/
-def isContainerEntity (e : Entity) : Bool :=
-  match e.data with
-  | .minecart .chest _ | .minecart .hopper _ => true
-  | .other type _ => type.endsWith "chest_boat" || type.endsWith "chest_raft"
-  | _ => false
+/-- `Hopper.SUCK_AABB` (`Block.column(16, 11, 32)`), moved to the hopper at `p`: the space from
+which the hopper picks up items, from the bottom of its bowl to one block above its top. -/
+def suckAabb (p : Pos) : AABB :=
+  let x := Phys.ofInt p.x
+  let y := Phys.ofInt p.y
+  let z := Phys.ofInt p.z
+  ⟨x, y + 0.6875, z, x + 1.0, y + 2.0, z + 1.0⟩
 
-/-- The bounding box of an entity, with the given half width and height, intersects the column
-of `blocks` blocks that starts with the block at `p`. -/
-def intersectsColumn (e : Entity) (halfWidth height : Float) (p : Pos) (blocks : Float) : Bool :=
-  let within (a : Float) (b : ℤ) : Bool :=
-    a - halfWidth < Float.ofInt b + 1 && a + halfWidth > Float.ofInt b
-  within e.base.pos.x p.x && within e.base.pos.z p.z
-    && e.base.pos.y < Float.ofInt p.y + blocks && e.base.pos.y + height > Float.ofInt p.y
-
-/-- `HopperBlockEntity.getEntityContainer`: the container entities whose bounding box touches
-the block at `p`. They are not modelled: if there may be one, `Level.overflow` is set. The box
-assumed for the entity is at least as large as that of a minecart or a boat. -/
-def getEntityContainer (p : Pos) : M Unit := do
-  if (← get).entities.any fun e => isContainerEntity e && intersectsColumn e 0.7 0.7 p 1 then
-    Level.setOverflow
-
-/-- An item entity touches the hopper at `p` or the space above it from which the hopper picks
-up items (`Hopper.SUCK_AABB`, which ends two blocks above the hopper's base). The game would
-then call `entityInside` or look at the item in `suckInItems`. -/
-def hasItemEntity (l : Level) (p : Pos) : Bool :=
-  l.entities.any fun e =>
+/-- `HopperBlockEntity.getItemsAtAndAbove(level, hopper)`: the item entities whose box meets
+the space the hopper at `p` picks up items from, by index, in the order of the game's entity
+sections (`Entity.Item.sectionKey`). -/
+def getItemsAtAndAbove (l : Level) (p : Pos) : List ℕ :=
+  let found := l.entities.filter fun e =>
     match e.data with
-    | .item _ => intersectsColumn e 0.125 0.25 p 2
+    | .item _ => (Entity.Item.kind.dims.box e.base.pos).intersects (suckAabb p)
     | _ => false
+  (found.foldl (fun acc e => Entity.Item.insertBySection e acc) []).map (·.index)
 
-/-- `HopperBlockEntity.getContainerAt(level, pos)`: the container at `p`, a block or else an
-entity. -/
-def getContainerAt (p : Pos) : M (Option ContainerRef) := do
-  let c ← getBlockContainer p
-  if c.isNone then getEntityContainer p
-  return c
-
-/-- The position of the hopper that the container is, if it is one
-(`container instanceof HopperBlockEntity`). -/
-def asHopper (c : ContainerRef) : M (Option Pos) := do
-  let .single p := c | return none
-  return (← getHopper p).map fun _ => p
-
-/-- `HopperBlockEntity.tryMoveInItem(from, container, itemStack, slot, direction)`: puts as much
-of the stack as fits into one slot of the container and returns the rest. When the container
-is a hopper that was empty, it gets a cooldown: eight ticks, or seven if it was ticked no
-earlier than the hopper the item comes from. `fromHopper` is the position of that hopper. -/
-def tryMoveInItem (fromHopper : Option Pos) (c : ContainerRef) (stack : ItemStack) (slot : ℕ) :
-    M ItemStack := do
-  let current ← c.getItem slot
-  if !(← c.canPlaceItem slot stack) then return stack
-  if (← c.isWorldly) && !(← c.canPlaceItemThroughFace slot stack) then return stack
-  let wasEmpty ← c.isEmpty
-  let mut stack := stack
-  let mut success := false
-  if current.isEmpty then
-    c.setItem slot stack
-    stack := .empty
-    success := true
-  else if current.count ≤ current.maxStackSize && current.isSameItem stack then
-    let count := min stack.count (stack.maxStackSize - current.count)
-    stack := stack.withCount (stack.count - count)
-    let (p, i) ← c.locate slot
-    setItems p ((← getItems p).setItem i (current.withCount (current.count + count)))
-    success := count > 0
-  if success then
-    if wasEmpty then
-      if let some q ← asHopper c then
-        if let some h ← getHopper q then
-          if !(h.cooldownTime > 8) then
-            let fromTicked ←
-              match fromHopper with
-              | some f => pure ((← getHopper f).map (·.tickedGameTime))
-              | none => pure none
-            let skip : ℤ := if fromTicked.any (h.tickedGameTime ≥ ·) then 1 else 0
-            modifyHopper q fun h => { h with cooldownTime := 8 - skip }
-    c.setChanged
-  return stack
-
-/-- `HopperBlockEntity.addItem(from, container, itemStack, direction)`: puts the stack into the
-container, slot after slot, through the given face if there is one, and returns what did not
-fit. -/
-def addItem (fromHopper : Option Pos) (c : ContainerRef) (stack : ItemStack)
-    (direction : Option Direction) : M ItemStack := do
-  let slots ←
-    match direction with
-    | some d => if ← c.isWorldly then c.slotsForFace d else pure (List.range (← c.size))
-    | none => pure (List.range (← c.size))
-  let mut stack := stack
-  for slot in slots do
-    if stack.isEmpty then break
-    stack ← tryMoveInItem fromHopper c stack slot
-  return stack
+/-- `HopperBlockEntity.addItem(container, entity)`: the hopper at `p` takes in as much of the
+stack of the item entity with index `i` as it has room for. Returns whether it took all of it;
+the entity is then gone. The components of an entity's stack are not known to the model: an
+entity that has some sets `Level.overflow`. -/
+def addItemEntity (p : Pos) (i : ℕ) : M Bool := do
+  let some (_, dt) ← Entity.Item.get? i | return false
+  if dt.hasComponents then
+    Level.setOverflow
+    return false
+  let rest ← addItem none (.single p) (.of dt.item dt.count) none
+  if rest.isEmpty then
+    Level.removeEntity i
+    return true
+  else
+    Entity.Item.modifyData i fun dt => { dt with count := rest.count }
+    return false
 
 /-- `HopperBlockEntity.ejectItems`: pushes one item, from the first slot that has one the
 container accepts, into the container the hopper faces. -/
@@ -170,7 +106,8 @@ above into the hopper at `p`. -/
 def tryTakeInItemFromSlot (p : Pos) (c : ContainerRef) (slot : ℕ) : M Bool := do
   let stack ← c.getItem slot
   if stack.isEmpty then return false
-  if (← c.isWorldly) && !(← c.canTakeItemThroughFace slot stack .down) then return false
+  let some h ← getHopper p | return false
+  if !(← c.canTakeItemFromContainer h.items stack slot .down) then return false
   let removed ← c.removeItem slot
   let rest ← addItem (← asHopper c) (.single p) removed none
   if rest.isEmpty then
@@ -181,7 +118,7 @@ def tryTakeInItemFromSlot (p : Pos) (c : ContainerRef) (slot : ℕ) : M Bool := 
 
 /-- `HopperBlockEntity.suckInItems`: pulls one item out of the container above the hopper,
 trying the slots that its bottom face gives access to in order. Without a container above, the
-game picks up item entities, which the model does not do (see `pushItemsTick`). -/
+hopper picks up the first item entity it has room for, unless a full block sits on it. -/
 def suckInItems (p : Pos) : M Bool := do
   let above := p.step .up
   match ← getBlockContainer above with
@@ -191,18 +128,25 @@ def suckInItems (p : Pos) : M Bool := do
     return false
   | none =>
     getEntityContainer above
+    let state ← Level.getBlock above
+    -- The block tag `minecraft:does_not_block_hoppers` holds the beehives.
+    let blocked := state.isCollisionShapeFullBlock && !(state matches .beehive _ _)
+    if !blocked then
+      for i in getItemsAtAndAbove (← get) p do
+        if ← addItemEntity p i then return true
     return false
 
 /-- `HopperBlockEntity.tryMoveItems`: if the hopper is enabled and not cooling down, it pushes
-and then pulls; if anything moved, it cools down for eight ticks and tells the comparators. -/
-def tryMoveItems (s : Blocks.Hopper) (p : Pos) : M Unit := do
+and then does `action`, which takes something in; if anything moved, it cools down for eight
+ticks and tells the comparators. -/
+def tryMoveItems (s : Blocks.Hopper) (p : Pos) (action : M Bool) : M Unit := do
   let some h ← getHopper p | return
   if !(h.cooldownTime > 0) && s.enabled then
     let mut changed := false
     if !h.items.isEmpty then changed ← ejectItems s p
     let some h ← getHopper p | return
     if !inventoryFull h.items then
-      let pulled ← suckInItems p
+      let pulled ← action
       changed := changed || pulled
     if changed then
       modifyHopper p fun h => { h with cooldownTime := 8 }
@@ -211,14 +155,20 @@ def tryMoveItems (s : Blocks.Hopper) (p : Pos) : M Unit := do
 /-- `HopperBlockEntity.pushItemsTick`: the hopper's block entity ticker. -/
 def pushItemsTick (s : Blocks.Hopper) (p : Pos) : M Unit := do
   let some h ← getHopper p | return
-  -- Item entities are not modelled. One that the hopper could have dealt with in this game
-  -- tick, when the entity was ticked (`entityInside`) or now, makes the model give up.
-  if s.enabled && h.cooldownTime ≤ 1 && hasItemEntity (← get) p then Level.setOverflow
   let h := { h with cooldownTime := h.cooldownTime - 1, tickedGameTime := (← get).gameTime }
   if h.cooldownTime > 0 then Level.setBlockEntity p (.hopper h)
   else
     Level.setBlockEntity p (.hopper { h with cooldownTime := 0 })
-    tryMoveItems s p
+    tryMoveItems s p (suckInItems p)
+
+/-- `HopperBlockEntity.entityInsideHopper`, called by `HopperBlock.entityInside`: an item entity
+that touches the space the hopper picks up items from is taken in, as far as there is room. -/
+def entityInside (s : Blocks.Hopper) (p : Pos) (i : ℕ) : M Unit := do
+  if (← getHopper p).isNone then return
+  let some (e, dt) ← Entity.Item.get? i | return
+  if dt.count == 0 || dt.item == "minecraft:air" then return
+  if (Entity.Item.kind.dims.box e.base.pos).intersects (suckAabb p) then
+    tryMoveItems s p (addItemEntity p i)
 
 /-- `HopperBlock.checkPoweredState`: the hopper is enabled exactly when it receives no
 signal. -/
@@ -235,6 +185,7 @@ def behaviour (self : Block) : Behaviour :=
       analogSignal := fun l p _ => redstoneSignalAt l p
       ticksBlockEntity := true
       blockEntityTick := pushItemsTick s
+      entityInside := entityInside s
       onPlace := fun p old _ => do
         if !old.is .hopper then checkPoweredState s p
       neighborChanged := fun p _ _ => checkPoweredState s p

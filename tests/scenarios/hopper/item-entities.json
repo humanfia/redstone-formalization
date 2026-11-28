@@ -1,0 +1,199 @@
+{
+ "name": "item-entities",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    1
+   ],
+   "max": [
+    10,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:dirt\",count:64},{Slot:1b,id:\"minecraft:dirt\",count:64},{Slot:2b,id:\"minecraft:dirt\",count:64},{Slot:3b,id:\"minecraft:dirt\",count:64},{Slot:4b,id:\"minecraft:stone\",count:62}]}"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=false,facing=down]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:1}]}"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    0
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.5,
+    1.8,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.3,
+    3.2,
+    0.3
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:5}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.6,
+    2.5,
+    0.6
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:7}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.5,
+    2.2,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:5}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.4,
+    2.6,
+    0.4
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.5,
+    1.75,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.5,
+    2.2,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    8.5,
+    2.2,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:20}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    8.5,
+    2.6,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:ender_pearl\",count:16}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    10.5,
+    1.75,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:2}}"
+  }
+ ]
+}

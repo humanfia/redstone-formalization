@@ -1,6 +1,6 @@
 module
 
-public import Redstone.Block.Entity.Dispenser
+public import Redstone.Block.Entity.Inventory
 
 /-!
 # Crafting recipes
@@ -16,12 +16,6 @@ Ingredients only look at the item of a stack, never at its components.
 @[expose] public section
 
 namespace Redstone.Component.Crafter
-
-open Redstone.BlockEntities.Dispenser (Slots)
-
--- `Redstone.ItemStack` is the stack of the hopper unit; in this namespace the name stands for
--- the stack with components that the dispenser, the dropper and the crafter hold.
-export Redstone.BlockEntities.Dispenser (ItemStack)
 
 /-- An ingredient (`Ingredient`): the items it accepts, each given by its name or as an item
 tag written `#name`. The empty list stands for an empty cell of a shaped recipe. -/
@@ -73,14 +67,14 @@ structure CraftingInput where
   /-- The height of what is left. -/
   height : ℕ
   /-- The stacks, row by row. -/
-  items : Slots
+  items : Inventory
   deriving Repr
 
 namespace CraftingInput
 
 /-- `CraftingInput.ofPositioned(width, height, items).input()`. -/
-def ofPositioned (width height : ℕ) (items : Slots) : CraftingInput :=
-  let full (x y : ℕ) : Bool := (items.getD (x + y * width) none).isSome
+def ofPositioned (width height : ℕ) (items : Inventory) : CraftingInput :=
+  let full (x y : ℕ) : Bool := !(items.getItem (x + y * width)).isEmpty
   let cols := (List.range width).filter fun x => (List.range height).any (full x ·)
   let rows := (List.range height).filter fun y => (List.range width).any (full · y)
   match cols.head?, cols.getLast?, rows.head?, rows.getLast? with
@@ -89,14 +83,14 @@ def ofPositioned (width height : ℕ) (items : Slots) : CraftingInput :=
       height := bottom - top + 1
       items := (List.range (bottom - top + 1)).flatMap fun y =>
         (List.range (right - left + 1)).map fun x =>
-          items.getD (x + left + (y + top) * width) none }
+          items.getItem (x + left + (y + top) * width) }
   | _, _, _, _ => ⟨0, 0, []⟩
 
 /-- `ingredientCount`: the number of stacks in the grid. -/
-def ingredientCount (input : CraftingInput) : ℕ := input.items.countP (·.isSome)
+def ingredientCount (input : CraftingInput) : ℕ := input.items.countP (!·.isEmpty)
 
 /-- The names of the items in the grid, one per stack. -/
-def ids (input : CraftingInput) : List String := input.items.filterMap fun s => s.map (·.id)
+def ids (input : CraftingInput) : List String := (input.items.filter (!·.isEmpty)).map (·.id)
 
 end CraftingInput
 
@@ -108,9 +102,8 @@ def matchesPattern (tags : List (String × List String)) (r : Recipe) (input : C
     (flip : Bool) : Bool :=
   (List.range r.height).all fun y => (List.range r.width).all fun x =>
     let expected := r.ingredients.getD ((if flip then r.width - x - 1 else x) + y * r.width) []
-    match input.items.getD (x + y * r.width) none with
-    | none => expected.isEmpty
-    | some stack => Ingredient.test tags expected stack.id
+    let stack := input.items.getItem (x + y * r.width)
+    if stack.isEmpty then expected.isEmpty else Ingredient.test tags expected stack.id
 
 /-- `StackedItemContents.canCraft` for one craft: the ingredients can be matched with distinct
 stacks of the grid, given as the list of their items. -/

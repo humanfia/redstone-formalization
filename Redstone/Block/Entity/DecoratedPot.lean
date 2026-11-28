@@ -1,8 +1,7 @@
 module
 
-public import Redstone.Basic.Nbt
 public import Redstone.Block.Generated.State
-public import Redstone.Block.Entity.StoredItem
+public import Redstone.Block.Entity.Inventory
 
 /-!
 # Block entity `minecraft:decorated_pot`
@@ -18,8 +17,8 @@ namespace Redstone.BlockEntities
 
 /-- The data of a `minecraft:decorated_pot` block entity. -/
 structure DecoratedPot where
-  /-- `item`: the stack in the pot, if it is not empty. -/
-  item : Option StoredItem
+  /-- `item`: the stack in the pot. -/
+  item : ItemStack
   deriving DecidableEq, Repr, Inhabited
 
 namespace DecoratedPot
@@ -28,7 +27,7 @@ namespace DecoratedPot
 represented. -/
 def ofNbt? (t : Nbt) : Option DecoratedPot :=
   if (t.get? "LootTable").isSome then none
-  else some ⟨(t.get? "item").bind StoredItem.ofNbt?⟩
+  else some ⟨ItemStack.ofNbtD (t.get? "item")⟩
 
 end DecoratedPot
 

@@ -15,7 +15,8 @@ disappears.
 ## What is left out
 
 * Fluids: an item that touches water or lava sets `Level.overflow`.
-* Fire, damage, portals, and being picked up by players or hoppers.
+* Fire, damage, portals, and being picked up by players. (Hoppers pick items up: see
+  `Redstone.Component.Hopper`.)
 * Data components: two stacks of the same item of which one has components are not compared;
   the model sets `Level.overflow` instead of deciding whether they merge.
 * The owner of an item (`Owner`), which the game compares before merging.
@@ -67,11 +68,12 @@ def toFloat32 (n : ℕ) : Float32 := Float32.ofNat n / 16777216
 def toDouble (n : ℕ) : Float := Float.ofNat n * Phys.d 0x3ca0000000000000
 
 /-- `new ItemEntity(level, x, y, z, stack)` followed by `setDefaultPickUpDelay` and
-`addFreshEntity`, as `Entity.spawnAtLocation` does: one item of the kind named `item` appears at
-`pos` with a random horizontal velocity and cannot be picked up for 10 ticks. `actor` tells
-what makes the item, as in `Entities.Physics.sectionEntry`: `0` before the entities are ticked,
-`i + 1` in the tick of the entity with index `i`. Returns the index of the new entity. -/
-def spawnAtLocation (pos : Vec3) (item : String) (actor : ℕ) : M ℕ := do
+`addFreshEntity`, as `Entity.spawnAtLocation` does: `count` items of the kind named `item`
+appear at `pos` with a random horizontal velocity and cannot be picked up for 10 ticks. `actor`
+tells what makes the item, as in `Entities.Physics.sectionEntry`: `0` before the entities are
+ticked, `i + 1` in the tick of the entity with index `i`. Returns the index of the new entity. -/
+def spawnAtLocation (pos : Vec3) (item : String) (actor : ℕ) (count : ℕ := 1)
+    (hasComponents : Bool := false) : M ℕ := do
   let id := (← get).nextEntityIndex + 2
   let r := Entity.randomAfterUuid id
   let r := r.nextFloat24.2
@@ -83,7 +85,7 @@ def spawnAtLocation (pos : Vec3) (item : String) (actor : ℕ) : M ℕ := do
   let shift := Phys.d 0x3fb999999999999a
   let motion : Vec3 := ⟨toDouble dx * scale - shift, scale, toDouble dz * scale - shift⟩
   let data : Entities.Item :=
-    { item := item, count := 1, pickupDelay := 10
+    { item := item, count := count, hasComponents := hasComponents, pickupDelay := 10
       yRot := (toFloat32 yaw * 360).toBits.toNat
       phys := { random := some r, sectionEntry := (now, actor) } }
   Level.addEntity ⟨pos, motion, false⟩ (.item data)

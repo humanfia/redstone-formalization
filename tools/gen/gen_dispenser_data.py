@@ -83,10 +83,6 @@ def gen_items():
     tags = Tags()
     out = HEADER.format(imports="", title="Item properties", namespace="Redstone.Component.Dispenser.Items")
     defs = [
-        ("stacksTo1", "The items whose default `max_stack_size` is 1.",
-         [i for i in ids if stack[i] == 1]),
-        ("stacksTo16", "The items whose default `max_stack_size` is 16. All other items stack to 64.",
-         [i for i in ids if stack[i] == 16]),
         ("equippable", "The items that have the component `minecraft:equippable` by default.",
          [i for i in ids if "minecraft:equippable" in comps[i]]),
         ("sulfurCubeSwallowable", "The item tag `#minecraft:sulfur_cube_swallowable`.",

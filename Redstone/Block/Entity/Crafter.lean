@@ -19,7 +19,7 @@ namespace Redstone.BlockEntities
 /-- The data of a `minecraft:crafter` block entity. -/
 structure Crafter where
   /-- The nine slots, row by row. -/
-  items : Dispenser.Slots := Dispenser.Slots.empty 9
+  items : Inventory := Inventory.empty 9
   /-- `craftingTicksRemaining`. -/
   craftingTicksRemaining : ℤ := 0
   /-- `containerData` 0 to 8: for each slot, whether it is disabled. -/
@@ -37,7 +37,7 @@ def isSlotDisabled (c : Crafter) (slot : ℕ) : Bool := c.disabled.getD slot fal
 
 /-- `slotCanBeDisabled`: the slot exists and is empty. -/
 def slotCanBeDisabled (c : Crafter) (slot : ℤ) : Bool :=
-  0 ≤ slot && slot < 9 && (c.items.getD slot.toNat none).isNone
+  0 ≤ slot && slot < 9 && (c.items.getItem slot.toNat).isEmpty
 
 /-- Reads the data from the block entity's saved NBT (`loadAdditional`). Fields the model does
 not keep are ignored. Fails if the block entity has a loot table. -/
@@ -45,7 +45,7 @@ def ofNbt? (t : Nbt) : Option Crafter :=
   if (t.get? "LootTable").isSome then none
   else
     let c : Crafter :=
-      { items := Dispenser.Slots.ofNbt 9 t
+      { items := Inventory.ofNbt 9 t
         craftingTicksRemaining := t.intD "crafting_ticks_remaining" 0
         triggered := t.intD "triggered" 0 }
     let slots :=

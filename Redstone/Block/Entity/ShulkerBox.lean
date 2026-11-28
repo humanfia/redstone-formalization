@@ -30,7 +30,7 @@ instance : Inhabited ShulkerBox := ⟨{}⟩
 keep are ignored. -/
 def ofNbt? (t : Nbt) : Option ShulkerBox := do
   if !t.plainContainer then none
-  return { items := ← Inventory.ofNbt? 27 t }
+  return { items := Inventory.ofNbt 27 t }
 
 end ShulkerBox
 

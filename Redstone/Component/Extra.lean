@@ -1,7 +1,7 @@
 module
 
 public import Redstone.Mechanics.Tick
-public import Redstone.Component.Extra.Xoroshiro
+public import Redstone.Basic.Xoroshiro
 public import Redstone.Entity.Still
 
 /-!
@@ -218,10 +218,6 @@ def frostedIce (s : Blocks.FrostedIce) : Behaviour :=
       if block = .frosted_ice && fewerNeighboursThan (← get) p 2 then melt p }
 
 /-! ### Potent sulfur -/
-
-/-- The seed of the world (`ServerLevel.getSeed`), from which the lengths of a geyser's phases
-are drawn. It is 0 on the server the model is tested against. -/
-def worldSeed : ℕ := 0
 
 /-- `PotentSulfurBlockEntity.GEYSER_SALT`, as the bits of the `long`. -/
 def geyserSalt : ℕ := Xoroshiro.ofLong (-904011478)

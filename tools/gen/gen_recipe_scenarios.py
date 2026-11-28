@@ -258,6 +258,27 @@ def recipes():
     ])
 
 
+    def dyed(id, color, extra=None):
+        return (id, 1, comp("dyed_color", color) + ("," + extra if extra else ""))
+
+    crafters("crafter-special-dye", [
+        (grid("leather_helmet", "red_dye"), "dropper"),
+        (grid("yellow_dye", dyed("leather_boots", 255), "white_dye"), "dropper"),
+        (grid("wolf_armor", "black_dye"), "chest"),
+        (grid("lime_dye", "leather_horse_armor", "pink_dye", "pink_dye", "cyan_dye"), "air"),
+        (grid(dyed("leather_chestplate", 0, comp("damage", 5)), "black_dye"), "dropper"),
+        (grid("leather_leggings", ("gray_dye", 1, comp("dye", '"blue"'))), "dropper"),
+        (grid("leather_helmet", "leather_helmet", "red_dye"), "dropper"),
+        (grid("leather_helmet", "red_dye", "stone"), "dropper"),
+        (grid(dyed("leather_helmet", -16777216), "brown_dye", "brown_dye", "green_dye",
+              "light_gray_dye", "magenta_dye", "orange_dye", "purple_dye", "light_blue_dye"),
+         "dropper"),
+        (grid(dyed("leather_boots", 16777215), "white_dye"), "dropper"),
+        (grid("leather_helmet", ("red_dye", 1, '"!minecraft:dye":{}')), "dropper"),
+        (grid(dyed("wolf_armor", 1908001, comp("rarity", '"rare"')), "blue_dye", "red_dye"),
+         [(0,) + dyed("wolf_armor", 7735883, comp("rarity", '"rare"'))]),
+    ])
+
     # Results that meet stacks of the same kind in the dropper, patches that remove a
     # component, and damage outside its range.
     full = [(k, "stone", 64) for k in range(8)]

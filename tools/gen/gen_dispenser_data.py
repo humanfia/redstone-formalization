@@ -348,6 +348,12 @@ def gen_recipes(ids, comps):
                                   f"{ing_term(d['material'])}\n      "
                                   f"{lo} {hi} {target} 1 {'true' if add else 'false'}"))
             continue
+        elif t == "crafting_dye":
+            result = plain_result(d)
+            want([result] + items_of(d["target"]))
+            special.append((name, f".dyeItem {ing_term(d['target'])} {ing_term(d['dye'])}"
+                                  f"\n      {lean_str(result)}"))
+            continue
         elif t == "crafting_imbue":
             result = d["result"]
             assert set(result) == {"id", "count"}, result
@@ -369,9 +375,7 @@ def gen_recipes(ids, comps):
             # grid holds `count` stacks (0: any number), one item of each of `required`, and
             # nothing outside them.
             count = 0
-            if t == "crafting_dye":
-                required = [d["target"], d["dye"]]
-            elif t == "crafting_special_bannerduplicate":
+            if t == "crafting_special_bannerduplicate":
                 count, required = 2, [d["banner"]]
             elif t == "crafting_special_bookcloning":
                 required = [d["source"], d["material"]]
@@ -439,9 +443,9 @@ def gen_recipes(ids, comps):
              "(`Special.craft`). -/\n"
              "def special : List (String × Special) := [\n")
     body += ",\n".join(f"  ({lean_str(n)},\n    {term})" for n, term in special) + "]\n"
-    body += ("\n/-- The crafting recipes that are not modelled (armour dyeing, banner copying, "
-             "book cloning,\nmap extending, shield decoration), reduced to a necessary condition "
-             "for a match. -/\n"
+    body += ("\n/-- The crafting recipes that are not modelled (banner copying, book cloning, "
+             "map extending,\nshield decoration), reduced to a necessary condition for a match. "
+             "-/\n"
              "def unmodelled : List SpecialRecipe := [\n")
     body += ",\n".join(f"  ⟨{lean_str(n)}, {c}, {lists(g, 4)},\n{lean_list(a, indent=4)}⟩"
                        for n, c, g, a in unmodelled) + "]\n"

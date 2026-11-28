@@ -20,8 +20,8 @@ disabled.
   and, for suspicious stew, whose result has components, `Data.componentRecipes`; generated
   from the server's data pack), and so are these recipes with code of their own
   (`Data.special`, `Special.craft`): firework rockets, firework stars and their fade colours,
-  item repair, shulker box and bundle dyeing, map cloning, tipped arrows and decorated pots.
-  Armour dyeing, banner copying, book cloning, map extending and shield decoration are not
+  item repair, shulker box and bundle dyeing, map cloning, armour dyeing, tipped arrows and
+  decorated pots. Banner copying, book cloning, map extending and shield decoration are not
   (`Data.unmodelled`): when one of them may match (`SpecialRecipe.mayMatch` is a necessary
   condition), the model sets `Level.overflow`, even if a modelled recipe matches as well.
 * Which recipe the game picks when several match the same grid: unless they all give the same

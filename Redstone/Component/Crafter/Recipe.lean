@@ -7,7 +7,7 @@ public import Redstone.Block.Entity.Components
 
 Java classes: `CraftingInput`, `ShapedRecipePattern`, `ShapelessRecipe`, and the recipes with
 code of their own: `FireworkRocketRecipe`, `FireworkStarRecipe`, `FireworkStarFadeRecipe`,
-`TransmuteRecipe`, `ImbueRecipe`, `DecoratedPotRecipe`, `RepairItemRecipe`.
+`TransmuteRecipe`, `DyeRecipe`, `ImbueRecipe`, `DecoratedPotRecipe`, `RepairItemRecipe`.
 
 What a crafter needs of the crafting system: the trimmed crafting grid (`CraftingInput`), when
 a shaped or a shapeless recipe matches it (`ShapedRecipePattern.matches`,
@@ -28,8 +28,8 @@ curses of a tool, the potion of a bottle, the whole patch of a shulker box that 
   (`MapItem.onCraftedPostProcess` then makes a new map).
 * `ItemStack.validateStrict`, which empties an assembled stack with contradictory components,
   except for its check of the count against the maximal stack size.
-* Armour dyeing (`DyeRecipe`), banner copying, book cloning, map extending and shield
-  decoration (`Data.unmodelled`, with `SpecialRecipe.mayMatch` as a necessary condition).
+* Banner copying, book cloning, map extending and shield decoration (`Data.unmodelled`, with
+  `SpecialRecipe.mayMatch` as a necessary condition).
 -/
 
 @[expose] public section
@@ -182,6 +182,9 @@ inductive Special
   `addMaterialCount` adds the number of materials to the count. -/
   | transmute (input material : Ingredient) (min max : ℕ) (result : Option String) (count : ℕ)
       (addMaterialCount : Bool)
+  /-- `DyeRecipe`: the stack `target` with dyes becomes the item `result` with the components
+  it had and the colour mixed from its own and the dyes'. -/
+  | dyeItem (target dye : Ingredient) (result : String)
   /-- `ImbueRecipe`: eight `material` around a `source` become `count` items `result` with the
   potion contents of the source. -/
   | imbue (material source : Ingredient) (result : String) (count : ℕ)
@@ -260,6 +263,33 @@ def fireworkColors : List (String × ℤ) :=
    ("light_gray", 11250603), ("cyan", 2651799), ("purple", 8073150), ("blue", 2437522),
    ("brown", 5320730), ("green", 3887386), ("red", 11743532), ("black", 1973019)]
 
+/-- `DyeColor.getTextureDiffuseColor` without its alpha, by the name of the colour. -/
+def textureDiffuseColors : List (String × ℕ) :=
+  [("white", 16383998), ("orange", 16351261), ("magenta", 13061821), ("light_blue", 3847130),
+   ("yellow", 16701501), ("lime", 8439583), ("pink", 15961002), ("gray", 4673362),
+   ("light_gray", 10329495), ("cyan", 1481884), ("purple", 8991416), ("blue", 3949738),
+   ("brown", 8606770), ("green", 6192150), ("red", 11546150), ("black", 1908001)]
+
+/-- `DyedItemColor.applyDyes(currentDye, dyes)`: the colour of an item, if it has one, mixed
+with those of the dyes; colours are `0xRRGGBB`. The channels are averaged and then scaled, in
+`float` arithmetic, so that the brightest has the average of the brightest channels. -/
+def applyDyes (current : Option ℕ) (dyes : List ℕ) : ℕ :=
+  let colors := current.toList ++ dyes
+  let red (c : ℕ) : ℕ := c / 65536 % 256
+  let green (c : ℕ) : ℕ := c / 256 % 256
+  let blue (c : ℕ) : ℕ := c % 256
+  let count := colors.length
+  let r := (colors.map red).sum / count
+  let g := (colors.map green).sum / count
+  let b := (colors.map blue).sum / count
+  let intensityTotal := (colors.map fun c => max (red c) (max (green c) (blue c))).sum
+  let averageIntensity : Float32 := Float32.ofNat intensityTotal / Float32.ofNat count
+  let resultIntensity : Float32 := Float32.ofNat (max r (max g b))
+  -- `(int)(channel * averageIntensity / resultIntensity)`; the cast of `NaN` is 0.
+  let scale (v : ℕ) : ℕ :=
+    (Float32.ofNat v * averageIntensity / resultIntensity).toUInt32.toNat % 256
+  scale r * 65536 + scale g * 256 + scale b
+
 section
 
 variable (T : Tables)
@@ -270,17 +300,19 @@ def test (ing : Ingredient) (s : ItemStack) : Bool := !s.isEmpty && Ingredient.t
 /-- `stack.has(DataComponents.DYE)`. -/
 def hasDye (s : ItemStack) : Bool := s.hasComponent "minecraft:dye" (T.dyes.map (·.1))
 
+/-- `stack.getOrDefault(DataComponents.DYE, DyeColor.WHITE)`, by name. -/
+def dyeColor (s : ItemStack) : Option String :=
+  match s.patched? "minecraft:dye" with
+  | some v =>
+    match Nbt.unrender v with
+    | some (.string c) => some c
+    | _ => none
+  | none =>
+    if s.removes "minecraft:dye" then some "white" else some ((T.dyes.lookup s.id).getD "white")
+
 /-- `stack.getOrDefault(DataComponents.DYE, DyeColor.WHITE).getFireworkColor()`. -/
 def dyeFireworkColor (s : ItemStack) : Option ℤ :=
-  let name : Option String :=
-    match s.patched? "minecraft:dye" with
-    | some v =>
-      match Nbt.unrender v with
-      | some (.string c) => some c
-      | _ => none
-    | none =>
-      if s.removes "minecraft:dye" then some "white" else some ((T.dyes.lookup s.id).getD "white")
-  name.bind fun c => fireworkColors.lookup c
+  (dyeColor T s).bind fun c => fireworkColors.lookup c
 
 /-- `new ItemStack(item, count, patch)` for an item whose default components are known. -/
 def create (id : String) (count : ℕ) (patch : List (String × String)) : Option ItemStack :=
@@ -418,6 +450,33 @@ def craftTransmute (inputIngredient material : Ingredient) (min max : ℕ)
       | some true => finish? (compute (if addMaterialCount then materials.length else 0))
     | _ => .noMatch
 
+/-- `DyeRecipe`. -/
+def craftDye (target dye : Ingredient) (result : String) (input : CraftingInput) : Crafted :=
+  let component := "minecraft:dyed_color"
+  let filled := input.items.filter (!·.isEmpty)
+  let dyes := filled.filter fun s => !test T target s
+  if input.ingredientCount < 2 || dyes.isEmpty ||
+      !(dyes.all fun s => test T dye s && hasDye T s) then .noMatch
+  else
+    match filled.filter (test T target) with
+    | [targetStack] =>
+      -- `targetStack.get(DataComponents.DYED_COLOR)`, an `int` of which 24 bits are read
+      let current : Option (Option ℕ) :=
+        match targetStack.patched? component with
+        | none => some none
+        | some v =>
+          match Nbt.unrender v with
+          | some (.int n) => some (some (n % 16777216).toNat)
+          | _ => none
+      let colors := dyes.mapM fun s =>
+        (dyeColor T s).bind fun c => textureDiffuseColors.lookup c
+      match current, colors, createWithOriginalComponents T result 1 targetStack with
+      | some current, some colors, some r =>
+        finish? <| set T (r.clearComponent component) component
+          (toString (applyDyes current colors))
+      | _, _, _ => .unknown
+    | _ => .noMatch
+
 /-- `ImbueRecipe`. -/
 def craftImbue (material source : Ingredient) (result : String) (count : ℕ)
     (input : CraftingInput) : Crafted :=
@@ -535,6 +594,7 @@ def craft (r : Special) (input : CraftingInput) : Crafted :=
   | .fireworkStarFade target dye result => craftFireworkStarFade T target dye result input
   | .transmute inputIngredient material min max result count addMaterialCount =>
     craftTransmute T inputIngredient material min max result count addMaterialCount input
+  | .dyeItem target dye result => craftDye T target dye result input
   | .imbue material source result count => craftImbue T material source result count input
   | .decoratedPot back left right front result =>
     craftDecoratedPot T back left right front result input

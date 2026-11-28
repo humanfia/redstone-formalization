@@ -1,0 +1,25 @@
+{
+  "name": "amethyst-arrow",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [2, 4, 6]},
+  "fill": [{"min": [0, 0, 0], "max": [2, 0, 6], "state": "minecraft:stone"}],
+  "blocks": [
+    {"pos": [1, 2, 1], "state": "minecraft:stone"},
+    {"pos": [1, 3, 1], "state": "minecraft:amethyst_cluster[facing=up,waterlogged=false]"},
+    {"pos": [1, 3, 5], "state": "minecraft:dropper[facing=down,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:1b,id:\"minecraft:dirt\",count:3},{Slot:2b,id:\"minecraft:sand\",count:3},{Slot:3b,id:\"minecraft:gravel\",count:3},{Slot:4b,id:\"minecraft:cobblestone\",count:3},{Slot:5b,id:\"minecraft:granite\",count:3},{Slot:6b,id:\"minecraft:diorite\",count:3},{Slot:7b,id:\"minecraft:andesite\",count:3},{Slot:8b,id:\"minecraft:tuff\",count:3}]}"},
+    {"pos": [1, 2, 5], "state": "minecraft:barrel[facing=up,open=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "summon", "entity": {"type": "minecraft:arrow", "pos": [1.5, 5.5, 1.5], "nbt": "{Motion:[0.0d,-0.5d,0.0d]}"}},
+    {"tick": 16, "type": "set", "pos": [1, 3, 4], "state": "minecraft:redstone_block"},
+    {"tick": 18, "type": "set", "pos": [1, 3, 4], "state": "minecraft:air"},
+    {"tick": 20, "type": "set", "pos": [1, 3, 4], "state": "minecraft:redstone_block"},
+    {"tick": 22, "type": "set", "pos": [1, 3, 4], "state": "minecraft:air"},
+    {"tick": 24, "type": "set", "pos": [1, 3, 4], "state": "minecraft:redstone_block"},
+    {"tick": 26, "type": "set", "pos": [1, 3, 4], "state": "minecraft:air"},
+    {"tick": 28, "type": "set", "pos": [1, 3, 4], "state": "minecraft:redstone_block"},
+    {"tick": 30, "type": "set", "pos": [1, 3, 4], "state": "minecraft:air"},
+    {"tick": 32, "type": "set", "pos": [1, 3, 4], "state": "minecraft:redstone_block"},
+    {"tick": 34, "type": "set", "pos": [1, 3, 4], "state": "minecraft:air"}
+  ]
+}

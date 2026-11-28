@@ -1,0 +1,34 @@
+{
+  "name": "banner-wall",
+  "ticks": 20,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 3]},
+  "fill": [{"min": [0, 0, 0], "max": [15, 0, 3], "state": "minecraft:stone"}],
+  "blocks": [
+    {"pos": [1, 2, 1], "state": "minecraft:stone"},
+    {"pos": [1, 2, 0], "state": "minecraft:gray_wall_banner[facing=north]"},
+    {"pos": [2, 2, 1], "state": "minecraft:green_wall_banner[facing=east]"},
+    {"pos": [1, 2, 2], "state": "minecraft:brown_wall_banner[facing=south]"},
+    {"pos": [0, 2, 1], "state": "minecraft:purple_wall_banner[facing=west]"},
+    {"pos": [5, 2, 1], "state": "minecraft:stone"},
+    {"pos": [5, 2, 0], "state": "minecraft:gray_wall_banner[facing=north]"},
+    {"pos": [6, 2, 1], "state": "minecraft:green_wall_banner[facing=east]"},
+    {"pos": [5, 2, 2], "state": "minecraft:brown_wall_banner[facing=south]"},
+    {"pos": [4, 2, 1], "state": "minecraft:purple_wall_banner[facing=west]"},
+    {"pos": [9, 2, 1], "state": "minecraft:stone"},
+    {"pos": [9, 2, 0], "state": "minecraft:gray_wall_banner[facing=north]"},
+    {"pos": [10, 2, 1], "state": "minecraft:green_wall_banner[facing=east]"},
+    {"pos": [9, 2, 2], "state": "minecraft:brown_wall_banner[facing=south]"},
+    {"pos": [8, 2, 1], "state": "minecraft:purple_wall_banner[facing=west]"},
+    {"pos": [13, 2, 1], "state": "minecraft:stone"},
+    {"pos": [13, 2, 0], "state": "minecraft:gray_wall_banner[facing=north]"},
+    {"pos": [14, 2, 1], "state": "minecraft:green_wall_banner[facing=east]"},
+    {"pos": [13, 2, 2], "state": "minecraft:brown_wall_banner[facing=south]"},
+    {"pos": [12, 2, 1], "state": "minecraft:purple_wall_banner[facing=west]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "destroy", "pos": [1, 2, 1], "drop": false},
+    {"tick": 5, "type": "set", "pos": [5, 2, 1], "state": "minecraft:ladder[facing=north,waterlogged=false]"},
+    {"tick": 8, "type": "set", "pos": [9, 2, 1], "state": "minecraft:short_grass"},
+    {"tick": 11, "type": "set", "pos": [13, 2, 1], "state": "minecraft:azalea"}
+  ]
+}

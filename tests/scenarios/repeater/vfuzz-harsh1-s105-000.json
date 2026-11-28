@@ -1,0 +1,53 @@
+{
+  "name": "vfuzz-harsh1-s105-000",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [6, 1, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:stone"},
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [0, 1, 2], "state": "minecraft:repeater[delay=1,facing=east,locked=false,powered=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:stone"},
+    {"pos": [1, 1, 1], "state": "minecraft:repeater[delay=1,facing=east,locked=true,powered=true]"},
+    {"pos": [1, 1, 2], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:glass"},
+    {"pos": [2, 1, 2], "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"},
+    {"pos": [3, 1, 0], "state": "minecraft:repeater[delay=2,facing=west,locked=true,powered=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:lever[face=ceiling,facing=east,powered=true]"},
+    {"pos": [4, 1, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [4, 1, 1], "state": "minecraft:repeater[delay=1,facing=east,locked=true,powered=true]"},
+    {"pos": [4, 1, 2], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [5, 1, 0], "state": "minecraft:lever[face=wall,facing=west,powered=true]"},
+    {"pos": [5, 1, 1], "state": "minecraft:repeater[delay=4,facing=west,locked=true,powered=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:repeater[delay=2,facing=east,locked=false,powered=true]"},
+    {"pos": [6, 1, 0], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:repeater[delay=3,facing=west,locked=true,powered=true]"},
+    {"pos": [6, 1, 2], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [6, 1, 2], "face": "up"},
+    {"tick": 1, "type": "set", "pos": [6, 1, 1], "state": "minecraft:repeater[delay=3,facing=west,locked=false,powered=false]", "flags": 1},
+    {"tick": 2, "type": "use", "pos": [0, 1, 2], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [5, 1, 2], "face": "up"},
+    {"tick": 9, "type": "use", "pos": [5, 1, 1], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [5, 1, 2], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [6, 1, 2], "face": "up"},
+    {"tick": 12, "type": "destroy", "pos": [1, 1, 2], "drop": false},
+    {"tick": 15, "type": "use", "pos": [6, 1, 2], "face": "up"},
+    {"tick": 15, "type": "destroy", "pos": [2, 1, 2], "drop": false},
+    {"tick": 17, "type": "destroy", "pos": [3, 1, 0], "drop": false},
+    {"tick": 18, "type": "destroy", "pos": [0, 1, 1], "drop": false},
+    {"tick": 20, "type": "set", "pos": [1, 1, 1], "state": "minecraft:repeater[delay=4,facing=south,locked=false,powered=true]", "flags": 1},
+    {"tick": 29, "type": "set", "pos": [0, 1, 2], "state": "minecraft:repeater[delay=2,facing=south,locked=false,powered=true]", "flags": 1},
+    {"tick": 30, "type": "destroy", "pos": [5, 1, 2], "drop": false},
+    {"tick": 31, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 33, "type": "set", "pos": [0, 1, 1], "state": "minecraft:repeater[delay=2,facing=west,locked=false,powered=false]", "flags": 1},
+    {"tick": 38, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 38, "type": "set", "pos": [0, 1, 1], "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]", "flags": 1},
+    {"tick": 39, "type": "use", "pos": [5, 1, 2], "face": "up"},
+    {"tick": 39, "type": "use", "pos": [0, 1, 2], "face": "up"}
+  ]
+}

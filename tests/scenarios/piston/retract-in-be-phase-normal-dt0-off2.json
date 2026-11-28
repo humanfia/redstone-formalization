@@ -1,0 +1,21 @@
+{
+  "name": "retract-in-be-phase-normal-dt0-off2",
+  "ticks": 20,
+  "box": {"min": [5, 4, 3], "max": [12, 12, 16]},
+  "blocks": [
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [8, 8, 10], "state": "minecraft:glass"},
+    {"pos": [8, 8, 11], "state": "minecraft:piston[extended=false,facing=north]"},
+    {"pos": [8, 8, 12], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [8, 8, 13], "state": "minecraft:stone"},
+    {"pos": [8, 9, 6], "state": "minecraft:glass"},
+    {"pos": [8, 9, 7], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [9, 8, 8], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 9, 7], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [8, 8, 12], "face": "up"},
+    {"tick": 3, "type": "set", "pos": [8, 7, 8], "state": "minecraft:glass"},
+    {"tick": 5, "type": "use", "pos": [8, 9, 7], "face": "up"}
+  ]
+}

@@ -47,6 +47,9 @@ Files: `tests/scenarios/<unit>/<name>.json` and `tests/traces/<unit>/<name>.trac
     The first calls are made by the construction of the player, the later ones by whatever the
     game constructs, in order (every entity makes one for its private random when constructed);
   * the list of recent redstone torch toggles (burn-out) is cleared;
+  * `Level.skyDarken`, which the game only recomputes at the start of a tick, is recomputed from
+    the scenario's clock and weather, so the actions of tick 1 do not see the sky of the previous
+    scenario;
   * between two ticks the harness waits until the light engine (a separate thread) is idle, and
     runs all queued main-thread tasks, so nothing depends on thread timing.
 
@@ -243,7 +246,8 @@ compares it with their traces after every tick; without arguments it runs everyt
 `tests/scenarios`, which is what `lake test` and the CI do.
 
 * The model takes its initial state from frame 0 of the trace, so it never reads `fill`,
-  `blocks`, `entities` or `settings`. From the scenario it uses `ticks`, `box` and `actions`.
+  `blocks` or `entities`. From the scenario it uses `ticks`, `box`, `actions` and, of the
+  `settings`, `dayTime`, `advanceTime` and `weather`.
 * It supports the actions `use`, `use_item`, `set`, `destroy` and `kill`. A scenario with
   `summon` cannot be run yet.
 * After every tick it compares: `gameTime`; the block state and the block entity of every
@@ -251,6 +255,9 @@ compares it with their traces after every tick; without arguments it runs everyt
   Block entities and entities are compared after decoding the server's NBT into the model's
   types (`ofNbt?`), so data the model does not represent is not compared. In particular a
   block entity or entity type whose model is still an empty structure always compares equal.
+  A model type may also keep data that the game does not save (the openers counter of a chest,
+  for instance). A trace cannot show such data, so those fields are reset before the comparison
+  (`Redstone.Component.Container.savedData`).
 * `tests/pending/scenarios` and `tests/pending/traces` hold scenarios that have been recorded
   but that the model does not reproduce yet. They are not run by `lake test`. Run them with
   `lake exe difftest tests/pending/scenarios/<unit>` and move them to `tests/scenarios` and

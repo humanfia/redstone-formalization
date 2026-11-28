@@ -1,0 +1,110 @@
+{
+ "name": "drop-15",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=top,shape=inner_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:chorus_plant[down=false,east=true,north=true,south=false,up=true,west=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:cobblestone_wall[east=low,north=none,south=tall,up=false,waterlogged=false,west=low]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    6
+   ],
+   "state": "minecraft:grindstone[face=floor,facing=south]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:oak_planks"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.64,
+    4.287,
+    2.4
+   ],
+   "nbt": "{Motion:[0.029d,-0.047d,0.035d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.247,
+    1.277,
+    2.847
+   ],
+   "nbt": "{Motion:[0.195d,0.035d,0.397d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.983,
+    2.051,
+    3.188
+   ],
+   "nbt": "{Motion:[-0.034d,-0.237d,0.183d]}"
+  }
+ ]
+}

@@ -32,6 +32,7 @@ public import Redstone.Entity.FallingBlock
 public import Redstone.Entity.PrimedTnt
 public import Redstone.Entity.Minecart
 public import Redstone.Entity.Projectile
+public import Redstone.Entity.Still
 
 /-!
 # The rules of the game
@@ -242,7 +243,7 @@ def blockBehaviour (b : Block) : Behaviour :=
   | .flowerBed _ _ => .inert b
   | .leafLitter _ => .inert b
   | .bigDripleaf _ => Component.Dripleaf.behaviour b
-  | .bigDripleafStem _ => .inert b
+  | .bigDripleafStem _ => Component.Dripleaf.behaviour b
   | .smallDripleaf _ => .inert b
   | .hangingRoots _ => .inert b
   | .infestedRotatedPillar _ => .inert b
@@ -262,7 +263,7 @@ def entityBehaviour (e : Entity) : EntityBehaviour :=
   | .tnt _ => Entity.PrimedTnt.behaviour
   | .minecart _ _ => Entity.Minecart.behaviour
   | .projectile _ _ => Entity.Projectile.behaviour
-  | .other _ => .inert
+  | .other _ => Entity.Still.behaviour e
 
 /-- The rules of Minecraft, as far as they are formalized. -/
 def rules : Rules where

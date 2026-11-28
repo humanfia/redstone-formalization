@@ -1,0 +1,350 @@
+module
+
+public import Redstone.Mechanics.Tick
+
+/-!
+# Entities at rest
+
+Java classes: `Entity` (`applyEffectsFromBlocks`, `checkInsideBlocks`, `makeBoundingBox`),
+`EntityDimensions`, `AABB`, `EntityGetter.getEntitiesOfClass`.
+
+Blocks such as pressure plates react to the entities that touch them. This module gives what
+they need: the bounding box of an entity, the search for the entities in a box, and the
+behaviour of the entities the model does not move (`EntityData.other`: mobs, armour stands,
+boats, end crystals, ...). Such an entity stays where it is, and once per game tick it tells
+the blocks it is in that it is there (`BlockBehaviour.entityInside`), as the game does for an
+entity that does not move.
+
+## What is assumed
+
+The model keeps only the type, position, velocity and `onGround` flag of these entities, so
+everything else is taken from the entity type:
+
+* the bounding box is that of the type's default dimensions: an adult, standing, unscaled
+  entity (no baby, no small armour stand, no sleeping or sitting pose);
+* an entity has its default flags: an armour stand is not a marker and has gravity (an armour
+  stand with `NoGravity` or `Marker` does not touch blocks in the game, and a marker is not
+  detected either), no entity is a spectator or has `noPhysics`;
+* a living entity runs `LivingEntity.aiStep`, which applies the effects of blocks once;
+* the entity does not move, which is true on the server only if it is kept still (`NoAI` for
+  mobs, a resting position for an armour stand).
+
+## What is left out
+
+* `Block.stepOn` for the block an entity on the ground stands on.
+* Fluids (`FluidState.entityInside`).
+* Everything else these entities do in a tick: mobs push each other, age, burn, and so on.
+  A squid or glow squid out of water changes its velocity every tick even with `NoAI`, so the
+  model does not reproduce it (pending scenario `sweep-squid-00`).
+* The parts of the ender dragon (the dragon is not in the type table at all).
+-/
+
+@[expose] public section
+
+namespace Redstone.Entity.Still
+
+/-- An axis-aligned box in `double` coordinates (`AABB`). -/
+structure AABB where
+  minX : Float
+  minY : Float
+  minZ : Float
+  maxX : Float
+  maxY : Float
+  maxZ : Float
+  deriving Repr, Inhabited
+
+namespace AABB
+
+/-- `AABB.intersects(aabb)`: the interiors of the two boxes meet. -/
+def intersects (a b : AABB) : Bool :=
+  a.minX < b.maxX && a.maxX > b.minX && a.minY < b.maxY && a.maxY > b.minY &&
+    a.minZ < b.maxZ && a.maxZ > b.minZ
+
+/-- `AABB.inflate(amount)`: grows the box by `d` on every side. -/
+def inflate (a : AABB) (d : Float) : AABB :=
+  ⟨a.minX - d, a.minY - d, a.minZ - d, a.maxX + d, a.maxY + d, a.maxZ + d⟩
+
+/-- `AABB.deflate(amount)`: shrinks the box by `d` on every side. -/
+def deflate (a : AABB) (d : Float) : AABB := a.inflate (-d)
+
+/-- `AABB.move(pos)`: the box moved by the coordinates of a block position. -/
+def move (a : AABB) (p : Pos) : AABB :=
+  let x := Float.ofInt p.x
+  let y := Float.ofInt p.y
+  let z := Float.ofInt p.z
+  ⟨a.minX + x, a.minY + y, a.minZ + z, a.maxX + x, a.maxY + y, a.maxZ + z⟩
+
+/-- `Mth.floor(double)`: the largest integer not above `v`. -/
+def floor (v : Float) : ℤ := v.floor.toInt64.toInt
+
+/-- `BlockPos.betweenClosed(aabb)`: the block positions the box reaches, in the order of the
+game's iterator: x runs fastest, then y, then z. -/
+def blocks (a : AABB) : List Pos :=
+  let x0 := floor a.minX
+  let y0 := floor a.minY
+  let z0 := floor a.minZ
+  let width := (floor a.maxX - x0 + 1).toNat
+  let height := (floor a.maxY - y0 + 1).toNat
+  let depth := (floor a.maxZ - z0 + 1).toNat
+  (List.range depth).flatMap fun z => (List.range height).flatMap fun y =>
+    (List.range width).map fun x => ⟨x0 + x, y0 + y, z0 + z⟩
+
+end AABB
+
+/-- What the model knows about an entity type. -/
+structure TypeInfo where
+  /-- `EntityDimensions.width` of the type. -/
+  width : Float32
+  /-- `EntityDimensions.height` of the type. -/
+  height : Float32
+  /-- The entity class is a `LivingEntity`. -/
+  living : Bool
+  /-- `Entity.isIgnoringBlockTriggers` is true for every entity of the type (displays,
+  interactions, markers, ominous item spawners and bats). -/
+  ignoresBlockTriggers : Bool
+  /-- How many times an entity of the type that does not move calls
+  `Entity.applyEffectsFromBlocks` in a game tick: once for a `LivingEntity` (`aiStep`), an end
+  crystal and an experience orb, twice for a boat or raft, never for the other types. -/
+  effects : ℕ
+
+/-- The entity types of the game: registry name, the bits of the width and of the height
+(`float`), whether the class is a `LivingEntity`, whether it ignores block triggers, and the
+number of calls of `applyEffectsFromBlocks` per tick at rest. The dimensions are those of the
+server's block dump (`entityTypes`); the three other columns are read off the classes.
+
+Left out, so that the model does not see them at all: the types whose bounding box is not the
+box of these dimensions around their position (item frames, paintings and leash knots, which
+hang on a block, and the pufferfish, which is scaled), and the ender dragon, which has parts
+and its own `aiStep`. The last column is zero for the types that the model moves itself (items,
+falling blocks, TNT, minecarts, projectiles) and for those that have no such call. It is also
+zero, wrongly, for types that do call it but always move or vanish at once, which the model
+cannot keep still anyway: shulker bullets, fishing bobbers, dragon fireballs, wither skulls and
+breeze wind charges. An experience orb can be at rest (it then calls it once per tick). -/
+def typeTable : List (String × UInt32 × UInt32 × Bool × Bool × ℕ) := [
+    ("minecraft:acacia_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:acacia_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:allay", 0x3eb33333, 0x3f19999a, true, false, 1),
+    ("minecraft:area_effect_cloud", 0x40c00000, 0x3f000000, false, false, 0),
+    ("minecraft:armadillo", 0x3f333333, 0x3f266666, true, false, 1),
+    ("minecraft:armor_stand", 0x3f000000, 0x3ffccccd, true, false, 1),
+    ("minecraft:arrow", 0x3f000000, 0x3f000000, false, false, 0),
+    ("minecraft:axolotl", 0x3f400000, 0x3ed70a3d, true, false, 1),
+    ("minecraft:bamboo_chest_raft", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:bamboo_raft", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:bat", 0x3f000000, 0x3f666666, true, true, 1),
+    ("minecraft:bee", 0x3f0ccccd, 0x3f000000, true, false, 1),
+    ("minecraft:birch_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:birch_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:blaze", 0x3f19999a, 0x3fe66666, true, false, 1),
+    ("minecraft:block_display", 0x00000000, 0x00000000, false, true, 0),
+    ("minecraft:bogged", 0x3f19999a, 0x3ffeb852, true, false, 1),
+    ("minecraft:breeze", 0x3f19999a, 0x3fe28f5c, true, false, 1),
+    ("minecraft:breeze_wind_charge", 0x3ea00000, 0x3ea00000, false, false, 0),
+    ("minecraft:camel", 0x3fd9999a, 0x40180000, true, false, 1),
+    ("minecraft:camel_husk", 0x3fd9999a, 0x40180000, true, false, 1),
+    ("minecraft:cat", 0x3f19999a, 0x3f333333, true, false, 1),
+    ("minecraft:cave_spider", 0x3f333333, 0x3f000000, true, false, 1),
+    ("minecraft:cherry_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:cherry_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:chest_minecart", 0x3f7ae148, 0x3f333333, false, false, 0),
+    ("minecraft:chicken", 0x3ecccccd, 0x3f333333, true, false, 1),
+    ("minecraft:cod", 0x3f000000, 0x3e99999a, true, false, 1),
+    ("minecraft:copper_golem", 0x3efae148, 0x3f7ae148, true, false, 1),
+    ("minecraft:command_block_minecart", 0x3f7ae148, 0x3f333333, false, false, 0),
+    ("minecraft:cow", 0x3f666666, 0x3fb33333, true, false, 1),
+    ("minecraft:creaking", 0x3f666666, 0x402ccccd, true, false, 1),
+    ("minecraft:creeper", 0x3f19999a, 0x3fd9999a, true, false, 1),
+    ("minecraft:cushion", 0x3f800000, 0x3e800000, false, false, 0),
+    ("minecraft:dark_oak_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:dark_oak_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:dolphin", 0x3f666666, 0x3f19999a, true, false, 1),
+    ("minecraft:donkey", 0x3fb2c000, 0x3fc00000, true, false, 1),
+    ("minecraft:dragon_fireball", 0x3f800000, 0x3f800000, false, false, 0),
+    ("minecraft:drowned", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:egg", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:elder_guardian", 0x3fffae14, 0x3fffae14, true, false, 1),
+    ("minecraft:enderman", 0x3f19999a, 0x4039999a, true, false, 1),
+    ("minecraft:endermite", 0x3ecccccd, 0x3e99999a, true, false, 1),
+    ("minecraft:ender_pearl", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:end_crystal", 0x40000000, 0x40000000, false, false, 1),
+    ("minecraft:evoker", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:evoker_fangs", 0x3f000000, 0x3f4ccccd, false, false, 0),
+    ("minecraft:experience_bottle", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:experience_orb", 0x3f000000, 0x3f000000, false, false, 1),
+    ("minecraft:eye_of_ender", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:falling_block", 0x3f7ae148, 0x3f7ae148, false, false, 0),
+    ("minecraft:fireball", 0x3f800000, 0x3f800000, false, false, 0),
+    ("minecraft:firework_rocket", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:fox", 0x3f19999a, 0x3f333333, true, false, 1),
+    ("minecraft:frog", 0x3f000000, 0x3f000000, true, false, 1),
+    ("minecraft:furnace_minecart", 0x3f7ae148, 0x3f333333, false, false, 0),
+    ("minecraft:ghast", 0x40800000, 0x40800000, true, false, 1),
+    ("minecraft:happy_ghast", 0x40800000, 0x40800000, true, false, 1),
+    ("minecraft:giant", 0x40666666, 0x41400000, true, false, 1),
+    ("minecraft:glow_squid", 0x3f4ccccd, 0x3f4ccccd, true, false, 1),
+    ("minecraft:goat", 0x3f666666, 0x3fa66666, true, false, 1),
+    ("minecraft:guardian", 0x3f59999a, 0x3f59999a, true, false, 1),
+    ("minecraft:hoglin", 0x3fb2c000, 0x3fb33333, true, false, 1),
+    ("minecraft:hopper_minecart", 0x3f7ae148, 0x3f333333, false, false, 0),
+    ("minecraft:horse", 0x3fb2c000, 0x3fcccccd, true, false, 1),
+    ("minecraft:husk", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:illusioner", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:interaction", 0x00000000, 0x00000000, false, true, 0),
+    ("minecraft:iron_golem", 0x3fb33333, 0x402ccccd, true, false, 1),
+    ("minecraft:item", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:item_display", 0x00000000, 0x00000000, false, true, 0),
+    ("minecraft:jungle_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:jungle_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:lightning_bolt", 0x00000000, 0x00000000, false, false, 0),
+    ("minecraft:llama", 0x3f666666, 0x3fef5c29, true, false, 1),
+    ("minecraft:llama_spit", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:magma_cube", 0x3f051eb8, 0x3f051eb8, true, false, 1),
+    ("minecraft:mangrove_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:mangrove_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:mannequin", 0x3f19999a, 0x3fe66666, true, false, 1),
+    ("minecraft:marker", 0x00000000, 0x00000000, false, true, 0),
+    ("minecraft:minecart", 0x3f7ae148, 0x3f333333, false, false, 0),
+    ("minecraft:mooshroom", 0x3f666666, 0x3fb33333, true, false, 1),
+    ("minecraft:mule", 0x3fb2c000, 0x3fcccccd, true, false, 1),
+    ("minecraft:nautilus", 0x3f600000, 0x3f733333, true, false, 1),
+    ("minecraft:oak_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:oak_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:ocelot", 0x3f19999a, 0x3f333333, true, false, 1),
+    ("minecraft:ominous_item_spawner", 0x3e800000, 0x3e800000, false, true, 0),
+    ("minecraft:pale_oak_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:pale_oak_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:panda", 0x3fa66666, 0x3fa00000, true, false, 1),
+    ("minecraft:parched", 0x3f19999a, 0x3ffeb852, true, false, 1),
+    ("minecraft:parrot", 0x3f000000, 0x3f666666, true, false, 1),
+    ("minecraft:phantom", 0x3f666666, 0x3f000000, true, false, 1),
+    ("minecraft:pig", 0x3f666666, 0x3f666666, true, false, 1),
+    ("minecraft:piglin", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:piglin_brute", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:pillager", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:polar_bear", 0x3fb33333, 0x3fb33333, true, false, 1),
+    ("minecraft:poplar_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:poplar_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:splash_potion", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:lingering_potion", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:rabbit", 0x3efae148, 0x3f19999a, true, false, 1),
+    ("minecraft:ravager", 0x3ff9999a, 0x400ccccd, true, false, 1),
+    ("minecraft:salmon", 0x3f333333, 0x3ecccccd, true, false, 1),
+    ("minecraft:sheep", 0x3f666666, 0x3fa66666, true, false, 1),
+    ("minecraft:shulker", 0x3f800000, 0x3f800000, true, false, 1),
+    ("minecraft:shulker_bullet", 0x3ea00000, 0x3ea00000, false, false, 0),
+    ("minecraft:silverfish", 0x3ecccccd, 0x3e99999a, true, false, 1),
+    ("minecraft:skeleton", 0x3f19999a, 0x3ffeb852, true, false, 1),
+    ("minecraft:skeleton_horse", 0x3fb2c000, 0x3fcccccd, true, false, 1),
+    ("minecraft:slime", 0x3f051eb8, 0x3f051eb8, true, false, 1),
+    ("minecraft:small_fireball", 0x3ea00000, 0x3ea00000, false, false, 0),
+    ("minecraft:sniffer", 0x3ff33333, 0x3fe00000, true, false, 1),
+    ("minecraft:snowball", 0x3e800000, 0x3e800000, false, false, 0),
+    ("minecraft:snow_golem", 0x3f333333, 0x3ff33333, true, false, 1),
+    ("minecraft:spawner_minecart", 0x3f7ae148, 0x3f333333, false, false, 0),
+    ("minecraft:spectral_arrow", 0x3f000000, 0x3f000000, false, false, 0),
+    ("minecraft:spider", 0x3fb33333, 0x3f666666, true, false, 1),
+    ("minecraft:spruce_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:spruce_chest_boat", 0x3fb00000, 0x3f100000, false, false, 2),
+    ("minecraft:squid", 0x3f4ccccd, 0x3f4ccccd, true, false, 1),
+    ("minecraft:stray", 0x3f19999a, 0x3ffeb852, true, false, 1),
+    ("minecraft:strider", 0x3f666666, 0x3fd9999a, true, false, 1),
+    ("minecraft:sulfur_cube", 0x3efae148, 0x3efae148, true, false, 1),
+    ("minecraft:tadpole", 0x3ecccccd, 0x3e99999a, true, false, 1),
+    ("minecraft:text_display", 0x00000000, 0x00000000, false, true, 0),
+    ("minecraft:tnt", 0x3f7ae148, 0x3f7ae148, false, false, 0),
+    ("minecraft:tnt_minecart", 0x3f7ae148, 0x3f333333, false, false, 0),
+    ("minecraft:trader_llama", 0x3f666666, 0x3fef5c29, true, false, 1),
+    ("minecraft:trident", 0x3f000000, 0x3f000000, false, false, 0),
+    ("minecraft:tropical_fish", 0x3f000000, 0x3ecccccd, true, false, 1),
+    ("minecraft:turtle", 0x3f99999a, 0x3ecccccd, true, false, 1),
+    ("minecraft:vex", 0x3ecccccd, 0x3f4ccccd, true, false, 1),
+    ("minecraft:villager", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:vindicator", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:wandering_trader", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:warden", 0x3f666666, 0x4039999a, true, false, 1),
+    ("minecraft:wind_charge", 0x3ea00000, 0x3ea00000, false, false, 0),
+    ("minecraft:witch", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:wither", 0x3f666666, 0x40600000, true, false, 1),
+    ("minecraft:wither_skeleton", 0x3f333333, 0x4019999a, true, false, 1),
+    ("minecraft:wither_skull", 0x3ea00000, 0x3ea00000, false, false, 0),
+    ("minecraft:wolf", 0x3f19999a, 0x3f59999a, true, false, 1),
+    ("minecraft:zoglin", 0x3fb2c000, 0x3fb33333, true, false, 1),
+    ("minecraft:zombie", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:zombie_horse", 0x3fb2c000, 0x3fcccccd, true, false, 1),
+    ("minecraft:zombie_nautilus", 0x3f600000, 0x3f733333, true, false, 1),
+    ("minecraft:zombie_villager", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:zombified_piglin", 0x3f19999a, 0x3ff9999a, true, false, 1),
+    ("minecraft:player", 0x3f19999a, 0x3fe66666, true, false, 0),
+    ("minecraft:fishing_bobber", 0x3e800000, 0x3e800000, false, false, 0)
+  ]
+
+/-- What the model knows about the entity type with the given registry name. -/
+def typeInfo? (type : String) : Option TypeInfo :=
+  (typeTable.find? (·.1 == type)).map fun (_, w, h, living, ignores, effects) =>
+    ⟨Float32.ofBits w, Float32.ofBits h, living, ignores, effects⟩
+
+/-- `EntityDimensions.makeBoundingBox(x, y, z)`: the box of an entity standing at `pos`. Half
+the width is computed in `float`, the rest in `double`. -/
+def makeBoundingBox (info : TypeInfo) (pos : Vec3) : AABB :=
+  let w := (info.width / 2.0).toFloat
+  let h := info.height.toFloat
+  ⟨pos.x - w, pos.y, pos.z - w, pos.x + w, pos.y + h, pos.z + w⟩
+
+/-- `Entity.getBoundingBox()`, for an entity with the default dimensions of its type. -/
+def boundingBox? (e : Entity) : Option AABB :=
+  (typeInfo? e.data.typeName).map fun info => makeBoundingBox info e.base.pos
+
+/-- `SectionPos.posToSectionCoord(double)`: the coordinate of the 16-block section of `v`. -/
+def sectionCoord (v : Float) : ℤ := (AABB.floor v).fdiv 16
+
+/-- `EntitySectionStorage.forEachAccessibleNonEmptySection(box, ...)`: the entity search only
+looks at the sections that the box, grown by 2 blocks horizontally and by 4 blocks downwards,
+reaches; an entity is stored in the section of its position (`blockPosition`). An entity whose
+box meets `box` is therefore missed when its position lies in a section outside this range:
+a giant (12 blocks high) whose feet are in the section below, for instance. -/
+def inSearchedSections (pos : Vec3) (box : AABB) : Bool :=
+  let within (lo v hi : Float) : Bool :=
+    sectionCoord lo ≤ sectionCoord v && sectionCoord v ≤ sectionCoord hi
+  within (box.minX - 2.0) pos.x (box.maxX + 2.0) &&
+    within (box.minY - 4.0) pos.y (box.maxY + 0.0) &&
+    within (box.minZ - 2.0) pos.z (box.maxZ + 2.0)
+
+/-- `getEntitiesOfClass(class, box, selector)` with the selector of the block triggers
+(`NO_SPECTATORS` and not `isIgnoringBlockTriggers`): the entities whose bounding box meets
+`box` and whose position is in a section the search looks at, among the living entities only
+if `livingOnly` is set (`LivingEntity.class` instead of `Entity.class`). Entities of a type the
+table does not know are not found. -/
+def getTriggeringEntities (l : Level) (box : AABB) (livingOnly : Bool) : List Entity :=
+  l.entities.filter fun e =>
+    match typeInfo? e.data.typeName with
+    | none => false
+    | some info =>
+      (info.living || !livingOnly) && !info.ignoresBlockTriggers &&
+        inSearchedSections e.base.pos box && (makeBoundingBox info e.base.pos).intersects box
+
+/-- The amount by which `checkInsideBlocks` shrinks the bounding box: `1.0E-5F`. -/
+def insideMargin : Float := (1.0e-5 : Float32).toFloat
+
+/-- `Entity.applyEffectsFromBlocks()` for an entity that did not move in this tick: every block
+that its bounding box, shrunk by `insideMargin`, reaches is told that the entity is inside it
+(`checkInsideBlocks` with a movement of length zero, where `forEachBlockIntersectedBetween`
+goes through `BlockPos.betweenClosed`). The blocks are told in order, and no more once the
+entity is gone. A block is told whatever its shape, as for all blocks that do not override
+`getEntityInsideCollisionShape`. -/
+def applyEffectsFromBlocks (index : ℕ) : M Unit := do
+  let some e := (← get).entity? index | return
+  let some box := boundingBox? e | return
+  (box.deflate insideMargin).blocks.forM fun p => do
+    if ((← get).entity? index).isSome then
+      let state ← Level.getBlock p
+      if !state.isAir then (← Level.behaviour state).entityInside p index
+
+/-- The behaviour of an entity the model does not move: in every game tick it applies the
+effects of the blocks it is in, as often as its class does. -/
+def behaviour (e : Entity) : EntityBehaviour :=
+  ⟨fun index => do
+    match typeInfo? e.data.typeName with
+    | none => pure ()
+    | some info => (List.range info.effects).forM fun _ => applyEffectsFromBlocks index⟩
+
+end Redstone.Entity.Still

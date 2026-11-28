@@ -1,0 +1,29 @@
+{
+  "name": "dripleaf-unsupported",
+  "ticks": 10,
+  "box": {"min": [-1, 0, -2], "max": [8, 4, 2]},
+  "blocks": [
+    {"pos": [0, 2, 0], "state": "minecraft:big_dripleaf[facing=north,tilt=none,waterlogged=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:big_dripleaf[facing=south,tilt=unstable,waterlogged=false]"},
+    {"pos": [4, 2, 0], "state": "minecraft:big_dripleaf[facing=west,tilt=partial,waterlogged=false]"},
+    {"pos": [6, 2, 0], "state": "minecraft:big_dripleaf[facing=east,tilt=full,waterlogged=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [0, 2, -1], "state": "minecraft:stone"},
+    {"tick": 2, "type": "set", "pos": [2, 2, 1], "state": "minecraft:stone"},
+    {"tick": 2, "type": "set", "pos": [3, 2, 0], "state": "minecraft:stone"},
+    {"tick": 2, "type": "set", "pos": [7, 2, 0], "state": "minecraft:stone"},
+    {"tick": 4, "type": "set", "pos": [0, 3, 0], "state": "minecraft:stone"},
+    {"tick": 4, "type": "set", "pos": [2, 3, 0], "state": "minecraft:stone"},
+    {"tick": 4, "type": "set", "pos": [4, 3, 0], "state": "minecraft:stone"},
+    {"tick": 4, "type": "set", "pos": [6, 3, 0], "state": "minecraft:stone"},
+    {"tick": 6, "type": "set", "pos": [0, 1, 0], "state": "minecraft:clay"},
+    {"tick": 6, "type": "set", "pos": [2, 1, 0], "state": "minecraft:stone"},
+    {"tick": 6, "type": "set", "pos": [4, 1, 0], "state": "minecraft:clay"},
+    {"tick": 6, "type": "set", "pos": [6, 1, 0], "state": "minecraft:stone"},
+    {"tick": 8, "type": "destroy", "pos": [0, 1, 0], "drop": false},
+    {"tick": 8, "type": "destroy", "pos": [2, 1, 0], "drop": false},
+    {"tick": 8, "type": "destroy", "pos": [4, 1, 0], "drop": false},
+    {"tick": 8, "type": "destroy", "pos": [6, 1, 0], "drop": false}
+  ]
+}

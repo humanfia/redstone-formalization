@@ -1,0 +1,129 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 8
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:hopper[enabled=*,facing=*]",
+   "weight": 4,
+   "nbt": "{TransferCooldown:3}"
+  },
+  {
+   "state": "minecraft:chest[facing=*,type=*]",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:trapped_chest[facing=*,type=*]",
+   "weight": 7
+  },
+  {
+   "state": "minecraft:barrel[facing=*,open=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:copper_chest[facing=*,type=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:weathered_copper_chest[facing=*,type=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:waxed_oxidized_copper_chest[facing=*,type=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:shulker_box[facing=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:furnace[facing=*,lit=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:brewing_stand[has_bottle_0=*,has_bottle_1=*,has_bottle_2=*]",
+   "weight": 1
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    8,
+    16
+   ],
+   "targets": [
+    "minecraft:lever",
+    "minecraft:chest",
+    "minecraft:trapped_chest",
+    "minecraft:trapped_chest",
+    "minecraft:barrel",
+    "minecraft:hopper",
+    "minecraft:furnace",
+    "minecraft:brewing_stand",
+    "minecraft:copper_chest",
+    "minecraft:weathered_copper_chest",
+    "minecraft:waxed_oxidized_copper_chest"
+   ],
+   "faces": [
+    "up",
+    "north",
+    "west"
+   ]
+  },
+  "set": {
+   "count": [
+    6,
+    12
+   ],
+   "states": [
+    "minecraft:stone",
+    "minecraft:air",
+    "minecraft:redstone_lamp[lit=false]",
+    "minecraft:lever[face=*,facing=*,powered=*]",
+    "minecraft:hopper[enabled=*,facing=*]",
+    "minecraft:chest[facing=*,type=*]",
+    "minecraft:trapped_chest[facing=*,type=*]",
+    "minecraft:barrel[facing=*,open=*]",
+    "minecraft:exposed_copper_chest[facing=*,type=*]",
+    "minecraft:waxed_copper_chest[facing=*,type=*]",
+    "minecraft:copper_chest[facing=*,type=*]",
+    "minecraft:furnace[facing=*,lit=*]",
+    "minecraft:brewing_stand"
+   ],
+   "flags": 3
+  },
+  "destroy": {
+   "count": [
+    3,
+    7
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:redstone_lamp",
+    "minecraft:lever",
+    "minecraft:chest",
+    "minecraft:trapped_chest",
+    "minecraft:barrel",
+    "minecraft:hopper",
+    "minecraft:copper_chest",
+    "minecraft:weathered_copper_chest",
+    "minecraft:waxed_oxidized_copper_chest",
+    "minecraft:furnace"
+   ]
+  }
+ }
+}

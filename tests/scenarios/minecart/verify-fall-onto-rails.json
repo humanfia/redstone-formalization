@@ -1,0 +1,20 @@
+{
+  "name": "verify-fall-onto-rails",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 3], "state": "minecraft:rail[shape=ascending_south,waterlogged=false]"},
+    {"pos": [3, 2, 4], "state": "minecraft:rail[shape=ascending_south,waterlogged=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:stone"},
+    {"pos": [3, 2, 5], "state": "minecraft:stone"},
+    {"pos": [3, 3, 5], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [10, 1, 3], "state": "minecraft:rail[shape=north_west,waterlogged=false]"},
+    {"pos": [3, 1, 11], "state": "minecraft:powered_rail[powered=true,shape=ascending_west,waterlogged=false]"},
+    {"pos": [4, 1, 11], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [11, 1, 11], "state": "minecraft:activator_rail[powered=true,shape=ascending_north,waterlogged=false]"}
+  ],
+  "entities": [{"type": "minecraft:chest_minecart", "pos": [3.5, 3.0625, 5.5], "nbt": "{Motion:[0.0d,0.0d,0.0d]}"}, {"type": "minecraft:minecart", "pos": [10.2, 2.7, 3.9], "nbt": "{Motion:[0.0d,0.1d,0.0d]}"}, {"type": "minecraft:furnace_minecart", "pos": [3.3, 2.99, 11.5], "nbt": "{Motion:[0.0d,0.0d,0.0d],PushX:0.3d,PushZ:-0.2d,Fuel:30s}"}, {"type": "minecraft:hopper_minecart", "pos": [11.5, 2.5, 11.2], "nbt": "{Motion:[0.0d,0.0d,0.0d]}"}]
+}

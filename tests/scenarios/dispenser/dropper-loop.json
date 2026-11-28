@@ -1,0 +1,241 @@
+{
+ "name": "dropper-loop",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   5,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:dirt\",count:3},{Slot:4b,id:\"minecraft:stone\",count:2}]}"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:dropper[facing=west,triggered=false]",
+   "nbt": "{Items:[{Slot:8b,id:\"minecraft:stick\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 19,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 22,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 25,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 28,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 34,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 37,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 43,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 46,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 49,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 52,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+  "name": "lectern-book",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [8, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 2], "state": "minecraft:lectern[facing=north,has_book=false,powered=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:lectern[facing=south,has_book=false,powered=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:lectern[facing=west,has_book=false,powered=false]"},
+    {"pos": [7, 1, 2], "state": "minecraft:lectern[facing=east,has_book=false,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 1, "type": "use", "pos": [3, 1, 2], "face": "up"},
+    {"tick": 1, "type": "use", "pos": [5, 1, 2], "face": "up"},
+    {"tick": 1, "type": "use", "pos": [7, 1, 2], "face": "up"},
+    {"tick": 2, "type": "use_item", "pos": [1, 1, 2], "face": "north", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [3, 1, 2], "face": "south", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [5, 1, 2], "face": "west", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [7, 1, 2], "face": "east", "item": "minecraft:stick"},
+    {"tick": 3, "type": "use_item", "pos": [1, 1, 2], "face": "up", "item": "minecraft:writable_book"},
+    {"tick": 3, "type": "use_item", "pos": [3, 1, 2], "face": "up", "item": "minecraft:written_book"},
+    {"tick": 3, "type": "use_item", "pos": [5, 1, 2], "face": "west", "item": "minecraft:writable_book"},
+    {"tick": 3, "type": "use_item", "pos": [7, 1, 2], "face": "east", "item": "minecraft:written_book"},
+    {"tick": 5, "type": "use", "pos": [1, 1, 2], "face": "north"},
+    {"tick": 5, "type": "use", "pos": [3, 1, 2], "face": "south"},
+    {"tick": 5, "type": "use", "pos": [5, 1, 2], "face": "west"},
+    {"tick": 5, "type": "use", "pos": [7, 1, 2], "face": "east"},
+    {"tick": 6, "type": "use_item", "pos": [1, 1, 2], "face": "up", "item": "minecraft:writable_book"},
+    {"tick": 6, "type": "use_item", "pos": [3, 1, 2], "face": "up", "item": "minecraft:writable_book"},
+    {"tick": 6, "type": "use_item", "pos": [5, 1, 2], "face": "up", "item": "minecraft:writable_book"},
+    {"tick": 6, "type": "use_item", "pos": [7, 1, 2], "face": "up", "item": "minecraft:writable_book"},
+    {"tick": 7, "type": "use_item", "pos": [1, 1, 2], "face": "up", "item": "minecraft:stick"},
+    {"tick": 7, "type": "use_item", "pos": [3, 1, 2], "face": "up", "item": "minecraft:stick"},
+    {"tick": 7, "type": "use_item", "pos": [5, 1, 2], "face": "up", "item": "minecraft:stick"},
+    {"tick": 7, "type": "use_item", "pos": [7, 1, 2], "face": "up", "item": "minecraft:stick"},
+    {"tick": 9, "type": "set", "pos": [1, 1, 2], "state": "minecraft:lectern[facing=north,has_book=false,powered=false]"},
+    {"tick": 9, "type": "set", "pos": [3, 1, 2], "state": "minecraft:lectern[facing=south,has_book=true,powered=true]"},
+    {"tick": 10, "type": "use_item", "pos": [1, 1, 2], "face": "up", "item": "minecraft:written_book"},
+    {"tick": 10, "type": "use", "pos": [3, 1, 2], "face": "up"}
+  ]
+}

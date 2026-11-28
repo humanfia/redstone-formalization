@@ -1,0 +1,31 @@
+{
+  "name": "fuzz-items-s2-026",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:stone"},
+    {"pos": [0, 1, 1], "state": "minecraft:stone"},
+    {"pos": [0, 2, 0], "state": "minecraft:dropper[facing=south,triggered=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:dropper[facing=east,triggered=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:brown_mushroom\",count:38}]}"},
+    {"pos": [0, 2, 2], "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:oak_planks\",count:3},{Slot:1b,id:\"minecraft:birch_planks\",count:2},{Slot:3b,id:\"minecraft:oak_planks\",count:3},{Slot:4b,id:\"minecraft:oak_planks\",count:1}]}"},
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:dropper[facing=east,triggered=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:wheat\",count:22},{Slot:5b,id:\"minecraft:ender_pearl\",count:12},{Slot:8b,id:\"minecraft:dirt\",count:4}]}"},
+    {"pos": [1, 2, 1], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:birch_planks\",count:21},{Slot:1b,id:\"minecraft:wheat\",count:58},{Slot:2b,id:\"minecraft:iron_block\",count:46},{Slot:4b,id:\"minecraft:stone\",count:8},{Slot:6b,id:\"minecraft:iron_sword\",count:1}]}"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:dropper[facing=south,triggered=false]", "nbt": "{Items:[{Slot:2b,id:\"minecraft:iron_sword\",count:1},{Slot:4b,id:\"minecraft:red_mushroom\",count:13},{Slot:7b,id:\"minecraft:bowl\",count:39},{Slot:8b,id:\"minecraft:oak_planks\",count:59}]}"},
+    {"pos": [2, 1, 2], "state": "minecraft:dropper[facing=north,triggered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:stone"},
+    {"pos": [2, 2, 2], "state": "minecraft:dropper[facing=down,triggered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 6, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 31, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 59, "type": "use", "pos": [1, 2, 2], "face": "up"}
+  ]
+}

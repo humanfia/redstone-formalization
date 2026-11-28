@@ -1,0 +1,37 @@
+{
+  "name": "copper-chest",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [12, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [12, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:copper_chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:redstone\",count:7}]}"},
+    {"pos": [1, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:2}]}"},
+    {"pos": [4, 1, 1], "state": "minecraft:exposed_copper_chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:redstone\",count:7}]}"},
+    {"pos": [4, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:2}]}"},
+    {"pos": [7, 1, 1], "state": "minecraft:weathered_copper_chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:redstone\",count:7}]}"},
+    {"pos": [7, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:2}]}"},
+    {"pos": [10, 1, 1], "state": "minecraft:oxidized_copper_chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:redstone\",count:7}]}"},
+    {"pos": [10, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:2}]}"},
+    {"pos": [12, 1, 0], "state": "minecraft:copper_chest[facing=west,type=left,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:64}]}"},
+    {"pos": [12, 1, 1], "state": "minecraft:oxidized_copper_chest[facing=west,type=right,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:dirt\",count:64}]}"},
+    {"pos": [12, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:2}]}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [0, 1, 1], "state": "minecraft:waxed_exposed_copper_chest[facing=north,type=left,waterlogged=false]"},
+    {"tick": 3, "type": "set", "pos": [3, 1, 1], "state": "minecraft:waxed_weathered_copper_chest[facing=north,type=left,waterlogged=false]"},
+    {"tick": 4, "type": "set", "pos": [6, 1, 1], "state": "minecraft:waxed_oxidized_copper_chest[facing=north,type=left,waterlogged=false]"},
+    {"tick": 5, "type": "set", "pos": [9, 1, 1], "state": "minecraft:copper_chest[facing=north,type=left,waterlogged=false]"},
+    {"tick": 10, "type": "set", "pos": [12, 1, 2], "state": "minecraft:stone"},
+    {"tick": 12, "type": "use", "pos": [12, 1, 0], "face": "west"},
+    {"tick": 20, "type": "set", "pos": [0, 1, 1], "state": "minecraft:chest[facing=north,type=left,waterlogged=false]"},
+    {"tick": 21, "type": "set", "pos": [3, 1, 1], "state": "minecraft:chest[facing=north,type=left,waterlogged=false]"},
+    {"tick": 22, "type": "set", "pos": [6, 1, 1], "state": "minecraft:chest[facing=north,type=left,waterlogged=false]"},
+    {"tick": 23, "type": "set", "pos": [9, 1, 1], "state": "minecraft:chest[facing=north,type=left,waterlogged=false]"},
+    {"tick": 30, "type": "use", "pos": [1, 1, 1], "face": "north"},
+    {"tick": 31, "type": "use", "pos": [4, 1, 1], "face": "north"},
+    {"tick": 32, "type": "use", "pos": [7, 1, 1], "face": "north"},
+    {"tick": 33, "type": "use", "pos": [10, 1, 1], "face": "north"}
+  ]
+}

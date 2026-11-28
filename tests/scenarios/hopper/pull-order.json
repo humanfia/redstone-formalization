@@ -1,0 +1,11 @@
+{
+  "name": "pull-order",
+  "ticks": 80,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 0]},
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [0, 2, 0], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:2b,id:\"minecraft:redstone\",count:2},{Slot:5b,id:\"minecraft:ender_pearl\",count:1},{Slot:20b,id:\"minecraft:diamond_sword\",count:2},{Slot:26b,id:\"minecraft:stone\",count:3}]}"},
+    {"pos": [2, 1, 0], "state": "minecraft:hopper[enabled=true,facing=west]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:63},{Slot:2b,id:\"minecraft:ender_pearl\",count:15}]}"},
+    {"pos": [2, 2, 0], "state": "minecraft:barrel[facing=north,open=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:ender_pearl\",count:3},{Slot:1b,id:\"minecraft:stone\",count:3},{Slot:9b,id:\"minecraft:egg\",count:2}]}"}
+  ]
+}

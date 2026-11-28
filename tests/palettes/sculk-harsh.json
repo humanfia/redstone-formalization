@@ -1,0 +1,126 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 30
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:glass",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:white_wool",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:blue_wool_slab[type=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:amethyst_block",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 8
+  },
+  {
+   "state": "minecraft:sculk_sensor",
+   "weight": 7
+  },
+  {
+   "state": "minecraft:sculk_sensor[power=*,sculk_sensor_phase=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:calibrated_sculk_sensor[facing=*]",
+   "weight": 7
+  },
+  {
+   "state": "minecraft:calibrated_sculk_sensor[facing=*,power=*,sculk_sensor_phase=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:sculk_shrieker[can_summon=*,shrieking=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:sculk_catalyst[bloom=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:sculk_sensor",
+   "weight": 1,
+   "nbt": "{last_vibration_frequency:3,listener:{event:{game_event:\"minecraft:block_open\",distance:4.2f,pos:[2.5d,1.5d,3.5d]},event_delay:3,selector:{tick:-1L}}}"
+  },
+  {
+   "state": "minecraft:calibrated_sculk_sensor[facing=*]",
+   "weight": 1,
+   "nbt": "{listener:{event_delay:0,selector:{event:{game_event:\"minecraft:block_deactivate\",distance:2.0f,pos:[0.5d,2.5d,0.5d]},tick:0L}}}"
+  },
+  {
+   "state": "minecraft:sculk_sensor",
+   "weight": 1,
+   "nbt": "{listener:{event_delay:0,selector:{event:{game_event:\"minecraft:block_destroy\",distance:5.0f,pos:[4.5d,1.5d,0.5d]},tick:7L}}}"
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    6,
+    16
+   ],
+   "targets": [
+    "minecraft:lever"
+   ]
+  },
+  "set": {
+   "count": [
+    3,
+    9
+   ],
+   "states": [
+    "minecraft:stone",
+    "minecraft:air",
+    "minecraft:white_wool",
+    "minecraft:amethyst_block",
+    "minecraft:redstone_lamp[lit=*]",
+    "minecraft:lever[face=*,facing=*,powered=*]",
+    "minecraft:sculk_sensor[power=*,sculk_sensor_phase=*]",
+    "minecraft:sculk_sensor",
+    "minecraft:calibrated_sculk_sensor[facing=*]",
+    "minecraft:calibrated_sculk_sensor[facing=*,power=*,sculk_sensor_phase=*]",
+    "minecraft:sculk_shrieker[can_summon=*,shrieking=*]",
+    "minecraft:sculk_catalyst[bloom=*]"
+   ]
+  },
+  "destroy": {
+   "count": [
+    5,
+    14
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:redstone_lamp",
+    "minecraft:lever",
+    "minecraft:white_wool",
+    "minecraft:amethyst_block",
+    "minecraft:sculk_sensor",
+    "minecraft:calibrated_sculk_sensor",
+    "minecraft:glass",
+    "minecraft:blue_wool_slab",
+    "minecraft:sculk_shrieker",
+    "minecraft:sculk_catalyst"
+   ]
+  }
+ }
+}

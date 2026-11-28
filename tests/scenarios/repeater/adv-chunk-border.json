@@ -1,0 +1,323 @@
+{
+ "name": "adv-chunk-border",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   19,
+   3,
+   19
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    19,
+    0,
+    19
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    1
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    1
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    1
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    1
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    18,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    14
+   ],
+   "state": "minecraft:repeater[delay=2,facing=north,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    15
+   ],
+   "state": "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "state": "minecraft:repeater[delay=2,facing=north,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    17
+   ],
+   "state": "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    18
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    15
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    15
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    16
+   ],
+   "state": "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    15
+   ],
+   "state": "minecraft:repeater[delay=1,facing=east,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    14
+   ],
+   "state": "minecraft:repeater[delay=1,facing=south,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    15
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    17
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    15
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    13
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    15
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    15
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    15
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    15
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 21,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  }
+ ]
+}

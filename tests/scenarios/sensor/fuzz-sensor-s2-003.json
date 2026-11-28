@@ -1,0 +1,35 @@
+{
+  "name": "fuzz-sensor-s2-003",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:glass"},
+    {"pos": [0, 1, 2], "state": "minecraft:weathered_lightning_rod[facing=south,powered=true,waterlogged=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:waxed_exposed_lightning_rod[facing=up,powered=true,waterlogged=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:stone"},
+    {"pos": [1, 1, 1], "state": "minecraft:target[power=11]"},
+    {"pos": [1, 1, 2], "state": "minecraft:daylight_detector[inverted=false,power=12]"},
+    {"pos": [1, 2, 1], "state": "minecraft:target[power=1]"},
+    {"pos": [2, 1, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [2, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=13]"},
+    {"pos": [2, 2, 1], "state": "minecraft:daylight_detector[inverted=false,power=4]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [0, 2, 1], "state": "minecraft:stone"},
+    {"tick": 2, "type": "set", "pos": [1, 1, 2], "state": "minecraft:lever[face=wall,facing=east,powered=true]"},
+    {"tick": 3, "type": "set", "pos": [2, 1, 0], "state": "minecraft:target[power=0]"},
+    {"tick": 4, "type": "use", "pos": [0, 1, 0], "face": "north"},
+    {"tick": 4, "type": "set", "pos": [1, 2, 0], "state": "minecraft:waxed_lightning_rod[facing=down,powered=true,waterlogged=false]"},
+    {"tick": 5, "type": "use", "pos": [2, 2, 1], "face": "north"},
+    {"tick": 9, "type": "destroy", "pos": [0, 2, 2], "drop": false},
+    {"tick": 13, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 16, "type": "set", "pos": [2, 1, 0], "state": "minecraft:stone"},
+    {"tick": 17, "type": "set", "pos": [0, 1, 2], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"tick": 21, "type": "use", "pos": [2, 2, 1], "face": "up"}
+  ]
+}

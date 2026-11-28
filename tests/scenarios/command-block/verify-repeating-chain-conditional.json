@@ -1,0 +1,109 @@
+{
+ "name": "verify-repeating-chain-conditional",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    5,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:repeating_command_block[conditional=false,facing=east]",
+   "nbt": "{Command:\"say r\",TrackOutput:0b}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:chain_command_block[conditional=true,facing=east]",
+   "nbt": "{Command:\"nope\",TrackOutput:0b,auto:1b,SuccessCount:4}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:chain_command_block[conditional=true,facing=east]",
+   "nbt": "{Command:\"say d\",TrackOutput:0b,auto:1b,SuccessCount:2}"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:chain_command_block[conditional=false,facing=up]",
+   "nbt": "{Command:\"Searge\",TrackOutput:0b,auto:1b}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

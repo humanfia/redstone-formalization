@@ -1,14 +1,12 @@
 module
 
-public import Redstone.Basic.Nbt
-public import Redstone.Block.Generated.State
+public import Redstone.Block.Entity.Furnace
 
 /-!
 # Block entity `minecraft:blast_furnace`
 
-The data that the model keeps of the block entity `BlastFurnaceBlockEntity`.
-Nothing is modelled yet: the structure is empty and is to be filled in by the component that
-owns this block entity.
+The data that the model keeps of the block entity `BlastFurnaceBlockEntity`. It is the data of a
+furnace.
 -/
 
 @[expose] public section
@@ -16,14 +14,13 @@ owns this block entity.
 namespace Redstone.BlockEntities
 
 /-- The data of a `minecraft:blast_furnace` block entity. -/
-structure BlastFurnace where
-  deriving DecidableEq, Repr, Inhabited
+abbrev BlastFurnace := Furnace
 
 namespace BlastFurnace
 
 /-- Reads the data from the block entity's saved NBT. Fields the model does not keep are
 ignored. -/
-def ofNbt? (_ : Nbt) : Option BlastFurnace := some {}
+def ofNbt? (t : Nbt) : Option BlastFurnace := Furnace.ofNbt? t
 
 end BlastFurnace
 

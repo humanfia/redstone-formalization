@@ -1,0 +1,41 @@
+{
+  "name": "fuzz-repeater-s2-001",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [3, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:stone"},
+    {"pos": [0, 1, 2], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:repeater[delay=3,facing=west,locked=true,powered=true]"},
+    {"pos": [0, 2, 3], "state": "minecraft:lever[face=ceiling,facing=east,powered=true]"},
+    {"pos": [1, 1, 0], "state": "minecraft:stone"},
+    {"pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [1, 2, 3], "state": "minecraft:repeater[delay=2,facing=north,locked=true,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:repeater[delay=4,facing=north,locked=true,powered=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:repeater[delay=2,facing=east,locked=false,powered=false]"},
+    {"pos": [2, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:repeater[delay=1,facing=north,locked=true,powered=true]"},
+    {"pos": [2, 2, 2], "state": "minecraft:glass"},
+    {"pos": [2, 2, 3], "state": "minecraft:stone"},
+    {"pos": [3, 1, 0], "state": "minecraft:lever[face=ceiling,facing=west,powered=true]"},
+    {"pos": [3, 1, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [3, 1, 2], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [3, 2, 0], "state": "minecraft:stone"},
+    {"pos": [3, 2, 1], "state": "minecraft:repeater[delay=3,facing=south,locked=false,powered=false]"},
+    {"pos": [3, 2, 2], "state": "minecraft:repeater[delay=4,facing=east,locked=false,powered=true]"},
+    {"pos": [3, 2, 3], "state": "minecraft:repeater[delay=3,facing=south,locked=false,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 6, "type": "use", "pos": [3, 2, 3], "face": "up"},
+    {"tick": 7, "type": "use", "pos": [3, 2, 3], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [3, 2, 3], "face": "up"}
+  ]
+}

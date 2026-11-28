@@ -1,0 +1,158 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 8
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:glass",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:smooth_stone_slab[type=*,waterlogged=false]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 7
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:stone_button[face=*,facing=*,powered=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:polished_blackstone_button[face=*,facing=*,powered=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:oak_button[face=*,facing=*,powered=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:spruce_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:birch_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:jungle_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:acacia_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:cherry_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:dark_oak_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:pale_oak_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:mangrove_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:poplar_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:bamboo_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:crimson_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:warped_button[face=*,facing=*,powered=*]",
+   "weight": 1
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    8,
+    24
+   ],
+   "targets": [
+    "minecraft:stone_button",
+    "minecraft:polished_blackstone_button",
+    "minecraft:oak_button",
+    "minecraft:spruce_button",
+    "minecraft:birch_button",
+    "minecraft:jungle_button",
+    "minecraft:acacia_button",
+    "minecraft:cherry_button",
+    "minecraft:dark_oak_button",
+    "minecraft:pale_oak_button",
+    "minecraft:mangrove_button",
+    "minecraft:poplar_button",
+    "minecraft:bamboo_button",
+    "minecraft:crimson_button",
+    "minecraft:warped_button",
+    "minecraft:lever"
+   ],
+   "faces": [
+    "up",
+    "down",
+    "north",
+    "east"
+   ]
+  },
+  "set": {
+   "count": [
+    4,
+    12
+   ],
+   "states": [
+    "minecraft:stone",
+    "minecraft:air",
+    "minecraft:glass",
+    "minecraft:redstone_lamp[lit=*]",
+    "minecraft:smooth_stone_slab[type=*,waterlogged=false]",
+    "minecraft:stone_button[face=*,facing=*,powered=*]",
+    "minecraft:oak_button[face=*,facing=*,powered=*]",
+    "minecraft:warped_button[face=*,facing=*,powered=*]",
+    "minecraft:lever[face=*,facing=*,powered=*]"
+   ],
+   "flags": 19
+  },
+  "destroy": {
+   "count": [
+    3,
+    10
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:glass",
+    "minecraft:smooth_stone_slab",
+    "minecraft:redstone_lamp",
+    "minecraft:lever",
+    "minecraft:stone_button",
+    "minecraft:oak_button",
+    "minecraft:cherry_button",
+    "minecraft:polished_blackstone_button",
+    "minecraft:birch_button",
+    "minecraft:bamboo_button"
+   ]
+  }
+ }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "fuzz-extra-s2-017",
+  "ticks": 120,
+  "box": {"min": [0, 0, 0], "max": [3, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:dragon_head[powered=false,rotation=11]"},
+    {"pos": [0, 1, 2], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]", "nbt": "{countdown:2}"},
+    {"pos": [0, 1, 3], "state": "minecraft:wither_skeleton_wall_skull[facing=south,powered=true]"},
+    {"pos": [0, 2, 0], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]"},
+    {"pos": [0, 2, 2], "state": "minecraft:skeleton_wall_skull[facing=east,powered=true]"},
+    {"pos": [1, 1, 0], "state": "minecraft:wet_sponge"},
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"pos": [1, 1, 3], "state": "minecraft:sponge"},
+    {"pos": [2, 1, 0], "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]", "nbt": "{countdown:2}"},
+    {"pos": [2, 1, 2], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:creeper_wall_head[facing=south,powered=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:zombie_wall_head[facing=south,powered=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:sponge"},
+    {"pos": [3, 1, 0], "state": "minecraft:sponge"},
+    {"pos": [3, 1, 1], "state": "minecraft:zombie_head[powered=false,rotation=9]"},
+    {"pos": [3, 2, 1], "state": "minecraft:stone"},
+    {"pos": [3, 2, 2], "state": "minecraft:dragon_head[powered=false,rotation=5]"},
+    {"pos": [3, 2, 3], "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"}
+  ],
+  "actions": [
+    {"tick": 14, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 22, "type": "set", "pos": [2, 2, 2], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"tick": 25, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 33, "type": "destroy", "pos": [3, 2, 1], "drop": false},
+    {"tick": 50, "type": "set", "pos": [1, 2, 2], "state": "minecraft:player_wall_head[facing=west,powered=true]"},
+    {"tick": 80, "type": "destroy", "pos": [3, 2, 1], "drop": false},
+    {"tick": 100, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 104, "type": "destroy", "pos": [3, 1, 0], "drop": false}
+  ]
+}

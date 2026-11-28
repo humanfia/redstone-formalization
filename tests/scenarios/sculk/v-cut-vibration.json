@@ -1,0 +1,29 @@
+{
+  "name": "v-cut-vibration",
+  "ticks": 120,
+  "box": {"min": [0, 0, 0], "max": [5, 2, 5]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [5, 0, 5], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [4, 1, 0], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [0, 1, 4], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:block_activate\",distance:5.0f,pos:[0.5d,1.5d,9.5d]},event_delay:5,selector:{tick:-1L}}}"},
+    {"pos": [4, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=true,shrieking=true,waterlogged=false]", "nbt": "{warning_level:4}"},
+    {"pos": [2, 1, 2], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=true,waterlogged=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 3, "type": "set", "pos": [0, 1, 4], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"tick": 4, "type": "set", "pos": [4, 1, 0], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"tick": 10, "type": "destroy", "pos": [4, 1, 4], "drop": false},
+    {"tick": 11, "type": "set", "pos": [4, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=true,shrieking=true,waterlogged=false]"},
+    {"tick": 12, "type": "set", "pos": [2, 1, 2], "state": "minecraft:sculk_shrieker[can_summon=true,shrieking=false,waterlogged=false]", "flags": 2},
+    {"tick": 50, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 52, "type": "set", "pos": [4, 1, 0], "state": "minecraft:calibrated_sculk_sensor[facing=south,power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"tick": 53, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 54, "type": "destroy", "pos": [0, 1, 4], "drop": false},
+    {"tick": 55, "type": "set", "pos": [0, 1, 4], "state": "minecraft:calibrated_sculk_sensor[facing=north,power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"tick": 56, "type": "use", "pos": [0, 1, 0], "face": "up"}
+  ]
+}

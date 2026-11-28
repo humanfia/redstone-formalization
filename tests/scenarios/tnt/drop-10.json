@@ -1,0 +1,181 @@
+{
+ "name": "drop-10",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "state": "minecraft:cobblestone_wall[east=low,north=tall,south=tall,up=false,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:turtle_egg[eggs=2,hatch=1]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    1
+   ],
+   "state": "minecraft:lightning_rod[facing=east,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    3
+   ],
+   "state": "minecraft:farmland[moisture=3]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:white_bed[facing=south,occupied=false,part=head]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    5
+   ],
+   "state": "minecraft:turtle_egg[eggs=4,hatch=1]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:turtle_egg[eggs=2,hatch=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=bottom,shape=inner_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    3
+   ],
+   "state": "minecraft:lightning_rod[facing=north,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    5
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "state": "minecraft:farmland[moisture=1]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence[east=true,north=true,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    6
+   ],
+   "state": "minecraft:farmland[moisture=4]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence[east=true,north=true,south=true,waterlogged=false,west=true]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.75,
+    2.296,
+    2.489
+   ],
+   "nbt": "{Motion:[0.615d,-0.476d,0.791d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.159,
+    3.501,
+    1.892
+   ],
+   "nbt": "{Motion:[0.094d,-0.082d,-0.147d]}"
+  }
+ ]
+}

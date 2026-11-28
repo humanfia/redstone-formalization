@@ -1,0 +1,18 @@
+{
+  "name": "repeating-cond-becomes-unmet",
+  "ticks": 12,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:command_block[conditional=false,facing=east]", "nbt": "{Command:\"nonsense\",TrackOutput:0b,SuccessCount:1}"},
+    {"pos": [1, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:repeating_command_block[conditional=true,facing=east]", "nbt": "{Command:\"say hi\",TrackOutput:0b}"},
+    {"pos": [2, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 5, "type": "use", "pos": [1, 1, 0], "face": "up"}
+  ]
+}

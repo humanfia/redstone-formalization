@@ -1,0 +1,148 @@
+{
+ "name": "qc-stone-above",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   5,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:1b,id:\"minecraft:dirt\",count:7},{Slot:2b,id:\"minecraft:ender_pearl\",count:16},{Slot:3b,id:\"minecraft:cobblestone\",count:64},{Slot:4b,id:\"minecraft:iron_sword\",count:1},{Slot:5b,id:\"minecraft:oak_planks\",count:2},{Slot:6b,id:\"minecraft:stick\",count:9},{Slot:7b,id:\"minecraft:redstone\",count:1},{Slot:8b,id:\"minecraft:snowball\",count:5}]}"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 21,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 24,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

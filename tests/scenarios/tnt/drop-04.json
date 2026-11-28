@@ -1,0 +1,135 @@
+{
+ "name": "drop-04",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    2,
+    5
+   ],
+   "state": "minecraft:bedrock"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    5
+   ],
+   "state": "minecraft:glass_pane[east=false,north=false,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    5
+   ],
+   "state": "minecraft:snow[layers=5]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:oak_fence_gate[facing=south,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:chorus_plant[down=false,east=false,north=false,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_stairs[facing=north,half=top,shape=outer_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    4
+   ],
+   "state": "minecraft:oak_fence[east=true,north=true,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:cobblestone_wall[east=low,north=tall,south=tall,up=false,waterlogged=false,west=none]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.842,
+    4.901,
+    5.98
+   ],
+   "nbt": "{Motion:[-0.5d,-0.566d,0.614d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.887,
+    2.446,
+    3.635
+   ],
+   "nbt": "{Motion:[-0.042d,-0.046d,-0.091d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    6.225,
+    4.652,
+    1.868
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.282,
+    2.242,
+    4.062
+   ],
+   "nbt": "{Motion:[-0.069d,0.089d,0.025d]}"
+  }
+ ]
+}

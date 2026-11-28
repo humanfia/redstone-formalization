@@ -1,0 +1,27 @@
+{
+  "name": "limit-sticky-up-13",
+  "ticks": 20,
+  "box": {"min": [3, 5, 5], "max": [11, 26, 11]},
+  "blocks": [
+    {"pos": [6, 8, 8], "state": "minecraft:stone"},
+    {"pos": [7, 8, 8], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=up]"},
+    {"pos": [8, 9, 8], "state": "minecraft:stone"},
+    {"pos": [8, 10, 8], "state": "minecraft:stone"},
+    {"pos": [8, 11, 8], "state": "minecraft:stone"},
+    {"pos": [8, 12, 8], "state": "minecraft:stone"},
+    {"pos": [8, 13, 8], "state": "minecraft:stone"},
+    {"pos": [8, 14, 8], "state": "minecraft:stone"},
+    {"pos": [8, 15, 8], "state": "minecraft:stone"},
+    {"pos": [8, 16, 8], "state": "minecraft:stone"},
+    {"pos": [8, 17, 8], "state": "minecraft:stone"},
+    {"pos": [8, 18, 8], "state": "minecraft:stone"},
+    {"pos": [8, 19, 8], "state": "minecraft:stone"},
+    {"pos": [8, 20, 8], "state": "minecraft:stone"},
+    {"pos": [8, 21, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [7, 8, 8], "face": "up"}
+  ]
+}

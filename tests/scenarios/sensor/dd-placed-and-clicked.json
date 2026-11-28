@@ -1,0 +1,25 @@
+{
+  "name": "dd-placed-and-clicked",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [2, 3, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"pos": [1, 2, 1], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"tick": 1, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 3, "type": "destroy", "pos": [1, 2, 1], "drop": false},
+    {"tick": 3, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 9, "type": "set", "pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"tick": 9, "type": "set", "pos": [1, 1, 1], "state": "minecraft:daylight_detector[inverted=true,power=0]"},
+    {"tick": 9, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

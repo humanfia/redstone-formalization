@@ -1,0 +1,116 @@
+{
+ "name": "tnt-mixed-resistance",
+ "ticks": 100,
+ "box": {
+  "min": [
+   -8,
+   -8,
+   -8
+  ],
+  "max": [
+   14,
+   12,
+   14
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    0,
+    2,
+    0
+   ],
+   "max": [
+    2,
+    3,
+    6
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "min": [
+    4,
+    2,
+    0
+   ],
+   "max": [
+    6,
+    3,
+    6
+   ],
+   "state": "minecraft:oak_planks"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:bedrock"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

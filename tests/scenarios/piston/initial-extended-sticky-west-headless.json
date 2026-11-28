@@ -1,0 +1,17 @@
+{
+  "name": "initial-extended-sticky-west-headless",
+  "ticks": 24,
+  "box": {"min": [3, 5, 4], "max": [13, 11, 11]},
+  "blocks": [
+    {"pos": [6, 8, 8], "state": "minecraft:stone"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=true,facing=west]"},
+    {"pos": [9, 8, 8], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [10, 8, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [8, 8, 7], "state": "minecraft:glass"},
+    {"tick": 9, "type": "destroy", "pos": [8, 8, 7], "drop": false},
+    {"tick": 12, "type": "use", "pos": [9, 8, 8], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [9, 8, 8], "face": "up"}
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 44},
+    {"state": "minecraft:rail[shape=*]", "weight": 16},
+    {"state": "minecraft:powered_rail[powered=*,shape=*]", "weight": 7},
+    {"state": "minecraft:activator_rail[powered=*,shape=*]", "weight": 4},
+    {"state": "minecraft:stone", "weight": 3},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 1},
+    {"state": "minecraft:stone_slab[type=*]", "weight": 2},
+    {"state": "minecraft:oak_fence[east=*,north=*,south=*,west=*]", "weight": 1},
+    {"state": "minecraft:cobblestone_wall[east=*,north=*,up=*]", "weight": 1},
+    {"state": "minecraft:oak_fence_gate[facing=*,open=*]", "weight": 1},
+    {"state": "minecraft:oak_trapdoor[facing=*,half=*,open=*]", "weight": 2},
+    {"state": "minecraft:white_carpet", "weight": 1},
+    {"state": "minecraft:soul_sand", "weight": 1},
+    {"state": "minecraft:chest[facing=*]", "weight": 1},
+    {"state": "minecraft:hopper[facing=*]", "weight": 2},
+    {"state": "minecraft:anvil[facing=*]", "weight": 2},
+    {"state": "minecraft:oak_stairs[facing=*,half=*,shape=*]", "weight": 3},
+    {"state": "minecraft:cake[bites=*]", "weight": 1},
+    {"state": "minecraft:snow[layers=*]", "weight": 1},
+    {"state": "minecraft:glass_pane[east=*,north=*,south=*,west=*]", "weight": 1},
+    {"state": "minecraft:lantern[hanging=*]", "weight": 1},
+    {"state": "minecraft:end_rod[facing=*]", "weight": 1},
+    {"state": "minecraft:enchanting_table", "weight": 1},
+    {"state": "minecraft:farmland", "weight": 1},
+    {"state": "minecraft:dirt_path", "weight": 1},
+    {"state": "minecraft:composter[level=*]", "weight": 1},
+    {"state": "minecraft:cauldron", "weight": 1},
+    {"state": "minecraft:lectern[facing=*]", "weight": 1},
+    {"state": "minecraft:grindstone[face=*,facing=*]", "weight": 1},
+    {"state": "minecraft:brewing_stand", "weight": 1},
+    {"state": "minecraft:stonecutter[facing=*]", "weight": 1},
+    {"state": "minecraft:lightning_rod[facing=*]", "weight": 1},
+    {"state": "minecraft:candle[candles=*]", "weight": 1},
+    {"state": "minecraft:flower_pot", "weight": 1},
+    {"state": "minecraft:ladder[facing=*]", "weight": 1},
+    {"state": "minecraft:iron_chain[axis=*]", "weight": 1},
+    {"state": "minecraft:bell[attachment=*,facing=*]", "weight": 1},
+    {"state": "minecraft:piston_head[facing=*,short=*]", "weight": 1},
+    {"state": "minecraft:dragon_egg", "weight": 1}
+  ],
+  "actions": {
+    "set": {
+      "count": [4, 12],
+      "states": [
+        "minecraft:air", "minecraft:air", "minecraft:stone", "minecraft:rail[shape=*]",
+        "minecraft:powered_rail[powered=*,shape=*]", "minecraft:activator_rail[powered=*,shape=*]",
+        "minecraft:stone_slab[type=*]", "minecraft:anvil[facing=*]", "minecraft:cake[bites=*]",
+        "minecraft:oak_stairs[facing=*,half=*,shape=*]", "minecraft:oak_trapdoor[facing=*,half=*,open=*]",
+        "minecraft:oak_fence_gate[facing=*,open=*]", "minecraft:soul_sand"
+      ],
+      "flags": 594
+    }
+  }
+}

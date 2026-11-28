@@ -1,0 +1,34 @@
+{
+  "name": "rand-door-s2-021",
+  "ticks": 32,
+  "box": {"min": [0, 0, 0], "max": [6, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 2, 1], "state": "minecraft:bamboo_door[facing=north,half=lower,hinge=left,open=true,powered=false]"},
+    {"pos": [0, 3, 0], "state": "minecraft:waxed_oxidized_copper_door[facing=south,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [0, 3, 1], "state": "minecraft:bamboo_door[facing=north,half=upper,hinge=left,open=true,powered=false]"},
+    {"pos": [0, 4, 0], "state": "minecraft:waxed_oxidized_copper_door[facing=south,half=upper,hinge=left,open=false,powered=false]"},
+    {"pos": [1, 4, 1], "state": "minecraft:poplar_fence_gate[facing=south,in_wall=false,open=false,powered=false]"},
+    {"pos": [1, 4, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:copper_door[facing=north,half=lower,hinge=right,open=false,powered=false]"},
+    {"pos": [2, 3, 1], "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=true,powered=false]"},
+    {"pos": [2, 3, 2], "state": "minecraft:copper_door[facing=north,half=upper,hinge=right,open=false,powered=false]"},
+    {"pos": [2, 4, 1], "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=true,powered=false]"},
+    {"pos": [3, 2, 2], "state": "minecraft:poplar_fence_gate[facing=east,in_wall=false,open=false,powered=false]"},
+    {"pos": [3, 3, 2], "state": "minecraft:stone"},
+    {"pos": [4, 2, 0], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [4, 3, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [5, 3, 0], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [5, 4, 1], "state": "minecraft:stone"},
+    {"pos": [6, 3, 2], "state": "minecraft:cherry_trapdoor[facing=east,half=top,open=false,powered=false,waterlogged=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 4, 1], "face": "down"},
+    {"tick": 21, "type": "use", "pos": [4, 2, 0], "face": "up"},
+    {"tick": 22, "type": "set", "pos": [4, 0, 2], "state": "minecraft:air", "flags": 2},
+    {"tick": 23, "type": "use", "pos": [0, 3, 1], "face": "west"},
+    {"tick": 30, "type": "use", "pos": [2, 2, 2], "face": "east"}
+  ]
+}

@@ -30,7 +30,7 @@ o = ["module\n"]
 o += [f"public import Redstone.Component.{c['module']}" for c in components]
 o += ["public import Redstone.Entity.Item", "public import Redstone.Entity.FallingBlock",
       "public import Redstone.Entity.PrimedTnt", "public import Redstone.Entity.Minecart",
-      "public import Redstone.Entity.Projectile"]
+      "public import Redstone.Entity.Projectile", "public import Redstone.Entity.Still"]
 o.append("""
 /-!
 # The rules of the game
@@ -77,7 +77,7 @@ def entityBehaviour (e : Entity) : EntityBehaviour :=
   | .tnt _ => Entity.PrimedTnt.behaviour
   | .minecart _ _ => Entity.Minecart.behaviour
   | .projectile _ _ => Entity.Projectile.behaviour
-  | .other _ => .inert
+  | .other _ => Entity.Still.behaviour e
 
 /-- The rules of Minecraft, as far as they are formalized. -/
 def rules : Rules where

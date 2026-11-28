@@ -1,0 +1,126 @@
+{
+ "name": "adv-bottom-of-world",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   -64,
+   0
+  ],
+  "max": [
+   6,
+   -60,
+   6
+  ]
+ },
+ "fill": [],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    -63,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    -64,
+    3
+   ],
+   "state": "minecraft:oak_button[face=ceiling,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    -64,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    2,
+    -64,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    -64,
+    3
+   ],
+   "state": "minecraft:stone_button[face=wall,facing=south,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    -64,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    -64,
+    5
+   ],
+   "state": "minecraft:birch_button[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    3,
+    -64,
+    3
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    -64,
+    3
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    5,
+    -64,
+    5
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    5,
+    -64,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 15,
+   "type": "destroy",
+   "pos": [
+    3,
+    -63,
+    3
+   ]
+  }
+ ]
+}

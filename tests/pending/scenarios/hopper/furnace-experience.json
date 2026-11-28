@@ -1,0 +1,11 @@
+{
+  "name": "furnace-experience",
+  "ticks": 10,
+  "box": {"min": [0, 0, 0], "max": [0, 0, 0]},
+  "blocks": [
+    {"pos": [0, 0, 0], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:coal\",count:1}]}"}
+  ],
+  "actions": [
+    {"tick": 4, "type": "set", "pos": [0, 0, 0], "state": "minecraft:stone", "flags": 3}
+  ]
+}

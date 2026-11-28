@@ -1,0 +1,35 @@
+{
+  "name": "adv-stuck-weighted",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [12, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [12, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:light_weighted_pressure_plate[power=7]"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:light_weighted_pressure_plate[power=7]"},
+    {"pos": [3, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=15]"},
+    {"pos": [5, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=2]"},
+    {"pos": [7, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:oak_pressure_plate[powered=true]"},
+    {"pos": [9, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [11, 1, 1], "state": "minecraft:stone_pressure_plate[powered=true]"},
+    {"pos": [11, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:pig", "pos": [3.5, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [7.5, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:end_crystal", "pos": [11.5, 1.0, 1.5]}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"tick": 8, "type": "destroy", "pos": [5, 0, 1], "drop": false},
+    {"tick": 12, "type": "set", "pos": [3, 1, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"tick": 20, "type": "set", "pos": [7, 1, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=0]", "flags": 2},
+    {"tick": 25, "type": "set", "pos": [11, 1, 1], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"tick": 28, "type": "set", "pos": [11, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"}
+  ]
+}

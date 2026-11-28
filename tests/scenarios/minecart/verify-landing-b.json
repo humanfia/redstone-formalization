@@ -1,0 +1,19 @@
+{
+  "name": "verify-landing-b",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [19, 5, 19]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [19, 0, 19], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:dirt_path"},
+    {"pos": [9, 1, 2], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [16, 1, 2], "state": "minecraft:anvil[facing=east]"},
+    {"pos": [2, 1, 9], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [9, 1, 9], "state": "minecraft:composter[level=0]"},
+    {"pos": [16, 1, 9], "state": "minecraft:cauldron"},
+    {"pos": [2, 1, 16], "state": "minecraft:oak_stairs[facing=south,half=bottom,shape=straight,waterlogged=false]"},
+    {"pos": [9, 1, 16], "state": "minecraft:soul_sand"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [2.13, 3.3, 2.09], "nbt": "{Motion:[-0.06d,0.1d,0.03d]}"}, {"type": "minecraft:chest_minecart", "pos": [9.5, 3.3, 2.09], "nbt": "{Motion:[0.06d,0.1d,0.03d]}"}, {"type": "minecraft:spawner_minecart", "pos": [16.87, 3.3, 2.09], "nbt": "{Motion:[-0.06d,0.1d,0.03d]}"}, {"type": "minecraft:furnace_minecart", "pos": [2.13, 3.3, 9.5], "nbt": "{Motion:[0.06d,0.1d,0.03d],PushX:0.1d,Fuel:9s}"}, {"type": "minecraft:minecart", "pos": [9.5, 3.3, 9.5], "nbt": "{Motion:[-0.06d,0.1d,0.03d]}"}, {"type": "minecraft:chest_minecart", "pos": [16.87, 3.3, 9.5], "nbt": "{Motion:[0.06d,0.1d,0.03d]}"}, {"type": "minecraft:spawner_minecart", "pos": [2.13, 3.3, 16.91], "nbt": "{Motion:[-0.06d,0.1d,0.03d]}"}, {"type": "minecraft:furnace_minecart", "pos": [9.5, 3.3, 16.91], "nbt": "{Motion:[0.06d,0.1d,0.03d],PushX:0.1d,Fuel:9s}"}]
+}

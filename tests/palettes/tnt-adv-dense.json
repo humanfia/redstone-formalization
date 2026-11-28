@@ -1,0 +1,16 @@
+{
+  "blocks": [
+    {"state": "minecraft:air", "weight": 5},
+    {"state": "minecraft:stone", "weight": 1},
+    {"state": "minecraft:oak_planks", "weight": 1},
+    {"state": "minecraft:stone_slab[type=*,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 1},
+    {"state": "minecraft:tnt[unstable=*]", "weight": 6},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 5}
+  ],
+  "actions": {
+    "use": {"count": [4, 10], "targets": ["minecraft:lever"], "faces": ["up", "down", "north", "south", "east", "west"]},
+    "set": {"count": [2, 8], "states": ["minecraft:air", "minecraft:tnt[unstable=false]", "minecraft:lever[face=*,facing=*,powered=true]", "minecraft:stone"], "flags": 3},
+    "destroy": {"count": [1, 5], "targets": ["minecraft:tnt", "minecraft:lever", "minecraft:stone", "minecraft:oak_planks"], "drop": true}
+  }
+}

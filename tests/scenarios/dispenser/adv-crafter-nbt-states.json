@@ -1,0 +1,187 @@
+{
+ "name": "adv-crafter-nbt-states",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=true,orientation=north_up,triggered=false]",
+   "nbt": "{crafting_ticks_remaining:0}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=up_east,triggered=false]",
+   "nbt": "{crafting_ticks_remaining:3,triggered:1}"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=down_west,triggered=true]",
+   "nbt": "{triggered:0}"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=true,orientation=south_up,triggered=true]",
+   "nbt": "{crafting_ticks_remaining:1,triggered:1,disabled_slots:[I;0,1,2,9,-1]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=true]"
+  },
+  {
+   "tick": 22,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "verify-glazed-behind-branch-sticky",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [16, 16, 16]},
+  "blocks": [
+    {"pos": [8, 7, 7], "state": "minecraft:stone"},
+    {"pos": [8, 8, 7], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [8, 8, 9], "state": "minecraft:white_glazed_terracotta[facing=north]"},
+    {"pos": [8, 9, 8], "state": "minecraft:stone"},
+    {"pos": [9, 8, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 8, 9], "state": "minecraft:slime_block"},
+    {"pos": [9, 9, 8], "state": "minecraft:slime_block"},
+    {"pos": [10, 8, 9], "state": "minecraft:white_glazed_terracotta[facing=north]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [8, 8, 7], "face": "up"}
+  ]
+}

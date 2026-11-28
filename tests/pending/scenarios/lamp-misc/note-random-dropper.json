@@ -1,0 +1,35 @@
+{
+  "name": "note-random-dropper",
+  "ticks": 40,
+  "box": {"min": [-1, -1, -1], "max": [9, 3, 5]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:note_block[instrument=basedrum,note=3,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:8},{Slot:1b,id:\"minecraft:dirt\",count:8},{Slot:2b,id:\"minecraft:sand\",count:8},{Slot:3b,id:\"minecraft:gravel\",count:8}]}"},
+    {"pos": [5, 2, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 5, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 6, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 9, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 24, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [6, 1, 1], "face": "up"}
+  ]
+}

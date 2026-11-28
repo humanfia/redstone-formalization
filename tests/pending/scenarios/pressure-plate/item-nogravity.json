@@ -1,0 +1,20 @@
+{
+  "name": "item-nogravity",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:stone_pressure_plate[powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:item", "pos": [1.5, 1.0, 1.5], "nbt": "{NoGravity:1b,Item:{id:\"minecraft:stone\",count:1}}"},
+    {"type": "minecraft:item", "pos": [3.5, 1.0, 1.5], "nbt": "{NoGravity:1b,Item:{id:\"minecraft:stone\",count:1}}"}
+  ],
+  "actions": [
+    {"tick": 7, "type": "kill", "entity": 0}
+  ]
+}

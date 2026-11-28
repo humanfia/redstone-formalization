@@ -1,0 +1,13 @@
+{
+  "name": "head-alone-south-normal-long",
+  "ticks": 12,
+  "box": {"min": [5, 4, 4], "max": [11, 11, 12]},
+  "blocks": [
+    {"pos": [8, 8, 8], "state": "minecraft:piston_head[facing=south,short=false,type=normal]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [8, 7, 8], "state": "minecraft:stone"},
+    {"tick": 4, "type": "set", "pos": [8, 8, 9], "state": "minecraft:stone"},
+    {"tick": 6, "type": "set", "pos": [8, 8, 7], "state": "minecraft:stone"}
+  ]
+}

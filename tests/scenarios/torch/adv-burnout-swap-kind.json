@@ -1,0 +1,277 @@
+{
+ "name": "adv-burnout-swap-kind",
+ "ticks": 215,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=east,lit=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]",
+   "flags": 17
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 17
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]",
+   "flags": 17
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 17
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]",
+   "flags": 17
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 17
+  },
+  {
+   "tick": 19,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]",
+   "flags": 17
+  },
+  {
+   "tick": 22,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 17
+  },
+  {
+   "tick": 25,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]",
+   "flags": 17
+  },
+  {
+   "tick": 28,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 17
+  },
+  {
+   "tick": 31,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]",
+   "flags": 17
+  },
+  {
+   "tick": 34,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 17
+  },
+  {
+   "tick": 37,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]",
+   "flags": 17
+  },
+  {
+   "tick": 40,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 17
+  },
+  {
+   "tick": 43,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]",
+   "flags": 17
+  },
+  {
+   "tick": 46,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 17
+  },
+  {
+   "tick": 48,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=false]"
+  },
+  {
+   "tick": 55,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 66,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 120,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=east,lit=false]"
+  },
+  {
+   "tick": 130,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  }
+ ]
+}

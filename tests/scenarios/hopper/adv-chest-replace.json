@@ -1,0 +1,27 @@
+{
+  "name": "adv-chest-replace",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [7, 1, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [7, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:hopper[enabled=true,facing=down]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 3, "type": "set", "pos": [1, 1, 1], "state": "minecraft:chest[facing=south,type=single,waterlogged=false]"},
+    {"tick": 4, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 5, "type": "set", "pos": [3, 1, 1], "state": "minecraft:trapped_chest[facing=east,type=single,waterlogged=false]"},
+    {"tick": 6, "type": "set", "pos": [1, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=single,waterlogged=false]"},
+    {"tick": 8, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 9, "type": "set", "pos": [3, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"tick": 10, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 21, "type": "set", "pos": [3, 1, 1], "state": "minecraft:air"},
+    {"tick": 22, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

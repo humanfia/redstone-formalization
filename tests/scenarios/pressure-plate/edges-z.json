@@ -1,0 +1,31 @@
+{
+  "name": "edges-z",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [20, 3, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [20, 0, 6], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 3], "state": "minecraft:acacia_pressure_plate[powered=false]"},
+    {"pos": [2, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 3], "state": "minecraft:acacia_pressure_plate[powered=false]"},
+    {"pos": [5, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 1, 3], "state": "minecraft:acacia_pressure_plate[powered=false]"},
+    {"pos": [8, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [10, 1, 3], "state": "minecraft:acacia_pressure_plate[powered=false]"},
+    {"pos": [11, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [13, 1, 3], "state": "minecraft:acacia_pressure_plate[powered=false]"},
+    {"pos": [14, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [16, 1, 3], "state": "minecraft:acacia_pressure_plate[powered=false]"},
+    {"pos": [17, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:pig", "pos": [1.5, 1.0, 2.62], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [4.5, 1.0, 2.61], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [7.5, 1.0, 2.54], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [10.5, 1.0, 4.38], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [13.5, 1.0, 4.39], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [16.5, 1.0, 4.46], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": []
+}

@@ -1,0 +1,59 @@
+{
+  "name": "fuzz-pressure-plate-s4-007",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [8, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 2, 0], "state": "minecraft:light_weighted_pressure_plate[power=4]"},
+    {"pos": [0, 2, 2], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 1, 1], "state": "minecraft:stone_pressure_plate[powered=true]"},
+    {"pos": [1, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [1, 2, 0], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=4]"},
+    {"pos": [1, 2, 2], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"pos": [2, 1, 2], "state": "minecraft:stone_pressure_plate[powered=true]"},
+    {"pos": [2, 2, 0], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"},
+    {"pos": [2, 2, 1], "state": "minecraft:lever[face=wall,facing=south,powered=true]"},
+    {"pos": [2, 2, 2], "state": "minecraft:light_weighted_pressure_plate[power=8]"},
+    {"pos": [3, 1, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [3, 2, 0], "state": "minecraft:stone"},
+    {"pos": [4, 1, 0], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"},
+    {"pos": [4, 1, 2], "state": "minecraft:oak_pressure_plate[powered=true]"},
+    {"pos": [4, 2, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [4, 2, 2], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"pos": [5, 1, 0], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"pos": [5, 1, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [5, 2, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [6, 1, 0], "state": "minecraft:bamboo_pressure_plate[powered=false]"},
+    {"pos": [6, 2, 0], "state": "minecraft:heavy_weighted_pressure_plate[power=13]"},
+    {"pos": [7, 1, 0], "state": "minecraft:glass"},
+    {"pos": [7, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 2, 0], "state": "minecraft:heavy_weighted_pressure_plate[power=13]"},
+    {"pos": [7, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [8, 1, 0], "state": "minecraft:stone"},
+    {"pos": [8, 1, 1], "state": "minecraft:stone_pressure_plate[powered=true]"},
+    {"pos": [8, 2, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [8, 2, 1], "state": "minecraft:stone_pressure_plate[powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:end_crystal", "pos": [8.54, 1.2, 1.61]},
+    {"type": "minecraft:cow", "pos": [0.5, 1.5, 0.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [8.5, 2.0, 1.0], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:cow", "pos": [6.5, 2.0, 0.0], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:end_crystal", "pos": [1.5, 1.0, 1.0]},
+    {"type": "minecraft:pig", "pos": [5.912, 2.0, 2.118], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": [
+    {"tick": 4, "type": "kill", "entity": 5},
+    {"tick": 6, "type": "kill", "entity": 4},
+    {"tick": 10, "type": "use", "pos": [2, 2, 1], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 37, "type": "kill", "entity": 2},
+    {"tick": 38, "type": "destroy", "pos": [4, 1, 0], "drop": false},
+    {"tick": 39, "type": "kill", "entity": 3},
+    {"tick": 43, "type": "set", "pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"}
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "weighted-steps",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"}
+  ],
+  "entities": [
+    {"type": "minecraft:armor_stand", "pos": [1.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [1.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [1.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [1.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [1.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"},
+    {"type": "minecraft:armor_stand", "pos": [3.5, 1.0, 1.5], "nbt": "{Motion:[0.0d,-0.0784000015258789d,0.0d],OnGround:1b}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "kill", "entity": 5},
+    {"tick": 3, "type": "kill", "entity": 0},
+    {"tick": 4, "type": "kill", "entity": 1},
+    {"tick": 9, "type": "kill", "entity": 6},
+    {"tick": 15, "type": "kill", "entity": 2},
+    {"tick": 22, "type": "kill", "entity": 3},
+    {"tick": 24, "type": "kill", "entity": 7},
+    {"tick": 24, "type": "kill", "entity": 8},
+    {"tick": 24, "type": "kill", "entity": 9},
+    {"tick": 24, "type": "kill", "entity": 10},
+    {"tick": 24, "type": "kill", "entity": 11},
+    {"tick": 24, "type": "kill", "entity": 12},
+    {"tick": 24, "type": "kill", "entity": 13},
+    {"tick": 24, "type": "kill", "entity": 14},
+    {"tick": 24, "type": "kill", "entity": 15},
+    {"tick": 38, "type": "kill", "entity": 4},
+    {"tick": 41, "type": "kill", "entity": 16}
+  ]
+}

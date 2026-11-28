@@ -1,0 +1,99 @@
+{
+ "name": "basic-west-subtract",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   3,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=west,mode=subtract,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 17,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "face": "up"
+  }
+ ]
+}

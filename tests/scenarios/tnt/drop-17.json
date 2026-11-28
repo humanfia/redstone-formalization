@@ -1,0 +1,140 @@
+{
+ "name": "drop-17",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:cobblestone_wall[east=tall,north=low,south=tall,up=true,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:bedrock"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    2
+   ],
+   "state": "minecraft:iron_bars[east=true,north=false,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=bottom,shape=inner_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "state": "minecraft:iron_chain[axis=y,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_trapdoor[facing=west,half=bottom,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    4
+   ],
+   "state": "minecraft:amethyst_cluster[facing=down,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    0
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=tall,south=low,up=true,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    3
+   ],
+   "state": "minecraft:slime_block"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    6
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=0]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.845,
+    5.323,
+    5.613
+   ],
+   "nbt": "{Motion:[0.04d,-0.049d,-0.041d]}"
+  }
+ ]
+}

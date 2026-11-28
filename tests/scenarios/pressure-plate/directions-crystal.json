@@ -1,0 +1,34 @@
+{
+  "name": "directions-crystal",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [4, 4, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:stone"},
+    {"pos": [2, 2, 2], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 2, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 3, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 0, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 3, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 0, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 4, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:end_crystal", "pos": [2.5, 2.0, 2.5]}
+  ],
+  "actions": [
+    {"tick": 3, "type": "kill", "entity": 0}
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "chain-powered-z-stale",
+  "ticks": 14,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 14]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 14], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 3], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 4], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 6], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 7], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 8], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 9], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 10], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 11], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 6, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [3, 1, 1], "face": "up"}
+  ]
+}

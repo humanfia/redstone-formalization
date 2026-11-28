@@ -1,0 +1,29 @@
+{
+  "name": "lever-and-plate",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [10, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [10, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"},
+    {"pos": [7, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [8, 1, 1], "state": "minecraft:lever[face=wall,facing=east,powered=true]"}
+  ],
+  "entities": [
+    {"type": "minecraft:pig", "pos": [1.5, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [6.5, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use", "pos": [3, 1, 1], "face": "east"},
+    {"tick": 4, "type": "use", "pos": [8, 1, 1], "face": "east"},
+    {"tick": 5, "type": "kill", "entity": 0},
+    {"tick": 6, "type": "kill", "entity": 1},
+    {"tick": 12, "type": "use", "pos": [8, 1, 1], "face": "east"},
+    {"tick": 13, "type": "use", "pos": [8, 1, 1], "face": "east"},
+    {"tick": 30, "type": "use", "pos": [3, 1, 1], "face": "east"}
+  ]
+}

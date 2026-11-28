@@ -1,0 +1,17 @@
+{
+  "name": "dd-roof-3-evening",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [8, 3, 8]},
+  "settings": {"dayTime": 12300},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 8], "state": "minecraft:stone"},
+    {"min": [1, 2, 1], "max": [7, 2, 7], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [4, 1, 4], "state": "minecraft:daylight_detector[inverted=false,power=7]"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "use", "pos": [4, 1, 4], "face": "up"},
+    {"tick": 27, "type": "use", "pos": [4, 1, 4], "face": "up"}
+  ]
+}

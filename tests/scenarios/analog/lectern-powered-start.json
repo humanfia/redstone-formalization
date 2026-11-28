@@ -1,0 +1,49 @@
+{
+  "name": "lectern-powered-start",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [6, 4, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 6], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 2, 1], "state": "minecraft:lectern[facing=north,has_book=false,powered=true]"},
+    {"pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"pos": [1, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 3, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 2, 1], "state": "minecraft:lectern[facing=south,has_book=false,powered=true]"},
+    {"pos": [5, 1, 1], "state": "minecraft:stone"},
+    {"pos": [5, 1, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [5, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [6, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 3, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [5, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 2, 5], "state": "minecraft:lectern[facing=west,has_book=false,powered=true]"},
+    {"pos": [1, 1, 5], "state": "minecraft:stone"},
+    {"pos": [1, 1, 4], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 6], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [0, 1, 5], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 3, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [0, 2, 5], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 2, 5], "state": "minecraft:lectern[facing=east,has_book=false,powered=true]"},
+    {"pos": [5, 1, 5], "state": "minecraft:stone"},
+    {"pos": [5, 1, 4], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [5, 1, 6], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [6, 1, 5], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 3, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [6, 2, 5], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "destroy", "pos": [1, 2, 1], "drop": false},
+    {"tick": 4, "type": "set", "pos": [5, 2, 1], "state": "minecraft:lectern[facing=south,has_book=false,powered=false]"},
+    {"tick": 5, "type": "use_item", "pos": [1, 2, 5], "face": "up", "item": "minecraft:writable_book"},
+    {"tick": 6, "type": "set", "pos": [5, 1, 5], "state": "minecraft:glass"},
+    {"tick": 12, "type": "set", "pos": [5, 1, 5], "state": "minecraft:stone"}
+  ]
+}

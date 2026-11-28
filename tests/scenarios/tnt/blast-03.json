@@ -1,0 +1,366 @@
+{
+ "name": "blast-03",
+ "ticks": 110,
+ "box": {
+  "min": [
+   -12,
+   -12,
+   -12
+  ],
+  "max": [
+   18,
+   18,
+   18
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    2,
+    0
+   ],
+   "state": "minecraft:iron_block"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    0
+   ],
+   "state": "minecraft:iron_block"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    6
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    5
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    0
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    0
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:iron_block"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    5
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:bedrock"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    3
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    6
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    3
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    3
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    5
+   ],
+   "state": "minecraft:bedrock"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    5
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    0
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.37,
+    2.209,
+    5.738
+   ],
+   "nbt": "{fuse:25s,Motion:[-0.262d,-0.203d,0.165d],explosion_power:6.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.635,
+    6.471,
+    2.731
+   ],
+   "nbt": "{fuse:25s,Motion:[0.294d,0.374d,0.181d],explosion_power:6.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.867,
+    4.035,
+    5.105
+   ],
+   "nbt": "{fuse:23s,Motion:[0.201d,-0.057d,0.359d],explosion_power:2.0f}"
+  }
+ ]
+}

@@ -1,0 +1,174 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 16
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:glass",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 9
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 6
+  },
+  {
+   "state": "minecraft:oak_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:spruce_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:birch_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:jungle_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:acacia_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:cherry_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:dark_oak_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:pale_oak_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:mangrove_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:poplar_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:bamboo_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:crimson_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:warped_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:stone_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:polished_blackstone_pressure_plate[powered=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:light_weighted_pressure_plate[power=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:light_weighted_pressure_plate[power=0]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:heavy_weighted_pressure_plate[power=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:heavy_weighted_pressure_plate[power=0]",
+   "weight": 3
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    3,
+    8
+   ],
+   "targets": [
+    "minecraft:lever"
+   ],
+   "faces": [
+    "up",
+    "down",
+    "north",
+    "south",
+    "west",
+    "east"
+   ]
+  },
+  "set": {
+   "count": [
+    4,
+    12
+   ],
+   "flags": 2,
+   "states": [
+    "minecraft:stone",
+    "minecraft:air",
+    "minecraft:air",
+    "minecraft:glass",
+    "minecraft:redstone_lamp[lit=*]",
+    "minecraft:lever[face=*,facing=*,powered=*]",
+    "minecraft:oak_pressure_plate[powered=*]",
+    "minecraft:spruce_pressure_plate[powered=*]",
+    "minecraft:birch_pressure_plate[powered=*]",
+    "minecraft:jungle_pressure_plate[powered=*]",
+    "minecraft:stone_pressure_plate[powered=*]",
+    "minecraft:polished_blackstone_pressure_plate[powered=*]",
+    "minecraft:light_weighted_pressure_plate[power=*]",
+    "minecraft:heavy_weighted_pressure_plate[power=*]",
+    "minecraft:light_weighted_pressure_plate[power=0]",
+    "minecraft:heavy_weighted_pressure_plate[power=0]"
+   ]
+  },
+  "destroy": {
+   "count": [
+    4,
+    10
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:glass",
+    "minecraft:redstone_lamp",
+    "minecraft:lever",
+    "minecraft:oak_pressure_plate",
+    "minecraft:spruce_pressure_plate",
+    "minecraft:birch_pressure_plate",
+    "minecraft:jungle_pressure_plate",
+    "minecraft:acacia_pressure_plate",
+    "minecraft:cherry_pressure_plate",
+    "minecraft:dark_oak_pressure_plate",
+    "minecraft:pale_oak_pressure_plate",
+    "minecraft:mangrove_pressure_plate",
+    "minecraft:poplar_pressure_plate",
+    "minecraft:bamboo_pressure_plate",
+    "minecraft:crimson_pressure_plate",
+    "minecraft:warped_pressure_plate",
+    "minecraft:stone_pressure_plate",
+    "minecraft:polished_blackstone_pressure_plate",
+    "minecraft:light_weighted_pressure_plate",
+    "minecraft:heavy_weighted_pressure_plate"
+   ]
+  }
+ }
+}

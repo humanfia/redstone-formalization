@@ -1,0 +1,42 @@
+{
+ "name": "adv-cube-4",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -16,
+   -16,
+   -16
+  ],
+  "max": [
+   20,
+   34,
+   20
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.0,
+    4.0,
+    2.0
+   ],
+   "nbt": "{fuse:2s}"
+  }
+ ]
+}

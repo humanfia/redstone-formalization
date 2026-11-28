@@ -1,0 +1,97 @@
+{
+ "name": "floating-ceiling-button",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   3,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:acacia_button[face=ceiling,facing=west,powered=false]",
+   "flags": 3
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]",
+   "flags": 3
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]",
+   "flags": 3
+  },
+  {
+   "tick": 20,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    2
+   ]
+  }
+ ]
+}

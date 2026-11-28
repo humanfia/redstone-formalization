@@ -1,0 +1,24 @@
+{
+  "name": "dust-place-vertical-order-negative",
+  "ticks": 20,
+  "box": {"min": [-40, 60, -9], "max": [-34, 65, -4]},
+  "fill": [
+    {"min": [-40, 60, -9], "max": [-34, 60, -4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [-37, 62, -6], "state": "minecraft:stone"},
+    {"pos": [-36, 63, -6], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [-36, 64, -6], "state": "minecraft:redstone_wire[east=none,north=none,power=1,south=none,west=none]"},
+    {"pos": [-38, 62, -6], "state": "minecraft:redstone_wire[east=none,north=none,power=1,south=none,west=none]"},
+    {"pos": [-38, 61, -6], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [-37, 63, -6], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"tick": 8, "type": "destroy", "pos": [-37, 63, -6], "drop": false},
+    {"tick": 10, "type": "set", "pos": [-36, 64, -6], "state": "minecraft:redstone_wire[east=none,north=none,power=1,south=none,west=none]", "flags": 2},
+    {"tick": 10, "type": "set", "pos": [-38, 62, -6], "state": "minecraft:redstone_wire[east=none,north=none,power=1,south=none,west=none]", "flags": 2},
+    {"tick": 10, "type": "set", "pos": [-36, 63, -6], "state": "minecraft:redstone_lamp[lit=true]", "flags": 2},
+    {"tick": 10, "type": "set", "pos": [-38, 61, -6], "state": "minecraft:redstone_lamp[lit=true]", "flags": 2},
+    {"tick": 12, "type": "set", "pos": [-37, 63, -6], "state": "minecraft:redstone_wire[east=side,north=side,power=0,south=side,west=side]"}
+  ]
+}

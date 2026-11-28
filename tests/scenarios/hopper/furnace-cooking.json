@@ -1,0 +1,32 @@
+{
+  "name": "furnace-cooking",
+  "ticks": 250,
+  "box": {"min": [0, 0, 0], "max": [14, 1, 6]},
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:3},{Slot:1b,id:\"minecraft:stick\",count:1}]}"},
+    {"pos": [2, 1, 0], "state": "minecraft:furnace[facing=south,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:bamboo\",count:16}]}"},
+    {"pos": [4, 1, 0], "state": "minecraft:furnace[facing=west,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:cobblestone\",count:3},{Slot:1b,id:\"minecraft:oak_planks\",count:2}]}"},
+    {"pos": [6, 1, 0], "state": "minecraft:blast_furnace[facing=east,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:3},{Slot:1b,id:\"minecraft:stick\",count:3}]}"},
+    {"pos": [8, 1, 0], "state": "minecraft:smoker[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:beef\",count:3},{Slot:1b,id:\"minecraft:scaffolding\",count:9}]}"},
+    {"pos": [10, 1, 0], "state": "minecraft:furnace[facing=south,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:gold_ingot\",count:1}]}"},
+    {"pos": [12, 1, 0], "state": "minecraft:furnace[facing=west,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:iron_ingot\",count:63}]}"},
+    {"pos": [14, 1, 0], "state": "minecraft:furnace[facing=east,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:dirt\",count:3},{Slot:1b,id:\"minecraft:coal\",count:1}]}"},
+    {"pos": [0, 1, 2], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:3},{Slot:1b,id:\"minecraft:dirt\",count:1}],cooking_time_spent:5,cooking_total_time:200}"},
+    {"pos": [2, 1, 2], "state": "minecraft:blast_furnace[facing=south,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:3},{Slot:1b,id:\"minecraft:stone\",count:1}],cooking_time_spent:7,cooking_total_time:90}"},
+    {"pos": [4, 1, 2], "state": "minecraft:furnace[facing=west,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:1},{Slot:1b,id:\"minecraft:lava_bucket\",count:1}]}"},
+    {"pos": [6, 1, 2], "state": "minecraft:furnace[facing=east,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:wet_sponge\",count:2},{Slot:1b,id:\"minecraft:lava_bucket\",count:1}]}"},
+    {"pos": [8, 1, 2], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:wet_sponge\",count:2},{Slot:1b,id:\"minecraft:coal\",count:1}]}"},
+    {"pos": [10, 1, 2], "state": "minecraft:furnace[facing=south,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:1}],cooking_time_spent:50,cooking_total_time:200}"},
+    {"pos": [12, 1, 2], "state": "minecraft:furnace[facing=west,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:1}],cooking_time_spent:50,cooking_total_time:20}"},
+    {"pos": [14, 1, 2], "state": "minecraft:furnace[facing=east,lit=true]", "nbt": "{Items:[],lit_time_remaining:3,lit_total_time:100}"},
+    {"pos": [0, 1, 4], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:1}],lit_time_remaining:30,lit_total_time:100,cooking_time_spent:190,cooking_total_time:200}"},
+    {"pos": [2, 1, 4], "state": "minecraft:blast_furnace[facing=south,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:coal\",count:1}],cooking_time_spent:37,cooking_total_time:191}"},
+    {"pos": [4, 1, 4], "state": "minecraft:smoker[facing=west,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:coal\",count:1}]}"},
+    {"pos": [6, 1, 4], "state": "minecraft:blast_furnace[facing=east,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:beef\",count:2},{Slot:1b,id:\"minecraft:coal\",count:1}]}"},
+    {"pos": [8, 1, 4], "state": "minecraft:smoker[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:potato\",count:2},{Slot:1b,id:\"minecraft:blaze_rod\",count:1}]}"},
+    {"pos": [10, 1, 4], "state": "minecraft:furnace[facing=south,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:1},{Slot:1b,id:\"minecraft:coal\",count:1}],cooking_time_spent:-5,cooking_total_time:10}"},
+    {"pos": [12, 1, 4], "state": "minecraft:furnace[facing=west,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:1},{Slot:1b,id:\"minecraft:coal\",count:1}],cooking_time_spent:300,cooking_total_time:200}"},
+    {"pos": [0, 1, 6], "state": "minecraft:furnace[facing=north,lit=true]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:1}]}"},
+    {"pos": [2, 1, 6], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[],lit_time_remaining:5,lit_total_time:100}"}
+  ]
+}

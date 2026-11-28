@@ -1,0 +1,20 @@
+{
+  "name": "lock-stale",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [6, 1, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:hopper[enabled=false,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:3}]}"},
+    {"pos": [2, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:hopper[enabled=true,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:3}]}"},
+    {"pos": [5, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [4, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 12, "type": "set", "pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"tick": 20, "type": "set", "pos": [4, 1, 2], "state": "minecraft:stone"},
+    {"tick": 30, "type": "set", "pos": [1, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"}
+  ]
+}

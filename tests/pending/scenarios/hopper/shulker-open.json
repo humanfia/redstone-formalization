@@ -1,0 +1,11 @@
+{
+  "name": "shulker-open",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [0, 0, 0]},
+  "blocks": [
+    {"pos": [0, 0, 0], "state": "minecraft:shulker_box[facing=up]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use", "pos": [0, 0, 0], "face": "up"}
+  ]
+}

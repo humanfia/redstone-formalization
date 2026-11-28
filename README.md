@@ -142,6 +142,9 @@ one part of the engine), `Redstone/Theorems` and `Redstone/Contraption` (circuit
 under these four directories is built by `lake build` without being listed anywhere. How
 circuits are proved, what it costs and what does not work is in
 [docs/proof-feasibility.md](docs/proof-feasibility.md).
+To prove a circuit, follow [Redstone/Proof/README.md](Redstone/Proof/README.md); the eight
+circuits of `Redstone/Theorems/Basics` (lever and lamp, torch inverter, repeater delay, dust
+decay, RS latch, sticky piston, hopper pair, repeater clock) are the worked examples.
 
 What the model leaves out: fluids do not flow and blocks get no random ticks (the phases of the
 game tick are there, and empty), light is modelled only as far as the daylight detector needs

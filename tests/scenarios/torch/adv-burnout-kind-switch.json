@@ -1,0 +1,255 @@
+{
+ "name": "adv-burnout-kind-switch",
+ "ticks": 215,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=wall,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:lever[face=wall,facing=east,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 19,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 22,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 24,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=west,lit=true]"
+  },
+  {
+   "tick": 25,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 28,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 34,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 37,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 43,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 60,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 80,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ]
+}

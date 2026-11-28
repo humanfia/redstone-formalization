@@ -1,0 +1,276 @@
+{
+ "name": "hook-shape-updates",
+ "ticks": 20,
+ "box": {
+  "min": [
+   3,
+   -1,
+   1
+  ],
+  "max": [
+   19,
+   3,
+   7
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:tripwire_hook[attached=false,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    5
+   ],
+   "state": "minecraft:tripwire_hook[attached=false,facing=south,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=false,facing=west,powered=true]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=false,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    18,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    4,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    11,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    17,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 14,
+   "type": "set",
+   "pos": [
+    16,
+    1,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 17,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    4
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    16,
+    1,
+    4
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

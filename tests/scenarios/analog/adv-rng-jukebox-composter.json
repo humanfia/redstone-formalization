@@ -1,0 +1,38 @@
+{
+  "name": "adv-rng-jukebox-composter",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:jukebox[has_record=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:composter[level=1]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 3, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:music_disc_cat"},
+    {"tick": 4, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 7, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 10, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 13, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 16, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 19, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 22, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 25, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 28, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 31, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 34, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 37, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 40, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 43, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 46, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 49, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 52, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 55, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 58, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 61, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 64, "type": "use_item", "pos": [4, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"}
+  ]
+}

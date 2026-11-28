@@ -1,0 +1,280 @@
+{
+ "name": "adv-set-triggered-states",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   2,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:dropper[facing=up,triggered=true]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:dispenser[facing=west,triggered=true]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=west_up,triggered=true]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:dropper[facing=north,triggered=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:dispenser[facing=up,triggered=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=up_north,triggered=false]"
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:dropper[facing=up,triggered=false]"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:dispenser[facing=down,triggered=true]"
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 21,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 22,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:dispenser[facing=up,triggered=true]"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:dropper[facing=up,triggered=true]"
+  },
+  {
+   "tick": 24,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "tick": 25,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 27,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    2
+   ]
+  },
+  {
+   "tick": 30,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    2
+   ]
+  }
+ ]
+}

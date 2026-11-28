@@ -1,0 +1,14 @@
+{
+  "name": "pending-slime-bounce",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [7, 11, 7]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [7, 0, 7], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 3], "state": "minecraft:slime_block"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [3.5, 9.0, 3.5]}
+  ]
+}

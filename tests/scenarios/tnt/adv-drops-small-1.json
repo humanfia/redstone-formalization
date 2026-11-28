@@ -1,0 +1,970 @@
+{
+ "name": "adv-drops-small-1",
+ "ticks": 110,
+ "box": {
+  "min": [
+   -10,
+   -6,
+   -10
+  ],
+  "max": [
+   18,
+   16,
+   18
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "min": [
+    0,
+    3,
+    0
+   ],
+   "max": [
+    8,
+    3,
+    8
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    4,
+    0
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    1
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    3
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    4
+   ],
+   "state": "minecraft:flower_pot"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    5
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    7
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    7
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    8
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:flower_pot"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    0
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    1
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    2
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    4
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    5
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    6
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    7
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    8
+   ],
+   "state": "minecraft:flower_pot"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    8
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=0]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    3
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    5
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    6
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    7
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    7
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    8
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=0]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    0
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    1
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    2
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    5
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    6
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    7
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    7
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    8
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    8
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    0
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    1
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    2
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    3
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:flower_pot"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    5
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    7
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    8
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    8
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    0
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=0]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    3
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    4
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    5
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    6
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    7
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    8
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    8
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    1
+   ],
+   "state": "minecraft:flower_pot"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    2
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    3
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    3
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    4
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    6
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    7
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    7
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    8
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    8
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    0
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    4,
+    0
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    7,
+    4,
+    1
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    2
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    4,
+    2
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    7,
+    4,
+    4
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    4,
+    5
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "state": "minecraft:flower_pot"
+  },
+  {
+   "pos": [
+    7,
+    4,
+    7
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    8
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    4,
+    1
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    8,
+    4,
+    2
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=0]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    3
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    8,
+    4,
+    3
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    4,
+    4
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    8,
+    4,
+    6
+   ],
+   "state": "minecraft:snow[layers=3]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    7
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    8,
+    4,
+    7
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    8
+   ],
+   "state": "minecraft:flower_pot"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.5,
+    1.0,
+    4.5
+   ],
+   "nbt": "{fuse:3s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.5,
+    5.5,
+    4.5
+   ],
+   "nbt": "{fuse:20s}"
+  }
+ ]
+}

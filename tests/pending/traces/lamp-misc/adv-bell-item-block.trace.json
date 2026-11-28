@@ -1,0 +1,7 @@
+{"scenario":"adv-bell-item-block","version":"26.3","frames":[
+{"tick":0,"gameTime":0,"blocks":{"2,3,2":"minecraft:stone","2,4,2":"minecraft:bell[attachment=floor,facing=north,powered=false]"},"blockEntities":{"2,4,2":{"type":"minecraft:bell","nbt":{"c":{"components":{"c":{}}}}}},"blockEntityTickers":[[2,4,2]],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":1,"gameTime":1,"blocks":{},"blockEntities":{},"blockEntityTickers":[[2,4,2]],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":2,"gameTime":2,"blocks":{"2,5,2":"minecraft:stone"},"blockEntities":{},"blockEntityTickers":[[2,4,2]],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":3,"gameTime":3,"blocks":{"3,4,2":"minecraft:stone"},"blockEntities":{},"blockEntityTickers":[[2,4,2]],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":4,"gameTime":4,"blocks":{},"blockEntities":{},"blockEntityTickers":[[2,4,2]],"scheduled":[],"blockEvents":[],"entities":[]}
+]}

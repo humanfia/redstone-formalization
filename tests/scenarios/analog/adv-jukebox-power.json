@@ -1,0 +1,30 @@
+{
+  "name": "adv-jukebox-power",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [12, 2, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [12, 0, 6], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:jukebox[has_record=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:oak_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [4, 1, 2], "state": "minecraft:oak_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:jukebox[has_record=true]", "nbt": "{RecordItem:{id:\"minecraft:music_disc_11\",count:1},ticks_since_song_started:1425L}"},
+    {"pos": [2, 1, 3], "state": "minecraft:oak_shelf[facing=east,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:lectern[facing=north,has_book=false,powered=false]"},
+    {"pos": [8, 1, 2], "state": "minecraft:jukebox[has_record=true]", "nbt": "{RecordItem:{id:\"minecraft:music_disc_11\",count:1},ticks_since_song_started:1400L}"},
+    {"pos": [9, 1, 2], "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [10, 1, 2], "state": "minecraft:oak_shelf[facing=north,powered=true,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [8, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [8, 1, 1], "state": "minecraft:jukebox[has_record=false]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:music_disc_pigstep"},
+    {"tick": 5, "type": "use_item", "pos": [8, 1, 1], "face": "up", "item": "minecraft:stick"},
+    {"tick": 6, "type": "use_item", "pos": [8, 1, 1], "face": "up", "item": "minecraft:music_disc_5"},
+    {"tick": 30, "type": "set", "pos": [2, 1, 2], "state": "minecraft:jukebox[has_record=false]"},
+    {"tick": 34, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:music_disc_wait"},
+    {"tick": 50, "type": "set", "pos": [5, 1, 2], "state": "minecraft:jukebox[has_record=true]", "flags": 2}
+  ]
+}

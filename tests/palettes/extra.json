@@ -1,0 +1,41 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 30},
+    {"state": "minecraft:stone", "weight": 6},
+    {"state": "minecraft:glass", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 3},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 9},
+    {"state": "minecraft:skeleton_skull[powered=*,rotation=*]", "weight": 2},
+    {"state": "minecraft:wither_skeleton_skull[powered=*,rotation=*]", "weight": 1},
+    {"state": "minecraft:zombie_head[powered=*,rotation=*]", "weight": 1},
+    {"state": "minecraft:player_head[powered=*,rotation=*]", "weight": 1},
+    {"state": "minecraft:creeper_head[powered=*,rotation=*]", "weight": 1},
+    {"state": "minecraft:dragon_head[powered=*,rotation=*]", "weight": 2},
+    {"state": "minecraft:piglin_head[powered=*,rotation=*]", "weight": 1},
+    {"state": "minecraft:skeleton_wall_skull[facing=*,powered=*]", "weight": 1},
+    {"state": "minecraft:wither_skeleton_wall_skull[facing=*,powered=*]", "weight": 1},
+    {"state": "minecraft:zombie_wall_head[facing=*,powered=*]", "weight": 1},
+    {"state": "minecraft:player_wall_head[facing=*,powered=*]", "weight": 1},
+    {"state": "minecraft:creeper_wall_head[facing=*,powered=*]", "weight": 1},
+    {"state": "minecraft:dragon_wall_head[facing=*,powered=*]", "weight": 1},
+    {"state": "minecraft:piglin_wall_head[facing=*,powered=*]", "weight": 1},
+    {"state": "minecraft:sponge", "weight": 2},
+    {"state": "minecraft:wet_sponge", "weight": 1},
+    {"state": "minecraft:slime_block", "weight": 2},
+    {"state": "minecraft:honey_block", "weight": 2},
+    {"state": "minecraft:potent_sulfur[potent_sulfur_state=*]", "weight": 5},
+    {"state": "minecraft:potent_sulfur[potent_sulfur_state=*]", "weight": 2, "nbt": "{countdown:2}"},
+    {"state": "minecraft:magma_block", "weight": 1}
+  ],
+  "actions": {
+    "use": {"count": [3, 10], "targets": ["minecraft:lever"]},
+    "set": {"count": [1, 6], "states": [
+      "minecraft:stone", "minecraft:air", "minecraft:sponge", "minecraft:slime_block",
+      "minecraft:lever[face=*,facing=*,powered=*]",
+      "minecraft:dragon_head[powered=*,rotation=*]",
+      "minecraft:player_wall_head[facing=*,powered=*]",
+      "minecraft:potent_sulfur[potent_sulfur_state=*]"]},
+    "destroy": {"count": [0, 4]}
+  }
+}

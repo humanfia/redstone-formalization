@@ -1,0 +1,190 @@
+{
+ "name": "drop-18",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    3,
+    6
+   ],
+   "state": "minecraft:hay_block[axis=y]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    6
+   ],
+   "state": "minecraft:glass_pane[east=false,north=true,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:amethyst_cluster[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    5
+   ],
+   "state": "minecraft:grindstone[face=ceiling,facing=east]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    4
+   ],
+   "state": "minecraft:oak_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    3
+   ],
+   "state": "minecraft:iron_bars[east=true,north=false,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:cobblestone_wall[east=low,north=low,south=tall,up=true,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    5
+   ],
+   "state": "minecraft:end_rod[facing=up]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=inner_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:glass_pane[east=false,north=false,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    5
+   ],
+   "state": "minecraft:iron_bars[east=false,north=true,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    6
+   ],
+   "state": "minecraft:amethyst_cluster[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:cobblestone_wall[east=low,north=none,south=none,up=true,waterlogged=false,west=tall]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.429,
+    1.638,
+    3.282
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.498,
+    3.001,
+    1.04
+   ],
+   "nbt": "{Motion:[0.087d,-0.01d,-0.022d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.849,
+    5.778,
+    2.181
+   ],
+   "nbt": "{Motion:[-0.291d,-0.193d,0.299d]}"
+  }
+ ]
+}

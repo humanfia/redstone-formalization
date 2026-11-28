@@ -1,0 +1,189 @@
+{
+ "name": "floor-basic",
+ "ticks": 44,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   5,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=wall,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 21,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 30,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 32,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 38,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "face": "west"
+  }
+ ]
+}

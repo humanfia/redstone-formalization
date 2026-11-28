@@ -1,0 +1,105 @@
+{
+ "name": "adv-skip-on-place-powered",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   2,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=true]",
+   "flags": 515
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 12,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=true]",
+   "flags": 514
+  },
+  {
+   "tick": 17,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

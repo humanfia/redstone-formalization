@@ -1,0 +1,51 @@
+{
+  "name": "fuzz-command-block-verify-s12-009",
+  "ticks": 20,
+  "box": {"min": [0, 0, 0], "max": [2, 3, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:structure_block[mode=corner]"},
+    {"pos": [0, 1, 1], "state": "minecraft:command_block[conditional=false,facing=north]", "nbt": "{Command:\"say x\",TrackOutput:0b,UpdateLastExecution:0b,SuccessCount:1}"},
+    {"pos": [0, 2, 0], "state": "minecraft:chain_command_block[conditional=false,facing=east]", "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b}"},
+    {"pos": [0, 2, 1], "state": "minecraft:test_block[mode=fail]", "nbt": "{mode:\"log\"}"},
+    {"pos": [0, 2, 2], "state": "minecraft:repeating_command_block[conditional=true,facing=down]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [0, 3, 1], "state": "minecraft:repeating_command_block[conditional=false,facing=west]", "nbt": "{Command:\"Searge\"}"},
+    {"pos": [1, 1, 0], "state": "minecraft:repeating_command_block[conditional=true,facing=down]", "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b,powered:1b,LastExecution:6L}"},
+    {"pos": [1, 1, 2], "state": "minecraft:lever[face=ceiling,facing=south,powered=true]"},
+    {"pos": [1, 2, 0], "state": "minecraft:stone"},
+    {"pos": [1, 2, 1], "state": "minecraft:repeating_command_block[conditional=false,facing=north]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [1, 2, 2], "state": "minecraft:structure_block[mode=data]"},
+    {"pos": [1, 3, 0], "state": "minecraft:chain_command_block[conditional=true,facing=east]", "nbt": "{Command:\"say z\",TrackOutput:0b,auto:1b,UpdateLastExecution:0b}"},
+    {"pos": [1, 3, 1], "state": "minecraft:stone"},
+    {"pos": [1, 3, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:lever[face=wall,facing=north,powered=true]"},
+    {"pos": [2, 1, 1], "state": "minecraft:chain_command_block[conditional=false,facing=south]", "nbt": "{auto:1b,SuccessCount:1}"},
+    {"pos": [2, 2, 0], "state": "minecraft:chain_command_block[conditional=false,facing=north]", "nbt": "{Command:\"nope\",TrackOutput:0b,auto:1b,SuccessCount:3}"},
+    {"pos": [2, 2, 1], "state": "minecraft:repeating_command_block[conditional=false,facing=west]", "nbt": "{Command:\"Searge\"}"},
+    {"pos": [2, 2, 2], "state": "minecraft:structure_block[mode=corner]", "nbt": "{mode:\"CORNER\",name:\"a:b\"}"},
+    {"pos": [2, 3, 0], "state": "minecraft:structure_block[mode=data]", "nbt": "{mode:\"CORNER\",name:\"a:b\"}"},
+    {"pos": [2, 3, 1], "state": "minecraft:repeating_command_block[conditional=false,facing=south]", "nbt": "{Command:\"say x\",TrackOutput:0b}"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 1, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 1, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 1, "type": "set", "pos": [2, 2, 0], "state": "minecraft:repeating_command_block[conditional=true,facing=up]"},
+    {"tick": 2, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 3, "type": "destroy", "pos": [1, 1, 2], "drop": false},
+    {"tick": 5, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 5, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 8, "type": "destroy", "pos": [2, 1, 0], "drop": false},
+    {"tick": 9, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 13, "type": "set", "pos": [1, 2, 1], "state": "minecraft:structure_block[mode=data]"},
+    {"tick": 14, "type": "set", "pos": [2, 1, 2], "state": "minecraft:repeating_command_block[conditional=false,facing=north]"},
+    {"tick": 15, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 16, "type": "set", "pos": [1, 3, 2], "state": "minecraft:stone"},
+    {"tick": 18, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [2, 1, 0], "face": "up"}
+  ]
+}

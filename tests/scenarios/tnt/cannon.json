@@ -1,0 +1,175 @@
+{
+ "name": "cannon",
+ "ticks": 90,
+ "box": {
+  "min": [
+   -4,
+   -4,
+   -4
+  ],
+  "max": [
+   30,
+   14,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    6
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    1.0,
+    3.5
+   ],
+   "nbt": "{fuse:20s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.5,
+    1.0,
+    3.5
+   ],
+   "nbt": "{fuse:20s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    1.0,
+    3.5
+   ],
+   "nbt": "{fuse:20s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.5,
+    1.5,
+    3.5
+   ],
+   "nbt": "{fuse:45s}"
+  }
+ ]
+}

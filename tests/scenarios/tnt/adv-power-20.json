@@ -1,0 +1,106 @@
+{
+ "name": "adv-power-20",
+ "ticks": 40,
+ "box": {
+  "min": [
+   -30,
+   -30,
+   -30
+  ],
+  "max": [
+   30,
+   40,
+   30
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    -4,
+    0,
+    -4
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "min": [
+    -2,
+    3,
+    -2
+   ],
+   "max": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    12,
+    6,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    -9,
+    2,
+    -9
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    20,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    -20,
+    0,
+    1
+   ],
+   "state": "minecraft:bookshelf"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.5,
+    1.0,
+    0.5
+   ],
+   "nbt": "{fuse:3s,explosion_power:20.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.5,
+    9.0,
+    5.5
+   ],
+   "nbt": "{fuse:30s,explosion_power:1.0f}"
+  }
+ ]
+}

@@ -1,0 +1,199 @@
+{
+ "name": "drop-02",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    3,
+    1
+   ],
+   "state": "minecraft:grindstone[face=floor,facing=west]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:grindstone[face=wall,facing=east]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:white_bed[facing=east,occupied=true,part=head]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    3
+   ],
+   "state": "minecraft:oak_stairs[facing=west,half=top,shape=outer_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    1
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=tall,south=low,up=true,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    5
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=2]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    6
+   ],
+   "state": "minecraft:oak_stairs[facing=west,half=bottom,shape=outer_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    5
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:cobblestone_wall[east=tall,north=tall,south=tall,up=false,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:oak_trapdoor[facing=south,half=bottom,open=true,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:ladder[facing=east,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    4
+   ],
+   "state": "minecraft:slime_block"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:heavy_core[waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.448,
+    2.216,
+    2.159
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.5,
+    3.969,
+    5.41
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    6.082,
+    6.011,
+    1.485
+   ],
+   "nbt": "{Motion:[-0.143d,-0.07d,-0.63d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.26,
+    1.31,
+    5.496
+   ],
+   "nbt": "{Motion:[-0.081d,0.012d,-0.27d]}"
+  }
+ ]
+}

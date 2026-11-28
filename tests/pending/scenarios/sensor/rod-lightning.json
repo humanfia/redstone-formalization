@@ -1,0 +1,16 @@
+{
+  "name": "rod-lightning",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [2, 3, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"pos": [1, 0, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [1.5, 2.0, 1.5]}}
+  ]
+}

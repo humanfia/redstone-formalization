@@ -1,0 +1,36 @@
+{
+  "name": "fuzz-sensor-s2-010",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:target[power=2]"},
+    {"pos": [0, 2, 0], "state": "minecraft:glass"},
+    {"pos": [0, 2, 1], "state": "minecraft:glass"},
+    {"pos": [0, 2, 2], "state": "minecraft:target[power=2]"},
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:daylight_detector[inverted=false,power=11]"},
+    {"pos": [2, 1, 0], "state": "minecraft:lightning_rod[facing=north,powered=false,waterlogged=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:stone"},
+    {"pos": [2, 1, 2], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:waxed_exposed_lightning_rod[facing=west,powered=true,waterlogged=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:target[power=9]"},
+    {"pos": [2, 2, 2], "state": "minecraft:daylight_detector[inverted=false,power=10]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 2, 1], "face": "north"},
+    {"tick": 6, "type": "use", "pos": [2, 2, 2], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [2, 2, 2], "face": "north"},
+    {"tick": 10, "type": "use", "pos": [1, 2, 1], "face": "north"},
+    {"tick": 11, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [2, 2, 2], "face": "down"},
+    {"tick": 12, "type": "destroy", "pos": [0, 2, 1], "drop": false},
+    {"tick": 13, "type": "destroy", "pos": [2, 2, 1], "drop": false},
+    {"tick": 20, "type": "use", "pos": [1, 1, 1], "face": "down"},
+    {"tick": 20, "type": "destroy", "pos": [2, 1, 2], "drop": false},
+    {"tick": 22, "type": "set", "pos": [1, 1, 2], "state": "minecraft:air"},
+    {"tick": 25, "type": "set", "pos": [0, 1, 1], "state": "minecraft:oxidized_lightning_rod[facing=west,powered=true,waterlogged=false]"}
+  ]
+}

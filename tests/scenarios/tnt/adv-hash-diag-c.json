@@ -1,0 +1,2685 @@
+{
+ "name": "adv-hash-diag-c",
+ "ticks": 45,
+ "box": {
+  "min": [
+   47,
+   36,
+   107
+  ],
+  "max": [
+   73,
+   48,
+   133
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    50,
+    39,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    50,
+    39,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    50,
+    39,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    50,
+    40,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    50,
+    40,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    50,
+    40,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    50,
+    41,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    50,
+    41,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    50,
+    41,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    39,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    39,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    39,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    39,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    40,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    40,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    40,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    41,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    41,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    41,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    41,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    39,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    39,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    39,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    39,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    39,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    40,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    40,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    40,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    40,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    41,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    41,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    41,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    41,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    52,
+    41,
+    130
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    39,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    39,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    39,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    39,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    39,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    40,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    40,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    40,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    40,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    41,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    41,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    41,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    41,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    53,
+    41,
+    129
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    39,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    39,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    39,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    39,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    39,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    40,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    40,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    40,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    40,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    41,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    41,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    41,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    41,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    54,
+    41,
+    128
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    39,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    39,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    39,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    39,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    39,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    40,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    40,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    40,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    40,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    41,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    41,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    41,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    41,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    55,
+    41,
+    127
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    39,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    39,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    39,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    39,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    39,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    40,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    40,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    40,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    40,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    41,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    41,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    41,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    41,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    56,
+    41,
+    126
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    39,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    39,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    39,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    39,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    39,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    40,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    40,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    40,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    40,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    41,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    41,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    41,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    41,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    57,
+    41,
+    125
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    39,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    39,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    39,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    39,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    39,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    40,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    40,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    40,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    40,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    40,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    40,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    41,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    41,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    41,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    41,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    41,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    41,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    41,
+    124
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    42,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    42,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    42,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    42,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    43,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    43,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    43,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    58,
+    43,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    39,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    39,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    39,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    39,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    39,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    40,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    40,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    40,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    40,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    40,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    41,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    41,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    41,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    41,
+    123
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    42,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    42,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    43,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    43,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    43,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    59,
+    43,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    39,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    39,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    39,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    39,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    39,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    40,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    40,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    40,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    40,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    41,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    41,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    41,
+    122
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    42,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    42,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    43,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    43,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    43,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    60,
+    43,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    39,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    39,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    39,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    39,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    39,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    40,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    40,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    40,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    40,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    41,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    41,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    41,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    42,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    42,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    43,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    43,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    43,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    61,
+    43,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    39,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    39,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    39,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    39,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    39,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    40,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    40,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    40,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    40,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    40,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    41,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    41,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    41,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    41,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    41,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    41,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    42,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    42,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    42,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    42,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    43,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    43,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    43,
+    120
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    62,
+    43,
+    121
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    39,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    39,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    39,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    39,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    39,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    40,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    40,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    40,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    40,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    41,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    41,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    41,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    41,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    63,
+    41,
+    119
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    39,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    39,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    39,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    39,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    39,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    40,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    40,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    40,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    40,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    41,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    41,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    41,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    41,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    64,
+    41,
+    118
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    39,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    39,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    39,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    39,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    39,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    40,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    40,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    40,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    40,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    41,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    41,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    41,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    41,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    65,
+    41,
+    117
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    39,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    39,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    39,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    39,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    39,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    40,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    40,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    40,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    40,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    41,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    41,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    41,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    41,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    66,
+    41,
+    116
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    39,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    39,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    39,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    39,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    39,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    40,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    40,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    40,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    40,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    41,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    41,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    41,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    41,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    67,
+    41,
+    115
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    39,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    39,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    39,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    39,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    39,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    40,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    40,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    40,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    40,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    41,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    41,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    41,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    41,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    68,
+    41,
+    114
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    39,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    39,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    39,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    39,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    40,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    40,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    40,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    41,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    41,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    41,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    69,
+    41,
+    113
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    39,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    39,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    39,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    40,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    40,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    40,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    41,
+    110
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    41,
+    111
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    70,
+    41,
+    112
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    51,
+    40,
+    129
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    52,
+    40,
+    128
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    53,
+    40,
+    127
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    54,
+    40,
+    126
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    55,
+    40,
+    125
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    56,
+    40,
+    124
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    57,
+    40,
+    123
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    58,
+    40,
+    122
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    59,
+    40,
+    121
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    61,
+    40,
+    119
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    62,
+    40,
+    118
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    63,
+    40,
+    117
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    64,
+    40,
+    116
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    65,
+    40,
+    115
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    66,
+    40,
+    114
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    67,
+    40,
+    113
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    68,
+    40,
+    112
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    69,
+    40,
+    111
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    60.5,
+    40.0,
+    120.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],fuse:2s,explosion_power:25.0f}"
+  }
+ ]
+}

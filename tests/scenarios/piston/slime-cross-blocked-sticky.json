@@ -1,0 +1,22 @@
+{
+  "name": "slime-cross-blocked-sticky",
+  "ticks": 30,
+  "box": {"min": [3, 4, 4], "max": [13, 12, 12]},
+  "blocks": [
+    {"pos": [6, 8, 8], "state": "minecraft:stone"},
+    {"pos": [7, 8, 8], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [9, 7, 8], "state": "minecraft:stone"},
+    {"pos": [9, 8, 7], "state": "minecraft:stone"},
+    {"pos": [9, 8, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 8, 9], "state": "minecraft:stone"},
+    {"pos": [9, 9, 8], "state": "minecraft:stone"},
+    {"pos": [10, 9, 8], "state": "minecraft:obsidian"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [7, 8, 8], "face": "up"}
+  ]
+}

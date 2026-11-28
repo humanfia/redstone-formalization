@@ -1,0 +1,268 @@
+{
+ "name": "verify-set-over-powered-lever",
+ "ticks": 13,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   3,
+   2,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    3,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    8
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    8
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    12
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:command_block[conditional=false,facing=up]"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:structure_block[mode=load]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:test_block[mode=log]"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:repeating_command_block[conditional=false,facing=up]"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    8
+   ],
+   "state": "minecraft:chain_command_block[conditional=false,facing=up]"
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "state": "minecraft:command_block[conditional=false,facing=up]",
+   "flags": 2
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    12
+   ],
+   "state": "minecraft:test_block[mode=start]"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "face": "up"
+  }
+ ]
+}

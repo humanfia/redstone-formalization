@@ -1,0 +1,70 @@
+{
+ "name": "recipe-s1-light_gray_bed-neg",
+ "ticks": 13,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   3,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    3,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]",
+   "nbt": "{Items:[{Slot:2b,id:\"minecraft:light_gray_wool\",count:1},{Slot:4b,id:\"minecraft:light_gray_wool\",count:1},{Slot:5b,id:\"minecraft:light_gray_wool\",count:3},{Slot:6b,id:\"minecraft:pale_oak_planks\",count:3},{Slot:7b,id:\"minecraft:dark_oak_planks\",count:3},{Slot:8b,id:\"minecraft:birch_planks\",count:3}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

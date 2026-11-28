@@ -1,0 +1,451 @@
+{
+ "name": "adv-shapes-04",
+ "ticks": 70,
+ "box": {
+  "min": [
+   -6,
+   -3,
+   -6
+  ],
+  "max": [
+   19,
+   12,
+   19
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    13,
+    0,
+    13
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:iron_chain[axis=y,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:end_rod[facing=west]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    8
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=top,shape=outer_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    11
+   ],
+   "state": "minecraft:oak_fence[east=true,north=true,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:sea_pickle[pickles=3,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=top,shape=inner_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    8
+   ],
+   "state": "minecraft:white_bed[facing=north,occupied=false,part=foot]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    11
+   ],
+   "state": "minecraft:oak_fence[east=true,north=true,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    5
+   ],
+   "state": "minecraft:stone_stairs[facing=east,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    8
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    11
+   ],
+   "state": "minecraft:stone_stairs[facing=north,half=bottom,shape=outer_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    2
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    5
+   ],
+   "state": "minecraft:stone_stairs[facing=west,half=bottom,shape=inner_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    8
+   ],
+   "state": "minecraft:end_rod[facing=south]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    11
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.189941395292433,
+    6.031905294736684,
+    3.057795530533859
+   ],
+   "nbt": "{Motion:[-0.02723775923920481d,-0.16774306891339003d,0.021381062362427122d],fuse:55s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.7,
+    1.0,
+    2.2708699125484157
+   ],
+   "nbt": "{Motion:[-0.5450817249690182d,0.2d,-0.013125217970086533d],fuse:31s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.043411346559231,
+    5.691142301151237,
+    5.622280548403951
+   ],
+   "nbt": "{Motion:[-0.017767599264371263d,-0.05142943807971914d,0.012831326051885666d],fuse:43s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.7,
+    1.0,
+    5.776872917323014
+   ],
+   "nbt": "{Motion:[-0.32368141631463965d,0.0d,-0.039972150297220205d],fuse:49s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.9284007899663935,
+    5.463266370089887,
+    7.9359148907818
+   ],
+   "nbt": "{Motion:[0.006154513668115161d,-0.16325211845815754d,-0.04278823111214278d],fuse:49s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.3,
+    1.3,
+    8.399453463579924
+   ],
+   "nbt": "{Motion:[0.5466015302185961d,0.42d,-0.002267401194045379d],fuse:34s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.1206693599312203,
+    5.479323910627642,
+    12.244481647185037
+   ],
+   "nbt": "{Motion:[0.002268204229036508d,-0.28405375618322487d,-0.012146731442514769d],fuse:34s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.4250981176987807,
+    1.0,
+    10.3
+   ],
+   "nbt": "{Motion:[-0.04282079710826628d,0.0d,0.2534677141558072d],fuse:37s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.935017303440208,
+    5.861352049690271,
+    2.457545835014676
+   ],
+   "nbt": "{Motion:[-0.008208717681064626d,0.03209439083164073d,-0.002158597458463432d],fuse:36s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.294424594507255,
+    1.3,
+    1.3
+   ],
+   "nbt": "{Motion:[0.03814353562188595d,0.42d,0.3235822950323226d],fuse:46s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.697234099980538,
+    5.3187540842523475,
+    5.820919667188309
+   ],
+   "nbt": "{Motion:[0.028490786275207555d,-0.19844200635874215d,-0.04772037103840141d],fuse:54s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.725064743638233,
+    1.0,
+    4.3
+   ],
+   "nbt": "{Motion:[0.009031975334640008d,0.42d,0.5615345994698151d],fuse:33s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.597375975539246,
+    5.93665702993923,
+    9.188767416410572
+   ],
+   "nbt": "{Motion:[0.034380124252251607d,-0.29547355944639553d,0.018959066138999156d],fuse:36s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.3,
+    1.0,
+    8.74857405936986
+   ],
+   "nbt": "{Motion:[0.29653951588672534d,0.0d,0.03589597437488887d],fuse:48s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.94830590882735,
+    5.500168778191796,
+    10.874786821017945
+   ],
+   "nbt": "{Motion:[-0.044535750607935604d,-0.09750586239819242d,-0.02708916626225051d],fuse:46s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.3,
+    1.0,
+    11.757015433011706
+   ],
+   "nbt": "{Motion:[0.4043081489762682d,0.42d,-0.04129028067342905d],fuse:37s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    8.574731618963472,
+    5.794344897985171,
+    3.170986470197744
+   ],
+   "nbt": "{Motion:[-0.010583605035896615d,-0.21326525829236825d,-0.011960908313729889d],fuse:54s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    8.260887858958993,
+    1.0,
+    1.3
+   ],
+   "nbt": "{Motion:[-0.04599944593301483d,0.42d,0.3155928432798462d],fuse:44s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    9.221411619459708,
+    5.570163509451352,
+    5.013246739962986
+   ],
+   "nbt": "{Motion:[0.03863750772881051d,-0.19519875541687706d,0.0027933380619244857d],fuse:44s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    9.7,
+    1.0,
+    5.678655389504337
+   ],
+   "nbt": "{Motion:[-0.4822236437883577d,0.42d,-0.04391276413563128d],fuse:39s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.768093109842966,
+    5.4190779823391955,
+    8.406935453421562
+   ],
+   "nbt": "{Motion:[0.029946325378066227d,-0.10427458551984833d,-0.013152673661083449d],fuse:55s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    9.7,
+    1.0,
+    8.483071342591261
+   ],
+   "nbt": "{Motion:[-0.23508983291634328d,0.42d,0.047237195447265984d],fuse:51s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    8.981597099021576,
+    6.033403110755087,
+    11.060976426507791
+   ],
+   "nbt": "{Motion:[-0.03489229040770521d,-0.15120779526251307d,-0.03941279084670595d],fuse:40s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.3,
+    1.3,
+    11.263395409775185
+   ],
+   "nbt": "{Motion:[0.41920582391460437d,0.0d,0.045358939652308236d],fuse:57s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.985408128421563,
+    6.045143438596122,
+    2.9919205366248676
+   ],
+   "nbt": "{Motion:[0.007486380504372149d,-0.24167853551343849d,-0.026146924692884613d],fuse:31s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.629426011679318,
+    1.0,
+    3.7
+   ],
+   "nbt": "{Motion:[0.017793363782173763d,0.2d,-0.23931603041558547d],fuse:32s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.582885945914681,
+    5.471901963700311,
+    6.108655433584852
+   ],
+   "nbt": "{Motion:[0.04299120880992062d,-0.18198698166240856d,0.026393276114152472d],fuse:49s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    12.7,
+    1.3,
+    5.346825007005335
+   ],
+   "nbt": "{Motion:[-0.2239982616216482d,0.42d,-0.025517998890867657d],fuse:50s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.996991781368024,
+    5.8188630834293065,
+    9.175472645036628
+   ],
+   "nbt": "{Motion:[0.0481038874473116d,-0.2529995442311385d,0.0017562269468794148d],fuse:51s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.48216419635271,
+    1.0,
+    9.7
+   ],
+   "nbt": "{Motion:[-0.017791042126475046d,0.42d,-0.612079864512665d],fuse:44s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.906952231414673,
+    5.8919719771766115,
+    11.676265921323385
+   ],
+   "nbt": "{Motion:[0.027739206736581243d,-0.140666933904221d,0.017162518128486765d],fuse:46s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    10.3,
+    1.0,
+    11.308671367100825
+   ],
+   "nbt": "{Motion:[0.3294396403982812d,0.42d,0.02133616889409931d],fuse:49s,explosion_power:0.0f}"
+  }
+ ]
+}

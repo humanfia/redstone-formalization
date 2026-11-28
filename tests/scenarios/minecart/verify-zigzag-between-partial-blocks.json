@@ -1,0 +1,32 @@
+{
+  "name": "verify-zigzag-between-partial-blocks",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 3], "state": "minecraft:rail[shape=north_east,waterlogged=false]"},
+    {"pos": [3, 1, 3], "state": "minecraft:rail[shape=south_west,waterlogged=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [2, 1, 4], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [3, 1, 4], "state": "minecraft:rail[shape=north_east,waterlogged=false]"},
+    {"pos": [4, 1, 4], "state": "minecraft:rail[shape=south_west,waterlogged=false]"},
+    {"pos": [4, 1, 3], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [3, 1, 5], "state": "minecraft:cake[bites=0]"},
+    {"pos": [4, 1, 5], "state": "minecraft:rail[shape=north_east,waterlogged=false]"},
+    {"pos": [5, 1, 5], "state": "minecraft:rail[shape=south_west,waterlogged=false]"},
+    {"pos": [5, 1, 4], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [4, 1, 6], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [5, 1, 6], "state": "minecraft:rail[shape=north_east,waterlogged=false]"},
+    {"pos": [6, 1, 6], "state": "minecraft:rail[shape=south_west,waterlogged=false]"},
+    {"pos": [6, 1, 5], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [5, 1, 7], "state": "minecraft:cake[bites=0]"},
+    {"pos": [6, 1, 7], "state": "minecraft:rail[shape=north_east,waterlogged=false]"},
+    {"pos": [7, 1, 7], "state": "minecraft:rail[shape=south_west,waterlogged=false]"},
+    {"pos": [7, 1, 6], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [6, 1, 8], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [2, 1, 2], "state": "minecraft:rail[shape=north_south,waterlogged=false]"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [2.5, 1.0625, 2.5], "nbt": "{Motion:[0.0d,0.0d,0.4d]}"}]
+}

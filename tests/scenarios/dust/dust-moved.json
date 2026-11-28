@@ -1,0 +1,33 @@
+{
+  "name": "dust-moved",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [9, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [9, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [1, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=15,south=none,west=side]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=14,south=none,west=side]"},
+    {"pos": [3, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=13,south=none,west=side]"},
+    {"pos": [4, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=12,south=none,west=side]"},
+    {"pos": [5, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=11,south=none,west=side]"},
+    {"pos": [6, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=10,south=none,west=side]"},
+    {"pos": [7, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=9,south=none,west=side]"},
+    {"pos": [8, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=8,south=none,west=side]"},
+    {"pos": [2, 0, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [4, 0, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [6, 0, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [8, 0, 1], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [3, 1, 1], "state": "minecraft:air", "flags": 66},
+    {"tick": 5, "type": "set", "pos": [3, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=0,south=none,west=side]", "flags": 67},
+    {"tick": 8, "type": "set", "pos": [6, 1, 1], "state": "minecraft:stone", "flags": 67},
+    {"tick": 12, "type": "destroy", "pos": [6, 1, 1], "drop": false},
+    {"tick": 14, "type": "set", "pos": [2, 1, 1], "state": "minecraft:air", "flags": 67},
+    {"tick": 18, "type": "set", "pos": [2, 1, 1], "state": "minecraft:redstone_wire[east=side,north=none,power=3,south=none,west=side]", "flags": 66},
+    {"tick": 20, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [0, 1, 1], "face": "up"}
+  ]
+}

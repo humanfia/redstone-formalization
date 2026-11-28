@@ -1,0 +1,16 @@
+{
+  "name": "bottom-normal-y-61-n2",
+  "ticks": 20,
+  "box": {"min": [3, -64, 5], "max": [11, -58, 11]},
+  "blocks": [
+    {"pos": [6, -61, 8], "state": "minecraft:stone"},
+    {"pos": [7, -61, 8], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [8, -63, 8], "state": "minecraft:stone"},
+    {"pos": [8, -62, 8], "state": "minecraft:stone"},
+    {"pos": [8, -61, 8], "state": "minecraft:piston[extended=false,facing=down]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [7, -61, 8], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [7, -61, 8], "face": "up"}
+  ]
+}

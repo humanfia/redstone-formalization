@@ -1,0 +1,107 @@
+{
+ "name": "wire-east-compare",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   3,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_wire[east=side,north=none,power=11,south=none,west=side]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_wire[east=none,north=side,power=4,south=side,west=none]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "face": "up"
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "fuzz-items-s2-017",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:stone"},
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [0, 1, 2], "state": "minecraft:stone"},
+    {"pos": [0, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"pos": [2, 1, 0], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:2b,id:\"minecraft:honey_bottle\",count:10},{Slot:3b,id:\"minecraft:dirt\",count:23},{Slot:6b,id:\"minecraft:dirt\",count:3}]}"},
+    {"pos": [2, 1, 1], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:crafter[crafting=false,orientation=down_east,triggered=false]", "nbt": "{disabled_slots:[I;2,3,6]}"},
+    {"pos": [2, 2, 1], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 23, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 43, "type": "use", "pos": [2, 2, 1], "face": "up"},
+    {"tick": 46, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 53, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 59, "type": "use", "pos": [2, 2, 1], "face": "up"},
+    {"tick": 60, "type": "use", "pos": [2, 1, 1], "face": "up"}
+  ]
+}

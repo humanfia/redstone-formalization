@@ -1,0 +1,34 @@
+{
+  "name": "fuzz-items-s2-023",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:stone"},
+    {"pos": [0, 1, 1], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:honey_bottle\",count:15},{Slot:4b,id:\"minecraft:bowl\",count:37}],disabled_slots:[I;5]}"},
+    {"pos": [0, 1, 2], "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]", "nbt": "{disabled_slots:[I;3,7]}"},
+    {"pos": [0, 2, 2], "state": "minecraft:crafter[crafting=false,orientation=down_south,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bowl\",count:2},{Slot:4b,id:\"minecraft:red_mushroom\",count:2},{Slot:8b,id:\"minecraft:brown_mushroom\",count:3}]}"},
+    {"pos": [1, 1, 2], "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:cobblestone\",count:3},{Slot:1b,id:\"minecraft:cobblestone\",count:2},{Slot:2b,id:\"minecraft:cobblestone\",count:1},{Slot:3b,id:\"minecraft:cobblestone\",count:3},{Slot:5b,id:\"minecraft:cobblestone\",count:4},{Slot:6b,id:\"minecraft:cobblestone\",count:2},{Slot:7b,id:\"minecraft:cobblestone\",count:2},{Slot:8b,id:\"minecraft:cobblestone\",count:3}],disabled_slots:[I;4]}"},
+    {"pos": [1, 2, 0], "state": "minecraft:stone"},
+    {"pos": [1, 2, 1], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:crafter[crafting=false,orientation=down_west,triggered=false]", "nbt": "{disabled_slots:[I;3,8]}"},
+    {"pos": [2, 1, 0], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:cobblestone\",count:48},{Slot:1b,id:\"minecraft:stick\",count:4},{Slot:2b,id:\"minecraft:stick\",count:64},{Slot:3b,id:\"minecraft:dirt\",count:64},{Slot:4b,id:\"minecraft:snowball\",count:16},{Slot:5b,id:\"minecraft:iron_sword\",count:1},{Slot:6b,id:\"minecraft:cobblestone\",count:64},{Slot:7b,id:\"minecraft:brick\",count:52},{Slot:8b,id:\"minecraft:oak_planks\",count:26}]}"},
+    {"pos": [2, 2, 0], "state": "minecraft:dispenser[facing=south,triggered=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "use", "pos": [2, 2, 1], "face": "up"},
+    {"tick": 9, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 37, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 37, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 37, "type": "use", "pos": [2, 2, 1], "face": "up"},
+    {"tick": 38, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 40, "type": "use", "pos": [1, 2, 1], "face": "up"}
+  ]
+}

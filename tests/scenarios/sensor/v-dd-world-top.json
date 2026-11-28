@@ -1,0 +1,24 @@
+{
+  "name": "v-dd-world-top",
+  "ticks": 45,
+  "box": {"min": [0, 317, 0], "max": [10, 319, 2]},
+  "blocks": [
+    {"pos": [1, 319, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [3, 319, 1], "state": "minecraft:daylight_detector[inverted=true,power=0]"},
+    {"pos": [5, 319, 1], "state": "minecraft:stone"},
+    {"pos": [5, 318, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [7, 319, 1], "state": "minecraft:glass"},
+    {"pos": [7, 318, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [9, 319, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [9, 318, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [4, 318, 1], "state": "minecraft:stone"},
+    {"pos": [6, 318, 1], "state": "minecraft:stone"},
+    {"pos": [5, 318, 0], "state": "minecraft:stone"},
+    {"pos": [5, 318, 2], "state": "minecraft:stone"},
+    {"pos": [5, 317, 1], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 8, "type": "use", "pos": [5, 318, 1], "face": "up"},
+    {"tick": 26, "type": "destroy", "pos": [5, 319, 1], "drop": false}
+  ]
+}

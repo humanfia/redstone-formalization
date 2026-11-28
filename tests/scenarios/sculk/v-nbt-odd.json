@@ -1,0 +1,27 @@
+{
+  "name": "v-nbt-odd",
+  "ticks": 100,
+  "box": {"min": [0, 0, 0], "max": [10, 2, 8]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [10, 0, 8], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]", "nbt": "{last_vibration_frequency:-3,listener:{event:{game_event:\"minecraft:shriek\",distance:2.0f,pos:[3.5d,1.5d,1.5d]},event_delay:1,selector:{tick:-1L}}}"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]", "nbt": "{last_vibration_frequency:99,listener:{event:{game_event:\"minecraft:block_activate\",distance:0.0f,pos:[40.5d,1.5d,1.5d]},event_delay:5,selector:{tick:-1L}}}"},
+    {"pos": [5, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:resonate_7\",distance:50.0f,pos:[7.5d,1.5d,1.5d]},event_delay:3,selector:{tick:-1L}}}"},
+    {"pos": [1, 1, 4], "state": "minecraft:calibrated_sculk_sensor[facing=north,power=0,sculk_sensor_phase=inactive,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:explode\",distance:1.0f,pos:[-3.2d,5.9d,-0.1d]},event_delay:1,selector:{tick:-1L}}}"},
+    {"pos": [4, 1, 4], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]", "nbt": "{listener:{event_delay:9,selector:{event:{game_event:\"minecraft:block_place\",distance:0.0f,pos:[4.5d,1.5d,4.5d]},tick:0L}}}"},
+    {"pos": [7, 1, 4], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:block_destroy\",distance:2.0f,pos:[7.5d,1.5d,4.5d]},event_delay:2,selector:{tick:-1L}}}"},
+    {"pos": [1, 1, 7], "state": "minecraft:sculk_sensor[power=3,sculk_sensor_phase=active,waterlogged=false]", "nbt": "{listener:{event_delay:0,selector:{event:{game_event:\"minecraft:eat\",distance:2.0f,pos:[1.5d,1.5d,5.5d]},tick:0L}}}"},
+    {"pos": [4, 1, 7], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=cooldown,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:eat\",distance:2.0f,pos:[1.5d,1.5d,5.5d]},event_delay:40,selector:{tick:-1L}}}"},
+    {"pos": [7, 1, 7], "state": "minecraft:calibrated_sculk_sensor[facing=west,power=5,sculk_sensor_phase=inactive,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:eat\",distance:2.0f,pos:[9.5d,1.5d,7.5d]},event_delay:1,selector:{tick:-1L}}}"},
+    {"pos": [9, 1, 4], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 45, "type": "use", "pos": [9, 1, 4], "face": "up"},
+    {"tick": 46, "type": "use", "pos": [9, 1, 4], "face": "up"},
+    {"tick": 90, "type": "use", "pos": [9, 1, 4], "face": "up"}
+  ]
+}

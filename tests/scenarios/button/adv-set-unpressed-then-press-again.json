@@ -1,0 +1,91 @@
+{
+ "name": "adv-set-unpressed-then-press-again",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   4,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:oak_button[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:oak_button[face=floor,facing=north,powered=false]"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 33,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "head-alone-west-sticky-short",
+  "ticks": 12,
+  "box": {"min": [4, 4, 5], "max": [12, 11, 11]},
+  "blocks": [
+    {"pos": [8, 8, 8], "state": "minecraft:piston_head[facing=west,short=true,type=sticky]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [8, 7, 8], "state": "minecraft:stone"},
+    {"tick": 4, "type": "set", "pos": [7, 8, 8], "state": "minecraft:stone"},
+    {"tick": 6, "type": "set", "pos": [9, 8, 8], "state": "minecraft:stone"}
+  ]
+}

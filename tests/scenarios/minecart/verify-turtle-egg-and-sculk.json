@@ -1,0 +1,16 @@
+{
+  "name": "verify-turtle-egg-and-sculk",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 7], "state": "minecraft:turtle_egg[eggs=3,hatch=0]"},
+    {"pos": [4, 1, 7], "state": "minecraft:turtle_egg[eggs=3,hatch=0]"},
+    {"pos": [5, 1, 7], "state": "minecraft:turtle_egg[eggs=3,hatch=0]"},
+    {"pos": [6, 1, 7], "state": "minecraft:turtle_egg[eggs=3,hatch=0]"},
+    {"pos": [7, 1, 7], "state": "minecraft:turtle_egg[eggs=3,hatch=0]"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [4.5, 2.5, 7.5], "nbt": "{Motion:[0.2d,0.0d,0.0d]}"}]
+}

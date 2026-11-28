@@ -1,0 +1,41 @@
+{
+  "name": "fuzz-harsh-d-s101-005",
+  "ticks": 50,
+  "box": {"min": [-10, -8, -9], "max": [7, 13, 8]},
+  "fill": [
+    {"min": [-2, 0, -1], "max": [-1, 0, 0], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [-2, 1, -1], "state": "minecraft:piston_head[facing=down,short=true,type=sticky]"},
+    {"pos": [-2, 1, 0], "state": "minecraft:stone"},
+    {"pos": [-2, 2, -1], "state": "minecraft:sticky_piston[extended=false,facing=north]"},
+    {"pos": [-2, 2, 0], "state": "minecraft:sticky_piston[extended=false,facing=up]"},
+    {"pos": [-2, 3, -1], "state": "minecraft:honey_block"},
+    {"pos": [-2, 3, 0], "state": "minecraft:slime_block"},
+    {"pos": [-2, 4, -1], "state": "minecraft:slime_block"},
+    {"pos": [-2, 4, 0], "state": "minecraft:piston_head[facing=north,short=true,type=sticky]"},
+    {"pos": [-2, 5, -1], "state": "minecraft:stone"},
+    {"pos": [-1, 1, -1], "state": "minecraft:slime_block"},
+    {"pos": [-1, 1, 0], "state": "minecraft:lever[face=wall,facing=west,powered=true]"},
+    {"pos": [-1, 2, -1], "state": "minecraft:stone"},
+    {"pos": [-1, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [-1, 3, -1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [-1, 3, 0], "state": "minecraft:sticky_piston[extended=true,facing=up]"},
+    {"pos": [-1, 4, -1], "state": "minecraft:stone"},
+    {"pos": [-1, 5, -1], "state": "minecraft:sticky_piston[extended=false,facing=up]"},
+    {"pos": [-1, 5, 0], "state": "minecraft:sticky_piston[extended=false,facing=east]"}
+  ],
+  "actions": [
+    {"tick": 4, "type": "destroy", "pos": [-2, 2, -1], "drop": false},
+    {"tick": 11, "type": "use", "pos": [-1, 1, 0], "face": "north"},
+    {"tick": 11, "type": "use", "pos": [-1, 1, 0], "face": "north"},
+    {"tick": 13, "type": "use", "pos": [-1, 1, 0], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [-1, 1, 0], "face": "north"},
+    {"tick": 18, "type": "destroy", "pos": [-2, 4, 0], "drop": false},
+    {"tick": 22, "type": "use", "pos": [-1, 1, 0], "face": "north"},
+    {"tick": 28, "type": "use", "pos": [-1, 1, 0], "face": "north"},
+    {"tick": 36, "type": "use", "pos": [-1, 1, 0], "face": "down"},
+    {"tick": 40, "type": "use", "pos": [-1, 1, 0], "face": "north"},
+    {"tick": 49, "type": "set", "pos": [-2, 3, -1], "state": "minecraft:stone", "flags": 3}
+  ]
+}

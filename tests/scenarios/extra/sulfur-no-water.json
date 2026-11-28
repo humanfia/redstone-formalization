@@ -1,0 +1,25 @@
+{
+  "name": "sulfur-no-water",
+  "ticks": 460,
+  "box": {"min": [0, 0, 0], "max": [15, 9, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 1, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dry]"},
+    {"pos": [4, 1, 1], "state": "minecraft:magma_block"},
+    {"pos": [4, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]"},
+    {"pos": [7, 1, 1], "state": "minecraft:lava[level=0]"},
+    {"pos": [7, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"},
+    {"pos": [10, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"},
+    {"pos": [13, 1, 1], "state": "minecraft:magma_block"},
+    {"pos": [13, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=continuous]"}
+  ],
+  "actions": [
+    {"tick": 420, "type": "destroy", "pos": [1, 2, 1], "drop": false},
+    {"tick": 425, "type": "destroy", "pos": [13, 2, 1], "drop": false},
+    {"tick": 430, "type": "set", "pos": [5, 2, 1], "state": "minecraft:stone"},
+    {"tick": 440, "type": "set", "pos": [8, 2, 1], "state": "minecraft:stone"},
+    {"tick": 445, "type": "set", "pos": [11, 2, 1], "state": "minecraft:stone"}
+  ]
+}

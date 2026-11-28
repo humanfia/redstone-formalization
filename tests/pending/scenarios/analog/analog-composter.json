@@ -1,0 +1,39 @@
+{
+  "name": "analog-composter",
+  "ticks": 8,
+  "box": {"min": [0, 0, 0], "max": [18, 2, 5]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [18, 0, 5], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:composter[level=0]"},
+    {"pos": [1, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:composter[level=1]"},
+    {"pos": [3, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:composter[level=2]"},
+    {"pos": [5, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:composter[level=3]"},
+    {"pos": [7, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:composter[level=4]"},
+    {"pos": [9, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [11, 1, 1], "state": "minecraft:composter[level=5]"},
+    {"pos": [11, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [13, 1, 1], "state": "minecraft:composter[level=6]"},
+    {"pos": [13, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [15, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"pos": [15, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [17, 1, 1], "state": "minecraft:composter[level=8]"},
+    {"pos": [17, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [3, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [5, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [7, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [9, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [11, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [13, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [15, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [17, 1, 3], "state": "minecraft:stone"}
+  ]
+}

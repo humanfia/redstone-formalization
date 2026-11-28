@@ -1,0 +1,36 @@
+{
+  "name": "fuzz-comparator-s2-024",
+  "ticks": 24,
+  "box": {"min": [0, 0, 0], "max": [3, 1, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:comparator[facing=south,mode=compare,powered=true]", "nbt": "{OutputSignal:4}"},
+    {"pos": [0, 1, 2], "state": "minecraft:stone"},
+    {"pos": [0, 1, 3], "state": "minecraft:stone"},
+    {"pos": [1, 1, 0], "state": "minecraft:comparator[facing=south,mode=compare,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:stone"},
+    {"pos": [2, 1, 1], "state": "minecraft:comparator[facing=north,mode=compare,powered=true]", "nbt": "{OutputSignal:15}"},
+    {"pos": [2, 1, 2], "state": "minecraft:comparator[facing=west,mode=subtract,powered=true]", "nbt": "{OutputSignal:11}"},
+    {"pos": [2, 1, 3], "state": "minecraft:comparator[facing=north,mode=compare,powered=true]", "nbt": "{OutputSignal:14}"},
+    {"pos": [3, 1, 0], "state": "minecraft:stone"},
+    {"pos": [3, 1, 1], "state": "minecraft:lever[face=ceiling,facing=east,powered=true]"},
+    {"pos": [3, 1, 2], "state": "minecraft:comparator[facing=south,mode=subtract,powered=false]"},
+    {"pos": [3, 1, 3], "state": "minecraft:lever[face=floor,facing=south,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [2, 1, 3], "face": "up"},
+    {"tick": 1, "type": "set", "pos": [0, 1, 2], "state": "minecraft:composter[level=0]"},
+    {"tick": 2, "type": "use", "pos": [3, 1, 3], "face": "up"},
+    {"tick": 5, "type": "set", "pos": [3, 1, 1], "state": "minecraft:stone"},
+    {"tick": 6, "type": "destroy", "pos": [2, 1, 1], "drop": false},
+    {"tick": 8, "type": "use", "pos": [3, 1, 2], "face": "up"},
+    {"tick": 8, "type": "set", "pos": [1, 1, 0], "state": "minecraft:stone"},
+    {"tick": 17, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 18, "type": "set", "pos": [2, 1, 2], "state": "minecraft:air"},
+    {"tick": 20, "type": "use", "pos": [3, 1, 2], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [1, 1, 0], "face": "up"},
+    {"tick": 23, "type": "destroy", "pos": [3, 1, 0], "drop": false}
+  ]
+}

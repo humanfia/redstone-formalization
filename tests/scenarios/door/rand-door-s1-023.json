@@ -1,0 +1,29 @@
+{
+  "name": "rand-door-s1-023",
+  "ticks": 32,
+  "box": {"min": [0, 0, 0], "max": [6, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 2, 1], "state": "minecraft:poplar_fence_gate[facing=east,in_wall=false,open=false,powered=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:cherry_trapdoor[facing=west,half=top,open=false,powered=false,waterlogged=false]"},
+    {"pos": [1, 4, 1], "state": "minecraft:cherry_trapdoor[facing=east,half=top,open=false,powered=false,waterlogged=false]"},
+    {"pos": [2, 3, 1], "state": "minecraft:stone"},
+    {"pos": [2, 4, 1], "state": "minecraft:lever[face=ceiling,facing=south,powered=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:stone"},
+    {"pos": [3, 2, 1], "state": "minecraft:oxidized_copper_trapdoor[facing=west,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [3, 3, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 3, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 2, 0], "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"},
+    {"pos": [6, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [5, 4, 2], "state": "minecraft:air", "flags": 2},
+    {"tick": 17, "type": "destroy", "pos": [4, 3, 1], "drop": false},
+    {"tick": 22, "type": "use", "pos": [5, 2, 0], "face": "up"},
+    {"tick": 27, "type": "use", "pos": [2, 4, 1], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [2, 4, 1], "face": "up"}
+  ]
+}

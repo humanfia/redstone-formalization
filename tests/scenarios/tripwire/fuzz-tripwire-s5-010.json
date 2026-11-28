@@ -1,0 +1,44 @@
+{
+  "name": "fuzz-tripwire-s5-010",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [11, 1, 1]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [11, 0, 1], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:tripwire_hook[attached=true,facing=south,powered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:stone"},
+    {"pos": [3, 1, 1], "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=false]"},
+    {"pos": [4, 1, 0], "state": "minecraft:tripwire[attached=false,disarmed=false,east=true,north=false,powered=true,south=true,west=true]"},
+    {"pos": [4, 1, 1], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [5, 1, 0], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [6, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:tripwire[attached=false,disarmed=false,east=true,north=false,powered=true,south=false,west=true]"},
+    {"pos": [7, 1, 0], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [8, 1, 0], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [8, 1, 1], "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=false]"},
+    {"pos": [9, 1, 0], "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=true,powered=false,south=true,west=true]"},
+    {"pos": [9, 1, 1], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=true,powered=false,south=false,west=true]"},
+    {"pos": [10, 1, 0], "state": "minecraft:glass"},
+    {"pos": [10, 1, 1], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [11, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [11, 1, 1], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 12, "type": "set", "pos": [10, 1, 0], "state": "minecraft:stone"},
+    {"tick": 12, "type": "set", "pos": [5, 1, 1], "state": "minecraft:tripwire[attached=false,disarmed=true,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 15, "type": "set", "pos": [8, 1, 1], "state": "minecraft:tripwire[attached=true,disarmed=true,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 20, "type": "set", "pos": [10, 1, 0], "state": "minecraft:air"},
+    {"tick": 23, "type": "set", "pos": [1, 1, 1], "state": "minecraft:air"},
+    {"tick": 32, "type": "destroy", "pos": [9, 1, 1], "drop": false},
+    {"tick": 36, "type": "set", "pos": [11, 1, 1], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 44, "type": "destroy", "pos": [9, 1, 0], "drop": false},
+    {"tick": 49, "type": "destroy", "pos": [7, 1, 1], "drop": false},
+    {"tick": 50, "type": "set", "pos": [1, 1, 0], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"}
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "name": "adv-pot",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [10, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [10, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:decorated_pot[cracked=false,facing=north,waterlogged=false]", "nbt": "{item:{id:\"minecraft:stone\",count:63}}"},
+    {"pos": [3, 1, 1], "state": "minecraft:decorated_pot[cracked=true,facing=east,waterlogged=false]", "nbt": "{item:{id:\"minecraft:ender_pearl\",count:15}}"},
+    {"pos": [5, 1, 1], "state": "minecraft:decorated_pot[cracked=false,facing=south,waterlogged=false]", "nbt": "{item:{id:\"minecraft:iron_sword\",count:1}}"},
+    {"pos": [7, 1, 1], "state": "minecraft:decorated_pot[cracked=false,facing=west,waterlogged=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:decorated_pot[cracked=false,facing=north,waterlogged=false]", "nbt": "{sherds:[\"minecraft:arms_up_pottery_sherd\",\"minecraft:brick\",\"minecraft:brick\",\"minecraft:brick\"]}"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:stone"},
+    {"tick": 1, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:ender_pearl"},
+    {"tick": 1, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:iron_sword"},
+    {"tick": 1, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:air"},
+    {"tick": 1, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:oak_sign"},
+    {"tick": 3, "type": "use_item", "pos": [1, 1, 1], "face": "north", "item": "minecraft:stone"},
+    {"tick": 3, "type": "use_item", "pos": [3, 1, 1], "face": "north", "item": "minecraft:ender_pearl"},
+    {"tick": 3, "type": "use_item", "pos": [5, 1, 1], "face": "north", "item": "minecraft:air"},
+    {"tick": 3, "type": "use_item", "pos": [7, 1, 1], "face": "north", "item": "minecraft:egg"},
+    {"tick": 3, "type": "use_item", "pos": [9, 1, 1], "face": "north", "item": "minecraft:oak_sign"},
+    {"tick": 5, "type": "use_item", "pos": [1, 1, 1], "face": "south", "item": "minecraft:dirt"},
+    {"tick": 5, "type": "use_item", "pos": [3, 1, 1], "face": "south", "item": "minecraft:air"},
+    {"tick": 5, "type": "use_item", "pos": [5, 1, 1], "face": "south", "item": "minecraft:stick"},
+    {"tick": 5, "type": "use_item", "pos": [7, 1, 1], "face": "south", "item": "minecraft:egg"},
+    {"tick": 5, "type": "use_item", "pos": [9, 1, 1], "face": "south", "item": "minecraft:stone"},
+    {"tick": 7, "type": "use_item", "pos": [1, 1, 1], "face": "down", "item": "minecraft:air"},
+    {"tick": 7, "type": "use_item", "pos": [3, 1, 1], "face": "down", "item": "minecraft:stone"},
+    {"tick": 7, "type": "use_item", "pos": [5, 1, 1], "face": "down", "item": "minecraft:iron_sword"},
+    {"tick": 7, "type": "use_item", "pos": [7, 1, 1], "face": "down", "item": "minecraft:snowball"},
+    {"tick": 7, "type": "use_item", "pos": [9, 1, 1], "face": "down", "item": "minecraft:oak_sign"},
+    {"tick": 10, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [5, 1, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [7, 1, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [9, 1, 1], "face": "up"},
+    {"tick": 14, "type": "set", "pos": [7, 1, 1], "state": "minecraft:decorated_pot[cracked=true,facing=west,waterlogged=false]"},
+    {"tick": 16, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:egg"}
+  ]
+}

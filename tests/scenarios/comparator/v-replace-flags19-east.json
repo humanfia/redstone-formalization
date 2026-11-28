@@ -1,0 +1,153 @@
+{
+ "name": "v-replace-flags19-east",
+ "ticks": 32,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:11}"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    7
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    8
+   ],
+   "state": "minecraft:comparator[facing=south,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:11}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=north,mode=subtract,powered=true]",
+   "flags": 19
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=subtract,powered=false]",
+   "flags": 19
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=subtract,powered=true]",
+   "flags": 19
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 19
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=true]",
+   "flags": 19
+  },
+  {
+   "tick": 24,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:air",
+   "flags": 19
+  }
+ ]
+}

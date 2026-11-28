@@ -1,0 +1,35 @@
+{
+  "name": "rand-door-s1-005",
+  "ticks": 24,
+  "box": {"min": [0, 0, 0], "max": [6, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 2, 0], "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=false,powered=false]"},
+    {"pos": [0, 3, 1], "state": "minecraft:stone"},
+    {"pos": [1, 1, 1], "state": "minecraft:iron_trapdoor[facing=south,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [1, 3, 0], "state": "minecraft:cherry_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [3, 2, 0], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [3, 3, 1], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [4, 3, 2], "state": "minecraft:oak_door[facing=east,half=lower,hinge=right,open=false,powered=false]"},
+    {"pos": [4, 4, 2], "state": "minecraft:oak_door[facing=east,half=upper,hinge=right,open=false,powered=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:waxed_copper_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [5, 3, 1], "state": "minecraft:crimson_fence_gate[facing=east,in_wall=false,open=false,powered=false]"},
+    {"pos": [5, 4, 0], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:crimson_fence_gate[facing=south,in_wall=false,open=true,powered=false]"},
+    {"pos": [6, 1, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "destroy", "pos": [5, 4, 0], "drop": false},
+    {"tick": 3, "type": "use", "pos": [3, 3, 1], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [3, 3, 1], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [5, 4, 0], "face": "up"},
+    {"tick": 13, "type": "set", "pos": [2, 0, 2], "state": "minecraft:lever[face=wall,facing=west,powered=false]", "flags": 18},
+    {"tick": 16, "type": "use", "pos": [5, 4, 0], "face": "up"},
+    {"tick": 17, "type": "set", "pos": [6, 4, 0], "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]", "flags": 3},
+    {"tick": 21, "type": "use", "pos": [1, 3, 0], "face": "south"},
+    {"tick": 22, "type": "use", "pos": [5, 4, 0], "face": "up"},
+    {"tick": 24, "type": "use", "pos": [1, 3, 0], "face": "up"}
+  ]
+}

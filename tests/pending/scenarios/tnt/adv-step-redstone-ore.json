@@ -1,0 +1,64 @@
+{
+ "name": "adv-step-redstone-ore",
+ "ticks": 70,
+ "box": {
+  "min": [
+   -3,
+   -3,
+   -3
+  ],
+  "max": [
+   9,
+   8,
+   9
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    2,
+    1,
+    2
+   ],
+   "max": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_ore[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.5,
+    4.0,
+    3.5
+   ],
+   "nbt": "{fuse:50s,explosion_power:0.0f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.2,
+    2.5,
+    4.4
+   ],
+   "nbt": "{Motion:[0.1d,0.0d,-0.1d],fuse:60s,explosion_power:0.0f}"
+  }
+ ]
+}

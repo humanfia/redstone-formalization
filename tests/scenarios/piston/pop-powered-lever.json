@@ -1,0 +1,18 @@
+{
+  "name": "pop-powered-lever",
+  "ticks": 30,
+  "box": {"min": [5, 4, 3], "max": [13, 11, 12]},
+  "blocks": [
+    {"pos": [8, 8, 6], "state": "minecraft:stone"},
+    {"pos": [8, 8, 7], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [9, 7, 8], "state": "minecraft:stone"},
+    {"pos": [9, 8, 8], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [9, 8, 9], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [10, 8, 8], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [8, 8, 7], "face": "up"}
+  ]
+}

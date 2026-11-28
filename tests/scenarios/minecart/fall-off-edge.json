@@ -1,0 +1,16 @@
+{
+  "name": "fall-off-edge",
+  "ticks": 80,
+  "box": {"min": [0, 0, 0], "max": [15, 7, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [2, 1, 2], "max": [8, 4, 6], "state": "minecraft:stone"},
+    {"min": [3, 5, 4], "max": [10, 5, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [11, 1, 10], "max": [13, 4, 13], "state": "minecraft:stone"},
+    {"min": [12, 5, 8], "max": [12, 5, 12], "state": "minecraft:rail[shape=north_south,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [4.5, 5.0625, 4.5], "nbt": "{Motion:[0.3d,0.0d,0.0d]}"},
+    {"type": "minecraft:minecart", "pos": [12.5, 5.0625, 11.5], "nbt": "{Motion:[0.0d,0.0d,-0.1d]}"}
+  ]
+}

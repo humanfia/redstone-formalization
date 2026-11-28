@@ -1,0 +1,36 @@
+{
+  "name": "fuzz-tnt-s3-007",
+  "ticks": 95,
+  "box": {"min": [0, 0, 0], "max": [3, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:stone"},
+    {"pos": [0, 1, 3], "state": "minecraft:tnt[unstable=true]"},
+    {"pos": [0, 2, 1], "state": "minecraft:stone"},
+    {"pos": [1, 1, 1], "state": "minecraft:tnt[unstable=true]"},
+    {"pos": [1, 1, 2], "state": "minecraft:oak_slab[type=top,waterlogged=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:stone"},
+    {"pos": [1, 2, 2], "state": "minecraft:stone"},
+    {"pos": [2, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:tnt[unstable=true]"},
+    {"pos": [2, 1, 2], "state": "minecraft:obsidian"},
+    {"pos": [2, 2, 1], "state": "minecraft:tnt[unstable=true]"},
+    {"pos": [3, 1, 0], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:stone"},
+    {"pos": [3, 2, 0], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:stone"},
+    {"pos": [3, 2, 2], "state": "minecraft:tnt[unstable=true]"}
+  ],
+  "actions": [
+    {"tick": 18, "type": "use", "pos": [3, 1, 0], "face": "up"},
+    {"tick": 30, "type": "set", "pos": [0, 2, 2], "state": "minecraft:tnt[unstable=true]"},
+    {"tick": 57, "type": "use", "pos": [3, 2, 0], "face": "up"},
+    {"tick": 67, "type": "destroy", "pos": [2, 2, 1], "drop": false},
+    {"tick": 70, "type": "set", "pos": [1, 2, 0], "state": "minecraft:tnt[unstable=false]"},
+    {"tick": 75, "type": "set", "pos": [2, 2, 2], "state": "minecraft:tnt[unstable=true]"},
+    {"tick": 87, "type": "set", "pos": [3, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 87, "type": "destroy", "pos": [2, 1, 1], "drop": false}
+  ]
+}

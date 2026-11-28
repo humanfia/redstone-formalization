@@ -109,6 +109,13 @@ structure Attrs where
   outline : ℕ
   /-- Index of the support shape. -/
   supportShape : ℕ
+  /-- `BlockState.getLightDampening`: how much light loses on entering the block, from 0 to 15. -/
+  lightDampening : ℕ
+  /-- Index of the shape with which the block occludes light at its faces
+  (`LightEngine.getOcclusionShape`): `BlockState.getOcclusionShape` for a state that occludes
+  and uses its shape for light occlusion (`canOcclude`, `useShapeForLightOcclusion`), the empty
+  shape for every other state. -/
+  lightOcclusion : ℕ
   deriving DecidableEq, Repr
 
 namespace Attrs

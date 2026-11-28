@@ -412,7 +412,8 @@ class Gen:
                   f"light := {a['light']}", f"sturdyFull := {a['sturdyFull']}",
                   f"sturdyCenter := {a['sturdyCenter']}", f"sturdyRigid := {a['sturdyRigid']}",
                   f"fluid := {lean_str(a.get('fluid') or '')}", f"collision := {a['collision']}",
-                  f"outline := {a['outline']}", f"supportShape := {a['supportShape']}"]
+                  f"outline := {a['outline']}", f"supportShape := {a['supportShape']}",
+                  f"lightDampening := {a['lightDampening']}", f"lightOcclusion := {a['lightOcclusion']}"]
         return "{ " + ", ".join(fields) + " }"
 
     def gen_attrs(self):
@@ -550,10 +551,10 @@ def gen_shapes(g, grids):
     the grids of the collision shapes (`grids`: shapegrids.json, written by ShapeGrids.java)."""
     o = [g.header("Block shapes", ["Mathlib.Tactic"])]
     o.append("namespace Block\n")
-    o.append("/-- The shapes that blocks have (`VoxelShape`), numbered as `Attrs.collision`, `Attrs.outline`\n"
-             "and `Attrs.supportShape` number them. A shape is given by its boxes, in the order of\n"
-             "`VoxelShape.forAllBoxes`; a box is six doubles `minX, minY, minZ, maxX, maxY, maxZ`, given by\n"
-             "their IEEE bits, relative to the block. Shape 0 is the empty shape. -/")
+    o.append("/-- The shapes that blocks have (`VoxelShape`), numbered as `Attrs.collision`, `Attrs.outline`,\n"
+             "`Attrs.supportShape` and `Attrs.lightOcclusion` number them. A shape is given by its boxes,\n"
+             "in the order of `VoxelShape.forAllBoxes`; a box is six doubles `minX, minY, minZ, maxX, maxY,\n"
+             "maxZ`, given by their IEEE bits, relative to the block. Shape 0 is the empty shape. -/")
     o.append("def shapeBits : Array (Array UInt64) := #[")
     rows = []
     for shape in g.dump["shapes"]:

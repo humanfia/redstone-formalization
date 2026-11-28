@@ -1,0 +1,42 @@
+{
+  "name": "fuzz-harsh-q-s101-019",
+  "ticks": 40,
+  "box": {"min": [1, -5, 1], "max": [29, 13, 17]},
+  "fill": [
+    {"min": [9, 3, 9], "max": [21, 3, 9], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [9, 5, 9], "state": "minecraft:piston[extended=false,facing=north]"},
+    {"pos": [10, 4, 9], "state": "minecraft:slime_block"},
+    {"pos": [10, 5, 9], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [11, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=north]"},
+    {"pos": [11, 5, 9], "state": "minecraft:piston[extended=false,facing=west]"},
+    {"pos": [12, 4, 9], "state": "minecraft:pumpkin"},
+    {"pos": [12, 5, 9], "state": "minecraft:slime_block"},
+    {"pos": [13, 4, 9], "state": "minecraft:glass"},
+    {"pos": [13, 5, 9], "state": "minecraft:honey_block"},
+    {"pos": [14, 4, 9], "state": "minecraft:piston[extended=false,facing=up]"},
+    {"pos": [14, 5, 9], "state": "minecraft:slime_block"},
+    {"pos": [15, 4, 9], "state": "minecraft:stone"},
+    {"pos": [15, 5, 9], "state": "minecraft:piston[extended=true,facing=down]"},
+    {"pos": [16, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=up]"},
+    {"pos": [16, 5, 9], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [17, 4, 9], "state": "minecraft:glass"},
+    {"pos": [17, 5, 9], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [18, 4, 9], "state": "minecraft:honey_block"},
+    {"pos": [19, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [19, 5, 9], "state": "minecraft:sticky_piston[extended=false,facing=south]"},
+    {"pos": [20, 4, 9], "state": "minecraft:piston[extended=false,facing=down]"},
+    {"pos": [21, 4, 9], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [16, 5, 9], "face": "up"},
+    {"tick": 1, "type": "use", "pos": [21, 4, 9], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [21, 4, 9], "face": "north"},
+    {"tick": 8, "type": "use", "pos": [21, 4, 9], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [16, 5, 9], "face": "north"},
+    {"tick": 20, "type": "destroy", "pos": [12, 5, 9], "drop": false},
+    {"tick": 35, "type": "use", "pos": [16, 5, 9], "face": "down"},
+    {"tick": 36, "type": "use", "pos": [16, 5, 9], "face": "down"}
+  ]
+}

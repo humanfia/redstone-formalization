@@ -1,0 +1,47 @@
+{
+  "name": "fuzz-harsh-q-s101-014",
+  "ticks": 40,
+  "box": {"min": [1, -5, 1], "max": [29, 13, 17]},
+  "fill": [
+    {"min": [9, 3, 9], "max": [21, 3, 9], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [9, 4, 9], "state": "minecraft:honey_block"},
+    {"pos": [9, 5, 9], "state": "minecraft:sticky_piston[extended=false,facing=north]"},
+    {"pos": [10, 4, 9], "state": "minecraft:piston[extended=false,facing=up]"},
+    {"pos": [10, 5, 9], "state": "minecraft:slime_block"},
+    {"pos": [11, 4, 9], "state": "minecraft:piston[extended=false,facing=north]"},
+    {"pos": [11, 5, 9], "state": "minecraft:sticky_piston[extended=false,facing=north]"},
+    {"pos": [12, 4, 9], "state": "minecraft:lever[face=wall,facing=east,powered=true]"},
+    {"pos": [12, 5, 9], "state": "minecraft:piston[extended=false,facing=south]"},
+    {"pos": [13, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=down]"},
+    {"pos": [13, 5, 9], "state": "minecraft:honey_block"},
+    {"pos": [14, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [14, 5, 9], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [15, 4, 9], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [15, 5, 9], "state": "minecraft:pumpkin"},
+    {"pos": [16, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=down]"},
+    {"pos": [16, 5, 9], "state": "minecraft:piston[extended=false,facing=west]"},
+    {"pos": [17, 4, 9], "state": "minecraft:piston[extended=false,facing=west]"},
+    {"pos": [17, 5, 9], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [18, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [18, 5, 9], "state": "minecraft:sticky_piston[extended=false,facing=south]"},
+    {"pos": [19, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=west]"},
+    {"pos": [19, 5, 9], "state": "minecraft:slime_block"},
+    {"pos": [20, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [20, 5, 9], "state": "minecraft:piston[extended=false,facing=up]"},
+    {"pos": [21, 5, 9], "state": "minecraft:lever[face=ceiling,facing=east,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [17, 5, 9], "face": "up"},
+    {"tick": 1, "type": "destroy", "pos": [13, 5, 9], "drop": false},
+    {"tick": 6, "type": "use", "pos": [17, 5, 9], "face": "north"},
+    {"tick": 6, "type": "use", "pos": [12, 4, 9], "face": "down"},
+    {"tick": 6, "type": "set", "pos": [16, 5, 9], "state": "minecraft:moving_piston[facing=east,type=normal]", "flags": 3},
+    {"tick": 9, "type": "destroy", "pos": [11, 5, 9], "drop": false},
+    {"tick": 16, "type": "use", "pos": [17, 5, 9], "face": "up"},
+    {"tick": 19, "type": "use", "pos": [14, 5, 9], "face": "north"},
+    {"tick": 28, "type": "use", "pos": [12, 4, 9], "face": "down"},
+    {"tick": 39, "type": "use", "pos": [12, 4, 9], "face": "down"}
+  ]
+}

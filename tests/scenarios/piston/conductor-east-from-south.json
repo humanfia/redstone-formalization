@@ -1,0 +1,15 @@
+{
+  "name": "conductor-east-from-south",
+  "ticks": 24,
+  "box": {"min": [5, 5, 5], "max": [12, 11, 13]},
+  "blocks": [
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [8, 8, 9], "state": "minecraft:stone"},
+    {"pos": [8, 8, 10], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [9, 8, 8], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 8, 10], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [8, 8, 10], "face": "up"}
+  ]
+}

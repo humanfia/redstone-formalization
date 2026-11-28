@@ -1,0 +1,23 @@
+{
+  "name": "slime-down-normal",
+  "ticks": 30,
+  "box": {"min": [4, 3, 4], "max": [12, 13, 12]},
+  "blocks": [
+    {"pos": [7, 7, 8], "state": "minecraft:glass"},
+    {"pos": [8, 6, 8], "state": "minecraft:honey_block"},
+    {"pos": [8, 7, 7], "state": "minecraft:glass"},
+    {"pos": [8, 7, 8], "state": "minecraft:slime_block"},
+    {"pos": [8, 7, 9], "state": "minecraft:glass"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=down]"},
+    {"pos": [8, 9, 8], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [8, 10, 8], "state": "minecraft:stone"},
+    {"pos": [9, 6, 8], "state": "minecraft:stone"},
+    {"pos": [9, 7, 8], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 9, 8], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [8, 9, 8], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [8, 9, 8], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [8, 9, 8], "face": "up"}
+  ]
+}

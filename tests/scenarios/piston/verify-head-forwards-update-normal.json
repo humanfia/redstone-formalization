@@ -1,0 +1,16 @@
+{
+  "name": "verify-head-forwards-update-normal",
+  "ticks": 20,
+  "box": {"min": [0, 0, 0], "max": [16, 16, 16]},
+  "blocks": [
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=true,facing=east]"},
+    {"pos": [9, 7, 9], "state": "minecraft:stone"},
+    {"pos": [9, 8, 8], "state": "minecraft:piston_head[facing=east,short=false,type=normal]"},
+    {"pos": [9, 8, 9], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [10, 8, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use", "pos": [9, 8, 9], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [9, 8, 9], "face": "up"}
+  ]
+}

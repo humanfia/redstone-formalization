@@ -1,0 +1,27 @@
+{
+  "name": "slime-wall-11-normal",
+  "ticks": 30,
+  "box": {"min": [2, 4, 4], "max": [14, 17, 12]},
+  "blocks": [
+    {"pos": [6, 8, 8], "state": "minecraft:stone"},
+    {"pos": [7, 8, 8], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [9, 8, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 9, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 10, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 11, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 12, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 13, 8], "state": "minecraft:slime_block"},
+    {"pos": [10, 8, 8], "state": "minecraft:stone"},
+    {"pos": [10, 9, 8], "state": "minecraft:stone"},
+    {"pos": [10, 10, 8], "state": "minecraft:stone"},
+    {"pos": [10, 11, 8], "state": "minecraft:stone"},
+    {"pos": [10, 12, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [7, 8, 8], "face": "up"}
+  ]
+}

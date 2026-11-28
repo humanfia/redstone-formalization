@@ -1,0 +1,17 @@
+{
+  "name": "initial-extended-sticky-down-headless",
+  "ticks": 24,
+  "box": {"min": [4, 3, 5], "max": [11, 13, 11]},
+  "blocks": [
+    {"pos": [8, 6, 8], "state": "minecraft:stone"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=true,facing=down]"},
+    {"pos": [8, 9, 8], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [8, 10, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [7, 8, 8], "state": "minecraft:glass"},
+    {"tick": 9, "type": "destroy", "pos": [7, 8, 8], "drop": false},
+    {"tick": 12, "type": "use", "pos": [8, 9, 8], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [8, 9, 8], "face": "up"}
+  ]
+}

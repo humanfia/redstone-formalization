@@ -1,0 +1,21 @@
+{
+  "name": "set-place",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 1, 1], "state": "minecraft:command_block[conditional=false,facing=east]"},
+    {"tick": 4, "type": "set", "pos": [3, 1, 1], "state": "minecraft:stone"},
+    {"tick": 6, "type": "set", "pos": [3, 1, 1], "state": "minecraft:chain_command_block[conditional=false,facing=east]"},
+    {"tick": 8, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 12, "type": "set", "pos": [2, 1, 1], "state": "minecraft:repeating_command_block[conditional=false,facing=east]"},
+    {"tick": 13, "type": "set", "pos": [2, 1, 2], "state": "minecraft:glass"},
+    {"tick": 15, "type": "set", "pos": [2, 1, 1], "state": "minecraft:air"}
+  ]
+}

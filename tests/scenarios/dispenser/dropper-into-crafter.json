@@ -1,0 +1,489 @@
+{
+ "name": "dropper-into-crafter",
+ "ticks": 130,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   5,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:cobblestone\",count:30}]}"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:cobblestone\",count:2},{Slot:2b,id:\"minecraft:dirt\",count:1},{Slot:6b,id:\"minecraft:cobblestone\",count:1}],disabled_slots:[I;1,4]}"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:lever[face=wall,facing=east,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 19,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 22,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 25,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 28,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 34,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 37,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 43,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 46,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 49,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 52,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 55,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 58,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 61,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 64,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 67,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 70,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 73,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 76,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 79,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 82,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 85,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 88,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 91,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 94,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 97,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 100,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 103,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 106,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 109,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 112,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 115,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 118,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 121,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 124,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

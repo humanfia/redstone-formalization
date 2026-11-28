@@ -1,0 +1,37 @@
+{
+  "name": "adv-cake",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [12, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [12, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:cake[bites=2]"},
+    {"pos": [3, 1, 1], "state": "minecraft:cake[bites=0]"},
+    {"pos": [5, 1, 1], "state": "minecraft:blue_candle_cake[lit=true]"},
+    {"pos": [7, 1, 1], "state": "minecraft:candle_cake[lit=true]"},
+    {"pos": [9, 1, 1], "state": "minecraft:cake[bites=5]"},
+    {"pos": [11, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [11, 2, 1], "state": "minecraft:yellow_candle_cake[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:candle"},
+    {"tick": 2, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:torch"},
+    {"tick": 3, "type": "use_item", "pos": [3, 1, 1], "face": "north", "item": "minecraft:lime_candle"},
+    {"tick": 4, "type": "use_item", "pos": [5, 1, 1], "face": "north", "item": "minecraft:air"},
+    {"tick": 5, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:air"},
+    {"tick": 6, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:air"},
+    {"tick": 7, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:flint_and_steel"},
+    {"tick": 8, "type": "use", "pos": [9, 1, 1], "face": "north"},
+    {"tick": 9, "type": "use", "pos": [9, 1, 1], "face": "north"},
+    {"tick": 10, "type": "use", "pos": [9, 1, 1], "face": "north"},
+    {"tick": 11, "type": "use", "pos": [9, 1, 1], "face": "north"},
+    {"tick": 16, "type": "use_item", "pos": [11, 2, 1], "face": "up", "item": "minecraft:candle"},
+    {"tick": 20, "type": "set", "pos": [1, 0, 1], "state": "minecraft:glass"},
+    {"tick": 22, "type": "set", "pos": [1, 0, 1], "state": "minecraft:air"},
+    {"tick": 24, "type": "destroy", "pos": [5, 0, 1]},
+    {"tick": 26, "type": "destroy", "pos": [11, 1, 1]},
+    {"tick": 30, "type": "set", "pos": [9, 1, 1], "state": "minecraft:cake[bites=6]"},
+    {"tick": 32, "type": "use", "pos": [9, 1, 1], "face": "up"}
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "adv-rng-candlecake-beehive",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [10, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [10, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:candle_cake[lit=true]"},
+    {"pos": [3, 1, 1], "state": "minecraft:red_candle_cake[lit=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:beehive[facing=east,honey_level=5]"},
+    {"pos": [7, 1, 1], "state": "minecraft:bee_nest[facing=north,honey_level=5]"},
+    {"pos": [9, 1, 1], "state": "minecraft:composter[level=1]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 3, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 4, "type": "use_item", "pos": [3, 1, 1], "face": "north", "item": "minecraft:red_candle"},
+    {"tick": 5, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 6, "type": "use_item", "pos": [5, 1, 1], "face": "north", "item": "minecraft:shears"},
+    {"tick": 7, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 8, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:glass_bottle"},
+    {"tick": 9, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 10, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:shears"},
+    {"tick": 11, "type": "use_item", "pos": [5, 1, 1], "face": "up", "item": "minecraft:glass_bottle"},
+    {"tick": 12, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 13, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 14, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 15, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 16, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 17, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 18, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 19, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 20, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 21, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 22, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"},
+    {"tick": 23, "type": "use_item", "pos": [9, 1, 1], "face": "up", "item": "minecraft:kelp"}
+  ]
+}

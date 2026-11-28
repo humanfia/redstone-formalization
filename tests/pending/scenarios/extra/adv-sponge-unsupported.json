@@ -1,0 +1,71 @@
+{
+ "name": "adv-sponge-unsupported",
+ "ticks": 6,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   4,
+   2
+  ]
+ },
+ "fill": [],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:hanging_roots[waterlogged=true]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:ladder[facing=north,waterlogged=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    1
+   ],
+   "state": "minecraft:lantern[hanging=true,waterlogged=true]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:sponge"
+  }
+ ]
+}

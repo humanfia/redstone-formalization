@@ -1,0 +1,30 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 4},
+    {"state": "minecraft:stone", "weight": 1},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 4},
+    {"state": "minecraft:command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"Searge\"}"},
+    {"state": "minecraft:command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"state": "minecraft:command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{Command:\"nope\",TrackOutput:0b,SuccessCount:1}"},
+    {"state": "minecraft:repeating_command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"Searge\"}"},
+    {"state": "minecraft:repeating_command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"state": "minecraft:repeating_command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{SuccessCount:1}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 4, "nbt": "{Command:\"Searge\",auto:1b}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 4, "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"nope\",TrackOutput:0b,auto:1b,SuccessCount:3}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 2, "nbt": "{Command:\"say y\",TrackOutput:0b,auto:0b,SuccessCount:1}"},
+    {"state": "minecraft:chain_command_block[conditional=*,facing=*]", "weight": 1, "nbt": "{auto:1b,SuccessCount:1}"},
+    {"state": "minecraft:test_block[mode=start]", "weight": 1, "nbt": "{mode:\"start\",powered:1b}"}
+  ],
+  "actions": {
+    "use": {"count": [4, 10], "targets": ["minecraft:lever"]},
+    "set": {"count": [0, 3], "states": [
+      "minecraft:stone", "minecraft:air",
+      "minecraft:command_block[conditional=*,facing=*]",
+      "minecraft:repeating_command_block[conditional=*,facing=*]",
+      "minecraft:chain_command_block[conditional=*,facing=*]"]},
+    "destroy": {"count": [0, 2], "targets": [
+      "minecraft:lever", "minecraft:command_block", "minecraft:repeating_command_block", "minecraft:chain_command_block"]}
+  }
+}

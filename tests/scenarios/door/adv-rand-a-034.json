@@ -1,0 +1,821 @@
+{
+ "name": "adv-rand-a-034",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   5,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    3,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:oak_trapdoor[facing=north,half=bottom,open=true,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:crimson_door[facing=east,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:iron_door[facing=west,half=lower,hinge=left,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:waxed_copper_trapdoor[facing=south,half=top,open=false,powered=true,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:crimson_door[facing=east,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:iron_door[facing=west,half=upper,hinge=left,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:oak_trapdoor[facing=north,half=bottom,open=true,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    2
+   ],
+   "state": "minecraft:oxidized_copper_door[facing=east,half=lower,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    3
+   ],
+   "state": "minecraft:crimson_door[facing=west,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    1
+   ],
+   "state": "minecraft:mangrove_fence_gate[facing=west,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    2
+   ],
+   "state": "minecraft:waxed_copper_trapdoor[facing=east,half=top,open=false,powered=true,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    3
+   ],
+   "state": "minecraft:crimson_door[facing=west,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:oak_fence_gate[facing=west,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:iron_trapdoor[facing=east,half=top,open=true,powered=true,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:crimson_door[facing=east,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:mangrove_fence_gate[facing=south,in_wall=false,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:crimson_door[facing=east,half=upper,hinge=right,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    0
+   ],
+   "state": "minecraft:crimson_door[facing=west,half=lower,hinge=left,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:copper_door[facing=south,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:copper_door[facing=west,half=lower,hinge=left,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    0
+   ],
+   "state": "minecraft:crimson_door[facing=west,half=upper,hinge=left,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    2
+   ],
+   "state": "minecraft:copper_door[facing=south,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    3
+   ],
+   "state": "minecraft:copper_door[facing=west,half=upper,hinge=left,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:iron_door[facing=east,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_door[facing=east,half=lower,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:crimson_door[facing=north,half=lower,hinge=right,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:iron_trapdoor[facing=north,half=bottom,open=true,powered=true,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_door[facing=east,half=upper,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:iron_door[facing=north,half=upper,hinge=right,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    1
+   ],
+   "state": "minecraft:mangrove_fence_gate[facing=north,in_wall=true,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:oxidized_copper_door[facing=east,half=lower,hinge=left,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:iron_door[facing=west,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    0
+   ],
+   "state": "minecraft:oxidized_copper_door[facing=south,half=upper,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_door[facing=south,half=lower,hinge=right,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:iron_door[facing=east,half=upper,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:oxidized_copper_door[facing=north,half=lower,hinge=right,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    0
+   ],
+   "state": "minecraft:exposed_copper_trapdoor[facing=west,half=bottom,open=false,powered=true,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:oak_door[facing=east,half=upper,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:oxidized_copper_door[facing=north,half=upper,hinge=right,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    2
+   ],
+   "state": "minecraft:mangrove_fence_gate[facing=north,in_wall=false,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:oak_trapdoor[facing=west,half=bottom,open=true,powered=true,waterlogged=false]",
+   "flags": 1
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=south,powered=true]",
+   "flags": 1
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    4,
+    1
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    0,
+    4,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_trapdoor[facing=east,half=top,open=false,powered=true,waterlogged=false]",
+   "flags": 2
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=true,powered=false]",
+   "flags": 18
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    0,
+    4,
+    1
+   ],
+   "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=true,powered=false]",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    0,
+    4,
+    3
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 7,
+   "type": "destroy",
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    4,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "destroy",
+   "pos": [
+    0,
+    3,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:mangrove_fence_gate[facing=north,in_wall=true,open=true,powered=true]",
+   "flags": 3
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    0,
+    0,
+    3
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=wall,facing=south,powered=false]",
+   "flags": 0
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    1,
+    4,
+    1
+   ],
+   "state": "minecraft:stone",
+   "flags": 0
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    2,
+    0,
+    3
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 15,
+   "type": "destroy",
+   "pos": [
+    3,
+    0,
+    3
+   ],
+   "drop": false
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    2,
+    0,
+    1
+   ],
+   "state": "minecraft:oak_trapdoor[facing=north,half=top,open=false,powered=false,waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    1,
+    4,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "state": "minecraft:oak_trapdoor[facing=north,half=top,open=false,powered=false,waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:mangrove_fence_gate[facing=west,in_wall=false,open=true,powered=true]",
+   "flags": 3
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 17,
+   "type": "use",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    3,
+    0,
+    1
+   ],
+   "state": "minecraft:air",
+   "flags": 18
+  },
+  {
+   "tick": 21,
+   "type": "use",
+   "pos": [
+    1,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 23,
+   "type": "use",
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 25,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:mangrove_fence_gate[facing=west,in_wall=true,open=true,powered=true]",
+   "flags": 1
+  },
+  {
+   "tick": 26,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 27,
+   "type": "use",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 28,
+   "type": "use",
+   "pos": [
+    1,
+    4,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 28,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=false]",
+   "flags": 0
+  },
+  {
+   "tick": 29,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=south,half=lower,hinge=right,open=false,powered=true]",
+   "flags": 3
+  }
+ ]
+}

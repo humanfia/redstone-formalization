@@ -1,0 +1,128 @@
+{
+ "name": "v-stale-east",
+ "ticks": 26,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:13}"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=subtract,powered=false]",
+   "nbt": "{OutputSignal:13}"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    7
+   ],
+   "state": "minecraft:comparator[facing=south,mode=compare,powered=false]",
+   "nbt": "{OutputSignal:15}"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    6
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 17,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "face": "up"
+  }
+ ]
+}

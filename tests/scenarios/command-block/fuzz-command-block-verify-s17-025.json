@@ -1,0 +1,40 @@
+{
+  "name": "fuzz-command-block-verify-s17-025",
+  "ticks": 24,
+  "box": {"min": [0, 0, 0], "max": [1, 4, 1]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [1, 0, 1], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 2, 0], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [0, 3, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [0, 3, 1], "state": "minecraft:test_block[mode=accept]", "nbt": "{mode:\"log\"}"},
+    {"pos": [0, 4, 0], "state": "minecraft:repeating_command_block[conditional=true,facing=west]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [0, 4, 1], "state": "minecraft:chain_command_block[conditional=true,facing=up]", "nbt": "{Command:\"nope\",TrackOutput:0b,auto:1b,SuccessCount:3}"},
+    {"pos": [1, 1, 0], "state": "minecraft:chain_command_block[conditional=true,facing=up]", "nbt": "{Command:\"say x\",TrackOutput:0b,auto:1b}"},
+    {"pos": [1, 1, 1], "state": "minecraft:structure_block[mode=data]"},
+    {"pos": [1, 2, 0], "state": "minecraft:repeating_command_block[conditional=true,facing=north]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [1, 2, 1], "state": "minecraft:test_block[mode=fail]"},
+    {"pos": [1, 3, 1], "state": "minecraft:command_block[conditional=false,facing=up]", "nbt": "{TrackOutput:0b,SuccessCount:3,auto:1b,powered:1b}"},
+    {"pos": [1, 4, 0], "state": "minecraft:chain_command_block[conditional=true,facing=down]", "nbt": "{Command:\"Searge\",auto:1b}"},
+    {"pos": [1, 4, 1], "state": "minecraft:chain_command_block[conditional=false,facing=west]", "nbt": "{Command:\"nope\",TrackOutput:0b,auto:1b,SuccessCount:3}"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [1, 2, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"tick": 5, "type": "use", "pos": [0, 2, 1], "face": "up"},
+    {"tick": 7, "type": "set", "pos": [0, 2, 0], "state": "minecraft:chain_command_block[conditional=true,facing=south]"},
+    {"tick": 8, "type": "use", "pos": [0, 2, 0], "face": "up"},
+    {"tick": 9, "type": "destroy", "pos": [1, 2, 1], "drop": false},
+    {"tick": 16, "type": "use", "pos": [0, 2, 0], "face": "up"},
+    {"tick": 16, "type": "set", "pos": [1, 2, 0], "state": "minecraft:chain_command_block[conditional=false,facing=west]"},
+    {"tick": 17, "type": "use", "pos": [0, 2, 1], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [0, 3, 0], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [0, 2, 0], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [0, 3, 0], "face": "up"},
+    {"tick": 21, "type": "destroy", "pos": [0, 2, 0], "drop": false},
+    {"tick": 22, "type": "use", "pos": [0, 3, 0], "face": "up"},
+    {"tick": 22, "type": "set", "pos": [0, 4, 0], "state": "minecraft:command_block[conditional=true,facing=south]"},
+    {"tick": 23, "type": "set", "pos": [0, 1, 0], "state": "minecraft:stone"}
+  ]
+}

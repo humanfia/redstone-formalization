@@ -1,0 +1,23 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 14},
+    {"state": "minecraft:stone", "weight": 5},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:composter[level=0]", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 3},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 5},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=false]", "weight": 5},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=*]", "weight": 2, "nbt": "{OutputSignal:15}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:1}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:4}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:8}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:11}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:14}"}
+  ],
+  "actions": {
+    "use": {"count": [3, 8], "targets": ["minecraft:lever", "minecraft:comparator"]},
+    "set": {"count": [0, 4], "states": ["minecraft:stone", "minecraft:air", "minecraft:composter[level=0]", "minecraft:redstone_lamp[lit=false]", "minecraft:lever[face=floor,facing=*,powered=*]", "minecraft:comparator[facing=*,mode=*,powered=*]"]},
+    "destroy": {"count": [0, 3], "targets": ["minecraft:stone", "minecraft:redstone_lamp", "minecraft:lever", "minecraft:comparator"]}
+  }
+}

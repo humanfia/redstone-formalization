@@ -1,0 +1,34 @@
+{
+  "name": "rand-door-s1-001",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [4, 5, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 0], "state": "minecraft:lever[face=ceiling,facing=south,powered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=true,powered=false]"},
+    {"pos": [1, 4, 1], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [2, 2, 3], "state": "minecraft:oak_door[facing=north,half=lower,hinge=right,open=false,powered=false]"},
+    {"pos": [2, 3, 3], "state": "minecraft:oak_door[facing=north,half=upper,hinge=right,open=false,powered=false]"},
+    {"pos": [3, 2, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:crimson_fence_gate[facing=east,in_wall=false,open=true,powered=false]"},
+    {"pos": [4, 2, 0], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [4, 3, 1], "state": "minecraft:stone"},
+    {"pos": [4, 4, 1], "state": "minecraft:crimson_fence_gate[facing=east,in_wall=false,open=false,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [1, 1, 0], "face": "up"},
+    {"tick": 2, "type": "use", "pos": [2, 2, 3], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [1, 4, 1], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [3, 2, 0], "face": "up"},
+    {"tick": 7, "type": "destroy", "pos": [4, 0, 0], "drop": false},
+    {"tick": 7, "type": "set", "pos": [3, 1, 1], "state": "minecraft:poplar_fence_gate[facing=west,in_wall=false,open=false,powered=false]", "flags": 18},
+    {"tick": 9, "type": "destroy", "pos": [1, 0, 0], "drop": false},
+    {"tick": 11, "type": "use", "pos": [4, 1, 1], "face": "north"},
+    {"tick": 11, "type": "use", "pos": [2, 3, 3], "face": "west"},
+    {"tick": 11, "type": "set", "pos": [0, 2, 1], "state": "minecraft:crimson_fence_gate[facing=west,in_wall=false,open=true,powered=false]", "flags": 3},
+    {"tick": 16, "type": "destroy", "pos": [2, 0, 0], "drop": false},
+    {"tick": 16, "type": "use", "pos": [3, 2, 0], "face": "up"}
+  ]
+}

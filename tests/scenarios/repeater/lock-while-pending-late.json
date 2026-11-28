@@ -1,0 +1,125 @@
+{
+ "name": "lock-while-pending-late",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   3,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:repeater[delay=4,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 30,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 33,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

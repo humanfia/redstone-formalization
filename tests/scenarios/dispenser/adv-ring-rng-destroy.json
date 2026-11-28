@@ -1,0 +1,513 @@
+{
+ "name": "adv-ring-rng-destroy",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   2,
+   5
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:7},{Slot:3b,id:\"minecraft:dirt\",count:2},{Slot:8b,id:\"minecraft:ender_pearl\",count:16}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:dropper[facing=south,triggered=false]",
+   "nbt": "{Items:[{Slot:1b,id:\"minecraft:stone\",count:64},{Slot:2b,id:\"minecraft:stick\",count:1},{Slot:4b,id:\"minecraft:dirt\",count:63},{Slot:5b,id:\"minecraft:iron_sword\",count:1}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:dropper[facing=west,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:dropper[facing=north,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:ender_pearl\",count:15},{Slot:1b,id:\"minecraft:ender_pearl\",count:16},{Slot:2b,id:\"minecraft:ender_pearl\",count:15},{Slot:3b,id:\"minecraft:ender_pearl\",count:16},{Slot:4b,id:\"minecraft:ender_pearl\",count:15},{Slot:5b,id:\"minecraft:ender_pearl\",count:16},{Slot:6b,id:\"minecraft:ender_pearl\",count:15},{Slot:7b,id:\"minecraft:ender_pearl\",count:16},{Slot:8b,id:\"minecraft:ender_pearl\",count:15}]}"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:dispenser[facing=up,triggered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=up_east,triggered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:dropper[facing=down,triggered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    4
+   ]
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 19,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 20,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    4
+   ]
+  },
+  {
+   "tick": 22,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 22,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 25,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 28,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 28,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 33,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    4
+   ]
+  },
+  {
+   "tick": 34,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 34,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 37,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 40,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:dropper[facing=up,triggered=false]"
+  },
+  {
+   "tick": 43,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 46,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 46,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 47,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 49,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 52,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 52,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 55,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 58,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 58,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 61,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 64,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 64,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 67,
+   "type": "use",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

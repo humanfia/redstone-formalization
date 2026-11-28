@@ -1,0 +1,16 @@
+{
+  "name": "sulfur-updates-neighbours",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [5, 3, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [5, 0, 2], "state": "minecraft:stone"},
+    {"min": [2, 1, 0], "max": [5, 2, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]", "nbt": "{countdown:1}"},
+    {"pos": [2, 1, 1], "state": "minecraft:sponge"},
+    {"pos": [3, 1, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [4, 1, 1], "state": "minecraft:water[level=0]"}
+  ],
+  "actions": []
+}

@@ -1,0 +1,147 @@
+{
+ "name": "verify-chain-powered-through-conductor",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   2,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    5,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:lever[face=wall,facing=south,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:chain_command_block[conditional=false,facing=east]",
+   "nbt": "{Command:\"say k\",TrackOutput:0b,auto:0b}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:command_block[conditional=false,facing=south]",
+   "nbt": "{Command:\"say i\",TrackOutput:0b}"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

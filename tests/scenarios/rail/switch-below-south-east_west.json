@@ -1,0 +1,20 @@
+{
+  "name": "switch-below-south-east_west",
+  "ticks": 10,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 1, 0], "max": [4, 1, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 2, 1], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [3, 2, 2], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [2, 0, 2], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 0, 2], "face": "down"},
+    {"tick": 5, "type": "use", "pos": [2, 0, 2], "face": "down"},
+    {"tick": 8, "type": "use", "pos": [2, 0, 2], "face": "down"}
+  ]
+}

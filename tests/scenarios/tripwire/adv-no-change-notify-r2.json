@@ -1,0 +1,29 @@
+{
+  "name": "adv-no-change-notify-r2",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [13, 6, 6]},
+  "blocks": [
+    {"pos": [9, 3, 3], "state": "minecraft:tripwire_hook[attached=false,facing=west,powered=false]"},
+    {"pos": [8, 3, 3], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [5, 3, 3], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [4, 3, 3], "state": "minecraft:tripwire_hook[attached=false,facing=east,powered=false]"},
+    {"pos": [10, 3, 3], "state": "minecraft:stone"},
+    {"pos": [11, 3, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [10, 4, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [9, 4, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [9, 3, 2], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [3, 3, 3], "state": "minecraft:stone"},
+    {"pos": [2, 3, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [3, 2, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [4, 2, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [4, 3, 4], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [7, 4, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [6, 3, 2], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [7, 3, 3], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 15, "type": "destroy", "pos": [8, 3, 3]},
+    {"tick": 15, "type": "set", "pos": [6, 3, 3], "state": "minecraft:tripwire[attached=false,disarmed=true,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 16, "type": "set", "pos": [8, 3, 3], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"}
+  ]
+}

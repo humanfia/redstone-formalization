@@ -1,0 +1,154 @@
+{
+ "name": "crafter-states",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   5,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:crafter[crafting=true,orientation=east_up,triggered=true]",
+   "nbt": "{crafting_ticks_remaining:3,triggered:1}"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:crafter[crafting=true,orientation=north_up,triggered=false]",
+   "nbt": "{crafting_ticks_remaining:10}"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=true]",
+   "nbt": "{triggered:7}"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:crafter[crafting=true,orientation=up_north,triggered=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:lever[face=wall,facing=east,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:crafter[crafting=true,orientation=up_east,triggered=true]"
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=up_east,triggered=true]"
+  },
+  {
+   "tick": 16,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

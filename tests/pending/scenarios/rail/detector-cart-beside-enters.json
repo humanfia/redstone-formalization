@@ -1,0 +1,16 @@
+{
+  "name": "detector-cart-beside-enters",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:detector_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [1.75, 1.0, 2.5], "nbt": "{OnGround:1b}"}
+  ],
+  "actions": []
+}

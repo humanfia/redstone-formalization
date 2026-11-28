@@ -35,7 +35,11 @@ disabled.
 
 namespace Redstone.Component.Crafter
 
-open Redstone.BlockEntities.Dispenser (ItemStack Slots)
+open Redstone.BlockEntities.Dispenser (Slots)
+
+-- `Redstone.ItemStack` is the stack of the hopper unit; in this namespace the name stands for
+-- the stack with components that the dispenser, the dropper and the crafter hold.
+export Redstone.BlockEntities.Dispenser (ItemStack)
 open Redstone.Component.Dispenser
 
 /-- `FrontAndTop.front`: the direction a crafter faces. -/

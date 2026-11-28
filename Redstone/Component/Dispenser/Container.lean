@@ -29,7 +29,11 @@ reads from a container (`AbstractContainerMenu.getRedstoneSignalFromContainer`).
 
 namespace Redstone.Component.Dispenser
 
-open Redstone.BlockEntities.Dispenser (ItemStack Slots)
+open Redstone.BlockEntities.Dispenser (Slots)
+
+-- `Redstone.ItemStack` is the stack of the hopper unit; in this namespace the name stands for
+-- the stack with components that the dispenser, the dropper and the crafter hold.
+export Redstone.BlockEntities.Dispenser (ItemStack)
 
 /-! ### Item stacks -/
 

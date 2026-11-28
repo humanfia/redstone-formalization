@@ -171,6 +171,10 @@ structure Level where
   began. `Level.tick` copies `world` here; a level that is built by hand and used before its
   first tick has to set both. -/
   lightWorld : World := world
+  /-- The containers whose menu the player of the `use` actions has open (`containerMenu`): the
+  positions of the chests or the barrel on which closing the menu will call `stopOpen`. Empty
+  when the player has no menu open, or one whose container does not count its viewers. -/
+  playerMenu : List Pos := []
 
 namespace Level
 

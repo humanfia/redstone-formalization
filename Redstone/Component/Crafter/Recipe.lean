@@ -17,7 +17,11 @@ Ingredients only look at the item of a stack, never at its components.
 
 namespace Redstone.Component.Crafter
 
-open Redstone.BlockEntities.Dispenser (ItemStack Slots)
+open Redstone.BlockEntities.Dispenser (Slots)
+
+-- `Redstone.ItemStack` is the stack of the hopper unit; in this namespace the name stands for
+-- the stack with components that the dispenser, the dropper and the crafter hold.
+export Redstone.BlockEntities.Dispenser (ItemStack)
 
 /-- An ingredient (`Ingredient`): the items it accepts, each given by its name or as an item
 tag written `#name`. The empty list stands for an empty cell of a shaped recipe. -/

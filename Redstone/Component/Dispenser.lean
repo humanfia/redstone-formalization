@@ -33,7 +33,11 @@ container in front of it if there is one; otherwise the item is thrown out as an
 
 namespace Redstone.Component.Dispenser
 
-open Redstone.BlockEntities.Dispenser (ItemStack Slots)
+open Redstone.BlockEntities.Dispenser (Slots)
+
+-- `Redstone.ItemStack` is the stack of the hopper unit; in this namespace the name stands for
+-- the stack with components that the dispenser, the dropper and the crafter hold.
+export Redstone.BlockEntities.Dispenser (ItemStack)
 
 /-- The items with a behaviour of their own in `DispenserBlock.DISPENSER_REGISTRY`
 (`DispenseItemBehavior.bootStrap`). None of these behaviours is modelled. -/

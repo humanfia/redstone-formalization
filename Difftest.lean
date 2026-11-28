@@ -281,7 +281,8 @@ def compare (s : Scenario) (l : Level) (e : Expected) (f : Frame) : List String 
     let got := l.blockAt p
     if want ≠ got then out := s!"block at {showPos p}: expected {want}, got {got}" :: out
     let wantBe := e.blockEntities.get? (Pos.key p)
-    let gotBe := l.blockEntities p
+    -- A trace shows saved data only: the fields the game does not save are left out.
+    let gotBe := (l.blockEntities p).map Component.Container.savedData
     if wantBe ≠ gotBe then
       out := s!"block entity at {showPos p}: expected {repr wantBe}, got {repr gotBe}" :: out
   let tickers := l.blockEntityTickers ++ l.pendingBlockEntityTickers

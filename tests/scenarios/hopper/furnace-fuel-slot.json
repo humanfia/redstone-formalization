@@ -1,0 +1,18 @@
+{
+  "name": "furnace-fuel-slot",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [9, 2, 0]},
+  "blocks": [
+    {"pos": [1, 1, 0], "state": "minecraft:furnace[facing=north,lit=false]"},
+    {"pos": [0, 1, 0], "state": "minecraft:hopper[enabled=true,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bucket\",count:3},{Slot:1b,id:\"minecraft:lava_bucket\",count:1}]}"},
+    {"pos": [1, 0, 0], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [4, 1, 0], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:bucket\",count:1},{Slot:2b,id:\"minecraft:stone\",count:3}]}"},
+    {"pos": [5, 1, 0], "state": "minecraft:hopper[enabled=true,facing=west]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bucket\",count:1},{Slot:1b,id:\"minecraft:coal\",count:2},{Slot:2b,id:\"minecraft:water_bucket\",count:1}]}"},
+    {"pos": [4, 0, 0], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [7, 1, 0], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:water_bucket\",count:1},{Slot:0b,id:\"minecraft:dirt\",count:2}]}"},
+    {"pos": [7, 0, 0], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [7, 2, 0], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:dirt\",count:62},{Slot:1b,id:\"minecraft:stone\",count:1}]}"},
+    {"pos": [9, 1, 0], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:coal\",count:3}]}"},
+    {"pos": [9, 0, 0], "state": "minecraft:hopper[enabled=true,facing=down]"}
+  ]
+}

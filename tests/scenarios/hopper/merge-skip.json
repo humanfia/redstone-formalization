@@ -1,0 +1,9 @@
+{
+  "name": "merge-skip",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [0, 2, 0]},
+  "blocks": [
+    {"pos": [0, 2, 0], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:2},{Slot:1b,id:\"minecraft:dirt\",count:2},{Slot:2b,id:\"minecraft:ender_pearl\",count:2}]}"},
+    {"pos": [0, 1, 0], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:64},{Slot:1b,id:\"minecraft:redstone\",count:64},{Slot:2b,id:\"minecraft:ender_pearl\",count:16},{Slot:3b,id:\"minecraft:dirt\",count:63},{Slot:5b,id:\"minecraft:redstone\",count:10},{Slot:7b,id:\"minecraft:ender_pearl\",count:15}]}"}
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "pane-connect",
+  "ticks": 17,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 6], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:glass_pane[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [1, 1, 4], "state": "minecraft:red_stained_glass_pane[east=true,north=true,south=true,waterlogged=false,west=true]"},
+    {"pos": [4, 1, 4], "state": "minecraft:copper_bars[east=false,north=false,south=false,waterlogged=false,west=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [0, 1, 1], "state": "minecraft:stone"},
+    {"tick": 2, "type": "set", "pos": [2, 1, 1], "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"tick": 3, "type": "set", "pos": [1, 1, 0], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"tick": 3, "type": "set", "pos": [1, 1, 2], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"tick": 4, "type": "set", "pos": [5, 1, 1], "state": "minecraft:blue_stained_glass_pane[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"tick": 4, "type": "set", "pos": [4, 1, 0], "state": "minecraft:melon"},
+    {"tick": 5, "type": "set", "pos": [3, 1, 1], "state": "minecraft:glass"},
+    {"tick": 5, "type": "set", "pos": [4, 1, 2], "state": "minecraft:oak_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]"},
+    {"tick": 6, "type": "set", "pos": [0, 1, 4], "state": "minecraft:stone"},
+    {"tick": 6, "type": "set", "pos": [2, 1, 4], "state": "minecraft:carved_pumpkin[facing=north]"},
+    {"tick": 7, "type": "set", "pos": [1, 1, 3], "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=false,powered=false]"},
+    {"tick": 7, "type": "set", "pos": [1, 1, 5], "state": "minecraft:waxed_copper_bars[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"tick": 8, "type": "set", "pos": [3, 1, 4], "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"},
+    {"tick": 8, "type": "set", "pos": [5, 1, 4], "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"},
+    {"tick": 9, "type": "set", "pos": [4, 1, 3], "state": "minecraft:andesite_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"tick": 9, "type": "set", "pos": [4, 1, 5], "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"},
+    {"tick": 10, "type": "set", "pos": [4, 2, 4], "state": "minecraft:stone"},
+    {"tick": 11, "type": "destroy", "pos": [0, 1, 1], "drop": false},
+    {"tick": 11, "type": "destroy", "pos": [2, 1, 1], "drop": false},
+    {"tick": 12, "type": "destroy", "pos": [1, 1, 0], "drop": false},
+    {"tick": 13, "type": "set", "pos": [0, 1, 4], "state": "minecraft:air"},
+    {"tick": 14, "type": "destroy", "pos": [4, 1, 3], "drop": false}
+  ]
+}

@@ -82,6 +82,7 @@ only. When the model disagrees with a trace, the model is wrong.
 
 The block inventory is generated from the server as well:
 `tools/harness/run.sh dump`, then `tools/gen/gen_blocks.py` and `tools/gen/gen_dispatch.py`.
+The block tags come from the server jar (`tools/gen/gen_tags.py`).
 
 ## Status
 
@@ -93,7 +94,8 @@ component's module docstring says what it does not model.
 | Module | Contents | State |
 |---|---|---|
 | `Redstone.Basic.*` | directions, positions, signals, boxes, NBT, the game's random generator | defined |
-| `Redstone.Block.Generated.*` | all 1286 blocks of 26.3 with their properties, attributes, shapes and items, generated from the server | defined |
+| `Redstone.Block.Generated.*` | all 1286 blocks of 26.3 with their properties, attributes, shapes, items and tags, generated from the server | defined |
+| `Redstone.Block.FaceShape` | the faces of block shapes, in exact arithmetic (`getFaceShape`, `isFaceFull`) | defined |
 | `Redstone.Block.Entity.*` | the data of each block entity type | defined for the components below |
 | `Redstone.World.Level` | blocks, block entities, scheduled ticks, block events, entities, clock, weather | defined |
 | `Redstone.Mechanics.Behaviour` | the reactions of a block (`BlockBehaviour`) and the monad they run in | defined |
@@ -107,6 +109,7 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Piston`, `Door`, `Lamp`, `NoteBlock`, `Bell`, `Dripleaf`, `Rail`, `Tnt`, `CommandBlock` | outputs: pistons, doors, trapdoors and gates, lamp and copper bulb, note block, bell, dripleaf, rails, TNT, command, test and structure blocks | defined, tested |
 | `Redstone.Component.Hopper`, `Container`, `CookingTable`, `Dispenser`, `Crafter`, `AnalogSource` | hoppers and containers, furnaces and the brewing stand, dispenser, dropper, crafter, and the other blocks a comparator reads | defined, tested |
 | `Redstone.Component.FallingBlock`, `Extra` | falling blocks; skulls, sponge, frosted ice, potent sulfur, slime | defined, tested |
+| `Redstone.Component.Supported`, `Connecting` | blocks that react to shape updates: carpets, snow layers, torches, plants and beds, which break without support; fences, bars and panes, walls and stairs, which join their neighbours | defined, tested |
 | `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
 | `Redstone.Entity.Projectile` | arrows and other projectiles | stub |
 | `Redstone.Contraption.PistonDoor`, `Redstone.Theorems.PistonDoor3x3` | piston doors | placeholder |

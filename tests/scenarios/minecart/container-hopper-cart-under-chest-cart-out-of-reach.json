@@ -1,0 +1,63 @@
+{
+  "name": "container-hopper-cart-under-chest-cart-out-of-reach",
+  "ticks": 40,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:hopper_minecart",
+      "pos": [
+        3.5,
+        1.0625,
+        3.5
+      ]
+    },
+    {
+      "type": "minecraft:chest_minecart",
+      "pos": [
+        3.5,
+        3.2,
+        3.5
+      ],
+      "nbt": "{NoGravity:1b,Enabled:0b,Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:4b,id:\"minecraft:redstone\",count:2}]}"
+    }
+  ]
+}

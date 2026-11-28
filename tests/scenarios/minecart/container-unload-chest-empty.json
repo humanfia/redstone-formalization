@@ -1,0 +1,85 @@
+{
+  "name": "container-unload-chest-empty",
+  "ticks": 60,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        2,
+        3
+      ],
+      "max": [
+        5,
+        2,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        1,
+        3
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=down]"
+    },
+    {
+      "pos": [
+        3,
+        0,
+        3
+      ],
+      "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:chest_minecart",
+      "pos": [
+        3.5,
+        2.0625,
+        3.5
+      ]
+    }
+  ]
+}

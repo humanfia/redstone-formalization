@@ -1,0 +1,65 @@
+{
+  "name": "container-hopper-cart-under-barrel",
+  "ticks": 40,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        2,
+        3
+      ],
+      "state": "minecraft:barrel[facing=up,open=false]",
+      "nbt": "{Items:[{Slot:7b,id:\"minecraft:bucket\",count:4},{Slot:8b,id:\"minecraft:stone\",count:1}]}"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:hopper_minecart",
+      "pos": [
+        3.5,
+        1.0625,
+        3.5
+      ]
+    }
+  ]
+}

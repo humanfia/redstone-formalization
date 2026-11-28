@@ -1,0 +1,59 @@
+{
+  "name": "container-hopper-cart-under-two-carts",
+  "ticks": 40,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:hopper_minecart",
+      "pos": [
+        3.5,
+        1.0,
+        3.5
+      ]
+    },
+    {
+      "type": "minecraft:chest_minecart",
+      "pos": [
+        3.1,
+        2.0,
+        3.5
+      ],
+      "nbt": "{NoGravity:1b,Items:[{Slot:0b,id:\"minecraft:stone\",count:3}]}"
+    },
+    {
+      "type": "minecraft:chest_minecart",
+      "pos": [
+        3.9,
+        2.75,
+        3.5
+      ],
+      "nbt": "{NoGravity:1b,Items:[{Slot:0b,id:\"minecraft:redstone\",count:3}]}"
+    }
+  ]
+}

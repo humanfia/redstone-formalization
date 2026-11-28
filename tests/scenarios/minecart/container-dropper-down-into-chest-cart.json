@@ -1,0 +1,78 @@
+{
+  "name": "container-dropper-down-into-chest-cart",
+  "ticks": 30,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        3,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        2,
+        3
+      ],
+      "state": "minecraft:dropper[facing=down,triggered=false]",
+      "nbt": "{Items:[{Slot:4b,id:\"minecraft:stone\",count:2}]}"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:chest_minecart",
+      "pos": [
+        3.5,
+        1.0625,
+        3.5
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "tick": 3,
+      "type": "set",
+      "pos": [
+        3,
+        3,
+        3
+      ],
+      "state": "minecraft:redstone_block",
+      "flags": 3
+    }
+  ]
+}

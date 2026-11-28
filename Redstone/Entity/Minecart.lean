@@ -4,6 +4,7 @@ public import Redstone.Mechanics.Tick
 public import Redstone.Entity.Minecart.Tables
 public import Redstone.Block.Generated.Items
 public import Redstone.Entity.Still
+public import Redstone.Entity.Minecart.Container
 
 /-!
 # Minecarts
@@ -28,19 +29,14 @@ longer a faithful image of the game, when it meets one of these:
 
 * another entity that can act on the minecart, or the minecart on it, and whose box meets the
   box in which the minecart looks for entities or the way the minecart goes (minecarts push
-  and block each other and pick up mobs, living entities and boats push minecarts, and a
-  hopper minecart collects items); see `contact`. Entities that cannot do any of this (items
-  next to a minecart that is no hopper, falling blocks, primed TNT) are ignored. A projectile
-  or an entity of unknown size within four blocks sets the flag as well;
+  and block each other and pick up mobs, living entities and boats push minecarts); see
+  `contact`. Entities that cannot do any of this (items, falling blocks, primed TNT) are
+  ignored. A projectile or an entity of unknown size within four blocks sets the flag as well;
 * a fluid in or next to the minecart's box;
-* a hopper or a dropper next to the box of a minecart with a container (hoppers pull items out
-  of such a minecart and push items into it);
 * a block next to the minecart's path whose collision shape depends on more than its state
   (bamboo, pointed dripstone and sulfur spikes, which are shifted by their position; scaffolding,
   powder snow, moving pistons);
 * a TNT minecart that explodes;
-* a command block minecart with a command on an active activator rail;
-* a hopper minecart that is enabled under a block with a block entity or a composter;
 * a movement of a block or more per tick while falling (the game then traces a ray to reset
   the fall distance).
 
@@ -51,13 +47,16 @@ Hooks of other blocks that act on an entity (`Block.stepOn` of slime and of reds
 `entityInside` of honey) are theirs to model: here they are only called, through
 `Redstone.Entity.Touch`.
 
+The load of a minecart with a chest, a hopper or a command block, and what hoppers and droppers
+do with it, is in `Redstone.Entity.Minecart.Container`, with what is left out there (loot
+tables, the commands the oracle does not know).
+
 Scenarios that wait in `tests/pending/scenarios/minecart` for one of these:
 `pending-two-carts-collide` (two minecarts that meet: pushing needs the game's table of sines
 for `pushOtherMinecart`, the boxes of entities as obstacles in `Entity.collide`, and the order
-in which `getEntities` finds entities), `fuzz-minecart-harsh-*` (a hopper or a dropper next to a
-minecart with a container; in `s12-028` it is the hopper that gives up, see
-`Redstone.Component.Hopper`), `pending-hopper-cart-under-chest`, `pending-tnt-explodes`,
-`pending-waterlogged-rail`, `verify-hit-bamboo` and `verify-hit-dripstone`.
+in which `getEntities` finds entities), `pending-tnt-explodes`, `pending-waterlogged-rail`,
+`verify-hit-bamboo` and `verify-hit-dripstone`; for `container-*` and
+`fuzz-minecart-container-*` see `Redstone.Entity.Minecart.Container`.
 
 The helpers of the first sections (Java arithmetic, collision with block shapes, the
 supporting block) are not particular to minecarts. They are private copies, to be shared with
@@ -216,7 +215,10 @@ def intRange (lo hi : ℤ) : List ℤ := (List.range (hi - lo + 1).toNat).map (l
 /-- `BlockCollisions`: the blocks whose collision shape meets `box`, with their shapes, in the
 order of the game's cursor (x fastest, then y, then z). Positions one block outside the box are
 visited as well, for the shapes that reach outside their block; the world border and the
-moving pistons are left out. -/
+moving pistons are left out. A full cube meets the box when their interiors do
+(`AABB.intersects`); any other shape is joined with the box on a common grid, on which planes
+less than `1.0E-7` apart are one (`Shapes.joinIsNotEmpty`), so a box that reaches into a shape
+by less than that does not meet it. -/
 def blockCollisions (l : Level) (box : AABB) : List (Pos × List AABB) :=
   let x0 := floor (box.minX - 1.0E-7) - 1
   let x1 := floor (box.maxX + 1.0E-7) + 1
@@ -232,8 +234,11 @@ def blockCollisions (l : Level) (box : AABB) : List (Pos × List AABB) :=
       let b := l.blockAt p
       if type ≥ 2 || (type == 1 && !hasLargeCollisionShape b) then none
       else
-        let boxes := collisionBoxes l p
-        if boxes.any (·.intersects box) then some (p, boxes) else none
+        let shape := b.collisionShape
+        let meets :=
+          if shape.isBlock then box.intersects (AABB.ofBlock p)
+          else (PlacedShape.mk shape p).intersectsBox box
+        if meets then some (p, collisionBoxes l p) else none
 
 /-- A collision shape in the world, as the game keeps it (`VoxelShape`): a grid, given by the
 coordinates of its planes along each axis, some of whose cells are full. The full cells are the
@@ -505,7 +510,7 @@ abbrev CartM := StateT Cart M
 def level : CartM Level := getThe Level
 
 /-- `EntityType.getDimensions` of a minecart, which is `0.98F` wide and `0.7F` high. -/
-def dims : Dimensions := ⟨((0.98 : Float32) / 2.0).toFloat, (0.7 : Float32).toFloat⟩
+def dims : Dimensions := MinecartContainer.dims
 
 /-- `Entity.getBoundingBox()`, which always is `EntityDimensions.makeBoundingBox(position)`: a
 minecart is `0.98F` wide and `0.7F` high. -/
@@ -633,15 +638,14 @@ def applyEffectsFromBlocks : CartM Unit := do
 /-- How another entity can act on a minecart, or the minecart on it. -/
 inductive Contact
   /-- Not at all: the entity is not pushable, cannot be collided with and is not picked up
-  (falling blocks, primed TNT, items next to a minecart that is no hopper, end crystals,
-  experience orbs, displays, ...). -/
+  (falling blocks, primed TNT, end crystals, experience orbs, displays, ...). The items that a
+  hopper minecart takes in (`MinecartHopper.suckInItems`) are modelled and count as this. -/
   | never
   /-- By touching. Minecarts push each other (`OldMinecartBehavior.pushAndPickupEntities`,
   `AbstractMinecart.push`); a living entity and a boat push a minecart whose box meets theirs
   (`LivingEntity.pushEntities`, `AbstractBoat.tick`), a moving empty minecart picks up a mob,
   and all of them stop a minecart that runs into them (`AbstractMinecart.canCollideWith`, which
-  is `AbstractBoat.canVehicleCollide`). A hopper minecart that is enabled takes in the items
-  within a quarter of a block (`MinecartHopper.suckInItems`). -/
+  is `AbstractBoat.canVehicleCollide`). -/
   | touching
   /-- In a way that does not depend on the boxes alone, or that the model does not know: a
   projectile in flight, an entity of a type the model has no size for. -/
@@ -658,11 +662,10 @@ def Contact.ofKnown : Option Bool → Contact
 /-- How the entity `e` and the minecart `c` can act on each other. The kinds that are not
 modelled yet answer in their own modules, so that the unit that models one edits only its own
 file. -/
-def contact (c : Cart) (e : Entity) : Contact :=
+def contact (_c : Cart) (e : Entity) : Contact :=
   match e.data with
   | .minecart _ _ => .touching
-  | .item _ => if c.kind == .hopper && c.d.enabled then .touching else .never
-  | .fallingBlock _ | .tnt _ => .never
+  | .item _ | .fallingBlock _ | .tnt _ => .never
   | .projectile _ _ => .unknown
   | .lightning d => .ofKnown d.touchesMinecart
   | .itemFrame _ d => .ofKnown d.touchesMinecart
@@ -844,35 +847,19 @@ def comeOffTrack : CartM Unit := do
 
 /-! ### The load -/
 
-/-- `AbstractContainerMenu.getRedstoneSignalFromContainer` for the stacks of a minecart with
-`size` slots. -/
-def containerSignal (items : List (ℕ × String × ℕ)) (size : ℕ) : ℤ :=
-  let filled := items.filter (fun (slot, _, count) => slot < size && count > 0)
-  let sorted := filled.mergeSort (fun a b => a.1 ≤ b.1)
-  let total : Float32 := sorted.foldl (init := 0) fun t (_, item, count) =>
-    t + (Float.ofNat count).toFloat32 / (Float.ofNat (itemMaxStackSize item)).toFloat32
-  let total := total / (Float.ofNat size).toFloat32
-  floor (total * 14).toFloat + (if total > 0 then 1 else 0)
-
-/-- The number of slots of a minecart with a container (`getContainerSize`). -/
-def containerSize : MinecartKind → Option ℕ
-  | .chest => some 27
-  | .hopper => some 5
-  | _ => none
-
 /-- `applyNaturalSlowdown(movement)`: the friction of the rail. A plain minecart keeps `0.96`
 of its speed; a minecart with a container keeps more the emptier it is
 (`AbstractMinecartContainer`); a furnace minecart is driven by its push (`MinecartFurnace`).
 The vertical velocity is cleared. -/
 def applyNaturalSlowdown (movement : Vec3) : CartM Vec3 := do
   let c ← getThe Cart
-  match containerSize c.kind with
-  | some size =>
+  match MinecartContainer.signal c.kind c.d with
+  | some signal =>
     let keep : Float32 := 0.98
     let keep :=
       if c.d.hasLootTable then keep
       else
-        let emptiness := 15 - containerSignal c.d.items size
+        let emptiness : ℤ := 15 - signal
         keep + (Float.ofInt emptiness).toFloat32 * 0.001
     return vmul movement keep.toFloat 0.0 keep.toFloat
   | none =>
@@ -899,13 +886,14 @@ def applyNaturalSlowdown (movement : Vec3) : CartM Vec3 := do
 /-- `activateMinecart(level, x, y, z, state)`: what an activator rail does to the minecart
 standing on it. An active rail primes a TNT minecart and disables a hopper minecart, an inactive
 one enables it again. In a plain minecart an active rail starts the hurt animation, which is not
-kept; in a command block minecart it runs the command, which is not modelled. -/
+kept; in a command block minecart it runs the command
+(`MinecartContainer.activateCommandBlock`). -/
 def activateMinecart (powered : Bool) : CartM Unit := do
   let c ← getThe Cart
   match c.kind with
   | .tnt => if powered && c.d.fuse < 0 then modifyData fun d => { d with fuse := 80 }
   | .hopper => modifyData fun d => { d with enabled := !powered }
-  | .commandBlock => if powered && c.d.command != "" then unmodelled
+  | .commandBlock => if powered then withLevel (MinecartContainer.activateCommandBlock c.index)
   | _ => pure ()
 
 /-! ### Moving along rails -/
@@ -1029,18 +1017,19 @@ def entityGuard (l : Level) (c : Cart) : Bool := entityInReach l c (hitbox c)
 fluids do to a minecart is not modelled. -/
 def fluidGuard (l : Level) (c : Cart) : Bool := blocksAround l c (·.attrs.fluid != "")
 
-/-- The container guard of `checkSurroundings`: a hopper or a dropper is next to the box of a
-minecart with a container. `HopperBlockEntity.getContainerAt` finds the minecarts with a
-container whose box meets the block a hopper pulls from or pushes into, and a dropper pushes
-into them as well; none of this is modelled. -/
+/-- The container guard of `checkSurroundings`: the minecart is on a detector rail behind which
+a comparator would read something the model cannot tell (`MinecartContainer.detectorUnknown`).
+What hoppers, droppers and crafters do with a minecart that has a container is modelled
+(`HopperBlockEntity.getContainerAt` finds the minecart, see
+`Redstone.Component.Container.getEntityContainer`), and what remains left out of that sets
+`Level.overflow` where it happens (`Redstone.Entity.Minecart.Slots`). -/
 def containerGuard (l : Level) (c : Cart) : Bool :=
-  (containerSize c.kind).isSome && blocksAround l c (fun b => b.id == .hopper || b.id == .dropper)
+  MinecartContainer.detectorUnknown l c.index c.kind c.d c.pos
 
 /-- The model's check for what it leaves out around the minecart: another entity in its reach
-(`entityGuard`), a fluid in or next to its box (`fluidGuard`), or a hopper or a dropper next to
-the box of a minecart with a container (`containerGuard`). It is made before and after the
-minecart moves, so that it also covers what the other entities do to the minecart in their own
-ticks. -/
+(`entityGuard`), a fluid in or next to its box (`fluidGuard`), or a load that a detector rail
+cannot be read from (`containerGuard`). It is made before and after the minecart moves, so that
+it also covers what the other entities do to the minecart in their own ticks. -/
 def checkSurroundings : CartM Unit := do
   let c ← getThe Cart
   let l ← level
@@ -1082,8 +1071,8 @@ def behaviorTick (old : Vec3) (yRotO : Float32) : CartM Unit := do
 /-- What the subclasses add to `tick()` after `AbstractMinecart.tick()`: the fuse of a TNT
 minecart burns down and the minecart explodes when it runs out or when the minecart runs into
 something (`MinecartTNT`); a furnace minecart burns its fuel and loses its push when the fuel
-is gone (`MinecartFurnace`); a hopper minecart that is enabled looks for items (`MinecartHopper`),
-which is modelled only when there is nothing to find. -/
+is gone (`MinecartFurnace`); a hopper minecart that is enabled takes in an item
+(`MinecartHopper.tryConsumeItems`). -/
 def kindTick : CartM Unit := do
   let c ← getThe Cart
   match c.kind with
@@ -1095,10 +1084,7 @@ def kindTick : CartM Unit := do
     if c.d.fuel > 0 then modifyData fun d => { d with fuel := d.fuel - 1 }
     if (← getThe Cart).d.fuel ≤ 0 then
       modifyData fun d => { d with pushX := 0.0, pushY := 0.0, pushZ := 0.0 }
-  | .hopper =>
-    if c.d.enabled then
-      let above := (← level).blockAt (blockPosOf ⟨c.pos.x, c.pos.y + 0.5 + 1.0, c.pos.z⟩)
-      if above.hasBlockEntity || above.id == .composter then unmodelled
+  | .hopper => withLevel (MinecartContainer.tryConsumeItems c.index)
   | _ => pure ()
 
 /-- `tick()` of a minecart: `Entity.commonTick`, `AbstractMinecart.tick` and the additions of
@@ -1112,6 +1098,8 @@ def cartTick : CartM Unit := do
     StateT.lift (Level.removeEntity c.index)
     modifyThe Cart fun c => { c with alive := false }
     return
+  -- `Entity.commonTick`: `tickCount++`
+  modifyData fun d => { d with tickCount := d.tickCount + 1 }
   checkSurroundings
   behaviorTick old yRotO
   checkSurroundings

@@ -1,0 +1,73 @@
+{
+  "name": "container-detector-hopper-cart-3-stacks",
+  "ticks": 30,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      4,
+      3,
+      4
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        4,
+        0,
+        4
+      ],
+      "state": "minecraft:stone"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        2,
+        1,
+        3
+      ],
+      "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+    },
+    {
+      "pos": [
+        2,
+        1,
+        4
+      ],
+      "state": "minecraft:redstone_lamp[lit=false]"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:hopper_minecart",
+      "pos": [
+        1.75,
+        1.0,
+        2.5
+      ],
+      "nbt": "{OnGround:1b,Enabled:0b,Items:[{Slot:0b,id:\"minecraft:stone\",count:64},{Slot:1b,id:\"minecraft:stone\",count:64},{Slot:2b,id:\"minecraft:stone\",count:64}]}"
+    }
+  ],
+  "actions": [
+    {
+      "tick": 2,
+      "type": "set",
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:detector_rail[powered=false,shape=east_west,waterlogged=false]",
+      "flags": 3
+    }
+  ]
+}

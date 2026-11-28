@@ -1,0 +1,66 @@
+{
+  "name": "container-hopper-cart-full-under-chest",
+  "ticks": 40,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        2,
+        3
+      ],
+      "state": "minecraft:chest[facing=north,type=single,waterlogged=false]",
+      "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:2b,id:\"minecraft:ender_pearl\",count:16},{Slot:5b,id:\"minecraft:iron_sword\",count:1},{Slot:26b,id:\"minecraft:redstone\",count:64}]}"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:hopper_minecart",
+      "pos": [
+        3.5,
+        1.0625,
+        3.5
+      ],
+      "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:64},{Slot:1b,id:\"minecraft:stone\",count:64},{Slot:2b,id:\"minecraft:stone\",count:64},{Slot:3b,id:\"minecraft:stone\",count:64},{Slot:4b,id:\"minecraft:stone\",count:64}]}"
+    }
+  ]
+}

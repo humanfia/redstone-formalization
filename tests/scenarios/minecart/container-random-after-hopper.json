@@ -1,0 +1,142 @@
+{
+  "name": "container-random-after-hopper",
+  "ticks": 50,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        2,
+        3
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=down]",
+      "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:6},{Slot:3b,id:\"minecraft:ender_pearl\",count:2}]}"
+    },
+    {
+      "pos": [
+        1,
+        1,
+        1
+      ],
+      "state": "minecraft:dropper[facing=up,triggered=false]",
+      "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:4},{Slot:5b,id:\"minecraft:egg\",count:4}]}"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:chest_minecart",
+      "pos": [
+        3.5,
+        1.0625,
+        3.5
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "tick": 10,
+      "type": "set",
+      "pos": [
+        1,
+        1,
+        0
+      ],
+      "state": "minecraft:redstone_block",
+      "flags": 3
+    },
+    {
+      "tick": 12,
+      "type": "set",
+      "pos": [
+        1,
+        1,
+        0
+      ],
+      "state": "minecraft:air",
+      "flags": 3
+    },
+    {
+      "tick": 20,
+      "type": "set",
+      "pos": [
+        1,
+        1,
+        0
+      ],
+      "state": "minecraft:redstone_block",
+      "flags": 3
+    },
+    {
+      "tick": 22,
+      "type": "set",
+      "pos": [
+        1,
+        1,
+        0
+      ],
+      "state": "minecraft:air",
+      "flags": 3
+    },
+    {
+      "tick": 30,
+      "type": "set",
+      "pos": [
+        1,
+        1,
+        0
+      ],
+      "state": "minecraft:redstone_block",
+      "flags": 3
+    },
+    {
+      "tick": 32,
+      "type": "set",
+      "pos": [
+        1,
+        1,
+        0
+      ],
+      "state": "minecraft:air",
+      "flags": 3
+    }
+  ]
+}

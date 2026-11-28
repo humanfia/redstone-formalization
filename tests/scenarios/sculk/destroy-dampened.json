@@ -1,0 +1,27 @@
+{
+  "name": "destroy-dampened",
+  "ticks": 160,
+  "box": {"min": [0, 0, 0], "max": [8, 2, 8]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 8], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [4, 1, 4], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [2, 1, 4], "state": "minecraft:white_wool"},
+    {"pos": [6, 1, 4], "state": "minecraft:red_carpet"},
+    {"pos": [4, 1, 2], "state": "minecraft:blue_wool_slab[type=bottom,waterlogged=false]"},
+    {"pos": [4, 1, 6], "state": "minecraft:lime_wool_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:stone"},
+    {"pos": [6, 1, 6], "state": "minecraft:glass"},
+    {"pos": [6, 1, 2], "state": "minecraft:moss_carpet"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "destroy", "pos": [2, 1, 4], "drop": false},
+    {"tick": 6, "type": "destroy", "pos": [6, 1, 4], "drop": false},
+    {"tick": 10, "type": "destroy", "pos": [4, 1, 2], "drop": false},
+    {"tick": 14, "type": "destroy", "pos": [4, 1, 6], "drop": false},
+    {"tick": 20, "type": "destroy", "pos": [2, 1, 2], "drop": false},
+    {"tick": 70, "type": "destroy", "pos": [6, 1, 6], "drop": false},
+    {"tick": 120, "type": "destroy", "pos": [6, 1, 2], "drop": false}
+  ]
+}

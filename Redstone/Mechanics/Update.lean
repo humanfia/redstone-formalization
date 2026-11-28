@@ -121,8 +121,9 @@ def blockEvent (p : Pos) (block : BlockId) (a b : ℤ) : M Unit :=
     let e : BlockEvent := ⟨p, block, a, b⟩
     if l.blockEvents.contains e then l else { l with blockEvents := l.blockEvents ++ [e] }
 
-/-- `gameEvent(event, pos, ...)`: announces an event to vibration listeners. -/
-def gameEvent (event : String) (p : Pos) : M Unit := do (← read).gameEvent event p
+/-- `gameEvent(event, pos, context)`: announces an event to vibration listeners. -/
+def gameEvent (event : String) (p : Pos) (context : GameEventContext := {}) : M Unit := do
+  (← read).gameEvent event p context
 
 /-! ### Entities -/
 
@@ -258,7 +259,7 @@ def destroyBlock (p : Pos) (_drop : Bool) (limit : ℕ := 512) : M Bool := do
   let state ← getBlock p
   if state.isAir then return false
   let destroyed ← setBlock kick p state.fluidBlock UpdateFlag.all limit
-  if destroyed then gameEvent "minecraft:block_destroy" p
+  if destroyed then gameEvent "minecraft:block_destroy" p { affectedState := some state }
   return destroyed
 
 /-- `Level.removeBlock(pos, movedByPiston)`. -/

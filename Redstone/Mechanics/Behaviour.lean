@@ -87,6 +87,13 @@ structure BehaviourOf (m : Type → Type) where
   `ticksBlockEntity` holds. -/
   blockEntityTick : Pos → m Unit
 
+/-- `GameEvent.Context`: what comes with a game event. -/
+structure GameEventContext where
+  /-- `sourceEntity`: the entity that caused the event. -/
+  sourceEntity : Option GameEventSource := none
+  /-- `affectedState`: the block state the event is about. -/
+  affectedState : Option Block := none
+
 /-- The methods of `Entity` that matter here, for one entity. -/
 structure EntityBehaviourOf (m : Type → Type) where
   /-- `tick()`: what the entity with the given index does in a game tick. -/
@@ -101,7 +108,7 @@ structure Env where
   entity : Entity → EntityBehaviourOf (StateM Level)
   /-- `Level.gameEvent`: something happened at a position that vibration listeners may hear. The
   event is given by its registry name. -/
-  gameEvent : String → Pos → StateM Level Unit
+  gameEvent : String → Pos → GameEventContext → StateM Level Unit
 
 /-- The monad of reactions: a reader of the environment over a state of the level. -/
 abbrev M := ReaderT Env (StateM Level)
@@ -216,7 +223,7 @@ reaction to game events. -/
 structure Rules where
   block : Block → Behaviour
   entity : Entity → EntityBehaviour
-  gameEvent : String → Pos → M Unit
+  gameEvent : String → Pos → GameEventContext → M Unit
 
 namespace Rules
 
@@ -226,11 +233,11 @@ def env (r : Rules) : ℕ → Env
   | 0 =>
     { block := fun b => (r.block b).exhausted
       entity := fun _ => ⟨fun _ => modify fun l => { l with overflow := true }⟩
-      gameEvent := fun _ _ => modify fun l => { l with overflow := true } }
+      gameEvent := fun _ _ _ => modify fun l => { l with overflow := true } }
   | depth + 1 =>
     { block := fun b => (r.block b).close (r.env depth)
       entity := fun e => (r.entity e).close (r.env depth)
-      gameEvent := fun n p => (r.gameEvent n p).run (r.env depth) }
+      gameEvent := fun n p c => (r.gameEvent n p c).run (r.env depth) }
 
 end Rules
 

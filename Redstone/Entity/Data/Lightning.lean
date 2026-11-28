@@ -29,8 +29,7 @@ structure Lightning where
   life : ℤ := 2
   /-- `flashes`: how many times the bolt will still flash again. -/
   flashes : ℕ := 0
-  /-- `Entity.random`, the bolt's own generator. It is `none` before the bolt is constructed,
-  and also afterwards if the level could not say which generator the bolt has. -/
+  /-- `Entity.random`, the bolt's own generator. It is `none` before the bolt is constructed. -/
   random : Option JavaRandom := none
   deriving Repr, Inhabited
 

@@ -25,30 +25,22 @@ and the chances come from the bolt's own random number generator.
 ## The bolt's own random numbers
 
 Every entity has a generator of its own (`Entity.random`, made by `RandomSource.create()`),
-whose seed depends on how many generators were made before (`Level.createRandomSource`). The
-constructor of `Entity` draws a UUID from it (two `long`s), then `LightningBolt` draws `seed`
-and `flashes`.
+which the test harness seeds from the id of the entity (`Entity.randomOfId`). The constructor
+of `Entity` draws a UUID from it (two `long`s, `Entity.randomAfterUuid`), then `LightningBolt`
+draws `seed` and `flashes`.
 
-The data of an entity is read from its saved NBT without access to the level, so the model
-constructs the bolt when it first ticks (`construct`), and takes the generator that
-`Level.createRandomSource` gives then. This is the bolt's generator only if the count of
-generators (`Level.randomSourceCount`) is right at that moment: the player of the harness makes
-the first one, every entity one when it is created, and the model counts none of them yet.
-
-A level whose count is still zero has not counted anything, so it cannot say which generator
-the bolt has: the bolt is then constructed without one, and it sets `Level.overflow` in the
-tick in which it first needs a number of its own (its third). Nothing before that depends on
-the generator: the strike, the rod and the copper are the same whatever it is.
+The data of an entity is read from its saved NBT without knowing its id, so the model
+constructs the bolt when it first ticks (`construct`), from the generator that belongs to its
+id. Nothing draws from that generator between the constructor and the first tick, so this is
+the same. It is exact under the assumption of `Entity.id`: every entity that was created
+before the bolt was in the world at the end of its tick.
 
 ## Tests
 
-`tests/scenarios/lightning`: these scenarios remove the bolt after its second tick. Still in
-`tests/pending/scenarios/lightning`:
+`tests/scenarios/lightning`: the bolt is removed after its second tick, or (the `*-natural`
+scenarios, and `tests/scenarios/sensor/rod-lightning`) lives as long as its own numbers say and
+lights its fires. Still in `tests/pending/scenarios/lightning`:
 
-* the `*-natural` scenarios, and `tests/pending/scenarios/sensor/rod-lightning`: the bolt lives
-  as long as its own numbers say. They wait for the count of generators. (With the count
-  started at 1, for the player, they all agree with the server: every bolt in them is created
-  when no other entity has been created since.)
 * `entity-in-box`: an item in the bolt's box, which sets `Level.overflow` (see below).
 * `sculk-hears`: the sensor hears the strike as the server does, but the vibration it keeps
   names its source by the UUID of the bolt, which the model does not have
@@ -84,20 +76,16 @@ open Redstone.Block
 after the draws matters here. -/
 def skipLong (r : JavaRandom) : JavaRandom := ((r.next 32).2.next 32).2
 
-/-- The constructors of `Entity` and `LightningBolt`, with a new generator `r`: the entity's UUID
-(two `long`s) and the bolt's `seed` are drawn and not kept, then `flashes` is one to three. -/
+/-- The constructor of `LightningBolt`, with the generator `r` the constructor of `Entity`
+left: the bolt's `seed` is drawn and not kept, then `flashes` is one to three. -/
 def constructWith (r : JavaRandom) : Entities.Lightning :=
-  let r := skipLong (skipLong (skipLong r))
-  let (n, r) := r.nextInt 3
+  let (n, r) := (skipLong r).nextInt 3
   { constructed := true, life := 2, flashes := n + 1, random := some r }
 
-/-- The data of a bolt that has been constructed: `d` itself if it was, and otherwise what the
-constructor makes with a new generator (`Level.createRandomSource`). In a level that has not
-counted any generator the bolt gets none. -/
-def construct (d : Entities.Lightning) : M Entities.Lightning := do
-  if d.constructed then return d
-  if (← get).randomSourceCount == 0 then return { d with constructed := true }
-  return constructWith (← Level.createRandomSource)
+/-- The data of the bolt `e` once it has been constructed: `d` itself if it was, and otherwise
+what the constructor makes with the generator of the entity (`Entity.randomAfterUuid`). -/
+def construct (e : Entity) (d : Entities.Lightning) : Entities.Lightning :=
+  if d.constructed then d else constructWith (Entity.randomAfterUuid e.id)
 
 /-! ### Cleaning copper -/
 
@@ -192,7 +180,7 @@ def tick (index : ℕ) : M Unit := do
   let some e := (← get).entity? index | return
   let .lightning d := e.data | return
   let pos := e.base.pos
-  let d ← construct d
+  let d := construct e d
   if d.life == 2 then
     -- on easy no fire is lit here
     let struck := strikePosition pos
@@ -204,7 +192,7 @@ def tick (index : ℕ) : M Unit := do
   if d.life < 0 then
     match d.random with
     | none =>
-      -- which generator the bolt has is not known: neither is what it does from here on
+      -- a constructed bolt always has its generator
       Level.setOverflow
     | some r =>
       if d.flashes == 0 then

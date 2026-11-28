@@ -1,0 +1,125 @@
+{
+ "name": "scaffolding-set-on-supports",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   17,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    17,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    1
+   ],
+   "state": "minecraft:stonecutter[facing=north]"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=7,waterlogged=false]"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=7,waterlogged=false]"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=7,waterlogged=false]"
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=7,waterlogged=false]"
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    16,
+    2,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=7,waterlogged=false]"
+  }
+ ]
+}

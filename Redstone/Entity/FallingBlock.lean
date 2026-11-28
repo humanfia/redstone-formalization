@@ -16,7 +16,10 @@ item. A falling anvil can be damaged by its fall.
 
 * Fluids: a falling block that touches water or lava sets `Level.overflow`. In particular a
   falling concrete powder never turns to concrete in mid-fall, and waterlogging is not handled.
-* The damage a falling anvil does to living entities.
+* The damage a falling anvil or a falling stalactite does to living entities. The model has no
+  living entities of its own; while the level holds an entity it does not know
+  (`EntityData.other`, which a mob is), a falling block that would hurt entities sets
+  `Level.overflow`.
 * The block entity data a falling block can carry: landing with such data sets
   `Level.overflow`.
 * Dropping a block that is not one of the game's falling blocks (a falling block summoned with
@@ -51,10 +54,12 @@ def isAnvil (b : Block) : Bool := b.is .anvil || b.is .chipped_anvil || b.is .da
 /-- The block is a `ConcretePowderBlock`. -/
 def isConcretePowder (b : Block) : Bool := b.id.name.endsWith "_concrete_powder"
 
-/-- The blocks of the game that fall (`Fallable` blocks that have an item of the same name). -/
+/-- The blocks of the game that fall and have an item of the same name: the `Fallable` blocks,
+and scaffolding, which falls without being one (`ScaffoldingBlock.tick`). -/
 def isFallable (b : Block) : Bool :=
   b.is .sand || b.is .red_sand || b.is .gravel || b.is .dragon_egg || isAnvil b ||
-    isConcretePowder b || b.is .suspicious_sand || b.is .suspicious_gravel
+    isConcretePowder b || b.is .suspicious_sand || b.is .suspicious_gravel ||
+    b.is .scaffolding || b.is .pointed_dripstone || b.is .sulfur_spike
 
 /-- `AnvilBlock.damage(state)`: the next more damaged anvil with the same facing, if any. -/
 def damageAnvil (b : Block) : Option Block :=
@@ -64,8 +69,10 @@ def damageAnvil (b : Block) : Option Block :=
   next.bind fun id => Block.ofProps? id fun k => (b.toProps.find? (·.1 == k)).map (·.2)
 
 /-- `FallingBlockEntity.causeFallDamage(fallDistance, ...)`: a falling block that hurts entities
-(an anvil) may be damaged by a fall of more than one block. The damage to living entities is
-not modelled. -/
+(an anvil, the tip of a stalactite) hurts the living entities in its box, and an anvil may be
+damaged by a fall of more than one block. The damage to living entities is not modelled: the
+entities the model knows are not alive, and any other entity in the level sets
+`Level.overflow`, wherever it is. -/
 def causeFallDamage (i : ℕ) (fallDistance : Float) : M Unit := do
   let some (e, dt) ← get? i | return
   if !dt.hurtEntities then return
@@ -75,6 +82,7 @@ def causeFallDamage (i : ℕ) (fallDistance : Float) : M Unit := do
   let damage :=
     min (Phys.floor (n * Float32.ofBits (UInt32.ofNat dt.fallDamagePerDistance)).toFloat)
       dt.fallDamageMax
+  if (← get).entities.any fun o => o.data matches .other _ _ then Level.setOverflow
   if isAnvil dt.blockState && damage > 0 then
     let (draw, r) := (dt.phys.random.getD (Entity.randomAfterUuid e.id)).nextFloat24
     Level.modifyEntity i fun e => e.modifyPhys fun p => { p with random := some r }
@@ -127,6 +135,14 @@ def onLand (p : Pos) (state replaced : Block) : M Unit := do
   if isConcretePowder state && (canSolidify replaced || touchesLiquid (← get) p) then
     if let some concrete := concreteOf state then discard <| Level.setBlock p concrete
 
+/-- `FallingBlockEntity.callOnBrokenAfterFall(block, pos)`, that is
+`Fallable.onBrokenAfterFall(level, pos, entity)` of the block the entity had at the start of
+the tick, for the entity `e`. A suspicious block (`BrushableBlock`) announces that a block was
+destroyed, at the centre of the entity; the anvil and the speleothems only make a sound. -/
+def onBrokenAfterFall (block : Block) (e : Entity) : M Unit := do
+  if block.is .suspicious_sand || block.is .suspicious_gravel then
+    Level.gameEvent "minecraft:block_destroy" (kind.dims.box e.base.pos).center.blockPos
+
 /-- `spawnAtLocation(level, block)`: the falling block with index `i` drops as an item where it
 is. -/
 def dropItem (i : ℕ) (pos : Vec3) (b : Block) : M Unit := do
@@ -145,6 +161,7 @@ def land (i : ℕ) (block : Block) : M Unit := do
   if currentState.is .moving_piston then return
   if dt.cancelDrop then
     Level.removeEntity i
+    onBrokenAfterFall block e
     return
   let mayReplace := canBeReplaced currentState
   let wouldContinueFalling := isFree (l.blockAt (pos.step .down))
@@ -157,10 +174,13 @@ def land (i : ℕ) (block : Block) : M Unit := do
       if dt.hasBlockData && dt.blockState.hasBlockEntity then Level.setOverflow
     else if dt.dropItem then
       Level.removeEntity i
+      onBrokenAfterFall block e
       dropItem i e.base.pos block
   else
     Level.removeEntity i
-    if dt.dropItem then dropItem i e.base.pos block
+    if dt.dropItem then
+      onBrokenAfterFall block e
+      dropItem i e.base.pos block
 
 /-- `FallingBlockEntity.tick`. -/
 def tick (i : ℕ) : M Unit := do

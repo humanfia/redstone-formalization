@@ -1,0 +1,53 @@
+{
+ "name": "scaffolding-stack-falls",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   2,
+   6,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    2,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    1,
+    4,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=7,waterlogged=false]"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    1,
+    5,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=7,waterlogged=false]"
+  }
+ ]
+}

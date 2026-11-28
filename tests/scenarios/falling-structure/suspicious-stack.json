@@ -1,0 +1,119 @@
+{
+ "name": "suspicious-stack",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   8,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    4,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    1
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    1,
+    6,
+    1
+   ],
+   "state": "minecraft:suspicious_sand[dusted=0]"
+  },
+  {
+   "pos": [
+    1,
+    7,
+    1
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    1
+   ],
+   "state": "minecraft:suspicious_gravel[dusted=0]"
+  },
+  {
+   "pos": [
+    3,
+    6,
+    1
+   ],
+   "state": "minecraft:suspicious_sand[dusted=0]"
+  },
+  {
+   "pos": [
+    3,
+    7,
+    1
+   ],
+   "state": "minecraft:sand"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    1,
+    4,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    3,
+    4,
+    1
+   ],
+   "drop": false
+  }
+ ]
+}

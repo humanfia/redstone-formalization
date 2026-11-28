@@ -1,0 +1,111 @@
+{
+ "name": "suspicious-set",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   6,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:torch"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    1,
+    5,
+    1
+   ],
+   "state": "minecraft:suspicious_sand[dusted=0]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    3,
+    4,
+    1
+   ],
+   "state": "minecraft:suspicious_gravel[dusted=0]"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:suspicious_sand[dusted=1]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:suspicious_gravel[dusted=0]"
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    1
+   ],
+   "state": "minecraft:suspicious_sand[dusted=0]"
+  },
+  {
+   "tick": 20,
+   "type": "destroy",
+   "pos": [
+    7,
+    0,
+    1
+   ],
+   "drop": false
+  }
+ ]
+}

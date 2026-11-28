@@ -173,18 +173,25 @@ def modifyEntity (index : ℕ) (f : Entity → Entity) : M Unit :=
 
 /-! ### Random sources -/
 
-/-- `RandomSource.create()`: a new random number generator, such as the one every entity has for
-itself. The game seeds it from the clock; the test harness makes the seed of the `k`-th
-generator created on the server thread `k * 0x9E3779B97F4A7C15` (`tests/FORMAT.md`), and this is
-what the model follows, counting the generators in `Level.randomSourceCount`.
+/-- `RandomSource.create()`: a new random number generator that is not the private one of an
+entity. The game seeds it from the clock; the test harness makes the seed of the `k`-th
+generator created on the server thread `k * 0x9E3779B97F4A7C15` (`tests/FORMAT.md`).
 
-Nothing calls this yet. The count is only right if every place where the game creates a
-generator calls it, and the model does not do that so far: the entities it creates have no
-generator of their own. -/
+The first generator is that of the player of the tests, and every entity makes one when it is
+constructed: the entity with index `i` has the generator number `i + 2`
+(`Redstone.Entity.randomOfId`, which is what the entity units use for the private generator of
+an entity, without calling this). The generators made here come on top of those and are counted
+in `Level.randomSourceCount`. So the number of a new generator is one more than the player's,
+the entities' and the earlier ones made here together.
+
+This is exact as long as no generator was made between two entities: one made here does not
+move the numbers of the entities created after it, which still follow `randomOfId`. Nothing
+calls this yet. -/
 def createRandomSource : M JavaRandom :=
   modifyGet fun l =>
-    let k := l.randomSourceCount + 1
-    (.ofSeed (k * 0x9E3779B97F4A7C15 % 2 ^ 64), { l with randomSourceCount := k })
+    let k := 1 + l.nextEntityIndex + l.randomSourceCount + 1
+    (.ofSeed (k * 0x9E3779B97F4A7C15 % 2 ^ 64),
+      { l with randomSourceCount := l.randomSourceCount + 1 })
 
 /-! ### Drops -/
 

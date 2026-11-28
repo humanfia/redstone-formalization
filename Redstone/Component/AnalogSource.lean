@@ -48,10 +48,11 @@ which sets `Level.overflow`: the level is then no longer a faithful image of the
 * Cauldrons: dripstone (`tick`), rain and snow (`handlePrecipitation`), burning entities
   (`entityInside`), and the interactions that need item components (water bottles, dyed armour,
   banners).
-* Projectiles hitting a decorated pot or an unlit candle cake (`unmodelled`), explosions, and the
-  menu of the lectern as an interface (`setPage` and `takeBook` are defined, but nothing calls
-  them). The side of these blocks that hoppers and droppers see is in
-  `Redstone.Component.Container`.
+* Explosions, and the menu of the lectern as an interface (`setPage` and `takeBook` are
+  defined, but nothing calls them). The side of these blocks that hoppers and droppers see is
+  in `Redstone.Component.Container`.
+* A burning projectile lights a candle cake and any projectile of the tag `impact_projectiles`
+  shatters a decorated pot (`onProjectileHit`); the owner of the projectile is not modelled.
 * Fluid ticks: a waterlogged shelf, decorated pot or copper golem statue that gets a shape update
   schedules a fluid tick, after which its water flows (`unmodelled`).
 * Components of stored items: the stacks keep their component patch (`Redstone.ItemStack`), but
@@ -171,6 +172,26 @@ def cake (s : Blocks.Cake) : Behaviour :=
         return true
       else eat s p }
 
+/-- `Entity.isOnFire()` for the projectile with the given index. -/
+def projectileOnFire (l : Level) (index : ℕ) : Bool :=
+  (l.entity? index).any fun e =>
+    match e.data with
+    | .projectile _ d => d.fire > 0
+    | _ => false
+
+/-- `Projectile.mayBreak(level, pos)` for the projectile with the given index, which has no
+owner: it is in the entity tag `impact_projectiles`. The game rule
+`projectiles_can_break_blocks` is taken to be on, as it is by default. -/
+def projectileBreaksBlocks (l : Level) (index : ℕ) : Bool :=
+  (l.entity? index).any fun e =>
+    match e.data with
+    | .projectile type _ =>
+      type ∈ ["minecraft:arrow", "minecraft:spectral_arrow", "minecraft:firework_rocket",
+        "minecraft:snowball", "minecraft:fireball", "minecraft:small_fireball", "minecraft:egg",
+        "minecraft:trident", "minecraft:dragon_fireball", "minecraft:wither_skull",
+        "minecraft:wind_charge", "minecraft:breeze_wind_charge"]
+    | _ => false
+
 /-- The behaviour of a cake with a candle. Eating from it leaves a cake with one bite taken and
 drops the candle (`dropResources`: one stack). -/
 def candleCake (id : Blocks.CandleCake.Id) (s : Blocks.CandleCake) : Behaviour :=
@@ -184,8 +205,9 @@ def candleCake (id : Blocks.CandleCake.Id) (s : Blocks.CandleCake) : Behaviour :
     canSurvive := cakeCanSurvive
     updateShape := fun p d _ _ => cakeUpdateShape self p d
     -- `AbstractCandleBlock.onProjectileHit`: a burning projectile lights the candle.
-    onProjectileHit := fun _ _ _ _ => do
-      if !s.lit then unmodelled
+    onProjectileHit := fun p _ _ index => do
+      if !s.lit && projectileOnFire (← get) index then
+        discard <| Level.setBlock p (.candleCake id { s with lit := true }) 11
     useWithoutItem := fun p _ => eatCake p
     useItemOn := fun p face item => do
       -- Flint and steel and fire charges pass; lighting the candle is up to the item.
@@ -669,8 +691,14 @@ def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
     affectNeighborsAfterRemoval := fun p _ => updateNeighboursAfterDestroy p .decorated_pot
     preRemoveSideEffects := fun p => do
       if let some d ← getPot p then ItemDrop.dropContents p [d.item]
-    -- A projectile that may break blocks shatters the pot.
-    onProjectileHit := fun _ _ _ _ => unmodelled
+    -- `DecoratedPotBlock.onProjectileHit`: a projectile that may break blocks (the entity tag
+    -- `impact_projectiles`, with the game rule `projectiles_can_break_blocks` on, as it is by
+    -- default) cracks the pot and destroys it.
+    onProjectileHit := fun p _ _ index => do
+      if projectileBreaksBlocks (← get) index then
+        -- `UPDATE_INVISIBLE | UPDATE_SKIP_BLOCK_ENTITY_SIDEEFFECTS`
+        discard <| Level.setBlock p (.decoratedPot { s with cracked := true }) 260
+        discard <| Level.destroyBlock p true
     triggerEvent := fun p a b => do
       -- `DecoratedPotBlockEntity.triggerEvent`: the pot wobbles, which nothing here observes.
       return (← getPot p).isSome && decide (a = 1 ∧ 0 ≤ b ∧ b < 2)

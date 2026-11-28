@@ -23,11 +23,9 @@ the release tick looks for one and, if it finds one, schedules itself again.
 * Sounds.
 * `getStateForPlacement`: there are no block items.
 
-`entityInside` is called by the entity units (`Redstone.Entity.Touch`). Of the projectiles only
-an arrow that is stuck in a block is modelled (`Redstone.Entity.Projectile`), so an arrow that
-lies in a block presses a wooden button, and one that flies does not: the scenarios in which an
-arrow falls out of the wall next to a button (`adv-arrow-wall-*-short-neg`) wait in
-`tests/pending`.
+`entityInside` is called by the entity units (`Redstone.Entity.Touch`). An arrow presses a
+wooden button while it flies through it and while it lies in the block behind it, and lets it go
+when it falls out of the wall (`Redstone.Entity.Projectile`).
 -/
 
 @[expose] public section

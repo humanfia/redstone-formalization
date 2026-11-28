@@ -3,6 +3,7 @@ module
 public import Redstone.Mechanics.Tick
 public import Redstone.Block.FaceShape
 public import Redstone.Block.Generated.Tags
+public import Redstone.World.Light
 
 /-!
 # Blocks that need support: carpets, snow layers, torches, plants, beds
@@ -15,9 +16,10 @@ its subclasses `TallGrassBlock`, `BushBlock`, `FireflyBushBlock`, `FlowerBlock`,
 `DryVegetationBlock` (`ShortDryGrassBlock`, `TallDryGrassBlock`), `AzaleaBlock`,
 `NetherFungusBlock`, `NetherRootsBlock`, `NetherSproutsBlock`, `NetherWartBlock`, `StemBlock`,
 `AttachedStemBlock`, `CactusFlowerBlock`, `LilyPadBlock`, `SeagrassBlock`, `SeaPickleBlock`,
-`LeafLitterBlock`, `MangrovePropaguleBlock`, `DoublePlantBlock` (`TallFlowerBlock`,
-`TallSeagrassBlock`, `SmallDripleafBlock`), and `AbstractBedBlock` (`BedBlock`,
-`StrawBedBlock`).
+`LeafLitterBlock`, `MangrovePropaguleBlock`, `CropBlock` (`CarrotBlock`, `PotatoBlock`,
+`BeetrootBlock`, `TorchflowerCropBlock`), `MushroomBlock`, `DoublePlantBlock` (`TallFlowerBlock`,
+`TallSeagrassBlock`, `SmallDripleafBlock`, `PitcherCropBlock`), and `AbstractBedBlock`
+(`BedBlock`, `StrawBedBlock`).
 
 These blocks stay only where `canSurvive` holds: a carpet on anything but air, a snow layer on
 a block whose top is full, a torch on a block that supports the centre of its top or on a
@@ -25,12 +27,21 @@ sturdy wall, a plant on the blocks its tag names. A shape update makes them chec
 again, and a block that cannot stay becomes air (`updateShape`), which breaks it
 (`Block.updateOrDestroy`). The two halves of a double plant and of a bed go together.
 
+Three kinds of plants also ask for light (`getRawBrightness(pos, 0)`, here
+`Level.rawBrightness`): a crop (wheat, carrots, potatoes, beetroots, torchflower crop) and the
+lower half of a pitcher crop need 8 or more, and a mushroom needs less than 13 unless it stands
+on mycelium, podzol or nylium (the tag `overrides_mushroom_light_requirement`).
+
 ## What is not modelled
 
-* The plants whose survival depends on light keep `Behaviour.inert`: `CropBlock` (wheat,
-  carrots, potatoes, beetroots, torchflower crop), `MushroomBlock` and `PitcherCropBlock` need
-  `getRawBrightness`, and the model has no block light. They never pop off here.
-* Random ticks (growth, snow melting, sapling trees, spreading), bone meal and every other use
+* Light itself. `Level.rawBrightness` is a stub that answers 15 until block light is modelled
+  (`Redstone.World.Light`). Until then a crop never breaks for lack of light, and a mushroom
+  that gets a shape update breaks wherever it does not stand on mycelium, podzol or nylium, as
+  it does in the game under the open sky; a mushroom in the dark stays in the game. The
+  scenario `plants-dark-room` of `tests/pending/scenarios/ground` records both.
+* What a ravager does to crops (`CropBlock.entityInside`).
+* Random ticks (growth, snow melting, sapling trees, spreading; those of crops, pitcher crops
+  and mushrooms set `Level.overflow`), bone meal and every other use
   of an item (`useItemOn`), and what the plants do to entities inside them (`entityInside`:
   sweet berry bushes, wither roses, lily pads under boats, eyeblossoms).
 * `EyeblossomBlock.tick`, the scheduled tick that opens and closes an eyeblossom.
@@ -83,6 +94,7 @@ def mayPlaceOn (self : Block) (l : Level) (q : Pos) : Bool :=
   let below := l.blockAt q
   let sturdy := (l.supportAttrs q).isFaceSturdy .up
   match self with
+  | .plain .brown_mushroom | .plain .red_mushroom => below.attrs.solidRender
   | .plain id =>
     match id with
     | .dead_bush | .short_dry_grass | .tall_dry_grass => BlockTag.supports_dry_vegetation below.id
@@ -101,6 +113,8 @@ def mayPlaceOn (self : Block) (l : Level) (q : Pos) : Bool :=
         (l.blockAt (q.step .up)).attrs.fluid == ""
     | .seagrass => sturdy && !BlockTag.cannot_support_seagrass below.id
     | _ => BlockTag.supports_vegetation below.id
+  | .crop _ | .carrot _ | .potato _ | .beetroot _ | .torchflowerCrop _ | .pitcherCrop _ =>
+    BlockTag.supports_crops below.id
   | .netherWart _ => BlockTag.supports_nether_wart below.id
   | .stem .pumpkin_stem _ | .attachedStem .attached_pumpkin_stem _ =>
     BlockTag.supports_pumpkin_stem below.id
@@ -129,13 +143,27 @@ def snowCanSurvive (l : Level) (p : Pos) : Bool :=
       | .snowLayer s => s.layers.val == 8
       | _ => false
 
+/-- `CropBlock.hasSufficientLight(level, pos)`. -/
+def hasSufficientLight (l : Level) (p : Pos) : Bool := 8 ≤ l.rawBrightness p
+
 /-- `canSurvive(state, level, pos)` of the block `self` of this component at `p`. A torch needs
 the block below to support the centre of its top face (`Block.canSupportCenter`), a wall torch
-a sturdy face behind it (`WallTorchBlock.canSurvive`). -/
+a sturdy face behind it (`WallTorchBlock.canSurvive`). A crop and the lower half of a pitcher
+crop need light (`CropBlock.canSurvive`, `PitcherCropBlock.canSurvive`), a mushroom the lack of
+it or a block that makes up for it (`MushroomBlock.canSurvive`). -/
 def canSurvive (self : Block) (l : Level) (p : Pos) : Bool :=
   let q := p.step .down
   let below := l.blockAt q
   match self with
+  | .crop _ | .carrot _ | .potato _ | .beetroot _ | .torchflowerCrop _ =>
+    hasSufficientLight l p && mayPlaceOn self l q
+  | .plain .brown_mushroom | .plain .red_mushroom =>
+    BlockTag.overrides_mushroom_light_requirement below.id ||
+      (l.rawBrightness p < 13 && mayPlaceOn self l q)
+  | .pitcherCrop s =>
+    match s.half with
+    | .lower => hasSufficientLight l p && mayPlaceOn self l q
+    | .upper => below.id == self.id && doubleHalf? below == some .lower
   | .snowLayer _ => snowCanSurvive l p
   | .plain .torch | .plain .soul_torch | .plain .copper_torch =>
     (l.supportAttrs q).isFaceSturdyCenter .up
@@ -243,14 +271,25 @@ def doublePlant (self : Block) (half : DoubleBlockHalf) : Behaviour :=
     canSurvive := canSurvive self
     updateShape := fun p d _ neighbour => doubleUpdateShape self half p d neighbour }
 
-/-- The behaviour of a carpet, a snow layer, a torch, a plant or a bed. The plants that need light
-are inert. -/
+/-- A plant whose random tick is not modelled: `CropBlock.randomTick`,
+`PitcherCropBlock.randomTick` and `MushroomBlock.randomTick` draw from the level's random number
+generator and may grow or spread the plant. -/
+def unmodelledGrowth (b : Behaviour) : Behaviour :=
+  { b with randomTick := fun _ => Level.setOverflow }
+
+/-- The behaviour of a carpet, a snow layer, a torch, a plant or a bed. A pitcher crop is a
+double plant from age 3 on (`PitcherCropBlock.updateShape`). -/
 def behaviour (self : Block) : Behaviour :=
   match self with
   | .bed id s => bedBehaviour self s.facing s.part fun o => .bed id { s with occupied := o }
   | .strawBed s => bedBehaviour self s.facing s.part fun o => .strawBed { s with occupied := o }
   | .snowLayer _ | .leafLitter _ | .mangrovePropagule _ | .seaPickle _ | .sapling _ _
   | .netherWart _ | .stem _ _ | .flowerBed _ _ => supported self
+  | .crop _ | .carrot _ | .potato _ | .beetroot _ | .torchflowerCrop _ =>
+    unmodelledGrowth (supported self)
+  | .pitcherCrop s =>
+    unmodelledGrowth (if 3 ≤ s.age.val then doublePlant self s.half else supported self)
+  | .plain .brown_mushroom | .plain .red_mushroom => unmodelledGrowth (supported self)
   | .sweetBerryBush s =>
     { supported self with
       useWithoutItem := fun _ _ => do
@@ -271,9 +310,7 @@ def behaviour (self : Block) : Behaviour :=
   | .tallSeagrass s => doublePlant self s.half
   | .smallDripleaf s => doublePlant self s.half
   | .plain _ =>
-    if BlockClass.carpetBlock self.id ||
-        (BlockClass.vegetationBlock self.id && !BlockClass.mushroomBlock self.id) then
-      supported self
+    if BlockClass.carpetBlock self.id || BlockClass.vegetationBlock self.id then supported self
     else .inert self
   | _ => .inert self
 

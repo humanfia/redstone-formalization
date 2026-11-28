@@ -1,0 +1,875 @@
+{
+ "name": "crops-lose-ground",
+ "ticks": 12,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   20,
+   4,
+   5
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    20,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:wheat[age=0]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:wheat[age=0]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:wheat[age=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:wheat[age=7]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:wheat[age=7]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:wheat[age=7]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:carrots[age=3]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:carrots[age=3]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:carrots[age=3]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:potatoes[age=7]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:potatoes[age=7]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:potatoes[age=7]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:beetroots[age=2]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=2]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "state": "minecraft:beetroots[age=2]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:torchflower_crop[age=1]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:torchflower_crop[age=1]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "state": "minecraft:torchflower_crop[age=1]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:pitcher_crop[age=0,half=lower]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:pitcher_crop[age=0,half=lower]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "state": "minecraft:pitcher_crop[age=0,half=lower]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "state": "minecraft:pitcher_crop[age=2,half=lower]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "state": "minecraft:pitcher_crop[age=2,half=lower]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    4
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    4
+   ],
+   "state": "minecraft:pitcher_crop[age=2,half=lower]"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=0]"
+  },
+  {
+   "pos": [
+    16,
+    2,
+    0
+   ],
+   "state": "minecraft:pitcher_crop[age=3,half=lower]"
+  },
+  {
+   "pos": [
+    16,
+    3,
+    0
+   ],
+   "state": "minecraft:pitcher_crop[age=3,half=upper]"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=0]"
+  },
+  {
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "state": "minecraft:pitcher_crop[age=3,half=lower]"
+  },
+  {
+   "pos": [
+    16,
+    3,
+    2
+   ],
+   "state": "minecraft:pitcher_crop[age=3,half=upper]"
+  },
+  {
+   "pos": [
+    18,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=0]"
+  },
+  {
+   "pos": [
+    18,
+    2,
+    0
+   ],
+   "state": "minecraft:pitcher_crop[age=4,half=lower]"
+  },
+  {
+   "pos": [
+    18,
+    3,
+    0
+   ],
+   "state": "minecraft:pitcher_crop[age=4,half=upper]"
+  },
+  {
+   "pos": [
+    18,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=0]"
+  },
+  {
+   "pos": [
+    18,
+    2,
+    2
+   ],
+   "state": "minecraft:pitcher_crop[age=4,half=lower]"
+  },
+  {
+   "pos": [
+    18,
+    3,
+    2
+   ],
+   "state": "minecraft:pitcher_crop[age=4,half=upper]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    14,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    16,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    18,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    14,
+    3,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "destroy",
+   "pos": [
+    16,
+    3,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 5,
+   "type": "destroy",
+   "pos": [
+    18,
+    3,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    14,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  }
+ ]
+}

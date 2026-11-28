@@ -125,7 +125,7 @@ component's module docstring says what it does not model.
 | `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
 | `Redstone.Component.SpecialBlock` | campfire, powder snow, cobweb, nether portal, carved pumpkin, dried ghast, eggs | stub |
 | `Redstone.Component.Vine` | cactus, sugar cane, bamboo, chorus plants, kelp and vines, glow lichen and sculk veins | stub |
-| `Redstone.Component.Ground` | farmland, paths, leaves, grass, nylium, mushroom blocks, mud | stub |
+| `Redstone.Component.Ground` | farmland and paths that turn to dirt under a block, the distance of leaves from a log, snowy grass, the faces of mushroom blocks; the tickers of beacons, end gateways, trial spawners and vaults; and the list of the block classes that stay inert, with the reason for each (`tools/gen/list_inert.py`) | defined, tested |
 | `Redstone.Component.Fire` | fire and soul fire | stub |
 | `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners | stub |
 | `Redstone.World.Light` | the light of a cell: block light and raw brightness, for the blocks that need or shun light | stub: every cell has light 15 |

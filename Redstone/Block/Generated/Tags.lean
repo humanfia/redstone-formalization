@@ -201,6 +201,47 @@ def cannot_support_seagrass : BlockId → Bool
   | .magma_block => true
   | _ => false
 
+/-- The block tag `minecraft:supports_crops`. -/
+def supports_crops : BlockId → Bool
+  | .farmland => true
+  | _ => false
+
+/-- The block tag `minecraft:overrides_mushroom_light_requirement`. -/
+def overrides_mushroom_light_requirement : BlockId → Bool
+  | .mycelium | .podzol | .crimson_nylium | .warped_nylium => true
+  | _ => false
+
+/-- The block tag `minecraft:maintains_farmland`. -/
+def maintains_farmland : BlockId → Bool
+  | .pumpkin_stem | .attached_pumpkin_stem | .melon_stem | .attached_melon_stem | .beetroots |
+   .carrots | .potatoes | .torchflower_crop | .torchflower | .pitcher_crop | .wheat |
+   .moving_piston | .acacia_fence_gate | .birch_fence_gate | .dark_oak_fence_gate |
+   .pale_oak_fence_gate | .jungle_fence_gate | .oak_fence_gate | .spruce_fence_gate |
+   .crimson_fence_gate | .warped_fence_gate | .mangrove_fence_gate | .bamboo_fence_gate |
+   .cherry_fence_gate | .poplar_fence_gate => true
+  | _ => false
+
+/-- The block tag `minecraft:prevents_nearby_leaf_decay`. -/
+def prevents_nearby_leaf_decay : BlockId → Bool
+  | .dark_oak_log | .dark_oak_wood | .stripped_dark_oak_log | .stripped_dark_oak_wood |
+   .pale_oak_log | .pale_oak_wood | .stripped_pale_oak_log | .stripped_pale_oak_wood | .oak_log |
+   .oak_wood | .stripped_oak_log | .stripped_oak_wood | .acacia_log | .acacia_wood |
+   .stripped_acacia_log | .stripped_acacia_wood | .birch_log | .birch_wood | .stripped_birch_log |
+   .stripped_birch_wood | .jungle_log | .jungle_wood | .stripped_jungle_log |
+   .stripped_jungle_wood | .spruce_log | .spruce_wood | .stripped_spruce_log |
+   .stripped_spruce_wood | .mangrove_log | .mangrove_wood | .stripped_mangrove_log |
+   .stripped_mangrove_wood | .cherry_log | .cherry_wood | .stripped_cherry_log |
+   .stripped_cherry_wood | .poplar_log | .poplar_wood | .stripped_poplar_log |
+   .stripped_poplar_wood | .crimson_stem | .stripped_crimson_stem | .crimson_hyphae |
+   .stripped_crimson_hyphae | .warped_stem | .stripped_warped_stem | .warped_hyphae |
+   .stripped_warped_hyphae => true
+  | _ => false
+
+/-- The block tag `minecraft:snow`. -/
+def snow : BlockId → Bool
+  | .snow | .snow_block | .powder_snow => true
+  | _ => false
+
 end BlockTag
 
 /-! ### Block classes

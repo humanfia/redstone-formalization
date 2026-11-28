@@ -1,0 +1,16 @@
+{
+  "name": "place-rail-centre-first-snwe",
+  "ticks": 7,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [2, 1, 2], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"tick": 2, "type": "set", "pos": [2, 1, 3], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"tick": 3, "type": "set", "pos": [2, 1, 1], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"tick": 4, "type": "set", "pos": [1, 1, 2], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"tick": 5, "type": "set", "pos": [3, 1, 2], "state": "minecraft:rail[shape=north_south,waterlogged=false]"}
+  ]
+}

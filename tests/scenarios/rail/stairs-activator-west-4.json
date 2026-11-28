@@ -1,0 +1,29 @@
+{
+  "name": "stairs-activator-west-4",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [24, 6, 24]},
+  "fill": [
+    {"min": [12, 0, 12], "max": [12, 0, 12], "state": "minecraft:stone"},
+    {"min": [11, 0, 12], "max": [11, 1, 12], "state": "minecraft:stone"},
+    {"min": [10, 0, 12], "max": [10, 2, 12], "state": "minecraft:stone"},
+    {"min": [9, 0, 12], "max": [9, 3, 12], "state": "minecraft:stone"},
+    {"min": [12, 0, 13], "max": [12, 0, 13], "state": "minecraft:stone"},
+    {"min": [9, 0, 13], "max": [9, 3, 13], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [12, 1, 12], "state": "minecraft:activator_rail[powered=false,shape=ascending_west,waterlogged=false]"},
+    {"pos": [11, 2, 12], "state": "minecraft:activator_rail[powered=false,shape=ascending_west,waterlogged=false]"},
+    {"pos": [10, 3, 12], "state": "minecraft:activator_rail[powered=false,shape=ascending_west,waterlogged=false]"},
+    {"pos": [9, 4, 12], "state": "minecraft:activator_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [12, 1, 13], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [9, 4, 13], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [12, 1, 13], "face": "up"},
+    {"tick": 5, "type": "use", "pos": [12, 1, 13], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [9, 4, 13], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [9, 4, 13], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [12, 1, 13], "face": "up"},
+    {"tick": 15, "type": "destroy", "pos": [11, 1, 12], "drop": false}
+  ]
+}

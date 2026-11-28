@@ -16,9 +16,16 @@ is in the way). It gives its power to the block below it and to the blocks its s
 Only the default evaluator is formalized; the experimental one (`ExperimentalRedstoneWireEvaluator`)
 is behind a feature flag that is off.
 
+The kernel evaluates a change of one dust in about 0.2 s (it was 0.45 s): the game sends 42
+neighbour updates for it, about ten of them reach dust, and each of those computes the power
+again from some twenty blocks. What was measured, what was changed for it here and in the
+definitions this file uses, and what is left, is in `docs/proof-feasibility.md` ("Redstone
+dust: where the kernel time went"). Nothing more is to be gained in this file: computing the
+maxima strictly, sorting the hash set by insertion and testing for a hopper by constructor
+each change the 13 s of the 15-dust line by less than 0.3 s.
+
 Not formalized: `getStateForPlacement` is defined (`stateForPlacement`) but nothing uses it,
-since placing items is not part of the model; `dropResources`, since nothing drops; the shapes,
-particles, `rotate` and `mirror`.
+since placing items is not part of the model; the shapes, particles, `rotate` and `mirror`.
 -/
 
 @[expose] public section
@@ -61,6 +68,17 @@ def isCross (s : RedstoneWire) : Bool :=
 /-- `isDot(state)`: no side is connected. -/
 def isDot (s : RedstoneWire) : Bool :=
   !isConnected s.north && !isConnected s.south && !isConnected s.east && !isConnected s.west
+
+/-- `state.is(Blocks.REDSTONE_WIRE)`: the block is redstone dust. This is
+`b.is .redstone_wire` (`isWire_eq_is`), read off the constructor of the block state: comparing
+block ids is the most expensive thing the kernel does in a neighbour update of dust (three
+passes over the whole block inventory, 0.7 ms), and dust asks this of every block around it. -/
+def isWire : Block → Bool
+  | .redstoneWire _ => true
+  | _ => false
+
+theorem isWire_eq_is (b : Block) : isWire b = b.is .redstone_wire := by
+  cases b <;> first | rfl | (rename_i i; cases i <;> rfl) | (rename_i i _; cases i <;> rfl)
 
 /-- The block is a trapdoor (`getBlock() instanceof TrapDoorBlock`). -/
 def isTrapDoor : Block → Bool
@@ -147,9 +165,9 @@ def updateShape (s : RedstoneWire) (l : Level) (p : Pos) (d : Direction) (neighb
 connected side, unless there is dust right next to that side. -/
 def updateIndirectNeighbourShapes (s : RedstoneWire) (p : Pos) (flags limit : ℕ) : M Unit :=
   Direction.horizontals.forM fun d => do
-    if isConnected (side s d) && !(← Level.getBlock (p.step d)).is .redstone_wire then
+    if isConnected (side s d) && !isWire (← Level.getBlock (p.step d)) then
       for q in [(p.step d).step .down, (p.step d).step .up] do
-        if (← Level.getBlock q).is .redstone_wire then
+        if isWire (← Level.getBlock q) then
           let neighborPos := q.step d.opposite
           Level.Core.neighborShapeChanged Level.runUpdates d.opposite q neighborPos
             (← Level.getBlock neighborPos) flags limit
@@ -160,9 +178,10 @@ part of the environment, and `getBestNeighborSignal` does not read it.) -/
 def muted (env : Env) : Env :=
   { env with
     block := fun b =>
-      if b.is .redstone_wire then
+      match b with
+      | .redstoneWire _ =>
         { env.block b with signal := fun _ _ _ => 0, directSignal := fun _ _ _ => 0 }
-      else env.block b }
+      | _ => env.block b }
 
 /-- `RedstoneWireBlock.getBlockSignal(level, pos)`: the strongest signal `p` receives from its
 neighbours when dust gives none. -/
@@ -220,7 +239,7 @@ def updatePowerStrength (p : Pos) (s : RedstoneWire) : M Unit := do
 /-- `checkCornerChangeAt(level, pos)`: if there is dust at `p`, neighbour updates around it and
 around its six neighbours. -/
 def checkCornerChangeAt (p : Pos) : M Unit := do
-  if (← Level.getBlock p).is .redstone_wire then
+  if isWire (← Level.getBlock p) then
     Level.updateNeighborsAt p .redstone_wire
     Direction.values.forM fun d => Level.updateNeighborsAt (p.step d) .redstone_wire
 
@@ -238,7 +257,7 @@ def updateNeighborsOfNeighboringWires (p : Pos) : M Unit := do
 updates around the positions above and below it (`Direction.Plane.VERTICAL` is up, down), then
 `updateNeighborsOfNeighboringWires`. -/
 def onPlace (s : RedstoneWire) (p : Pos) (old : Block) : M Unit := do
-  if !old.is .redstone_wire then
+  if !isWire old then
     updatePowerStrength p s
     [Direction.up, Direction.down].forM fun d =>
       Level.updateNeighborsAt (p.step d) .redstone_wire
@@ -253,10 +272,13 @@ def affectNeighborsAfterRemoval (s : RedstoneWire) (p : Pos) (movedByPiston : Bo
     updatePowerStrength p s
     updateNeighborsOfNeighboringWires p
 
-/-- `neighborChanged`: dust that lost its support is removed; otherwise its power is updated. -/
+/-- `neighborChanged`: dust that lost its support drops (`dropResources`) and is removed;
+otherwise its power is updated. -/
 def neighborChanged (s : RedstoneWire) (p : Pos) : M Unit := do
   if canSurvive (← get) p then updatePowerStrength p s
-  else discard <| Level.removeBlock p false
+  else
+    Level.dropResources (.redstoneWire s) p
+    discard <| Level.removeBlock p false
 
 /-- `getSignal`: dust gives its power to the block below it and to the neighbours its sides are
 connected to, and nothing to the block above it. `d` points from the neighbour that asks to the

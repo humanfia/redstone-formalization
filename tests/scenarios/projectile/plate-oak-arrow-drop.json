@@ -1,0 +1,53 @@
+{
+ "name": "plate-oak-arrow-drop",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:oak_pressure_plate[powered=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    3.5,
+    3.0,
+    3.5
+   ],
+   "nbt": "{Motion:[0.0d,-0.2d,0.0d]}"
+  }
+ ],
+ "actions": []
+}

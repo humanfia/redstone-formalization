@@ -12,7 +12,7 @@ state of every block state, `Block.fluidState`, is generated from the server's b
 Nothing here uses strings except the registry names, which only the test runner reads, so
 that fluid states can be evaluated by the kernel.
 
-Fluids do not flow yet: `Redstone.Mechanics.Fluid` is a stub.
+How fluids flow is in `Redstone.Mechanics.Fluid`.
 -/
 
 @[expose] public section
@@ -69,8 +69,35 @@ def flowing : Fluid → Fluid
   | water | flowingWater => flowingWater
   | lava | flowingLava => flowingLava
 
-/-- `Fluid.isSame`: the two fluids are of the same kind. -/
+/-- `Fluid.isSame`: the two fluids are of the same kind. Nothing is of the kind of the empty
+fluid but itself. -/
 def isSame (a b : Fluid) : Bool := a.source == b.source
+
+/-! The parameters of water and lava (`WaterFluid`, `LavaFluid`), in the Overworld: lava is
+not fast (`EnvironmentAttributes.FAST_LAVA`). -/
+
+/-- `Fluid.getTickDelay`: the delay of the fluid's ticks. -/
+def tickDelay : Fluid → ℕ
+  | empty => 0
+  | water | flowingWater => 5
+  | lava | flowingLava => 30
+
+/-- `FlowingFluid.getDropOff`: how much the amount falls from a cell to the next. -/
+def dropOff : Fluid → ℕ
+  | lava | flowingLava => 2
+  | _ => 1
+
+/-- `FlowingFluid.getSlopeFindDistance`: how far the fluid looks for a hole to flow to. -/
+def slopeFindDistance : Fluid → ℕ
+  | lava | flowingLava => 2
+  | _ => 4
+
+/-- `FlowingFluid.canConvertToSource`, with the game rules `water_source_conversion` and
+`lava_source_conversion` at their defaults: water between two sources becomes a source, lava
+does not. -/
+def canConvertToSource : Fluid → Bool
+  | water | flowingWater => true
+  | _ => false
 
 end Fluid
 
@@ -108,6 +135,17 @@ def flowing (fluid : Fluid) (amount : ℕ) (falling : Bool) : FluidState :=
 /-- The fluid state of a block with the property `waterlogged`
 (`SimpleWaterloggedBlock`). -/
 def waterlogged (b : Bool) : FluidState := if b then source .water else empty
+
+/-- The fluid state of a `WaterloggedTransparentBlock` (the copper grates), whose water is
+`Fluids.WATER.getSource(true)`: a source with the property `FALLING` set. -/
+def waterloggedFalling (b : Bool) : FluidState := if b then source .water true else empty
+
+/-- `FluidState.is(fluid)`: the state is of exactly this fluid; a source and the flowing fluid
+of its kind are different fluids. -/
+def is (s : FluidState) (fluid : Fluid) : Bool := s.fluid == fluid
+
+/-- `FluidState.isFull`: the amount is 8. -/
+def isFull (s : FluidState) : Bool := s.amount == 8
 
 /-- `LiquidBlock.getFluidState`: the fluid state of a block of water or lava with the given
 `level`. Level 0 is a source, levels 1 to 7 flow with amount `8 - level`, and the levels from

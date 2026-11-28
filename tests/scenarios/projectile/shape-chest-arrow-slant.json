@@ -1,0 +1,53 @@
+{
+ "name": "shape-chest-arrow-slant",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    1.3,
+    3.4,
+    1.6
+   ],
+   "nbt": "{Motion:[0.45d,-0.35d,0.4d]}"
+  }
+ ],
+ "actions": []
+}

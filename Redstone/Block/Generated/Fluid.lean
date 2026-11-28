@@ -18,8 +18,8 @@ namespace Redstone
 namespace Block
 
 /-- `BlockState.getFluidState()`: the fluid the block holds. Blocks of water and lava hold
-their fluid, a block with the property `waterlogged` set holds a water source, and so do the
-few blocks that only exist under water. -/
+their fluid, a block with the property `waterlogged` set holds a water source (a falling one
+for a `WaterloggedTransparentBlock`), and so do the few blocks that only exist under water. -/
 def fluidState : Block → FluidState
   | .plain i =>
     match i with
@@ -86,8 +86,8 @@ def fluidState : Block → FluidState
   | .weatheringCopperStair _ s => .waterlogged s.waterlogged
   | .weatheringCopperSlab _ s => .waterlogged s.waterlogged
   | .weatheringCopperTrapDoor _ s => .waterlogged s.waterlogged
-  | .weatheringCopperGrate _ s => .waterlogged s.waterlogged
-  | .waterloggedTransparent _ s => .waterlogged s.waterlogged
+  | .weatheringCopperGrate _ s => .waterloggedFalling s.waterlogged
+  | .waterloggedTransparent _ s => .waterloggedFalling s.waterlogged
   | .weatheringCopperChest _ s => .waterlogged s.waterlogged
   | .copperChest _ s => .waterlogged s.waterlogged
   | .weatheringCopperGolemStatue _ s => .waterlogged s.waterlogged
@@ -255,5 +255,80 @@ def setWaterlogged (b : Block) (v : Bool) : Block :=
   | _ => b
 
 end Block
+
+/-! ### Block tags
+
+The block tags (`BlockTags`) that the flow of fluids reads, as predicates on blocks:
+`FluidBlockTag.t id` is `state.is(BlockTags.T)` for a state of the block `id`. -/
+
+namespace FluidBlockTag
+
+/-- The block tag `minecraft:washed_away_by_fluids`. -/
+def washed_away_by_fluids : BlockId → Bool
+  | .fire | .soul_fire | .oak_sapling | .spruce_sapling | .birch_sapling | .jungle_sapling |
+   .acacia_sapling | .dark_oak_sapling | .pale_oak_sapling | .azalea | .flowering_azalea |
+   .mangrove_propagule | .cherry_sapling | .poplar_sapling | .tube_coral | .brain_coral |
+   .bubble_coral | .fire_coral | .horn_coral | .tube_coral_fan | .brain_coral_fan |
+   .bubble_coral_fan | .fire_coral_fan | .horn_coral_fan | .tube_coral_wall_fan |
+   .brain_coral_wall_fan | .bubble_coral_wall_fan | .fire_coral_wall_fan | .horn_coral_wall_fan |
+   .air | .void_air | .cave_air | .flower_pot | .potted_open_eyeblossom |
+   .potted_closed_eyeblossom | .potted_poppy | .potted_blue_orchid | .potted_allium |
+   .potted_azure_bluet | .potted_red_tulip | .potted_orange_tulip | .potted_white_tulip |
+   .potted_pink_tulip | .potted_oxeye_daisy | .potted_dandelion | .potted_oak_sapling |
+   .potted_spruce_sapling | .potted_birch_sapling | .potted_jungle_sapling |
+   .potted_acacia_sapling | .potted_dark_oak_sapling | .potted_pale_oak_sapling |
+   .potted_red_mushroom | .potted_brown_mushroom | .potted_dead_bush | .potted_fern |
+   .potted_cactus | .potted_cornflower | .potted_lily_of_the_valley | .potted_wither_rose |
+   .potted_bamboo | .potted_crimson_fungus | .potted_warped_fungus | .potted_crimson_roots |
+   .potted_warped_roots | .potted_azalea_bush | .potted_flowering_azalea_bush |
+   .potted_mangrove_propagule | .potted_cherry_sapling | .potted_torchflower |
+   .potted_golden_dandelion | .potted_poplar_sapling | .oak_button | .spruce_button |
+   .birch_button | .jungle_button | .acacia_button | .dark_oak_button | .pale_oak_button |
+   .crimson_button | .warped_button | .mangrove_button | .bamboo_button | .cherry_button |
+   .poplar_button | .stone_button | .polished_blackstone_button | .white_carpet | .orange_carpet |
+   .magenta_carpet | .light_blue_carpet | .yellow_carpet | .lime_carpet | .pink_carpet |
+   .gray_carpet | .light_gray_carpet | .cyan_carpet | .purple_carpet | .blue_carpet |
+   .brown_carpet | .green_carpet | .red_carpet | .black_carpet | .candle | .white_candle |
+   .orange_candle | .magenta_candle | .light_blue_candle | .yellow_candle | .lime_candle |
+   .pink_candle | .gray_candle | .light_gray_candle | .cyan_candle | .purple_candle | .blue_candle |
+   .brown_candle | .green_candle | .red_candle | .black_candle | .rail | .powered_rail |
+   .detector_rail | .activator_rail | .player_head | .creeper_head | .zombie_head |
+   .skeleton_skull | .wither_skeleton_skull | .dragon_head | .piglin_head | .copper_golem_statue |
+   .exposed_copper_golem_statue | .weathered_copper_golem_statue | .oxidized_copper_golem_statue |
+   .waxed_copper_golem_statue | .waxed_exposed_copper_golem_statue |
+   .waxed_weathered_copper_golem_statue | .waxed_oxidized_copper_golem_statue | .water | .lava |
+   .tall_seagrass | .wall_torch | .redstone_wall_torch | .soul_wall_torch | .copper_wall_torch |
+   .attached_pumpkin_stem | .attached_melon_stem | .kelp_plant | .weeping_vines_plant |
+   .twisting_vines_plant | .cave_vines_plant | .big_dripleaf_stem | .skeleton_wall_skull |
+   .wither_skeleton_wall_skull | .zombie_wall_head | .player_wall_head | .creeper_wall_head |
+   .dragon_wall_head | .piglin_wall_head | .bamboo_sapling | .cobweb | .snow | .end_rod |
+   .chorus_plant | .chorus_flower | .big_dripleaf | .scaffolding | .powder_snow | .short_grass |
+   .fern | .dead_bush | .bush | .short_dry_grass | .tall_dry_grass | .seagrass | .dandelion |
+   .golden_dandelion | .torchflower | .poppy | .blue_orchid | .allium | .azure_bluet | .red_tulip |
+   .orange_tulip | .white_tulip | .pink_tulip | .oxeye_daisy | .cornflower | .wither_rose |
+   .lily_of_the_valley | .brown_mushroom | .red_mushroom | .torch | .redstone_wire | .wheat |
+   .lever | .redstone_torch | .cactus_flower | .soul_torch | .copper_torch | .pumpkin_stem |
+   .melon_stem | .vine | .glow_lichen | .resin_clump | .nether_wart | .tripwire_hook | .tripwire |
+   .carrots | .potatoes | .light | .sunflower | .lilac | .rose_bush | .peony | .tall_grass |
+   .large_fern | .torchflower_crop | .pitcher_crop | .pitcher_plant | .beetroots | .kelp |
+   .sweet_berry_bush | .warped_fungus | .warped_roots | .nether_sprouts | .crimson_fungus |
+   .weeping_vines | .twisting_vines | .crimson_roots | .cave_vines | .spore_blossom | .pink_petals |
+   .wildflowers | .leaf_litter | .small_dripleaf | .hanging_roots | .frogspawn |
+   .pale_hanging_moss | .open_eyeblossom | .closed_eyeblossom | .firefly_bush | .repeater |
+   .lily_pad | .cocoa | .comparator | .sea_pickle | .moss_carpet | .heavy_core | .pale_moss_carpet |
+   .red_shrub | .shelf_mushroom | .straw_bed => true
+  | _ => false
+
+/-- The block tag `minecraft:enables_bubble_column_drag_down`. -/
+def enables_bubble_column_drag_down : BlockId → Bool
+  | .magma_block => true
+  | _ => false
+
+/-- The block tag `minecraft:enables_bubble_column_push_up`. -/
+def enables_bubble_column_push_up : BlockId → Bool
+  | .soul_sand => true
+  | _ => false
+
+end FluidBlockTag
 
 end Redstone

@@ -1,0 +1,62 @@
+{
+ "name": "target-two-arrows",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:target[power=0]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    1.5,
+    3.5,
+    3.5
+   ],
+   "nbt": "{Motion:[1.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    5.5,
+    3.8,
+    3.9
+   ],
+   "nbt": "{Motion:[-0.2d,0.0d,0.0d]}"
+  }
+ ],
+ "actions": []
+}

@@ -92,8 +92,6 @@ it for an explosion that triggers blocks (`ExplosionInteraction.trigger`) and do
   some of the drops survive, by the generator of each loot table. `Level.getExplosionDrops` does
   not evaluate that, so a block that would drop something sets `Level.overflow` there.
 * The overrides of `onExplosionHit` of the beehive and the creaking heart, which act on mobs.
-* Fire: `createFire` places the fire block; what the fire does when placed (its first scheduled
-  tick, drawn from the level's generator) belongs to `Redstone.Component.Fire`.
 * Game events (`explode`, `entity_damage`, `entity_die`) are announced at the block the
   explosion or the entity is in, without the entity that caused them: what a sculk sensor keeps
   of them differs from the game.
@@ -106,11 +104,12 @@ it for an explosion that triggers blocks (`ExplosionInteraction.trigger`) and do
 
 In `tests/pending/scenarios`:
 
-* `analog/anchor-explode-obsidian-floor`, `anchor-explode-soul`, `anchor-explode-stone-floor`,
-  `anchor-explode-tnt` and the `analog/adv-fuzz-*` scenarios in which a respawn anchor explodes:
-  the explosion leaves fire on a floor, and a fire that is placed schedules its first tick with
-  a draw from the level's generator (`Redstone.Component.Fire`, still a stub); on a floor that
-  drops something the drops decay as well.
+* `analog/anchor-explode-soul`, `anchor-explode-stone-floor` and the `analog/adv-fuzz-*`
+  scenarios in which a respawn anchor explodes: the explosion of a respawn anchor lets the
+  drops decay, and the floor it destroys drops something, so the model sets `Level.overflow`
+  (see Decay above); the draws the game makes for the decay also move the fires that
+  `createFire` lights afterwards. What a fire does once it is placed is
+  `Redstone.Component.Fire`.
 * `minecart/tnt-chain-rails`: the explosion of one TNT minecart pushes the next into a third,
   and minecarts that meet are not modelled (`Redstone.Entity.Minecart`).
 * `minecart/tnt-fall-sculk` and `minecart/tnt-fuse-sculk`: a sculk sensor hears the explosion

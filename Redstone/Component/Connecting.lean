@@ -19,7 +19,6 @@ shape of the block above.
 
 ## What is not modelled
 
-* The fluid tick a waterlogged block schedules on a shape update: fluids do not flow.
 * The collision shape of the block above a wall when it comes from a block entity (a moving
   piston, a shulker box) or depends on the position (bamboo, pointed dripstone): the shape of
   the block state is used.
@@ -225,6 +224,7 @@ def behaviour (self : Block) : Behaviour :=
   let horizontal (f : Level → Pos → Direction → Pos → Block → Block) : Behaviour :=
     { Behaviour.inert self with
       updateShape := fun p d q neighbour => do
+        if self.waterlogged? = some true then Level.scheduleFluidTick p .water Fluid.water.tickDelay
         if d.IsHorizontal then return f (← get) p d q neighbour else return self }
   let attaches (l : Level) (d : Direction) (q : Pos) (neighbour : Block) : Bool :=
     barsAttachTo neighbour (isFaceSturdy l q neighbour d.opposite)
@@ -243,7 +243,8 @@ def behaviour (self : Block) : Behaviour :=
       .stainedGlassPane id (setPaneArm s d (attaches l d q neighbour))
   | .wall id s =>
     { Behaviour.inert self with
-      updateShape := fun p d q neighbour =>
+      updateShape := fun p d q neighbour => do
+        if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
         return .wall id (wallUpdateShape s (← get) p d q neighbour) }
   | .stair id s =>
     horizontal fun l p _ _ _ =>

@@ -1,0 +1,168 @@
+{
+ "name": "touch-tnt-plate-wire",
+ "ticks": 45,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   13,
+   7,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    13,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:oak_pressure_plate[powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=true,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    3,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    8,
+    3,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    9,
+    3,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    9,
+    4,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    2
+   ],
+   "state": "minecraft:light_weighted_pressure_plate[power=0]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.5,
+    4.0,
+    2.5
+   ],
+   "nbt": "{fuse:200s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.6,
+    6.5,
+    4.4
+   ],
+   "nbt": "{fuse:200s}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    8.5,
+    6.9,
+    4.5
+   ],
+   "nbt": "{BlockState:\"minecraft:sand\",Time:1,Motion:[0.0d,-1.2d,0.0d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    11.5,
+    4.0,
+    2.5
+   ],
+   "nbt": "{BlockState:\"minecraft:sand\",Time:1}"
+  }
+ ],
+ "actions": []
+}

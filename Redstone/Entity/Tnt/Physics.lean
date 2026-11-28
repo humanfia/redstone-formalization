@@ -2,12 +2,13 @@ module
 
 public import Redstone.Mechanics.Tick
 public import Redstone.Entity.Tnt.Tables
+public import Redstone.Entity.Touch
 
 /-!
 # Geometry for primed TNT
 
 The parts of the game's entity physics that primed TNT and explosions use, in the game's own
-floating point arithmetic: bounding boxes (`AABB`), collision shapes placed in the world
+floating point arithmetic: collision shapes placed in the world
 (`VoxelShape.move`), the collision of a moving box with shapes (`VoxelShape.collide`,
 `Shapes.collide`), the block collisions around a box (`BlockCollisions`), and ray casts
 through blocks (`BlockGetter.clip`), of which only "hit or miss" is needed.
@@ -99,59 +100,11 @@ def blockPos (a : Vec3) : Pos := ⟨floorInt a.x, floorInt a.y, floorInt a.z⟩
 
 /-! ### Boxes -/
 
-/-- An axis-aligned box in space (`AABB`). -/
-structure AABB where
-  minX : Float
-  minY : Float
-  minZ : Float
-  maxX : Float
-  maxY : Float
-  maxZ : Float
-  deriving Repr, Inhabited
+/-- `EntityType.getDimensions` of primed TNT, which is `0.98F` wide and `0.98F` high. -/
+def dims : Dimensions := ⟨wide 0x3efae148, wide 0x3f7ae148⟩
 
-namespace AABB
-
-/-- `AABB.min(axis)`. -/
-def min (b : AABB) : Axis → Float
-  | .x => b.minX
-  | .y => b.minY
-  | .z => b.minZ
-
-/-- `AABB.max(axis)`. -/
-def max (b : AABB) : Axis → Float
-  | .x => b.maxX
-  | .y => b.maxY
-  | .z => b.maxZ
-
-/-- `EntityDimensions.makeBoundingBox` for primed TNT, which is 0.98 wide and 0.98 high: the
-box of an entity at `p`. -/
-def ofEntity (p : Vec3) : AABB :=
-  let w := wide 0x3efae148
-  let h := wide 0x3f7ae148
-  ⟨p.x - w, p.y, p.z - w, p.x + w, p.y + h, p.z + w⟩
-
-/-- `AABB.move`. -/
-def move (b : AABB) (d : Vec3) : AABB :=
-  ⟨b.minX + d.x, b.minY + d.y, b.minZ + d.z, b.maxX + d.x, b.maxY + d.y, b.maxZ + d.z⟩
-
-/-- `AABB.expandTowards`. -/
-def expandTowards (b : AABB) (d : Vec3) : AABB :=
-  { minX := if d.x < 0.0 then b.minX + d.x else b.minX
-    maxX := if d.x < 0.0 then b.maxX else if d.x > 0.0 then b.maxX + d.x else b.maxX
-    minY := if d.y < 0.0 then b.minY + d.y else b.minY
-    maxY := if d.y < 0.0 then b.maxY else if d.y > 0.0 then b.maxY + d.y else b.maxY
-    minZ := if d.z < 0.0 then b.minZ + d.z else b.minZ
-    maxZ := if d.z < 0.0 then b.maxZ else if d.z > 0.0 then b.maxZ + d.z else b.maxZ }
-
-/-- `AABB.intersects` with the cube of the block at `p`. -/
-def intersectsBlock (b : AABB) (p : Pos) : Bool :=
-  let x := Float.ofInt p.x
-  let y := Float.ofInt p.y
-  let z := Float.ofInt p.z
-  b.minX < x + 1.0 && b.maxX > x && b.minY < y + 1.0 && b.maxY > y && b.minZ < z + 1.0 &&
-    b.maxZ > z
-
-end AABB
+/-- `EntityDimensions.makeBoundingBox` for primed TNT: the box of an entity at `p`. -/
+def entityBox (p : Vec3) : AABB := dims.box p
 
 /-! ### Shapes -/
 

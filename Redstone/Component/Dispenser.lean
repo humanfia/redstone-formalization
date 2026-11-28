@@ -102,7 +102,7 @@ def dispenseFromDispenser (p : Pos) (facing : Direction) : M Unit := do
   | none => Level.gameEvent "minecraft:block_activate" p
   | some slot =>
     let stack := be.items.getItem slot
-    let mobs := (← get).entities.any fun e => e.data matches .other _
+    let mobs := (← get).entities.any fun e => e.data matches .other _ _
     match getDispenseMethod stack mobs with
     | .unmodelled => Level.setOverflow
     | .default => ContainerRef.setItem (.single p) slot (← dispenseDefault p facing stack)

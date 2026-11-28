@@ -175,7 +175,7 @@ def tick (i : ℕ) : M Unit := do
   Level.applyGravity kind i
   let some (e, _) ← get? i | return
   Level.moveEntity kind i e.base.motion
-  Level.applyEffectsFromBlocks kind i
+  Level.applyEffectsFromBlocks kind i e.base.pos
   let some (e, dt) ← get? i | return
   if !e.base.onGround then
     let y := e.base.pos.blockPos.y

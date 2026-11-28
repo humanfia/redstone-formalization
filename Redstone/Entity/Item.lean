@@ -219,10 +219,10 @@ def tick (i : ℕ) : M Unit := do
   let some (e, _) ← get? i | return
   if e.base.onGround && !(e.base.motion.horizontalDistanceSqr > Phys.eps5f) &&
       (tickCount + e.id) % 4 != 0 then
-    Level.applyEffectsFromBlocks kind i
+    Level.applyEffectsFromBlocksForLastMovements kind i
   else
     Level.moveEntity kind i e.base.motion
-    Level.applyEffectsFromBlocks kind i
+    Level.applyEffectsFromBlocks kind i old
     let some (e, _) ← get? i | return
     let airDrag : Float32 := Float32.ofBits 0x3f7ae148
     let l ← get

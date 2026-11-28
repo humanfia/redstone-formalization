@@ -243,8 +243,8 @@ def doublePlant (self : Block) (half : DoubleBlockHalf) : Behaviour :=
     canSurvive := canSurvive self
     updateShape := fun p d _ neighbour => doubleUpdateShape self half p d neighbour }
 
-/-- The behaviour of a carpet, a snow layer, a torch, a plant or a bed. The plants that need light are
-inert. -/
+/-- The behaviour of a carpet, a snow layer, a torch, a plant or a bed. The plants that need light
+are inert. -/
 def behaviour (self : Block) : Behaviour :=
   match self with
   | .bed id s => bedBehaviour self s.facing s.part fun o => .bed id { s with occupied := o }

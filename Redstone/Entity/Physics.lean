@@ -2,13 +2,15 @@ module
 
 public import Redstone.Mechanics.Tick
 public import Redstone.Block.Generated.Shapes
+public import Redstone.Entity.Touch
 
 /-!
 # Entity physics
 
 How an entity moves through the blocks of the world: `Entity.move` with `Entity.collide`,
 `Shapes.collide` and `VoxelShape.collide`, the supporting block, fall distance, the bounce of
-`restituteMovementAfterCollisions`, gravity, and the effects of the blocks an entity touches.
+`restituteMovementAfterCollisions`, gravity, and the effects of the blocks an entity touches
+(through `Redstone.Entity.Touch`).
 
 The arithmetic is that of the game: every operation on `double` and `float` values is done in
 the same order, so results agree bit for bit. Constants that are not exactly representable are
@@ -24,8 +26,6 @@ given by their bits.
   sets `Level.overflow`.
 * The box of an entity is always taken as a shape with its own coordinates. The game snaps a
   box that lies in the unit cube on multiples of one eighth to that grid, with a tolerance.
-* `Entity.checkInsideBlocks` visits the blocks the entity overlaps at the end of its movement,
-  not the blocks along the way.
 * Blocks whose `fallOn` does more than pass the fall on to the entity (farmland, turtle eggs,
   powder snow, pointed dripstone) set `Level.overflow` when an entity lands on them.
 -/
@@ -34,168 +34,6 @@ given by their bits.
 
 namespace Redstone
 
-/-! ### Numbers -/
-
-namespace Phys
-
-/-- The `double` with the given bits. -/
-def d (bits : UInt64) : Float := Float.ofBits bits
-
-/-- The `float` with the given bits, widened to `double`. -/
-def f (bits : UInt32) : Float := (Float32.ofBits bits).toFloat
-
-/-- `(double)(float)v`: a `double` rounded to `float`. -/
-def toFloat32 (v : Float) : Float := v.toFloat32.toFloat
-
-/-- `1.0E-7`, the tolerance of shape collisions (`Shapes.EPSILON`). -/
-def eps7 : Float := d 0x3e7ad7f29abcaf48
-
-/-- `1.0E-6`. -/
-def eps6 : Float := d 0x3eb0c6f7a0b5ed8d
-
-/-- `1.0E-5F`. -/
-def eps5f : Float := f 0x3727c5ac
-
-/-- `Math.min` on doubles. -/
-def min (a b : Float) : Float :=
-  if a.isNaN then a
-  else if a == 0 && b == 0 && b.toBits == 0x8000000000000000 then b
-  else if a ≤ b then a else b
-
-/-- `Math.max` on doubles. -/
-def max (a b : Float) : Float :=
-  if a.isNaN then a
-  else if a == 0 && b == 0 && a.toBits == 0x8000000000000000 then b
-  else if a ≥ b then a else b
-
-/-- `Mth.floor`: the largest integer not above `v`. -/
-def floor (v : Float) : ℤ :=
-  let w := v.floor
-  if w < 0 then -((0 - w).toUInt64.toNat : ℤ) else (w.toUInt64.toNat : ℤ)
-
-/-- `Mth.ceil`: the smallest integer not below `v`. -/
-def ceil (v : Float) : ℤ := -floor (-v)
-
-/-- An integer as a `double`. -/
-def ofInt (n : ℤ) : Float := Float.ofInt n
-
-/-- `Mth.equal`: the two numbers differ by less than `1.0E-5F`. -/
-def equal (a b : Float) : Bool := (b - a).abs < eps5f
-
-end Phys
-
-namespace Vec3
-
-/-- The zero vector (`Vec3.ZERO`). -/
-def zero : Vec3 := ⟨0, 0, 0⟩
-
-/-- `Vec3.add`. -/
-def add (a b : Vec3) : Vec3 := ⟨a.x + b.x, a.y + b.y, a.z + b.z⟩
-
-/-- `Vec3.subtract`. -/
-def sub (a b : Vec3) : Vec3 := ⟨a.x - b.x, a.y - b.y, a.z - b.z⟩
-
-/-- `Vec3.multiply(x, y, z)`. -/
-def mul (a : Vec3) (x y z : Float) : Vec3 := ⟨a.x * x, a.y * y, a.z * z⟩
-
-/-- `Vec3.lengthSqr`. -/
-def lengthSqr (a : Vec3) : Float := a.x * a.x + a.y * a.y + a.z * a.z
-
-/-- `Vec3.horizontalDistanceSqr`. -/
-def horizontalDistanceSqr (a : Vec3) : Float := a.x * a.x + a.z * a.z
-
-/-- `Vec3.get(axis)`. -/
-def get (a : Vec3) : Axis → Float
-  | .x => a.x
-  | .y => a.y
-  | .z => a.z
-
-/-- `Vec3.with(axis, value)`. -/
-def set (a : Vec3) (ax : Axis) (v : Float) : Vec3 :=
-  match ax with
-  | .x => { a with x := v }
-  | .y => { a with y := v }
-  | .z => { a with z := v }
-
-/-- `BlockPos.containing`: the block the point lies in. -/
-def blockPos (a : Vec3) : Pos := ⟨Phys.floor a.x, Phys.floor a.y, Phys.floor a.z⟩
-
-end Vec3
-
-/-! ### Boxes -/
-
-/-- An axis-aligned box in space (`AABB`). -/
-structure AABB where
-  minX : Float
-  minY : Float
-  minZ : Float
-  maxX : Float
-  maxY : Float
-  maxZ : Float
-  deriving Repr, Inhabited
-
-namespace AABB
-
-/-- The constructor of `AABB`, which orders the two corners. -/
-def of (x1 y1 z1 x2 y2 z2 : Float) : AABB :=
-  ⟨Phys.min x1 x2, Phys.min y1 y2, Phys.min z1 z2, Phys.max x1 x2, Phys.max y1 y2, Phys.max z1 z2⟩
-
-/-- `AABB.min(axis)`. -/
-def min (b : AABB) : Axis → Float
-  | .x => b.minX
-  | .y => b.minY
-  | .z => b.minZ
-
-/-- `AABB.max(axis)`. -/
-def max (b : AABB) : Axis → Float
-  | .x => b.maxX
-  | .y => b.maxY
-  | .z => b.maxZ
-
-/-- `AABB.move`. -/
-def move (b : AABB) (v : Vec3) : AABB :=
-  of (b.minX + v.x) (b.minY + v.y) (b.minZ + v.z) (b.maxX + v.x) (b.maxY + v.y) (b.maxZ + v.z)
-
-/-- `AABB.expandTowards`: the box stretched by a movement. -/
-def expandTowards (b : AABB) (v : Vec3) : AABB :=
-  of (if v.x < 0 then b.minX + v.x else b.minX) (if v.y < 0 then b.minY + v.y else b.minY)
-    (if v.z < 0 then b.minZ + v.z else b.minZ) (if v.x > 0 then b.maxX + v.x else b.maxX)
-    (if v.y > 0 then b.maxY + v.y else b.maxY) (if v.z > 0 then b.maxZ + v.z else b.maxZ)
-
-/-- `AABB.inflate(x, y, z)`. -/
-def inflate (b : AABB) (x y z : Float) : AABB :=
-  of (b.minX - x) (b.minY - y) (b.minZ - z) (b.maxX + x) (b.maxY + y) (b.maxZ + z)
-
-/-- `AABB.deflate(amount)`. -/
-def deflate (b : AABB) (v : Float) : AABB := b.inflate (-v) (-v) (-v)
-
-/-- `AABB.intersects(minX, ..., maxZ)`: the interiors of the boxes meet. -/
-def intersects (b c : AABB) : Bool :=
-  b.minX < c.maxX && b.maxX > c.minX && b.minY < c.maxY && b.maxY > c.minY &&
-    b.minZ < c.maxZ && b.maxZ > c.minZ
-
-/-- The box of the block at `p`, as `BlockCollisions` passes it to `AABB.intersects`. -/
-def ofBlock (p : Pos) : AABB :=
-  let x := Phys.ofInt p.x
-  let y := Phys.ofInt p.y
-  let z := Phys.ofInt p.z
-  ⟨x, y, z, x + 1.0, y + 1.0, z + 1.0⟩
-
-end AABB
-
-/-- The size of an entity (`EntityDimensions`): half its width and its height, as doubles. -/
-structure Dimensions where
-  halfWidth : Float
-  height : Float
-
-namespace Dimensions
-
-/-- `EntityDimensions.makeBoundingBox`: the box of an entity at `p`. -/
-def box (dm : Dimensions) (p : Vec3) : AABB :=
-  AABB.of (p.x - dm.halfWidth) p.y (p.z - dm.halfWidth) (p.x + dm.halfWidth) (p.y + dm.height)
-    (p.z + dm.halfWidth)
-
-end Dimensions
 
 /-! ### Shapes -/
 
@@ -209,12 +47,6 @@ structure Shape where
   zs : Array Float
 
 namespace Shape
-
-/-- Reads the boxes of a shape from the bits of their coordinates. -/
-def boxesOfBits : List UInt64 → List AABB
-  | a :: b :: c :: d :: e :: g :: rest =>
-    ⟨.ofBits a, .ofBits b, .ofBits c, .ofBits d, .ofBits e, .ofBits g⟩ :: boxesOfBits rest
-  | _ => []
 
 /-- Inserts a coordinate into an increasing list, unless it is there. -/
 def insertCoord (v : Float) : List Float → List Float
@@ -231,7 +63,7 @@ def ofBoxes (boxes : List AABB) : Shape where
 /-- The shape number `i` of the table generated from the server. A collision shape has the grid
 that the game gives it; for any other shape the grid is made by the faces of its boxes. -/
 def ofIndex (i : ℕ) : Shape :=
-  let boxes := boxesOfBits (Block.shapeBits.getD i #[]).toList
+  let boxes := AABB.listOfBits (Block.shapeBits.getD i #[]).toList
   match Block.shapeGridBits.getD i #[] with
   | #[xs, ys, zs] => ⟨boxes, xs.map .ofBits, ys.map .ofBits, zs.map .ofBits⟩
   | _ => ofBoxes boxes
@@ -542,10 +374,6 @@ def collideShapes (ax : Axis) (moving : AABB) (shapes : List PlacedShape) (dista
   | s :: rest =>
     if distance.abs < eps7 then 0.0 else collideShapes ax moving rest (s.collide ax moving distance)
 
-/-- `Direction.axisStepOrder(movement)`: the order in which a movement is resolved. -/
-def axisStepOrder (movement : Vec3) : List Axis :=
-  if movement.x.abs < movement.z.abs then [.y, .z, .x] else [.y, .x, .z]
-
 /-- `Entity.collideWithShapes(movement, box, shapes)`: the part of `movement` the box can
 make. -/
 def collideWithShapes (movement : Vec3) (box : AABB) (shapes : List PlacedShape) : Vec3 :=
@@ -620,11 +448,11 @@ structure Kind where
   /-- `causeFallDamage(fallDistance, ...)` for the entity with the given index. -/
   causeFallDamage : ℕ → Float → M Unit := fun _ _ => pure ()
 
-/-- `Entity.getOnPos(offset)`: the block below the entity that is `offset` under its feet, or
-its supporting block. -/
-def getOnPos (l : Level) (e : Entity) (offset : Float) : Pos :=
-  let pos := e.base.pos
-  match e.phys.mainSupportingBlockPos with
+/-- `Entity.getOnPos(offset)` for an entity at `pos` whose supporting block
+(`mainSupportingBlockPos`) is `support`: the block below the entity that is `offset` under its
+feet, or its supporting block. -/
+def onPos (l : Level) (pos : Vec3) (support : Option Pos) (offset : Float) : Pos :=
+  match support with
   | some p =>
     if !(offset > Phys.eps5f) then p
     else
@@ -633,6 +461,10 @@ def getOnPos (l : Level) (e : Entity) (offset : Float) : Pos :=
         { p with y := Phys.floor (pos.y - offset) }
       else p
   | none => ⟨Phys.floor pos.x, Phys.floor (pos.y - offset), Phys.floor pos.z⟩
+
+/-- `Entity.getOnPos(offset)`. -/
+def getOnPos (l : Level) (e : Entity) (offset : Float) : Pos :=
+  onPos l e.base.pos e.phys.mainSupportingBlockPos offset
 
 /-- `Entity.getOnPosLegacy`. -/
 def getOnPosLegacy (l : Level) (e : Entity) : Pos := getOnPos l e (Phys.f 0x3e4ccccd)
@@ -797,7 +629,13 @@ def moveEntity (k : Entity.Kind) (i : ℕ) (delta : Vec3) : M Unit := do
     if moves && e.phys.fallDistance != 0 && movementLength ≥ 1.0 &&
         Entity.fallResetPossible l e.base.pos movement then
       setOverflow
-    let e := if moves then setPos e (e.base.pos.add movement) l.gameTime (i + 1) else e
+    -- `addMovementThisTick(new Movement(pos, newPosition, delta))`
+    let e :=
+      if moves then
+        let target := e.base.pos.add movement
+        (setPos e target l.gameTime (i + 1)).modifyPhys fun p =>
+          { p with movementThisTick := p.movementThisTick ++ [⟨e.base.pos, target, some delta⟩] }
+      else e
     let xCollision := !Phys.equal delta.x movement.x
     let zCollision := !Phys.equal delta.z movement.z
     let horizontalCollision := xCollision || zCollision
@@ -818,28 +656,25 @@ def applyGravity (k : Entity.Kind) (i : ℕ) : M Unit :=
     if e.phys.noGravity || k.gravity == 0 then e
     else { e with base := { e.base with motion := e.base.motion.add ⟨0.0, -k.gravity, 0.0⟩ } }
 
-/-- `Entity.applyEffectsFromBlocks` for the entity with index `i`: the block the entity stands
-on is told (`stepOn`), and so are the blocks it is inside of (`entityInside`). The blocks are
-those that the box of the entity, shrunk by `1.0E-5F`, overlaps where the entity is now, in the
-order of `BlockPos.betweenClosed`; the blocks passed on the way are left out. -/
-def applyEffectsFromBlocks (k : Entity.Kind) (i : ℕ) : M Unit := do
+/-- `Entity.applyEffectsFromBlocksForLastMovements` for the entity with index `i`: the block the
+entity stands on is told (`stepOn`), and so are the blocks it met (`entityInside`) during the
+movements for which the effects of blocks were last applied (`Entity.Touch`). -/
+def applyEffectsFromBlocksForLastMovements (k : Entity.Kind) (i : ℕ) : M Unit := do
   let some e ← getEntity i | return
   if e.phys.noPhysics then return
   let l ← get
-  if e.base.onGround then
-    let effectPos := Entity.getOnPosLegacy l e
-    (← behaviour (l.blockAt effectPos)).stepOn effectPos i
+  let effectPos := if e.base.onGround then some (Entity.getOnPosLegacy l e) else none
+  Entity.Touch.applyEffectsFromBlocks k.dims i effectPos e.phys.finalMovementsThisTick
+
+/-- `Entity.applyEffectsFromBlocks()` for the entity with index `i`: the effects of blocks are
+applied for the movements the entity made since the last time. `old` is where the entity was
+when its tick began (`Entity.oldPosition`). -/
+def applyEffectsFromBlocks (k : Entity.Kind) (i : ℕ) (old : Vec3) : M Unit := do
   let some e ← getEntity i | return
-  let box := (k.dims.box e.base.pos).deflate Phys.eps5f
-  let lo : Pos := ⟨Phys.floor box.minX, Phys.floor box.minY, Phys.floor box.minZ⟩
-  let hi : Pos := ⟨Phys.floor box.maxX, Phys.floor box.maxY, Phys.floor box.maxZ⟩
-  for z in PlacedShape.range lo.z (hi.z + 1) do
-    for y in PlacedShape.range lo.y (hi.y + 1) do
-      for x in PlacedShape.range lo.x (hi.x + 1) do
-        if ((← get).entity? i).isSome then
-          let p : Pos := ⟨x, y, z⟩
-          let state ← getBlock p
-          if !state.isAir then (← behaviour state).entityInside p i
+  let final := Entity.Touch.finalMovements e.phys.movementThisTick old e.base.pos
+  setEntity (e.modifyPhys fun p =>
+    { p with movementThisTick := [], finalMovementsThisTick := final })
+  applyEffectsFromBlocksForLastMovements k i
 
 /-- The entity with index `i` touches a fluid, which the model does not handle: records it. -/
 def checkNoFluid (k : Entity.Kind) (i : ℕ) : M Unit := do

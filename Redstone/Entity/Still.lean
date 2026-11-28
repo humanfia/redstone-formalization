@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Mechanics.Tick
+public import Redstone.Entity.Physics
 
 /-!
 # Entities at rest
@@ -21,75 +22,29 @@ The model keeps only the type, position, velocity and `onGround` flag of these e
 everything else is taken from the entity type:
 
 * the bounding box is that of the type's default dimensions: an adult, standing, unscaled
-  entity (no baby, no small armour stand, no sleeping or sitting pose);
-* an entity has its default flags: an armour stand is not a marker and has gravity (an armour
-  stand with `NoGravity` or `Marker` does not touch blocks in the game, and a marker is not
-  detected either), no entity is a spectator or has `noPhysics`;
+  entity (no baby, no sleeping or sitting pose). The flags of an armour stand are kept
+  (`Entities.Other`): a small one is half as large, a marker has no size and is not detected,
+  and a marker or an armour stand without gravity does not touch blocks (`info?`);
+* no entity is a spectator, and none but these armour stands has `noPhysics`;
 * a living entity runs `LivingEntity.aiStep`, which applies the effects of blocks once;
 * the entity does not move, which is true on the server only if it is kept still (`NoAI` for
   mobs, a resting position for an armour stand).
 
 ## What is left out
 
-* `Block.stepOn` for the block an entity on the ground stands on.
 * Fluids (`FluidState.entityInside`).
 * Everything else these entities do in a tick: mobs push each other, age, burn, and so on.
   A squid or glow squid out of water changes its velocity every tick even with `NoAI`, so the
-  model does not reproduce it (pending scenario `sweep-squid-00`).
+  model does not reproduce it (pending scenario `sweep-squid-00`). A boat is not at rest
+  either: its tick clears `onGround` (pending scenario `rail/detector-not-a-cart-boat`).
+* Babies, whose box is smaller by an amount that depends on the species (pending scenario
+  `pressure-plate/entity-flags`).
 * The parts of the ender dragon (the dragon is not in the type table at all).
 -/
 
 @[expose] public section
 
 namespace Redstone.Entity.Still
-
-/-- An axis-aligned box in `double` coordinates (`AABB`). -/
-structure AABB where
-  minX : Float
-  minY : Float
-  minZ : Float
-  maxX : Float
-  maxY : Float
-  maxZ : Float
-  deriving Repr, Inhabited
-
-namespace AABB
-
-/-- `AABB.intersects(aabb)`: the interiors of the two boxes meet. -/
-def intersects (a b : AABB) : Bool :=
-  a.minX < b.maxX && a.maxX > b.minX && a.minY < b.maxY && a.maxY > b.minY &&
-    a.minZ < b.maxZ && a.maxZ > b.minZ
-
-/-- `AABB.inflate(amount)`: grows the box by `d` on every side. -/
-def inflate (a : AABB) (d : Float) : AABB :=
-  ⟨a.minX - d, a.minY - d, a.minZ - d, a.maxX + d, a.maxY + d, a.maxZ + d⟩
-
-/-- `AABB.deflate(amount)`: shrinks the box by `d` on every side. -/
-def deflate (a : AABB) (d : Float) : AABB := a.inflate (-d)
-
-/-- `AABB.move(pos)`: the box moved by the coordinates of a block position. -/
-def move (a : AABB) (p : Pos) : AABB :=
-  let x := Float.ofInt p.x
-  let y := Float.ofInt p.y
-  let z := Float.ofInt p.z
-  ⟨a.minX + x, a.minY + y, a.minZ + z, a.maxX + x, a.maxY + y, a.maxZ + z⟩
-
-/-- `Mth.floor(double)`: the largest integer not above `v`. -/
-def floor (v : Float) : ℤ := v.floor.toInt64.toInt
-
-/-- `BlockPos.betweenClosed(aabb)`: the block positions the box reaches, in the order of the
-game's iterator: x runs fastest, then y, then z. -/
-def blocks (a : AABB) : List Pos :=
-  let x0 := floor a.minX
-  let y0 := floor a.minY
-  let z0 := floor a.minZ
-  let width := (floor a.maxX - x0 + 1).toNat
-  let height := (floor a.maxY - y0 + 1).toNat
-  let depth := (floor a.maxZ - z0 + 1).toNat
-  (List.range depth).flatMap fun z => (List.range height).flatMap fun y =>
-    (List.range width).map fun x => ⟨x0 + x, y0 + y, z0 + z⟩
-
-end AABB
 
 /-- What the model knows about an entity type. -/
 structure TypeInfo where
@@ -278,24 +233,40 @@ def typeTable : List (String × UInt32 × UInt32 × Bool × Bool × ℕ) := [
     ("minecraft:fishing_bobber", 0x3e800000, 0x3e800000, false, false, 0)
   ]
 
+/-- `EntityType.getDimensions`. -/
+def TypeInfo.dims (info : TypeInfo) : Dimensions :=
+  ⟨(info.width / 2.0).toFloat, info.height.toFloat⟩
+
 /-- What the model knows about the entity type with the given registry name. -/
 def typeInfo? (type : String) : Option TypeInfo :=
   (typeTable.find? (·.1 == type)).map fun (_, w, h, living, ignores, effects) =>
     ⟨Float32.ofBits w, Float32.ofBits h, living, ignores, effects⟩
 
+/-- What the model knows about an entity: what it knows about its type, changed by the flags of
+an armour stand. A marker (`Marker`) has no size (`MARKER_DIMENSIONS`) and ignores block
+triggers; a small armour stand (`Small`) is half as large (`BABY_DIMENSIONS`); a marker or an
+armour stand without gravity (`NoGravity`) has no physics (`ArmorStand.hasPhysics`,
+`Entity.noPhysics`), so it never applies the effects of blocks. -/
+def info? (e : Entity) : Option TypeInfo :=
+  match e.data, typeInfo? e.data.typeName with
+  | .other "minecraft:armor_stand" d, some info =>
+    let info :=
+      if d.marker then { info with width := 0.0, height := 0.0, ignoresBlockTriggers := true }
+      else if d.small then { info with width := info.width * 0.5, height := info.height * 0.5 }
+      else info
+    some (if d.marker || d.noGravity then { info with effects := 0 } else info)
+  | _, info => info
+
 /-- `EntityDimensions.makeBoundingBox(x, y, z)`: the box of an entity standing at `pos`. Half
 the width is computed in `float`, the rest in `double`. -/
-def makeBoundingBox (info : TypeInfo) (pos : Vec3) : AABB :=
-  let w := (info.width / 2.0).toFloat
-  let h := info.height.toFloat
-  ⟨pos.x - w, pos.y, pos.z - w, pos.x + w, pos.y + h, pos.z + w⟩
+def makeBoundingBox (info : TypeInfo) (pos : Vec3) : AABB := info.dims.box pos
 
 /-- `Entity.getBoundingBox()`, for an entity with the default dimensions of its type. -/
 def boundingBox? (e : Entity) : Option AABB :=
-  (typeInfo? e.data.typeName).map fun info => makeBoundingBox info e.base.pos
+  (info? e).map fun info => makeBoundingBox info e.base.pos
 
 /-- `SectionPos.posToSectionCoord(double)`: the coordinate of the 16-block section of `v`. -/
-def sectionCoord (v : Float) : ℤ := (AABB.floor v).fdiv 16
+def sectionCoord (v : Float) : ℤ := (Phys.floor v).fdiv 16
 
 /-- `EntitySectionStorage.forEachAccessibleNonEmptySection(box, ...)`: the entity search only
 looks at the sections that the box, grown by 2 blocks horizontally and by 4 blocks downwards,
@@ -316,34 +287,49 @@ if `livingOnly` is set (`LivingEntity.class` instead of `Entity.class`). Entitie
 table does not know are not found. -/
 def getTriggeringEntities (l : Level) (box : AABB) (livingOnly : Bool) : List Entity :=
   l.entities.filter fun e =>
-    match typeInfo? e.data.typeName with
+    match info? e with
     | none => false
     | some info =>
       (info.living || !livingOnly) && !info.ignoresBlockTriggers &&
         inSearchedSections e.base.pos box && (makeBoundingBox info e.base.pos).intersects box
 
-/-- The amount by which `checkInsideBlocks` shrinks the bounding box: `1.0E-5F`. -/
-def insideMargin : Float := (1.0e-5 : Float32).toFloat
+/-- The entity types that call `Entity.move` in every tick although they are at rest: armour
+stands (`LivingEntity.travel`, which a mob without AI does not run) and boats. Such an entity
+knows the block it stands on (`Entity.mainSupportingBlockPos`). -/
+def movesAtRest (type : String) : Bool :=
+  type == "minecraft:armor_stand" || type.endsWith "_boat" || type.endsWith "_raft"
 
-/-- `Entity.applyEffectsFromBlocks()` for an entity that did not move in this tick: every block
-that its bounding box, shrunk by `insideMargin`, reaches is told that the entity is inside it
-(`checkInsideBlocks` with a movement of length zero, where `forEachBlockIntersectedBetween`
-goes through `BlockPos.betweenClosed`). The blocks are told in order, and no more once the
-entity is gone. A block is told whatever its shape, as for all blocks that do not override
-`getEntityInsideCollisionShape`. -/
+/-- `Entity.getOnPosLegacy()` for an entity at rest that is on the ground: the block it steps
+on. An entity that calls `Entity.move` stands on the block that `checkSupportingBlock` finds
+under its box, the one whose centre is nearest; any other entity never had a supporting block,
+so it stands on the block a fifth of a block under its position. -/
+def effectPos (l : Level) (e : Entity) (info : TypeInfo) : Option Pos :=
+  if !e.base.onGround then none
+  else
+    let pos := e.base.pos
+    let support :=
+      if movesAtRest e.data.typeName then
+        let box := info.dims.box pos
+        l.findSupportingBlock pos
+          (AABB.of box.minX (box.minY - Phys.eps6) box.minZ box.maxX box.minY box.maxZ)
+      else none
+    some (Entity.onPos l pos support (Phys.f 0x3e4ccccd))
+
+/-- `Entity.applyEffectsFromBlocks()` for an entity that did not move in this tick: the block it
+stands on is stepped on (`Block.stepOn`), and, the way it made being from where it is to where
+it is, every block that its bounding box, shrunk by `1.0E-5F`, reaches is told that the entity
+is inside it (`Redstone.Entity.Touch`). -/
 def applyEffectsFromBlocks (index : ℕ) : M Unit := do
   let some e := (← get).entity? index | return
-  let some box := boundingBox? e | return
-  (box.deflate insideMargin).blocks.forM fun p => do
-    if ((← get).entity? index).isSome then
-      let state ← Level.getBlock p
-      if !state.isAir then (← Level.behaviour state).entityInside p index
+  let some info := info? e | return
+  Touch.applyEffectsFromBlocks info.dims index (effectPos (← get) e info)
+    [⟨e.base.pos, e.base.pos, none⟩]
 
 /-- The behaviour of an entity the model does not move: in every game tick it applies the
 effects of the blocks it is in, as often as its class does. -/
 def behaviour (e : Entity) : EntityBehaviour :=
   ⟨fun index => do
-    match typeInfo? e.data.typeName with
+    match info? e with
     | none => pure ()
     | some info => (List.range info.effects).forM fun _ => applyEffectsFromBlocks index⟩
 

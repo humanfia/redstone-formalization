@@ -23,14 +23,18 @@ The plate gives its signal to all its neighbours, and strong power to the block 
 needs a block below whose top face supports it (`canSurvive`).
 
 Which entities there are, their bounding boxes and when they touch a block comes from
-`Redstone.Entity.Still`; see there for what is assumed about entities. Sounds are left out.
+`Redstone.Entity.Still` and `Redstone.Entity.Touch`; see there for what is assumed about
+entities. Sounds are left out.
+
+Two scenarios wait in `tests/pending`: `entity-flags`, which has a baby pig, whose smaller box
+the model does not have, and `sweep-squid-00`, in which a squid out of water moves although it
+has no AI.
 -/
 
 @[expose] public section
 
 namespace Redstone.Component.PressurePlate
 
-open Redstone.Entity.Still (AABB)
 
 /-- `BlockSetType.PressurePlateSensitivity`: what a plate with a boolean state detects. -/
 inductive Sensitivity
@@ -54,7 +58,7 @@ def maxWeight : Blocks.WeightedPressurePlate.Id → ℕ
 
 /-- `TOUCH_AABB.move(pos)`: the box in which entities are counted, 14 pixels wide and 4 pixels
 high, at the bottom of the plate's cell. -/
-def touchBox (p : Pos) : AABB := (⟨0.0625, 0.0, 0.0625, 0.9375, 0.25, 0.9375⟩ : AABB).move p
+def touchBox (p : Pos) : AABB := (⟨0.0625, 0.0, 0.0625, 0.9375, 0.25, 0.9375⟩ : AABB).atBlock p
 
 /-- `getEntityCount(level, box, entityClass)`: the number of entities of the class in the box
 that are not spectators and do not ignore block triggers. -/

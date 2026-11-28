@@ -2,6 +2,7 @@ module
 
 public import Redstone.Mechanics.Tick
 public import Redstone.Basic.Xoroshiro
+public import Redstone.Entity.Still
 
 /-!
 # Other blocks that react to redstone or to pistons
@@ -9,7 +10,8 @@ public import Redstone.Basic.Xoroshiro
 Java classes: `AbstractSkullBlock` (with `SkullBlock`, `WallSkullBlock`, `WitherSkullBlock`,
 `WitherWallSkullBlock`, `PlayerHeadBlock`, `PlayerWallHeadBlock`, `PiglinWallSkullBlock`),
 `SpongeBlock`, `FrostedIceBlock` (with `IceBlock.melt`), `PotentSulfurBlock` (with the
-server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`.
+server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`,
+`RedStoneOreBlock`.
 
 ## What is modelled
 
@@ -21,8 +23,9 @@ server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`.
   generator.
 * Potent sulfur: `updateShape`, `onPlace`, `triggerEvent`, which states tick their block
   entity, and the countdown ticker that alternates `dormant` and `erupting`.
-* Slime block: `stepOn`, which no entity of the model calls yet; it is the only definition here
-  that has not been compared with the server.
+* Slime block: `stepOn`, which slows down an entity that walks on it.
+* Honey block: `entityInside`, which makes an entity slide down its sides.
+* Redstone ore: `stepOn`, which lights it up.
 
 ## What is left out
 
@@ -55,9 +58,11 @@ server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`.
   (`tests/pending/scenarios/extra/adv-fuzz-a-020.json`).
 * `WitherSkullBlock.setPlacedBy` (building a wither), `getStateForPlacement`: players do not
   place blocks.
-* `SlimeBlock.fallOn`, `HoneyBlock.fallOn` and `HoneyBlock.entityInside`: fall damage and the
-  slide along honey, which needs the width of the entity. That pistons move the blocks
+* `SlimeBlock.fallOn` and `HoneyBlock.fallOn`: fall damage. That pistons move the blocks
   attached to slime and honey belongs to the piston.
+* `RedStoneOreBlock.attack` (players do not hit blocks), `useItemOn`, whose result depends on
+  whether the item in hand could be placed, `randomTick`, which puts lit ore out again (random
+  ticks are not modelled), and the experience it drops.
 -/
 
 @[expose] public section
@@ -307,22 +312,95 @@ def potentSulfur (s : Blocks.PotentSulfur) : Behaviour :=
 /-! ### Slime block -/
 
 /-- `SlimeBlock.stepOn`: an entity that walks on slime without bouncing is slowed down. Entities
-of the model never step carefully (`isSteppingCarefully` is sneaking). Nothing in the model
-calls `stepOn` yet, so this definition has not been compared with the server. -/
+of the model never step carefully (`isSteppingCarefully` is sneaking). -/
 def slimeStepOn (index : ℕ) : M Unit :=
   Level.modifyEntity index fun e =>
     let m := e.base.motion
     let absDeltaY := m.y.abs
     if absDeltaY < 0.1 then
       let scale := 0.4 + absDeltaY * 0.2
-      { e with base := { e.base with motion := ⟨m.x * scale, m.y, m.z * scale⟩ } }
+      { e with base := { e.base with motion := ⟨m.x * scale, m.y * 1.0, m.z * scale⟩ } }
     else e
+
+/-! ### Honey block -/
+
+/-- `0.98F` as a `double`. -/
+def drag : Float := (Float32.ofBits 0x3f7ae148).toFloat
+
+/-- `HoneyBlock.getOldDeltaY`. -/
+def honeyOldDeltaY (deltaY : Float) : Float := deltaY / drag + 0.08
+
+/-- `HoneyBlock.getNewDeltaY`. -/
+def honeyNewDeltaY (deltaY : Float) : Float := (deltaY - 0.08) * drag
+
+/-- `HoneyBlock.isSlidingDown(pos, entity)` for an entity whose width is the `float` `width`:
+the entity is in the air, below the top of the block, falling, and at the side of the block. -/
+def honeyIsSlidingDown (p : Pos) (e : Entity) (width : Float32) : Bool :=
+  if e.base.onGround then false
+  else if e.base.pos.y > Float.ofInt p.y + 0.9375 - 1.0E-7 then false
+  else if honeyOldDeltaY e.base.motion.y ≥ -0.08 then false
+  else
+    let dx := (Float.ofInt p.x + 0.5 - e.base.pos.x).abs
+    let dz := (Float.ofInt p.z + 0.5 - e.base.pos.z).abs
+    let overlapDistance := 0.4375 + (width / 2.0).toFloat
+    dx + 1.0E-7 > overlapDistance || dz + 1.0E-7 > overlapDistance
+
+/-- `HoneyBlock.doesEntityDoHoneyBlockSlideEffects`: living entities, minecarts, primed TNT and
+boats. -/
+def honeySlideEffects (e : Entity) : Bool :=
+  match e.data with
+  | .minecart _ _ | .tnt _ => true
+  | .other type _ =>
+    type.endsWith "_boat" || type.endsWith "_raft" ||
+      ((Entity.Still.typeInfo? type).map (·.living)).getD false
+  | _ => false
+
+/-- `HoneyBlock.entityInside`: an entity that falls along the side of the block slides down
+slowly (`doSlideMovement`) and its fall distance is reset. For the entities that show it
+(`maybeDoSlideEffects`) the level's random generator is drawn from twice, for the sound and
+for the particles. An entity whose width the model does not know sets `Level.overflow`. -/
+def honeyEntityInside (p : Pos) (index : ℕ) : M Unit := do
+  let some e := (← get).entity? index | return
+  let some info := Entity.Still.info? e | Level.setOverflow
+  if honeyIsSlidingDown p e info.width then
+    let m := e.base.motion
+    let old := honeyOldDeltaY m.y
+    let motion : Vec3 :=
+      if old < -0.13 then
+        let horizontalReductionFactor := -0.05 / old
+        ⟨m.x * horizontalReductionFactor, honeyNewDeltaY (-0.05), m.z * horizontalReductionFactor⟩
+      else ⟨m.x, honeyNewDeltaY (-0.05), m.z⟩
+    Level.modifyEntity index fun e =>
+      { e with base := { e.base with motion := motion } }.resetFallDistance
+    if honeySlideEffects e then
+      discard <| nextInt 5
+      discard <| nextInt 5
+
+/-! ### Redstone ore -/
+
+/-- `RedStoneOreBlock.interact`: the ore lights up. `spawnParticles` draws two numbers from the
+level's random generator for every side of the block that is not covered by a block that hides
+it (`isSolidRender`), on the server as well. -/
+def redstoneOreInteract (id : Blocks.RedStoneOre.Id) (s : Blocks.RedStoneOre) (p : Pos) :
+    M Unit := do
+  for d in Direction.values do
+    if !(← Level.getBlock (p.step d)).attrs.solidRender then
+      modify fun l => { l with random := l.random.nextFloat24.2.nextFloat24.2 }
+  if !s.lit then discard <| Level.setBlock p (.redStoneOre id { s with lit := true })
+
+/-- The behaviour of redstone ore (`RedStoneOreBlock`): an entity that steps on it lights it
+up. -/
+def redstoneOre (id : Blocks.RedStoneOre.Id) (s : Blocks.RedStoneOre) : Behaviour :=
+  { Behaviour.inert (.redStoneOre id s) with
+    stepOn := fun p _ => redstoneOreInteract id s p }
 
 /-- The behaviour of the blocks of this component. -/
 def behaviour (self : Block) : Behaviour :=
   match self with
   | .plain .sponge => sponge self
   | .plain .slime_block => { Behaviour.inert self with stepOn := fun _ i => slimeStepOn i }
+  | .plain .honey_block => { Behaviour.inert self with entityInside := honeyEntityInside }
+  | .redStoneOre id s => redstoneOre id s
   | .frostedIce s => frostedIce s
   | .potentSulfur s => potentSulfur s
   | _ =>

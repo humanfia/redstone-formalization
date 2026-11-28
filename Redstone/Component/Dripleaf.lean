@@ -16,9 +16,9 @@ A leaf with another leaf placed on it becomes a stem. A stem needs a stem or sup
 below and a stem or leaf above; otherwise it breaks one game tick after a shape update from
 above or below.
 
-The two ways a leaf starts to tilt, `entityInside` and `onProjectileHit`, are defined here but
-are called by the entities, whose formalization is separate; until an entity calls them, a leaf
-only ever goes back to `none`.
+The two ways a leaf starts to tilt are `entityInside`, which the entity units call
+(`Redstone.Entity.Touch`), and `onProjectileHit`, which nothing calls yet, because the flight of
+projectiles is not modelled.
 
 Not modelled:
 

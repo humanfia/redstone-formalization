@@ -1,0 +1,62 @@
+{
+ "name": "touch-slime-step",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    6
+   ],
+   "state": "minecraft:slime_block"
+  }
+ ],
+ "blocks": [],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{fuse:200s,Motion:[0.3d,0.0d,0.1d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    3.0,
+    4.5
+   ],
+   "nbt": "{fuse:200s,Motion:[0.2d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    8.5,
+    3.0,
+    2.5
+   ],
+   "nbt": "{BlockState:\"minecraft:sand\",Time:1,Motion:[0.1d,0.0d,0.0d]}"
+  }
+ ],
+ "actions": []
+}

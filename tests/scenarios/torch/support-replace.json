@@ -1,0 +1,209 @@
+{
+ "name": "support-replace",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=east,lit=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=east,lit=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=east,lit=true]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=north,lit=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 20,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "drop": false
+  }
+ ]
+}

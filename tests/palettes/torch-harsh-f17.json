@@ -1,0 +1,98 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:stone_slab[type=*,waterlogged=false]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:iron_chain[axis=*,waterlogged=false]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:end_rod[facing=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:glass",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:redstone_block",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:redstone_torch[lit=*]",
+   "weight": 7
+  },
+  {
+   "state": "minecraft:redstone_wall_torch[facing=*,lit=*]",
+   "weight": 9
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    6,
+    16
+   ],
+   "targets": [
+    "minecraft:lever"
+   ]
+  },
+  "set": {
+   "count": [
+    6,
+    14
+   ],
+   "states": [
+    "minecraft:stone",
+    "minecraft:air",
+    "minecraft:redstone_block",
+    "minecraft:glass",
+    "minecraft:stone_slab[type=*,waterlogged=false]",
+    "minecraft:iron_chain[axis=*,waterlogged=false]",
+    "minecraft:end_rod[facing=*]",
+    "minecraft:redstone_lamp[lit=*]",
+    "minecraft:redstone_torch[lit=*]",
+    "minecraft:redstone_torch[lit=*]",
+    "minecraft:redstone_wall_torch[facing=*,lit=*]",
+    "minecraft:redstone_wall_torch[facing=*,lit=*]",
+    "minecraft:lever[face=*,facing=*,powered=*]"
+   ],
+   "flags": 17
+  },
+  "destroy": {
+   "count": [
+    3,
+    8
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:redstone_block",
+    "minecraft:redstone_torch",
+    "minecraft:redstone_wall_torch",
+    "minecraft:lever",
+    "minecraft:redstone_lamp",
+    "minecraft:stone_slab",
+    "minecraft:glass"
+   ]
+  }
+ }
+}

@@ -137,6 +137,10 @@ structure Level where
   nesting depth of block reactions or the length of a loop. A level with this flag is not a
   faithful image of the game any more. -/
   overflow : Bool
+  /-- `RedstoneTorchBlock.RECENT_TOGGLES` for this level: the position and game time of the
+  recent times a redstone torch was switched off, oldest first. It decides when a torch burns
+  out. The game keeps it outside the level and does not save it. -/
+  recentTorchToggles : List (Pos × ℕ) := []
 
 namespace Level
 

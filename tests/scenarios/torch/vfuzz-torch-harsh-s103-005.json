@@ -1,0 +1,48 @@
+{
+  "name": "vfuzz-torch-harsh-s103-005",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [1, 4, 1]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [1, 0, 1], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=wall,facing=east,powered=true]"},
+    {"pos": [0, 2, 0], "state": "minecraft:glass"},
+    {"pos": [0, 2, 1], "state": "minecraft:redstone_torch[lit=false]"},
+    {"pos": [0, 3, 0], "state": "minecraft:glass"},
+    {"pos": [0, 3, 1], "state": "minecraft:lever[face=floor,facing=east,powered=true]"},
+    {"pos": [0, 4, 0], "state": "minecraft:redstone_torch[lit=false]"},
+    {"pos": [0, 4, 1], "state": "minecraft:stone_slab[type=double,waterlogged=false]"},
+    {"pos": [1, 2, 0], "state": "minecraft:redstone_wall_torch[facing=north,lit=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 3, 0], "state": "minecraft:stone"},
+    {"pos": [1, 3, 1], "state": "minecraft:stone"},
+    {"pos": [1, 4, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 4, 1], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [0, 3, 1], "state": "minecraft:iron_chain[axis=y,waterlogged=false]"},
+    {"tick": 5, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 5, "type": "destroy", "pos": [0, 1, 1], "drop": false},
+    {"tick": 8, "type": "set", "pos": [1, 1, 1], "state": "minecraft:redstone_wall_torch[facing=south,lit=false]"},
+    {"tick": 9, "type": "destroy", "pos": [0, 2, 1], "drop": false},
+    {"tick": 11, "type": "set", "pos": [1, 1, 0], "state": "minecraft:air"},
+    {"tick": 12, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 16, "type": "set", "pos": [0, 4, 0], "state": "minecraft:redstone_torch[lit=false]"},
+    {"tick": 16, "type": "set", "pos": [1, 4, 1], "state": "minecraft:glass"},
+    {"tick": 17, "type": "destroy", "pos": [0, 4, 0], "drop": false},
+    {"tick": 18, "type": "use", "pos": [0, 3, 1], "face": "up"},
+    {"tick": 25, "type": "set", "pos": [1, 4, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"tick": 26, "type": "use", "pos": [0, 3, 1], "face": "up"},
+    {"tick": 27, "type": "use", "pos": [0, 3, 1], "face": "up"},
+    {"tick": 29, "type": "set", "pos": [0, 4, 1], "state": "minecraft:redstone_torch[lit=true]"},
+    {"tick": 30, "type": "set", "pos": [0, 4, 1], "state": "minecraft:end_rod[facing=down]"},
+    {"tick": 34, "type": "set", "pos": [1, 1, 1], "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"},
+    {"tick": 35, "type": "use", "pos": [0, 3, 1], "face": "up"},
+    {"tick": 35, "type": "set", "pos": [1, 3, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 37, "type": "destroy", "pos": [0, 4, 1], "drop": false},
+    {"tick": 43, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 46, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 50, "type": "use", "pos": [0, 1, 1], "face": "up"}
+  ]
+}

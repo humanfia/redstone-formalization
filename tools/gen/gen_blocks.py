@@ -421,23 +421,42 @@ class Gen:
     def gen_attrs(self):
         o = [self.header("Block attributes", ["Redstone.Block.Generated.State"])]
         o.append("namespace Block\n")
-        o.append("/-- The distinct attribute records of the game's block states, found by binary search. -/")
-        o.append("def attrRecord (i : ℕ) : Attrs :=")
         recs = [self.attr_lit(json.loads(key)) for key in self.attr_records]
 
-        def tree(lo, hi, indent):
+        # The binary search is cut into definitions of three levels each. The Lean kernel
+        # evaluates `attrRecord i` by substituting `i` in the body of the definition, which
+        # copies every `if` of the body: as one definition that is all 3674 of them for each
+        # lookup (2 ms, measured; see docs/proof-feasibility.md), in pieces it is the seven of
+        # each of the four definitions on the way. The comparisons are `Nat.blt`, one
+        # unfolding away from `Nat.ble`, which the kernel computes natively; `i < n` would go
+        # through its `Decidable` instance.
+        def tree(lo, hi, depth, indent, body):
             # records lo .. hi - 1
             pad = "  " * indent
             if hi - lo == 1:
-                o.append(f"{pad}{recs[lo]}")
-                return
-            mid = (lo + hi) // 2
-            o.append(f"{pad}if i < {mid} then")
-            tree(lo, mid, indent + 1)
-            o.append(f"{pad}else")
-            tree(mid, hi, indent + 1)
-        tree(0, len(recs), 1)
-        o.append("")
+                body.append(f"{pad}{recs[lo]}")
+            elif depth == 3:
+                body.append(f"{pad}{define(lo, hi)} i")
+            else:
+                mid = (lo + hi) // 2
+                body.append(f"{pad}bif i.blt {mid} then")
+                tree(lo, mid, depth + 1, indent + 1, body)
+                body.append(f"{pad}else")
+                tree(mid, hi, depth + 1, indent + 1, body)
+
+        def define(lo, hi):
+            name = "attrRecord" if (lo, hi) == (0, len(recs)) else f"attrRecords{lo}To{hi - 1}"
+            body = []
+            tree(lo, hi, 0, 1, body)
+            if name == "attrRecord":
+                o.append("/-- The distinct attribute records of the game's block states, found by binary search. -/")
+            else:
+                o.append(f"/-- The attribute records {lo} to {hi - 1}, for `{lo} ≤ i ≤ {hi - 1}`. -/")
+            o.append(f"def {name} (i : ℕ) : Attrs :=")
+            o.extend(body)
+            o.append("")
+            return name
+        define(0, len(recs))
         bits = self.attr_bits
         for key, name in self.tables.items():
             n = 0

@@ -1,0 +1,15 @@
+{
+  "name": "pending-hopper-cart-under-chest",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [1, 1, 4], "max": [14, 1, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "blocks": [
+    {"pos": [8, 2, 4], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:8}]}"}
+  ],
+  "entities": [
+    {"type": "minecraft:hopper_minecart", "pos": [8.5, 1.0625, 4.5]}
+  ]
+}

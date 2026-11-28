@@ -1,0 +1,30 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 40},
+    {"state": "minecraft:rail[shape=*]", "weight": 16},
+    {"state": "minecraft:powered_rail[powered=*,shape=*]", "weight": 7},
+    {"state": "minecraft:activator_rail[powered=*,shape=*]", "weight": 4},
+    {"state": "minecraft:stone", "weight": 4},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 1},
+    {"state": "minecraft:stone_slab[type=*]", "weight": 2},
+    {"state": "minecraft:oak_fence", "weight": 1},
+    {"state": "minecraft:cobblestone_wall", "weight": 1},
+    {"state": "minecraft:oak_fence_gate[facing=*,open=*]", "weight": 1},
+    {"state": "minecraft:oak_trapdoor[facing=*,half=*,open=*]", "weight": 1},
+    {"state": "minecraft:white_carpet", "weight": 1},
+    {"state": "minecraft:soul_sand", "weight": 1}
+  ],
+  "actions": {
+    "set": {
+      "count": [0, 4],
+      "states": [
+        "minecraft:air", "minecraft:stone", "minecraft:rail[shape=*]",
+        "minecraft:powered_rail[powered=*,shape=*]", "minecraft:activator_rail[powered=*,shape=*]",
+        "minecraft:stone_slab[type=bottom]"
+      ],
+      "flags": 594
+    }
+  }
+}

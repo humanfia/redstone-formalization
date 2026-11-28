@@ -1,0 +1,30 @@
+{
+  "name": "verify-powered-thresholds-c",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [4, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [6, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [7, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [8, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [9, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [10, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [11, 1, 5], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [4, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [6, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [7, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [8, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [9, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [10, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [11, 1, 12], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [12, 1, 5], "state": "minecraft:stone"},
+    {"pos": [3, 1, 12], "state": "minecraft:glass"},
+    {"pos": [12, 1, 12], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [11.5, 1.0625, 5.5], "nbt": "{Motion:[0.0d,0.0d,0.0d]}"}, {"type": "minecraft:minecart", "pos": [4.5, 1.0625, 12.5], "nbt": "{Motion:[0.0d,0.0d,0.3d]}"}]
+}

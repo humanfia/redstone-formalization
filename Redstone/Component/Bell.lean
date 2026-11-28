@@ -16,8 +16,6 @@ Not modelled:
 * What ringing does besides the block event: the swing of the bell, the memory `HEARD_BELL_TIME`
   of the mobs around and the glow of raiders (`BellBlockEntity`). None of it is saved, and none
   of it reaches blocks; see `Redstone.BlockEntities.Bell`.
-* `onProjectileHit`: whether the hit rings the bell depends on the height of the point that was
-  hit. The hook carries the point, but projectiles do not fly in the model yet.
 * `onExplosionHit`: only explosions that trigger blocks (wind charges) ring a bell, and the
   model's hook does not say which explosion it is.
 * The height of a player's click: the game refuses a click above 0.8124 of the block's height.
@@ -130,6 +128,12 @@ def behaviour (self : Block) : Behaviour :=
           if signal then discard <| attemptToRing p none
           discard <| Level.setBlock p (.bell { s with powered := signal })
       useWithoutItem := fun p face => use s p face
+      -- `onHit(level, state, hitResult, owner, true)`: a projectile rings the bell where a
+      -- player's click would, on a proper side and not above `0.8124F` of the block's height.
+      onProjectileHit := fun p face hit _ => do
+        if !(hit.y - Float.ofInt p.y > (Float32.ofBits 0x3f4ff972).toFloat) &&
+            isProperHit s face then
+          discard <| attemptToRing p (some face)
       -- `BaseEntityBlock.triggerEvent` passes the event to the block entity, which accepts the
       -- ring (`BellBlockEntity.triggerEvent`).
       triggerEvent := fun p a _ => return (← Level.getBlockEntity p).isSome && a == 1

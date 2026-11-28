@@ -1,0 +1,657 @@
+{
+ "name": "fuzz-items-08",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   6,
+   5
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    5,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:water[level=2]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=1]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    5
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:lava[level=6]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    4
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:water[level=4]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lava[level=4]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:water[level=8]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    0
+   ],
+   "state": "minecraft:lava[level=4]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:water[level=7]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    4
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=8]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:water[level=2]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:water[level=1]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=8]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    5
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    5
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    5
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:lava[level=5]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:water[level=7]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    5
+   ],
+   "state": "minecraft:water[level=7]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    4
+   ],
+   "state": "minecraft:lava[level=7]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    5
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_stairs[facing=west,half=bottom,shape=straight,waterlogged=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:lava[level=3]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    5
+   ],
+   "state": "minecraft:lava[level=3]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:water[level=1]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    0
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    4
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    0
+   ],
+   "state": "minecraft:lava[level=4]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    3
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.538,
+    1.942,
+    0.974
+   ],
+   "nbt": "{Item:{id:\"minecraft:redstone\",count:4},Motion:[0.123d,-0.025d,-0.092d],Health:5s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.479,
+    2.326,
+    0.64
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:4},Motion:[-0.235d,-0.116d,0.173d],Health:5s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.127,
+    1.952,
+    4.526
+   ],
+   "nbt": "{Item:{id:\"minecraft:oak_planks\",count:2},Motion:[-0.114d,-0.074d,-0.01d],Health:9s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.84,
+    2.546,
+    1.399
+   ],
+   "nbt": "{Item:{id:\"minecraft:netherite_ingot\",count:1},Motion:[-0.283d,-0.275d,0.207d],Health:5s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.282,
+    1.969,
+    1.664
+   ],
+   "nbt": "{Item:{id:\"minecraft:diamond\",count:2},Motion:[0.268d,0.141d,0.131d],Health:9s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.073,
+    3.791,
+    5.436
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1},Motion:[0.059d,-0.203d,0.05d],Health:40s}"
+  }
+ ]
+}

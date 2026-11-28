@@ -1,0 +1,77 @@
+{
+ "name": "flight-egg-6",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   6,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    10,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:marker",
+   "pos": [
+    0.5,
+    1.0,
+    0.5
+   ]
+  },
+  {
+   "type": "minecraft:egg",
+   "pos": [
+    5.5,
+    2.0,
+    5.5
+   ],
+   "nbt": "{Motion:[0.01d,1.5d,-0.02d]}"
+  }
+ ],
+ "actions": []
+}

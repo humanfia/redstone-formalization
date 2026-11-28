@@ -1,0 +1,44 @@
+{
+ "name": "trident-flight",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "entities": [
+  {
+   "type": "minecraft:trident",
+   "pos": [
+    0.5,
+    1.5,
+    0.5
+   ],
+   "nbt": "{Motion:[0.35d,0.5d,0.3d]}"
+  }
+ ],
+ "actions": []
+}

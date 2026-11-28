@@ -1,0 +1,154 @@
+{
+ "name": "fuzz-offset-02",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   11,
+   5,
+   11
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    11,
+    0,
+    11
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    1,
+    10
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip_merge,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    5
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip_merge,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    9
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip_merge,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=frustum,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    7
+   ],
+   "state": "minecraft:sulfur_spike[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    8
+   ],
+   "state": "minecraft:bamboo[age=1,leaves=none,stage=0]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    7.5,
+    2.75,
+    10.4
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.6,
+    3.75,
+    5.8
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    3.5,
+    1.0,
+    9.2
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,0.05d]}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    2.5,
+    1.0,
+    5.3
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,0.05d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.3,
+    3.0,
+    1.3
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    8.5,
+    1.0,
+    7.2
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,-0.05d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.3,
+    1.4,
+    8.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:cobblestone\",count:1},Motion:[0.3d,0.0d,0.0d]}"
+  }
+ ]
+}

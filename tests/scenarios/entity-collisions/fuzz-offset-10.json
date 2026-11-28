@@ -1,0 +1,154 @@
+{
+ "name": "fuzz-offset-10",
+ "ticks": 50,
+ "box": {
+  "min": [
+   200,
+   0,
+   50
+  ],
+  "max": [
+   211,
+   5,
+   61
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    200,
+    0,
+    50
+   ],
+   "max": [
+    211,
+    0,
+    61
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    203,
+    1,
+    51
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    207,
+    1,
+    54
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    203,
+    1,
+    57
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=frustum,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    209,
+    1,
+    55
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip_merge,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    201,
+    1,
+    56
+   ],
+   "state": "minecraft:sulfur_spike[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    204,
+    1,
+    58
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    209,
+    1,
+    52
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    203.7,
+    4.5,
+    51.6
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    206.1,
+    1.1,
+    54.6
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1},Motion:[0.3d,0.15d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    202.39999999999998,
+    1.2,
+    57.7
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:1},Motion:[0.3d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    209.5,
+    2.75,
+    55.4
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    201.4,
+    1.2,
+    58.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:cobblestone\",count:1},Motion:[0.0d,0.15d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    202.5,
+    1.0,
+    58.6
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,-0.05d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    210.60000000000002,
+    1.2,
+    52.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:1},Motion:[-0.3d,0.15d,0.0d]}"
+  }
+ ]
+}

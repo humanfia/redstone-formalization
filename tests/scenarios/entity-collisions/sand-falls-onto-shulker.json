@@ -1,0 +1,51 @@
+{
+ "name": "sand-falls-onto-shulker",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   7,
+   5,
+   7
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    7,
+    0,
+    7
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:shulker",
+   "pos": [
+    3.5,
+    1.0,
+    3.5
+   ],
+   "nbt": "{NoAI:1b}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    3.5,
+    4.0,
+    3.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:sand\"},Time:1}"
+  }
+ ]
+}

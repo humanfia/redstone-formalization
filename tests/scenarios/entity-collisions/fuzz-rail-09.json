@@ -1,0 +1,73 @@
+{
+ "name": "fuzz-rail-09",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   8
+  ],
+  "max": [
+   15,
+   3,
+   40
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    8
+   ],
+   "max": [
+    15,
+    0,
+    40
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    3,
+    1,
+    9
+   ],
+   "max": [
+    3,
+    1,
+    39
+   ],
+   "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    3.5,
+    1.0625,
+    11.875
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,-0.05d]}"
+  },
+  {
+   "type": "minecraft:command_block_minecart",
+   "pos": [
+    3.5,
+    1.0625,
+    26.875
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,-0.1d]}"
+  },
+  {
+   "type": "minecraft:spawner_minecart",
+   "pos": [
+    3.5,
+    1.0625,
+    31.875
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,-0.2d]}"
+  }
+ ]
+}

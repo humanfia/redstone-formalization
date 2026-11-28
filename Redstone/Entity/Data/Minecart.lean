@@ -64,6 +64,9 @@ structure Minecart where
   /-- `Entity.nextStep`: the value of `moveDist` beyond which the next step event is due. Not
   saved. -/
   nextStep : Float32
+  /-- When the minecart was last put into the entity section it is in, as in
+  `Entities.Physics.sectionEntry`. Not saved. -/
+  sectionEntry : ℕ × ℕ := (0, 0)
   deriving Repr
 
 namespace Minecart

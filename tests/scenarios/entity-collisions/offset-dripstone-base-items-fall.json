@@ -1,0 +1,239 @@
+{
+ "name": "offset-dripstone-base-items-fall",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   5,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    3
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    3
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    3
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    7
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    7
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    7
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    7
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    11
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    11
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    11
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    11
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.5,
+    3.5,
+    3.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.3,
+    3.5,
+    3.65
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.7,
+    3.5,
+    3.4
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    12.45,
+    3.5,
+    3.75
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.5,
+    3.5,
+    7.65
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.3,
+    3.5,
+    7.4
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.7,
+    3.5,
+    7.75
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    12.45,
+    3.5,
+    7.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.5,
+    3.5,
+    11.4
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.3,
+    3.5,
+    11.75
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.7,
+    3.5,
+    11.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    12.45,
+    3.5,
+    11.65
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  }
+ ]
+}

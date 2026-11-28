@@ -1,0 +1,60 @@
+{
+ "name": "sand-falls-onto-boat",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   7,
+   5,
+   7
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    7,
+    0,
+    7
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:oak_boat",
+   "pos": [
+    3.5,
+    2.0,
+    3.5
+   ],
+   "nbt": "{NoGravity:1b}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    3.5,
+    4.0,
+    3.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:sand\"},Time:1}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    5.5,
+    4.0,
+    5.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:gravel\"},Time:1}"
+  }
+ ]
+}

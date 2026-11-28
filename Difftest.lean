@@ -233,6 +233,7 @@ structure Scenario where
   weather : Weather
   randomTickSpeed : ℕ
   blockDrops : Bool
+  fireSpreadRadiusAroundPlayer : ℤ
 
 /-- A coordinate of an entity in a scenario: a JSON number. -/
 def parseCoordinate (j : Json) : Except String Float := do
@@ -276,6 +277,9 @@ def parseScenario (j : Json) : Except String Scenario := do
     | "rain" => pure Weather.rain
     | "thunder" => pure Weather.thunder
     | w => throw s!"not a weather: {w}"
+  let fireSpreadRadiusAroundPlayer ← setting ℤ "fireSpreadRadiusAroundPlayer" 128
+  if fireSpreadRadiusAroundPlayer < -1 then
+    throw s!"settings.fireSpreadRadiusAroundPlayer must be >= -1: {fireSpreadRadiusAroundPlayer}"
   return {
     name := ← (← j.getObjVal? "name").getStr?
     ticks := ← (← j.getObjVal? "ticks").getNat?
@@ -286,7 +290,8 @@ def parseScenario (j : Json) : Except String Scenario := do
     advanceTime := ← setting Bool "advanceTime" false
     weather
     randomTickSpeed := ← setting ℕ "randomTickSpeed" 0
-    blockDrops := ← setting Bool "blockDrops" false }
+    blockDrops := ← setting Bool "blockDrops" false
+    fireSpreadRadiusAroundPlayer }
 
 structure Frame where
   gameTime : ℕ
@@ -397,6 +402,7 @@ def initialLevel (s : Scenario) (f : Frame) : Level :=
     weather := s.weather
     randomTickSpeed := s.randomTickSpeed
     blockDrops := s.blockDrops
+    fireSpreadRadiusAroundPlayer := s.fireSpreadRadiusAroundPlayer
     randomTickBox := some (s.lo, s.hi) }
   { l with lightWorld := l.world }
 

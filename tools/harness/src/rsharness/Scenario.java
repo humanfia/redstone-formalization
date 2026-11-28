@@ -33,6 +33,7 @@ final class Scenario {
    String weather = "clear";
    int randomTickSpeed = 0;
    boolean blockDrops = false;
+   int fireSpreadRadiusAroundPlayer = 128;
    final List<Fill> fills = new ArrayList<>();
    final List<BlockSpec> blocks = new ArrayList<>();
    final List<EntitySpec> entities = new ArrayList<>();
@@ -60,7 +61,7 @@ final class Scenario {
 
       if (root.has("settings")) {
          JsonObject settings = root.getAsJsonObject("settings");
-         checkKeys(settings, "settings", Set.of("dayTime", "advanceTime", "weather", "randomTickSpeed", "blockDrops"));
+         checkKeys(settings, "settings", Set.of("dayTime", "advanceTime", "weather", "randomTickSpeed", "blockDrops", "fireSpreadRadiusAroundPlayer"));
          if (settings.has("dayTime")) {
             s.dayTime = settings.get("dayTime").getAsLong();
          }
@@ -78,6 +79,12 @@ final class Scenario {
          }
          if (settings.has("randomTickSpeed")) {
             s.randomTickSpeed = settings.get("randomTickSpeed").getAsInt();
+         }
+         if (settings.has("fireSpreadRadiusAroundPlayer")) {
+            s.fireSpreadRadiusAroundPlayer = settings.get("fireSpreadRadiusAroundPlayer").getAsInt();
+            if (s.fireSpreadRadiusAroundPlayer < -1) {
+               throw new IllegalArgumentException("settings.fireSpreadRadiusAroundPlayer must be >= -1");
+            }
          }
       }
 

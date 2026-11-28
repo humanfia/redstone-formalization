@@ -24,7 +24,7 @@ a conductor that gives less than 15, the measure of the block behind it replaces
   or the content of an item frame, so `inputSignal` here behaves as if there were none.
 * `setPlacedBy` (a tick scheduled when a player places a comparator that should be on): placing
   blocks from items is not modelled.
-* Sounds and item drops.
+* Sounds.
 -/
 
 @[expose] public section
@@ -187,12 +187,13 @@ def refreshOutputState (s : Blocks.Comparator) (p : Pos) : M Unit := do
       discard <| Level.setBlock p (.comparator { s with powered := true }) 2
     updateNeighborsInFront s p
 
-/-- `DiodeBlock.neighborChanged`: checks the inputs, or removes the comparator if it has lost
-its support and updates the neighbours of its six neighbours. -/
+/-- `DiodeBlock.neighborChanged`: checks the inputs, or drops and removes the comparator if it
+has lost its support and updates the neighbours of its six neighbours. -/
 def neighborChanged (s : Blocks.Comparator) (p : Pos) : M Unit := do
   if (← Level.getBlock p).is .comparator then
     if canSurvive (← get) p then checkTickOnNeighbor s p
     else
+      Level.dropResources (.comparator s) p (← Level.peekBlockEntity p)
       discard <| Level.removeBlock p false
       Direction.values.forM fun d => Level.updateNeighborsAt (p.step d) .comparator
 

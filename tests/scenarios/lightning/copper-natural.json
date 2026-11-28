@@ -1,0 +1,13 @@
+{
+  "name": "copper-natural",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [6, 4, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 6], "state": "minecraft:stone"},
+    {"min": [1, 1, 1], "max": [5, 1, 5], "state": "minecraft:oxidized_copper"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [3.5, 2.0, 3.5]}},
+    {"tick": 9, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 2.0, 2.5]}}
+  ]
+}

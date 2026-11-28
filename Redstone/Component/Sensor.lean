@@ -26,8 +26,8 @@ Java classes: `TargetBlock`, `LightningRodBlock`, `WeatheringLightningRodBlock`,
 * Lightning rod: `ownSignal`, `getDirectSignal`, `onLightningStrike`, `tick`, `onPlace`,
   `affectNeighborsAfterRemoval`. `updateShape` only schedules a fluid tick for a waterlogged
   rod, and fluids do not flow in the model. `randomTick` (the oxidation of copper) and the level
-  event of a strike (particles) are left out. No lightning is modelled yet, so nothing calls
-  `strike`.
+  event of a strike (particles) are left out. A lightning bolt calls `strike` for the block
+  under it (`Redstone.Entity.Lightning`), and cleans the copper of a rod that weathers.
 * Daylight detector: `ownSignal`, `useWithoutItem`, the ticker, `updateSignalStrength`. The sun
   angle and the darkening of the sky are computed from the clock and the weather in
   `Redstone.Component.Sensor.Sky`, the sky light of the cell in `Redstone.Component.Sensor.Light`;

@@ -146,6 +146,8 @@ def Entity.resetFallDistance (e : Entity) : Entity :=
   | .item d => { e with data := .item { d with phys := { d.phys with fallDistance := 0 } } }
   | .fallingBlock d =>
     { e with data := .fallingBlock { d with phys := { d.phys with fallDistance := 0 } } }
+  | .experienceOrb d =>
+    { e with data := .experienceOrb { d with phys := { d.phys with fallDistance := 0 } } }
   | .tnt d => { e with data := .tnt { d with fallDistance := 0 } }
   | .minecart kind d => { e with data := .minecart kind { d with fallDistance := 0 } }
   | _ => e

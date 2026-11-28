@@ -88,13 +88,15 @@ def setChanged (p : Pos) (block : BlockId) : M Unit :=
 def updateNeighboursAfterDestroy (p : Pos) (block : BlockId) : M Unit :=
   Level.updateNeighbourForOutputSignal p block
 
-/-- `Block.popResource(level, pos, stack)` while blocks drop nothing (the game rule
-`block_drops` is off, as in every test): three doubles are drawn for the position of the item
-before the rule is looked at. -/
+/-- `Block.popResource(level, pos, stack)` for a stack the model does not make (the honeycombs
+of a beehive, which come from a loot table): three doubles are drawn for the position of the
+item before the game rule `block_drops` is looked at. While the rule is on, the item is
+missing, and `Level.overflow` is set. -/
 def popResource : M Unit := do
   nextDouble
   nextDouble
   nextDouble
+  if (← get).blockDrops then Level.setOverflow
 
 /-- `ItemStack.isEmpty` for an item given by name: the empty hand is `minecraft:air`. -/
 def isEmptyHand (item : String) : Bool := item = "minecraft:air"
@@ -199,7 +201,7 @@ def candleCake (id : Blocks.CandleCake.Id) (s : Blocks.CandleCake) : Behaviour :
   let self : Block := .candleCake id s
   let eatCake (p : Pos) : M Bool := do
     discard <| eat ⟨0⟩ p
-    popResource
+    Level.dropResources self p
     return true
   { Behaviour.inert self with
     analogSignal := fun _ _ _ => 14

@@ -70,6 +70,10 @@ structure BehaviourOf (m : Type → Type) where
   /-- `useItemOn`: a player uses the item with the given name on the block. Returns whether the
   block consumed the action. -/
   useItemOn : Pos → Direction → String → m Bool
+  /-- Whether `useItemOn` with this item on this face, when it does not consume the action,
+  answers `TRY_WITH_EMPTY_HAND` (as `BlockBehaviour.useItemOn` does) rather than `PASS`: the
+  game then tries `useWithoutItem`. -/
+  tryEmptyHand : Direction → String → Bool
   /-- `entityInside(state, level, pos, entity, ...)`: the entity with the given index touches
   the inside of the block. -/
   entityInside : Pos → ℕ → m Unit
@@ -142,6 +146,7 @@ def inert (self : Block) : Behaviour where
   triggerEvent _ _ _ := pure false
   useWithoutItem _ _ := pure false
   useItemOn _ _ _ := pure false
+  tryEmptyHand _ _ := true
   entityInside _ _ := pure ()
   stepOn _ _ := pure ()
   onProjectileHit _ _ _ := pure ()
@@ -168,6 +173,7 @@ def close (b : Behaviour) (env : Env) : BehaviourOf (StateM Level) where
   triggerEvent p x y := (b.triggerEvent p x y).run env
   useWithoutItem p d := (b.useWithoutItem p d).run env
   useItemOn p d i := (b.useItemOn p d i).run env
+  tryEmptyHand := b.tryEmptyHand
   entityInside p e := (b.entityInside p e).run env
   stepOn p e := (b.stepOn p e).run env
   onProjectileHit p d e := (b.onProjectileHit p d e).run env
@@ -198,6 +204,7 @@ def exhausted (b : Behaviour) : BehaviourOf (StateM Level) :=
     triggerEvent := fun _ _ _ => stop false
     useWithoutItem := fun _ _ => stop false
     useItemOn := fun _ _ _ => stop false
+    tryEmptyHand := b.tryEmptyHand
     entityInside := fun _ _ => stop ()
     stepOn := fun _ _ => stop ()
     onProjectileHit := fun _ _ _ => stop ()

@@ -142,8 +142,6 @@ def behaviour (k : DoorId) (s : Blocks.Door) : Behaviour :=
     canSurvive := canSurvive k s
     updateShape := fun p d _ neighbour => updateShape k s p d neighbour
     useWithoutItem := fun p _ => useWithoutItem k s p
-    -- `BlockBehaviour.useItemOn` asks for the empty-hand interaction.
-    useItemOn := fun p _ _ => useWithoutItem k s p
     neighborChanged := fun p block _ => neighborChanged k s p block }
 
 end DoorBlock
@@ -214,8 +212,6 @@ water and leaves the state as it is, so it is not overridden. -/
 def behaviour (k : TrapDoorId) (s : Blocks.TrapDoor) : Behaviour :=
   { Behaviour.inert (k.block s) with
     useWithoutItem := fun p _ => useWithoutItem k s p
-    -- `BlockBehaviour.useItemOn` asks for the empty-hand interaction.
-    useItemOn := fun p _ _ => useWithoutItem k s p
     neighborChanged := fun p _ _ => neighborChanged k s p }
 
 end TrapDoorBlock
@@ -291,8 +287,6 @@ def behaviour (id : Blocks.FenceGate.Id) (s : Blocks.FenceGate) : Behaviour :=
   { Behaviour.inert (.fenceGate id s) with
     updateShape := fun p d _ neighbour => updateShape id s p d neighbour
     useWithoutItem := fun p face => useWithoutItem id s p face
-    -- `BlockBehaviour.useItemOn` asks for the empty-hand interaction.
-    useItemOn := fun p face _ => useWithoutItem id s p face
     neighborChanged := fun p _ _ => neighborChanged id s p }
 
 end FenceGateBlock

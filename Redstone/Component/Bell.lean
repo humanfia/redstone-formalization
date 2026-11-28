@@ -130,8 +130,6 @@ def behaviour (self : Block) : Behaviour :=
           if signal then discard <| attemptToRing p none
           discard <| Level.setBlock p (.bell { s with powered := signal })
       useWithoutItem := fun p face => use s p face
-      -- `BlockBehaviour.useItemOn` asks for the empty-hand interaction, whatever the item.
-      useItemOn := fun p face _ => use s p face
       -- `BaseEntityBlock.triggerEvent` passes the event to the block entity, which accepts the
       -- ring (`BellBlockEntity.triggerEvent`).
       triggerEvent := fun p a _ => return (← Level.getBlockEntity p).isSome && a == 1

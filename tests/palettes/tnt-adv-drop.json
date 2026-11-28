@@ -1,0 +1,24 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 8},
+    {"state": "minecraft:stone", "weight": 2},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:obsidian", "weight": 1},
+    {"state": "minecraft:bookshelf", "weight": 1},
+    {"state": "minecraft:clay", "weight": 1},
+    {"state": "minecraft:snow_block", "weight": 1},
+    {"state": "minecraft:soul_sand", "weight": 1},
+    {"state": "minecraft:hay_block[axis=*]", "weight": 1},
+    {"state": "minecraft:oak_slab[type=*,waterlogged=false]", "weight": 2},
+    {"state": "minecraft:stone_slab[type=*,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 2},
+    {"state": "minecraft:tnt[unstable=*]", "weight": 7},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 7}
+  ],
+  "actions": {
+    "use": {"count": [3, 9], "targets": ["minecraft:lever"]},
+    "set": {"count": [3, 9], "states": ["minecraft:stone", "minecraft:air", "minecraft:tnt[unstable=false]", "minecraft:tnt[unstable=true]", "minecraft:redstone_lamp[lit=false]", "minecraft:lever[face=*,facing=*,powered=*]", "minecraft:oak_slab[type=*,waterlogged=false]", "minecraft:clay"]},
+    "destroy": {"count": [2, 6], "targets": ["minecraft:stone", "minecraft:tnt", "minecraft:lever", "minecraft:redstone_lamp", "minecraft:oak_slab", "minecraft:bookshelf"], "drop": true}
+  }
+}

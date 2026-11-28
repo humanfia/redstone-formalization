@@ -1,0 +1,180 @@
+{
+ "name": "drop-39",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    6
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_trapdoor[facing=north,half=top,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    6
+   ],
+   "state": "minecraft:oak_stairs[facing=west,half=top,shape=outer_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "state": "minecraft:oak_trapdoor[facing=east,half=top,open=true,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    6
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=none,south=tall,up=true,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:lightning_rod[facing=south,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_bars[east=false,north=true,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:stonecutter[facing=north]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_bars[east=true,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:oak_fence_gate[facing=east,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    3
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    1
+   ],
+   "state": "minecraft:stonecutter[facing=east]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    2
+   ],
+   "state": "minecraft:amethyst_cluster[facing=south,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.626,
+    4.985,
+    3.769
+   ],
+   "nbt": "{Motion:[0.57d,-0.689d,-0.033d]}"
+  }
+ ]
+}

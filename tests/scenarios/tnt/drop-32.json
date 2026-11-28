@@ -1,0 +1,173 @@
+{
+ "name": "drop-32",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:iron_bars[east=false,north=true,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:glass_pane[east=false,north=true,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:oak_trapdoor[facing=east,half=top,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    5
+   ],
+   "state": "minecraft:glass_pane[east=false,north=false,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:oak_fence[east=true,north=false,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:cobblestone_wall[east=tall,north=low,south=none,up=true,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:lightning_rod[facing=down,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:amethyst_cluster[facing=west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=2]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    1
+   ],
+   "state": "minecraft:oak_fence_gate[facing=west,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    5
+   ],
+   "state": "minecraft:iron_bars[east=true,north=true,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:grindstone[face=floor,facing=south]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    6
+   ],
+   "state": "minecraft:oak_fence[east=true,north=true,south=false,waterlogged=false,west=true]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.085,
+    5.904,
+    0.602
+   ],
+   "nbt": "{Motion:[0.1d,-0.013d,-0.044d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.867,
+    1.618,
+    3.668
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  }
+ ]
+}

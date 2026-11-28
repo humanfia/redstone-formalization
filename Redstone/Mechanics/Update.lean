@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Mechanics.Behaviour
+public import Redstone.Entity.Tnt.Tables
 
 /-!
 # Changing blocks, and the updates that follow
@@ -144,6 +145,17 @@ def modifyEntity (index : ℕ) (f : Entity → Entity) : M Unit :=
   modify fun l =>
     { l with entities := l.entities.map fun e => if e.index == index then f e else e }
 
+/-! ### Drops -/
+
+/-- `Block.dropResources(state, level, pos, blockEntity, breaker, tool)` in a world where the
+game rule `block_drops` is off: nothing is dropped, but `Block.popResource` draws the three
+coordinates of every stack of the block's loot from the level's random number generator before
+it finds that out. A block whose loot is not a function of its state sets `Level.overflow`. -/
+def dropResources (state : Block) : M Unit :=
+  match Entity.Tnt.brokenDropStacks state with
+  | some n => modify fun l => { l with random := (·.nextDouble53.2)^[3 * n] l.random }
+  | none => setOverflow
+
 /-! ### Operations that request updates -/
 
 /-- Adds an update to the neighbour updater (the first half of `addAndRun`). Returns whether
@@ -254,10 +266,12 @@ def setBlock (p : Pos) (state : Block) (flags : ℕ := UpdateFlag.all) (limit : 
   return true
 
 /-- `Level.destroyBlock(pos, drop, breaker, limit)`: breaks the block at `p`. Nothing is
-dropped, whatever `drop` says. Returns whether a block was broken. -/
-def destroyBlock (p : Pos) (_drop : Bool) (limit : ℕ := 512) : M Bool := do
+dropped, whatever `drop` says, but with `drop` the level's random number generator advances
+as it does in the game (`dropResources`). Returns whether a block was broken. -/
+def destroyBlock (p : Pos) (drop : Bool) (limit : ℕ := 512) : M Bool := do
   let state ← getBlock p
   if state.isAir then return false
+  if drop then dropResources state
   let destroyed ← setBlock kick p state.fluidBlock UpdateFlag.all limit
   if destroyed then gameEvent "minecraft:block_destroy" p { affectedState := some state }
   return destroyed

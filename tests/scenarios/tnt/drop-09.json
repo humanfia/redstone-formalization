@@ -1,0 +1,133 @@
+{
+ "name": "drop-09",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "state": "minecraft:oak_trapdoor[facing=south,half=top,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=top,shape=inner_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    3
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=2]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:sea_pickle[pickles=2,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=west,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:slime_block"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    1
+   ],
+   "state": "minecraft:iron_chain[axis=z,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    6
+   ],
+   "state": "minecraft:hay_block[axis=y]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.154,
+    2.82,
+    3.494
+   ],
+   "nbt": "{Motion:[-0.289d,0.038d,0.066d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.699,
+    5.003,
+    1.995
+   ],
+   "nbt": "{Motion:[-0.382d,-0.528d,0.678d]}"
+  }
+ ]
+}

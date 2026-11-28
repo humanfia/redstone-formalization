@@ -1,0 +1,21 @@
+{
+  "name": "rod-unpowered",
+  "ticks": 20,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 1, 1], "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 4, "type": "set", "pos": [2, 1, 1], "state": "minecraft:oxidized_lightning_rod[facing=down,powered=false,waterlogged=false]"},
+    {"tick": 6, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 9, "type": "destroy", "pos": [2, 1, 1], "drop": false},
+    {"tick": 12, "type": "use", "pos": [2, 1, 0], "face": "up"}
+  ]
+}

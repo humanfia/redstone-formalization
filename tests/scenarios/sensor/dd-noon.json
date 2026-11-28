@@ -1,0 +1,22 @@
+{
+  "name": "dd-noon",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:daylight_detector[inverted=true,power=15]"},
+    {"pos": [4, 1, 1], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 25, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 33, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 47, "type": "use", "pos": [3, 1, 1], "face": "north"},
+    {"tick": 47, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 61, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "dd-roof-6-noon",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [14, 3, 14]},
+  "settings": {"dayTime": 6000},
+  "fill": [
+    {"min": [0, 0, 0], "max": [14, 0, 14], "state": "minecraft:stone"},
+    {"min": [1, 2, 1], "max": [13, 2, 13], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [7, 1, 7], "state": "minecraft:daylight_detector[inverted=false,power=7]"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "use", "pos": [7, 1, 7], "face": "up"},
+    {"tick": 27, "type": "use", "pos": [7, 1, 7], "face": "up"}
+  ]
+}

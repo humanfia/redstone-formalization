@@ -70,8 +70,11 @@ server's block dump (`entityTypes`); the three other columns are read off the cl
 Left out, so that the model does not see them at all: the types whose bounding box is not the
 box of these dimensions around their position (item frames, paintings and leash knots, which
 hang on a block, and the pufferfish, which is scaled), and the ender dragon, which has parts
-and its own `aiStep`. The last column is zero for the types that the model moves itself (items,
-falling blocks, TNT, minecarts, projectiles) and for those that have no such call. It is also
+and its own `aiStep`. An item frame whose data could be read is not one of these entities
+at all but an `EntityData.itemFrame`, with a behaviour of its own (`Redstone.Entity.Hanging`);
+it has no dimensions here either, so the searches of this module do not find it. The last
+column is zero for the types that the model moves itself (items, falling blocks, TNT,
+minecarts, projectiles) and for those that have no such call. It is also
 zero, wrongly, for types that do call it but always move or vanish at once, which the model
 cannot keep still anyway: shulker bullets, fishing bobbers, dragon fireballs, wither skulls and
 breeze wind charges. An experience orb can be at rest (it then calls it once per tick). -/

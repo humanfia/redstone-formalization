@@ -1,0 +1,53 @@
+{
+ "name": "support-fence-up",
+ "ticks": 112,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   5,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item_frame",
+   "pos": [
+    5.5,
+    2.5,
+    5.5
+   ],
+   "nbt": "{Facing:1b,Item:{id:\"minecraft:stone\",count:1},ItemRotation:3b}"
+  }
+ ],
+ "actions": []
+}

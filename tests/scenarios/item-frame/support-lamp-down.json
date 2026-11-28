@@ -1,0 +1,53 @@
+{
+ "name": "support-lamp-down",
+ "ticks": 112,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   5,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    3,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item_frame",
+   "pos": [
+    5.5,
+    2.5,
+    5.5
+   ],
+   "nbt": "{Facing:0b,Item:{id:\"minecraft:stone\",count:1},ItemRotation:3b}"
+  }
+ ],
+ "actions": []
+}

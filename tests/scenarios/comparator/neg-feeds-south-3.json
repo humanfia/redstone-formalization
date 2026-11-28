@@ -1,0 +1,91 @@
+{
+ "name": "neg-feeds-south-3",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=south,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:-9}"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"
+  }
+ ],
+ "entities": [],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "face": "up"
+  }
+ ]
+}

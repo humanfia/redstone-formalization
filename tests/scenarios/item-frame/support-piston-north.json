@@ -1,0 +1,69 @@
+{
+ "name": "support-piston-north",
+ "ticks": 112,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   5,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    2,
+    6
+   ],
+   "state": "minecraft:piston[extended=false,facing=up]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item_frame",
+   "pos": [
+    5.5,
+    2.5,
+    5.5
+   ],
+   "nbt": "{Facing:2b,Item:{id:\"minecraft:stone\",count:1},ItemRotation:3b}"
+  }
+ ],
+ "actions": []
+}

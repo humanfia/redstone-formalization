@@ -427,6 +427,20 @@ end Core
 
 /-! ### The updater's loop -/
 
+/-- The level itself (`pinWorld_eq`), with its world evaluated as far as its constructor.
+
+This is for the Lean kernel, which evaluates lazily: a change to another field of the level,
+`{ l with updateCount := _ }`, leaves the world as the unevaluated `l.world`, and after `n` such
+changes a read of a block goes back through all `n` of them, every time. The updater's loop
+changes the level several times for each update it delivers, so without this the cost of a
+run of updates that changes no block grows with the square of its length (12000 updates in
+empty air: no end within a minute; see `docs/proof-feasibility.md`). -/
+def pinWorld (l : Level) : Level :=
+  match l.world with
+  | ⟨cells, noAir⟩ => { l with world := ⟨cells, noAir⟩ }
+
+theorem pinWorld_eq (l : Level) : l.pinWorld = l := rfl
+
 /-- The loop of `CollectingNeighborUpdater.runUpdates`, bounded by `fuel` steps. Each step
 moves the updates added meanwhile to the top of the stack, first added on top, and runs the
 next step of the update that is then on top. -/
@@ -439,7 +453,7 @@ def runUpdatesLoop : ℕ → M Unit
     match l.updatesAdded ++ l.updateStack with
     | [] => set { l with updateStack := [], updatesAdded := [], updateCount := 0 }
     | u :: rest =>
-      set { l with updateStack := u :: rest, updatesAdded := [] }
+      set { l.pinWorld with updateStack := u :: rest, updatesAdded := [] }
       let next ← Core.runNext setOverflow u
       modify fun l => { l with updateStack := next.toList ++ rest }
       runUpdatesLoop fuel

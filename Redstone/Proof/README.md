@@ -204,8 +204,10 @@ build `--mem 48G`.
   which the kernel cannot evaluate, and `Level.beqBlocks` rejects it. The command stops at the
   first such tick. Dropped items, minecarts, primed TNT and projectiles are out of reach of
   this method.
-* Do not read a container with a comparator (`Container.redstoneSignal` is `Float32`) until
-  that function is exact.
+* Do not assume a path is cheap, or reduces at all, because compiled code runs it. A
+  comparator that reads a container goes through `Container.redstoneSignal`, which is exact
+  rational arithmetic now; what a tick with it costs in the kernel was not measured here. Time
+  the first tick of a new kind with `checkpoints (timing)` before building on it.
 * Do not name a theorem with a Lean keyword (`extends`), and do not write the three words the
   CI check rejects, even in a comment.
 * Do not claim more than was checked: a bounded run is a bounded run, a cycle certificate is

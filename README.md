@@ -85,29 +85,37 @@ The block inventory is generated from the server as well:
 
 ## Status
 
-The engine is in place and verified against the server on the first components. Most components
-are still stubs: their blocks exist, with all their states, but do nothing.
+The engine and every redstone component of 26.3 are defined and tested against the server:
+`lake test` replays about 9500 recorded scenarios. Scenarios on which the model still disagrees
+with the server, or which need something the model leaves out, wait in `tests/pending`; each
+component's module docstring says what it does not model.
 
 | Module | Contents | State |
 |---|---|---|
 | `Redstone.Basic.*` | directions, positions, signals, boxes, NBT, the game's random generator | defined |
-| `Redstone.Block.Generated.*` | all 1286 blocks of 26.3 with their properties and attributes, generated from the server | defined |
-| `Redstone.Block.Entity.*` | the data of each block entity type | stubs |
-| `Redstone.World.Level` | blocks, block entities, scheduled ticks, block events, entities, clock | defined |
+| `Redstone.Block.Generated.*` | all 1286 blocks of 26.3 with their properties, attributes, shapes and items, generated from the server | defined |
+| `Redstone.Block.Entity.*` | the data of each block entity type | defined for the components below |
+| `Redstone.World.Level` | blocks, block entities, scheduled ticks, block events, entities, clock, weather | defined |
 | `Redstone.Mechanics.Behaviour` | the reactions of a block (`BlockBehaviour`) and the monad they run in | defined |
 | `Redstone.Mechanics.Update` | `setBlock`, neighbour and shape updates, the neighbour updater | defined |
 | `Redstone.Mechanics.Power` | strong and weak power, conductors | defined |
 | `Redstone.Mechanics.Tick` | the phases of a game tick | defined |
 | `Redstone.Mechanics.Dispatch` | which component gives each block its behaviour (generated) | defined |
-| `Redstone.Component.Lever`, `Lamp` | lever, redstone lamp | defined, tested |
-| other `Redstone.Component.*` | dust, torch, repeater, comparator, piston, observer, ... | stubs |
-| `Redstone.Entity.*` | items, falling blocks, TNT, minecarts, projectiles | stubs |
-| `Redstone.Mechanics.PistonMotion` | which blocks a piston moves | placeholder |
+| `Redstone.Mechanics.PistonMotion` | which blocks a piston moves, and in which order | defined, tested |
+| `Redstone.Component.Dust`, `Torch`, `Repeater`, `Diode`, `Comparator`, `Observer` | wire, torches and the block of redstone, repeater, comparator, observer | defined, tested |
+| `Redstone.Component.Lever`, `Button`, `PressurePlate`, `Tripwire`, `Sensor`, `Sculk` | inputs: lever, buttons, plates, tripwire, target, lightning rod, daylight detector, sculk sensors and shriekers | defined, tested |
+| `Redstone.Component.Piston`, `Door`, `Lamp`, `NoteBlock`, `Bell`, `Dripleaf`, `Rail`, `Tnt`, `CommandBlock` | outputs: pistons, doors, trapdoors and gates, lamp and copper bulb, note block, bell, dripleaf, rails, TNT, command, test and structure blocks | defined, tested |
+| `Redstone.Component.Hopper`, `Container`, `CookingTable`, `Dispenser`, `Crafter`, `AnalogSource` | hoppers and containers, furnaces and the brewing stand, dispenser, dropper, crafter, and the other blocks a comparator reads | defined, tested |
+| `Redstone.Component.FallingBlock`, `Extra` | falling blocks; skulls, sponge, frosted ice, potent sulfur, slime | defined, tested |
+| `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
+| `Redstone.Entity.Projectile` | arrows and other projectiles | stub |
 | `Redstone.Contraption.PistonDoor`, `Redstone.Theorems.PistonDoor3x3` | piston doors | placeholder |
 
-What the model leaves out: fluids do not flow, there is no light, destroyed blocks drop nothing,
+What the model leaves out: fluids do not flow, light is modelled only as far as the daylight
+detector needs it, destroyed blocks drop nothing (the random numbers of the drops are drawn),
 every chunk is loaded, players and mobs only exist as inputs, and the experimental redstone
-wire is off.
+wire is off. Where the model meets something it does not cover it sets `Level.overflow` instead
+of going on with a wrong state.
 
 ## Contributing
 
@@ -119,7 +127,8 @@ welcome. Please follow the project conventions:
 * Definitions follow the game's code and carry its names, so that they can be read side by
   side with it.
 * No `sorry` on `main`. A statement that is not proved yet is described in a module docstring
-  instead of being stated with `sorry`.
+  instead of being stated with `sorry`. The CI rejects `sorry`, `admit`, `native_decide` and
+  new axioms.
 
 ## License
 

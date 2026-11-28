@@ -22,8 +22,8 @@ will check them once droppers work.
 
 Not modelled:
 
-* `randomTick` of the weathering copper variants (oxidation): the hook exists
-  (`BehaviourOf.randomTick`), but no block gets a random tick yet.
+* `randomTick` of the weathering copper variants (oxidation) is not here but in
+  `Redstone.Component.Weathering`, which the random-tick engine calls for all copper.
 * `getStateForPlacement` and `setPlacedBy`: the model has no placement of blocks by items.
 * `onExplosionHit`: `Behaviour.onExplosionHit` does not say whether the explosion can trigger
   blocks. The reaction to an explosion that can (a wind charge) is defined here as

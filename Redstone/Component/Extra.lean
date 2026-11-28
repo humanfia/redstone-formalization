@@ -59,8 +59,7 @@ server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`,
 * `SlimeBlock.fallOn` and `HoneyBlock.fallOn`: fall damage. That pistons move the blocks
   attached to slime and honey belongs to the piston.
 * `RedStoneOreBlock.attack` (players do not hit blocks), `useItemOn`, whose result depends on
-  whether the item in hand could be placed, `randomTick`, which puts lit ore out again (random
-  ticks are not modelled), and the experience it drops.
+  whether the item in hand could be placed, and the experience it drops.
 -/
 
 @[expose] public section
@@ -384,10 +383,12 @@ def redstoneOreInteract (id : Blocks.RedStoneOre.Id) (s : Blocks.RedStoneOre) (p
   if !s.lit then discard <| Level.setBlock p (.redStoneOre id { s with lit := true })
 
 /-- The behaviour of redstone ore (`RedStoneOreBlock`): an entity that steps on it lights it
-up. -/
+up, and a random tick puts it out again. -/
 def redstoneOre (id : Blocks.RedStoneOre.Id) (s : Blocks.RedStoneOre) : Behaviour :=
   { Behaviour.inert (.redStoneOre id s) with
-    stepOn := fun p _ => redstoneOreInteract id s p }
+    stepOn := fun p _ => redstoneOreInteract id s p
+    randomTick := fun p => do
+      if s.lit then discard <| Level.setBlock p (.redStoneOre id { s with lit := false }) }
 
 /-- The behaviour of the blocks of this component. -/
 def behaviour (self : Block) : Behaviour :=

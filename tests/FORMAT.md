@@ -258,9 +258,9 @@ compares it with their traces after every tick; without arguments it runs everyt
 * The model takes its initial state from frame 0 of the trace, so it never reads `fill`,
   `blocks` or `entities`. From the scenario it uses `ticks`, `box`, `actions` and the
   `settings`. The settings `randomTickSpeed` and `blockDrops` are loaded into the level. With
-  `blockDrops` a destroyed block leaves its loot and its experience (`Level.dropResources`); the
-  model has no random ticks yet, so a scenario that sets `randomTickSpeed` will not agree with
-  its trace.
+  `blockDrops` a destroyed block leaves its loot and its experience (`Level.dropResources`).
+  With a positive `randomTickSpeed` the model gives random ticks to the blocks inside `box`,
+  with the chunks of the harness world in the server's order (`Redstone.Mechanics.RandomTick`).
 * It supports all the actions; they are the inputs of the model
   (`Redstone.Mechanics.Input`). The entity of a `summon` is read from its `type`, its `pos` and
   its `nbt`, as the model reads an entity of a trace; what the game adds to a summoned entity

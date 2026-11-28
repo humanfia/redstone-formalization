@@ -99,7 +99,7 @@ component's module docstring says what it does not model.
 | `Redstone.Block.Generated.*` | all 1286 blocks of 26.3 with their properties, attributes, shapes, items and tags, generated from the server | defined |
 | `Redstone.Block.FaceShape` | the faces of block shapes, in exact arithmetic (`getFaceShape`, `isFaceFull`) | defined |
 | `Redstone.Block.Fluid`, `Redstone.Block.Generated.Fluid` | fluid states, and the fluid state of every block state, without strings | defined |
-| `Redstone.Block.Weathering` | the stages of copper | defined, not used yet |
+| `Redstone.Block.Weathering` | the stages of copper | defined |
 | `Redstone.Block.Entity.*` | the data of each block entity type | defined for the components below |
 | `Redstone.World.Level` | blocks, block entities, scheduled block and fluid ticks, block events, entities, clock, weather, the game rules for random ticks and drops | defined |
 | `Redstone.Mechanics.Behaviour` | the reactions of a block (`BlockBehaviour`) and the monad they run in | defined |
@@ -108,7 +108,8 @@ component's module docstring says what it does not model.
 | `Redstone.Mechanics.Tick` | the phases of a game tick | defined |
 | `Redstone.Mechanics.Input` | the actions of a scenario (use, set, destroy, summon, kill) and schedules of them | defined |
 | `Redstone.Mechanics.Fluid` | what a fluid tick does: the flow of water and lava | defined, tested |
-| `Redstone.Mechanics.RandomTick` | the random ticks of the chunks | stub |
+| `Redstone.Mechanics.RandomTick` | the random ticks of the chunks, in the game's order over the chunks of the test world | defined, tested; the random tick of lava sets `overflow` |
+| `Redstone.Component.Weathering` | copper of every kind weathering on random ticks | defined, tested |
 | `Redstone.Mechanics.Dispatch` | which component gives each block its behaviour (generated) | defined |
 | `Redstone.Mechanics.PistonMotion` | which blocks a piston moves, and in which order | defined, tested |
 | `Redstone.Component.Dust`, `Torch`, `Repeater`, `Diode`, `Comparator`, `Observer` | wire, torches and the block of redstone, repeater, comparator, observer | defined, tested |
@@ -129,7 +130,7 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Fire` | fire and soul fire | stub |
 | `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners; what they release is in `Level.spawnAfterBreak` (`Redstone.Mechanics.Update`), next to the loot of every block | defined, tested |
 | `Redstone.World.Light` | the light of a cell: block light and raw brightness, for the blocks that need or shun light | stub: every cell has light 15 |
-| `Redstone.Component.RandomTicked` | copper blocks, ice, budding amethyst | stub |
+| `Redstone.Component.RandomTicked` | ice melting, budding amethyst growing buds (the copper blocks weather through `Weathering`) | defined, tested where light does not matter |
 | `Redstone.Entity.Lightning`, `Redstone.Entity.Hanging` | lightning bolts, item frames | stub |
 | `Redstone.Entity.ExperienceOrb` | experience orbs: falling, sliding, merging, expiring; what a broken ore or a removed furnace releases | defined, tested |
 | `Redstone.Proof.Smoke` | four small circuits proved by kernel evaluation: lever and lamp, a lever losing its support, a sticky piston, two hoppers | proved |
@@ -147,8 +148,9 @@ To prove a circuit, follow [Redstone/Proof/README.md](Redstone/Proof/README.md);
 circuits of `Redstone/Theorems/Basics` (lever and lamp, torch inverter, repeater delay, dust
 decay, RS latch, sticky piston, hopper pair, repeater clock) are the worked examples.
 
-What the model leaves out: blocks get no random ticks (the phase of the game tick is there,
-and empty), light is modelled only as far as the daylight detector needs
+What the model leaves out: random ticks reach copper, redstone ore, ice, snow layers and
+budding amethyst but not the plants, and ice and snow melt whatever the light is (block light
+is still 15 everywhere), light is modelled only as far as the daylight detector needs
 it, every chunk is
 loaded, players and mobs only exist as inputs, and the experimental redstone wire is off. Where the model meets something it does not cover it sets `Level.overflow` instead
 of going on with a wrong state.

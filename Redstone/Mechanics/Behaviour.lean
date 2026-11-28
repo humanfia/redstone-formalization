@@ -130,7 +130,11 @@ namespace Behaviour
 
 /-- The behaviour of a block that does nothing: no signal, no reaction, and the block entity
 the game creates for the block. It is the behaviour of `BlockBehaviour` itself, and the base
-that components override. -/
+that components override.
+
+A random tick is the exception: it sets `Level.overflow`. The game only gives random ticks to
+the states that do something with them (`isRandomlyTicking`), so a block that gets one and has
+no `randomTick` of its own here is a block whose random tick is not modelled. -/
 def inert (self : Block) : Behaviour where
   signal _ _ _ := 0
   ownSignal _ _ := 0
@@ -146,7 +150,7 @@ def inert (self : Block) : Behaviour where
   updateShape _ _ _ _ := pure self
   updateIndirectNeighbourShapes _ _ _ := pure ()
   tick _ := pure ()
-  randomTick _ := pure ()
+  randomTick _ := modify fun l => { l with overflow := true }
   triggerEvent _ _ _ := pure false
   useWithoutItem _ _ := pure false
   useItemOn _ _ _ := pure false

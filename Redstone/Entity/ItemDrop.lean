@@ -13,10 +13,7 @@ an `ItemEntity` of its own (`JukeboxBlockEntity.popOutTheItem`, `ComposterBlock.
 What the components share when an item stack becomes an item entity: the draws from the
 level's random number generator and the entity itself.
 
-## What is left out
-
-* An item entity holds the item and the count of its stack, and whether the stack has
-  components, but not the components themselves (`Entities.Item`).
+The item entity holds the stack with its components (`Entities.Item`).
 -/
 
 @[expose] public section
@@ -78,12 +75,17 @@ def spawnItem (stack : ItemStack) (accuracy : ℕ) (d : Direction) (position : V
   let vy ← triangle 0.2 spread
   let vz ← triangle (n.z * pow) spread
   discard <| Entity.Item.spawnStack ⟨position.x, y, position.z⟩ ⟨vx, vy, vz⟩ stack.id stack.count
-    stack.hasComponents
+    stack.hasComponents (components := stack.components)
+
+/-- What makes an item entity, for `Entities.Physics.sectionEntry`, when it is made while the
+block entities are ticked: that is after every entity was ticked, so the number is larger than
+that of any entity's tick. -/
+def afterEntities : M ℕ := return (← get).nextEntityIndex + 1
 
 /-- The loop of `Containers.dropItemStack`: splits the stack into item entities of 10 to 30
 items, all at the same place. `fuel` bounds the number of entities; the count of the stack is
-enough. -/
-def dropItemStackLoop (pos : Vec3) : ℕ → ItemStack → M Unit
+enough. `actor` is as in `Entity.Item.spawnAtLocation`. -/
+def dropItemStackLoop (pos : Vec3) (actor : ℕ) : ℕ → ItemStack → M Unit
   | 0, stack => if stack.isEmpty then pure () else Level.setOverflow
   | fuel + 1, stack => do
     if stack.isEmpty then return
@@ -92,18 +94,19 @@ def dropItemStackLoop (pos : Vec3) : ℕ → ItemStack → M Unit
     let vy ← triangle 0.2 0.11485000171139836
     let vz ← triangle 0.0 0.11485000171139836
     discard <| Entity.Item.spawnStack pos ⟨vx, vy, vz⟩ stack.id n stack.hasComponents
-    dropItemStackLoop pos fuel (stack.withCount (stack.count - n))
+      (actor := actor) (components := stack.components)
+    dropItemStackLoop pos actor fuel (stack.withCount (stack.count - n))
 
 /-- `Containers.dropItemStack(level, x, y, z, itemStack)` at a block position. The position is
-drawn even for an empty stack. -/
-def dropItemStack (p : Pos) (stack : ItemStack) : M Unit := do
+drawn even for an empty stack. `actor` is as in `Entity.Item.spawnAtLocation`. -/
+def dropItemStack (p : Pos) (stack : ItemStack) (actor : ℕ := 0) : M Unit := do
   let x := Float.ofInt p.x + (← nextDouble) * 0.75 + 0.125
   let y := Float.ofInt p.y + (← nextDouble) * 0.75
   let z := Float.ofInt p.z + (← nextDouble) * 0.75 + 0.125
-  dropItemStackLoop ⟨x, y, z⟩ stack.count stack
+  dropItemStackLoop ⟨x, y, z⟩ actor stack.count stack
 
 /-- `Containers.dropContents(level, pos, container)`. -/
-def dropContents (p : Pos) (items : Inventory) : M Unit := items.forM (dropItemStack p)
+def dropContents (p : Pos) (items : Inventory) : M Unit := items.forM (dropItemStack p ·)
 
 /-- `new ItemEntity(level, x, y, z, stack)`, `setDefaultPickUpDelay()` and `addFreshEntity`:
 the stack lies at `pos`, with the small random velocity the constructor gives it, and cannot
@@ -111,6 +114,7 @@ be picked up for 10 ticks. -/
 def spawnWithPickUpDelay (pos : Vec3) (stack : ItemStack) : M Unit := do
   if stack.isEmpty then return
   discard <| Entity.Item.spawnAtLocation pos stack.id 0 stack.count stack.hasComponents
+    stack.components
 
 /-- An item entity thrown out above the block at `p` (`JukeboxBlockEntity.popOutTheItem`,
 `ComposterBlock.extractProduce`): at

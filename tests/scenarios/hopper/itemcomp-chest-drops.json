@@ -1,0 +1,53 @@
+{
+ "name": "itemcomp-chest-drops",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   2,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:64,components:{\"minecraft:rarity\":\"epic\"}},{Slot:5b,id:\"minecraft:potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:water\"}}},{Slot:9b,id:\"minecraft:stick\",count:4,components:{\"minecraft:max_stack_size\":4}}]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    2
+   ]
+  }
+ ]
+}

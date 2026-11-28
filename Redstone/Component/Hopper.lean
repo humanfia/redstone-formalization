@@ -23,8 +23,8 @@ ticked (`entityInside`).
 ## What is left out
 
 * Containers that are entities (minecarts, boats): see `Redstone.Component.Container`.
-* The components of the stack of an item entity (`Entities.Item`): a hopper that would take in
-  an item entity whose stack has components sets `Level.overflow`.
+* An item entity whose stack has components that the entity does not hold
+  (`Entities.Item.unknownComponents`): a hopper that would take it in sets `Level.overflow`.
 * `entityInside` is called for the blocks an entity overlaps at the end of its move, not for
   those it only passed through (`Level.applyEffectsFromBlocks`).
 -/
@@ -66,14 +66,13 @@ def getItemsAtAndAbove (l : Level) (p : Pos) : List ℕ :=
 
 /-- `HopperBlockEntity.addItem(container, entity)`: the hopper at `p` takes in as much of the
 stack of the item entity with index `i` as it has room for. Returns whether it took all of it;
-the entity is then gone. The components of an entity's stack are not known to the model: an
-entity that has some sets `Level.overflow`. -/
+the entity is then gone. -/
 def addItemEntity (p : Pos) (i : ℕ) : M Bool := do
   let some (_, dt) ← Entity.Item.get? i | return false
-  if dt.hasComponents then
+  if dt.unknownComponents then
     Level.setOverflow
     return false
-  let rest ← addItem none (.single p) (.of dt.item dt.count) none
+  let rest ← addItem none (.single p) dt.stack none
   if rest.isEmpty then
     Level.removeEntity i
     return true

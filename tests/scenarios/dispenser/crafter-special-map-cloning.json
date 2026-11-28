@@ -1,0 +1,295 @@
+{
+ "name": "crafter-special-map-cloning",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   2,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:filled_map\",count:1,components:{\"minecraft:map_id\":3}},{Slot:1b,id:\"minecraft:map\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:map\",count:1},{Slot:1b,id:\"minecraft:filled_map\",count:1,components:{\"minecraft:map_id\":4}},{Slot:2b,id:\"minecraft:map\",count:1},{Slot:3b,id:\"minecraft:map\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    7
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:filled_map\",count:1},{Slot:1b,id:\"minecraft:map\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    7
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:filled_map\",count:1,components:{\"minecraft:map_id\":5}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    10
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  }
+ ]
+}

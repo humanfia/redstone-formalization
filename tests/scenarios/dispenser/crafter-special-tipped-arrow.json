@@ -1,0 +1,482 @@
+{
+ "name": "crafter-special-tipped-arrow",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   2,
+   21
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    21
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:arrow\",count:1},{Slot:1b,id:\"minecraft:arrow\",count:1},{Slot:2b,id:\"minecraft:arrow\",count:1},{Slot:3b,id:\"minecraft:arrow\",count:1},{Slot:4b,id:\"minecraft:lingering_potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:poison\"}}},{Slot:5b,id:\"minecraft:arrow\",count:1},{Slot:6b,id:\"minecraft:arrow\",count:1},{Slot:7b,id:\"minecraft:arrow\",count:1},{Slot:8b,id:\"minecraft:arrow\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:arrow\",count:1},{Slot:1b,id:\"minecraft:arrow\",count:1},{Slot:2b,id:\"minecraft:arrow\",count:1},{Slot:3b,id:\"minecraft:arrow\",count:1},{Slot:4b,id:\"minecraft:lingering_potion\",count:1},{Slot:5b,id:\"minecraft:arrow\",count:1},{Slot:6b,id:\"minecraft:arrow\",count:1},{Slot:7b,id:\"minecraft:arrow\",count:1},{Slot:8b,id:\"minecraft:arrow\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    7
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:arrow\",count:1},{Slot:1b,id:\"minecraft:arrow\",count:1},{Slot:2b,id:\"minecraft:arrow\",count:1},{Slot:3b,id:\"minecraft:arrow\",count:1},{Slot:4b,id:\"minecraft:lingering_potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:water\",custom_color:255}}},{Slot:5b,id:\"minecraft:arrow\",count:1},{Slot:6b,id:\"minecraft:arrow\",count:1},{Slot:7b,id:\"minecraft:arrow\",count:1},{Slot:8b,id:\"minecraft:arrow\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    7
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:arrow\",count:1},{Slot:1b,id:\"minecraft:arrow\",count:1},{Slot:2b,id:\"minecraft:arrow\",count:1},{Slot:3b,id:\"minecraft:arrow\",count:1},{Slot:4b,id:\"minecraft:lingering_potion\",count:1,components:{\"!minecraft:potion_contents\":{}}},{Slot:5b,id:\"minecraft:arrow\",count:1},{Slot:6b,id:\"minecraft:arrow\",count:1},{Slot:7b,id:\"minecraft:arrow\",count:1},{Slot:8b,id:\"minecraft:arrow\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    10
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    13
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:arrow\",count:1},{Slot:1b,id:\"minecraft:arrow\",count:1},{Slot:2b,id:\"minecraft:arrow\",count:1},{Slot:3b,id:\"minecraft:arrow\",count:1},{Slot:4b,id:\"minecraft:lingering_potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:swiftness\"}}},{Slot:5b,id:\"minecraft:arrow\",count:1},{Slot:6b,id:\"minecraft:arrow\",count:1},{Slot:7b,id:\"minecraft:arrow\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    13
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    16
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:arrow\",count:1},{Slot:1b,id:\"minecraft:arrow\",count:1},{Slot:2b,id:\"minecraft:arrow\",count:1},{Slot:3b,id:\"minecraft:arrow\",count:1},{Slot:4b,id:\"minecraft:splash_potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:poison\"}}},{Slot:5b,id:\"minecraft:arrow\",count:1},{Slot:6b,id:\"minecraft:arrow\",count:1},{Slot:7b,id:\"minecraft:arrow\",count:1},{Slot:8b,id:\"minecraft:arrow\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    16
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    19
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:arrow\",count:1},{Slot:1b,id:\"minecraft:arrow\",count:1},{Slot:2b,id:\"minecraft:arrow\",count:1},{Slot:3b,id:\"minecraft:arrow\",count:1},{Slot:4b,id:\"minecraft:lingering_potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:long_regeneration\"}}},{Slot:5b,id:\"minecraft:arrow\",count:1},{Slot:6b,id:\"minecraft:arrow\",count:1},{Slot:7b,id:\"minecraft:arrow\",count:1},{Slot:8b,id:\"minecraft:arrow\",count:1}]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  }
+ ]
+}

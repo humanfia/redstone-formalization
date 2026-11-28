@@ -1,0 +1,677 @@
+{
+ "name": "crafter-special-repair",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   2,
+   30
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    30
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":100}},{Slot:1b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":200}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:diamond_pickaxe\",count:1,components:{\"minecraft:damage\":10}},{Slot:3b,id:\"minecraft:diamond_pickaxe\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    7
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:bow\",count:1,components:{\"minecraft:damage\":300}},{Slot:1b,id:\"minecraft:bow\",count:1,components:{\"minecraft:damage\":350}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    7
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:shears\",count:1,components:{\"minecraft:damage\":200,\"minecraft:max_damage\":500}},{Slot:1b,id:\"minecraft:shears\",count:1,components:{\"minecraft:damage\":100}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    10
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    13
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:iron_helmet\",count:1,components:{\"minecraft:damage\":50,\"minecraft:enchantments\":{\"minecraft:binding_curse\":1,\"minecraft:protection\":2}}},{Slot:1b,id:\"minecraft:iron_helmet\",count:1,components:{\"minecraft:damage\":60,\"minecraft:enchantments\":{\"minecraft:vanishing_curse\":1,\"minecraft:unbreaking\":3}}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    13
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    16
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":5}},{Slot:1b,id:\"minecraft:golden_sword\",count:1,components:{\"minecraft:damage\":5}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    16
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    19
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:elytra\",count:1,components:{\"minecraft:damage\":431}},{Slot:1b,id:\"minecraft:elytra\",count:1,components:{\"minecraft:damage\":431}}]}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    22
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stick\",count:1,components:{\"minecraft:damage\":3,\"minecraft:max_damage\":10,\"minecraft:max_stack_size\":1}},{Slot:1b,id:\"minecraft:stick\",count:1,components:{\"minecraft:damage\":9,\"minecraft:max_damage\":10,\"minecraft:max_stack_size\":1}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    22
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    25
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    25
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone_axe\",count:1,components:{\"minecraft:damage\":1}},{Slot:1b,id:\"minecraft:stone_axe\",count:1,components:{\"minecraft:damage\":2}},{Slot:2b,id:\"minecraft:stone_axe\",count:1,components:{\"minecraft:damage\":3}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    25
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    28
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    28
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:fishing_rod\",count:1,components:{\"minecraft:damage\":60,\"minecraft:rarity\":\"epic\"}},{Slot:1b,id:\"minecraft:fishing_rod\",count:1,components:{\"minecraft:damage\":63,\"minecraft:enchantments\":{\"minecraft:vanishing_curse\":1}}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    28
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    25
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    28
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    25
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    28
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    25
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    28
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    25
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    28
+   ],
+   "face": "up"
+  }
+ ]
+}

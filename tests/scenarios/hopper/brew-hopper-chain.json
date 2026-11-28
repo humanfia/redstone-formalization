@@ -1,0 +1,95 @@
+{
+ "name": "brew-hopper-chain",
+ "ticks": 880,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:nether_wart\",count:1},{Slot:1b,id:\"minecraft:sugar\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=west]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:blaze_powder\",count:1},{Slot:1b,id:\"minecraft:potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:water\"}}},{Slot:2b,id:\"minecraft:potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:water\"}}},{Slot:3b,id:\"minecraft:potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:water\"}}}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=false,facing=west]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 840,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  }
+ ]
+}

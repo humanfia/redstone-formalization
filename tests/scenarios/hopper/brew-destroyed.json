@@ -1,0 +1,71 @@
+{
+ "name": "brew-destroyed",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:water\"}}},{Slot:1b,id:\"minecraft:potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:awkward\"}}},{Slot:3b,id:\"minecraft:nether_wart\",count:2},{Slot:4b,id:\"minecraft:blaze_powder\",count:3}],BrewTime:30,Fuel:1}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]",
+   "nbt": "{Items:[{Slot:1b,id:\"minecraft:splash_potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:strength\"}}},{Slot:3b,id:\"minecraft:dragon_breath\",count:1}],BrewTime:3,Fuel:0}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    1
+   ]
+  }
+ ]
+}

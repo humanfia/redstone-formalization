@@ -12,6 +12,7 @@ Sources:
 * the cooking recipes: the recipe files of the server's built-in data pack
   (`data/minecraft/recipe/*.json`, types `smelting`, `blasting`, `smoking`), with the item tags
   of `data/minecraft/tags/item`;
+* the brewing recipes: `data/minecraft/recipe/brewing/*.json`;
 * the fuels: the item registrations in the decompiled `Items.java` (`cookingFuel(...)`,
   `brewingFuel(...)`, `craftRemainder(...)`) and the providers they name, under
   `data/minecraft/context_int_provider`.
@@ -117,16 +118,34 @@ def load_recipes(src, tags):
 
 
 def load_brewing(src, tags):
-    """The reagents and the potion inputs of the brewing recipes. Every recipe asks for potion
-    contents, so no recipe accepts a stack without components; the model relies on this."""
+    """The reagents and the potion inputs of the brewing recipes, and the recipes: (input item,
+    potion of the input, reagent item) -> (output item, potion of the output). Every recipe
+    asks for one potion in an item and for a reagent item, and gives an item with a potion; the
+    model relies on this, and on no two recipes asking for the same things."""
     root = os.path.join(src, "data/minecraft/recipe/brewing")
     reagents, inputs = set(), set(tags["minecraft:brewing_potion_inputs"])
+    recipes = {}
     for f in sorted(os.listdir(root)):
         r = json.load(open(os.path.join(root, f)))
-        assert r["type"] == "minecraft:brewing" and "potion_contents" in r["input"], f
+        assert set(r) == {"type", "input", "reagent", "output"}, f
+        assert r["type"] == "minecraft:brewing", f
+        assert set(r["input"]) == {"item", "potion_contents"}, f
+        assert set(r["input"]["potion_contents"]) == {"potions"}, f
+        assert set(r["reagent"]) == {"item"}, f
+        assert set(r["output"]) == {"id", "components"}, f
+        contents = r["output"]["components"]
+        assert set(contents) == {"minecraft:potion_contents"}, f
+        assert set(contents["minecraft:potion_contents"]) == {"potion"}, f
+        potion = r["input"]["potion_contents"]["potions"]
+        assert isinstance(potion, str) and not potion.startswith("#"), f
+        result = (r["output"]["id"], contents["minecraft:potion_contents"]["potion"])
         reagents.update(ingredient_items(r["reagent"]["item"], tags))
         inputs.update(ingredient_items(r["input"]["item"], tags))
-    return reagents, inputs
+        for item in ingredient_items(r["input"]["item"], tags):
+            for reagent in ingredient_items(r["reagent"]["item"], tags):
+                assert (item, potion, reagent) not in recipes, f
+                recipes[(item, potion, reagent)] = result
+    return reagents, inputs, recipes
 
 
 def id_constants(src, cls):
@@ -220,7 +239,10 @@ def gen_cooking_table(dump, src):
     recipes = load_recipes(src, tags)
     fuels, brewing, remainders = load_fuels(src, dump)
     order = [i["id"] for i in dump["items"]]
-    out = HEADER.format(imp="Mathlib.Tactic", title="Fuels and cooking recipes")
+    # The table needs nothing of the import; those who read the brewing recipes
+    # (`Redstone.Component.Container`) need it to read the potion of a bottle.
+    out = HEADER.format(imp="Redstone.Block.Entity.Components",
+                        title="Fuels, cooking recipes and brewing recipes")
     out += ("/-- The furnace fuels (the items with the component `minecraft:cooking_fuel`), with\n"
             "their burn time in a furnace and in a blast furnace or smoker. -/\n"
             "def cookingFuels : List (String × ℕ × ℕ) := [\n")
@@ -236,7 +258,7 @@ def gen_cooking_table(dump, src):
     out += ",\n".join(f"  ({lean_str(i)}, {lean_str(remainders[i])})"
                       for i in order if i in remainders)
     out += "\n]\n\n"
-    reagents, inputs = load_brewing(src, tags)
+    reagents, inputs, brews = load_brewing(src, tags)
     out += string_list(
         "brewingReagents",
         "The property set `minecraft:brewing_reagent`: the reagents of the brewing recipes.",
@@ -251,6 +273,14 @@ def gen_cooking_table(dump, src):
         "The item tag `minecraft:furnace_fuel_bottom_takeable`: what a hopper may take out of\n"
         "the fuel slot of a furnace.",
         tags["minecraft:furnace_fuel_bottom_takeable"], 2) + "\n"
+    out += ("/-- The recipes of type `minecraft:brewing`: the item of the bottle, its potion and\n"
+            "the reagent, with the item of the result and its potion. -/\n"
+            "def brewingRecipes : List ((String × String × String) × String × String) := [\n")
+    out += ",\n".join(
+        f"  (({lean_str(k[0])}, {lean_str(k[1])},\n    {lean_str(k[2])}),\n"
+        f"    {lean_str(v[0])}, {lean_str(v[1])})"
+        for k, v in sorted(brews.items()))
+    out += "\n]\n\n"
     for kind in ("smelting", "blasting", "smoking"):
         table = {}
         for rid, items, result, count, time in recipes[kind]:

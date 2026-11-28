@@ -1,0 +1,105 @@
+{
+ "name": "adv-arrow-chunk-border",
+ "ticks": 70,
+ "box": {
+  "min": [
+   13,
+   0,
+   13
+  ],
+  "max": [
+   18,
+   3,
+   18
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    13,
+    0,
+    13
+   ],
+   "max": [
+    18,
+    0,
+    18
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    15,
+    1,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    15
+   ],
+   "state": "minecraft:oak_button[face=wall,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    16
+   ],
+   "state": "minecraft:oak_button[face=wall,facing=south,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    15
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    14
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    15.99,
+    1.25,
+    15.5
+   ]
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    16,
+    1,
+    15
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    16
+   ],
+   "face": "south"
+  }
+ ]
+}

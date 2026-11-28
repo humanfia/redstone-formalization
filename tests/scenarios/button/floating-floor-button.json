@@ -1,0 +1,110 @@
+{
+ "name": "floating-floor-button",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   3,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:jungle_button[face=floor,facing=east,powered=false]",
+   "flags": 3
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]",
+   "flags": 3
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]",
+   "flags": 3
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 25,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  }
+ ]
+}

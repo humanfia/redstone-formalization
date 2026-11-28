@@ -21,10 +21,10 @@ Java classes: `TargetBlock`, `LightningRodBlock`, `WeatheringLightningRodBlock`,
 ## What is modelled, and what is not
 
 * Target: `ownSignal`, `tick`, `onPlace`, and `updateRedstoneOutput` with `getRedstoneStrength`.
-  `onProjectileHit` needs the point where the projectile hit, which the hook of the model does
-  not pass; the position of the projectile stands in for it, which is not the same point in
-  general. Statistics and advancements are left out. No projectile is modelled yet, so nothing
-  calls `onProjectileHit`, and `tick` cannot be reached either.
+  `onProjectileHit` needs the point where the projectile hit. The hook passes it, but the
+  target does not read it yet: the position of the projectile stands in for it, which is not
+  the same point in general. Statistics and advancements are left out. No projectile flies in
+  the model yet, so nothing calls `onProjectileHit`, and `tick` cannot be reached either.
 * Lightning rod: `ownSignal`, `getDirectSignal`, `onLightningStrike`, `tick`, `onPlace`,
   `affectNeighborsAfterRemoval`. `updateShape` only schedules a fluid tick for a waterlogged
   rod, and fluids do not flow in the model. `randomTick` (the oxidation of copper) and the level
@@ -74,7 +74,7 @@ def target (s : Blocks.Target) : Behaviour :=
   { Behaviour.inert self with
     signal := fun _ _ _ => s.power
     ownSignal := fun _ _ => s.power
-    onProjectileHit := fun p face index => do
+    onProjectileHit := fun p face _ index => do
       if let some e := (← get).entity? index then
         let strength := redstoneStrength face e.base.pos
         updateRedstoneOutput s p ⟨strength % 16, Nat.mod_lt _ (by decide)⟩

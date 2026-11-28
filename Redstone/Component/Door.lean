@@ -23,8 +23,10 @@ will check them once droppers work.
 Not modelled:
 
 * Fluid ticks. A waterlogged trapdoor schedules a tick of its water whenever it is toggled or
-  receives a shape update; the model has no fluid ticks, so the water never flows.
-* `randomTick` of the weathering copper variants (oxidation); the model has no random ticks.
+  receives a shape update; the trapdoor does not schedule it yet (`Level.scheduleFluidTick`),
+  and fluids do not flow.
+* `randomTick` of the weathering copper variants (oxidation): the hook exists
+  (`BehaviourOf.randomTick`), but no block gets a random tick yet.
 * `getStateForPlacement` and `setPlacedBy`: the model has no placement of blocks by items.
 * `onExplosionHit`: `Behaviour.onExplosionHit` does not say whether the explosion can trigger
   blocks. The reaction to an explosion that can (a wind charge) is defined here as

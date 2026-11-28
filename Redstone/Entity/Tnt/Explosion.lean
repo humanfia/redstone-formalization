@@ -34,7 +34,8 @@ reproduces (`Redstone.Entity.Tnt.HashSet`).
 * Drops: an exploded block drops nothing, as in a world where the game rule `block_drops` is
   off, which is how the tests run. The game still evaluates the loot table of every exploded
   block and draws the position of every stack from the level's generator, so the number of
-  stacks is modelled (`explosionDrops`, `addOrAppendStack`). A block whose drops depend on
+  stacks is modelled (`Level.getExplosionDrops`, `addOrAppendStack`, `Level.popResource`). With
+  the game rule on, `Level.popResource` sets `Level.overflow`. A block whose drops depend on
   chance, on its block entity or on its neighbours (leaves, glowstone, some ores, banners,
   shulker boxes, heads, ...) sets `Level.overflow` when it explodes. Experience and silverfish
   (`spawnAfterBreak`) are not modelled.
@@ -224,51 +225,49 @@ def shuffle (ps : Array Pos) (r : JavaRandom) : Array Pos × JavaRandom :=
       (ps.swapIfInBounds (i - 1) swapTo, r))
     (ps, r)
 
-/-- `ServerExplosion.addOrAppendStack`: adds a dropped stack of `count` of `item` to the ones
-collected so far. It is merged into the collected ones of the same item, which take up to 16
-(`StackCollector.tryMerge`, `ItemEntity.merge`), and what is left becomes a new stack. An empty
-stack is kept only if it is the first. -/
-def addOrAppendStack (collected : Array (String × ℕ)) (item : String) (count : ℕ) :
-    Array (String × ℕ) :=
-  if count == 0 then (if collected.isEmpty then collected.push (item, 0) else collected)
+/-- `ServerExplosion.addOrAppendStack`: adds a stack of `count` of `item`, dropped by the block at
+`p`, to the ones collected so far (`ServerExplosion.StackCollector`: where the stack will be
+dropped, the item, the count). It is merged into the collected ones of the same item, which
+take up to 16 and keep their position (`StackCollector.tryMerge`, `ItemEntity.merge`), and what
+is left becomes a new stack at `p`. An empty stack is kept only if it is the first. -/
+def addOrAppendStack (collected : Array (Pos × String × ℕ)) (p : Pos) (item : String)
+    (count : ℕ) : Array (Pos × String × ℕ) :=
+  if count == 0 then (if collected.isEmpty then collected.push (p, item, 0) else collected)
   else
     let size : ℤ := itemMaxStackSize item
     let (collected, rest) := collected.foldl
-      (fun ((acc, n) : Array (String × ℕ) × ℤ) (it, c) =>
+      (fun ((acc, n) : Array (Pos × String × ℕ) × ℤ) (q, it, c) =>
         if n > 0 && c > 0 && it == item && n + c ≤ size then
           let delta := min (min size 16 - c) n
-          (acc.push (it, (c + delta).toNat), n - delta)
-        else (acc.push (it, c), n))
+          (acc.push (q, it, (c + delta).toNat), n - delta)
+        else (acc.push (q, it, c), n))
       (#[], (count : ℤ))
-    if rest > 0 then collected.push (item, rest.toNat) else collected
+    if rest > 0 then collected.push (p, item, rest.toNat) else collected
 
 /-- `BlockBehaviour.onExplosionHit` for an explosion that destroys blocks: the drops of a block
-that is not air are added to `collected`, the block is replaced by air, and then told so
-(`Block.wasExploded`). Only TNT reacts, and it drops nothing (`dropFromExplosion`): it becomes a
-primed TNT with a short fuse (`TntBlock.wasExploded`). -/
-def onExplosionHit (collected : Array (String × ℕ)) (p : Pos) : M (Array (String × ℕ)) := do
+that is not air (`Level.getExplosionDrops`) are added to `collected`, the block is replaced by
+air, and then told so (`Block.wasExploded`). Only TNT reacts, and it drops nothing
+(`dropFromExplosion`): it becomes a primed TNT with a short fuse (`TntBlock.wasExploded`). -/
+def onExplosionHit (collected : Array (Pos × String × ℕ)) (p : Pos) :
+    M (Array (Pos × String × ℕ)) := do
   let state ← Level.getBlock p
   if state.isAir then return collected
   let mut collected := collected
   if !state.is .tnt then
-    match explosionDrops state with
-    | some drops =>
-      collected := drops.foldl (fun s (item, count) => addOrAppendStack s item count) collected
-    | none => Level.setOverflow
+    let drops ← Level.getExplosionDrops state p (← Level.peekBlockEntity p)
+    collected := drops.foldl (fun s (item, count) => addOrAppendStack s p item count) collected
   discard <| Level.setBlock p .AIR 3
   if state.is .tnt then discard <| addPrimedTnt p randomShortFuse
   return collected
 
 /-- `ServerExplosion.interactWithBlocks`: shuffles the positions, blows up each block, and
-drops what was collected. Nothing is dropped in the model, but `Block.popResource` draws the
-three coordinates of each stack from the level's generator before it finds that out. -/
+drops what was collected, every stack where the first block that dropped that item was
+(`Level.popResource`). What the blocks drop and what dropping a stack does are not decided
+here: both are in `Redstone.Mechanics.Update`, next to `Level.getDrops`. -/
 def interactWithBlocks (ps : List Pos) : M Unit := do
   let ps ← drawRandom (shuffle ps.toArray)
   let collected ← ps.toList.foldlM onExplosionHit #[]
-  collected.forM fun _ => do
-    discard <| drawRandom nextDouble
-    discard <| drawRandom nextDouble
-    discard <| drawRandom nextDouble
+  collected.forM fun (p, item, count) => Level.popResource p item count
 
 /-- `ServerLevel.explode` with `ExplosionInteraction.TNT`, no fire and the default damage
 calculator of an entity: `ServerExplosion.explode`. -/

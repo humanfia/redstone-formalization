@@ -13,7 +13,8 @@ is `tests/traces/<unit>/<name>.trace.json`.
 The model starts from frame 0 of the trace. Before each game tick the scenario's actions for
 that tick are applied; after it the model is compared with the frame: every block and block
 entity in the box, the order in which block entities tick, the scheduled ticks, the block
-events and the entities.
+events and the entities. The scheduled fluid ticks are read from the trace and loaded, but
+they are not compared yet (`compareFluidTicks`): fluids do not flow in the model.
 
 This program is a test tool and not part of the formalization.
 -/
@@ -105,14 +106,121 @@ partial def parseNbt (j : Json) : Except String Nbt := do
     | _ => throw s!"not an NBT tag: {j.compress}"
   | _ => throw s!"not an NBT tag: {j.compress}"
 
+/-! ### SNBT
+
+The text form of NBT (`TagParser`), in which a scenario gives the data of an entity it
+summons. -/
+
+namespace Snbt
+
+def isBare (c : Char) : Bool := c.isAlphanum || c == '.' || c == '_' || c == '+' || c == '-'
+
+def skip : List Char → List Char
+  | c :: cs => if c.isWhitespace then skip cs else c :: cs
+  | [] => []
+
+/-- A quoted string, after its opening quote `q`. -/
+def quoted (q : Char) : List Char → String → Except String (String × List Char)
+  | '\\' :: c :: cs, acc => quoted q cs (acc.push c)
+  | c :: cs, acc => if c == q then pure (acc, cs) else quoted q cs (acc.push c)
+  | [], _ => throw "SNBT: a string is not closed"
+
+/-- A decimal number. SNBT allows `.5` and `5.`, which JSON does not. -/
+def float? (text : String) : Option Float :=
+  let (sign, digits) := if text.startsWith "-" then ("-", (text.drop 1).toString) else ("", text)
+  let digits := if digits.startsWith "." then "0" ++ digits else digits
+  let digits := if digits.endsWith "." then digits ++ "0" else digits
+  match Json.parse (sign ++ digits) with
+  | .ok (.num n) => some n.toFloat
+  | _ => none
+
+/-- The tag an unquoted token stands for: a number with its suffix, a boolean, or a string. -/
+def ofBare (t : String) : Nbt :=
+  let body := (t.dropEnd 1).toString
+  let lower := t.toLower
+  if lower == "true" then .byte 1
+  else if lower == "false" then .byte 0
+  else if let some n := t.toInt? then .int n
+  else match t.back.toLower, body.toInt?, float? body with
+    | 'b', some n, _ => .byte n
+    | 's', some n, _ => .short n
+    | 'l', some n, _ => .long n
+    | 'f', _, some x => .float x.toFloat32.toBits.toNat
+    | 'd', _, some x => .double x.toBits.toNat
+    | _, _, _ =>
+      match float? t with
+      | some x => if t.contains '.' then .double x.toBits.toNat else .string t
+      | none => .string t
+
+mutual
+
+partial def value (cs : List Char) : Except String (Nbt × List Char) := do
+  match skip cs with
+  | '{' :: cs => fields (skip cs) []
+  | '[' :: 'B' :: ';' :: cs => do
+    let (l, cs) ← elements (skip cs) []
+    pure (.byteArray (l.filterMap (·.toInt?)), cs)
+  | '[' :: 'I' :: ';' :: cs => do
+    let (l, cs) ← elements (skip cs) []
+    pure (.intArray (l.filterMap (·.toInt?)), cs)
+  | '[' :: 'L' :: ';' :: cs => do
+    let (l, cs) ← elements (skip cs) []
+    pure (.longArray (l.filterMap (·.toInt?)), cs)
+  | '[' :: cs => do
+    let (l, cs) ← elements (skip cs) []
+    pure (.list l, cs)
+  | '"' :: cs => do
+    let (v, cs) ← quoted '"' cs ""
+    pure (.string v, cs)
+  | '\'' :: cs => do
+    let (v, cs) ← quoted '\'' cs ""
+    pure (.string v, cs)
+  | cs =>
+    let token := cs.takeWhile isBare
+    if token.isEmpty then throw s!"SNBT: unexpected `{String.ofList (cs.take 8)}`"
+    else pure (ofBare (String.ofList token), cs.dropWhile isBare)
+
+/-- The elements of a list, up to its closing bracket. -/
+partial def elements (cs : List Char) (acc : List Nbt) : Except String (List Nbt × List Char) := do
+  match cs with
+  | ']' :: cs => pure (acc.reverse, cs)
+  | cs =>
+    let (v, cs) ← value cs
+    match skip cs with
+    | ',' :: cs => elements (skip cs) (v :: acc)
+    | ']' :: cs => pure ((v :: acc).reverse, cs)
+    | _ => throw "SNBT: a list is not closed"
+
+/-- The entries of a compound, up to its closing brace. -/
+partial def fields (cs : List Char) (acc : List (String × Nbt)) :
+    Except String (Nbt × List Char) := do
+  match cs with
+  | '}' :: cs => pure (.compound acc.reverse, cs)
+  | cs =>
+    let (key, cs) ← match cs with
+      | '"' :: cs => quoted '"' cs ""
+      | '\'' :: cs => quoted '\'' cs ""
+      | cs => pure (String.ofList (cs.takeWhile isBare), cs.dropWhile isBare)
+    let ':' :: cs := skip cs | throw s!"SNBT: no value for the key `{key}`"
+    let (v, cs) ← value cs
+    match skip cs with
+    | ',' :: cs => fields (skip cs) ((key, v) :: acc)
+    | '}' :: cs => pure (.compound ((key, v) :: acc).reverse, cs)
+    | _ => throw "SNBT: a compound is not closed"
+
+end
+
+/-- Reads a tag from its text form. -/
+def parse (text : String) : Except String Nbt := do
+  let (v, rest) ← value text.toList
+  if (skip rest).isEmpty then pure v else throw "SNBT: text after the tag"
+
+end Snbt
+
 /-! ### Scenarios and traces -/
 
-inductive Action
-  | use (p : Pos) (face : Direction)
-  | useItem (p : Pos) (face : Direction) (item : String)
-  | set (p : Pos) (b : Block) (flags : ℕ)
-  | destroy (p : Pos) (drop : Bool)
-  | kill (index : ℕ)
+/-- The actions of a scenario are the inputs of the model. -/
+abbrev Action := Redstone.Input
 
 structure Scenario where
   name : String
@@ -123,6 +231,12 @@ structure Scenario where
   dayTime : ℕ
   advanceTime : Bool
   weather : Weather
+  randomTickSpeed : ℕ
+  blockDrops : Bool
+
+/-- A coordinate of an entity in a scenario: a JSON number. -/
+def parseCoordinate (j : Json) : Except String Float := do
+  return (← j.getNum?).toFloat
 
 def parseAction (j : Json) : Except String (ℕ × Action) := do
   let tick ← (← j.getObjVal? "tick").getNat?
@@ -137,6 +251,15 @@ def parseAction (j : Json) : Except String (ℕ × Action) := do
     return (tick, .set (← pos) (← parseBlock (← (← j.getObjVal? "state").getStr?)) flags)
   | "destroy" => return (tick, .destroy (← pos) ((j.getObjValAs? Bool "drop").toOption.getD false))
   | "kill" => return (tick, .kill (← (← j.getObjVal? "entity").getNat?))
+  | "summon" =>
+    let e ← j.getObjVal? "entity"
+    let pos ← match ← (← e.getObjVal? "pos").getArr? with
+      | #[x, y, z] => pure (⟨← parseCoordinate x, ← parseCoordinate y, ← parseCoordinate z⟩ : Vec3)
+      | _ => throw s!"not a position: {e.compress}"
+    let nbt ← match e.getObjVal? "nbt" with
+      | .ok v => Snbt.parse (← v.getStr?)
+      | .error _ => pure (.compound [])
+    return (tick, .summon (← (← e.getObjVal? "type").getStr?) pos nbt)
   | _ => throw s!"the Lean runner does not support the action `{type}`"
 
 def parseScenario (j : Json) : Except String Scenario := do
@@ -161,7 +284,9 @@ def parseScenario (j : Json) : Except String Scenario := do
     actions := ← actions.toList.mapM parseAction
     dayTime := ← setting ℕ "dayTime" 6000
     advanceTime := ← setting Bool "advanceTime" false
-    weather }
+    weather
+    randomTickSpeed := ← setting ℕ "randomTickSpeed" 0
+    blockDrops := ← setting Bool "blockDrops" false }
 
 structure Frame where
   gameTime : ℕ
@@ -169,6 +294,7 @@ structure Frame where
   blockEntities : List (Pos × Option BlockEntity)
   tickers : List Pos
   scheduled : List (Pos × BlockId × ℤ × ℤ)
+  fluidTicks : List (Pos × Fluid × ℤ × ℤ)
   blockEvents : List BlockEvent
   entities : List Entity
 
@@ -202,6 +328,11 @@ def parseFrame (j : Json) : Except String Frame := do
       return (← parsePos (← t.getObjVal? "pos"),
         ← parseBlockId (← (← t.getObjVal? "block").getStr?),
         ← (← t.getObjVal? "delay").getInt?, ← (← t.getObjVal? "priority").getInt?)
+    fluidTicks := ← (arr "fluidTicks").toList.mapM fun t => do
+      let name ← (← t.getObjVal? "fluid").getStr?
+      let some fluid := Fluid.ofName? name | throw s!"not a fluid: {name}"
+      return (← parsePos (← t.getObjVal? "pos"), fluid,
+        ← (← t.getObjVal? "delay").getInt?, ← (← t.getObjVal? "priority").getInt?)
     blockEvents := ← (arr "blockEvents").toList.mapM fun e =>
       return ⟨← parsePos (← e.getObjVal? "pos"),
         ← parseBlockId (← (← e.getObjVal? "block").getStr?),
@@ -230,48 +361,46 @@ def Expected.apply (e : Expected) (f : Frame) : Expected :=
         | some be => m.insert (Pos.key p) be
         | none => m.erase (Pos.key p)) e.blockEntities }
 
-/-- Rebuilds the block and block entity maps of a level from its content in the box, so that
-lookups stay fast however many blocks were set. Nothing outside the box is kept. -/
+/-- Rebuilds the block and block entity maps of a level from its content in the box. Nothing
+outside the box is kept. -/
 def normalize (s : Scenario) (l : Level) : Level :=
   let ps := boxPositions s
-  let blocks : Std.HashMap Key Block :=
-    ps.foldl (fun m p => let b := l.blockAt p; if b = .AIR then m else m.insert (Pos.key p) b) {}
-  let bes : Std.HashMap Key BlockEntity :=
-    ps.foldl (fun m p => match l.blockEntities p with
-      | some be => m.insert (Pos.key p) be
-      | none => m) {}
   { l with
-    world := ⟨fun p => blocks.getD (Pos.key p) .AIR⟩
-    blockEntities := fun p => bes.get? (Pos.key p) }
+    world := World.ofList (ps.filterMap fun p =>
+      let b := l.blockAt p
+      if b = .AIR then none else some (p, b))
+    blockEntities := PosMap.ofList (ps.filterMap fun p =>
+      (l.blockEntities p).map fun be => (p, be)) }
+
+/-- Whether the scheduled fluid ticks of the model are compared with the trace. Not yet: no
+block of the model schedules a fluid tick, while the traces of scenarios with waterlogged
+blocks have them. -/
+def compareFluidTicks : Bool := false
 
 def initialLevel (s : Scenario) (f : Frame) : Level :=
   let e := ({} : Expected).apply f
   let l := normalize s { Level.empty with
-    world := ⟨fun p => e.blocks.getD (Pos.key p) .AIR⟩
-    blockEntities := fun p => e.blockEntities.get? (Pos.key p)
+    world := World.ofList (e.blocks.toList.map fun (k, b) => (posOfKey k, b))
+    blockEntities := PosMap.ofList (e.blockEntities.toList.map fun (k, be) => (posOfKey k, be))
     blockEntityTickers := f.tickers
     ticks := f.scheduled.zipIdx.map fun ((p, b, delay, prio), i) =>
       ⟨p, b, (f.gameTime + delay).toNat, .ofValue prio, i⟩
-    subTickCount := f.scheduled.length
+    fluidTicks := f.fluidTicks.zipIdx.map fun ((p, fluid, delay, prio), i) =>
+      ⟨p, fluid, (f.gameTime + delay).toNat, .ofValue prio, f.scheduled.length + i⟩
+    subTickCount := f.scheduled.length + f.fluidTicks.length
     blockEvents := f.blockEvents
     entities := f.entities
     nextEntityIndex := f.entities.foldl (fun n e => max n (e.index + 1)) 0
     gameTime := f.gameTime
     dayTime := s.dayTime
     advanceTime := s.advanceTime
-    weather := s.weather }
+    weather := s.weather
+    randomTickSpeed := s.randomTickSpeed
+    blockDrops := s.blockDrops
+    randomTickBox := some (s.lo, s.hi) }
   { l with lightWorld := l.world }
 
-def applyAction (a : Action) : M Unit :=
-  match a with
-  | .use p face => discard <| Level.useWithoutItem p face
-  | .useItem p face item => discard <| Level.useItemOn p face item
-  | .set p b flags => discard <| Level.setBlock p b flags
-  | .destroy p drop => discard <| Level.destroyBlock p drop
-  | .kill index => Level.removeEntity index
-
-def sortTicks (ts : List ScheduledTick) : List ScheduledTick :=
-  ts.foldl (fun acc t => ScheduledTick.insertSorted t acc) []
+def applyAction (a : Action) : M Unit := a.apply
 
 /-- The differences between the model and the server after a tick. -/
 def compare (s : Scenario) (l : Level) (e : Expected) (f : Frame) : List String := Id.run do
@@ -292,12 +421,19 @@ def compare (s : Scenario) (l : Level) (e : Expected) (f : Frame) : List String 
   if tickers ≠ f.tickers then
     out := s!"block entity tickers: expected {f.tickers.map showPos}, \
       got {tickers.map showPos}" :: out
-  let scheduled := (sortTicks l.ticks).map fun t =>
+  let scheduled := (ScheduledTickOf.sortTicks l.ticks).map fun t =>
     (t.pos, t.block, (t.trigger : ℤ) - l.gameTime, t.priority.value)
   if scheduled ≠ f.scheduled then
     let show' (ts : List (Pos × BlockId × ℤ × ℤ)) :=
       ts.map fun (p, b, d, pr) => s!"{b.name}@{showPos p} in {d} priority {pr}"
     out := s!"scheduled ticks: expected {show' f.scheduled}, got {show' scheduled}" :: out
+  if compareFluidTicks then
+    let fluidTicks := (ScheduledTickOf.sortTicks l.fluidTicks).map fun t =>
+      (t.pos, t.fluid, (t.trigger : ℤ) - l.gameTime, t.priority.value)
+    if fluidTicks ≠ f.fluidTicks then
+      let show' (ts : List (Pos × Fluid × ℤ × ℤ)) :=
+        ts.map fun (p, b, d, pr) => s!"{b.name}@{showPos p} in {d} priority {pr}"
+      out := s!"fluid ticks: expected {show' f.fluidTicks}, got {show' fluidTicks}" :: out
   if l.blockEvents ≠ f.blockEvents then
     out := s!"block events: expected {repr f.blockEvents}, got {repr l.blockEvents}" :: out
   if l.entities.length ≠ f.entities.length then

@@ -648,13 +648,25 @@ inductive Contact
   | unknown
   deriving DecidableEq
 
-/-- How the entity `e` and the minecart `c` can act on each other. -/
+/-- The contact of an entity kind that says for itself whether a minecart and it act on each
+other (`Entities.Lightning.touchesMinecart` and the like): `unknown` while it does not say. -/
+def Contact.ofKnown : Option Bool → Contact
+  | some true => .touching
+  | some false => .never
+  | none => .unknown
+
+/-- How the entity `e` and the minecart `c` can act on each other. The kinds that are not
+modelled yet answer in their own modules, so that the unit that models one edits only its own
+file. -/
 def contact (c : Cart) (e : Entity) : Contact :=
   match e.data with
   | .minecart _ _ => .touching
   | .item _ => if c.kind == .hopper && c.d.enabled then .touching else .never
   | .fallingBlock _ | .tnt _ => .never
   | .projectile _ _ => .unknown
+  | .lightning d => .ofKnown d.touchesMinecart
+  | .itemFrame _ d => .ofKnown d.touchesMinecart
+  | .experienceOrb d => .ofKnown d.touchesMinecart
   | .other type _ =>
     match Still.info? e with
     | none => .unknown
@@ -999,26 +1011,42 @@ def moveAlongTrack (pos : Pos) (state : Block) (shape : Shape) : CartM Unit := d
 
 /-! ### The tick -/
 
-/-- The model's check for what it leaves out around the minecart: another entity that the
-minecart and it can act on each other with in the minecart's reach (`entityInReach` with
-`hitbox`), a fluid in or next to the minecart's box, or a hopper or a dropper next to the box
-of a minecart with a container. It is made before and after the minecart moves, so that it
-also covers what the other entities do to the minecart in their own ticks. -/
-def checkSurroundings : CartM Unit := do
-  let c ← getThe Cart
-  let l ← level
-  if entityInReach l c (hitbox c) then unmodelled
+/-- Whether a block around the minecart passes `test`: the blocks of the cells its box meets
+and of the cells next to them. -/
+def blocksAround (l : Level) (c : Cart) (test : Block → Bool) : Bool :=
   let bb := boundingBox c.pos
   let lo := blockPosOf ⟨bb.minX, bb.minY, bb.minZ⟩
   let hi := blockPosOf ⟨bb.maxX, bb.maxY, bb.maxZ⟩
-  let around (test : Block → Bool) : Bool :=
-    (intRange (lo.x - 1) (hi.x + 1)).any fun x => (intRange (lo.y - 1) (hi.y + 1)).any
-      fun y => (intRange (lo.z - 1) (hi.z + 1)).any fun z => test (l.blockAt ⟨x, y, z⟩)
-  if around (·.attrs.fluid != "") then unmodelled
-  -- `HopperBlockEntity.getContainerAt` finds the minecarts with a container whose box meets the
-  -- block a hopper pulls from or pushes into, and a dropper pushes into them as well.
-  if (containerSize c.kind).isSome && around (fun b => b.id == .hopper || b.id == .dropper) then
-    unmodelled
+  (intRange (lo.x - 1) (hi.x + 1)).any fun x => (intRange (lo.y - 1) (hi.y + 1)).any
+    fun y => (intRange (lo.z - 1) (hi.z + 1)).any fun z => test (l.blockAt ⟨x, y, z⟩)
+
+/-- The entity guard of `checkSurroundings`: another entity that the minecart and it can act on
+each other with is in the minecart's reach (`entityInReach` with `hitbox`). What minecarts and
+other entities do to each other is not modelled. -/
+def entityGuard (l : Level) (c : Cart) : Bool := entityInReach l c (hitbox c)
+
+/-- The fluid guard of `checkSurroundings`: a fluid is in or next to the minecart's box. What
+fluids do to a minecart is not modelled. -/
+def fluidGuard (l : Level) (c : Cart) : Bool := blocksAround l c (·.attrs.fluid != "")
+
+/-- The container guard of `checkSurroundings`: a hopper or a dropper is next to the box of a
+minecart with a container. `HopperBlockEntity.getContainerAt` finds the minecarts with a
+container whose box meets the block a hopper pulls from or pushes into, and a dropper pushes
+into them as well; none of this is modelled. -/
+def containerGuard (l : Level) (c : Cart) : Bool :=
+  (containerSize c.kind).isSome && blocksAround l c (fun b => b.id == .hopper || b.id == .dropper)
+
+/-- The model's check for what it leaves out around the minecart: another entity in its reach
+(`entityGuard`), a fluid in or next to its box (`fluidGuard`), or a hopper or a dropper next to
+the box of a minecart with a container (`containerGuard`). It is made before and after the
+minecart moves, so that it also covers what the other entities do to the minecart in their own
+ticks. -/
+def checkSurroundings : CartM Unit := do
+  let c ← getThe Cart
+  let l ← level
+  if entityGuard l c then unmodelled
+  if fluidGuard l c then unmodelled
+  if containerGuard l c then unmodelled
 
 /-- `OldMinecartBehavior.tick` on the server. `old` and `yRotO` are the position and the yaw
 before the tick (`Entity.xo`, `zo`, `yRotO`). -/

@@ -27,8 +27,8 @@ and looks again every 20 game ticks until it finds none.
 * A boat on a detector rail (pending scenario `detector-not-a-cart-boat`): a boat is never at
   rest, its tick clears `onGround` at once, and boats are not modelled
   (`Redstone.Entity.Still`).
-* The fluid tick a waterlogged rail schedules on every shape update (`updateShape`): the model
-  has no fluid ticks.
+* The fluid tick a waterlogged rail schedules on every shape update (`updateShape`): the rail
+  does not schedule it yet (`Level.scheduleFluidTick`), and fluids do not flow.
 * `getAnalogOutputSignal` of a detector rail with a command block minecart or a minecart with a
   container on it: the model does not keep the contents of minecarts and returns zero, which is
   right for a plain minecart and for an empty container.

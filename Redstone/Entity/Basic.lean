@@ -5,6 +5,9 @@ public import Redstone.Entity.Data.FallingBlock
 public import Redstone.Entity.Data.Tnt
 public import Redstone.Entity.Data.Minecart
 public import Redstone.Entity.Data.Projectile
+public import Redstone.Entity.Data.Lightning
+public import Redstone.Entity.Data.Hanging
+public import Redstone.Entity.Data.ExperienceOrb
 
 /-!
 # Entities
@@ -12,6 +15,9 @@ public import Redstone.Entity.Data.Projectile
 The entities that take part in redstone: dropped items, falling blocks, primed TNT, minecarts
 and projectiles. Every other entity (players, mobs, ...) is kept as `other`: it has a position
 and can be detected, but the model does not move it.
+
+Lightning bolts, item frames and experience orbs have constructors of their own, but they are
+not modelled yet and nothing is decoded into them: such an entity is still an `other`.
 -/
 
 @[expose] public section
@@ -66,6 +72,12 @@ inductive EntityData
   | minecart (kind : MinecartKind) (d : Entities.Minecart)
   /-- A projectile of the entity type named `type`. -/
   | projectile (type : String) (d : Entities.Projectile)
+  /-- A lightning bolt (`minecraft:lightning_bolt`). Not used yet. -/
+  | lightning (d : Entities.Lightning)
+  /-- An item frame, or a glow item frame if `glow`. Not used yet. -/
+  | itemFrame (glow : Bool) (d : Entities.ItemFrame)
+  /-- An experience orb (`minecraft:experience_orb`). Not used yet. -/
+  | experienceOrb (d : Entities.ExperienceOrb)
   /-- Any other entity, of the entity type named `type`. -/
   | other (type : String) (d : Entities.Other := {})
   deriving BEq, Repr
@@ -77,6 +89,9 @@ def EntityData.typeName : EntityData → String
   | .tnt _ => "minecraft:tnt"
   | .minecart kind _ => kind.typeName
   | .projectile type _ => type
+  | .lightning _ => "minecraft:lightning_bolt"
+  | .itemFrame glow _ => if glow then "minecraft:glow_item_frame" else "minecraft:item_frame"
+  | .experienceOrb _ => "minecraft:experience_orb"
   | .other type _ => type
 
 /-- The entity types kept as `EntityData.projectile`. -/
@@ -86,8 +101,11 @@ def projectileTypes : List String :=
     "minecraft:small_fireball", "minecraft:fireball", "minecraft:splash_potion",
     "minecraft:lingering_potion", "minecraft:experience_bottle"]
 
-/-- Reads the kind-specific data of an entity of the type named `type` from its saved NBT. -/
+/-- Reads the kind-specific data of an entity of the type named `type` from its saved NBT. A
+lightning bolt, an item frame or an experience orb whose data the model cannot read (which is
+all of them, for now) is kept as `other`. -/
 def EntityData.ofNbt? (type : String) (nbt : Nbt) : Option EntityData :=
+  let other : EntityData := .other type (.ofNbt nbt)
   match type with
   | "minecraft:item" => .item <$> Entities.Item.ofNbt? nbt
   | "minecraft:falling_block" => .fallingBlock <$> Entities.FallingBlock.ofNbt? nbt
@@ -99,9 +117,16 @@ def EntityData.ofNbt? (type : String) (nbt : Nbt) : Option EntityData :=
   | "minecraft:hopper_minecart" => .minecart .hopper <$> Entities.Minecart.ofNbt? nbt
   | "minecraft:spawner_minecart" => .minecart .spawner <$> Entities.Minecart.ofNbt? nbt
   | "minecraft:command_block_minecart" => .minecart .commandBlock <$> Entities.Minecart.ofNbt? nbt
+  | "minecraft:lightning_bolt" => some (((Entities.Lightning.ofNbt? nbt).map .lightning).getD other)
+  | "minecraft:item_frame" =>
+    some (((Entities.ItemFrame.ofNbt? nbt).map (.itemFrame false)).getD other)
+  | "minecraft:glow_item_frame" =>
+    some (((Entities.ItemFrame.ofNbt? nbt).map (.itemFrame true)).getD other)
+  | "minecraft:experience_orb" =>
+    some (((Entities.ExperienceOrb.ofNbt? nbt).map .experienceOrb).getD other)
   | _ =>
     if projectileTypes.contains type then .projectile type <$> Entities.Projectile.ofNbt? nbt
-    else some (.other type (.ofNbt nbt))
+    else some other
 
 /-- An entity of the world. -/
 structure Entity where

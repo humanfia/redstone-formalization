@@ -17,7 +17,7 @@ Not modelled:
   of the mobs around and the glow of raiders (`BellBlockEntity`). None of it is saved, and none
   of it reaches blocks; see `Redstone.BlockEntities.Bell`.
 * `onProjectileHit`: whether the hit rings the bell depends on the height of the point that was
-  hit, which the model's hook does not carry.
+  hit. The hook carries the point, but projectiles do not fly in the model yet.
 * `onExplosionHit`: only explosions that trigger blocks (wind charges) ring a bell, and the
   model's hook does not say which explosion it is.
 * The height of a player's click: the game refuses a click above 0.8124 of the block's height.

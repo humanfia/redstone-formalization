@@ -2,6 +2,7 @@ module
 
 public import Redstone.Block.Generated.Attrs
 public import Redstone.Block.Generated.BlockEntity
+public import Redstone.Block.Generated.Fluid
 
 /-!
 # Blocks
@@ -71,8 +72,16 @@ def parse? (s : String) : Option Block := do
   ofProps? id fun k => (props.find? (·.1 == k)).map (·.2)
 
 /-- `getFluidState().createLegacyBlock()`: what is left when the block is removed. This is air,
-except for a block that holds a fluid, which leaves the fluid behind. -/
-def fluidBlock (b : Block) : Block := (parse? b.attrs.fluid).getD AIR
+except for a block that holds a fluid, which leaves the fluid behind.
+
+It is computed from the block's constructor, without strings, so that the kernel can evaluate
+the removal of a block. It is the block state named by the attribute `Attrs.fluid`:
+`tools/gen/gen_fluid.py` checks this for every block state when it writes `Block.fluidState`. -/
+def fluidBlock (b : Block) : Block := b.fluidState.createLegacyBlock
+
+/-- `state.setValue(WATERLOGGED, false)` if the state has the property and it is true. -/
+def clearWaterlogged (b : Block) : Block :=
+  if b.waterlogged? = some true then b.setWaterlogged false else b
 
 end Block
 

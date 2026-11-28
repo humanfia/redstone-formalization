@@ -68,13 +68,6 @@ def updateFromNeighbourShapes (state : Block) (p : Pos) : M Block :=
       (← Level.behaviour s).updateShape p d q (← Level.getBlock q))
     state
 
-/-- `state.setValue(WATERLOGGED, false)` if the state has the property and it is true. -/
-def clearWaterlogged (b : Block) : Block :=
-  if b.toProps.contains ("waterlogged", "true") then
-    (Block.ofProps? b.id fun k =>
-      if k = "waterlogged" then some "false" else (b.toProps.find? (·.1 == k)).map (·.2)).getD b
-  else b
-
 /-- `level.getRandom().nextFloat()`, drawn for the pitch of the piston's sound. -/
 def nextFloat : M Unit := modify fun l => { l with random := l.random.nextFloat24.2 }
 
@@ -110,7 +103,7 @@ def tick (p : Pos) : M Unit := do
         discard <| Level.setBlock p d.movedState 340
         Level.updateOrDestroy d.movedState newState p 3
       else
-        let newState := clearWaterlogged newState
+        let newState := newState.clearWaterlogged
         discard <| Level.setBlock p newState 67
         Level.neighborChanged p newState.id
   else

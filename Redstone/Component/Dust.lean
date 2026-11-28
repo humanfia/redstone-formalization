@@ -25,8 +25,7 @@ maxima strictly, sorting the hash set by insertion and testing for a hopper by c
 each change the 13 s of the 15-dust line by less than 0.3 s.
 
 Not formalized: `getStateForPlacement` is defined (`stateForPlacement`) but nothing uses it,
-since placing items is not part of the model; `dropResources`, since nothing drops; the shapes,
-particles, `rotate` and `mirror`.
+since placing items is not part of the model; the shapes, particles, `rotate` and `mirror`.
 -/
 
 @[expose] public section
@@ -273,10 +272,13 @@ def affectNeighborsAfterRemoval (s : RedstoneWire) (p : Pos) (movedByPiston : Bo
     updatePowerStrength p s
     updateNeighborsOfNeighboringWires p
 
-/-- `neighborChanged`: dust that lost its support is removed; otherwise its power is updated. -/
+/-- `neighborChanged`: dust that lost its support drops (`dropResources`) and is removed;
+otherwise its power is updated. -/
 def neighborChanged (s : RedstoneWire) (p : Pos) : M Unit := do
   if canSurvive (← get) p then updatePowerStrength p s
-  else discard <| Level.removeBlock p false
+  else
+    Level.dropResources (.redstoneWire s) p
+    discard <| Level.removeBlock p false
 
 /-- `getSignal`: dust gives its power to the block below it and to the neighbours its sides are
 connected to, and nothing to the block above it. `d` points from the neighbour that asks to the

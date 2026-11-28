@@ -40,16 +40,13 @@ by taking `kick := runUpdates`.
   made before the entities were ticked (`Entities.Physics.sectionEntry`), also when an
   exploding entity made it. This is the order in which items and orbs meet others to merge
   with.
-* Drops that do not come through here. Some components remove a block where the game first
-  calls `dropResources`, and so drop nothing and draw nothing, whatever the game rule says:
-  redstone dust, repeaters, comparators and rails that lose their support (`neighborChanged` in
-  `Component.Dust`, `Component.Diode`, `Component.Comparator`, `Component.Rail`), and the candle
-  of a candle cake (`Component.AnalogSource.popResource`, which only draws).
+* Drops that do not come through here: the honeycombs of a sheared beehive come from a loot
+  table of their own (`Component.AnalogSource.popResource` only draws the three numbers of
+  their place, and sets `Level.overflow` while the rule is on).
 
-The scenarios of `tests/pending/scenarios/drops` wait for these and for two other parts of the
-model: `support-diodes` and `explode-wiring` for the components above; `piston-direct-*` and
-`piston-pushed` for a moving piston that pushes the item the block in its way dropped
-(`Component.Piston`: a moving block pushes no entity, and `Level.overflow` is set);
+The scenarios of `tests/pending/scenarios/drops` wait for other parts of the model:
+`piston-direct-*` and `piston-pushed` for a moving piston that pushes the item the block in its
+way dropped (`Component.Piston`: a moving block pushes no entity, and `Level.overflow` is set);
 `explode-twice` for an explosion that reaches item entities (`Entity.Tnt`); `destroy-infested`
 for the silverfish.
 

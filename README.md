@@ -149,7 +149,7 @@ decay, RS latch, sticky piston, hopper pair, repeater clock) are the worked exam
 
 What the model leaves out: fluids do not flow and blocks get no random ticks (the phases of the
 game tick are there, and empty), light is modelled only as far as the daylight detector needs
-it, destroyed blocks drop nothing (the random numbers of the drops are drawn), every chunk is
+it, every chunk is
 loaded, players and mobs only exist as inputs, and the experimental redstone wire is off. Where the model meets something it does not cover it sets `Level.overflow` instead
 of going on with a wrong state.
 

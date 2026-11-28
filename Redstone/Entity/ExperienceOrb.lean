@@ -108,8 +108,8 @@ def scanForMerges (i : ℕ) : M Unit := do
 /-- `ExperienceOrb.tick`. -/
 def tick (i : ℕ) : M Unit := do
   let some (e, _) ← get? i | return
-  -- `Entity.baseTick`: fluids are not modelled; below the world the entity is removed
-  Level.checkNoFluid kind i
+  -- `Entity.baseTick`: an orb in a fluid is not modelled; below the world the entity is removed
+  if (← get).touchesFluid (kind.dims.box e.base.pos) then Level.setOverflow
   if e.base.pos.y < -128 then
     Level.removeEntity i
     return

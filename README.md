@@ -123,7 +123,7 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | stub |
 | `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
 | `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
-| `Redstone.Component.SpecialBlock` | campfire, powder snow, cobweb, nether portal, carved pumpkin, dried ghast, eggs | stub |
+| `Redstone.Component.SpecialBlock` | campfire (cooking, signal fire, shovel), cobweb and powder snow slowing entities, nether portal losing its frame, carved pumpkin, dried ghast, turtle eggs, frogspawn, sniffer egg | defined, tested; entities in powder snow, TNT and minecarts in cobwebs, burning arrows and whatever makes a mob are not |
 | `Redstone.Component.Vine` | cactus, sugar cane, bamboo, chorus plants, kelp and vines, glow lichen and sculk veins | stub |
 | `Redstone.Component.Ground` | farmland, paths, leaves, grass, nylium, mushroom blocks, mud | stub |
 | `Redstone.Component.Fire` | fire and soul fire | stub |

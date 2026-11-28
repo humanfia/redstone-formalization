@@ -1,0 +1,70 @@
+{
+ "name": "eggs-pig",
+ "ticks": 300,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=2]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:turtle_egg[eggs=1,hatch=0]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:pig",
+   "pos": [
+    1.5,
+    1.4375,
+    2.5
+   ],
+   "nbt": "{NoAI:1b,OnGround:1b}"
+  },
+  {
+   "type": "minecraft:turtle",
+   "pos": [
+    4.5,
+    1.4375,
+    2.5
+   ],
+   "nbt": "{NoAI:1b,OnGround:1b}"
+  }
+ ],
+ "actions": []
+}

@@ -1,0 +1,54 @@
+{
+ "name": "campfire-destroy",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:campfire[facing=north,lit=true,signal_fire=false,waterlogged=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:beef\",count:1},{Slot:2b,id:\"minecraft:potato\",count:2}],CookingTimes:[I;10,0,20,0],CookingTotalTimes:[I;600,600,600,600]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "drop": false
+  }
+ ]
+}

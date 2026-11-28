@@ -1,0 +1,43 @@
+{
+ "name": "campfire-cook-overdue",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:campfire[facing=north,lit=true,signal_fire=false,waterlogged=false]",
+   "nbt": "{Items:[{Slot:1b,id:\"minecraft:cod\",count:1},{Slot:3b,id:\"minecraft:chicken\",count:1}],CookingTimes:[I;700,0,0,598],CookingTotalTimes:[I;600,0,0,600]}"
+  }
+ ],
+ "actions": []
+}

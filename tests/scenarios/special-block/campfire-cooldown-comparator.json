@@ -1,0 +1,51 @@
+{
+ "name": "campfire-cooldown-comparator",
+ "ticks": 12,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:campfire[facing=north,lit=false,signal_fire=false,waterlogged=false]",
+   "nbt": "{Items:[],CookingTimes:[I;9,0,4,1],CookingTotalTimes:[I;600,600,600,600]}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=false]"
+  }
+ ],
+ "actions": []
+}

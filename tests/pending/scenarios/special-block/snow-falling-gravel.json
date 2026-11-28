@@ -1,0 +1,61 @@
+{
+ "name": "snow-falling-gravel",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   6,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:powder_snow"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:powder_snow"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    2.5,
+    4.5,
+    2.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:gravel\"},Time:1}"
+  }
+ ],
+ "actions": []
+}

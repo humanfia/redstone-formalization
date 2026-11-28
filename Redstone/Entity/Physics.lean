@@ -656,6 +656,24 @@ def applyGravity (k : Entity.Kind) (i : ℕ) : M Unit :=
     if e.phys.noGravity || k.gravity == 0 then e
     else { e with base := { e.base with motion := e.base.motion.add ⟨0.0, -k.gravity, 0.0⟩ } }
 
+/-- `Entity.makeStuckInBlock(state, speedMultiplier)` for the entity with index `i`: the fall
+distance is reset, and the next `Entity.move` scales its movement by `multiplier` and then
+stops the entity (`moveEntity`). Cobwebs, powder snow and sweet berry bushes do this to the
+entities inside them.
+
+Only the entities that move through `moveEntity` keep the multiplier (items and falling
+blocks). Primed TNT and minecarts move by code of their own, which has no such field: for them
+`Level.overflow` is set. The entities the model does not move at all (projectiles, mobs and the
+other kinds) are left as they are. -/
+def makeStuckInBlock (i : ℕ) (multiplier : Vec3) : M Unit := do
+  let some e ← getEntity i | return
+  match e.data with
+  | .item _ | .fallingBlock _ =>
+    setEntity (e.resetFallDistance.modifyPhys fun p =>
+      { p with stuckSpeedMultiplier := multiplier })
+  | .tnt _ | .minecart _ _ => setOverflow
+  | _ => pure ()
+
 /-- `Entity.applyEffectsFromBlocksForLastMovements` for the entity with index `i`: the block the
 entity stands on is told (`stepOn`), and so are the blocks it met (`entityInside`) during the
 movements for which the effects of blocks were last applied (`Entity.Touch`). -/

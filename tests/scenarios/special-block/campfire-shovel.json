@@ -1,0 +1,77 @@
+{
+ "name": "campfire-shovel",
+ "ticks": 12,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:campfire[facing=north,lit=true,signal_fire=false,waterlogged=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:beef\",count:1}],CookingTimes:[I;100,0,0,0],CookingTotalTimes:[I;600,600,600,600]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up",
+   "item": "minecraft:iron_shovel"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up",
+   "item": "minecraft:iron_shovel"
+  },
+  {
+   "tick": 7,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "north",
+   "item": "minecraft:wooden_shovel"
+  }
+ ]
+}

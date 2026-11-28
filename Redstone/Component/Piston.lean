@@ -22,11 +22,11 @@ Which blocks move is decided by `Redstone.PistonMotion.resolve`.
 ## What is left out
 
 * Entities: a moving block pushes, carries and bounces nothing (`moveCollidedEntities`,
-  `moveStuckEntities`), and has no collision shape.
+  `moveStuckEntities`), and has no collision shape. A block that a piston destroys drops its
+  loot (`Level.dropResources`) where the moving blocks arrive; when that makes an item or an
+  experience orb (the game rule `block_drops` is on), `Level.overflow` is set.
 * Players: `setPlacedBy`, `PistonHeadBlock.playerWillDestroy` and `MovingPistonBlock.destroy`
   are only called when a player places or breaks a block.
-* Drops: a block destroyed by a piston drops nothing (`dropResources`), and the random numbers
-  that its loot table would draw from the level's generator are not drawn.
 * The shape of a moving block. In the game the collision shape of a `moving_piston`, and with
   it whether its faces can support a lever or a torch, depends on its block entity. The model
   knows two cases (`Level.supportAttrs`): a base that is retracting supports what the extended
@@ -147,6 +147,11 @@ def moveBlocks (id : Blocks.PistonBase.Id) (pistonPos : Pos) (direction : Direct
   let mut destroyed : List Block := []
   for pos in toDestroy.reverse do
     let state ← Level.getBlock pos
+    -- `dropResources(state, level, pos, blockEntity)`. What the block drops lies in the way of
+    -- the moving blocks, which push it; that is not modelled.
+    let entities := (← get).nextEntityIndex
+    Level.dropResources state pos (← Level.peekBlockEntity pos)
+    if (← get).nextEntityIndex != entities then Level.setOverflow
     discard <| Level.setBlock pos .AIR 18
     Level.gameEvent "minecraft:block_destroy" pos
     destroyed := destroyed ++ [state]

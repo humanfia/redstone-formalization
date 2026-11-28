@@ -1,0 +1,22 @@
+{
+  "name": "rod-two-bolts",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [4, 4, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"pos": [2, 0, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 2.0, 2.5]}},
+    {"tick": 3, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 2.0, 2.5]}},
+    {"tick": 5, "type": "kill", "entity": 0},
+    {"tick": 5, "type": "kill", "entity": 1},
+    {"tick": 7, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 2.0, 2.5]}},
+    {"tick": 9, "type": "kill", "entity": 2},
+    {"tick": 20, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.3, 2.0, 2.7]}},
+    {"tick": 22, "type": "kill", "entity": 3}
+  ]
+}

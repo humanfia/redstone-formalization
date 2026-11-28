@@ -1,0 +1,117 @@
+{
+ "name": "logged-copper_golem_statue",
+ "ticks": 45,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   3,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    8
+   ],
+   "max": [
+    8,
+    2,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    2,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    8,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    2,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:copper_golem_statue[copper_golem_pose=standing,facing=north,waterlogged=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 30,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  }
+ ]
+}

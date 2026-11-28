@@ -1,0 +1,383 @@
+{
+ "name": "fuzz-lava-022",
+ "ticks": 160,
+ "box": {
+  "min": [
+   0,
+   -1,
+   0
+  ],
+  "max": [
+   8,
+   5,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    4,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    8
+   ],
+   "max": [
+    8,
+    4,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    4,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    8,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    4,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    -1,
+    0
+   ],
+   "max": [
+    8,
+    -1,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=straight,waterlogged=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:mangrove_roots[waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    5
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    7
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    5
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:tube_coral_block"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:lava[level=0]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    6
+   ],
+   "state": "minecraft:oak_trapdoor[facing=south,half=top,open=true,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "state": "minecraft:iron_chain[axis=y,waterlogged=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 14,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "drop": false
+  },
+  {
+   "tick": 28,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:lava[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 36,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    6
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 39,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:magma_block",
+   "flags": 3
+  },
+  {
+   "tick": 81,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    7
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 86,
+   "type": "destroy",
+   "pos": [
+    3,
+    0,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 88,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 95,
+   "type": "set",
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:magma_block",
+   "flags": 3
+  },
+  {
+   "tick": 99,
+   "type": "destroy",
+   "pos": [
+    4,
+    0,
+    7
+   ],
+   "drop": false
+  }
+ ]
+}

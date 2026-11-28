@@ -1,0 +1,152 @@
+{
+ "name": "logged-small_dripleaf",
+ "ticks": 45,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   3,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    8
+   ],
+   "max": [
+    8,
+    2,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    2,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    8,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    2,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:small_dripleaf[facing=north,half=lower,waterlogged=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:small_dripleaf[facing=north,half=upper,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:tube_coral_block"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 30,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  }
+ ]
+}

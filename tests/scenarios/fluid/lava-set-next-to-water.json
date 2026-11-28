@@ -1,0 +1,192 @@
+{
+ "name": "lava-set-next-to-water",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   4,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    6
+   ],
+   "max": [
+    8,
+    3,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    3,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    8,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    3,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:lava[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:lava[level=3]",
+   "flags": 3
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:lava[level=2]",
+   "flags": 3
+  }
+ ]
+}

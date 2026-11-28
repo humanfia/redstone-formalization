@@ -1,0 +1,13 @@
+{
+  "name": "burn-white-wool",
+  "ticks": 300,
+  "box": {"min": [0, 0, 0], "max": [6, 7, 6]},
+  "settings": {"fireSpreadRadiusAroundPlayer": -1},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 6], "state": "minecraft:stone"},
+    {"min": [2, 1, 2], "max": [4, 2, 4], "state": "minecraft:white_wool"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [3, 3, 3], "state": "minecraft:fire[age=0,east=false,north=false,south=false,up=false,west=false]"}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "copper-not-struck",
+  "ticks": 10,
+  "box": {"min": [0, 0, 0], "max": [4, 4, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"},
+    {"min": [0, 1, 0], "max": [4, 1, 4], "state": "minecraft:oxidized_copper"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 2.0, 2.5]}},
+    {"tick": 4, "type": "kill", "entity": 0},
+    {"tick": 5, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [1.5, 4.0, 1.5]}},
+    {"tick": 7, "type": "kill", "entity": 1}
+  ]
+}

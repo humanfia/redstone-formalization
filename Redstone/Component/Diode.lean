@@ -18,7 +18,7 @@ its subclasses override. The definitions of this file are the methods of `DiodeB
 against that record.
 
 Not formalized: `getStateForPlacement` and `setPlacedBy`, which run when a player places the
-item, and `dropResources` (destroyed blocks drop nothing in the model).
+item.
 -/
 
 @[expose] public section
@@ -163,12 +163,13 @@ def checkTickOnNeighbor (p : Pos) : M Unit := do
         else .high
       Level.scheduleTick p d.id d.delay priority
 
-/-- `DiodeBlock.neighborChanged`: checks the input, or removes the diode when the block below
-cannot carry it any more. -/
+/-- `DiodeBlock.neighborChanged`: checks the input, or drops and removes the diode when the
+block below cannot carry it any more. -/
 def neighborChanged (p : Pos) : M Unit := do
   if (← Level.getBlock p).is d.id then
     if canSurvive (← get) p then checkTickOnNeighbor d p
     else
+      Level.dropResources d.self p
       discard <| Level.removeBlock p false
       Direction.values.forM fun dir => Level.updateNeighborsAt (p.step dir) d.id
 

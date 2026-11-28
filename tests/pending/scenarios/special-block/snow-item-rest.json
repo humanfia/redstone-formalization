@@ -1,0 +1,62 @@
+{
+ "name": "snow-item-rest",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   6,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:powder_snow"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.5,
+    1.0,
+    2.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:diamond\",count:3}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.3,
+    1.5,
+    2.7
+   ],
+   "nbt": "{Item:{id:\"minecraft:stick\",count:1}}"
+  }
+ ],
+ "actions": []
+}

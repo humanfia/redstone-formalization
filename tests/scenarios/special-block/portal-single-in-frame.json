@@ -1,0 +1,163 @@
+{
+ "name": "portal-single-in-frame",
+ "ticks": 8,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   7,
+   4
+  ]
+ },
+ "fill": [],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    2,
+    5,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    5,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:nether_portal[axis=x]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:nether_portal[axis=x]"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

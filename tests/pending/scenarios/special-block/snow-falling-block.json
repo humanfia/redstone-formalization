@@ -1,0 +1,53 @@
+{
+ "name": "snow-falling-block",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   6,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:powder_snow"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:sand"
+  }
+ ]
+}

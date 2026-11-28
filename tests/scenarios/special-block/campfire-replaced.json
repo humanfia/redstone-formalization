@@ -1,0 +1,54 @@
+{
+ "name": "campfire-replaced",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:campfire[facing=north,lit=false,signal_fire=false,waterlogged=false]",
+   "nbt": "{Items:[{Slot:1b,id:\"minecraft:kelp\",count:1},{Slot:3b,id:\"minecraft:cod\",count:1}],CookingTimes:[I;0,10,0,20],CookingTotalTimes:[I;600,600,600,600]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ]
+}

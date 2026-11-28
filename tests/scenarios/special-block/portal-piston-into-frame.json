@@ -1,0 +1,217 @@
+{
+ "name": "portal-piston-into-frame",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   7,
+   4
+  ]
+ },
+ "fill": [],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:nether_portal[axis=x]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:nether_portal[axis=x]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:nether_portal[axis=x]"
+  },
+  {
+   "pos": [
+    2,
+    5,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:nether_portal[axis=x]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:nether_portal[axis=x]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    2
+   ],
+   "state": "minecraft:nether_portal[axis=x]"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    4,
+    5,
+    2
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "state": "minecraft:sticky_piston[extended=false,facing=west]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "state": "minecraft:slime_block"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    4,
+    2
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 9,
+   "type": "destroy",
+   "pos": [
+    6,
+    4,
+    2
+   ],
+   "drop": false
+  }
+ ]
+}

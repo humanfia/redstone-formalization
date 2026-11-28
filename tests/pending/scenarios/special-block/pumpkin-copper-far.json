@@ -1,0 +1,63 @@
+{
+ "name": "pumpkin-copper-far",
+ "ticks": 6,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   5,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:copper_block"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:carved_pumpkin[facing=north]"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:jack_o_lantern[facing=east]"
+  }
+ ]
+}

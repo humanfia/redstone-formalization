@@ -15,13 +15,38 @@ change of the inputs takes effect through a scheduled tick two game ticks later.
 
 The input is the redstone signal of the block behind, or the level of redstone wire there; if
 that block can be measured (`hasAnalogOutputSignal`) its measure replaces the signal; if it is
-a conductor that gives less than 15, the measure of the block behind it replaces the signal.
+a conductor that gives less than 15, the measure of the block behind it replaces the signal,
+or that of an item frame that hangs in the block behind it and faces away from the comparator
+(`ItemFrame.getAnalogOutput`, see `Redstone.Entity.Hanging`), whichever is more.
+
+The frames are looked for only when the level has entities at all, and the search compares
+block positions and directions, without arithmetic on coordinates: the box of a frame lies
+inside the block the frame is in (`Entities.ItemFrame.pos`) and touches no other, so the frames
+the game finds in the box of a block are those in that block.
+
+## Stored outputs below zero
+
+The block entity keeps the output as an `int`, and saved data can make it negative
+(`BlockEntities.Comparator`). A powered comparator then gives a negative signal. Everything
+that reads a signal takes the larger of it and zero, so the comparator gives nothing, with
+one exception: the side input of a diode reads the signal of a comparator beside it as it is
+(`SignalGetter.getControlInputSignal`), and takes the larger of its two sides. Two such
+comparators, one on each side, give a comparator a negative side input, which it subtracts
+(`alternateBelow`). A repeater only asks whether its side input is above zero.
+
+One more reader takes the signal as it is: a calibrated sculk sensor compares the signal at
+its back with the frequency of a vibration (`CalibratedSculkSensorBlockEntity.getBackSignal`),
+and a negative signal there equals no frequency, so the sensor hears nothing. The model's
+sensor (`Component.Sculk.canReceiveVibration`) reads 0 and hears everything; this is not
+reproduced. `controlInputBelow` is what that reader would need.
 
 ## What is left out
 
-* Item frames. Behind a conductor the game also looks for a single item frame facing the
-  comparator and reads its `getAnalogOutput`. The model's entities do not keep the direction
-  or the content of an item frame, so `inputSignal` here behaves as if there were none.
+* Item frames whose data the model could not read (`Entities.ItemFrame.ofNbt?`): a comparator
+  that looks behind a conductor while one exists sets `Level.overflow`.
+* A change of the item of a frame or of its rotation, which tells the comparators
+  (`ItemFrame.setItem`, `setRotation`): only players do that. A frame that falls off does tell
+  them (`Entity.Hanging.dropItem`).
 * `setPlacedBy` (a tick scheduled when a player places a comparator that should be on): placing
   blocks from items is not modelled.
 * Sounds and item drops.
@@ -63,7 +88,15 @@ def outputSignal (l : Level) (p : Pos) : ℕ :=
   | some (.comparator d) => d.output
   | _ => 0
 
-/-- `DiodeBlock.ownSignal`: the stored output while the comparator is powered. -/
+/-- How far the output stored in the block entity at `p` is below zero
+(`BlockEntities.Comparator.below`). -/
+def outputBelow (l : Level) (p : Pos) : ℕ :=
+  match l.blockEntities p with
+  | some (.comparator d) => d.below
+  | _ => 0
+
+/-- `DiodeBlock.ownSignal`: the stored output while the comparator is powered. A stored output
+below zero counts as none (see the module docstring). -/
 def ownSignal (s : Blocks.Comparator) (l : Level) (p : Pos) : ℕ :=
   if s.powered then outputSignal l p else 0
 
@@ -92,9 +125,36 @@ def diodeInputSignal (s : Blocks.Comparator) (p : Pos) : M ℕ := do
   if input ≥ 15 then return input
   return max input (wirePower (← Level.getBlock target))
 
+/-- `ComparatorBlock.getItemFrame(level, direction, pos)`: the item frame in the block at `tPos`
+that faces in the direction `d`, if there is exactly one. Nothing is looked at when the level
+has no entities. -/
+def getItemFrame (l : Level) (d : Direction) (tPos : Pos) : Option Entities.ItemFrame :=
+  match l.entities with
+  | [] => none
+  | entities =>
+    let frames := entities.filterMap fun e =>
+      match e.data with
+      | .itemFrame _ frame => if frame.pos = tPos ∧ frame.facing = d then some frame else none
+      | _ => none
+    match frames with
+    | [frame] => some frame
+    | _ => none
+
+/-- The level has an item frame whose data the model could not read, so that it does not know
+where the frame hangs or what it shows. -/
+def hasUnreadItemFrame (l : Level) : Bool :=
+  match l.entities with
+  | [] => false
+  | entities =>
+    entities.any fun e =>
+      match e.data with
+      | .other type _ => type == "minecraft:item_frame" || type == "minecraft:glow_item_frame"
+      | _ => false
+
 /-- `ComparatorBlock.getInputSignal`: the input of `DiodeBlock`, replaced by the measure of the
 block behind if it has one, or else, if that block is a conductor and the input is below 15, by
-the measure of the block behind it if that has one. Item frames are not read. -/
+the measure of the block behind it or of an item frame in that block that faces away from the
+comparator, whichever is more, if there is one of them. -/
 def inputSignal (s : Blocks.Comparator) (p : Pos) : M ℕ := do
   let result ← diodeInputSignal s p
   let d := facing s
@@ -105,9 +165,17 @@ def inputSignal (s : Blocks.Comparator) (p : Pos) : M ℕ := do
   else if result < 15 && target.isConductor then
     let targetPos := targetPos.step d
     let target ← Level.getBlock targetPos
-    if target.attrs.analog then
-      return (← Level.behaviour target).analogSignal (← get) targetPos d.opposite
-    else return result
+    if hasUnreadItemFrame (← get) then Level.setOverflow
+    match getItemFrame (← get) d targetPos with
+    | none =>
+      if target.attrs.analog then
+        return (← Level.behaviour target).analogSignal (← get) targetPos d.opposite
+      else return result
+    | some frame =>
+      if target.attrs.analog then
+        return max frame.analogOutput
+          ((← Level.behaviour target).analogSignal (← get) targetPos d.opposite)
+      else return frame.analogOutput
   else return result
 
 /-- `SignalGetter.getControlInputSignal(pos, direction, false)`: what the block at `p` gives to
@@ -126,14 +194,31 @@ def alternateSignal (s : Blocks.Comparator) (p : Pos) : M ℕ := do
   let ccw := counterClockWise (facing s)
   return max (← controlInputSignal (p.step cw) cw) (← controlInputSignal (p.step ccw) ccw)
 
+/-- How far below zero the signal is that the block at `p` gives to the side of a diode, asked
+in the direction `d`: the amount by which the stored output of a powered comparator that points
+its output at the diode is below zero, and 0 for anything else. -/
+def controlInputBelow (p : Pos) (d : Direction) : M ℕ := do
+  match ← Level.getBlock p with
+  | .comparator side =>
+    if facing side = d && side.powered then return outputBelow (← get) p else return 0
+  | _ => return 0
+
+/-- How far `DiodeBlock.getAlternateSignal` is below zero: the larger of two side inputs is
+negative only if both are. Then `alternateSignal` is 0. -/
+def alternateBelow (s : Blocks.Comparator) (p : Pos) : M ℕ := do
+  let cw := clockWise (facing s)
+  let ccw := counterClockWise (facing s)
+  return min (← controlInputBelow (p.step cw) cw) (← controlInputBelow (p.step ccw) ccw)
+
 /-- `ComparatorBlock.calculateOutputSignal`: nothing if there is no input or the side input is
-stronger; otherwise the input, less the side input in subtract mode. -/
+stronger; otherwise the input, less the side input in subtract mode. A side input below zero is
+never stronger than the input, and subtracting it adds to the input. -/
 def calculateOutputSignal (s : Blocks.Comparator) (p : Pos) : M ℕ := do
   let input ← inputSignal s p
   if input = 0 then return 0
   let alternate ← alternateSignal s p
   if alternate > input then return 0
-  return if s.mode = .subtract then input - alternate else input
+  if s.mode = .subtract then return input - alternate + (← alternateBelow s p) else return input
 
 /-- `ComparatorBlock.shouldTurnOn`: there is an input, and it is stronger than the side input,
 or equal to it in compare mode. -/
@@ -156,7 +241,8 @@ def checkTickOnNeighbor (s : Blocks.Comparator) (p : Pos) : M Unit := do
   if !(← get).willTickThisTick p .comparator then
     let outputValue ← calculateOutputSignal s p
     let oldValue := outputSignal (← get) p
-    if outputValue != oldValue || s.powered != (← shouldTurnOn s p) then
+    let oldBelow := outputBelow (← get) p
+    if outputValue != oldValue || oldBelow != 0 || s.powered != (← shouldTurnOn s p) then
       let priority := if ← shouldPrioritize s p then TickPriority.high else .normal
       Level.scheduleTick p .comparator 2 priority
 
@@ -176,10 +262,10 @@ def refreshOutputState (s : Blocks.Comparator) (p : Pos) : M Unit := do
   let oldValue ←
     match ← Level.getBlockEntity p with
     | some (.comparator d) => do
-      Level.setBlockEntity p (.comparator { d with output := outputValue })
-      pure d.output
-    | _ => pure 0
-  if oldValue != outputValue || s.mode = .compare then
+      Level.setBlockEntity p (.comparator { d with output := outputValue, below := 0 })
+      pure (d.output, d.below)
+    | _ => pure (0, 0)
+  if oldValue != (outputValue, 0) || s.mode = .compare then
     let sourceOn ← shouldTurnOn s p
     if s.powered && !sourceOn then
       discard <| Level.setBlock p (.comparator { s with powered := false }) 2

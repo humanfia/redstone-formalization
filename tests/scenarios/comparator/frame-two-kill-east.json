@@ -1,0 +1,114 @@
+{
+ "name": "frame-two-kill-east",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   4,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item_frame",
+   "pos": [
+    7.5,
+    1.5,
+    5.5
+   ],
+   "nbt": "{Facing:5b,Item:{id:\"minecraft:stone\",count:1},ItemRotation:2b}"
+  },
+  {
+   "type": "minecraft:item_frame",
+   "pos": [
+    7.5,
+    1.5,
+    5.5
+   ],
+   "nbt": "{Facing:5b,Item:{id:\"minecraft:stone\",count:1},ItemRotation:5b}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 6,
+   "type": "kill",
+   "entity": 0
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "face": "up"
+  }
+ ]
+}

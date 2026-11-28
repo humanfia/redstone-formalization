@@ -1,0 +1,99 @@
+{
+ "name": "neg-sides-north-6-x",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:composter[level=8]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=north,mode=subtract,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    7
+   ],
+   "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:-6}"
+  }
+ ],
+ "entities": [],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "face": "up"
+  }
+ ]
+}

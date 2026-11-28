@@ -1,0 +1,90 @@
+{
+ "name": "pop-fixed-north",
+ "ticks": 112,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   5,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item_frame",
+   "pos": [
+    5.5,
+    1.5,
+    3.5
+   ],
+   "nbt": "{Facing:2b,Item:{id:\"minecraft:stone\",count:1},ItemRotation:2b,Fixed:1b}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ]
+}

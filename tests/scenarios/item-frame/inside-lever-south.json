@@ -1,0 +1,61 @@
+{
+ "name": "inside-lever-south",
+ "ticks": 112,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   5,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item_frame",
+   "pos": [
+    5.5,
+    1.5,
+    5.5
+   ],
+   "nbt": "{Facing:3b,Item:{id:\"minecraft:stone\",count:1},ItemRotation:3b}"
+  }
+ ],
+ "actions": []
+}

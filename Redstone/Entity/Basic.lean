@@ -74,7 +74,7 @@ inductive EntityData
   | projectile (type : String) (d : Entities.Projectile)
   /-- A lightning bolt (`minecraft:lightning_bolt`). Not used yet. -/
   | lightning (d : Entities.Lightning)
-  /-- An item frame, or a glow item frame if `glow`. Not used yet. -/
+  /-- An item frame, or a glow item frame if `glow` (`Redstone.Entity.Hanging`). -/
   | itemFrame (glow : Bool) (d : Entities.ItemFrame)
   /-- An experience orb (`minecraft:experience_orb`). Not used yet. -/
   | experienceOrb (d : Entities.ExperienceOrb)

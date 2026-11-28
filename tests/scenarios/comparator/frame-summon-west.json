@@ -1,0 +1,93 @@
+{
+ "name": "frame-summon-west",
+ "ticks": 14,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   4,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "summon",
+   "entity": {
+    "type": "minecraft:item_frame",
+    "pos": [
+     3.96875,
+     1.5,
+     5.5
+    ],
+    "nbt": "{block_pos:[I;3,1,5],Facing:4b,Item:{id:\"minecraft:clock\",count:1},ItemRotation:4b}"
+   }
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "face": "up"
+  }
+ ]
+}

@@ -26,7 +26,7 @@ def connectedDirection (s : Blocks.Lever) : Direction :=
 /-- `canSurvive`: the face the lever is attached to is sturdy. -/
 def canSurvive (s : Blocks.Lever) (l : Level) (p : Pos) : Bool :=
   let d := (connectedDirection s).opposite
-  (l.blockAt (p.step d)).attrs.isFaceSturdy d.opposite
+  (l.supportAttrs (p.step d)).isFaceSturdy d.opposite
 
 /-- `updateNeighbours`: neighbour updates around the lever and around the block it is attached
 to. -/

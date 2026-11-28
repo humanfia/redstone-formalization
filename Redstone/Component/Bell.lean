@@ -52,7 +52,7 @@ def canSupportCenter (l : Level) (p : Pos) (d : Direction) : Bool :=
 /-- `FaceAttachedHorizontalDirectionalBlock.canAttach(level, pos, direction)`: the neighbour of
 `p` in direction `d` has a sturdy face towards `p`. -/
 def canAttach (l : Level) (p : Pos) (d : Direction) : Bool :=
-  (l.blockAt (p.step d)).attrs.isFaceSturdy d.opposite
+  (l.supportAttrs (p.step d)).isFaceSturdy d.opposite
 
 /-- `canSurvive`: a ceiling bell needs support at the centre of the block above, any other bell
 a sturdy face of the block it is attached to. -/

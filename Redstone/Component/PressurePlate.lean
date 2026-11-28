@@ -121,7 +121,7 @@ def weightedKind (id : Blocks.WeightedPressurePlate.Id) (s : Blocks.WeightedPres
 /-- `canSurvive`: the top face of the block below supports a rigid block, or at least supports
 one at its centre. -/
 def canSurvive (l : Level) (p : Pos) : Bool :=
-  let below := (l.blockAt (p.step .down)).attrs
+  let below := l.supportAttrs (p.step .down)
   below.isFaceSturdyRigid .up || below.isFaceSturdyCenter .up
 
 /-- `updateNeighbours`: neighbour updates around the plate and around the block below it. -/

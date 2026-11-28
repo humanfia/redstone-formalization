@@ -396,8 +396,8 @@ def useWithoutItem (p : Pos) (face : Direction) : M Bool := do
 (`ServerPlayerGameMode.useItemOn`). The block is asked first (`BlockState.useItemOn`); a block
 that does not consume the action answers `TRY_WITH_EMPTY_HAND`, as `BlockBehaviour.useItemOn`
 does by default (`Behaviour.tryEmptyHand`), and the game then tries the empty-hand interaction
-of the same block state (`BlockState.useWithoutItem`). What the item would do by itself after that (`ItemStack.useOn`,
-placing a block for instance) is not modelled. -/
+of the same block state (`BlockState.useWithoutItem`). What the item would do by itself after
+that (`ItemStack.useOn`, placing a block for instance) is not modelled. -/
 def useItemOn (p : Pos) (face : Direction) (item : String) : M Bool := do
   let b ← behaviour (← getBlock p)
   if (← b.useItemOn p face item) then return true

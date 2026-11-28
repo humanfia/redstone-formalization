@@ -1,0 +1,132 @@
+{
+ "name": "lever-doors",
+ "ticks": 8,
+ "box": {
+  "min": [
+   -2,
+   -1,
+   -1
+  ],
+  "max": [
+   2,
+   3,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -1,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    -1,
+    1,
+    0
+   ],
+   "state": "minecraft:iron_door[facing=east,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    -1,
+    2,
+    0
+   ],
+   "state": "minecraft:iron_door[facing=east,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "face": "up"
+  }
+ ]
+}

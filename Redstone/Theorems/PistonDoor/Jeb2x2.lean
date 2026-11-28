@@ -1,4 +1,8 @@
 import Redstone.Contraption.PistonDoor
+-- Heavy chain: imported only so that the files of this directory, and the memory-heavy files of
+-- the repository, are checked one after the other (about 3.5 GB here); see "What it costs" in
+-- `Redstone/Proof/README.md`.
+import Redstone.Theorems.PistonDoor.Simple2x2
 
 /-!
 # The 2×2 flush piston door (the "Jeb door")
@@ -12,6 +16,8 @@ Layer by layer, from below; in each layer north (`-z`) is at the top and west (`
 left. The level is shown closed, as it is loaded:
 
 ```
+(in every row, x = -2 on the left to x = 3 on the right)
+
 y = 0
   z = 0   .  ## ## ## ## .
   z = 1   .  .  .  .  .  .
@@ -94,6 +100,12 @@ cell above it (quasi-connectivity) and switches because the piston above it move
 * `stays_open`, `stays_closed`: for ever, as long as the lever is left alone.
 * `volume`, `minVolume_le`: the door fills a box of 6 by 6 by 5 blocks, so the least volume of
   a working 2 by 2 door is at most 180.
+
+## Checked against the server
+
+The level is also a recorded scenario, `tests/scenarios/piston-door/jeb-2x2.json`: the real
+server opens and closes it twice, and `lake test` checks that the model does the same, game
+tick by game tick. That tests the model on this level; it is not part of the proof.
 
 ## What is not proved
 
@@ -235,10 +247,10 @@ theorem isPistonDoor : door.IsPistonDoor 2 2 := ⟨by circuit_decide, works⟩
 
 assert_standard_axioms isPistonDoor
 
-/-- **Opening, game tick by game tick.** The lever is switched on before game tick 1. After
-game tick 5 something is still in the way; after game tick 6 the way is clear
-(the side pistons have started to pull the door blocks and the back pistons away). The level is not yet at rest after game tick 8 and is at rest after game
-tick 9. -/
+/-- **Opening, game tick by game tick.** The lever is switched on before game tick 1. After game
+tick 5 something is still in the way; after game tick 6 the way is clear (the side pistons have
+started to pull the door blocks and the back pistons away). The level is not yet at rest after
+game tick 8 and is at rest after game tick 9. -/
 theorem opening_times :
     ¬ door.IsOpen (rules.runSchedule (schedule.take 5) circuit) ∧
       door.IsOpen (rules.runSchedule (schedule.take 6) circuit) ∧
@@ -250,10 +262,10 @@ theorem opening_times :
 
 assert_standard_axioms opening_times
 
-/-- **Closing, game tick by game tick.** The lever is switched off before game tick 10.
-After game tick 19 the doorway is not yet closed; after game tick 20 every cell of it
-holds stone (the back pistons have pushed the door blocks into the wall). The level is not yet at rest after game tick 20 and is at rest
-after game tick 21. -/
+/-- **Closing, game tick by game tick.** The lever is switched off before game tick 10. After
+game tick 19 the doorway is not yet closed; after game tick 20 every cell of it holds stone (the
+back pistons have pushed the door blocks into the wall). The level is not yet at rest after game
+tick 20 and is at rest after game tick 21. -/
 theorem closing_times :
     ¬ door.IsClosed (rules.runSchedule (schedule.take 19) circuit) ∧
       door.IsClosed (rules.runSchedule (schedule.take 20) circuit) ∧

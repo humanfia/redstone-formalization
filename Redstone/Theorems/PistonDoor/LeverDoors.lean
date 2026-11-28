@@ -38,7 +38,9 @@ Not proved: a pair of doors side by side (two doors that open away from each oth
 hinges on opposite sides; that is a matter of how they look, not of how they switch), and
 doors opened by a pressure plate, which needs an entity to stand on it.
 
-The level is loaded raw and is at rest (`circuit_quiescent`).
+The level is loaded raw and is at rest (`circuit_quiescent`). It is also a recorded scenario,
+`tests/scenarios/piston-door/lever-doors.json`, so `lake test` checks the model against the
+real server on it.
 -/
 
 set_option Elab.async false

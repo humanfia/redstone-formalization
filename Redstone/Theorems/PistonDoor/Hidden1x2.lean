@@ -1,4 +1,8 @@
 import Redstone.Contraption.PistonDoor
+-- Heavy chain: imported only so that the files of this directory, and the memory-heavy files of
+-- the repository, are checked one after the other (about 2.5 GB here); see "What it costs" in
+-- `Redstone/Proof/README.md`.
+import Redstone.Theorems.PistonDoor.Jeb2x2
 
 /-!
 # The 1×2 hidden door
@@ -11,6 +15,8 @@ Layer by layer, from below; in each layer north (`-z`) is at the top and west (`
 left. The level is shown closed, as it is loaded:
 
 ```
+(in every row, x = -2 on the left to x = 1 on the right)
+
 y = 0
   z = 0   .  ## ## ##
   z = 1   .  .  .  .
@@ -62,15 +68,15 @@ and `L1` the lever, off and on; `RB` a block of redstone; `. ` air.
 
 ## How it works
 
-The wall is the plane `z = 0`. Behind every cell of the doorway are a door block (stone, in
-the wall when the door is closed), the head of a sticky piston that faces the wall (`z = 1`)
-and that piston (`z = 2`, called a *back* piston below). Beside them are two more sticky
-pistons per cell that face the doorway: the one at `z = 1` moves the door block sideways, the
+The wall is the plane `z = 0`. Behind each of the two cells of the doorway are a door block
+(stone, in the wall when the door is closed), the head of a sticky piston that faces the wall
+(`z = 1`) and that piston (`z = 2`, called a *back* piston below). West of them are two more
+sticky pistons per cell that face east: the one at `z = 1` moves the door block sideways, the
 one at `z = 2` moves the back piston sideways.
 
 * **Opening.** The lever switches the torch off two game ticks later. The dust above the back
-  pistons goes out and they retract, pulling the door blocks out of the wall. The repeaters
-  (delay 2) keep the side pistons powered for four game ticks more, so that the back pistons
+  pistons goes out and they retract, pulling the door blocks out of the wall. The repeater
+  (delay 2) keeps the side pistons powered for four game ticks more, so that the back pistons
   have come to rest and can be pulled; then the side pistons retract, and take the door blocks
   and the back pistons out of the way, behind the wall.
 * **Closing.** The torch comes on; the dust above the place of the back pistons is powered at
@@ -79,8 +85,8 @@ one at `z = 2` moves the back piston sideways.
   extends, which puts the door block into the wall. So the order of closing needs no second
   delay: it comes from where the power is.
 
-A back piston in the lower row is not next to anything powered. It is powered through the
-cell above it (quasi-connectivity) and switches because the piston above it moves.
+A piston in the lower row is not next to anything powered. It is powered through the cell
+above it (quasi-connectivity) and switches because the piston above it moves.
 
 ## What is proved
 
@@ -90,6 +96,12 @@ cell above it (quasi-connectivity) and switches because the piston above it move
 * `closing_times`: the doorway is closed from game tick 11 after the lever is switched off.
 * `stays_open`, `stays_closed`: for ever, as long as the lever is left alone.
 * `volume`, `minVolume_le`: the door fills a box of 4 by 6 by 5 blocks, 120 in all.
+
+## Checked against the server
+
+The level is also a recorded scenario, `tests/scenarios/piston-door/hidden-1x2.json`: the real
+server opens and closes it twice, and `lake test` checks that the model does the same, game
+tick by game tick. That tests the model on this level; it is not part of the proof.
 
 ## What is not proved
 
@@ -214,10 +226,10 @@ theorem isPistonDoor : door.IsPistonDoor 1 2 := ⟨by circuit_decide, works⟩
 
 assert_standard_axioms isPistonDoor
 
-/-- **Opening, game tick by game tick.** The lever is switched on before game tick 1. After
-game tick 5 something is still in the way; after game tick 6 the way is clear
-(the side pistons have started to pull the door blocks and the back pistons away). The level is not yet at rest after game tick 8 and is at rest after game
-tick 9. -/
+/-- **Opening, game tick by game tick.** The lever is switched on before game tick 1. After game
+tick 5 something is still in the way; after game tick 6 the way is clear (the side pistons have
+started to pull the door blocks and the back pistons away). The level is not yet at rest after
+game tick 8 and is at rest after game tick 9. -/
 theorem opening_times :
     ¬ door.IsOpen (rules.runSchedule (schedule.take 5) circuit) ∧
       door.IsOpen (rules.runSchedule (schedule.take 6) circuit) ∧
@@ -229,10 +241,10 @@ theorem opening_times :
 
 assert_standard_axioms opening_times
 
-/-- **Closing, game tick by game tick.** The lever is switched off before game tick 10.
-After game tick 19 the doorway is not yet closed; after game tick 20 every cell of it
-holds stone (the back pistons have pushed the door blocks into the wall). The level is not yet at rest after game tick 20 and is at rest
-after game tick 21. -/
+/-- **Closing, game tick by game tick.** The lever is switched off before game tick 10. After
+game tick 19 the doorway is not yet closed; after game tick 20 every cell of it holds stone (the
+back pistons have pushed the door blocks into the wall). The level is not yet at rest after game
+tick 20 and is at rest after game tick 21. -/
 theorem closing_times :
     ¬ door.IsClosed (rules.runSchedule (schedule.take 19) circuit) ∧
       door.IsClosed (rules.runSchedule (schedule.take 20) circuit) ∧

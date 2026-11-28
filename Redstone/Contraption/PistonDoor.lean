@@ -35,7 +35,15 @@ cell that holds a block at some game tick of one opening and closing (`PistonDoo
 `Level.occupied`, `boundingVolume`). `minVolume w h` is the least volume of a working `w` by
 `h` door, and `minVolume_le` says that every working door is an upper bound for it.
 
-## What is not here
+The doors proved to work are in `Redstone/Theorems/PistonDoor`: the simple 2×2 door with four
+pistons (`Simple2x2.lean`), the flush 2×2 door with twelve (`Jeb2x2.lean`), a 1×2 and a 2×1
+flush door (`Hidden1x2.lean`, `Hidden2x1.lean`), and a 3×3 door (`Door3x3.lean`); doors,
+trapdoors and fence gates that need no piston are in `LeverDoors.lean`, and the lemmas about
+them in `Redstone/Lemmas/Door.lean`. Each of these levels is also a scenario recorded on the
+real server (`tests/scenarios/piston-door`), so `lake test` checks the model on the very
+levels the theorems are about.
+
+## What is not here, and what is not yet proved
 
 * **For ever.** `Works` says that one opening and closing brings back the blocks. The level
   after it differs from the first in its clocks, the counter that orders scheduled ticks and
@@ -47,9 +55,19 @@ cell that holds a block at some game tick of one opening and closing (`PistonDoo
 * **Nothing but pistons is asked for.** The definition does not say what the door is made of.
   A contraption that empties the doorway by other means and fills it again would count; none
   is known to the model without entities.
-* **Lower bounds.** `minVolume` is defined, and bounded above by the doors proved in
-  `Redstone/Theorems/PistonDoor`. A lower bound needs an argument about every level, and none
-  is proved.
+* **Lower bounds, and the least volume of a 3×3 door.** `minVolume` is defined, and bounded
+  above by the doors proved in `Redstone/Theorems/PistonDoor`. A lower bound needs an argument
+  about every level, and none is proved. The 3×3 door proved here is far from small: no compact
+  design of the community is proved.
+* **Doors that need an entity**: a door opened by a pressure plate under a player or a mob, a
+  door reset by a minecart, a door blown open by TNT. An entity moves in `Float`, which the
+  kernel cannot evaluate, so these are out of reach of the method (`Redstone/Proof/README.md`).
+* **Checkpoints for levels with a door, a trapdoor or a fence gate.** The command
+  `checkpoints` and the term `blk%` write a level as the term that `Repr` prints, and what it
+  prints for these three blocks does not parse: their property `open` is a keyword of Lean
+  (`Redstone.Proof.parseRepr`). `LeverDoors.lean` therefore evaluates single game ticks
+  directly, which is enough for blocks that switch at once, but a circuit that needs many
+  game ticks and contains one of them cannot be proved until `parseRepr` is repaired.
 -/
 
 namespace Redstone
@@ -115,6 +133,8 @@ theorem mem_toList_iff (t : Trie α) (k : ℕ) (v : α) : (k, v) ∈ t.toList �
           simp only [Prod.mk.injEq, and_true]
           omega
 
+assert_standard_axioms mem_toList_iff
+
 end Trie
 
 namespace PosMap
@@ -133,6 +153,8 @@ theorem mem_toList_iff (m : PosMap α) (p : Pos) (v : α) : (p, v) ∈ m.toList 
     exact (Trie.mem_toList_iff _ _ _).1 hk
   · intro h
     exact List.mem_map.2 ⟨(p.key, v), (Trie.mem_toList_iff _ _ _).2 h, by simp⟩
+
+assert_standard_axioms mem_toList_iff
 
 end PosMap
 
@@ -155,6 +177,8 @@ theorem mem_toList_iff (w : World) (p : Pos) (b : Block) :
       rw [hc] at h
       exact congrArg some h
 
+assert_standard_axioms mem_toList_iff
+
 end World
 
 namespace Level
@@ -172,6 +196,8 @@ theorem mem_occupied {l : Level} {p : Pos} : p ∈ l.occupied ↔ l.blockAt p �
   · intro h
     exact List.mem_map.2 ⟨(p, l.blockAt p), (l.world.mem_toList_iff p _).2 ⟨rfl, h⟩, rfl⟩
 
+assert_standard_axioms mem_occupied
+
 /-- The two levels have the same blocks and the same block entities. -/
 def SameBlocks (a b : Level) : Prop := a.world = b.world ∧ a.blockEntities = b.blockEntities
 
@@ -181,6 +207,8 @@ theorem SameBlocks.blockAt_eq {a b : Level} (h : a.SameBlocks b) (p : Pos) :
     a.blockAt p = b.blockAt p := by
   unfold Level.blockAt
   rw [h.1]
+
+assert_standard_axioms SameBlocks.blockAt_eq
 
 end Level
 
@@ -232,6 +260,8 @@ theorem bounds_spec (vs : List ℤ) (lo hi : ℤ) (h : lo ≤ hi) :
         · exact ⟨by omega, by omega⟩
         · exact h4 u hu
 
+assert_standard_axioms bounds_spec
+
 /-- Any two numbers of a list are less than its span apart. -/
 theorem lt_span {vs : List ℤ} {u v : ℤ} (hu : u ∈ vs) (hv : v ∈ vs) : u - v < span vs := by
   cases vs with
@@ -246,6 +276,8 @@ theorem lt_span {vs : List ℤ} {u v : ℤ} (hu : u ∈ vs) (hv : v ∈ vs) : u 
     have b := key v hv
     simp only [span]
     omega
+
+assert_standard_axioms lt_span
 
 /-- The volume of the smallest box that holds all the positions. -/
 def boundingVolume (ps : List Pos) : ℕ :=
@@ -337,9 +369,13 @@ theorem isOpen_iff (l : Level) : d.isOpen l = true ↔ d.IsOpen l := by
     by_contra hin
     exact Level.mem_occupied.1 hp (h p (by simpa using hin))
 
+assert_standard_axioms isOpen_iff
+
 instance (l : Level) : Decidable (d.IsOpen l) := decidable_of_iff _ (d.isOpen_iff l)
 
-/-- The input is used, and then `n` game ticks pass. -/
+/-- The input is used, and then `n` game ticks pass. For `n = 0` the schedule is empty and the
+input is not used; a door that works has `openTicks` and `closeTicks` positive
+(`Works.openTicks_pos`, `Works.closeTicks_pos`). -/
 def toggle (n : ℕ) : Schedule := .first [.use d.input d.face] n
 
 /-- One opening and one closing: the input is used, `openTicks` game ticks pass, the input is
@@ -355,16 +391,24 @@ def closedAgain : Level := rules.runSchedule (d.toggle d.closeTicks) d.opened
 theorem length_toggle (n : ℕ) : (d.toggle n).length = n := by
   cases n <;> simp [toggle, Schedule.first, Schedule.idle]
 
+assert_standard_axioms length_toggle
+
 theorem length_cycle : d.cycle.length = d.openTicks + d.closeTicks := by
   simp [cycle, length_toggle]
+
+assert_standard_axioms length_cycle
 
 /-- The opened level is the level after the first `openTicks` game ticks of the cycle. -/
 theorem opened_eq : d.opened = rules.runSchedule (d.cycle.take d.openTicks) d.level := by
   rw [cycle, List.take_left' (d.length_toggle _), opened]
 
+assert_standard_axioms opened_eq
+
 /-- The level after opening and closing is the level after the cycle. -/
 theorem closedAgain_eq : d.closedAgain = rules.runSchedule d.cycle d.level := by
   rw [cycle, Rules.runSchedule_append, closedAgain, opened]
+
+assert_standard_axioms closedAgain_eq
 
 /-- **The door works**: closed and at rest; open and at rest `openTicks` game ticks after the
 input is used; and `closeTicks` game ticks after it is used again, at rest with the blocks it
@@ -401,22 +445,30 @@ variable {d}
 theorem closes (h : d.Works) : d.IsClosed d.closedAgain := fun p hp => by
   rw [h.returns.blockAt_eq, h.closed p hp]
 
+assert_standard_axioms closes
+
 /-- **An opened door stays open**: as long as the input is not used, nothing comes into the
 way, however many game ticks pass. -/
 theorem stays_open (h : d.Works) (n : ℕ) : d.IsOpen (rules.steps n d.opened) := fun p hp => by
   rw [rules.blockAt_steps_of_quiescent h.opened_rest, h.opens p hp]
 
+assert_standard_axioms stays_open
+
 /-- **A closed door stays closed**, before it is first used. -/
 theorem stays_closed (h : d.Works) (n : ℕ) : d.IsClosed (rules.steps n d.level) := fun p hp => by
   rw [rules.blockAt_steps_of_quiescent h.rest, h.closed p hp]
+
+assert_standard_axioms stays_closed
 
 /-- A door that has been opened and closed stays closed. -/
 theorem stays_closed_again (h : d.Works) (n : ℕ) :
     d.IsClosed (rules.steps n d.closedAgain) := fun p hp => by
   rw [rules.blockAt_steps_of_quiescent h.closed_rest, h.closes p hp]
 
-/-- A closed door is not open: the two states of a working door differ. -/
-theorem not_isOpen_level (h : d.Works) : ¬ d.IsOpen d.level := by
+assert_standard_axioms stays_closed_again
+
+/-- A level in which the doorway of a working door is closed is not one in which it is open. -/
+theorem not_isOpen_of_isClosed (h : d.Works) {l : Level} (hc : d.IsClosed l) : ¬ d.IsOpen l := by
   intro ho
   obtain ⟨hx, hy, hz, ht⟩ := h.wellFormed
   have hmem : d.lo ∈ d.doorway := by
@@ -427,7 +479,34 @@ theorem not_isOpen_level (h : d.Works) : ¬ d.IsOpen d.level := by
     exact List.mem_flatMap.2 ⟨_, mem _ _ hx, List.mem_flatMap.2 ⟨_, mem _ _ hy,
       List.mem_map.2 ⟨_, mem _ _ hz, rfl⟩⟩⟩
   have hin : d.inPassage d.lo = true := by simp [inPassage, coord, hx, hy, hz]
-  exact h.door_ne_air ((h.closed _ hmem).symm.trans (ho _ hin))
+  exact h.door_ne_air ((hc _ hmem).symm.trans (ho _ hin))
+
+assert_standard_axioms not_isOpen_of_isClosed
+
+/-- A closed door is not open: the two states of a working door differ. -/
+theorem not_isOpen_level (h : d.Works) : ¬ d.IsOpen d.level := h.not_isOpen_of_isClosed h.closed
+
+assert_standard_axioms not_isOpen_level
+
+/-- Opening a working door takes at least one game tick: the input has to be used. -/
+theorem openTicks_pos (h : d.Works) : 0 < d.openTicks := by
+  rcases Nat.eq_zero_or_pos d.openTicks with h0 | h0
+  · have ho := h.opens
+    rw [opened, h0] at ho
+    exact absurd ho h.not_isOpen_level
+  · exact h0
+
+assert_standard_axioms openTicks_pos
+
+/-- Closing a working door takes at least one game tick: the input has to be used again. -/
+theorem closeTicks_pos (h : d.Works) : 0 < d.closeTicks := by
+  rcases Nat.eq_zero_or_pos d.closeTicks with h0 | h0
+  · have hc := h.closes
+    rw [closedAgain, h0] at hc
+    exact absurd h.opens (h.not_isOpen_of_isClosed hc)
+  · exact h0
+
+assert_standard_axioms closeTicks_pos
 
 end Works
 
@@ -448,6 +527,8 @@ theorem trace_eq_of (ls : List Level) (hlen : ls.length = d.cycle.length + 1)
   refine List.ext_getElem (by simp [trace, hlen]) fun k hk hk' => ?_
   simp [trace, h k hk']
 
+assert_standard_axioms trace_eq_of
+
 /-- **The volume of a door**: the volume of the bounding box of every cell that holds a block
 at some game tick of one opening and closing. -/
 def volume : ℕ := boundingVolume (d.trace.flatMap Level.occupied)
@@ -463,6 +544,8 @@ noncomputable def minVolume (w h : ℕ) : ℕ :=
 theorem minVolume_le {w h : ℕ} {d : PistonDoor} (hd : d.IsPistonDoor w h) :
     minVolume w h ≤ d.volume :=
   Nat.sInf_le ⟨d, hd, rfl⟩
+
+assert_standard_axioms minVolume_le
 
 end Contraption
 

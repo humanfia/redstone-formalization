@@ -1,0 +1,16 @@
+{
+  "name": "ice-age-no-update",
+  "ticks": 520,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 1, 2], "state": "minecraft:stone"},
+    {"min": [0, 2, 0], "max": [4, 2, 2], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 1], "state": "minecraft:sponge"},
+    {"pos": [3, 1, 1], "state": "minecraft:water[level=0]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 1, 1], "state": "minecraft:frosted_ice[age=1]"}
+  ]
+}

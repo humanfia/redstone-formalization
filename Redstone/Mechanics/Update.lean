@@ -44,11 +44,7 @@ by taking `kick := runUpdates`.
   table of their own (`Component.AnalogSource.popResource` only draws the three numbers of
   their place, and sets `Level.overflow` while the rule is on).
 
-The scenarios of `tests/pending/scenarios/drops` wait for other parts of the model:
-`piston-direct-*` and `piston-pushed` for a moving piston that pushes the item the block in its
-way dropped (`Component.Piston`: a moving block pushes no entity, and `Level.overflow` is set);
-`explode-twice` for an explosion that reaches item entities (`Entity.Tnt`); `destroy-infested`
-for the silverfish.
+The scenario `destroy-infested` of `tests/pending/scenarios/drops` waits for the silverfish.
 
 Also left out:
 

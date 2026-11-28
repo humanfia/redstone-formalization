@@ -1,0 +1,133 @@
+{
+ "name": "support-pulled-lever-west-2",
+ "ticks": 14,
+ "box": {
+  "min": [
+   -2,
+   2,
+   -2
+  ],
+  "max": [
+   10,
+   10,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    3,
+    0
+   ],
+   "max": [
+    8,
+    3,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    4,
+    4
+   ],
+   "state": "minecraft:sticky_piston[extended=true,facing=west]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    4
+   ],
+   "state": "minecraft:piston_head[facing=west,short=false,type=sticky]"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    4
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [],
+ "actions": [
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    5,
+    4,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    3,
+    5,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "state": "minecraft:lever[face=wall,facing=north,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    3,
+    4,
+    5
+   ],
+   "state": "minecraft:lever[face=wall,facing=south,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    4,
+    4
+   ],
+   "state": "minecraft:lever[face=wall,facing=west,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    3,
+    4,
+    4
+   ],
+   "state": "minecraft:moving_piston[facing=west,type=sticky]",
+   "flags": 3
+  }
+ ]
+}

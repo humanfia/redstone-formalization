@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Mechanics.PistonMotion
+public import Redstone.Entity.PistonPush
 
 /-!
 # Pistons
@@ -19,21 +20,24 @@ block down (`tick`); it can be made to do so at once (`finalTick`).
 
 Which blocks move is decided by `Redstone.PistonMotion.resolve`.
 
+A moving block pushes the entities in its way, a slime block launches them and a honey block
+carries them (`Redstone.Entity.PistonPush`), and entities collide with the block where it is
+on its way (`Level.movingPistonShape`). All of this is skipped in a level without entities, so
+that a circuit of blocks alone never computes with `double`s.
+
 ## What is left out
 
-* Entities: a moving block pushes, carries and bounces nothing (`moveCollidedEntities`,
-  `moveStuckEntities`), and has no collision shape. A block that a piston destroys drops its
-  loot (`Level.dropResources`) where the moving blocks arrive; when that makes an item or an
-  experience orb (the game rule `block_drops` is on), `Level.overflow` is set.
+* Entities other than dropped items and falling blocks: a piston that would move primed TNT, a
+  minecart or any other entity sets `Level.overflow` (see `Redstone.Entity.PistonPush`). The
+  scenarios `entity-tnt-*`, `entity-cart-*`, `entity-honey-tnt-*`, `entity-slime-tnt-up` and
+  `entity-slime-cart-up` wait in `tests/pending/scenarios/piston` for that.
 * Players: `setPlacedBy`, `PistonHeadBlock.playerWillDestroy` and `MovingPistonBlock.destroy`
   are only called when a player places or breaks a block.
-* The shape of a moving block. In the game the collision shape of a `moving_piston`, and with
-  it whether its faces can support a lever or a torch, depends on its block entity. The model
-  knows two cases (`Level.supportAttrs`): a base that is retracting supports what the extended
-  base supports, and a moved block that has arrived supports what it supports at rest. The
-  head that moves back into a retracting base, and a block half way, support nothing in the
-  model. Components that ask for support through a block state alone (dust, repeater,
-  comparator, door) still see a `moving_piston` that supports nothing.
+* Components that ask for support through a block state alone (dust, repeater, comparator,
+  door) see a `moving_piston` that supports nothing. In the game the collision shape of a
+  `moving_piston`, and with it whether its faces can support a lever or a torch, depends on
+  its block entity; `Level.supportAttrs` gives the faces that are sturdy
+  (`BlockEntities.Piston.supportMasks`), and the components that ask through it are right.
 -/
 
 @[expose] public section
@@ -90,8 +94,12 @@ def finalTick (p : Pos) (d : BlockEntities.Piston) : M Unit := do
       discard <| Level.setBlock p newState 3
       Level.neighborChanged p newState.id
 
-/-- `PistonMovingBlockEntity.tick`: advances the block by half a block; once it has arrived,
-removes the block entity and puts the moved block down. Entities are not moved. -/
+/-- `PistonMovingBlockEntity.tick`: advances the block by half a block, pushing the entities in
+its way; once it has arrived, removes the block entity and puts the moved block down.
+
+The entities are only looked at when the level has any. Moving an entity can set off a block
+that ends this very movement (`finalTick`); the game then goes on writing to the block entity
+it has removed, and the model leaves it removed. -/
 def tick (p : Pos) : M Unit := do
   let some d ← movingBlockEntity? p | return
   let d := { d with progressO := d.progress }
@@ -107,7 +115,15 @@ def tick (p : Pos) : M Unit := do
         discard <| Level.setBlock p newState 67
         Level.neighborChanged p newState.id
   else
-    Level.setBlockEntity p (.piston { d with progress := min (d.progress + 1 / 2) 1 })
+    let newProgress := d.progress + 1 / 2
+    let present ←
+      match (← get).entities with
+      | [] => pure true
+      | _ :: _ => do
+        let before := (← get).blockEntities p
+        Entity.PistonPush.moveEntities p newProgress d
+        pure ((← get).blockEntities p == before)
+    if present then Level.setBlockEntity p (.piston { d with progress := min newProgress 1 })
 
 /-! ### The base -/
 
@@ -148,10 +164,8 @@ def moveBlocks (id : Blocks.PistonBase.Id) (pistonPos : Pos) (direction : Direct
   for pos in toDestroy.reverse do
     let state ← Level.getBlock pos
     -- `dropResources(state, level, pos, blockEntity)`. What the block drops lies in the way of
-    -- the moving blocks, which push it; that is not modelled.
-    let entities := (← get).nextEntityIndex
+    -- the moving blocks, which push it (`Redstone.Entity.PistonPush`).
     Level.dropResources state pos (← Level.peekBlockEntity pos)
-    if (← get).nextEntityIndex != entities then Level.setOverflow
     discard <| Level.setBlock pos .AIR 18
     Level.gameEvent "minecraft:block_destroy" pos
     destroyed := destroyed ++ [state]

@@ -270,24 +270,17 @@ def blockAt (l : Level) (p : Pos) : Block := l.world.blockAt p
 /-- The attributes that decide what the block at `p` can support (`BlockState.isFaceSturdy`,
 which reads `getBlockSupportShape(level, pos)`). They are the attributes of the block state,
 except for a `moving_piston`, whose shape comes from its block entity
-(`PistonMovingBlockEntity.getCollisionShape`):
-
-* for the base of a piston that is retracting (`isSourcePiston`, not `extending`) the shape
-  contains that of the extended base, so whatever the extended base supports is supported, the
-  face at its back in particular; the head that is still moving in is not taken into account;
-* a moved block that has arrived (`progress` is 1) has its own shape;
-* any other `moving_piston` is treated as supporting nothing. -/
+(`PistonMovingBlockEntity.getCollisionShape`): the faces it supports are those of the moved
+block where it is on its way, together with the extended base for a piston that is retracting
+(`BlockEntities.Piston.supportMasks`). A `moving_piston` without its block entity has no shape
+and supports nothing, as its block state says. -/
 def supportAttrs (l : Level) (p : Pos) : Attrs :=
   let b := l.blockAt p
   match b, l.blockEntities p with
   | .movingPiston _, some (.piston e) =>
-    if e.isSourcePiston then
-      match e.movedState with
-      | .pistonBase id s =>
-        if e.extending then b.attrs else (Block.pistonBase id { s with extended := true }).attrs
-      | _ => b.attrs
-    else if e.progress ≥ 1 then e.movedState.attrs
-    else b.attrs
+    match e.supportMasks with
+    | (full, center, rigid) =>
+      { b.attrs with sturdyFull := full, sturdyCenter := center, sturdyRigid := rigid }
   | _, _ => b.attrs
 
 /-- Replaces the block at `p` and nothing else: no reactions, no updates. -/

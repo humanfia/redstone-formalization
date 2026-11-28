@@ -204,7 +204,7 @@ def moveTowardsClosestSpace (i : ℕ) (x y z : Float) : M Unit := do
   let pos : Pos := ⟨Phys.floor x, Phys.floor y, Phys.floor z⟩
   let delta : Vec3 := ⟨x - Phys.ofInt pos.x, y - Phys.ofInt pos.y, z - Phys.ofInt pos.z⟩
   let step (best : Direction × Float) (dir : Direction) : Direction × Float :=
-    if !(l.blockAt (pos.step dir)).isCollisionShapeFullBlock then
+    if !l.isCollisionShapeFullBlock (pos.step dir) then
       let dd := delta.get dir.axis
       let positive := dir == .south || dir == .east || dir == .up
       let oriented := if positive then 1.0 - dd else dd

@@ -1,0 +1,118 @@
+{
+ "name": "support-pushed-torch-down-1",
+ "ticks": 14,
+ "box": {
+  "min": [
+   -2,
+   2,
+   -2
+  ],
+  "max": [
+   10,
+   10,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    3,
+    0
+   ],
+   "max": [
+    8,
+    3,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    7,
+    4
+   ],
+   "state": "minecraft:piston[extended=false,facing=down]"
+  },
+  {
+   "pos": [
+    4,
+    6,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [],
+ "actions": [
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    4,
+    8,
+    4
+   ],
+   "state": "minecraft:redstone_block",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    4,
+    5,
+    3
+   ],
+   "state": "minecraft:wall_torch[facing=north]",
+   "flags": 2
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    4,
+    5,
+    5
+   ],
+   "state": "minecraft:wall_torch[facing=south]",
+   "flags": 2
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    3,
+    5,
+    4
+   ],
+   "state": "minecraft:wall_torch[facing=west]",
+   "flags": 2
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    5,
+    5,
+    4
+   ],
+   "state": "minecraft:wall_torch[facing=east]",
+   "flags": 2
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    4,
+    5,
+    4
+   ],
+   "state": "minecraft:moving_piston[facing=down,type=sticky]",
+   "flags": 3
+  }
+ ]
+}

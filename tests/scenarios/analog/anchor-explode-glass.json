@@ -1,0 +1,69 @@
+{
+ "name": "anchor-explode-glass",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   10,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    4,
+    0
+   ],
+   "max": [
+    15,
+    4,
+    15
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    5,
+    7
+   ],
+   "state": "minecraft:respawn_anchor[charges=2]"
+  },
+  {
+   "pos": [
+    9,
+    5,
+    7
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    7,
+    5,
+    9
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    7,
+    5,
+    7
+   ],
+   "face": "up"
+  }
+ ]
+}

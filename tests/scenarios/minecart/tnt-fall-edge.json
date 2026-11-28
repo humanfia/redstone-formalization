@@ -1,0 +1,57 @@
+{
+ "name": "tnt-fall-edge",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    7.5,
+    4.3,
+    7.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    2.5,
+    4.0,
+    2.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    12.5,
+    4.6,
+    12.5
+   ]
+  }
+ ]
+}

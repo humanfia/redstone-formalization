@@ -1,0 +1,89 @@
+{
+ "name": "tnt-activator-pass",
+ "ticks": 110,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    1,
+    1,
+    4
+   ],
+   "max": [
+    14,
+    1,
+    4
+   ],
+   "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    4
+   ],
+   "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    2.5,
+    1.0625,
+    4.5
+   ],
+   "nbt": "{Motion:[0.3d,0.0d,0.0d]}"
+  }
+ ]
+}

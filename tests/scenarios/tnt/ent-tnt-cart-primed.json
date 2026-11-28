@@ -1,0 +1,51 @@
+{
+ "name": "ent-tnt-cart-primed",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   6,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:5}"
+  },
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    11.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:30}"
+  }
+ ]
+}

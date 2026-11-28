@@ -1,0 +1,83 @@
+{
+ "name": "ent-carts-obsidian",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   6,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:5}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    10.5,
+    1.0,
+    7.5
+   ]
+  },
+  {
+   "type": "minecraft:furnace_minecart",
+   "pos": [
+    7.5,
+    1.0,
+    11.5
+   ]
+  },
+  {
+   "type": "minecraft:chest_minecart",
+   "pos": [
+    3.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:13b,id:\"minecraft:redstone\",count:64}]}"
+  },
+  {
+   "type": "minecraft:spawner_minecart",
+   "pos": [
+    7.5,
+    1.0,
+    3.5
+   ]
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    14.5,
+    1.0,
+    14.5
+   ]
+  }
+ ]
+}

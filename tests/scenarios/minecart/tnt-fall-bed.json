@@ -1,0 +1,83 @@
+{
+ "name": "tnt-fall-bed",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "state": "minecraft:red_bed[facing=north,occupied=false,part=foot]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    6
+   ],
+   "state": "minecraft:red_bed[facing=north,occupied=false,part=head]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:red_bed[facing=north,occupied=false,part=foot]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:red_bed[facing=north,occupied=false,part=head]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    7.5,
+    7.5,
+    7.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    3.5,
+    5.0,
+    3.5
+   ]
+  }
+ ]
+}

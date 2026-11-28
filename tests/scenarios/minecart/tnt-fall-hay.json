@@ -1,0 +1,51 @@
+{
+ "name": "tnt-fall-hay",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "state": "minecraft:hay_block[axis=y]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    7.5,
+    7.0,
+    7.5
+   ]
+  }
+ ]
+}

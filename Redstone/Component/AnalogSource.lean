@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Entity.ItemDrop
+public import Redstone.Entity.Tnt.Explosion
 public import Redstone.Component.AnalogSource.ItemData
 
 /-!
@@ -31,7 +32,9 @@ always eat.
 Where the game does something the model cannot represent, the reaction calls `unmodelled`,
 which sets `Level.overflow`: the level is then no longer a faithful image of the game.
 
-* The explosion of a respawn anchor used outside the Nether (`unmodelled`).
+* The fire that the explosion of a respawn anchor leaves (`Redstone.Entity.Tnt.createFire`
+  places the block; what fire does when placed is `Redstone.Component.Fire`), and the drops of
+  the blocks it destroys, which decay (`Redstone.Entity.Tnt.onExplosionHit`).
 * An axe or honeycomb used on a copper golem statue (`unmodelled`): scraping, waxing and
   bringing the golem back are behaviours of the items and of a mob.
 * What an item does by itself after the block has passed (`Item.useOn`): placing a block,
@@ -694,27 +697,52 @@ def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
 
 /-! ### Respawn anchor -/
 
+/-- `RespawnAnchorBlock.isWaterThatWouldFlow(pos, level)`: a source of water, or flowing water
+of amount 2 or more that has no water below. -/
+def isWaterThatWouldFlow (l : Level) (p : Pos) : Bool :=
+  let fluid := (l.blockAt p).fluidState
+  if !fluid.fluid.isWater then false
+  else if fluid.isSource then true
+  else if fluid.amount < 2 then false
+  else !(l.blockAt (p.step .down)).fluidState.fluid.isWater
+
+/-- `RespawnAnchorBlock.explode(state, level, pos)`: the anchor is removed and explodes at its
+centre with power 5, making fire, as a block does (`ExplosionInteraction.block`). When water
+that would flow is next to the anchor, or any water above it, the explosion takes the
+anchor's own position to resist like water, which keeps it from reaching any block. -/
+def explodeRespawnAnchor (p : Pos) : M Unit := do
+  discard <| Level.removeBlock p false
+  let l ← get
+  let anyWaterNeighbors :=
+    [Direction.north, .east, .south, .west].any fun d => isWaterThatWouldFlow l (p.step d)
+  let inWater := anyWaterNeighbors || (l.blockAt (p.step .up)).fluidState.fluid.isWater
+  let calculator : Entity.Tnt.DamageCalculator :=
+    { getBlockExplosionResistance := fun _ q b =>
+        if q == p && inWater then some 100.0 else Entity.Tnt.blockExplosionResistance b }
+  let boomPos : Vec3 := ⟨Float.ofInt p.x + 0.5, Float.ofInt p.y + 0.5, Float.ofInt p.z + 0.5⟩
+  Entity.Tnt.explode boomPos 5.0 true .block calculator
+
 /-- The behaviour of a respawn anchor. A comparator reads `floor(charges / 4 * 15)`. Glowstone
-charges it; using a charged anchor where it does not work makes it explode, which is not
-modelled. -/
+charges it; using a charged anchor where it does not work, which is everywhere in the
+overworld (`RespawnAnchorBlock.canSetSpawn`), makes it explode. -/
 def respawnAnchor (s : Blocks.RespawnAnchor) : Behaviour :=
   let self : Block := .respawnAnchor s
-  let useWithoutItem : M Bool := do
+  let useWithoutItem (p : Pos) : M Bool := do
     if s.charges.val = 0 then return false
-    unmodelled
+    explodeRespawnAnchor p
     return true
   { Behaviour.inert self with
     analogSignal := fun _ _ _ => s.charges.val * 15 / 4
-    useWithoutItem := fun _ _ => useWithoutItem
+    useWithoutItem := fun p _ => useWithoutItem p
     useItemOn := fun p _ item => do
-      if item ≠ "minecraft:glowstone" then useWithoutItem
+      if item ≠ "minecraft:glowstone" then useWithoutItem p
       else if h : s.charges.val < 4 then
         -- `charge`.
         discard <| Level.setBlock p
           (.respawnAnchor { s with charges := ⟨s.charges.val + 1, by omega⟩ })
         Level.gameEvent "minecraft:block_change" p
         return true
-      else useWithoutItem }
+      else useWithoutItem p }
 
 /-! ### Copper golem statue -/
 

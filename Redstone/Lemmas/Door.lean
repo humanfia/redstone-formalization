@@ -96,7 +96,7 @@ theorem neighborChanged_of_agrees (k : TrapDoorId) (s : Blocks.TrapDoor) (p : Po
 
 /-- **`open` follows the signal.** A trapdoor whose signal differs from its `powered` property
 writes one new state, in which `open` and `powered` are the signal, and makes its sound if
-that changes `open`. -/
+that changes `open`. If it is waterlogged it then asks for a tick of its water. -/
 theorem neighborChanged_of_differs (k : TrapDoorId) (s : Blocks.TrapDoor) (p : Pos) (env : Env)
     (l : Level) (h : l.hasNeighborSignalAt env p = !s.powered) :
     neighborChanged k s p env l =
@@ -105,7 +105,9 @@ theorem neighborChanged_of_differs (k : TrapDoorId) (s : Blocks.TrapDoor) (p : P
           playSound
           Level.gameEvent (openEvent (!s.powered)) p
         discard <| Level.setBlock p
-          (k.block { s with «open» := !s.powered, powered := !s.powered }) 2 : M Unit) env l := by
+          (k.block { s with «open» := !s.powered, powered := !s.powered }) 2
+        if s.waterlogged then
+          Level.scheduleFluidTick p .water Fluid.water.tickDelay : M Unit) env l := by
   have hs : Level.hasNeighborSignal p env l = (!s.powered, l) := by
     rw [← h]
     rfl

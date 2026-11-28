@@ -1,0 +1,430 @@
+{
+ "name": "amethyst-buds",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   1
+  ],
+  "max": [
+   13,
+   2,
+   12
+  ]
+ },
+ "settings": {
+  "randomTickSpeed": 1000
+ },
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    6
+   ],
+   "state": "minecraft:medium_amethyst_bud[facing=west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:amethyst_cluster[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "state": "minecraft:large_amethyst_bud[facing=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    11
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    6
+   ],
+   "state": "minecraft:large_amethyst_bud[facing=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    11
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:small_amethyst_bud[facing=east,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    11
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    11
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    11
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:medium_amethyst_bud[facing=west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:amethyst_cluster[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    7
+   ],
+   "state": "minecraft:large_amethyst_bud[facing=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    11
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:large_amethyst_bud[facing=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    0,
+    11
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    6
+   ],
+   "state": "minecraft:small_amethyst_bud[facing=east,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    10
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    11
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    12
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    11
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    11
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    6
+   ],
+   "state": "minecraft:medium_amethyst_bud[facing=west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    1
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    5
+   ],
+   "state": "minecraft:amethyst_cluster[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    6
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    7
+   ],
+   "state": "minecraft:large_amethyst_bud[facing=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    11
+   ],
+   "state": "minecraft:budding_amethyst"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    6
+   ],
+   "state": "minecraft:large_amethyst_bud[facing=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    12,
+    0,
+    11
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    6
+   ],
+   "state": "minecraft:small_amethyst_bud[facing=east,waterlogged=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    10
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    11
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    12
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    11
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    11
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "actions": []
+}

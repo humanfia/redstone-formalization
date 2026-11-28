@@ -10,9 +10,9 @@ weathers (`NEXT_BY_BLOCK`) and which one it came from (`PREVIOUS_BY_BLOCK`), for
 kinds of copper block of the game. The tables are on block ids; the game keeps the properties
 of the state (`withPropertiesOf`).
 
-Nothing uses the tables yet: copper weathers on random ticks
-(`Redstone.Mechanics.RandomTick`, `Redstone.Component.RandomTicked`) and lightning cleans it
-(`Redstone.Entity.Lightning`), and neither is modelled.
+Copper weathers on random ticks (`Redstone.Component.Weathering`, called by
+`Redstone.Mechanics.RandomTick`). Lightning cleans it (`Redstone.Entity.Lightning`), which is not
+modelled yet.
 -/
 
 @[expose] public section

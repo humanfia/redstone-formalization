@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Mechanics.Tick
+public import Redstone.World.Light
 public import Redstone.Block.FaceShape
 public import Redstone.Block.Generated.Tags
 
@@ -30,7 +31,7 @@ again, and a block that cannot stay becomes air (`updateShape`), which breaks it
 * The plants whose survival depends on light keep `Behaviour.inert`: `CropBlock` (wheat,
   carrots, potatoes, beetroots, torchflower crop), `MushroomBlock` and `PitcherCropBlock` need
   `getRawBrightness`, and the model has no block light. They never pop off here.
-* Random ticks (growth, snow melting, sapling trees, spreading), bone meal and every other use
+* Random ticks of the plants (growth, sapling trees, spreading), bone meal and every other use
   of an item (`useItemOn`), and what the plants do to entities inside them (`entityInside`:
   sweet berry bushes, wither roses, lily pads under boats, eyeblossoms).
 * `EyeblossomBlock.tick`, the scheduled tick that opens and closes an eyeblossom.
@@ -255,7 +256,18 @@ def behaviour (self : Block) : Behaviour :=
   match self with
   | .bed id s => bedBehaviour self s.facing s.part fun o => .bed id { s with occupied := o }
   | .strawBed s => bedBehaviour self s.facing s.part fun o => .strawBed { s with occupied := o }
-  | .snowLayer _ | .leafLitter _ | .mangrovePropagule _ | .seaPickle _ | .sapling _ _
+  | .snowLayer _ =>
+    -- `SnowLayerBlock.randomTick`: under block light above 11 the snow melts away. Block light
+    -- is `Level.blockLight`, which is 15 everywhere until light is modelled; snow in the dark,
+    -- and a full layer, which lets no light in, stay in the game
+    -- (`tests/pending/scenarios/random-tick/snow-dark.json`, `snow-full-lit.json`).
+    { supported self with
+      randomTick := fun p => do
+        if (← get).blockLight p > 11 then
+          Level.dropResources self p
+          discard <| Level.removeBlock p false
+          Level.gameEvent "minecraft:block_destroy" p { affectedState := some self } }
+  | .leafLitter _ | .mangrovePropagule _ | .seaPickle _ | .sapling _ _
   | .netherWart _ | .stem _ _ | .flowerBed _ _ => supported self
   | .sweetBerryBush s =>
     { supported self with

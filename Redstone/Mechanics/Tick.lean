@@ -19,8 +19,8 @@ this order:
 6. the entities are ticked;
 7. the block entities are ticked.
 
-A fluid tick makes water and lava flow (`Redstone.Mechanics.Fluid`). Phase 4 is in place but
-empty: no block gets a random tick yet (`Redstone.Mechanics.RandomTick`). In a level without
+A fluid tick makes water and lava flow (`Redstone.Mechanics.Fluid`). Phase 4 gives the
+blocks their random ticks (`Redstone.Mechanics.RandomTick`). In a level without
 scheduled fluid ticks and with the game rule `random_tick_speed` at zero phases 3 and 4 leave
 the level as it is (`runFluidTicks_of_empty`, `tickChunks_of_speed_zero`), so circuits that
 have neither never look into them.

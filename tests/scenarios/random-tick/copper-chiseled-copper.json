@@ -1,0 +1,310 @@
+{
+ "name": "copper-chiseled-copper",
+ "ticks": 60,
+ "box": {
+  "min": [
+   1,
+   0,
+   1
+  ],
+  "max": [
+   11,
+   7,
+   11
+  ]
+ },
+ "settings": {
+  "randomTickSpeed": 1000
+ },
+ "blocks": [
+  {
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:chiseled_copper"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:exposed_chiseled_copper"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    11
+   ],
+   "state": "minecraft:weathered_chiseled_copper"
+  },
+  {
+   "pos": [
+    1,
+    6,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    6,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    6,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    7,
+    1
+   ],
+   "state": "minecraft:chiseled_copper"
+  },
+  {
+   "pos": [
+    1,
+    7,
+    6
+   ],
+   "state": "minecraft:exposed_chiseled_copper"
+  },
+  {
+   "pos": [
+    1,
+    7,
+    11
+   ],
+   "state": "minecraft:weathered_chiseled_copper"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:chiseled_copper"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:exposed_chiseled_copper"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    11
+   ],
+   "state": "minecraft:weathered_chiseled_copper"
+  },
+  {
+   "pos": [
+    6,
+    6,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    6,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    6,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    7,
+    1
+   ],
+   "state": "minecraft:chiseled_copper"
+  },
+  {
+   "pos": [
+    6,
+    7,
+    6
+   ],
+   "state": "minecraft:exposed_chiseled_copper"
+  },
+  {
+   "pos": [
+    6,
+    7,
+    11
+   ],
+   "state": "minecraft:weathered_chiseled_copper"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    1
+   ],
+   "state": "minecraft:chiseled_copper"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    6
+   ],
+   "state": "minecraft:exposed_chiseled_copper"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    11
+   ],
+   "state": "minecraft:weathered_chiseled_copper"
+  },
+  {
+   "pos": [
+    11,
+    6,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    6,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    6,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    7,
+    1
+   ],
+   "state": "minecraft:oxidized_chiseled_copper"
+  },
+  {
+   "pos": [
+    11,
+    7,
+    6
+   ],
+   "state": "minecraft:waxed_chiseled_copper"
+  },
+  {
+   "pos": [
+    11,
+    7,
+    11
+   ],
+   "state": "minecraft:waxed_exposed_chiseled_copper"
+  }
+ ],
+ "actions": []
+}

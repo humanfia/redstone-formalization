@@ -24,8 +24,11 @@ shape of the block above.
   the block state is used.
 * `FenceBlock.useWithoutItem` (`LeadItem.bindPlayerMobs`): there are no leashed mobs, so the
   action passes, as in the game.
-* Random ticks (`WeatheringCopperBarsBlock`, `WeatheringCopperStairBlock`), items used on the
+* Items used on the
   blocks (waxing, scraping), placement (`getStateForPlacement`), rotation and mirroring.
+
+The random ticks of the copper bars and stairs (weathering) are in
+`Redstone.Component.Weathering`.
 -/
 
 @[expose] public section

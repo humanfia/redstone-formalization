@@ -1,0 +1,76 @@
+{
+ "name": "brew-hoppers-busy",
+ "ticks": 120,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:awkward\"}}},{Slot:3b,id:\"minecraft:sugar\",count:1}],BrewTime:40,Fuel:1}"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:sugar\",count:2},{Slot:1b,id:\"minecraft:redstone\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=west]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:awkward\"}}},{Slot:1b,id:\"minecraft:glass_bottle\",count:2},{Slot:2b,id:\"minecraft:splash_potion\",count:1,components:{\"minecraft:potion_contents\":{potion:\"minecraft:water\"}}},{Slot:3b,id:\"minecraft:blaze_powder\",count:3}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=west]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:barrel[facing=north,open=false]"
+  }
+ ]
+}

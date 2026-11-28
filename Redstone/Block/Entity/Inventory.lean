@@ -13,9 +13,9 @@ crafter, and the blocks a comparator reads (jukebox, chiseled bookshelf, shelf, 
 An item stack of the game is an item, a count and a patch of data components (a potion's
 contents, an enchantment, a custom maximal stack size, ...). The model keeps the patch as the
 game saves it, without interpreting it: two patches are equal when their saved forms are. The
-only component the model reads is `max_stack_size`. A block whose behaviour depends on other
-components (a furnace, a brewing stand) does not accept stacks with a patch; see
-`Redstone.Component.Container`.
+only component read here is `max_stack_size`. The few places that read others (brewing and the
+crafting recipes that compute their result from components) do it with
+`Redstone.Block.Entity.Components`.
 
 The maximal stack size of an item comes from the one table `Redstone.itemMaxStackSize`, a
 search tree on a number made of the item's name (`Redstone.itemKey`): theorems about circuits

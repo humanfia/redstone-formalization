@@ -17,8 +17,10 @@ disappears.
 * Fluids: an item that touches water or lava sets `Level.overflow`.
 * Fire, damage, portals, and being picked up by players. (Hoppers pick items up: see
   `Redstone.Component.Hopper`.)
-* Data components: two stacks of the same item of which one has components are not compared;
-  the model sets `Level.overflow` instead of deciding whether they merge.
+* An item whose stack has components that the entity does not hold
+  (`Entities.Item.unknownComponents`: made by code that only tells that there are some) is not
+  compared with another of the same item: the model sets `Level.overflow` instead of deciding
+  whether they merge.
 * The owner of an item (`Owner`), which the game compares before merging.
 * The order in which an item meets the items it could merge with is that of the game's entity
   sections, and inside a section the order in which the entities entered it. The model knows
@@ -71,9 +73,11 @@ def toDouble (n : ℕ) : Float := Float.ofNat n * Phys.d 0x3ca0000000000000
 `addFreshEntity`, as `Entity.spawnAtLocation` does: `count` items of the kind named `item`
 appear at `pos` with a random horizontal velocity and cannot be picked up for 10 ticks. `actor`
 tells what makes the item, as in `Entities.Physics.sectionEntry`: `0` before the entities are
-ticked, `i + 1` in the tick of the entity with index `i`. Returns the index of the new entity. -/
+ticked, `i + 1` in the tick of the entity with index `i`. `components` is the component patch of
+the stack; a caller that does not have it says with `hasComponents` that there is one. Returns
+the index of the new entity. -/
 def spawnAtLocation (pos : Vec3) (item : String) (actor : ℕ) (count : ℕ := 1)
-    (hasComponents : Bool := false) : M ℕ := do
+    (hasComponents : Bool := false) (components : List (String × String) := []) : M ℕ := do
   let id := (← get).nextEntityIndex + 2
   let r := Entity.randomAfterUuid id
   let r := r.nextFloat24.2
@@ -85,7 +89,8 @@ def spawnAtLocation (pos : Vec3) (item : String) (actor : ℕ) (count : ℕ := 1
   let shift := Phys.d 0x3fb999999999999a
   let motion : Vec3 := ⟨toDouble dx * scale - shift, scale, toDouble dz * scale - shift⟩
   let data : Entities.Item :=
-    { item := item, count := count, hasComponents := hasComponents, pickupDelay := 10
+    { item := item, count := count, hasComponents := hasComponents || !components.isEmpty
+      components := components, pickupDelay := 10
       yRot := (toFloat32 yaw * 360).toBits.toNat
       phys := { random := some r, sectionEntry := (now, actor) } }
   Level.addEntity ⟨pos, motion, false⟩ (.item data)
@@ -94,10 +99,10 @@ def spawnAtLocation (pos : Vec3) (item : String) (actor : ℕ) (count : ℕ := 1
 `addFreshEntity`, as `DefaultDispenseItemBehavior.spawnItem` and `Containers.dropItemStack` do:
 `count` items of the kind named `item` appear at `pos` with the given velocity and can be
 picked up at once. The constructor draws the bobbing offset, the rotation and a velocity that
-is then replaced from the entity's own generator. `actor` is as in `spawnAtLocation`. Returns
-the index of the new entity. -/
+is then replaced from the entity's own generator. `actor`, `hasComponents` and `components` are
+as in `spawnAtLocation`. Returns the index of the new entity. -/
 def spawnStack (pos motion : Vec3) (item : String) (count : ℕ) (hasComponents : Bool)
-    (actor : ℕ := 0) : M ℕ := do
+    (actor : ℕ := 0) (components : List (String × String) := []) : M ℕ := do
   let id := (← get).nextEntityIndex + 2
   let r := Entity.randomAfterUuid id
   let r := r.nextFloat24.2
@@ -106,7 +111,8 @@ def spawnStack (pos motion : Vec3) (item : String) (count : ℕ) (hasComponents 
   let r := r.nextDouble53.2
   let now := (← get).gameTime
   let data : Entities.Item :=
-    { item := item, count := count, hasComponents := hasComponents
+    { item := item, count := count, hasComponents := hasComponents || !components.isEmpty
+      components := components
       yRot := (toFloat32 yaw * 360).toBits.toNat
       phys := { random := some r, sectionEntry := (now, actor) } }
   Level.addEntity ⟨pos, motion, false⟩ (.item data)
@@ -139,21 +145,23 @@ def moveTowardsClosestSpace (i : ℕ) (x y z : Float) : M Unit := do
 /-- `ItemEntity.isMergable`. -/
 def isMergable (dt : Entities.Item) : Bool :=
   dt.pickupDelay != 32767 && dt.age != -32768 && dt.age < 6000 &&
-    dt.count < itemMaxStackSize dt.item
+    dt.count < dt.maxStackSize
 
 /-- `ItemEntity.tryToMerge(other)` for the item entities with indices `i` and `j`: if the two
-stacks fit into one, the smaller one is added to the larger one and disappears. -/
+stacks are of the same item with the same components (`ItemEntity.areMergable`) and fit into
+one, the smaller one is added to the larger one and disappears. -/
 def tryToMerge (i j : ℕ) : M Unit := do
   let some (_, a) ← get? i | return
   let some (_, b) ← get? j | return
-  if b.count + a.count > itemMaxStackSize b.item then return
+  if b.count + a.count > b.maxStackSize then return
   if a.item != b.item then return
-  if a.hasComponents || b.hasComponents then
+  if a.unknownComponents || b.unknownComponents then
     Level.setOverflow
     return
+  if a.components != b.components then return
   -- `merge(to, toStack, from, fromStack)`
   let (dst, toData, src, srcData) := if b.count < a.count then (i, a, j, b) else (j, b, i, a)
-  let moved := min (min (itemMaxStackSize toData.item) 64 - toData.count) srcData.count
+  let moved := min (min toData.maxStackSize 64 - toData.count) srcData.count
   modifyData dst fun dt => { dt with
     count := dt.count + moved
     pickupDelay := max toData.pickupDelay srcData.pickupDelay

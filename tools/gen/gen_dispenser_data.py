@@ -196,6 +196,66 @@ def check_unambiguous(tags, recipes):
         sys.exit(f"recipes that may match the same grid: {clashes}")
 
 
+# ---------------------------------------------------------------------------------------------
+# Component values, written as `Nbt.render` writes them
+
+# Components whose saved form is known well enough to write any value of them: every number in
+# them is an `int`, except those listed in BYTES.
+TRUSTED = {"minecraft:fireworks", "minecraft:pot_decorations", "minecraft:potion_contents",
+           "minecraft:suspicious_stew_effects", "minecraft:max_stack_size",
+           "minecraft:max_damage", "minecraft:damage", "minecraft:repair_cost"}
+BYTES = {("minecraft:fireworks", "flight_duration")}
+
+
+def quote(s):
+    """`String.quote` of a plain string."""
+    assert all(32 <= ord(c) < 127 and c not in '"\\' for c in s), s
+    return '"' + s + '"'
+
+
+def render(v, path):
+    """The text `Nbt.render` gives for the saved form of the JSON value `v` of a component, or
+    None where the JSON does not determine it (the width of a number, a list of numbers, which
+    the game saves as an array, or a component not in TRUSTED that is not trivial)."""
+    trusted = path[0] in TRUSTED
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, str):
+        return quote(v)
+    if isinstance(v, int):
+        if not trusted:
+            return None
+        return f"{v}b" if tuple(p for p in path if isinstance(p, str)) in BYTES else str(v)
+    if isinstance(v, list):
+        if not v:
+            return "[]"
+        if not trusted or any(isinstance(x, (int, float)) for x in v):
+            return None
+        parts = [render(x, path + (0,)) for x in v]
+        return None if None in parts else "[" + "".join(p + "," for p in parts) + "]"
+    if isinstance(v, dict):
+        if not v:
+            return "{}"
+        if not trusted:
+            return None
+        parts = [(k, render(v[k], path + (k,))) for k in sorted(v)]
+        if any(p is None for _, p in parts):
+            return None
+        return "{" + "".join(quote(k) + ":" + p + "," for k, p in parts) + "}"
+    return None
+
+
+def lean_long_str(s, indent, width=96):
+    """A Lean string literal, split with `++` so that no line is too long."""
+    room = width - indent - 12
+    chunks = [""]
+    for c in s:
+        if len(lean_str(chunks[-1] + c)) > room:
+            chunks.append("")
+        chunks[-1] += c
+    return (" ++\n" + " " * indent).join(lean_str(c) for c in chunks)
+
+
 def gen_recipes(ids, comps):
     tags = Tags()
     used_tags = []
@@ -210,7 +270,30 @@ def gen_recipes(ids, comps):
                 assert x in comps, x
         return xs
 
-    recipes, unmodelled, special = [], [], []
+    def ing_term(j):
+        return lean_list(ing(j), indent=0)
+
+    def items_of(j):
+        out = []
+        for x in ing(j):
+            out += tags.resolve(x[1:]) if x.startswith("#") else [x]
+        return out
+
+    def plain_result(d):
+        """The item of a result that is one item without components."""
+        result = d["result"]
+        assert set(result) == {"id"} and result["id"] in comps, result
+        return result["id"]
+
+    recipes, with_components, special, unmodelled = [], [], [], []
+    # The items whose default components the special recipes ask for.
+    wanted = []
+
+    def want(items):
+        for i in items:
+            if i not in wanted:
+                wanted.append(i)
+
     for path in sorted(glob.glob(os.path.join(DATA, "recipe", "*.json"))):
         name = "minecraft:" + os.path.basename(path)[:-5]
         with open(path) as f:
@@ -225,57 +308,98 @@ def gen_recipes(ids, comps):
             entry = (name, True, width, height, cells)
         elif t == "crafting_shapeless":
             entry = (name, False, 0, 0, [ing(x) for x in d["ingredients"]])
+        elif t == "crafting_special_firework_rocket":
+            result = d["result"]
+            assert set(result) == {"id", "count"}, result
+            want([result["id"]])
+            special.append((name, f".fireworkRocket {ing_term(d['shell'])} "
+                                  f"{ing_term(d['fuel'])} {ing_term(d['star'])}\n      "
+                                  f"{lean_str(result['id'])} {result['count']}"))
+            continue
+        elif t == "crafting_special_firework_star":
+            result = plain_result(d)
+            want([result])
+            shapes = ",\n       ".join(f"({lean_str(k)}, {ing_term(v)})"
+                                       for k, v in sorted(d["shapes"].items()))
+            # `findShape` goes through a hash map: the order must not matter.
+            sets = [set(items_of(v)) for v in d["shapes"].values()]
+            assert all(not (a & b) for i, a in enumerate(sets) for b in sets[i + 1:]), name
+            special.append((name, f".fireworkStar\n      [{shapes}]\n      "
+                                  f"{ing_term(d['trail'])} {ing_term(d['twinkle'])}\n      "
+                                  f"{ing_term(d['fuel'])} {ing_term(d['dye'])} "
+                                  f"{lean_str(result)}"))
+            continue
+        elif t == "crafting_special_firework_star_fade":
+            result = plain_result(d)
+            want([result] + items_of(d["target"]))
+            special.append((name, f".fireworkStarFade {ing_term(d['target'])} "
+                                  f"{ing_term(d['dye'])}\n      {lean_str(result)}"))
+            continue
+        elif t == "crafting_transmute":
+            result = d["result"]
+            assert set(result) <= {"id"}, result
+            bounds = d.get("material_count", {"min": 1, "max": 1})
+            # `minMaterialCount` and `maxMaterialCount`
+            lo, hi = bounds.get("min", 1), bounds.get("max", 8)
+            add = d.get("add_material_count_to_result", False)
+            want([result["id"]] if "id" in result else items_of(d["input"]))
+            target = f"(some {lean_str(result['id'])})" if "id" in result else "none"
+            special.append((name, f".transmute {ing_term(d['input'])} "
+                                  f"{ing_term(d['material'])}\n      "
+                                  f"{lo} {hi} {target} 1 {'true' if add else 'false'}"))
+            continue
+        elif t == "crafting_imbue":
+            result = d["result"]
+            assert set(result) == {"id", "count"}, result
+            want([result["id"]] + items_of(d["source"]))
+            special.append((name, f".imbue {ing_term(d['material'])} {ing_term(d['source'])}"
+                                  f"\n      {lean_str(result['id'])} {result['count']}"))
+            continue
+        elif t == "crafting_decorated_pot":
+            result = plain_result(d)
+            want([result])
+            sides = "\n      ".join(ing_term(d[s]) for s in ("back", "left", "right", "front"))
+            special.append((name, f".decoratedPot\n      {sides}\n      {lean_str(result)}"))
+            continue
+        elif t == "crafting_special_repairitem":
+            special.append((name, ".repair"))
+            continue
         else:
-            # Recipes with their own matching code. Two of them are shaped recipes in disguise;
-            # the others are reduced to a necessary condition for a match: the grid holds
-            # `count` stacks (0: any number), one item of each of `required`, and nothing
-            # outside `allowed`.
-            count, required, allowed = 0, None, None
-            if t == "crafting_imbue":
-                cells = [ing(d["source"] if k == 4 else d["material"]) for k in range(9)]
-                unmodelled.append((name, True, 3, 3, cells))
-                continue
-            elif t == "crafting_decorated_pot":
-                cells = [[] for _ in range(9)]
-                for k, side in ((1, "back"), (3, "left"), (5, "right"), (7, "front")):
-                    cells[k] = ing(d[side])
-                unmodelled.append((name, True, 3, 3, cells))
-                continue
-            elif t == "crafting_special_repairitem":
-                # `RepairItemRecipe` looks at components; it is handled in Lean.
-                continue
-            elif t == "crafting_transmute":
-                required = [d["input"], d["material"]]
-            elif t == "crafting_dye":
+            # Recipes that are not modelled, reduced to a necessary condition for a match: the
+            # grid holds `count` stacks (0: any number), one item of each of `required`, and
+            # nothing outside them.
+            count = 0
+            if t == "crafting_dye":
                 required = [d["target"], d["dye"]]
             elif t == "crafting_special_bannerduplicate":
                 count, required = 2, [d["banner"]]
             elif t == "crafting_special_bookcloning":
                 required = [d["source"], d["material"]]
-            elif t == "crafting_special_firework_rocket":
-                required, allowed = [d["shell"], d["fuel"]], [d["shell"], d["fuel"], d["star"]]
-            elif t == "crafting_special_firework_star":
-                required = [d["fuel"], d["dye"]]
-                allowed = required + [d["trail"], d["twinkle"]] + list(d["shapes"].values())
-            elif t == "crafting_special_firework_star_fade":
-                required = [d["target"], d["dye"]]
             elif t == "crafting_special_mapextending":
                 count, required = 9, [d["map"], d["material"]]
             elif t == "crafting_special_shielddecoration":
                 count, required = 2, [d["banner"], d["target"]]
             else:
                 sys.exit(f"unknown recipe type {t} in {path}")
-            allowed = allowed or required
-            special.append((name, count, [ing(g) for g in required],
-                            [x for g in allowed for x in ing(g)]))
+            unmodelled.append((name, count, [ing(g) for g in required],
+                               [x for g in required for x in ing(g)]))
             continue
         result = d["result"]
         assert set(result) <= {"id", "count", "components"}, result
         assert result["id"] in comps, result
+        entry += (result["id"], result.get("count", 1))
         if "components" in result:
-            unmodelled.append(entry)
+            patch = []
+            for k in sorted(result["components"]):
+                assert not k.startswith("!"), (name, k)
+                value = render(result["components"][k], (k,))
+                assert value is not None, (name, k)
+                # `ItemStackTemplate.create`: an entry that says what the item says is dropped.
+                assert comps[result["id"]].get(k) != result["components"][k], (name, k)
+                patch.append((k, value))
+            with_components.append(entry + (patch,))
         else:
-            recipes.append(entry + (result["id"], result.get("count", 1)))
+            recipes.append(entry)
 
     def lists(xss, indent):
         if not xss:
@@ -285,6 +409,80 @@ def gen_recipes(ids, comps):
             pad + " " + ("[]" if not xs else lean_list(xs, indent=indent + 1).lstrip()) for xs in xss)
         return "[\n" + body + "]"
 
+    def recipe_term(e):
+        name, shaped, width, height, cells, result, count = e[:7]
+        return (f"  ⟨{lean_str(name)}, {'true' if shaped else 'false'}, {width}, {height}, "
+                f"{lists(cells, 4)},\n    {lean_str(result)}, {count}⟩")
+
+    # The tags are written first, and are all known only once the recipes have been read.
+    body = ""
+    size, parts = 60, []
+    for k in range(0, len(recipes), size):
+        part = f"recipes{k // size}"
+        parts.append(part)
+        body += f"\n/-- Part of `recipes`. -/\ndef {part} : List Recipe := [\n"
+        body += ",\n".join(recipe_term(e) for e in recipes[k:k + size]) + "]\n"
+    body += ("\n/-- The shaped and shapeless crafting recipes whose result is a plain stack. -/\n"
+             "def recipes : List Recipe :=\n  List.flatten [\n    " + ",\n    ".join(parts) + "]\n")
+    check_unambiguous(tags, recipes)
+
+    def patch_term(patch, indent):
+        return "[" + ", ".join(f"({lean_str(k)},\n{' ' * indent}{lean_long_str(v, indent)})"
+                               for k, v in patch) + "]"
+
+    body += ("\n/-- The shaped and shapeless crafting recipes whose result has components "
+             "(suspicious\nstew), each with the component patch of its result. -/\n"
+             "def componentRecipes : List (Recipe × List (String × String)) := [\n")
+    body += ",\n".join(f"  ({recipe_term(e).strip()},\n    {patch_term(e[7], 6)})"
+                       for e in with_components) + "]\n"
+    body += ("\n/-- The crafting recipes with code of their own that the model follows "
+             "(`Special.craft`). -/\n"
+             "def special : List (String × Special) := [\n")
+    body += ",\n".join(f"  ({lean_str(n)},\n    {term})" for n, term in special) + "]\n"
+    body += ("\n/-- The crafting recipes that are not modelled (armour dyeing, banner copying, "
+             "book cloning,\nmap extending, shield decoration), reduced to a necessary condition "
+             "for a match. -/\n"
+             "def unmodelled : List SpecialRecipe := [\n")
+    body += ",\n".join(f"  ⟨{lean_str(n)}, {c}, {lists(g, 4)},\n{lean_list(a, indent=4)}⟩"
+                       for n, c, g, a in unmodelled) + "]\n"
+
+    damageable = [i for i in ids if "minecraft:max_damage" in comps[i]]
+    for i in ids:
+        # `RepairItemRecipe` starts from a new stack of the item: what it has by default.
+        assert ("minecraft:damage" in comps[i]) == (i in damageable), i
+        assert comps[i].get("minecraft:damage", 0) == 0, i
+        assert comps[i].get("minecraft:enchantments") == {} or i not in damageable, i
+    body += ("\n/-- The items that have the components `minecraft:max_damage` and "
+             "`minecraft:damage` by\ndefault, with their maximal damage; their damage is 0. -/\n"
+             "def maxDamage : List (String × ℕ) := [\n")
+    body += ",\n".join(f"  ({lean_str(i)}, {comps[i]['minecraft:max_damage']})"
+                       for i in damageable) + "]\n"
+    dyes = [(i, comps[i]["minecraft:dye"]) for i in ids if "minecraft:dye" in comps[i]]
+    body += ("\n/-- The items that have the component `minecraft:dye` by default, with their "
+             "colour. -/\n"
+             "def dyes : List (String × String) := [\n")
+    body += ",\n".join(f"  ({lean_str(i)}, {lean_str(c)})" for i, c in dyes) + "]\n"
+    with open(os.path.join(DATA, "tags", "enchantment", "curse.json")) as f:
+        curses = sorted(json.load(f)["values"])
+    assert all(not c.startswith("#") for c in curses), curses
+    body += ("\n/-- The enchantment tag `#minecraft:curse`. -/\n"
+             f"def curses : List String :=\n{lean_list(curses, indent=2)}\n")
+    body += ("\n/-- The components that the result items of the special recipes have by "
+             "default, each with\nits value as `Nbt.render` writes the saved form, where the "
+             "data of the game determines it. -/\n"
+             "def defaults : List (String × List (String × Option String)) := [\n")
+    rows = []
+    for i in wanted:
+        entries = []
+        for k in sorted(comps[i]):
+            value = render(comps[i][k], (k,))
+            entries.append(f"({lean_str(k)}, none)" if value is None else
+                           f"({lean_str(k)},\n      some ({lean_long_str(value, 8)}))")
+        rows.append(f"  ({lean_str(i)}, [\n    " + ",\n    ".join(entries) + "])")
+    body += ",\n".join(rows) + "]\n"
+    body += ("\n/-- The data that the special recipes read. -/\n"
+             "def tables : Tables := ⟨tags, dyes, maxDamage, curses, defaults⟩\n")
+
     out = HEADER.format(imports="public import Redstone.Component.Crafter.Recipe\n",
                         title="Crafting recipes and item tags",
                         namespace="Redstone.Component.Crafter.Data")
@@ -293,41 +491,11 @@ def gen_recipes(ids, comps):
     out += ",\n".join(
         f"  ({lean_str('#' + t)},\n{lean_list(tags.resolve(t), indent=4)})" for t in used_tags)
     out += "]\n"
-
-    def recipe_term(e):
-        name, shaped, width, height, cells = e[:5]
-        result = f"{lean_str(e[5])}, {e[6]}" if len(e) > 5 else '"", 0'
-        return (f"  ⟨{lean_str(name)}, {'true' if shaped else 'false'}, {width}, {height}, "
-                f"{lists(cells, 4)},\n    {result}⟩")
-
-    def chunks(name, doc, entries):
-        nonlocal out
-        size, parts = 60, []
-        for k in range(0, max(len(entries), 1), size):
-            part = f"{name}{k // size}"
-            parts.append(part)
-            out += f"\n/-- Part of `{name}`. -/\ndef {part} : List Recipe := [\n"
-            out += ",\n".join(recipe_term(e) for e in entries[k:k + size]) + "]\n"
-        out += (f"\n/-- {doc} -/\ndef {name} : List Recipe :=\n  List.flatten [\n    "
-                + ",\n    ".join(parts) + "]\n")
-
-    chunks("recipes", "The shaped and shapeless crafting recipes whose result is a plain stack.",
-           recipes)
-    chunks("unmodelled", "The crafting recipes whose result has components or depends on the "
-           "input:\nsuspicious stew, tipped arrows and decorated pots.", unmodelled)
-    check_unambiguous(tags, recipes)
-    out += ("\n/-- The crafting recipes with their own matching code (dyeing, fireworks, ...), "
-            "except item\nrepair, reduced to a necessary condition for a match. -/\n"
-            "def special : List SpecialRecipe := [\n")
-    out += ",\n".join(f"  ⟨{lean_str(n)}, {c}, {lists(g, 4)},\n{lean_list(a, indent=4)}⟩"
-                      for n, c, g, a in special) + "]\n"
-    damageable = [i for i in ids if "minecraft:max_damage" in comps[i]]
-    out += ("\n/-- The items that have the component `minecraft:max_damage` by default. -/\n"
-            f"def damageable : List String :=\n{lean_list(damageable, indent=2)}\n")
+    out += body
     out += "\nend Redstone.Component.Crafter.Data\n"
     write("Redstone/Component/Crafter/Data.lean", out)
-    print(f"{len(recipes)} recipes, {len(unmodelled)} unmodelled, {len(special)} special, "
-          f"{len(used_tags)} tags")
+    print(f"{len(recipes)} recipes, {len(with_components)} with components, "
+          f"{len(special)} special, {len(unmodelled)} unmodelled, {len(used_tags)} tags")
 
 
 def write(rel, text):

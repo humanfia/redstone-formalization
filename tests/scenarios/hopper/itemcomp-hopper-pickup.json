@@ -1,0 +1,124 @@
+{
+ "name": "itemcomp-hopper-pickup",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5,components:{\"minecraft:rarity\":\"epic\"}}]}"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5}]}"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":4}},{Slot:1b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":4}},{Slot:2b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":4}},{Slot:3b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":4}},{Slot:4b,id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":4}}]}"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:dirt\",count:64},{Slot:1b,id:\"minecraft:dirt\",count:64},{Slot:2b,id:\"minecraft:dirt\",count:64},{Slot:3b,id:\"minecraft:dirt\",count:64},{Slot:4b,id:\"minecraft:dirt\",count:64}]}"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:7,components:{\"minecraft:rarity\":\"epic\"}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:7,components:{\"minecraft:rarity\":\"epic\"}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:7,components:{\"minecraft:rarity\":\"epic\"}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    7.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:9,components:{\"minecraft:max_stack_size\":4}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:2,components:{\"minecraft:rarity\":\"epic\"}}}"
+  }
+ ]
+}

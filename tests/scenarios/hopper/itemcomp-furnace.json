@@ -1,0 +1,95 @@
+{
+ "name": "itemcomp-furnace",
+ "ticks": 130,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   11,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    11,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:furnace[facing=north,lit=true]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2,components:{\"minecraft:rarity\":\"epic\"}},{Slot:1b,id:\"minecraft:coal\",count:1,components:{\"minecraft:repair_cost\":3}}],cooking_time_spent:195s,cooking_total_time:200s,lit_time_remaining:20s,lit_total_time:1600s}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:furnace[facing=north,lit=true]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2},{Slot:1b,id:\"minecraft:coal\",count:1},{Slot:2b,id:\"minecraft:iron_ingot\",count:1,components:{\"minecraft:rarity\":\"epic\"}}],cooking_time_spent:195s,cooking_total_time:200s,lit_time_remaining:20s,lit_total_time:1600s}"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:smoker[facing=north,lit=true]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:beef\",count:3,components:{\"minecraft:max_stack_size\":4}},{Slot:2b,id:\"minecraft:cooked_beef\",count:2}],cooking_time_spent:98s,cooking_total_time:100s,lit_time_remaining:20s,lit_total_time:1600s}"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:furnace[facing=north,lit=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:1},{Slot:1b,id:\"minecraft:lava_bucket\",count:2,components:{\"minecraft:max_stack_size\":4}}]}"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:blast_furnace[facing=north,lit=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_copper\",count:2,components:{\"minecraft:rarity\":\"epic\"}}]}"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=west]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:charcoal\",count:1,components:{\"minecraft:rarity\":\"epic\"}}]}"
+  }
+ ]
+}

@@ -34,10 +34,13 @@ world, and the model has no other players.
 ## What is left out
 
 * Loot tables and locks (see `Redstone.ItemStack`).
-* Item stacks with data components in a furnace or a brewing stand, whose fuels and recipes
-  depend on components: such a stack is not loaded, and offering one to these blocks sets
-  `Level.overflow`. So does offering a jukebox a stack that patches `jukebox_playable`, or a
-  composter one that patches `compostable`: the model reads these from the item.
+* Fuels that are not those of the item: a stack that patches `cooking_fuel` in the fuel slot
+  of a furnace, or offered to it, sets `Level.overflow`, and so does one that patches
+  `brewing_fuel` at a brewing stand. So does offering a jukebox a stack that patches
+  `jukebox_playable`, or a composter one that patches `compostable`: the model reads these
+  from the item.
+* Potion contents that are not written the way the game saves them (`potionOf`): a brewing
+  stand with such a bottle sets `Level.overflow`.
 * Containers that are entities (minecarts, boats): looking for a container where such an entity
   may be sets `Level.overflow`.
 * The experience a furnace releases when it is removed: removing a furnace that has cooked
@@ -47,8 +50,6 @@ world, and the model has no other players.
   `Level.overflow`.
 * The menus of blocks of other components. In the game, opening any menu closes the one the
   player had open; here only the blocks of this file and the hopper do that.
-* Brewing: every brewing recipe asks for potion contents, a data component, so with the stacks
-  of the model a brewing stand never brews. It still burns its fuel and shows its bottles.
 * A cat sitting on a chest, which blocks it.
 * Waterlogged chests: a shape update of one schedules a fluid tick, which the engine does not
   have, so it sets `Level.overflow`.
@@ -105,7 +106,8 @@ def savedData : BlockEntity → BlockEntity
   | .chest d => .chest { d with openCount := 0, viewed := false }
   | .trappedChest d => .trappedChest { d with openCount := 0, viewed := false }
   | .barrel d => .barrel { d with openCount := 0, viewed := false }
-  | .brewingStand d => .brewingStand { d with lastPotionCount := none }
+  | .brewingStand d =>
+    .brewingStand { d with lastPotionCount := none, ingredient := d.loadedIngredient }
   | be => be
 
 /-- The three kinds of furnace, which differ in their recipes and in how fast they burn. -/
@@ -460,26 +462,24 @@ def slotsForFace (c : ContainerRef) (d : Direction) : M (List ℕ) := do
 def slots (c : ContainerRef) (d : Direction) : M (List ℕ) := do
   if ← c.isWorldly then c.slotsForFace d else return List.range (← c.size)
 
-/-- `canPlaceItem(slot, itemStack)`. A furnace or a brewing stand asked about a stack with data
-components sets `Level.overflow`: what they take depends on components the model does not
-read. So does a jukebox asked about a stack that patches `jukebox_playable`. -/
+/-- `canPlaceItem(slot, itemStack)`. A furnace asked about a stack that patches `cooking_fuel`
+sets `Level.overflow`: the model reads the fuels from the item. So do a brewing stand asked
+about a stack that patches `brewing_fuel` and a jukebox asked about one that patches
+`jukebox_playable`. -/
 def canPlaceItem (c : ContainerRef) (slot : ℕ) (s : ItemStack) : M Bool := do
   let .single p := c | return true
   match ← Level.getBlockEntity p with
   | some (.furnace d) | some (.blastFurnace d) | some (.smoker d) =>
-    if s.hasComponents then
-      Level.setOverflow
-      return false
-    else if slot = 2 then return false
+    if slot = 2 then return false
     else if slot ≠ 1 then return true
     else
+      if patches s "minecraft:cooking_fuel" then Level.setOverflow
       return isCookingFuel s
         || (s.is "minecraft:bucket" && !(d.items.getItem 1).is "minecraft:bucket")
   | some (.brewingStand d) =>
-    if s.hasComponents then
-      Level.setOverflow
-      return false
-    else if slot = 4 then return (Item.brewingFuels.lookup s.item).isSome
+    if slot = 4 then
+      if patches s "minecraft:brewing_fuel" then Level.setOverflow
+      return (Item.brewingFuels.lookup s.item).isSome
     else if slot = 3 then return Item.brewingReagents.contains s.item
     else return Item.brewingPotionInputs.contains s.item && (d.items.getItem slot).isEmpty
   | some (.crafter d) =>
@@ -975,8 +975,8 @@ def canBurn (items : Inventory) (result : ItemStack) : Bool :=
   else slot.count + result.count ≤ result.containerMaxStackSize
 
 /-- `AbstractFurnaceBlockEntity.consumeFuel`: uses up one item of fuel. A lava bucket leaves
-its bucket in the slot. Returns the new slots, and whether the game would have dropped the
-remainder next to the furnace instead, which is not modelled. -/
+its bucket in the slot. Returns the new slots, and whether the remainder did not fit there:
+the game then drops it at the furnace (`furnaceTick`). -/
 def consumeFuel (items : Inventory) : Inventory × Bool :=
   let fuel := items.getItem 1
   let rest := fuel.withCount (fuel.count - 1)
@@ -1000,13 +1000,13 @@ def burn (items : Inventory) (result : ItemStack) : Inventory :=
 
 /-- The data of a furnace after `AbstractFurnaceBlockEntity.serverTick`, with whether the fuel
 burns now, whether the data changed in a way comparators must hear of, and whether the tick
-did something the model does not represent. -/
+used up a fuel whose remainder is to be dropped. -/
 def furnaceStep (k : FurnaceKind) (d : BlockEntities.Furnace) :
     BlockEntities.Furnace × Bool × Bool × Bool := Id.run do
   let mut d := d
   let mut changed := false
   let mut isLit := false
-  let mut unmodelled := false
+  let mut dropRemainder := false
   if d.litTimeRemaining > 0 then
     d := { d with litTimeRemaining := d.litTimeRemaining - 1 }
     isLit := d.litTimeRemaining > 0
@@ -1033,7 +1033,7 @@ def furnaceStep (k : FurnaceKind) (d : BlockEntities.Furnace) :
             if newLitTime > 0 then
               let (items, dropped) := consumeFuel d.items
               d := { d with items := items }
-              unmodelled := dropped
+              dropRemainder := dropped
               isLit := true
               changed := true
           if isLit then
@@ -1051,15 +1051,20 @@ def furnaceStep (k : FurnaceKind) (d : BlockEntities.Furnace) :
   else if d.cookingTimer > 0 then
     -- `Mth.clamp(cookingTimer - 2, 0, cookingTotalTime)`
     d := { d with cookingTimer := min (max (d.cookingTimer - 2) 0) d.cookingTotalTime }
-  return (d, isLit, changed, unmodelled)
+  return (d, isLit, changed, dropRemainder)
 
 /-- `AbstractFurnaceBlockEntity.serverTick`. -/
 def furnaceTick (self : Block) (p : Pos) : M Unit := do
   let some (k, d) := (← Level.getBlockEntity p).bind furnace? | return
   let wasLit := d.litTimeRemaining > 0
-  let (d, isLit, changed, unmodelled) := furnaceStep k d
+  let fuel := d.items.getItem 1
+  -- `getBurnDuration` and `getSpeedMultiplier` read the component; the model reads the item.
+  if patches fuel "minecraft:cooking_fuel" then Level.setOverflow
+  let (d, isLit, changed, dropRemainder) := furnaceStep k d
   Level.setBlockEntity p (k.blockEntity d)
-  if unmodelled then Level.setOverflow
+  if dropRemainder then
+    if let some remainder := Item.craftingRemainders.lookup fuel.item then
+      ItemDrop.dropItemStack p (.of remainder) (← ItemDrop.afterEntities)
   if wasLit ≠ isLit then discard <| Level.setBlock p (withLit isLit self)
   if changed || wasLit ≠ isLit then Level.updateNeighbourForOutputSignal p self.id
 
@@ -1079,13 +1084,73 @@ def furnace (self : Block) : Behaviour :=
 
 /-! ### Brewing stand -/
 
-/-- `BrewingStandBlockEntity.serverTick`. The stand takes fuel, stops a brew that cannot go on
-and shows in its block state which bottle slots are occupied. `isBrewable` is false: no brewing
-recipe accepts a stack without potion contents. -/
+/-- `PotionContents.potion()` of the stack: the name of its potion, or `some none` if it has
+none (its contents name no potion, or it has no potion contents). Returns `none` when the
+component is not written the way the game saves it. -/
+def potionOf (s : ItemStack) : Option (Option String) :=
+  match s.patched? "minecraft:potion_contents" with
+  | none => some none
+  | some v =>
+    match Nbt.unrender v with
+    | some (.compound l) =>
+      match l.lookup "potion" with
+      | none => some none
+      | some (.string potion) => some (some potion)
+      | some _ => none
+    | _ => none
+
+/-- `quickCheck.getRecipeFor(new BrewingInput(container, ingredient), level)` and `assemble`:
+what the bottle `container` becomes with the reagent `ingredient`, if a brewing recipe asks for
+the two. Every recipe asks for a bottle item with one potion and for a reagent item, and no two
+ask for the same (the generator of `Item.brewingRecipes` checks this). Returns `none` when the
+potion of the bottle cannot be read. -/
+def brewingResult? (container ingredient : ItemStack) : Option (Option ItemStack) :=
+  if container.isEmpty then some none
+  else
+    match potionOf container with
+    | none => none
+    | some none => some none
+    | some (some potion) =>
+      some <| (Item.brewingRecipes.lookup (container.id, potion, ingredient.item)).map
+        fun (item, result) =>
+          { id := item, count := 1
+            components :=
+              [("minecraft:potion_contents",
+                Components.renderCompound [("potion", result.quote)])] }
+
+/-- `BrewingStandBlockEntity.isBrewable`: the ingredient is a reagent and some bottle has a
+recipe with it. The second component tells that a bottle could not be read. -/
+def isBrewable (items : Inventory) : Bool × Bool :=
+  let ingredient := items.getItem 3
+  if ingredient.isEmpty || !Item.brewingReagents.contains ingredient.item then (false, false)
+  else
+    let results := (List.range 3).map fun dest => brewingResult? (items.getItem dest) ingredient
+    (results.any fun r => r matches some (some _), results.any (·.isNone))
+
+/-- `BrewingStandBlockEntity.doBrew`: every bottle with a recipe becomes its result, and one
+ingredient is used up. What it leaves behind takes its slot, or is dropped at the stand if the
+slot is not empty. Returns the new slots and the stack to drop. -/
+def doBrew (items : Inventory) : Inventory × ItemStack :=
+  let ingredient := items.getItem 3
+  let items := (List.range 3).foldl (init := items) fun items dest =>
+    match brewingResult? (items.getItem dest) ingredient with
+    | some (some result) => items.setItem dest result
+    | _ => items
+  let rest := ingredient.withCount (ingredient.count - 1)
+  match Item.craftingRemainders.lookup ingredient.item with
+  | some remainder =>
+    if rest.isEmpty then (items.setItem 3 (.of remainder), .empty)
+    else (items.setItem 3 rest, .of remainder)
+  | none => (items.setItem 3 rest, .empty)
+
+/-- `BrewingStandBlockEntity.serverTick`. The stand takes fuel, brews, and shows in its block
+state which bottle slots are occupied. -/
 def brewingStandTick (self : Block) (p : Pos) : M Unit := do
   let some (.brewingStand d) ← Level.getBlockEntity p | return
   let mut d := d
   let fuel := d.items.getItem 4
+  -- `fuel.get(DataComponents.BREWING_FUEL)`: the model reads the item.
+  if patches fuel "minecraft:brewing_fuel" then Level.setOverflow
   if let some uses := Item.brewingFuels.lookup fuel.item then
     if d.fuel ≤ 0 then
       let rest := fuel.withCount (fuel.count - 1)
@@ -1094,14 +1159,31 @@ def brewingStandTick (self : Block) (p : Pos) : M Unit := do
         | some remainder =>
           if rest.isEmpty then pure (d.items.setItem 4 (.of remainder))
           else do
-            Level.setOverflow
+            ItemDrop.dropItemStack p (.of remainder) (← ItemDrop.afterEntities)
             pure (d.items.setItem 4 rest)
         | none => pure (d.items.setItem 4 rest)
       d := { d with fuel := uses, totalFuel := uses, speedMultiplier := 1, items := items }
       Level.setBlockEntity p (.brewingStand d)
       Level.updateNeighbourForOutputSignal p self.id
+  let (brewable, unreadable) := isBrewable d.items
+  if unreadable then Level.setOverflow
+  let ingredient := d.items.getItem 3
   if d.brewTime > 0 then
-    d := { d with brewTime := 0 }
+    d := { d with brewTime := d.brewTime - 1 }
+    if d.brewTime == 0 && brewable then
+      let (items, dropped) := doBrew d.items
+      if !dropped.isEmpty then ItemDrop.dropItemStack p dropped (← ItemDrop.afterEntities)
+      d := { d with items := items }
+    else if !brewable || !ingredient.is d.ingredient then d := { d with brewTime := 0 }
+    Level.setBlockEntity p (.brewingStand d)
+    Level.updateNeighbourForOutputSignal p self.id
+  else if brewable && d.fuel > 0 then
+    -- `(int)Math.ceil(400.0F / speedMultiplier)`
+    let speed := if d.speedMultiplier > 0 then d.speedMultiplier else 1
+    let brewTime : ℤ := ((400 + speed - 1) / speed : ℕ)
+    d := { d with
+      fuel := d.fuel - 1, brewTime := brewTime, totalBrewTime := brewTime
+      ingredient := ingredient.item }
     Level.setBlockEntity p (.brewingStand d)
     Level.updateNeighbourForOutputSignal p self.id
   let bits :=

@@ -16,16 +16,21 @@ disabled.
 
 ## What is not modelled
 
-* Recipes. The shaped and shapeless recipes of the game whose result has no components are
-  modelled (`Data.recipes`, 1185 recipes generated from the server's data pack). The other
-  crafting recipes are not: suspicious stew, tipped arrows and decorated pots
-  (`Data.unmodelled`) and the recipes with code of their own (dyeing, fireworks, banner
-  copying, book cloning, map cloning and extending, item repair, shield decoration, bundle and
-  shulker box dyeing). When one of these matches, or may match (`SpecialRecipe.mayMatch` and
-  `repairMayMatch` are necessary conditions), the model sets `Level.overflow`, even if a
-  modelled recipe matches as well: which of the two the game picks is not modelled.
-* What an item entity holds: see `Redstone.ItemDrop`. The containers a crafter pushes its
-  results into are those of `Redstone.Component.Container`.
+* Some recipes. The shaped and shapeless recipes of the game are modelled (`Data.recipes`
+  and, for suspicious stew, whose result has components, `Data.componentRecipes`; generated
+  from the server's data pack), and so are these recipes with code of their own
+  (`Data.special`, `Special.craft`): firework rockets, firework stars and their fade colours,
+  item repair, shulker box and bundle dyeing, map cloning, tipped arrows and decorated pots.
+  Armour dyeing, banner copying, book cloning, map extending and shield decoration are not
+  (`Data.unmodelled`): when one of them may match (`SpecialRecipe.mayMatch` is a necessary
+  condition), the model sets `Level.overflow`, even if a modelled recipe matches as well.
+* Which recipe the game picks when several match the same grid: unless they all give the same
+  stack, the model sets `Level.overflow`. No two of the plain recipes match the same grid (the
+  generator of `Data` checks this).
+* What `Special.craft` cannot tell (see `Redstone.Component.Crafter.Recipe`): the model sets
+  `Level.overflow`.
+* The containers a crafter pushes its results into are those of
+  `Redstone.Component.Container`.
 * `setPlacedBy` (a player places an already powered crafter) and menus: using the block opens
   its menu and changes nothing in the level. Players change `disabled` through the menu only.
 * Sounds, particles and advancements.
@@ -46,36 +51,41 @@ def front : FrontAndTop → Direction
   | .north_up => .north
   | .south_up => .south
 
-/-- What `CrafterBlock.getPotentialResults` finds for a crafting grid. -/
+/-- What `CrafterBlock.getPotentialResults` finds for a crafting grid, with what the recipe
+assembles from it. -/
 inductive Potential
   /-- No recipe matches. -/
   | none
-  /-- A modelled recipe matches. -/
-  | found (r : Recipe)
-  /-- A recipe that is not modelled matches, or may match. -/
+  /-- The modelled recipes that match all assemble this stack. -/
+  | found (result : ItemStack)
+  /-- A recipe that is not modelled may match, or several recipes match, or the model cannot
+  tell what a recipe gives. -/
   | unmodelled
 
-/-- A necessary condition for `RepairItemRecipe.matches`: two stacks of the same item, both
-with the component `max_damage`. -/
-def repairMayMatch (input : CraftingInput) : Bool :=
-  match input.items.filter (!·.isEmpty) with
-  | [a, b] =>
-    a.id == b.id && a.hasComponent "minecraft:max_damage" Data.damageable &&
-      b.hasComponent "minecraft:max_damage" Data.damageable
-  | _ => false
-
-/-- `CrafterBlock.getPotentialResults(level, input)`: the recipe for a crafting grid. The cache
-of the game (`RecipeCache`) does not change the answer. A modelled recipe is only returned when
-it is the only recipe that can match; no two modelled recipes match the same grid (the
-generator of `Data` checks this), so the order in which the game tries recipes is not needed. -/
+/-- `CrafterBlock.getPotentialResults(level, input)` and `assemble(input)` of the recipe it
+finds. The cache of the game (`RecipeCache`) does not change the answer. The order in which the
+game tries recipes is not modelled: when several recipes match, a result is only returned if
+they all assemble the same stack (a rocket without a star is both a shapeless recipe and a
+`FireworkRocketRecipe`). All modelled recipes leave the same items behind. -/
 def getPotentialResults (input : CraftingInput) : Potential :=
   if input.ingredientCount == 0 then .none
   else
-    let other := Data.unmodelled.any (·.matches Data.tags input) ||
-      Data.special.any (·.mayMatch Data.tags input) || repairMayMatch input
-    match Data.recipes.filter (·.matches Data.tags input) with
+    let other := Data.unmodelled.any (·.mayMatch Data.tags input)
+    let plain : List Crafted := (Data.recipes.filter (·.matches Data.tags input)).map fun r =>
+      .result (.of r.result r.count)
+    let withComponents : List Crafted :=
+      (Data.componentRecipes.filter (·.1.matches Data.tags input)).map fun (r, components) =>
+        .result { id := r.result, count := r.count, components }
+    let special : List Crafted := (Data.special.map (·.2.craft Data.tables input)).filter
+      (!· matches .noMatch)
+    match plain ++ withComponents ++ special with
     | [] => if other then .unmodelled else .none
-    | [r] => if other then .unmodelled else .found r
+    | .result stack :: rest =>
+      let same (c : Crafted) : Bool :=
+        match c with
+        | .result s => s == stack
+        | _ => false
+      if !other && rest.all same then .found stack else .unmodelled
     | _ => .unmodelled
 
 /-- `Item.getCraftingRemainder`: what an item leaves behind when it is used in a recipe. -/
@@ -133,12 +143,12 @@ def dispenseFrom (s : Blocks.Crafter) (p : Pos) : M Unit := do
   match getPotentialResults input with
   | .none => pure ()
   | .unmodelled => Level.setOverflow
-  | .found recipe =>
-    if recipe.count == 0 then return
+  | .found results =>
+    if results.isEmpty then return
     Level.setBlockEntity p (.crafter { be with craftingTicksRemaining := 6 })
     discard <| Level.setBlock p (.crafter { s with crafting := true }) 2
     let d := front s.orientation
-    dispenseItem p d (.of recipe.result recipe.count)
+    dispenseItem p d results
     for stack in input.items do
       let remainder := craftingRemainder stack.item
       if !remainder.isEmpty then dispenseItem p d remainder

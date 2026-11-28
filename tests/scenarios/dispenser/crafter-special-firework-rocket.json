@@ -1,0 +1,547 @@
+{
+ "name": "crafter-special-firework-rocket",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   2,
+   24
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    24
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:paper\",count:2},{Slot:1b,id:\"minecraft:gunpowder\",count:2}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:paper\",count:1},{Slot:1b,id:\"minecraft:gunpowder\",count:1},{Slot:2b,id:\"minecraft:gunpowder\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    7
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:gunpowder\",count:1},{Slot:1b,id:\"minecraft:gunpowder\",count:1},{Slot:2b,id:\"minecraft:paper\",count:1},{Slot:3b,id:\"minecraft:gunpowder\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    7
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:paper\",count:1},{Slot:1b,id:\"minecraft:gunpowder\",count:1},{Slot:2b,id:\"minecraft:gunpowder\",count:1},{Slot:3b,id:\"minecraft:gunpowder\",count:1},{Slot:4b,id:\"minecraft:gunpowder\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    10
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    13
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:paper\",count:1},{Slot:1b,id:\"minecraft:gunpowder\",count:1},{Slot:2b,id:\"minecraft:firework_star\",count:1,components:{\"minecraft:firework_explosion\":{shape:\"small_ball\",colors:[I;11743532]}}}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    13
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    16
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:firework_star\",count:1,components:{\"minecraft:firework_explosion\":{shape:\"star\",colors:[I;255,65280],fade_colors:[I;16711680],has_trail:1b,has_twinkle:1b}}},{Slot:1b,id:\"minecraft:gunpowder\",count:1},{Slot:2b,id:\"minecraft:paper\",count:1},{Slot:3b,id:\"minecraft:gunpowder\",count:1},{Slot:4b,id:\"minecraft:firework_star\",count:1,components:{\"minecraft:firework_explosion\":{shape:\"small_ball\",colors:[I;11743532]}}},{Slot:5b,id:\"minecraft:firework_star\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    16
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    19
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:paper\",count:1},{Slot:1b,id:\"minecraft:gunpowder\",count:1},{Slot:2b,id:\"minecraft:firework_star\",count:1,components:{\"minecraft:firework_explosion\":{shape:\"star\",colors:[I;255,65280],fade_colors:[I;16711680],has_trail:1b,has_twinkle:1b}}}]}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    22
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:paper\",count:1},{Slot:1b,id:\"minecraft:paper\",count:1},{Slot:2b,id:\"minecraft:gunpowder\",count:1}]}"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    22
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    13
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    19
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    22
+   ],
+   "face": "up"
+  }
+ ]
+}

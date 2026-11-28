@@ -6,8 +6,9 @@ public import Redstone.Block.Entity.Inventory
 # Block entity `minecraft:brewing_stand`
 
 The data that the model keeps of the block entity `BrewingStandBlockEntity`: the five slots
-(three bottles, the ingredient, the fuel), the brewing and fuel counters, and the bottle bits
-the stand last wrote into its block state, which the game does not save.
+(three bottles, the ingredient, the fuel), the brewing and fuel counters, and what the game
+does not save: the bottle bits the stand last wrote into its block state, and the item it
+started the brew with.
 -/
 
 @[expose] public section
@@ -31,6 +32,9 @@ structure BrewingStand where
   /-- `lastPotionCount`: which bottle slots were occupied when the stand last updated its block
   state; `none` before the first tick. Not saved. -/
   lastPotionCount : Option (Bool × Bool × Bool) := none
+  /-- `ingredient`: the item in the ingredient slot when the brew began. Not saved: a loaded
+  stand that is brewing takes the item that is in the slot. -/
+  ingredient : String := "minecraft:air"
   deriving DecidableEq, Repr
 
 namespace BrewingStand
@@ -38,16 +42,21 @@ namespace BrewingStand
 /-- The data of a freshly created brewing stand. -/
 instance : Inhabited BrewingStand := ⟨{}⟩
 
+/-- `ingredient` as `loadAdditional` sets it: the item of the ingredient slot if the stand is
+brewing. -/
+def loadedIngredient (d : BrewingStand) : String :=
+  if d.brewTime > 0 then (d.items.getItem 3).item else "minecraft:air"
+
 /-- Reads the data from the block entity's saved NBT (`loadAdditional`). Fields the model does
-not keep are ignored. A brewing stand whose stacks have data components is not read: brewing
-is about potion contents, which the model does not interpret. -/
+not keep are ignored. -/
 def ofNbt? (t : Nbt) : Option BrewingStand := do
   if !t.plainContainer then none
   let items := Inventory.ofNbt 5 t
-  if items.hasComponents then none
+  let brewTime := t.intD "BrewTime" 0
   return {
     items := items
-    brewTime := t.intD "BrewTime" 0
+    ingredient := loadedIngredient { items, brewTime }
+    brewTime := brewTime
     totalBrewTime := t.intD "total_brew_time" 400
     fuel := t.intD "Fuel" 0
     totalFuel := t.intD "total_fuel" 20

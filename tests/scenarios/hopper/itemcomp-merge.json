@@ -1,0 +1,160 @@
+{
+ "name": "itemcomp-merge",
+ "ticks": 90,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   21,
+   2,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    21,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3,components:{\"minecraft:rarity\":\"epic\"}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.7,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:4,components:{\"minecraft:rarity\":\"epic\"}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3,components:{\"minecraft:rarity\":\"epic\"}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.7,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:4}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    7.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3,components:{\"minecraft:rarity\":\"epic\"}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    7.7,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:4,components:{\"minecraft:rarity\":\"rare\"}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    10.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:2,components:{\"minecraft:max_stack_size\":4}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    10.7,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:2,components:{\"minecraft:max_stack_size\":4}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    13.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":4}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    13.7,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:3,components:{\"minecraft:max_stack_size\":4}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    16.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:ender_pearl\",count:40,components:{\"minecraft:max_stack_size\":64}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    16.7,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:ender_pearl\",count:20,components:{\"minecraft:max_stack_size\":64}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    19.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":3}}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    19.7,
+    1.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":3}}}"
+  }
+ ]
+}

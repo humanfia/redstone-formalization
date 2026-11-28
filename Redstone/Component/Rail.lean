@@ -23,7 +23,6 @@ and looks again every 20 game ticks until it finds none.
 
 ## What is left out
 
-* Drops (`dropResources`).
 * A boat on a detector rail (pending scenario `detector-not-a-cart-boat`): a boat is never at
   rest, its tick clears `onGround` at once, and boats are not modelled
   (`Redstone.Entity.Still`).
@@ -288,13 +287,16 @@ def updateStateOnPlace (state : Block) (p : Pos) (movedByPiston : Bool) : M Bloc
   if isStraight state then Level.neighborChangedFor state p state.id movedByPiston
   return state
 
-/-- `BaseRailBlock.neighborChanged`: the rail is removed if it lost its support; otherwise
-`updateState` is the reaction of the particular rail (`updateState(state, level, pos, block)`). -/
+/-- `BaseRailBlock.neighborChanged`: the rail drops and is removed if it lost its support;
+otherwise `updateState` is the reaction of the particular rail
+(`updateState(state, level, pos, block)`). -/
 def neighborChanged (self : Block) (updateState : Pos → BlockId → M Unit) (p : Pos)
     (block : BlockId) (movedByPiston : Bool) : M Unit := do
   let l ← get
   if (l.blockAt p).is self.id then
-    if shouldBeRemoved l p (shapeOf self) then discard <| Level.removeBlock p movedByPiston
+    if shouldBeRemoved l p (shapeOf self) then
+      Level.dropResources self p
+      discard <| Level.removeBlock p movedByPiston
     else updateState p block
 
 /-- `BaseRailBlock.affectNeighborsAfterRemoval`. -/

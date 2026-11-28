@@ -1,0 +1,79 @@
+{
+ "name": "adv-arrow-negative-coords-held",
+ "ticks": 70,
+ "box": {
+  "min": [
+   -6,
+   -4,
+   -6
+  ],
+  "max": [
+   0,
+   0,
+   0
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    -6,
+    -4,
+    -6
+   ],
+   "max": [
+    0,
+    -4,
+    0
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    -3,
+    -3,
+    -3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    -3,
+    -2,
+    -3
+   ],
+   "state": "minecraft:bamboo_button[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    -2,
+    -2,
+    -3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    -2.9,
+    -2.01,
+    -2.5
+   ]
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    -3,
+    -2,
+    -3
+   ],
+   "face": "up"
+  }
+ ]
+}

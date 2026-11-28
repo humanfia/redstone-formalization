@@ -1,0 +1,26 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 6},
+    {"state": "minecraft:stone", "weight": 4},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:oak_slab[type=*,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 3},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 5},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=false]", "weight": 6},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 2},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=false]", "weight": 1, "nbt": "{OutputSignal:9}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=*]", "weight": 2, "nbt": "{OutputSignal:15}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:1}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:2}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:5}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:10}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:13}"},
+    {"state": "minecraft:comparator[facing=*,mode=*,powered=true]", "weight": 1, "nbt": "{OutputSignal:40}"}
+  ],
+  "actions": {
+    "use": {"count": [4, 10], "targets": ["minecraft:lever", "minecraft:comparator"]},
+    "set": {"count": [3, 9], "states": ["minecraft:stone", "minecraft:air", "minecraft:air", "minecraft:glass", "minecraft:redstone_lamp[lit=false]", "minecraft:lever[face=*,facing=*,powered=*]", "minecraft:comparator[facing=*,mode=*,powered=*]", "minecraft:comparator[facing=*,mode=*,powered=*]"], "flags": 3},
+    "destroy": {"count": [3, 8], "targets": ["minecraft:stone", "minecraft:redstone_lamp", "minecraft:lever", "minecraft:comparator", "minecraft:glass", "minecraft:oak_slab"]}
+  }
+}

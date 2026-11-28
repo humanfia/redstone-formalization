@@ -1,0 +1,1021 @@
+{
+ "name": "adv-loc-bottom",
+ "ticks": 110,
+ "box": {
+  "min": [
+   -7,
+   -64,
+   -3
+  ],
+  "max": [
+   22,
+   -47,
+   26
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    5,
+    -64,
+    9
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    -64,
+    10
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    5,
+    -64,
+    11
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    5,
+    -64,
+    12
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    -64,
+    13
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    -63,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    -63,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    -63,
+    11
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    -63,
+    12
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    -63,
+    13
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    -62,
+    9
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    5,
+    -62,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    -62,
+    11
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    5,
+    -62,
+    12
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    5,
+    -62,
+    13
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    5,
+    -61,
+    9
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    5,
+    -61,
+    10
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    5,
+    -61,
+    11
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    -61,
+    12
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    5,
+    -61,
+    13
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    -60,
+    9
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    5,
+    -60,
+    10
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    -60,
+    11
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    5,
+    -60,
+    12
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    5,
+    -60,
+    13
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    6,
+    -64,
+    9
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    6,
+    -64,
+    10
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    6,
+    -64,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    -64,
+    12
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    6,
+    -64,
+    13
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    -63,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    -63,
+    10
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    6,
+    -63,
+    11
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    6,
+    -63,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    -63,
+    13
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    -62,
+    9
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    6,
+    -62,
+    10
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    6,
+    -62,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    -62,
+    12
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    6,
+    -62,
+    13
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    6,
+    -61,
+    9
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    6,
+    -61,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    -61,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    -61,
+    12
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    6,
+    -61,
+    13
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    6,
+    -60,
+    9
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    6,
+    -60,
+    10
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    6,
+    -60,
+    11
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    6,
+    -60,
+    12
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    6,
+    -60,
+    13
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -64,
+    9
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    7,
+    -64,
+    10
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    7,
+    -64,
+    11
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    7,
+    -64,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    -64,
+    13
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -63,
+    9
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    7,
+    -63,
+    10
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    7,
+    -63,
+    11
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    7,
+    -63,
+    12
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -63,
+    13
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    7,
+    -62,
+    9
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -62,
+    10
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -62,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    -62,
+    13
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    7,
+    -61,
+    9
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -61,
+    10
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    7,
+    -61,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    -61,
+    12
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -61,
+    13
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -60,
+    9
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    7,
+    -60,
+    10
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    7,
+    -60,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    -60,
+    12
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    7,
+    -60,
+    13
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    8,
+    -64,
+    9
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -64,
+    10
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    8,
+    -64,
+    11
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -64,
+    12
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    8,
+    -64,
+    13
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -63,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    -63,
+    10
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    8,
+    -63,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    -63,
+    12
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    8,
+    -63,
+    13
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    8,
+    -62,
+    9
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    8,
+    -62,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    -62,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    -62,
+    12
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -62,
+    13
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    8,
+    -61,
+    9
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    8,
+    -61,
+    10
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -61,
+    11
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    8,
+    -61,
+    12
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    8,
+    -61,
+    13
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -60,
+    9
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -60,
+    10
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -60,
+    11
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    8,
+    -60,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    -60,
+    13
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -64,
+    9
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    9,
+    -64,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -64,
+    11
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    9,
+    -64,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -64,
+    13
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -63,
+    9
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    9,
+    -63,
+    10
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    9,
+    -63,
+    11
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    9,
+    -63,
+    12
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    9,
+    -63,
+    13
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -62,
+    9
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    9,
+    -62,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -62,
+    11
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    9,
+    -62,
+    12
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    9,
+    -62,
+    13
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    9,
+    -61,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -61,
+    10
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    9,
+    -61,
+    11
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    9,
+    -61,
+    12
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    9,
+    -61,
+    13
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    9,
+    -60,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -60,
+    10
+   ],
+   "state": "minecraft:clay"
+  },
+  {
+   "pos": [
+    9,
+    -60,
+    11
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    9,
+    -60,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    -60,
+    13
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    -62.0,
+    11.5
+   ],
+   "nbt": "{fuse:3s}"
+  }
+ ]
+}

@@ -1,0 +1,187 @@
+{
+ "name": "destroy-drop-then-prime",
+ "ticks": 40,
+ "box": {
+  "min": [
+   -8,
+   -8,
+   -8
+  ],
+  "max": [
+   14,
+   12,
+   14
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 4,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "drop": true
+  },
+  {
+   "tick": 12,
+   "type": "destroy",
+   "pos": [
+    2,
+    0,
+    4
+   ],
+   "drop": true
+  },
+  {
+   "tick": 14,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "drop": true
+  },
+  {
+   "tick": 20,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "face": "up"
+  }
+ ]
+}

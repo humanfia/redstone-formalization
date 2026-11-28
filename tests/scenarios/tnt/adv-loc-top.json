@@ -1,0 +1,1021 @@
+{
+ "name": "adv-loc-top",
+ "ticks": 110,
+ "box": {
+  "min": [
+   178,
+   302,
+   188
+  ],
+  "max": [
+   207,
+   319,
+   217
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    190,
+    314,
+    200
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    190,
+    314,
+    201
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    190,
+    314,
+    202
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    190,
+    314,
+    203
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    190,
+    314,
+    204
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    190,
+    315,
+    200
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    190,
+    315,
+    201
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    190,
+    315,
+    202
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    190,
+    315,
+    203
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    190,
+    315,
+    204
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    190,
+    316,
+    200
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    190,
+    316,
+    201
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    190,
+    316,
+    202
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    190,
+    316,
+    203
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    190,
+    316,
+    204
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    190,
+    317,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    190,
+    317,
+    201
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    190,
+    317,
+    202
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    190,
+    317,
+    203
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    190,
+    317,
+    204
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    190,
+    318,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    190,
+    318,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    190,
+    318,
+    202
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    190,
+    318,
+    203
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    190,
+    318,
+    204
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    191,
+    314,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    191,
+    314,
+    201
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    191,
+    314,
+    202
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    191,
+    314,
+    203
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    191,
+    314,
+    204
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    191,
+    315,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    191,
+    315,
+    201
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    191,
+    315,
+    202
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    191,
+    315,
+    203
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    191,
+    315,
+    204
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    191,
+    316,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    191,
+    316,
+    201
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    191,
+    316,
+    202
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    191,
+    316,
+    203
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    191,
+    316,
+    204
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    191,
+    317,
+    200
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    191,
+    317,
+    201
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    191,
+    317,
+    202
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    191,
+    317,
+    203
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    191,
+    317,
+    204
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    191,
+    318,
+    200
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    191,
+    318,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    191,
+    318,
+    202
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    191,
+    318,
+    203
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    191,
+    318,
+    204
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    192,
+    314,
+    200
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    192,
+    314,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    314,
+    202
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    314,
+    203
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    192,
+    314,
+    204
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    315,
+    200
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    315,
+    201
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    192,
+    315,
+    202
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    192,
+    315,
+    203
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    192,
+    315,
+    204
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    316,
+    200
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    192,
+    316,
+    201
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    192,
+    316,
+    203
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    316,
+    204
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    192,
+    317,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    192,
+    317,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    317,
+    202
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    317,
+    203
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    192,
+    317,
+    204
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    192,
+    318,
+    200
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    192,
+    318,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    318,
+    202
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    192,
+    318,
+    203
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    192,
+    318,
+    204
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    193,
+    314,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    193,
+    314,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    193,
+    314,
+    202
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    193,
+    314,
+    203
+   ],
+   "state": "minecraft:tnt[unstable=true]"
+  },
+  {
+   "pos": [
+    193,
+    314,
+    204
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    193,
+    315,
+    200
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    193,
+    315,
+    201
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    193,
+    315,
+    202
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    193,
+    315,
+    203
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    193,
+    315,
+    204
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    193,
+    316,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    193,
+    316,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    193,
+    316,
+    202
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    193,
+    316,
+    203
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    193,
+    316,
+    204
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    193,
+    317,
+    200
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    193,
+    317,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    193,
+    317,
+    202
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    193,
+    317,
+    203
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    193,
+    317,
+    204
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    193,
+    318,
+    200
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    193,
+    318,
+    201
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    193,
+    318,
+    202
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    193,
+    318,
+    203
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    193,
+    318,
+    204
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    194,
+    314,
+    200
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    194,
+    314,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    194,
+    314,
+    202
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    194,
+    314,
+    203
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    194,
+    314,
+    204
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    194,
+    315,
+    200
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    194,
+    315,
+    201
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    194,
+    315,
+    202
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    194,
+    315,
+    203
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    194,
+    315,
+    204
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    194,
+    316,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    194,
+    316,
+    201
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    194,
+    316,
+    202
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    194,
+    316,
+    203
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    194,
+    316,
+    204
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    194,
+    317,
+    200
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    194,
+    317,
+    201
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    194,
+    317,
+    202
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    194,
+    317,
+    203
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    194,
+    317,
+    204
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    194,
+    318,
+    200
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    194,
+    318,
+    201
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    194,
+    318,
+    202
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    194,
+    318,
+    203
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    194,
+    318,
+    204
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    192.5,
+    316.0,
+    202.5
+   ],
+   "nbt": "{fuse:3s}"
+  }
+ ]
+}

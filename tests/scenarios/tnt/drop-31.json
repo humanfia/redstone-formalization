@@ -1,0 +1,150 @@
+{
+ "name": "drop-31",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    3,
+    4
+   ],
+   "state": "minecraft:glass_pane[east=false,north=false,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:farmland[moisture=7]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:iron_bars[east=true,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:grindstone[face=wall,facing=north]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:candle[candles=3,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:oak_fence_gate[facing=west,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    5
+   ],
+   "state": "minecraft:oak_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    1
+   ],
+   "state": "minecraft:bedrock"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "state": "minecraft:cobblestone_wall[east=tall,north=low,south=low,up=true,waterlogged=false,west=low]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:end_rod[facing=south]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.632,
+    2.369,
+    1.371
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.96,
+    2.11,
+    4.578
+   ],
+   "nbt": "{Motion:[-0.031d,-0.003d,-0.052d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.441,
+    2.382,
+    4.26
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  }
+ ]
+}

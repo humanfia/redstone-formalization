@@ -1,0 +1,23 @@
+{
+  "name": "verify-curve-diagonal-fence",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [7, 1, 7], "state": "minecraft:rail[shape=south_east,waterlogged=false]"},
+    {"pos": [8, 1, 8], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [7, 1, 8], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 1, 9], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 1, 10], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 1, 11], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 1, 12], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [8, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [9, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [10, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [11, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [12, 1, 7], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [7.5, 1.0625, 11.5], "nbt": "{Motion:[0.0d,0.0d,-0.38d]}"}]
+}

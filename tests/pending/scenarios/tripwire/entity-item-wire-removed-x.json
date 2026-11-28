@@ -1,0 +1,202 @@
+{
+ "name": "entity-item-wire-removed-x",
+ "ticks": 40,
+ "box": {
+  "min": [
+   2,
+   -1,
+   2
+  ],
+  "max": [
+   12,
+   3,
+   6
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=true,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    7.5,
+    1.0,
+    4.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1},NoGravity:1b,Age:0s,PickupDelay:32767s}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 7,
+   "type": "destroy",
+   "pos": [
+    7,
+    1,
+    4
+   ]
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"
+  }
+ ]
+}

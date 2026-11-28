@@ -1,0 +1,15 @@
+{
+  "name": "ceiling-and-corner",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [15, 5, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [2, 3, 2], "max": [6, 3, 6], "state": "minecraft:stone"},
+    {"min": [10, 1, 10], "max": [13, 1, 10], "state": "minecraft:stone"},
+    {"min": [13, 1, 11], "max": [13, 1, 13], "state": "minecraft:stone"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [4.5, 1.0, 4.5], "nbt": "{Motion:[0.1d,0.9d,0.05d]}"},
+    {"type": "minecraft:minecart", "pos": [11.5, 1.0, 12.3], "nbt": "{Motion:[0.4d,0.0d,-0.4d]}"}
+  ]
+}

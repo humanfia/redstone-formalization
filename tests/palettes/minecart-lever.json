@@ -1,0 +1,16 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 30},
+    {"state": "minecraft:rail[shape=north_south]", "weight": 8},
+    {"state": "minecraft:rail[shape=east_west]", "weight": 8},
+    {"state": "minecraft:stone", "weight": 3},
+    {"state": "minecraft:redstone_lamp[lit=false]", "weight": 4},
+    {"state": "minecraft:lever[face=floor,facing=*,powered=false]", "weight": 4}
+  ],
+  "actions": {
+    "use": {"count": [2, 6], "targets": ["minecraft:lever"]},
+    "set": {"count": [0, 2], "states": ["minecraft:stone", "minecraft:redstone_lamp[lit=false]"]},
+    "destroy": {"count": [0, 2], "targets": ["minecraft:stone", "minecraft:redstone_lamp", "minecraft:lever"]}
+  }
+}

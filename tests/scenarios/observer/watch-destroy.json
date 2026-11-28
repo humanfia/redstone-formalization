@@ -1,0 +1,79 @@
+{
+ "name": "watch-destroy",
+ "ticks": 14,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    1
+   ]
+  }
+ ]
+}

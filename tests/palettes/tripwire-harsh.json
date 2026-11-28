@@ -1,0 +1,21 @@
+{
+  "blocks": [
+    {"state": "minecraft:air", "weight": 3},
+    {"state": "minecraft:stone", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 4},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 1},
+    {"state": "minecraft:tripwire_hook[attached=*,facing=*,powered=*]", "weight": 12},
+    {"state": "minecraft:tripwire[attached=*,disarmed=*,east=*,north=*,powered=*,south=*,west=*]", "weight": 14}
+  ],
+  "actions": {
+    "use": {"count": [0, 3], "targets": ["minecraft:lever"]},
+    "set": {"count": [10, 20], "states": [
+      "minecraft:stone", "minecraft:air", "minecraft:air", "minecraft:redstone_lamp[lit=*]",
+      "minecraft:lever[face=*,facing=*,powered=*]",
+      "minecraft:tripwire[attached=*,disarmed=*,east=*,north=*,powered=*,south=*,west=*]",
+      "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]",
+      "minecraft:tripwire_hook[attached=*,facing=*,powered=*]",
+      "minecraft:tripwire_hook[attached=*,facing=*,powered=*]"]},
+    "destroy": {"count": [8, 16], "targets": ["minecraft:stone", "minecraft:tripwire", "minecraft:tripwire_hook", "minecraft:redstone_lamp", "minecraft:lever"]}
+  }
+}

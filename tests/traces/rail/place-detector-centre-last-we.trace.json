@@ -1,0 +1,11 @@
+{"scenario":"place-detector-centre-last-we","version":"26.3","frames":[
+{"tick":0,"gameTime":0,"blocks":{"0,0,0":"minecraft:stone","0,0,1":"minecraft:stone","0,0,2":"minecraft:stone","0,0,3":"minecraft:stone","0,0,4":"minecraft:stone","1,0,0":"minecraft:stone","1,0,1":"minecraft:stone","1,0,2":"minecraft:stone","1,0,3":"minecraft:stone","1,0,4":"minecraft:stone","2,0,0":"minecraft:stone","2,0,1":"minecraft:stone","2,0,2":"minecraft:stone","2,0,3":"minecraft:stone","2,0,4":"minecraft:stone","3,0,0":"minecraft:stone","3,0,1":"minecraft:stone","3,0,2":"minecraft:stone","3,0,3":"minecraft:stone","3,0,4":"minecraft:stone","4,0,0":"minecraft:stone","4,0,1":"minecraft:stone","4,0,2":"minecraft:stone","4,0,3":"minecraft:stone","4,0,4":"minecraft:stone"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":1,"gameTime":1,"blocks":{"1,1,2":"minecraft:rail[shape=north_south,waterlogged=false]"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":2,"gameTime":2,"blocks":{"3,1,2":"minecraft:rail[shape=north_south,waterlogged=false]"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":3,"gameTime":3,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":4,"gameTime":4,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":5,"gameTime":5,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":6,"gameTime":6,"blocks":{"1,1,2":"minecraft:rail[shape=east_west,waterlogged=false]","2,1,2":"minecraft:detector_rail[powered=false,shape=east_west,waterlogged=false]","3,1,2":"minecraft:rail[shape=east_west,waterlogged=false]"},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":7,"gameTime":7,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]},
+{"tick":8,"gameTime":8,"blocks":{},"blockEntities":{},"blockEntityTickers":[],"scheduled":[],"blockEvents":[],"entities":[]}
+]}

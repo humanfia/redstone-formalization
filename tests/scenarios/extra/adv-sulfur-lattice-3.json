@@ -1,0 +1,684 @@
+{
+ "name": "adv-sulfur-lattice-3",
+ "ticks": 800,
+ "box": {
+  "min": [
+   120,
+   17,
+   -80
+  ],
+  "max": [
+   128,
+   21,
+   -72
+  ]
+ },
+ "fill": [],
+ "blocks": [
+  {
+   "pos": [
+    121,
+    17,
+    -79
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    121,
+    18,
+    -79
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"
+  },
+  {
+   "pos": [
+    122,
+    19,
+    -79
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    120,
+    19,
+    -79
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -78
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -80
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -79
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    121,
+    17,
+    -76
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    121,
+    18,
+    -76
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"
+  },
+  {
+   "pos": [
+    122,
+    19,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    120,
+    19,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -75
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -77
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -76
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    122,
+    20,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    120,
+    20,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    20,
+    -75
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    20,
+    -77
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    20,
+    -76
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    121,
+    17,
+    -73
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    121,
+    18,
+    -73
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"
+  },
+  {
+   "pos": [
+    122,
+    19,
+    -73
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    120,
+    19,
+    -73
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -72
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -74
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    121,
+    19,
+    -73
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    124,
+    17,
+    -79
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    124,
+    18,
+    -79
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"
+  },
+  {
+   "pos": [
+    125,
+    19,
+    -79
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    123,
+    19,
+    -79
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -78
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -80
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -79
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    125,
+    20,
+    -79
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    123,
+    20,
+    -79
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    20,
+    -78
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    20,
+    -80
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    20,
+    -79
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    124,
+    17,
+    -76
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    124,
+    18,
+    -76
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"
+  },
+  {
+   "pos": [
+    125,
+    19,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    123,
+    19,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -75
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -77
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -76
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    124,
+    17,
+    -73
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    124,
+    18,
+    -73
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"
+  },
+  {
+   "pos": [
+    125,
+    19,
+    -73
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    123,
+    19,
+    -73
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -72
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -74
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    19,
+    -73
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    125,
+    20,
+    -73
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    123,
+    20,
+    -73
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    20,
+    -72
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    20,
+    -74
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    124,
+    20,
+    -73
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    127,
+    17,
+    -79
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    127,
+    18,
+    -79
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"
+  },
+  {
+   "pos": [
+    128,
+    19,
+    -79
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    126,
+    19,
+    -79
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -78
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -80
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -79
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    127,
+    17,
+    -76
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    127,
+    18,
+    -76
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"
+  },
+  {
+   "pos": [
+    128,
+    19,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    126,
+    19,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -75
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -77
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -76
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    128,
+    20,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    126,
+    20,
+    -76
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    20,
+    -75
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    20,
+    -77
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    20,
+    -76
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    127,
+    17,
+    -73
+   ],
+   "state": "minecraft:magma_block"
+  },
+  {
+   "pos": [
+    127,
+    18,
+    -73
+   ],
+   "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"
+  },
+  {
+   "pos": [
+    128,
+    19,
+    -73
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    126,
+    19,
+    -73
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -72
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -74
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    127,
+    19,
+    -73
+   ],
+   "state": "minecraft:water[level=0]"
+  }
+ ],
+ "actions": []
+}

@@ -1,0 +1,49 @@
+{
+  "name": "fuzz-minecart-lever-s4-002",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [7, 1, 7]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [7, 0, 7], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 3], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [0, 1, 5], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 1, 7], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [1, 1, 5], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [1, 1, 6], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [1, 1, 7], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 3], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [2, 1, 6], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [3, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 0], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [4, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 1, 3], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [4, 1, 6], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [4, 1, 7], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 0], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:stone"},
+    {"pos": [5, 1, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 5], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 7], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [6, 1, 2], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [6, 1, 5], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [7, 1, 2], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [7, 1, 4], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 1, 7], "state": "minecraft:rail[shape=north_south,waterlogged=false]"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [6.24, 1.0625, 5.513], "nbt": "{Motion:[-0.013d,0.0d,0.011d],Rotation:[359.5f,0.0f]}"}],
+  "actions": [
+    {"tick": 32, "type": "set", "pos": [2, 1, 6], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 33, "type": "destroy", "pos": [0, 1, 5], "drop": false},
+    {"tick": 36, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 41, "type": "use", "pos": [6, 1, 5], "face": "up"},
+    {"tick": 49, "type": "destroy", "pos": [4, 1, 2], "drop": false}
+  ]
+}

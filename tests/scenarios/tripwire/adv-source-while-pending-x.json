@@ -1,0 +1,28 @@
+{
+  "name": "adv-source-while-pending-x",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [12, 4, 4]},
+  "blocks": [
+    {"pos": [3, 2, 2], "state": "minecraft:tripwire_hook[attached=true,facing=east,powered=false]"},
+    {"pos": [9, 2, 2], "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [10, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 2, 2], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [5, 2, 2], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [6, 2, 2], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [7, 2, 2], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [8, 2, 2], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "destroy", "pos": [4, 2, 2]},
+    {"tick": 5, "type": "destroy", "pos": [5, 2, 2]},
+    {"tick": 12, "type": "destroy", "pos": [6, 2, 2]},
+    {"tick": 13, "type": "set", "pos": [4, 2, 2], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 13, "type": "set", "pos": [5, 2, 2], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 22, "type": "set", "pos": [6, 2, 2], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 23, "type": "destroy", "pos": [7, 2, 2]},
+    {"tick": 23, "type": "set", "pos": [7, 2, 2], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=true,south=false,west=false]"},
+    {"tick": 32, "type": "destroy", "pos": [8, 2, 2]},
+    {"tick": 33, "type": "set", "pos": [8, 2, 2], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"}
+  ]
+}

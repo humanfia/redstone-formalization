@@ -1,0 +1,14 @@
+{
+  "name": "head-wrong-base-up-sticky-long",
+  "ticks": 12,
+  "box": {"min": [5, 4, 5], "max": [11, 11, 11]},
+  "blocks": [
+    {"pos": [8, 7, 8], "state": "minecraft:piston[extended=true,facing=up]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston_head[facing=up,short=false,type=sticky]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [8, 7, 8], "state": "minecraft:sticky_piston[extended=true,facing=up]"},
+    {"tick": 6, "type": "set", "pos": [8, 7, 8], "state": "minecraft:sticky_piston[extended=false,facing=up]"},
+    {"tick": 9, "type": "destroy", "pos": [8, 8, 8], "drop": false}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 14},
+    {"state": "minecraft:stone", "weight": 4},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 2},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 4},
+    {"state": "minecraft:rail[shape=*,waterlogged=false]", "weight": 8},
+    {"state": "minecraft:powered_rail[powered=*,shape=*,waterlogged=false]", "weight": 8},
+    {"state": "minecraft:activator_rail[powered=*,shape=*,waterlogged=false]", "weight": 5},
+    {"state": "minecraft:detector_rail[powered=*,shape=*,waterlogged=false]", "weight": 4}
+  ],
+  "actions": {
+    "use": {"count": [2, 6], "targets": ["minecraft:lever"]},
+    "set": {"count": [2, 6], "states": ["minecraft:stone", "minecraft:air", "minecraft:rail[shape=*,waterlogged=false]", "minecraft:powered_rail[powered=*,shape=*,waterlogged=false]", "minecraft:activator_rail[powered=*,shape=*,waterlogged=false]", "minecraft:detector_rail[powered=*,shape=*,waterlogged=false]", "minecraft:lever[face=floor,facing=*,powered=*]"]},
+    "destroy": {"count": [1, 4], "targets": ["minecraft:stone", "minecraft:rail", "minecraft:powered_rail", "minecraft:activator_rail", "minecraft:detector_rail", "minecraft:lever"]}
+  }
+}

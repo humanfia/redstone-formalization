@@ -1,0 +1,61 @@
+{
+ "name": "remove-powered-no-tick",
+ "ticks": 12,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   3,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    1
+   ]
+  }
+ ]
+}

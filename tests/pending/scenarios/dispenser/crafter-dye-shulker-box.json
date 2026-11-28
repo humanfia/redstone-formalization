@@ -1,0 +1,108 @@
+{
+ "name": "crafter-dye-shulker-box",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   5,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:shulker_box\",count:1},{Slot:1b,id:\"minecraft:red_dye\",count:1}]}"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:dropper[facing=east,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:lever[face=wall,facing=east,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

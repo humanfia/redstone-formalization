@@ -1,0 +1,39 @@
+{
+  "name": "rand-door-s1-013",
+  "ticks": 24,
+  "box": {"min": [0, 0, 0], "max": [6, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:poplar_fence_gate[facing=north,in_wall=false,open=false,powered=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:iron_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:poplar_fence_gate[facing=north,in_wall=false,open=true,powered=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=true,powered=false]"},
+    {"pos": [2, 3, 2], "state": "minecraft:waxed_oxidized_copper_door[facing=west,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [2, 4, 2], "state": "minecraft:waxed_oxidized_copper_door[facing=west,half=upper,hinge=left,open=false,powered=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:poplar_fence_gate[facing=south,in_wall=false,open=true,powered=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:bamboo_door[facing=east,half=lower,hinge=right,open=true,powered=false]"},
+    {"pos": [3, 3, 1], "state": "minecraft:bamboo_door[facing=east,half=upper,hinge=right,open=true,powered=false]"},
+    {"pos": [4, 1, 2], "state": "minecraft:waxed_oxidized_copper_door[facing=north,half=lower,hinge=right,open=false,powered=false]"},
+    {"pos": [4, 2, 2], "state": "minecraft:waxed_oxidized_copper_door[facing=north,half=upper,hinge=right,open=false,powered=false]"},
+    {"pos": [5, 2, 0], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [5, 3, 1], "state": "minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:oxidized_copper_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [6, 2, 0], "state": "minecraft:oxidized_copper_trapdoor[facing=west,half=top,open=false,powered=false,waterlogged=false]"},
+    {"pos": [6, 2, 2], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [6, 3, 1], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 11, "type": "use", "pos": [6, 2, 2], "face": "up"},
+    {"tick": 12, "type": "set", "pos": [2, 4, 0], "state": "minecraft:lever[face=floor,facing=south,powered=false]", "flags": 18},
+    {"tick": 12, "type": "destroy", "pos": [5, 2, 0], "drop": false},
+    {"tick": 16, "type": "set", "pos": [3, 3, 0], "state": "minecraft:air", "flags": 3},
+    {"tick": 16, "type": "use", "pos": [5, 2, 0], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [2, 3, 2], "face": "south"},
+    {"tick": 22, "type": "destroy", "pos": [4, 0, 0], "drop": false},
+    {"tick": 23, "type": "use", "pos": [6, 2, 2], "face": "up"},
+    {"tick": 24, "type": "use", "pos": [2, 4, 2], "face": "up"}
+  ]
+}

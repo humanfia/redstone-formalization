@@ -1,0 +1,23 @@
+{
+  "name": "bulb-dust",
+  "ticks": 30,
+  "box": {"min": [-1, -1, -1], "max": [9, 2, 5]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [3, 1, 1], "state": "minecraft:waxed_copper_bulb[lit=false,powered=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:exposed_copper_bulb[lit=false,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [0, 1, 1], "face": "up"}
+  ]
+}

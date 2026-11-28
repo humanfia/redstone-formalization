@@ -1,0 +1,139 @@
+{
+ "name": "embedded",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:cauldron"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.5,
+    1.2,
+    3.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    1.1,
+    1.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.5,
+    1.3,
+    5.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    1.4,
+    5.5
+   ],
+   "nbt": "{Motion:[0.1d,0.0d,0.1d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.1,
+    1.6,
+    3.9
+   ],
+   "nbt": "{Motion:[0.2d,0.3d,-0.2d]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 30,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  }
+ ]
+}

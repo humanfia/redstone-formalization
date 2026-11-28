@@ -1,0 +1,252 @@
+{
+ "name": "adv-nbt-fuse-power",
+ "ticks": 140,
+ "box": {
+  "min": [
+   -8,
+   -8,
+   -8
+  ],
+  "max": [
+   26,
+   14,
+   22
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    17,
+    1,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    2,
+    0
+   ],
+   "max": [
+    17,
+    2,
+    12
+   ],
+   "state": "minecraft:oak_planks"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    8,
+    3,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    13,
+    3,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    18,
+    3,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    7
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    8,
+    3,
+    7
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    13,
+    3,
+    7
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    18,
+    3,
+    7
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    12
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    8,
+    3,
+    12
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    13,
+    3,
+    12
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    18,
+    3,
+    12
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    3.0,
+    1.5
+   ],
+   "nbt": "{fuse:0s}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    6.5,
+    3.37,
+    1.5
+   ],
+   "nbt": "{fuse:1s,fall_distance:0.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.5,
+    3.74,
+    1.5
+   ],
+   "nbt": "{fuse:-5s,fall_distance:3.5d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    16.5,
+    3.0,
+    1.5
+   ],
+   "nbt": "{fuse:2s,explosion_power:0.0f,fall_distance:100.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    3.37,
+    6.5
+   ],
+   "nbt": "{fuse:3s,explosion_power:0.5f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    6.5,
+    3.74,
+    6.5
+   ],
+   "nbt": "{fuse:4s,explosion_power:1.0f,fall_distance:0.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.5,
+    3.0,
+    6.5
+   ],
+   "nbt": "{fuse:5s,explosion_power:2.5f,fall_distance:3.5d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    16.5,
+    3.37,
+    6.5
+   ],
+   "nbt": "{fuse:6s,explosion_power:-3.0f,fall_distance:100.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    3.74,
+    11.5
+   ],
+   "nbt": "{fuse:7s,explosion_power:1e-06f}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    6.5,
+    3.0,
+    11.5
+   ],
+   "nbt": "{fuse:8s,explosion_power:6.5f,fall_distance:0.0d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.5,
+    3.37,
+    11.5
+   ],
+   "nbt": "{fuse:300s,fall_distance:3.5d}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    16.5,
+    3.74,
+    11.5
+   ],
+   "nbt": "{fuse:9s,explosion_power:3.9999f,fall_distance:100.0d}"
+  }
+ ]
+}

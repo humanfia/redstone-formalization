@@ -1,0 +1,26 @@
+{
+  "name": "ice-random-009",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 1, 6], "state": "minecraft:stone"},
+    {"min": [0, 2, 0], "max": [4, 2, 6], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:frosted_ice[age=1]"},
+    {"pos": [1, 1, 2], "state": "minecraft:frosted_ice[age=3]"},
+    {"pos": [1, 1, 4], "state": "minecraft:frosted_ice[age=0]"},
+    {"pos": [1, 1, 5], "state": "minecraft:frosted_ice[age=1]"},
+    {"pos": [2, 1, 1], "state": "minecraft:frosted_ice[age=2]"},
+    {"pos": [3, 1, 1], "state": "minecraft:frosted_ice[age=3]"},
+    {"pos": [3, 1, 4], "state": "minecraft:frosted_ice[age=2]"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [3, 1, 1], "state": "minecraft:frosted_ice[age=3]"},
+    {"tick": 6, "type": "set", "pos": [2, 1, 5], "state": "minecraft:stone"},
+    {"tick": 9, "type": "set", "pos": [1, 1, 1], "state": "minecraft:frosted_ice[age=3]"},
+    {"tick": 14, "type": "set", "pos": [1, 1, 1], "state": "minecraft:frosted_ice[age=2]"},
+    {"tick": 18, "type": "set", "pos": [2, 1, 5], "state": "minecraft:frosted_ice[age=0]"},
+    {"tick": 23, "type": "set", "pos": [3, 1, 1], "state": "minecraft:frosted_ice[age=3]"}
+  ]
+}

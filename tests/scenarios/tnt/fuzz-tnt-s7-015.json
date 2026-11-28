@@ -1,0 +1,43 @@
+{
+  "name": "fuzz-tnt-s7-015",
+  "ticks": 140,
+  "box": {"min": [0, 0, 0], "max": [2, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 2, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [0, 3, 0], "state": "minecraft:oak_slab[type=top,waterlogged=false]"},
+    {"pos": [0, 4, 1], "state": "minecraft:glass"},
+    {"pos": [0, 4, 2], "state": "minecraft:glass"},
+    {"pos": [0, 5, 0], "state": "minecraft:tnt[unstable=true]"},
+    {"pos": [0, 5, 1], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [0, 5, 2], "state": "minecraft:glass"},
+    {"pos": [1, 1, 0], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=wall,facing=south,powered=true]"},
+    {"pos": [1, 1, 2], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [1, 2, 0], "state": "minecraft:lever[face=ceiling,facing=east,powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=floor,facing=west,powered=true]"},
+    {"pos": [1, 3, 2], "state": "minecraft:obsidian"},
+    {"pos": [1, 4, 0], "state": "minecraft:stone"},
+    {"pos": [1, 4, 1], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [1, 5, 0], "state": "minecraft:lever[face=floor,facing=south,powered=true]"},
+    {"pos": [1, 5, 2], "state": "minecraft:lever[face=wall,facing=west,powered=true]"},
+    {"pos": [2, 1, 1], "state": "minecraft:tnt[unstable=true]"},
+    {"pos": [2, 1, 2], "state": "minecraft:obsidian"},
+    {"pos": [2, 2, 0], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:stone"},
+    {"pos": [2, 3, 0], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [2, 3, 1], "state": "minecraft:lever[face=ceiling,facing=east,powered=false]"},
+    {"pos": [2, 3, 2], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [2, 5, 1], "state": "minecraft:tnt[unstable=false]"},
+    {"pos": [2, 5, 2], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 60, "type": "use", "pos": [0, 2, 2], "face": "up"},
+    {"tick": 89, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 113, "type": "use", "pos": [2, 3, 1], "face": "up"},
+    {"tick": 130, "type": "use", "pos": [2, 3, 2], "face": "up"},
+    {"tick": 140, "type": "use", "pos": [2, 3, 1], "face": "up"}
+  ]
+}

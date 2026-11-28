@@ -1,0 +1,109 @@
+{
+ "name": "arith-north-compare-15-0-0",
+ "ticks": 32,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   3,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:15}"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 24,
+   "type": "destroy",
+   "pos": [
+    4,
+    1,
+    3
+   ]
+  }
+ ]
+}

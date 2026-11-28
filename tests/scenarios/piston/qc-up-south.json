@@ -1,0 +1,20 @@
+{
+  "name": "qc-up-south",
+  "ticks": 40,
+  "box": {"min": [5, 5, 5], "max": [11, 12, 13]},
+  "blocks": [
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=up]"},
+    {"pos": [8, 9, 8], "state": "minecraft:stone"},
+    {"pos": [8, 9, 9], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [8, 9, 10], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 9, 9], "face": "up"},
+    {"tick": 6, "type": "set", "pos": [8, 8, 9], "state": "minecraft:glass"},
+    {"tick": 12, "type": "use", "pos": [8, 9, 9], "face": "up"},
+    {"tick": 18, "type": "destroy", "pos": [8, 8, 9], "drop": false},
+    {"tick": 24, "type": "use", "pos": [8, 9, 9], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [8, 9, 9], "face": "up"},
+    {"tick": 30, "type": "set", "pos": [8, 8, 9], "state": "minecraft:glass"}
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "composter-always",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:composter[level=0]"},
+    {"pos": [3, 1, 1], "state": "minecraft:composter[level=5]"},
+    {"pos": [1, 1, 3], "state": "minecraft:composter[level=7]"},
+    {"pos": [3, 1, 3], "state": "minecraft:composter[level=6]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 2, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:cake"},
+    {"tick": 2, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 2, "type": "use", "pos": [3, 1, 3], "face": "up"},
+    {"tick": 3, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 3, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 3, "type": "use_item", "pos": [1, 1, 3], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 4, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:cake"},
+    {"tick": 4, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 4, "type": "use", "pos": [1, 1, 3], "face": "up"},
+    {"tick": 5, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 5, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 5, "type": "use_item", "pos": [1, 1, 3], "face": "up", "item": "minecraft:stick"},
+    {"tick": 6, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:cake"},
+    {"tick": 6, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:stick"},
+    {"tick": 7, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 8, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:cake"},
+    {"tick": 9, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:pumpkin_pie"},
+    {"tick": 30, "type": "use_item", "pos": [3, 1, 3], "face": "up", "item": "minecraft:stick"},
+    {"tick": 31, "type": "use_item", "pos": [3, 1, 3], "face": "up", "item": "minecraft:cake"}
+  ]
+}

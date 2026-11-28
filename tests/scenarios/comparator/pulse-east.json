@@ -1,0 +1,129 @@
+{
+ "name": "pulse-east",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   3,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 11,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "face": "up"
+  }
+ ]
+}

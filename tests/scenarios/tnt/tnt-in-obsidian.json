@@ -1,0 +1,77 @@
+{
+ "name": "tnt-in-obsidian",
+ "ticks": 100,
+ "box": {
+  "min": [
+   -8,
+   -8,
+   -8
+  ],
+  "max": [
+   14,
+   12,
+   14
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    3,
+    6
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

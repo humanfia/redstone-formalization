@@ -1,0 +1,30 @@
+{
+  "name": "adv-rewrite-kills-hooks-r3",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [13, 5, 10]},
+  "blocks": [
+    {"pos": [6, 2, 7], "state": "minecraft:tripwire_hook[attached=false,facing=north,powered=false]"},
+    {"pos": [6, 2, 5], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [6, 2, 4], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [6, 2, 3], "state": "minecraft:tripwire_hook[attached=false,facing=south,powered=false]"},
+    {"pos": [7, 2, 5], "state": "minecraft:tripwire_hook[attached=true,facing=east,powered=true]"},
+    {"pos": [8, 2, 5], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=true,south=false,west=false]"},
+    {"pos": [9, 2, 5], "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=true]"},
+    {"pos": [5, 2, 4], "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=false]"},
+    {"pos": [4, 2, 4], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [3, 2, 4], "state": "minecraft:tripwire_hook[attached=true,facing=east,powered=false]"},
+    {"pos": [9, 3, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [10, 2, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [11, 2, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [3, 3, 4], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [2, 2, 4], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [7, 2, 6], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [7, 3, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [6, 2, 8], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [6, 2, 2], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [6, 2, 6], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 20, "type": "destroy", "pos": [6, 2, 5]}
+  ]
+}

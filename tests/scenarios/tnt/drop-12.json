@@ -1,0 +1,127 @@
+{
+ "name": "drop-12",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    6
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    5
+   ],
+   "state": "minecraft:oak_fence[east=false,north=true,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:cobblestone_wall[east=low,north=tall,south=tall,up=false,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:oak_fence_gate[facing=west,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:iron_bars[east=true,north=true,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=bottom,shape=straight,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.83,
+    4.419,
+    3.739
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.969,
+    4.586,
+    0.83
+   ],
+   "nbt": "{Motion:[-0.169d,-0.447d,0.014d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.905,
+    4.169,
+    2.105
+   ],
+   "nbt": "{Motion:[-0.076d,0.087d,-0.031d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.371,
+    1.731,
+    3.193
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  }
+ ]
+}

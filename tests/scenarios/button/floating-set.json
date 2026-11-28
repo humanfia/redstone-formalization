@@ -1,0 +1,117 @@
+{
+ "name": "floating-set",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   3,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:stone_button[face=wall,facing=north,powered=false]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]",
+   "flags": 3
+  },
+  {
+   "tick": 14,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    2
+   ]
+  }
+ ]
+}

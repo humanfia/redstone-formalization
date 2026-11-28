@@ -1,0 +1,48 @@
+{
+  "name": "fuzz-extra-s2-015",
+  "ticks": 120,
+  "box": {"min": [0, 0, 0], "max": [3, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:potent_sulfur[potent_sulfur_state=continuous]"},
+    {"pos": [0, 1, 2], "state": "minecraft:glass"},
+    {"pos": [0, 2, 0], "state": "minecraft:honey_block"},
+    {"pos": [0, 2, 2], "state": "minecraft:potent_sulfur[potent_sulfur_state=dry]"},
+    {"pos": [0, 2, 3], "state": "minecraft:potent_sulfur[potent_sulfur_state=continuous]"},
+    {"pos": [1, 1, 0], "state": "minecraft:player_head[powered=true,rotation=15]"},
+    {"pos": [1, 1, 1], "state": "minecraft:honey_block"},
+    {"pos": [1, 1, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 2, 1], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:stone"},
+    {"pos": [2, 1, 1], "state": "minecraft:dragon_head[powered=false,rotation=10]"},
+    {"pos": [2, 1, 3], "state": "minecraft:honey_block"},
+    {"pos": [2, 2, 0], "state": "minecraft:glass"},
+    {"pos": [2, 2, 1], "state": "minecraft:lever[face=ceiling,facing=east,powered=true]"},
+    {"pos": [2, 2, 2], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [2, 2, 3], "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"},
+    {"pos": [3, 1, 0], "state": "minecraft:lever[face=ceiling,facing=east,powered=true]"},
+    {"pos": [3, 1, 2], "state": "minecraft:dragon_wall_head[facing=east,powered=false]"},
+    {"pos": [3, 1, 3], "state": "minecraft:dragon_head[powered=false,rotation=5]"},
+    {"pos": [3, 2, 1], "state": "minecraft:magma_block"},
+    {"pos": [3, 2, 2], "state": "minecraft:lever[face=ceiling,facing=east,powered=true]"},
+    {"pos": [3, 2, 3], "state": "minecraft:dragon_wall_head[facing=south,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [1, 2, 2], "state": "minecraft:stone"},
+    {"tick": 11, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 31, "type": "set", "pos": [0, 2, 0], "state": "minecraft:air"},
+    {"tick": 54, "type": "use", "pos": [1, 2, 1], "face": "up"},
+    {"tick": 60, "type": "use", "pos": [3, 2, 2], "face": "up"},
+    {"tick": 76, "type": "use", "pos": [3, 2, 2], "face": "up"},
+    {"tick": 82, "type": "set", "pos": [2, 2, 2], "state": "minecraft:lever[face=wall,facing=north,powered=true]"},
+    {"tick": 88, "type": "use", "pos": [2, 2, 2], "face": "up"},
+    {"tick": 89, "type": "use", "pos": [3, 2, 2], "face": "up"},
+    {"tick": 90, "type": "use", "pos": [2, 2, 2], "face": "up"},
+    {"tick": 91, "type": "use", "pos": [2, 2, 1], "face": "up"},
+    {"tick": 110, "type": "set", "pos": [0, 2, 2], "state": "minecraft:player_wall_head[facing=west,powered=false]"},
+    {"tick": 117, "type": "use", "pos": [3, 2, 2], "face": "up"}
+  ]
+}

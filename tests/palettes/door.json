@@ -1,0 +1,40 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 30},
+    {"state": "minecraft:stone", "weight": 8},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 3},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 8},
+    {"state": "minecraft:oak_door[facing=*,half=*,hinge=*,open=*,powered=*]", "weight": 5},
+    {"state": "minecraft:iron_door[facing=*,half=*,hinge=*,open=*,powered=*]", "weight": 2},
+    {"state": "minecraft:exposed_copper_door[facing=*,half=*,hinge=*,open=*,powered=*]", "weight": 2},
+    {"state": "minecraft:waxed_copper_door[facing=*,half=*,hinge=*,open=*,powered=*]", "weight": 1},
+    {"state": "minecraft:spruce_trapdoor[facing=*,half=*,open=*,powered=*]", "weight": 4},
+    {"state": "minecraft:iron_trapdoor[facing=*,half=*,open=*,powered=*]", "weight": 2},
+    {"state": "minecraft:weathered_copper_trapdoor[facing=*,half=*,open=*,powered=*]", "weight": 2},
+    {"state": "minecraft:birch_fence_gate[facing=*,in_wall=*,open=*,powered=*]", "weight": 5}
+  ],
+  "actions": {
+    "use": {
+      "count": [4, 10],
+      "targets": ["minecraft:lever", "minecraft:lever", "minecraft:oak_door", "minecraft:iron_door",
+                  "minecraft:exposed_copper_door", "minecraft:waxed_copper_door", "minecraft:spruce_trapdoor",
+                  "minecraft:iron_trapdoor", "minecraft:weathered_copper_trapdoor", "minecraft:birch_fence_gate"],
+      "faces": ["up", "down", "north", "south", "west", "east"]
+    },
+    "set": {
+      "count": [1, 5],
+      "states": ["minecraft:stone", "minecraft:air", "minecraft:redstone_lamp[lit=false]",
+                 "minecraft:lever[face=*,facing=*,powered=*]",
+                 "minecraft:oak_door[facing=*,half=*,hinge=*,open=*,powered=*]",
+                 "minecraft:spruce_trapdoor[facing=*,half=*,open=*,powered=*]",
+                 "minecraft:birch_fence_gate[facing=*,in_wall=*,open=*,powered=*]"]
+    },
+    "destroy": {
+      "count": [1, 4],
+      "targets": ["minecraft:stone", "minecraft:lever", "minecraft:oak_door", "minecraft:iron_door",
+                  "minecraft:spruce_trapdoor", "minecraft:birch_fence_gate"]
+    }
+  }
+}

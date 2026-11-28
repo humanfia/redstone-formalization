@@ -1,0 +1,127 @@
+{
+ "name": "drop-00",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:glass_pane[east=false,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    4
+   ],
+   "state": "minecraft:oak_stairs[facing=west,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=top,shape=inner_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    5
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=top,shape=straight,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "state": "minecraft:oak_trapdoor[facing=south,half=bottom,open=false,powered=false,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.458,
+    5.491,
+    3.539
+   ],
+   "nbt": "{Motion:[-0.235d,0.097d,0.289d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.221,
+    1.738,
+    3.754
+   ],
+   "nbt": "{Motion:[0.124d,-0.079d,-0.07d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.774,
+    3.583,
+    4.863
+   ],
+   "nbt": "{Motion:[-0.048d,-0.646d,-0.738d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.749,
+    2.703,
+    0.761
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  }
+ ]
+}

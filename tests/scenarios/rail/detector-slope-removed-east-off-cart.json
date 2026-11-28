@@ -1,0 +1,18 @@
+{
+  "name": "detector-slope-removed-east-off-cart",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [2.5, 1.0, 1.75], "nbt": "{OnGround:1b}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 1, 2], "state": "minecraft:detector_rail[powered=false,shape=ascending_east,waterlogged=false]"},
+    {"tick": 4, "type": "set", "pos": [2, 1, 2], "state": "minecraft:detector_rail[powered=false,shape=ascending_east,waterlogged=false]", "flags": 2}
+  ]
+}

@@ -1,0 +1,182 @@
+{
+ "name": "drop-24",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:glass_pane[east=false,north=true,south=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:end_rod[facing=west]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "state": "minecraft:farmland[moisture=3]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    4
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=low,south=tall,up=false,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    3
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    6
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=low,south=none,up=false,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:cake[bites=0]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:oak_door[facing=west,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:white_wool"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.483,
+    1.963,
+    2.889
+   ],
+   "nbt": "{Motion:[0.155d,0.039d,0.151d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.733,
+    4.943,
+    1.618
+   ],
+   "nbt": "{Motion:[0.553d,-0.147d,0.118d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.064,
+    6.224,
+    1.581
+   ],
+   "nbt": "{Motion:[-0.2d,0.164d,-0.21d]}"
+  }
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:lever[face=floor,facing=*,powered=*]",
+   "weight": 3
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:rail[shape=*,waterlogged=false]",
+   "weight": 8
+  },
+  {
+   "state": "minecraft:powered_rail[powered=*,shape=*,waterlogged=false]",
+   "weight": 8
+  },
+  {
+   "state": "minecraft:activator_rail[powered=*,shape=*,waterlogged=false]",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:detector_rail[powered=*,shape=*,waterlogged=false]",
+   "weight": 3
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    4,
+    10
+   ],
+   "targets": [
+    "minecraft:lever"
+   ]
+  },
+  "set": {
+   "count": [
+    10,
+    20
+   ],
+   "states": [
+    "minecraft:air",
+    "minecraft:stone",
+    "minecraft:rail[shape=*,waterlogged=false]",
+    "minecraft:powered_rail[powered=*,shape=*,waterlogged=false]",
+    "minecraft:activator_rail[powered=*,shape=*,waterlogged=false]",
+    "minecraft:detector_rail[powered=*,shape=*,waterlogged=false]",
+    "minecraft:lever[face=floor,facing=*,powered=*]"
+   ],
+   "flags": 16
+  },
+  "destroy": {
+   "count": [
+    4,
+    10
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:rail",
+    "minecraft:powered_rail",
+    "minecraft:activator_rail",
+    "minecraft:detector_rail",
+    "minecraft:lever"
+   ]
+  }
+ }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "push-lever-support",
+  "ticks": 30,
+  "box": {"min": [3, 3, 3], "max": [13, 14, 13]},
+  "blocks": [
+    {"pos": [6, 9, 8], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 9, 8], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [8, 6, 8], "state": "minecraft:stone"},
+    {"pos": [8, 7, 8], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=up]"},
+    {"pos": [8, 9, 6], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [8, 9, 7], "state": "minecraft:lever[face=wall,facing=north,powered=true]"},
+    {"pos": [8, 9, 8], "state": "minecraft:stone"},
+    {"pos": [8, 9, 9], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [8, 9, 10], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [8, 10, 8], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [8, 11, 8], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [9, 9, 8], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [10, 9, 8], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use", "pos": [8, 7, 8], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [8, 7, 8], "face": "up"}
+  ]
+}

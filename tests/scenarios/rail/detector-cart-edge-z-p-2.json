@@ -1,0 +1,15 @@
+{
+  "name": "detector-cart-edge-z-p-2",
+  "ticks": 6,
+  "box": {"min": [0, 0, 0], "max": [6, 3, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 6], "state": "minecraft:stone"}
+  ],
+  "blocks": [],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [3.5, 1.0, 4.2899999], "nbt": "{OnGround:1b}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [3, 1, 3], "state": "minecraft:detector_rail[powered=false,shape=north_south,waterlogged=false]"}
+  ]
+}

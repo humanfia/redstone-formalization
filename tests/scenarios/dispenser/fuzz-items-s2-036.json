@@ -1,0 +1,31 @@
+{
+  "name": "fuzz-items-s2-036",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]"},
+    {"pos": [0, 1, 2], "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]", "nbt": "{Items:[{Slot:2b,id:\"minecraft:stick\",count:39},{Slot:6b,id:\"minecraft:stick\",count:55},{Slot:7b,id:\"minecraft:stone\",count:8},{Slot:8b,id:\"minecraft:bowl\",count:1}],disabled_slots:[I;0]}"},
+    {"pos": [0, 2, 0], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:dropper[facing=down,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:snowball\",count:5},{Slot:1b,id:\"minecraft:iron_sword\",count:1},{Slot:2b,id:\"minecraft:honey_bottle\",count:8},{Slot:3b,id:\"minecraft:oak_planks\",count:53},{Slot:7b,id:\"minecraft:oak_log\",count:34}]}"},
+    {"pos": [0, 2, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:dropper[facing=south,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stick\",count:25},{Slot:1b,id:\"minecraft:oak_planks\",count:12},{Slot:4b,id:\"minecraft:iron_block\",count:2}]}"},
+    {"pos": [1, 1, 1], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:cobblestone\",count:43},{Slot:6b,id:\"minecraft:brick\",count:25}]}"},
+    {"pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"pos": [1, 2, 0], "state": "minecraft:stone"},
+    {"pos": [2, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:crafter[crafting=false,orientation=west_up,triggered=false]", "nbt": "{disabled_slots:[I;2]}"},
+    {"pos": [2, 1, 2], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 11, "type": "use", "pos": [0, 2, 2], "face": "up"},
+    {"tick": 24, "type": "use", "pos": [0, 2, 0], "face": "up"},
+    {"tick": 34, "type": "use", "pos": [0, 2, 0], "face": "up"},
+    {"tick": 39, "type": "use", "pos": [0, 2, 0], "face": "up"},
+    {"tick": 47, "type": "use", "pos": [0, 2, 2], "face": "up"},
+    {"tick": 51, "type": "use", "pos": [0, 2, 2], "face": "up"}
+  ]
+}

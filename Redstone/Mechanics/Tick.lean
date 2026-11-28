@@ -83,6 +83,7 @@ def tickBlockEntities : M Unit := do
   tickers.forM fun p => do
     let l ← get
     if l.blockEntityTickers.contains p && (l.blockEntities p).isSome then
+      modify fun l => { l with tickedBlockEntities := p :: l.tickedBlockEntities }
       (← behaviour (← getBlock p)).blockEntityTick p
   modify fun l => { l with tickingBlockEntities := false }
 
@@ -90,10 +91,12 @@ def tickBlockEntities : M Unit := do
 def tick : M Unit := do
   modify fun l => { l with
     gameTime := l.gameTime + 1
+    handlingTick := true
     dayTime := if l.advanceTime then l.dayTime + 1 else l.dayTime
     lightWorld := l.world }
   runScheduledTicks
   runBlockEvents
+  modify fun l => { l with handlingTick := false, tickedBlockEntities := [] }
   tickEntities
   tickBlockEntities
 

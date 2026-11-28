@@ -119,6 +119,16 @@ structure Level where
   pendingBlockEntityTickers : List Pos
   /-- Block entities are being ticked right now. -/
   tickingBlockEntities : Bool
+  /-- `ServerLevel.isHandlingTick()`: the level is in the first part of a game tick, in which
+  scheduled ticks and block events run. It is false while entities and block entities are
+  ticked, and between game ticks. -/
+  handlingTick : Bool := false
+  /-- The positions of the block entities ticked in the current game tick, or in the last one
+  when no game tick is running. It is emptied when `handlingTick` ends, just before entities
+  and block entities are ticked. When `handlingTick` is false, a block entity that records the
+  time of its last tick (`PistonMovingBlockEntity.lastTicked`) was last ticked at the current
+  game time exactly when its position is in this list. -/
+  tickedBlockEntities : List Pos := []
   /-- The scheduled ticks that are waiting. No two have the same position and block. -/
   ticks : List ScheduledTick
   /-- The scheduled ticks collected for the current game tick that have not run yet. -/
@@ -145,6 +155,10 @@ structure Level where
   nesting depth of block reactions or the length of a loop. A level with this flag is not a
   faithful image of the game any more. -/
   overflow : Bool
+  /-- `RedstoneTorchBlock.RECENT_TOGGLES` for this level: the position and game time of the
+  recent times a redstone torch was switched off, oldest first. It decides when a torch burns
+  out. The game keeps it outside the level and does not save it. -/
+  recentTorchToggles : List (Pos × ℕ) := []
   /-- The overworld clock (`WorldClocks.OVERWORLD`, `totalTicks`): the time of day is this value
   modulo 24000. -/
   dayTime : ℕ := 6000

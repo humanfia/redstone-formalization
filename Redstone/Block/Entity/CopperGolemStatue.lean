@@ -7,8 +7,8 @@ public import Redstone.Block.Generated.State
 # Block entity `minecraft:copper_golem_statue`
 
 The data that the model keeps of the block entity `CopperGolemStatueBlockEntity`.
-Nothing is modelled yet: the structure is empty and is to be filled in by the component that
-owns this block entity.
+The block entity only holds the custom name the golem had, which nothing in the model depends
+on, so the structure is empty. The pose that a comparator reads is a property of the block.
 -/
 
 @[expose] public section

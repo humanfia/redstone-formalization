@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Mechanics.Tick
+public import Redstone.Entity.Minecart.Container
 
 /-!
 # Rails
@@ -29,9 +30,9 @@ and looks again every 20 game ticks until it finds none.
   (`Redstone.Entity.Still`).
 * The fluid tick a waterlogged rail schedules on every shape update (`updateShape`): the rail
   does not schedule it yet (`Level.scheduleFluidTick`), and fluids do not flow.
-* `getAnalogOutputSignal` of a detector rail with a command block minecart or a minecart with a
-  container on it: the model does not keep the contents of minecarts and returns zero, which is
-  right for a plain minecart and for an empty container.
+* `getAnalogOutputSignal` of a detector rail with a minecart on it whose container still has a
+  loot table, or with two minecarts that a comparator could read: see
+  `Redstone.Entity.Minecart.Container`.
 * `getStateForPlacement`, `rotate` and `mirror`, which no update calls.
 -/
 
@@ -430,9 +431,8 @@ def detector (s : Blocks.DetectorRail) : Behaviour :=
     signal := fun _ _ _ => if s.powered then 15 else 0
     ownSignal := fun _ _ => if s.powered then 15 else 0
     directSignal := fun _ _ d => if s.powered && d = .up then 15 else 0
-    -- Zero unless a command block minecart or a container minecart is on the rail; see the
-    -- module documentation.
-    analogSignal := fun _ _ _ => 0
+    analogSignal := fun l p _ =>
+      if s.powered then Entity.MinecartContainer.detectorSignal l p else 0
     entityInside := fun p _ => do
       if !s.powered then checkPressed p s
     tick := fun p => do

@@ -1,0 +1,97 @@
+{
+  "name": "container-hopper-cart-activator",
+  "ticks": 50,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        1,
+        3
+      ],
+      "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        3,
+        2,
+        3
+      ],
+      "state": "minecraft:chest[facing=north,type=single,waterlogged=false]",
+      "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:20}]}"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:hopper_minecart",
+      "pos": [
+        3.5,
+        1.0625,
+        3.5
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "tick": 14,
+      "type": "set",
+      "pos": [
+        3,
+        1,
+        3
+      ],
+      "state": "minecraft:activator_rail[powered=false,shape=east_west,waterlogged=false]",
+      "flags": 594
+    },
+    {
+      "tick": 31,
+      "type": "set",
+      "pos": [
+        3,
+        1,
+        3
+      ],
+      "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]",
+      "flags": 594
+    }
+  ]
+}

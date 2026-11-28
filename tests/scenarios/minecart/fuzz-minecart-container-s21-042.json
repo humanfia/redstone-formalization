@@ -1,0 +1,43 @@
+{
+  "name": "fuzz-minecart-container-s21-042",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:composter[level=8]"},
+    {"pos": [0, 1, 1], "state": "minecraft:composter[level=0]"},
+    {"pos": [0, 1, 3], "state": "minecraft:composter[level=4]"},
+    {"pos": [0, 2, 1], "state": "minecraft:detector_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:composter[level=8]"},
+    {"pos": [0, 2, 4], "state": "minecraft:stone"},
+    {"pos": [1, 1, 0], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5},{Slot:2b,id:\"minecraft:ender_pearl\",count:3},{Slot:4b,id:\"minecraft:iron_sword\",count:1}]}"},
+    {"pos": [1, 1, 3], "state": "minecraft:hopper[enabled=true,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5},{Slot:2b,id:\"minecraft:ender_pearl\",count:3},{Slot:4b,id:\"minecraft:iron_sword\",count:1}]}"},
+    {"pos": [1, 1, 4], "state": "minecraft:hopper[enabled=false,facing=south]"},
+    {"pos": [1, 2, 0], "state": "minecraft:comparator[facing=east,mode=subtract,powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:rail[shape=ascending_east,waterlogged=false]"},
+    {"pos": [1, 2, 4], "state": "minecraft:rail[shape=ascending_south,waterlogged=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:stone\",count:4}]}"},
+    {"pos": [2, 1, 2], "state": "minecraft:rail[shape=ascending_east,waterlogged=false]"},
+    {"pos": [2, 1, 4], "state": "minecraft:rail[shape=north_east,waterlogged=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:rail[shape=ascending_east,waterlogged=false]"},
+    {"pos": [2, 2, 4], "state": "minecraft:hopper[enabled=false,facing=west]"},
+    {"pos": [3, 1, 1], "state": "minecraft:rail[shape=north_east,waterlogged=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:hopper[enabled=true,facing=north]"},
+    {"pos": [3, 2, 3], "state": "minecraft:hopper[enabled=false,facing=north]"},
+    {"pos": [3, 2, 4], "state": "minecraft:comparator[facing=west,mode=subtract,powered=false]"},
+    {"pos": [4, 2, 0], "state": "minecraft:hopper[enabled=true,facing=south]"},
+    {"pos": [4, 2, 1], "state": "minecraft:barrel[facing=north,open=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bucket\",count:3},{Slot:9b,id:\"minecraft:stone\",count:64}]}"},
+    {"pos": [4, 2, 3], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:bucket\",count:1},{Slot:2b,id:\"minecraft:iron_ingot\",count:5}]}"},
+    {"pos": [4, 2, 4], "state": "minecraft:rail[shape=south_east,waterlogged=false]"}
+  ],
+  "entities": [{"type": "minecraft:hopper_minecart", "pos": [1.5, 2.0625, 4.5], "nbt": "{Motion:[0.0d,0.0d,0.0d],Items:[{Slot:4b,id:\"minecraft:shulker_box\",count:1}]}"}, {"type": "minecraft:item", "pos": [1.845, 2.062, 4.728], "nbt": "{Item:{id:\"minecraft:stone\",count:4}}"}],
+  "actions": [
+    {"tick": 8, "type": "set", "pos": [4, 1, 0], "state": "minecraft:hopper[enabled=true,facing=down]", "flags": 259},
+    {"tick": 11, "type": "set", "pos": [3, 2, 1], "state": "minecraft:rail[shape=south_west,waterlogged=false]", "flags": 259},
+    {"tick": 13, "type": "set", "pos": [0, 1, 4], "state": "minecraft:activator_rail[powered=true,shape=north_south,waterlogged=false]", "flags": 259},
+    {"tick": 33, "type": "set", "pos": [3, 2, 4], "state": "minecraft:air", "flags": 259},
+    {"tick": 43, "type": "set", "pos": [0, 1, 1], "state": "minecraft:rail[shape=south_west,waterlogged=false]", "flags": 259}
+  ]
+}

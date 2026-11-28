@@ -1,0 +1,65 @@
+{
+  "name": "container-command-cart-searge-lower",
+  "ticks": 20,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        1,
+        3
+      ],
+      "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:command_block_minecart",
+      "pos": [
+        3.5,
+        1.0625,
+        3.5
+      ],
+      "nbt": "{Command:\"searge\"}"
+    }
+  ]
+}

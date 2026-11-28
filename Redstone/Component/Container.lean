@@ -3,6 +3,7 @@ module
 public import Redstone.Basic.Float32
 public import Redstone.Component.AnalogSource
 public import Redstone.Component.CookingTable
+public import Redstone.Entity.Minecart.Slots
 
 /-!
 # Containers
@@ -38,8 +39,9 @@ world, and the model has no other players.
   depend on components: such a stack is not loaded, and offering one to these blocks sets
   `Level.overflow`. So does offering a jukebox a stack that patches `jukebox_playable`, or a
   composter one that patches `compostable`: the model reads these from the item.
-* Containers that are entities (minecarts, boats): looking for a container where such an entity
-  may be sets `Level.overflow`.
+* Boats with a chest, minecarts whose container has a loot table, and a choice between several
+  container entities in one place: see `Redstone.Entity.Minecart.Slots`. A minecart with a chest
+  or a hopper is a container here (`ContainerRef.entity`).
 * The experience a furnace releases when it is removed: removing a furnace that has cooked
   sets `Level.overflow`.
 * The lid of a shulker box: using a shulker box sets `Level.overflow`.
@@ -243,8 +245,9 @@ def connectedDirection (c : ChestState) : Direction :=
   if c.kind = .left then clockWise c.facing else (clockWise c.facing).opposite
 
 /-- A `Container` of the world: the block entity at a position, the `CompoundContainer` of
-the two halves of a double chest, or the container that a composter in the given state makes
-of itself when it is asked for one (`ComposterBlock.getContainer`).
+the two halves of a double chest, the container that a composter in the given state makes
+of itself when it is asked for one (`ComposterBlock.getContainer`), or the minecart with a chest
+or a hopper that is the entity with the given index (`AbstractMinecartContainer`).
 
 The container of a composter lives only as long as the hopper or dropper that asked for it
 works with it. It remembers the state the composter had then, and whether it has been used
@@ -253,6 +256,7 @@ inductive ContainerRef
   | single (p : Pos)
   | double (first second : Pos)
   | composter (p : Pos) (state : Blocks.Composter)
+  | entity (index : ℕ)
   deriving DecidableEq, Repr
 
 /-- The positions of the block entities that make up the container. -/
@@ -260,6 +264,7 @@ def ContainerRef.positions : ContainerRef → List Pos
   | .single p => [p]
   | .double p q => [p, q]
   | .composter _ _ => []
+  | .entity _ => []
 
 /-- `entityType.getBlockEntity(level, pos)` is not null, for the block entity type of a chest
 block: there is a chest block entity of the right type at `p`. -/
@@ -380,13 +385,16 @@ meal yet (level 7) is an `EmptyContainer`. -/
 def size (c : ContainerRef) : M ℕ :=
   match c with
   | .composter _ s => return if s.level.val = 7 then 0 else 1
+  | .entity i => Entity.MinecartContainer.containerSize i
   | _ => return (c.items (← get)).length
 
 /-- The block entity that holds `slot`, and the slot's number in it
-(`CompoundContainer.getItem` and the like). -/
+(`CompoundContainer.getItem` and the like). The slots of a minecart are in no block entity:
+the operations below treat it before they ask. -/
 def locate (c : ContainerRef) (slot : ℕ) : M (Pos × ℕ) :=
   match c with
   | .single p | .composter p _ => return (p, slot)
+  | .entity _ => return (⟨0, 0, 0⟩, slot)
   | .double p q => do
     let n := (← getItems p).length
     return if slot ≥ n then (q, slot - n) else (p, slot)
@@ -395,6 +403,7 @@ def locate (c : ContainerRef) (slot : ℕ) : M (Pos × ℕ) :=
 def getItem (c : ContainerRef) (slot : ℕ) : M ItemStack := do
   if let .composter _ s := c then
     return if s.level.val = 8 && slot = 0 then .of "minecraft:bone_meal" else .empty
+  if let .entity e := c then return ← Entity.MinecartContainer.getItem e slot
   let (p, i) ← c.locate slot
   return (← getItems p).getItem i
 
@@ -402,13 +411,14 @@ def getItem (c : ContainerRef) (slot : ℕ) : M ItemStack := do
 def isEmpty (c : ContainerRef) : M Bool :=
   match c with
   | .composter _ s => return s.level.val ≠ 8
+  | .entity i => Entity.MinecartContainer.isEmpty i
   | _ => return (c.items (← get)).isEmpty
 
 /-- `Container.getMaxStackSize()`: how many items a slot holds at most. -/
 def maxStackSize (c : ContainerRef) : M ℕ := do
   match c with
   | .composter _ _ => return 1
-  | .double _ _ => return 99
+  | .double _ _ | .entity _ => return 99
   | .single p =>
     return match ← Level.getBlockEntity p with
       | some (.jukebox _) | some (.chiseledBookshelf _) => 1
@@ -416,7 +426,8 @@ def maxStackSize (c : ContainerRef) : M ℕ := do
 
 /-- `setChanged()`; for a double chest, of both halves. The `InputContainer` of a composter has
 turned what it was given into a layer by now and does nothing; its `OutputContainer` empties
-the composter, again if need be. -/
+the composter, again if need be. A minecart does nothing
+(`AbstractMinecartContainer.setChanged`). -/
 def setChanged (c : ContainerRef) : M Unit :=
   match c with
   | .composter p s => do
@@ -425,13 +436,14 @@ def setChanged (c : ContainerRef) : M Unit :=
   | .double p q => do
     blockEntityChanged p
     blockEntityChanged q
+  | .entity _ => pure ()
 
 /-- The container is a `WorldlyContainer`: a shulker box, a furnace, a brewing stand or a
 composter. -/
 def isWorldly (c : ContainerRef) : M Bool := do
   match c with
   | .composter _ _ => return true
-  | .double _ _ => return false
+  | .double _ _ | .entity _ => return false
   | .single p =>
     return match ← Level.getBlockEntity p with
       | some (.shulkerBox _) | some (.furnace _) | some (.blastFurnace _) | some (.smoker _)
@@ -446,7 +458,7 @@ def slotsForFace (c : ContainerRef) (d : Direction) : M (List ℕ) := do
     return if s.level.val = 8 then (if d = .down then [0] else [])
       else if s.level.val < 7 then (if d = .up then [0] else [])
       else []
-  | .double _ _ => return []
+  | .double _ _ | .entity _ => return []
   | .single p =>
     return match ← Level.getBlockEntity p with
       | some (.shulkerBox _) => List.range 27
@@ -510,7 +522,7 @@ def canPlaceItemThroughFace (c : ContainerRef) (slot : ℕ) (s : ItemStack)
   | .composter _ cs =>
     if patches s "minecraft:compostable" then Level.setOverflow
     return cs.level.val < 7 && d = some .up && (AnalogSource.compostChance s.item).isSome
-  | .double _ _ => return true
+  | .double _ _ | .entity _ => return true
   | .single p =>
     match ← Level.getBlockEntity p with
     | some (.shulkerBox _) => return !isShulkerBoxItem s.item
@@ -539,7 +551,7 @@ def canTakeItemThroughFace (c : ContainerRef) (slot : ℕ) (s : ItemStack) (d : 
     M Bool := do
   match c with
   | .composter _ cs => return cs.level.val = 8 && d = .down && s.is "minecraft:bone_meal"
-  | .double _ _ => return true
+  | .double _ _ | .entity _ => return true
   | .single p =>
     return match ← Level.getBlockEntity p with
       | some (.furnace _) | some (.blastFurnace _) | some (.smoker _) =>
@@ -571,6 +583,7 @@ def removeItem (c : ContainerRef) (slot : ℕ) : M ItemStack := do
     let s ← c.getItem slot
     if !s.isEmpty then c.setChanged
     return s
+  if let .entity e := c then return ← Entity.MinecartContainer.removeItem e slot
   let (p, i) ← c.locate slot
   let inv ← getItems p
   let s := inv.getItem i
@@ -605,6 +618,7 @@ def setItem (c : ContainerRef) (slot : ℕ) (s : ItemStack) : M Unit := do
     if let some chance := AnalogSource.compostChance s.item then
       if !s.isEmpty then AnalogSource.composterAddLayer cs p chance
     return
+  if let .entity e := c then return ← Entity.MinecartContainer.setItem e slot s
   let (p, i) ← c.locate slot
   let inv ← getItems p
   let old := inv.getItem i
@@ -650,6 +664,7 @@ def restoreItem (c : ContainerRef) (slot : ℕ) (s : ItemStack) : M Unit := do
   if let .composter _ _ := c then
     if s.count = 1 then c.setChanged
     return
+  if let .entity e := c then return ← Entity.MinecartContainer.putItem e slot s
   let (p, i) ← c.locate slot
   match ← Level.getBlockEntity p with
   | some (.jukebox _) | some (.chiseledBookshelf _) => if s.count = 1 then c.setItem slot s
@@ -678,35 +693,17 @@ def getBlockContainer (p : Pos) : M (Option ContainerRef) := do
       return combine (← get) state p true
     else return some (.single p)
 
-/-- The entity is a `Container` (`EntitySelector.CONTAINER_ENTITY_SELECTOR`): a minecart with a
-chest or a hopper, or a boat with a chest. -/
-def isContainerEntity (e : Entity) : Bool :=
-  match e.data with
-  | .minecart .chest _ | .minecart .hopper _ => true
-  | .other type _ => type.endsWith "chest_boat" || type.endsWith "chest_raft"
-  | _ => false
-
-/-- The bounding box of an entity, with the given half width and height, intersects the column
-of `blocks` blocks that starts with the block at `p`. -/
-def intersectsColumn (e : Entity) (halfWidth height : Float) (p : Pos) (blocks : Float) : Bool :=
-  let within (a : Float) (b : ℤ) : Bool :=
-    a - halfWidth < Float.ofInt b + 1 && a + halfWidth > Float.ofInt b
-  within e.base.pos.x p.x && within e.base.pos.z p.z
-    && e.base.pos.y < Float.ofInt p.y + blocks && e.base.pos.y + height > Float.ofInt p.y
-
-/-- `HopperBlockEntity.getEntityContainer`: the container entities whose bounding box touches
-the block at `p`. They are not modelled: if there may be one, `Level.overflow` is set. The box
-assumed for the entity is at least as large as that of a minecart or a boat. -/
-def getEntityContainer (p : Pos) : M Unit := do
-  if (← get).entities.any fun e => isContainerEntity e && intersectsColumn e 0.7 0.7 p 1 then
-    Level.setOverflow
+/-- `HopperBlockEntity.getEntityContainer(level, x, y, z)` for the centre of the block at `p`:
+a minecart with a chest or a hopper whose bounding box meets the block. -/
+def getEntityContainer (p : Pos) : M (Option ContainerRef) :=
+  return (← Entity.MinecartContainer.getEntityContainer (AABB.ofBlock p)).map .entity
 
 /-- `HopperBlockEntity.getContainerAt(level, pos)`: the container at `p`, a block or else an
 entity. -/
 def getContainerAt (p : Pos) : M (Option ContainerRef) := do
-  let c ← getBlockContainer p
-  if c.isNone then getEntityContainer p
-  return c
+  match ← getBlockContainer p with
+  | some c => return some c
+  | none => getEntityContainer p
 
 /-! ### Moving items into a container -/
 
@@ -746,8 +743,11 @@ def tryMoveInItem (fromHopper : Option Pos) (c : ContainerRef) (stack : ItemStac
     -- `canMergeItems`
     let count := min stack.count (stack.maxStackSize - current.count)
     stack := stack.withCount (stack.count - count)
-    let (p, i) ← c.locate slot
-    setItems p ((← getItems p).setItem i (current.withCount (current.count + count)))
+    if let .entity e := c then
+      Entity.MinecartContainer.putItem e slot (current.withCount (current.count + count))
+    else
+      let (p, i) ← c.locate slot
+      setItems p ((← getItems p).setItem i (current.withCount (current.count + count)))
     success := count > 0
   if success then
     if wasEmpty then

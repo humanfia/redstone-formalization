@@ -22,7 +22,8 @@ ticked (`entityInside`).
 
 ## What is left out
 
-* Containers that are entities (minecarts, boats): see `Redstone.Component.Container`.
+* Boats with a chest: see `Redstone.Entity.Minecart.Slots`. Minecarts with a chest or a hopper
+  are containers like the blocks (`ContainerRef.entity`).
 * The components of the stack of an item entity (`Entities.Item`): a hopper that would take in
   an item entity whose stack has components sets `Level.overflow`.
 * `entityInside` is called for the blocks an entity overlaps at the end of its move, not for
@@ -64,22 +65,25 @@ def getItemsAtAndAbove (l : Level) (p : Pos) : List ℕ :=
     | _ => false
   (found.foldl (fun acc e => Entity.Item.insertBySection e acc) []).map (·.index)
 
-/-- `HopperBlockEntity.addItem(container, entity)`: the hopper at `p` takes in as much of the
-stack of the item entity with index `i` as it has room for. Returns whether it took all of it;
-the entity is then gone. The components of an entity's stack are not known to the model: an
-entity that has some sets `Level.overflow`. -/
-def addItemEntity (p : Pos) (i : ℕ) : M Bool := do
+/-- `HopperBlockEntity.addItem(container, entity)`: the container `c`, a hopper or a hopper
+minecart, takes in as much of the stack of the item entity with index `i` as it has room for.
+Returns whether it took all of it; the entity is then gone. The components of an entity's stack
+are not known to the model: an entity that has some sets `Level.overflow`. -/
+def addItemEntityTo (c : ContainerRef) (i : ℕ) : M Bool := do
   let some (_, dt) ← Entity.Item.get? i | return false
   if dt.hasComponents then
     Level.setOverflow
     return false
-  let rest ← addItem none (.single p) (.of dt.item dt.count) none
+  let rest ← addItem none c (.of dt.item dt.count) none
   if rest.isEmpty then
     Level.removeEntity i
     return true
   else
     Entity.Item.modifyData i fun dt => { dt with count := rest.count }
     return false
+
+/-- `addItemEntityTo` for the hopper at `p`. -/
+def addItemEntity (p : Pos) (i : ℕ) : M Bool := addItemEntityTo (.single p) i
 
 /-- `HopperBlockEntity.ejectItems`: pushes one item, from the first slot that has one the
 container accepts, into the container the hopper faces. -/
@@ -116,18 +120,18 @@ def tryTakeInItemFromSlot (p : Pos) (c : ContainerRef) (slot : ℕ) : M Bool := 
   c.restoreItem slot stack
   return false
 
-/-- `HopperBlockEntity.suckInItems`: pulls one item out of the container above the hopper,
-trying the slots that its bottom face gives access to in order. Without a container above, the
-hopper picks up the first item entity it has room for, unless a full block sits on it. -/
+/-- `HopperBlockEntity.suckInItems`: pulls one item out of the container above the hopper, a
+block or else a minecart, trying the slots that its bottom face gives access to in order.
+Without a container above, the hopper picks up the first item entity it has room for, unless a
+full block sits on it. -/
 def suckInItems (p : Pos) : M Bool := do
   let above := p.step .up
-  match ← getBlockContainer above with
+  match ← getContainerAt above with
   | some c =>
     for slot in ← c.slots .down do
       if ← tryTakeInItemFromSlot p c slot then return true
     return false
   | none =>
-    getEntityContainer above
     let state ← Level.getBlock above
     -- The block tag `minecraft:does_not_block_hoppers` holds the beehives.
     let blocked := state.isCollisionShapeFullBlock && !(state matches .beehive _ _)

@@ -1,0 +1,32 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 40},
+    {"state": "minecraft:rail[shape=*]", "weight": 12},
+    {"state": "minecraft:powered_rail[powered=*,shape=*]", "weight": 3},
+    {"state": "minecraft:activator_rail[powered=*,shape=*]", "weight": 4},
+    {"state": "minecraft:detector_rail[powered=false,shape=*]", "weight": 2},
+    {"state": "minecraft:stone", "weight": 3},
+    {"state": "minecraft:hopper[enabled=*,facing=*]", "weight": 6},
+    {"state": "minecraft:hopper[enabled=true,facing=*]", "weight": 6, "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5},{Slot:2b,id:\"minecraft:ender_pearl\",count:3},{Slot:4b,id:\"minecraft:iron_sword\",count:1}]}"},
+    {"state": "minecraft:chest[facing=*]", "weight": 2, "nbt": "{Items:[{Slot:1b,id:\"minecraft:redstone\",count:62},{Slot:4b,id:\"minecraft:stone\",count:2},{Slot:26b,id:\"minecraft:ender_pearl\",count:15}]}"},
+    {"state": "minecraft:barrel[facing=*]", "weight": 2, "nbt": "{Items:[{Slot:0b,id:\"minecraft:bucket\",count:3},{Slot:9b,id:\"minecraft:stone\",count:64}]}"},
+    {"state": "minecraft:dropper[facing=*]", "weight": 2, "nbt": "{Items:[{Slot:4b,id:\"minecraft:stone\",count:4}]}"},
+    {"state": "minecraft:furnace[facing=*]", "weight": 1, "nbt": "{Items:[{Slot:1b,id:\"minecraft:bucket\",count:1},{Slot:2b,id:\"minecraft:iron_ingot\",count:5}]}"},
+    {"state": "minecraft:composter[level=*]", "weight": 2},
+    {"state": "minecraft:comparator[facing=*,mode=*]", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=false]", "weight": 1},
+    {"state": "minecraft:stone_slab[type=*]", "weight": 1}
+  ],
+  "actions": {
+    "set": {
+      "count": [2, 8],
+      "states": [
+        "minecraft:air", "minecraft:air", "minecraft:stone", "minecraft:rail[shape=*]",
+        "minecraft:activator_rail[powered=*,shape=*]", "minecraft:hopper[enabled=true,facing=*]",
+        "minecraft:redstone_block", "minecraft:redstone_block", "minecraft:chest[facing=*]"
+      ],
+      "flags": 259
+    }
+  }
+}

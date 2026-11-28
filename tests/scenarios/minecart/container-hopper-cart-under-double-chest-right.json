@@ -1,0 +1,74 @@
+{
+  "name": "container-hopper-cart-under-double-chest-right",
+  "ticks": 60,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        2,
+        3
+      ],
+      "state": "minecraft:chest[facing=north,type=right,waterlogged=false]",
+      "nbt": "{Items:[{Slot:26b,id:\"minecraft:stone\",count:2}]}"
+    },
+    {
+      "pos": [
+        4,
+        2,
+        3
+      ],
+      "state": "minecraft:chest[facing=north,type=left,waterlogged=false]",
+      "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:2}]}"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:hopper_minecart",
+      "pos": [
+        4.5,
+        1.0625,
+        3.5
+      ]
+    }
+  ]
+}

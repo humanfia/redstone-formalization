@@ -1,0 +1,60 @@
+{
+  "name": "container-edge-of-hopper-chest",
+  "ticks": 20,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        1,
+        1,
+        4
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=west]"
+    },
+    {
+      "pos": [
+        0,
+        1,
+        4
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=north]"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:chest_minecart",
+      "pos": [
+        1.5,
+        1.0,
+        4.7
+      ],
+      "nbt": "{Motion:[-0.01d,0.0d,0.001d]}"
+    }
+  ]
+}

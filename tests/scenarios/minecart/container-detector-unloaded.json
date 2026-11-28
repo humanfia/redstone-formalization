@@ -1,0 +1,97 @@
+{
+  "name": "container-detector-unloaded",
+  "ticks": 80,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      4,
+      3,
+      4
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        4,
+        0,
+        4
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        2,
+        1,
+        3
+      ],
+      "max": [
+        2,
+        1,
+        3
+      ],
+      "state": "minecraft:stone"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=down]"
+    },
+    {
+      "pos": [
+        2,
+        0,
+        2
+      ],
+      "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+    },
+    {
+      "pos": [
+        2,
+        2,
+        2
+      ],
+      "state": "minecraft:detector_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        2,
+        2,
+        3
+      ],
+      "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+    },
+    {
+      "pos": [
+        2,
+        2,
+        4
+      ],
+      "state": "minecraft:redstone_lamp[lit=false]"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:hopper_minecart",
+      "pos": [
+        2.5,
+        2.0625,
+        2.5
+      ],
+      "nbt": "{Enabled:0b,Items:[{Slot:0b,id:\"minecraft:stone\",count:4},{Slot:1b,id:\"minecraft:ender_pearl\",count:2}]}"
+    }
+  ]
+}

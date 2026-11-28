@@ -1,0 +1,102 @@
+{
+  "name": "container-unload-moving-0_05",
+  "ticks": 70,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      15,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        15,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        14,
+        1,
+        3
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        2,
+        3
+      ],
+      "max": [
+        14,
+        2,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        4,
+        1,
+        3
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=north]"
+    },
+    {
+      "pos": [
+        6,
+        1,
+        3
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=down]"
+    },
+    {
+      "pos": [
+        8,
+        1,
+        3
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=north]"
+    },
+    {
+      "pos": [
+        10,
+        1,
+        3
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=down]"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:chest_minecart",
+      "pos": [
+        2.5,
+        2.0625,
+        3.5
+      ],
+      "nbt": "{Motion:[0.05d,0.0d,0.0d],Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:2b,id:\"minecraft:ender_pearl\",count:16},{Slot:5b,id:\"minecraft:iron_sword\",count:1},{Slot:26b,id:\"minecraft:redstone\",count:64}]}"
+    }
+  ]
+}

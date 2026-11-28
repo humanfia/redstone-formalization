@@ -1,0 +1,65 @@
+{
+  "name": "container-load-above-furnace",
+  "ticks": 60,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      6
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        6
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "min": [
+        1,
+        1,
+        3
+      ],
+      "max": [
+        5,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        3,
+        2,
+        3
+      ],
+      "state": "minecraft:hopper[enabled=true,facing=down]",
+      "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:6},{Slot:3b,id:\"minecraft:ender_pearl\",count:2}]}"
+    }
+  ],
+  "entities": [
+    {
+      "type": "minecraft:furnace_minecart",
+      "pos": [
+        3.5,
+        1.0625,
+        3.5
+      ]
+    }
+  ]
+}

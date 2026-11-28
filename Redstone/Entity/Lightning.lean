@@ -45,8 +45,6 @@ lights its fires. Still in `tests/pending/scenarios/lightning`:
 * `sculk-hears`: the sensor hears the strike as the server does, but the vibration it keeps
   names its source by the UUID of the bolt, which the model does not have
   (`Redstone.Component.Sculk`).
-* `copper-waterlogged`: waterlogged copper that is cleaned starts its water flowing
-  (`Redstone.Mechanics.Fluid` does not make fluids flow yet).
 
 ## What is assumed
 

@@ -13,8 +13,7 @@ is `tests/traces/<unit>/<name>.trace.json`.
 The model starts from frame 0 of the trace. Before each game tick the scenario's actions for
 that tick are applied; after it the model is compared with the frame: every block and block
 entity in the box, the order in which block entities tick, the scheduled ticks, the block
-events and the entities. The scheduled fluid ticks are read from the trace and loaded, but
-they are not compared yet (`compareFluidTicks`): fluids do not flow in the model.
+events, the scheduled fluid ticks (`compareFluidTicks`) and the entities.
 
 A run without arguments first checks the model's container signal against the same
 computation in `Float32` (`signalSelfCheck`); a difference fails the run.
@@ -380,10 +379,11 @@ def normalize (s : Scenario) (l : Level) : Level :=
     blockEntities := PosMap.ofList (ps.filterMap fun p =>
       (l.blockEntities p).map fun be => (p, be)) }
 
-/-- Whether the scheduled fluid ticks of the model are compared with the trace. Not yet: no
-block of the model schedules a fluid tick, while the traces of scenarios with waterlogged
-blocks have them. -/
-def compareFluidTicks : Bool := false
+/-- Whether the scheduled fluid ticks of the model are compared with the trace. A trace lists
+the ticks inside the box of the scenario, so those of the model outside it are not compared
+(nor is anything else out there: the runner forgets the blocks outside the box after every
+tick, so a scenario should keep its fluids inside). -/
+def compareFluidTicks : Bool := true
 
 def initialLevel (s : Scenario) (f : Frame) : Level :=
   let e := ({} : Expected).apply f
@@ -437,7 +437,10 @@ def compare (s : Scenario) (l : Level) (e : Expected) (f : Frame) : List String 
       ts.map fun (p, b, d, pr) => s!"{b.name}@{showPos p} in {d} priority {pr}"
     out := s!"scheduled ticks: expected {show' f.scheduled}, got {show' scheduled}" :: out
   if compareFluidTicks then
-    let fluidTicks := (ScheduledTickOf.sortTicks l.fluidTicks).map fun t =>
+    -- The trace lists the fluid ticks inside the box only.
+    let inBox (p : Pos) : Bool :=
+      s.lo.x ≤ p.x && p.x ≤ s.hi.x && s.lo.y ≤ p.y && p.y ≤ s.hi.y && s.lo.z ≤ p.z && p.z ≤ s.hi.z
+    let fluidTicks := (ScheduledTickOf.sortTicks (l.fluidTicks.filter (inBox ·.pos))).map fun t =>
       (t.pos, t.fluid, (t.trigger : ℤ) - l.gameTime, t.priority.value)
     if fluidTicks ≠ f.fluidTicks then
       let show' (ts : List (Pos × Fluid × ℤ × ℤ)) :=

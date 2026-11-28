@@ -107,7 +107,7 @@ component's module docstring says what it does not model.
 | `Redstone.Mechanics.Power` | strong and weak power, conductors | defined |
 | `Redstone.Mechanics.Tick` | the phases of a game tick | defined |
 | `Redstone.Mechanics.Input` | the actions of a scenario (use, set, destroy, summon, kill) and schedules of them | defined |
-| `Redstone.Mechanics.Fluid` | what a fluid tick does: the flow of water and lava | stub |
+| `Redstone.Mechanics.Fluid` | what a fluid tick does: the flow of water and lava | defined, tested |
 | `Redstone.Mechanics.RandomTick` | the random ticks of the chunks | stub |
 | `Redstone.Mechanics.Dispatch` | which component gives each block its behaviour (generated) | defined |
 | `Redstone.Mechanics.PistonMotion` | which blocks a piston moves, and in which order | defined, tested |
@@ -120,7 +120,7 @@ component's module docstring says what it does not model.
 | `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
 | `Redstone.Entity.Geometry`, `Redstone.Entity.Touch` | the boxes of entities, and how an entity tells the blocks it steps on and passes through (`Entity.applyEffectsFromBlocks`), shared by all entity units | defined, tested |
 | `Redstone.Entity.Projectile`, `Redstone.Entity.Clip` | arrows, snowballs and eggs: flight, the hit of a block, an arrow in the ground; the ray that finds the block | defined, tested; hits on entities and the other projectiles are not |
-| `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | stub |
+| `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | defined, tested; lava sets nothing on fire yet |
 | `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
 | `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
 | `Redstone.Component.SpecialBlock` | campfire, powder snow, cobweb, nether portal, carved pumpkin, dried ghast, eggs | stub |
@@ -147,8 +147,8 @@ To prove a circuit, follow [Redstone/Proof/README.md](Redstone/Proof/README.md);
 circuits of `Redstone/Theorems/Basics` (lever and lamp, torch inverter, repeater delay, dust
 decay, RS latch, sticky piston, hopper pair, repeater clock) are the worked examples.
 
-What the model leaves out: fluids do not flow and blocks get no random ticks (the phases of the
-game tick are there, and empty), light is modelled only as far as the daylight detector needs
+What the model leaves out: blocks get no random ticks (the phase of the game tick is there,
+and empty), light is modelled only as far as the daylight detector needs
 it, every chunk is
 loaded, players and mobs only exist as inputs, and the experimental redstone wire is off. Where the model meets something it does not cover it sets `Level.overflow` instead
 of going on with a wrong state.

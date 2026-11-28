@@ -1,0 +1,108 @@
+{
+ "name": "lava-water-cobblestone-2",
+ "ticks": 260,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   14,
+   3,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    14,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    14,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    10
+   ],
+   "max": [
+    14,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    14,
+    1,
+    0
+   ],
+   "max": [
+    14,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    5
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 30,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:lava[level=0]",
+   "flags": 3
+  }
+ ]
+}

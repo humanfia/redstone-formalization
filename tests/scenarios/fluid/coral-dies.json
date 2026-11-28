@@ -1,0 +1,507 @@
+{
+ "name": "coral-dies",
+ "ticks": 125,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   3,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    15
+   ],
+   "max": [
+    12,
+    2,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    2,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    12,
+    1,
+    0
+   ],
+   "max": [
+    12,
+    2,
+    15
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:tube_coral_block"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:tube_coral[waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    8
+   ],
+   "state": "minecraft:tube_coral_fan[waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "state": "minecraft:tube_coral_wall_fan[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:brain_coral_block"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:brain_coral[waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    8
+   ],
+   "state": "minecraft:brain_coral_fan[waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    12
+   ],
+   "state": "minecraft:brain_coral_wall_fan[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:bubble_coral_block"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:bubble_coral[waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    8
+   ],
+   "state": "minecraft:bubble_coral_fan[waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    12
+   ],
+   "state": "minecraft:bubble_coral_wall_fan[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:fire_coral_block"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    5
+   ],
+   "state": "minecraft:fire_coral[waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    8
+   ],
+   "state": "minecraft:fire_coral_fan[waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    12
+   ],
+   "state": "minecraft:fire_coral_wall_fan[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:horn_coral_block"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    5
+   ],
+   "state": "minecraft:horn_coral[waterlogged=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    8
+   ],
+   "state": "minecraft:horn_coral_fan[waterlogged=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    12
+   ],
+   "state": "minecraft:horn_coral_wall_fan[facing=south,waterlogged=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    9
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    13
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    9
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    13
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    9
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    13
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    9
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    13
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    9
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    13
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  }
+ ]
+}

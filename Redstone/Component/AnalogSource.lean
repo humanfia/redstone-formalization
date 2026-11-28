@@ -54,8 +54,6 @@ which sets `Level.overflow`: the level is then no longer a faithful image of the
   in `Redstone.Component.Container`.
 * A burning projectile lights a candle cake and any projectile of the tag `impact_projectiles`
   shatters a decorated pot (`onProjectileHit`); the owner of the projectile is not modelled.
-* Fluid ticks: a waterlogged shelf, decorated pot or copper golem statue that gets a shape update
-  schedules a fluid tick, after which its water flows (`unmodelled`).
 * Components of stored items: the stacks keep their component patch (`Redstone.ItemStack`), but
   whether an item is a record, a book or compostable is read from the item, not from the patch.
 -/
@@ -120,10 +118,9 @@ def counterClockWise : HorizontalDirection → Direction
   | .east => .north
 
 /-- `updateShape` of a block that can be waterlogged (shelf, decorated pot, copper golem statue):
-a waterlogged block schedules a fluid tick for its water, which then flows. The model has no
-fluid ticks, so this is `unmodelled`. -/
-def waterloggedUpdateShape (self : Block) (waterlogged : Bool) : M Block := do
-  if waterlogged then unmodelled
+a waterlogged block at `p` schedules a fluid tick for its water. -/
+def waterloggedUpdateShape (self : Block) (waterlogged : Bool) (p : Pos) : M Block := do
+  if waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
   return self
 
 /-! ### Cake and candle cake -/
@@ -624,7 +621,7 @@ def shelf (id : Blocks.Shelf.Id) (s : Blocks.Shelf) : Behaviour :=
           let bit (i : ℕ) : ℕ := if (e.items.getItem i).isEmpty then 0 else 1
           bit 0 + 2 * bit 1 + 4 * bit 2
         | _ => 0
-    updateShape := fun _ _ _ _ => waterloggedUpdateShape self s.waterlogged
+    updateShape := fun p _ _ _ => waterloggedUpdateShape self s.waterlogged p
     neighborChanged := fun p _ _ => do
       let signal ← Level.hasNeighborSignal p
       if s.powered != signal then
@@ -690,7 +687,7 @@ def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
       match l.blockEntities p with
       | some (.decoratedPot d) => potSignal d
       | _ => 0
-    updateShape := fun _ _ _ _ => waterloggedUpdateShape self s.waterlogged
+    updateShape := fun p _ _ _ => waterloggedUpdateShape self s.waterlogged p
     affectNeighborsAfterRemoval := fun p _ => updateNeighboursAfterDestroy p .decorated_pot
     preRemoveSideEffects := fun p => do
       if let some d ← getPot p then ItemDrop.dropContents p [d.item]
@@ -781,7 +778,7 @@ def copperGolemStatue (self : Block) (block : BlockId) (pose : Pose)
     (weathering waterlogged : Bool) (withPose : Pose → Block) : Behaviour :=
   { Behaviour.inert self with
     analogSignal := fun _ _ _ => poseSignal pose
-    updateShape := fun _ _ _ _ => waterloggedUpdateShape self waterlogged
+    updateShape := fun p _ _ _ => waterloggedUpdateShape self waterlogged p
     keepsBlockEntity := isCopperGolemStatue
     affectNeighborsAfterRemoval := fun p _ => Level.updateNeighbourForOutputSignal p block
     useItemOn := fun p _ item => do

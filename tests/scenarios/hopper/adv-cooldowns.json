@@ -1,0 +1,32 @@
+{
+  "name": "adv-cooldowns",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [17, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [17, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:5}],TransferCooldown:-5}"},
+    {"pos": [1, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:5}],TransferCooldown:0}"},
+    {"pos": [3, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [5, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:5}],TransferCooldown:1}"},
+    {"pos": [5, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [7, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:5}],TransferCooldown:2}"},
+    {"pos": [7, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [9, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:5}],TransferCooldown:8}"},
+    {"pos": [9, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [11, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:5}],TransferCooldown:9}"},
+    {"pos": [11, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [13, 2, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:5}],TransferCooldown:100}"},
+    {"pos": [13, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [15, 2, 1], "state": "minecraft:hopper[enabled=false,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:5}],TransferCooldown:3}"},
+    {"pos": [15, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [16, 1, 1], "state": "minecraft:stone"},
+    {"pos": [16, 2, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "use", "pos": [16, 2, 1], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [16, 2, 1], "face": "up"}
+  ]
+}

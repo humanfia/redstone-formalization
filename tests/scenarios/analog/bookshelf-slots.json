@@ -1,0 +1,42 @@
+{
+  "name": "bookshelf-slots",
+  "ticks": 12,
+  "box": {"min": [0, 0, 0], "max": [12, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [12, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=false,slot_5_occupied=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:enchanted_book\",count:1}],last_interacted_slot:-1}"},
+    {"pos": [3, 1, 1], "state": "minecraft:chiseled_bookshelf[facing=south,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=false,slot_5_occupied=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:enchanted_book\",count:1},{Slot:1b,id:\"minecraft:book\",count:1}],last_interacted_slot:0}"},
+    {"pos": [5, 1, 1], "state": "minecraft:chiseled_bookshelf[facing=west,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true,slot_3_occupied=false,slot_4_occupied=false,slot_5_occupied=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:enchanted_book\",count:1},{Slot:1b,id:\"minecraft:book\",count:1},{Slot:2b,id:\"minecraft:enchanted_book\",count:1}],last_interacted_slot:1}"},
+    {"pos": [7, 1, 1], "state": "minecraft:chiseled_bookshelf[facing=east,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true,slot_3_occupied=true,slot_4_occupied=false,slot_5_occupied=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:enchanted_book\",count:1},{Slot:1b,id:\"minecraft:book\",count:1},{Slot:2b,id:\"minecraft:enchanted_book\",count:1},{Slot:3b,id:\"minecraft:book\",count:1}],last_interacted_slot:2}"},
+    {"pos": [9, 1, 1], "state": "minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=true,slot_1_occupied=true,slot_2_occupied=true,slot_3_occupied=true,slot_4_occupied=true,slot_5_occupied=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:enchanted_book\",count:1},{Slot:1b,id:\"minecraft:book\",count:1},{Slot:2b,id:\"minecraft:enchanted_book\",count:1},{Slot:3b,id:\"minecraft:book\",count:1},{Slot:4b,id:\"minecraft:enchanted_book\",count:1}],last_interacted_slot:3}"},
+    {"pos": [11, 1, 1], "state": "minecraft:chiseled_bookshelf[facing=south,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=true,slot_5_occupied=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:book\",count:1}],last_interacted_slot:4}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "north"},
+    {"tick": 2, "type": "use", "pos": [7, 1, 1], "face": "east"},
+    {"tick": 3, "type": "use", "pos": [3, 1, 1], "face": "south"},
+    {"tick": 3, "type": "use", "pos": [9, 1, 1], "face": "north"},
+    {"tick": 4, "type": "use", "pos": [5, 1, 1], "face": "west"},
+    {"tick": 4, "type": "use", "pos": [11, 1, 1], "face": "south"},
+    {"tick": 6, "type": "use_item", "pos": [1, 1, 1], "face": "north", "item": "minecraft:book"},
+    {"tick": 6, "type": "use_item", "pos": [3, 1, 1], "face": "south", "item": "minecraft:book"},
+    {"tick": 6, "type": "use_item", "pos": [5, 1, 1], "face": "west", "item": "minecraft:book"},
+    {"tick": 6, "type": "use_item", "pos": [7, 1, 1], "face": "east", "item": "minecraft:book"},
+    {"tick": 6, "type": "use_item", "pos": [9, 1, 1], "face": "north", "item": "minecraft:book"},
+    {"tick": 6, "type": "use_item", "pos": [11, 1, 1], "face": "south", "item": "minecraft:book"},
+    {"tick": 8, "type": "use", "pos": [1, 1, 1], "face": "north"},
+    {"tick": 8, "type": "use", "pos": [3, 1, 1], "face": "south"},
+    {"tick": 8, "type": "use", "pos": [5, 1, 1], "face": "west"},
+    {"tick": 8, "type": "use", "pos": [7, 1, 1], "face": "east"},
+    {"tick": 8, "type": "use", "pos": [9, 1, 1], "face": "north"},
+    {"tick": 8, "type": "use", "pos": [11, 1, 1], "face": "south"},
+    {"tick": 9, "type": "use_item", "pos": [1, 1, 1], "face": "north", "item": "minecraft:stick"},
+    {"tick": 9, "type": "use_item", "pos": [5, 1, 1], "face": "west", "item": "minecraft:stick"},
+    {"tick": 9, "type": "use_item", "pos": [9, 1, 1], "face": "north", "item": "minecraft:stick"},
+    {"tick": 10, "type": "use_item", "pos": [3, 1, 1], "face": "south", "item": "minecraft:stick"},
+    {"tick": 10, "type": "use_item", "pos": [7, 1, 1], "face": "east", "item": "minecraft:stick"},
+    {"tick": 10, "type": "use_item", "pos": [11, 1, 1], "face": "south", "item": "minecraft:stick"}
+  ]
+}

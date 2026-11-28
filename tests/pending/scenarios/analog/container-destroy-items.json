@@ -1,0 +1,18 @@
+{
+  "name": "container-destroy-items",
+  "ticks": 12,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=true,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=false,slot_5_occupied=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:book\",count:1}],last_interacted_slot:0}"},
+    {"pos": [3, 1, 1], "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:stone\",count:40}]}"},
+    {"pos": [5, 1, 1], "state": "minecraft:decorated_pot[cracked=false,facing=north,waterlogged=false]", "nbt": "{item:{id:\"minecraft:stone\",count:64}}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "destroy", "pos": [1, 1, 1], "drop": false},
+    {"tick": 4, "type": "destroy", "pos": [3, 1, 1], "drop": false},
+    {"tick": 6, "type": "set", "pos": [5, 1, 1], "state": "minecraft:stone"}
+  ]
+}

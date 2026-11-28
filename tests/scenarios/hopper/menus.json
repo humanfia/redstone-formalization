@@ -1,0 +1,42 @@
+{
+  "name": "menus",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [10, 1, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [10, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:barrel[facing=up,open=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [8, 1, 1], "state": "minecraft:furnace[facing=north,lit=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]"},
+    {"pos": [10, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 15, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 27, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 28, "type": "use", "pos": [7, 1, 1], "face": "up"},
+    {"tick": 31, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 32, "type": "use", "pos": [8, 1, 1], "face": "up"},
+    {"tick": 35, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 36, "type": "use", "pos": [9, 1, 1], "face": "up"},
+    {"tick": 39, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 40, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 41, "type": "use", "pos": [10, 1, 1], "face": "up"},
+    {"tick": 50, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 51, "type": "use", "pos": [10, 1, 1], "face": "up"},
+    {"tick": 52, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 53, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

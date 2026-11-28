@@ -1,0 +1,30 @@
+{
+  "name": "skull-block-entity",
+  "ticks": 24,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:player_head[powered=false,rotation=5]", "nbt": "{note_block_sound:\"minecraft:entity.pig.ambient\",custom_name:\"Bob\"}"},
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:player_wall_head[facing=east,powered=false]", "nbt": "{note_block_sound:\"minecraft:block.bell.use\"}"},
+    {"pos": [2, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [4, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 4, "type": "set", "pos": [4, 1, 1], "state": "minecraft:wither_skeleton_skull[powered=false,rotation=9]"},
+    {"tick": 6, "type": "use", "pos": [4, 1, 0], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [4, 1, 0], "face": "up"},
+    {"tick": 9, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 12, "type": "set", "pos": [4, 1, 1], "state": "minecraft:dragon_head[powered=true,rotation=1]"},
+    {"tick": 14, "type": "set", "pos": [0, 1, 1], "state": "minecraft:player_head[powered=false,rotation=6]"},
+    {"tick": 15, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 17, "type": "destroy", "pos": [0, 1, 1], "drop": false},
+    {"tick": 19, "type": "set", "pos": [4, 1, 1], "state": "minecraft:stone"},
+    {"tick": 21, "type": "destroy", "pos": [2, 1, 0], "drop": false}
+  ]
+}

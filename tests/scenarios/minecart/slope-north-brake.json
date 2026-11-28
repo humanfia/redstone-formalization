@@ -1,0 +1,28 @@
+{
+  "name": "slope-north-brake",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [15, 5, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [7, 1, 6], "max": [7, 1, 6], "state": "minecraft:stone"},
+    {"min": [7, 1, 5], "max": [7, 2, 5], "state": "minecraft:stone"},
+    {"min": [7, 1, 4], "max": [7, 3, 4], "state": "minecraft:stone"},
+    {"min": [7, 1, 3], "max": [7, 3, 3], "state": "minecraft:stone"},
+    {"min": [7, 1, 2], "max": [7, 3, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [7, 1, 11], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 1, 10], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 1, 9], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 1, 8], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 1, 7], "state": "minecraft:powered_rail[powered=false,shape=ascending_north,waterlogged=false]"},
+    {"pos": [7, 2, 6], "state": "minecraft:powered_rail[powered=false,shape=ascending_north,waterlogged=false]"},
+    {"pos": [7, 3, 5], "state": "minecraft:powered_rail[powered=false,shape=ascending_north,waterlogged=false]"},
+    {"pos": [7, 4, 4], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 4, 3], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [7, 4, 2], "state": "minecraft:rail[shape=north_south,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [7.5, 4.0625, 3.5], "nbt": "{Motion:[-0.0d,0.0d,0.1d]}"}
+  ]
+}

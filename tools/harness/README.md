@@ -71,6 +71,8 @@ nondeterminism found, and what was done:
 * The entity id counter, `Level.randValue`, the game time and the redstone torch burn-out list
   survive from one scenario to the next: reset by reflection.
 * The light engine runs on another thread: the server waits for it between ticks.
+* `Level.skyDarken` is only recomputed at the start of a tick, so after the clock and the weather
+  of a scenario are set it still holds the value of the previous scenario: recomputed at once.
 * Main-thread tasks (e.g. point-of-interest updates) are delayed depending on wall-clock time:
   they are always run between ticks.
 * The attributes of a mob are saved in identity-hash order: sorted in the trace.

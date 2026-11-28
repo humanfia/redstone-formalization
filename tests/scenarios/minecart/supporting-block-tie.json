@@ -1,0 +1,19 @@
+{
+  "name": "supporting-block-tie",
+  "ticks": 12,
+  "box": {"min": [0, 0, 0], "max": [23, 3, 11]},
+  "fill": [
+    {"min": [19, 0, 8], "max": [20, 0, 9], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [4, 0, 5], "state": "minecraft:soul_sand"},
+    {"pos": [5, 0, 4], "state": "minecraft:mud"},
+    {"pos": [14, 0, 5], "state": "minecraft:mud"},
+    {"pos": [15, 0, 4], "state": "minecraft:soul_sand"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [4.75, 0.875, 4.75], "nbt": "{Motion:[0.25d,0.0d,0.25d]}"},
+    {"type": "minecraft:minecart", "pos": [14.75, 0.875, 4.75], "nbt": "{Motion:[0.25d,0.0d,0.25d]}"},
+    {"type": "minecraft:minecart", "pos": [20.0, 1.5, 9.0], "nbt": "{Motion:[0.0d,0.0d,0.0d]}"}
+  ]
+}

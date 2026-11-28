@@ -1,0 +1,32 @@
+{
+  "name": "verify-grazing-fences",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [3, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [4, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [5, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [6, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [7, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [8, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [9, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [10, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [11, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [12, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [13, 1, 5], "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=true]"},
+    {"pos": [2, 1, 9], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [4, 1, 9], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [6, 1, 9], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [8, 1, 9], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [10, 1, 9], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [12, 1, 9], "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"},
+    {"pos": [8, 1, 13], "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=true,powered=false]"},
+    {"pos": [8, 1, 12], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [8, 1, 14], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [2.5, 1.0, 0.8], "nbt": "{Motion:[0.4d,0.0d,0.35d]}"}, {"type": "minecraft:minecart", "pos": [13.0, 1.0, 9.86], "nbt": "{Motion:[-0.4d,0.0d,-0.05d]}"}, {"type": "minecraft:minecart", "pos": [2.5, 1.0, 13.5], "nbt": "{Motion:[0.4d,0.0d,0.01d]}"}]
+}

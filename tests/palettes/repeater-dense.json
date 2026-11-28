@@ -1,0 +1,15 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 3},
+    {"state": "minecraft:stone", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=false]", "weight": 2},
+    {"state": "minecraft:lever[face=floor,facing=*,powered=*]", "weight": 4},
+    {"state": "minecraft:repeater[delay=*,facing=*,locked=false,powered=false]", "weight": 12}
+  ],
+  "actions": {
+    "use": {"count": [6, 14], "targets": ["minecraft:lever", "minecraft:repeater"]},
+    "set": {"count": [0, 2], "states": ["minecraft:stone", "minecraft:air", "minecraft:repeater[delay=*,facing=*,locked=false,powered=*]"], "flags": 2},
+    "destroy": {"count": [0, 2], "targets": ["minecraft:lever", "minecraft:repeater"]}
+  }
+}

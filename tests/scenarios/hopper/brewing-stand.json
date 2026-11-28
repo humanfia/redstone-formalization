@@ -1,0 +1,22 @@
+{
+  "name": "brewing-stand",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [16, 0, 0]},
+  "blocks": [
+    {"pos": [0, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:blaze_powder\",count:2}]}"},
+    {"pos": [2, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:potion\",count:1},{Slot:1b,id:\"minecraft:glass_bottle\",count:1},{Slot:3b,id:\"minecraft:nether_wart\",count:1},{Slot:4b,id:\"minecraft:blaze_powder\",count:1}]}"},
+    {"pos": [4, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=true,has_bottle_1=true,has_bottle_2=true]", "nbt": "{Items:[]}"},
+    {"pos": [6, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=true,has_bottle_2=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:1},{Slot:2b,id:\"minecraft:potion\",count:1}]}"},
+    {"pos": [8, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:potion\",count:1},{Slot:3b,id:\"minecraft:nether_wart\",count:1}],BrewTime:5,Fuel:3}"},
+    {"pos": [10, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]", "nbt": "{Items:[{Slot:3b,id:\"minecraft:redstone\",count:3}],BrewTime:400,Fuel:0}"},
+    {"pos": [12, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:blaze_powder\",count:1}],Fuel:1}"},
+    {"pos": [14, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:blaze_powder\",count:1}],Fuel:-3,total_fuel:7,total_brew_time:9}"},
+    {"pos": [16, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:splash_potion\",count:1},{Slot:1b,id:\"minecraft:lingering_potion\",count:1},{Slot:2b,id:\"minecraft:potion\",count:1},{Slot:3b,id:\"minecraft:gunpowder\",count:1},{Slot:4b,id:\"minecraft:blaze_powder\",count:1}]}"}
+  ],
+  "actions": [
+    {"tick": 10, "type": "set", "pos": [0, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=true,has_bottle_1=false,has_bottle_2=false]"},
+    {"tick": 12, "type": "set", "pos": [4, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=true,has_bottle_1=false,has_bottle_2=true]"},
+    {"tick": 14, "type": "set", "pos": [6, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=false]"},
+    {"tick": 20, "type": "set", "pos": [2, 0, 0], "state": "minecraft:brewing_stand[has_bottle_0=false,has_bottle_1=false,has_bottle_2=true]", "flags": 259}
+  ]
+}

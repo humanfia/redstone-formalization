@@ -1,0 +1,69 @@
+{
+ "name": "prime-on-fence",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -8,
+   -8,
+   -8
+  ],
+  "max": [
+   14,
+   12,
+   14
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "face": "up"
+  }
+ ]
+}

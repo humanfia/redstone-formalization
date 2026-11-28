@@ -1,0 +1,39 @@
+{
+  "name": "fuzz-sensor-s2-011",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:glass"},
+    {"pos": [0, 1, 1], "state": "minecraft:stone"},
+    {"pos": [0, 1, 2], "state": "minecraft:lever[face=floor,facing=south,powered=true]"},
+    {"pos": [0, 2, 0], "state": "minecraft:lightning_rod[facing=down,powered=true,waterlogged=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:daylight_detector[inverted=false,power=4]"},
+    {"pos": [0, 2, 2], "state": "minecraft:daylight_detector[inverted=false,power=11]"},
+    {"pos": [1, 1, 0], "state": "minecraft:lightning_rod[facing=down,powered=true,waterlogged=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [1, 2, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [1, 2, 2], "state": "minecraft:target[power=5]"},
+    {"pos": [2, 1, 0], "state": "minecraft:glass"},
+    {"pos": [2, 1, 1], "state": "minecraft:glass"},
+    {"pos": [2, 1, 2], "state": "minecraft:lever[face=floor,facing=west,powered=true]"},
+    {"pos": [2, 2, 0], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 4, "type": "set", "pos": [2, 2, 1], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"tick": 5, "type": "set", "pos": [0, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 8, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [0, 2, 2], "face": "down"},
+    {"tick": 12, "type": "use", "pos": [0, 1, 2], "face": "up"},
+    {"tick": 13, "type": "set", "pos": [2, 1, 1], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"tick": 13, "type": "destroy", "pos": [0, 2, 0], "drop": false},
+    {"tick": 15, "type": "use", "pos": [0, 2, 1], "face": "down"},
+    {"tick": 15, "type": "use", "pos": [1, 1, 2], "face": "down"},
+    {"tick": 15, "type": "destroy", "pos": [0, 1, 2], "drop": false},
+    {"tick": 18, "type": "use", "pos": [2, 1, 2], "face": "north"},
+    {"tick": 18, "type": "destroy", "pos": [0, 2, 2], "drop": false}
+  ]
+}

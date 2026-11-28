@@ -1,0 +1,181 @@
+{
+ "name": "drop-34",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_trapdoor[facing=west,half=top,open=true,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:turtle_egg[eggs=4,hatch=1]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:iron_bars[east=true,north=true,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    5
+   ],
+   "state": "minecraft:end_rod[facing=east]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:cobblestone_wall[east=tall,north=low,south=tall,up=true,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=none,south=tall,up=true,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_stairs[facing=north,half=bottom,shape=inner_left,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:chorus_plant[down=true,east=false,north=true,south=true,up=false,west=true]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    1
+   ],
+   "state": "minecraft:stonecutter[facing=north]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    5
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=top,shape=outer_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    3
+   ],
+   "state": "minecraft:sea_pickle[pickles=4,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    5
+   ],
+   "state": "minecraft:farmland[moisture=4]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:oak_stairs[facing=north,half=top,shape=inner_right,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:heavy_core[waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.677,
+    5.387,
+    0.713
+   ],
+   "nbt": "{Motion:[-0.18d,-0.055d,-0.124d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    4.087,
+    6.284,
+    3.732
+   ],
+   "nbt": "{Motion:[0.112d,0.378d,-0.474d]}"
+  }
+ ]
+}

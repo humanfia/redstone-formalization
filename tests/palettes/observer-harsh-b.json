@@ -1,0 +1,12 @@
+{
+  "blocks": [
+    {"state": "minecraft:air", "weight": 2},
+    {"state": "minecraft:stone", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=false]", "weight": 3},
+    {"state": "minecraft:observer[facing=*,powered=*]", "weight": 10}
+  ],
+  "actions": {
+    "set": {"count": [12, 24], "flags": 2, "states": ["minecraft:stone", "minecraft:air", "minecraft:redstone_lamp[lit=false]", "minecraft:observer[facing=*,powered=*]", "minecraft:observer[facing=*,powered=*]"]},
+    "destroy": {"count": [4, 8], "targets": ["minecraft:stone", "minecraft:redstone_lamp", "minecraft:observer"]}
+  }
+}

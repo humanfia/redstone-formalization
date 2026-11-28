@@ -1,0 +1,307 @@
+{
+ "name": "adv-use-item-iron",
+ "ticks": 8,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   3,
+   3,
+   7
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    3,
+    0,
+    7
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    6
+   ],
+   "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "face": "north",
+   "item": "minecraft:stick"
+  },
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "face": "up",
+   "item": "minecraft:stick"
+  },
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "face": "north",
+   "item": "minecraft:honeycomb"
+  },
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up",
+   "item": "minecraft:honeycomb"
+  },
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "face": "north",
+   "item": "minecraft:iron_axe"
+  },
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "face": "up",
+   "item": "minecraft:iron_axe"
+  },
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    0,
+    1,
+    6
+   ],
+   "face": "north",
+   "item": "minecraft:bone_meal"
+  },
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "face": "up",
+   "item": "minecraft:bone_meal"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "face": "south",
+   "item": "minecraft:stick"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "face": "down",
+   "item": "minecraft:stick"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "face": "south",
+   "item": "minecraft:honeycomb"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "down",
+   "item": "minecraft:honeycomb"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "face": "south",
+   "item": "minecraft:iron_axe"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "face": "down",
+   "item": "minecraft:iron_axe"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "face": "south",
+   "item": "minecraft:bone_meal"
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "face": "down",
+   "item": "minecraft:bone_meal"
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "adv-rng-shelf-replace",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [8, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:oak_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:oak_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:decorated_pot[cracked=false,facing=north,waterlogged=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:composter[level=1]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [1, 1, 1], "state": "minecraft:spruce_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"tick": 3, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 4, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 5, "type": "set", "pos": [3, 1, 1], "state": "minecraft:oak_shelf[facing=east,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"tick": 6, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 7, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 8, "type": "set", "pos": [5, 1, 1], "state": "minecraft:stone"},
+    {"tick": 9, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 10, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 11, "type": "set", "pos": [1, 1, 1], "state": "minecraft:air", "flags": 2},
+    {"tick": 12, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 13, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 14, "type": "destroy", "pos": [3, 1, 1]},
+    {"tick": 15, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 16, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 17, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 18, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 19, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 20, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 21, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 22, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 23, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"},
+    {"tick": 24, "type": "use_item", "pos": [7, 1, 1], "face": "up", "item": "minecraft:cactus"}
+  ]
+}

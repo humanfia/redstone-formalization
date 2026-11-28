@@ -1,0 +1,18 @@
+{
+  "name": "ice-other-neighbour",
+  "ticks": 10,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 1, 4], "state": "minecraft:stone"},
+    {"min": [0, 2, 0], "max": [4, 2, 4], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:frosted_ice[age=3]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [1, 1, 2], "state": "minecraft:glass"},
+    {"tick": 4, "type": "set", "pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"tick": 6, "type": "set", "pos": [2, 1, 1], "state": "minecraft:ice"},
+    {"tick": 8, "type": "set", "pos": [2, 1, 1], "state": "minecraft:stone"}
+  ]
+}

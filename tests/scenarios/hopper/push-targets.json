@@ -1,0 +1,19 @@
+{
+  "name": "push-targets",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [10, 1, 1]},
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:hopper[enabled=true,facing=south]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:oak_planks\",count:2},{Slot:4b,id:\"minecraft:ender_pearl\",count:2}]}"},
+    {"pos": [0, 1, 1], "state": "minecraft:barrel[facing=up,open=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:hopper[enabled=true,facing=south]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:oak_planks\",count:2},{Slot:4b,id:\"minecraft:ender_pearl\",count:2}]}"},
+    {"pos": [2, 1, 1], "state": "minecraft:trapped_chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [4, 1, 0], "state": "minecraft:hopper[enabled=true,facing=south]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:oak_planks\",count:2},{Slot:4b,id:\"minecraft:ender_pearl\",count:2}]}"},
+    {"pos": [4, 1, 1], "state": "minecraft:shulker_box[facing=up]"},
+    {"pos": [6, 1, 0], "state": "minecraft:hopper[enabled=true,facing=south]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:oak_planks\",count:2},{Slot:4b,id:\"minecraft:ender_pearl\",count:2}]}"},
+    {"pos": [6, 1, 1], "state": "minecraft:red_shulker_box[facing=west]"},
+    {"pos": [8, 1, 0], "state": "minecraft:hopper[enabled=true,facing=south]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:oak_planks\",count:2},{Slot:4b,id:\"minecraft:ender_pearl\",count:2}]}"},
+    {"pos": [8, 1, 1], "state": "minecraft:hopper[enabled=true,facing=north]"},
+    {"pos": [10, 1, 0], "state": "minecraft:hopper[enabled=true,facing=south]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:oak_planks\",count:2},{Slot:4b,id:\"minecraft:ender_pearl\",count:2}]}"},
+    {"pos": [10, 1, 1], "state": "minecraft:barrel[facing=down,open=true]"}
+  ]
+}

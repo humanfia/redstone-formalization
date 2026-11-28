@@ -1,0 +1,24 @@
+{
+  "name": "lever-held-powered-rail",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [2, 1, 4], "max": [5, 1, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [6, 1, 4], "max": [8, 1, 4], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"min": [9, 1, 4], "max": [14, 1, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [2, 1, 10], "max": [5, 1, 10], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [6, 1, 10], "max": [8, 1, 10], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"min": [9, 1, 10], "max": [14, 1, 10], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "blocks": [
+    {"pos": [7, 1, 5], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [7, 1, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [7, 1, 11], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [7, 1, 9], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [3.5, 1.0625, 4.5], "nbt": "{Motion:[0.1d,0.0d,0.0d]}"},
+    {"type": "minecraft:minecart", "pos": [3.5, 1.0625, 10.5], "nbt": "{Motion:[0.4d,0.0d,0.0d]}"}
+  ]
+}

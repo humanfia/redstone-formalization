@@ -1,0 +1,21 @@
+{
+  "name": "v-saved-source-shrieker",
+  "ticks": 120,
+  "box": {"min": [0, 0, 0], "max": [8, 2, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 6], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:sculk_sensor_tendrils_clicking\",distance:3.0f,pos:[1.5d,1.5d,1.5d],source:[I;7,7,7,7]},event_delay:2,selector:{tick:-1L}}}"},
+    {"pos": [3, 1, 1], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:sculk_sensor_tendrils_clicking\",distance:3.0f,pos:[1.5d,1.5d,1.5d],source:[I;-5,123456,0,-1]},event_delay:3,selector:{tick:-1L}}}"},
+    {"pos": [5, 1, 1], "state": "minecraft:sculk_shrieker[can_summon=true,shrieking=false,waterlogged=false]", "nbt": "{listener:{event_delay:0,selector:{event:{game_event:\"minecraft:sculk_sensor_tendrils_clicking\",distance:3.0f,pos:[1.5d,1.5d,1.5d],source:[I;7,7,7,7]},tick:0L}}}"},
+    {"pos": [7, 1, 1], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:sculk_sensor_tendrils_clicking\",distance:3.0f,pos:[1.5d,1.5d,1.5d]},event_delay:2,selector:{tick:-1L}}}"},
+    {"pos": [1, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=true,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:sculk_sensor_tendrils_clicking\",distance:3.0f,pos:[1.5d,1.5d,1.5d],source:[I;7,7,7,7]},event_delay:2,selector:{tick:-1L}}}"},
+    {"pos": [3, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=true,shrieking=false,waterlogged=false]", "nbt": "{listener:{event:{game_event:\"minecraft:sculk_sensor_tendrils_clicking\",distance:3.0f,pos:[1.5d,1.5d,1.5d],source:[I;-5,123456,0,-1]},event_delay:0,selector:{tick:-1L}}}"}
+  ],
+  "actions": [
+    {"tick": 50, "type": "set", "pos": [5, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=true,waterlogged=false]"},
+    {"tick": 60, "type": "destroy", "pos": [1, 1, 1], "drop": false},
+    {"tick": 61, "type": "destroy", "pos": [1, 1, 4], "drop": false}
+  ]
+}

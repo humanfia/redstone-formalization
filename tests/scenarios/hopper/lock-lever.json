@@ -1,0 +1,30 @@
+{
+  "name": "lock-lever",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:hopper[enabled=true,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:6}]}"},
+    {"pos": [3, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:6}]}"},
+    {"pos": [5, 1, 1], "state": "minecraft:hopper[enabled=true,facing=west]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:dirt\",count:6}]}"},
+    {"pos": [4, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 15, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 44, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 50, "type": "use", "pos": [6, 1, 1], "face": "up"}
+  ]
+}

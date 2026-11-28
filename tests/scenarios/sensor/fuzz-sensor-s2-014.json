@@ -1,0 +1,37 @@
+{
+  "name": "fuzz-sensor-s2-014",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:target[power=6]"},
+    {"pos": [0, 2, 0], "state": "minecraft:lever[face=wall,facing=west,powered=true]"},
+    {"pos": [0, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:weathered_lightning_rod[facing=east,powered=true,waterlogged=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:lightning_rod[facing=south,powered=true,waterlogged=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [2, 1, 1], "state": "minecraft:daylight_detector[inverted=false,power=15]"},
+    {"pos": [2, 1, 2], "state": "minecraft:weathered_lightning_rod[facing=south,powered=false,waterlogged=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:daylight_detector[inverted=true,power=3]"},
+    {"pos": [2, 2, 1], "state": "minecraft:lever[face=floor,facing=south,powered=true]"},
+    {"pos": [2, 2, 2], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 2, 0], "face": "north"},
+    {"tick": 2, "type": "set", "pos": [2, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 5, "type": "use", "pos": [2, 1, 1], "face": "down"},
+    {"tick": 5, "type": "use", "pos": [2, 2, 1], "face": "north"},
+    {"tick": 6, "type": "destroy", "pos": [1, 2, 1], "drop": false},
+    {"tick": 8, "type": "set", "pos": [0, 2, 1], "state": "minecraft:air"},
+    {"tick": 9, "type": "use", "pos": [2, 1, 1], "face": "north"},
+    {"tick": 10, "type": "use", "pos": [0, 2, 0], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [0, 2, 0], "face": "down"},
+    {"tick": 18, "type": "use", "pos": [2, 2, 1], "face": "down"},
+    {"tick": 18, "type": "use", "pos": [0, 2, 0], "face": "up"},
+    {"tick": 19, "type": "destroy", "pos": [0, 2, 0], "drop": false},
+    {"tick": 25, "type": "set", "pos": [1, 2, 2], "state": "minecraft:target[power=14]"}
+  ]
+}

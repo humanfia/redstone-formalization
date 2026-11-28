@@ -1,0 +1,26 @@
+{
+  "name": "rod-initial-west",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [4, 4, 4]},
+  "blocks": [
+    {"pos": [2, 2, 2], "state": "minecraft:oxidized_lightning_rod[facing=west,powered=true,waterlogged=false]"},
+    {"pos": [3, 2, 2], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 3, "type": "set", "pos": [2, 3, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 4, "type": "set", "pos": [2, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 5, "type": "set", "pos": [2, 2, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 6, "type": "set", "pos": [1, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 7, "type": "set", "pos": [3, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 8, "type": "set", "pos": [3, 3, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 9, "type": "set", "pos": [3, 2, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 10, "type": "set", "pos": [3, 2, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 11, "type": "set", "pos": [4, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 15, "type": "destroy", "pos": [2, 2, 2], "drop": false},
+    {"tick": 18, "type": "set", "pos": [2, 2, 2], "state": "minecraft:lightning_rod[facing=west,powered=false,waterlogged=false]"},
+    {"tick": 21, "type": "destroy", "pos": [3, 2, 2], "drop": false},
+    {"tick": 23, "type": "set", "pos": [2, 2, 2], "state": "minecraft:waxed_lightning_rod[facing=west,powered=true,waterlogged=false]"},
+    {"tick": 25, "type": "set", "pos": [3, 2, 2], "state": "minecraft:target[power=0]"}
+  ]
+}

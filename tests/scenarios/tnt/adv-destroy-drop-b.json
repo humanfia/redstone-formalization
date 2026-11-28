@@ -1,0 +1,435 @@
+{
+ "name": "adv-destroy-drop-b",
+ "ticks": 34,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   32,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    30,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:snow[layers=5]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:candle[candles=1,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:candle[candles=4,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    1
+   ],
+   "state": "minecraft:sea_pickle[pickles=2,waterlogged=false]"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "state": "minecraft:turtle_egg[eggs=3,hatch=0]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    1
+   ],
+   "state": "minecraft:tinted_glass"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    1
+   ],
+   "state": "minecraft:amethyst_cluster[facing=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    19,
+    1,
+    1
+   ],
+   "state": "minecraft:white_bed[facing=north,occupied=false,part=head]"
+  },
+  {
+   "pos": [
+    21,
+    1,
+    1
+   ],
+   "state": "minecraft:enchanting_table"
+  },
+  {
+   "pos": [
+    23,
+    1,
+    1
+   ],
+   "state": "minecraft:anvil[facing=north]"
+  },
+  {
+   "pos": [
+    25,
+    1,
+    1
+   ],
+   "state": "minecraft:stonecutter[facing=north]"
+  },
+  {
+   "pos": [
+    27,
+    1,
+    1
+   ],
+   "state": "minecraft:grindstone[face=floor,facing=north]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 4,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 12,
+   "type": "destroy",
+   "pos": [
+    11,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 14,
+   "type": "destroy",
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 14,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 16,
+   "type": "destroy",
+   "pos": [
+    15,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 18,
+   "type": "destroy",
+   "pos": [
+    17,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 20,
+   "type": "destroy",
+   "pos": [
+    19,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 22,
+   "type": "destroy",
+   "pos": [
+    21,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 22,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 24,
+   "type": "destroy",
+   "pos": [
+    23,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 24,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 26,
+   "type": "destroy",
+   "pos": [
+    25,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 26,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 28,
+   "type": "destroy",
+   "pos": [
+    27,
+    1,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 28,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ]
+}

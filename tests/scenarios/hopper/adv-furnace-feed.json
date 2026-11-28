@@ -1,0 +1,27 @@
+{
+  "name": "adv-furnace-feed",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [17, 3, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [17, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 2, 1], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_gold\",count:1}],cooking_time_spent:40,cooking_total_time:200}"},
+    {"pos": [1, 3, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2}]}"},
+    {"pos": [3, 2, 1], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[],cooking_time_spent:40,cooking_total_time:200}"},
+    {"pos": [3, 3, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:2}]}"},
+    {"pos": [5, 2, 1], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:bucket\",count:1}]}"},
+    {"pos": [6, 2, 1], "state": "minecraft:hopper[enabled=true,facing=west]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bucket\",count:2},{Slot:1b,id:\"minecraft:coal\",count:2}]}"},
+    {"pos": [8, 2, 1], "state": "minecraft:furnace[facing=north,lit=false]"},
+    {"pos": [9, 2, 1], "state": "minecraft:hopper[enabled=true,facing=west]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bucket\",count:2},{Slot:1b,id:\"minecraft:coal\",count:2}]}"},
+    {"pos": [11, 2, 1], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:coal\",count:3},{Slot:2b,id:\"minecraft:iron_ingot\",count:2}]}"},
+    {"pos": [11, 1, 1], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [11, 0, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [13, 2, 1], "state": "minecraft:furnace[facing=north,lit=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:wet_sponge\",count:1},{Slot:1b,id:\"minecraft:bucket\",count:1}],lit_time_remaining:30,lit_total_time:30,cooking_time_spent:190,cooking_total_time:200}"},
+    {"pos": [13, 1, 1], "state": "minecraft:hopper[enabled=true,facing=east]"},
+    {"pos": [15, 2, 1], "state": "minecraft:smoker[facing=north,lit=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:lava_bucket\",count:1}]}"},
+    {"pos": [15, 3, 1], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:raw_iron\",count:1},{Slot:1b,id:\"minecraft:beef\",count:2}]}"},
+    {"pos": [15, 1, 1], "state": "minecraft:hopper[enabled=true,facing=west]"},
+    {"pos": [16, 2, 1], "state": "minecraft:hopper[enabled=true,facing=west]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:1},{Slot:1b,id:\"minecraft:stick\",count:2}]}"}
+  ]
+}

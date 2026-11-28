@@ -1,0 +1,12 @@
+{
+  "name": "fall-into-void",
+  "ticks": 260,
+  "box": {"min": [0, 0, 0], "max": [7, 3, 7]},
+  "fill": [
+    {"min": [1, 0, 1], "max": [3, 0, 1], "state": "minecraft:stone"},
+    {"min": [1, 1, 1], "max": [5, 1, 1], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [3.5, 1.0625, 1.5], "nbt": "{Motion:[0.3d,0.0d,0.0d]}"}
+  ]
+}

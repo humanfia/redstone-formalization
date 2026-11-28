@@ -1,0 +1,40 @@
+{
+  "name": "fuzz-items-s2-037",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:dropper[facing=south,triggered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:dropper[facing=north,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:oak_planks\",count:52},{Slot:1b,id:\"minecraft:snowball\",count:12},{Slot:3b,id:\"minecraft:birch_planks\",count:1},{Slot:5b,id:\"minecraft:stick\",count:4,components:{\"minecraft:max_stack_size\":4}},{Slot:6b,id:\"minecraft:oak_planks\",count:5},{Slot:8b,id:\"minecraft:dirt\",count:10}]}"},
+    {"pos": [0, 1, 2], "state": "minecraft:dropper[facing=north,triggered=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:dropper[facing=down,triggered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"pos": [1, 2, 0], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:stone"},
+    {"pos": [2, 1, 1], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":1}},{Slot:3b,id:\"minecraft:oak_log\",count:45}]}"},
+    {"pos": [2, 1, 2], "state": "minecraft:stone"},
+    {"pos": [2, 2, 1], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{disabled_slots:[I;0,2,4]}"},
+    {"pos": [2, 2, 2], "state": "minecraft:dropper[facing=north,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:brick\",count:58},{Slot:2b,id:\"minecraft:oak_log\",count:5},{Slot:3b,id:\"minecraft:bowl\",count:3},{Slot:4b,id:\"minecraft:brown_mushroom\",count:8},{Slot:5b,id:\"minecraft:cobblestone\",count:30},{Slot:8b,id:\"minecraft:stick\",count:53}]}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [1, 2, 0], "face": "up"},
+    {"tick": 6, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [1, 2, 0], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [1, 2, 0], "face": "up"},
+    {"tick": 41, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 42, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 49, "type": "use", "pos": [1, 2, 0], "face": "up"},
+    {"tick": 49, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 50, "type": "use", "pos": [1, 2, 0], "face": "up"},
+    {"tick": 51, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 55, "type": "use", "pos": [1, 2, 0], "face": "up"},
+    {"tick": 55, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 57, "type": "use", "pos": [1, 2, 0], "face": "up"},
+    {"tick": 58, "type": "use", "pos": [1, 2, 2], "face": "up"}
+  ]
+}

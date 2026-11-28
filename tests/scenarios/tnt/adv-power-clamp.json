@@ -1,0 +1,76 @@
+{
+ "name": "adv-power-clamp",
+ "ticks": 30,
+ "box": {
+  "min": [
+   -40,
+   -64,
+   -40
+  ],
+  "max": [
+   40,
+   60,
+   40
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    -3,
+    0,
+    -3
+   ],
+   "max": [
+    3,
+    0,
+    3
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    30,
+    5,
+    0
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "pos": [
+    0,
+    30,
+    0
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    0.5,
+    1.0,
+    0.5
+   ],
+   "nbt": "{fuse:3s,explosion_power:500.0f}"
+  }
+ ]
+}

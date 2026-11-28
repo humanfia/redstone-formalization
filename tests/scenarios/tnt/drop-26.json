@@ -1,0 +1,126 @@
+{
+ "name": "drop-26",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    5
+   ],
+   "state": "minecraft:iron_bars[east=true,north=true,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    5
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:amethyst_cluster[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    6
+   ],
+   "state": "minecraft:chorus_plant[down=false,east=true,north=false,south=false,up=true,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    5
+   ],
+   "state": "minecraft:oak_door[facing=south,half=lower,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:grindstone[face=floor,facing=south]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.458,
+    5.077,
+    1.25
+   ],
+   "nbt": "{Motion:[-0.218d,0.261d,-0.211d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.258,
+    5.131,
+    3.25
+   ],
+   "nbt": "{Motion:[-0.037d,-0.095d,0.063d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.138,
+    5.212,
+    2.422
+   ],
+   "nbt": "{Motion:[0.141d,0.076d,-0.172d]}"
+  }
+ ]
+}

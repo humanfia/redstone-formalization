@@ -1,0 +1,53 @@
+{
+  "name": "fuzz-items-s4-021",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [2, 4, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:stone"},
+    {"pos": [0, 1, 2], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 3, 0], "state": "minecraft:stone"},
+    {"pos": [0, 3, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 4, 0], "state": "minecraft:dropper[facing=east,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:64},{Slot:1b,id:\"minecraft:brown_mushroom\",count:64},{Slot:2b,id:\"minecraft:snowball\",count:16},{Slot:3b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":1}},{Slot:4b,id:\"minecraft:cobblestone\",count:64},{Slot:5b,id:\"minecraft:brown_mushroom\",count:33},{Slot:6b,id:\"minecraft:oak_log\",count:64},{Slot:7b,id:\"minecraft:birch_planks\",count:64},{Slot:8b,id:\"minecraft:brick\",count:64}]}"},
+    {"pos": [0, 4, 1], "state": "minecraft:dropper[facing=north,triggered=false]", "nbt": "{Items:[{Slot:5b,id:\"minecraft:ender_pearl\",count:13},{Slot:6b,id:\"minecraft:wheat\",count:56},{Slot:7b,id:\"minecraft:red_mushroom\",count:20}]}"},
+    {"pos": [0, 4, 2], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:ender_pearl\",count:2},{Slot:1b,id:\"minecraft:ender_pearl\",count:15},{Slot:2b,id:\"minecraft:milk_bucket\",count:1},{Slot:5b,id:\"minecraft:oak_log\",count:48}]}"},
+    {"pos": [1, 1, 2], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:brick\",count:16},{Slot:2b,id:\"minecraft:oak_planks\",count:31},{Slot:3b,id:\"minecraft:oak_planks\",count:4},{Slot:6b,id:\"minecraft:brown_mushroom\",count:55}]}"},
+    {"pos": [1, 2, 0], "state": "minecraft:dropper[facing=south,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:honey_bottle\",count:7},{Slot:2b,id:\"minecraft:cobblestone\",count:61},{Slot:3b,id:\"minecraft:bowl\",count:21},{Slot:4b,id:\"minecraft:brick\",count:26},{Slot:5b,id:\"minecraft:birch_planks\",count:3},{Slot:6b,id:\"minecraft:bowl\",count:42},{Slot:7b,id:\"minecraft:cobblestone\",count:19}]}"},
+    {"pos": [1, 2, 1], "state": "minecraft:dropper[facing=east,triggered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:dropper[facing=north,triggered=false]"},
+    {"pos": [1, 3, 0], "state": "minecraft:dropper[facing=down,triggered=false]"},
+    {"pos": [1, 3, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [1, 4, 0], "state": "minecraft:dropper[facing=south,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stick\",count:57},{Slot:2b,id:\"minecraft:honey_bottle\",count:7},{Slot:4b,id:\"minecraft:dirt\",count:37},{Slot:5b,id:\"minecraft:ender_pearl\",count:7},{Slot:7b,id:\"minecraft:iron_block\",count:58}]}"},
+    {"pos": [1, 4, 1], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:wheat\",count:53},{Slot:1b,id:\"minecraft:oak_planks\",count:54},{Slot:4b,id:\"minecraft:birch_planks\",count:29},{Slot:5b,id:\"minecraft:birch_planks\",count:20},{Slot:6b,id:\"minecraft:ender_pearl\",count:6}]}"},
+    {"pos": [1, 4, 2], "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:oak_log\",count:2}]}"},
+    {"pos": [2, 1, 0], "state": "minecraft:dispenser[facing=down,triggered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:dropper[facing=up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bowl\",count:20},{Slot:3b,id:\"minecraft:iron_block\",count:46},{Slot:4b,id:\"minecraft:dirt\",count:30},{Slot:7b,id:\"minecraft:iron_sword\",count:1}]}"},
+    {"pos": [2, 1, 2], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:crafter[crafting=false,orientation=west_up,triggered=false]", "nbt": "{Items:[{Slot:2b,id:\"minecraft:iron_block\",count:2}],disabled_slots:[I;3,8]}"},
+    {"pos": [2, 2, 2], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":2}},{Slot:1b,id:\"minecraft:stick\",count:2,components:{\"minecraft:max_stack_size\":4}},{Slot:2b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":2}},{Slot:3b,id:\"minecraft:cobblestone\",count:3},{Slot:4b,id:\"minecraft:brick\",count:64},{Slot:5b,id:\"minecraft:brick\",count:64},{Slot:6b,id:\"minecraft:ender_pearl\",count:16},{Slot:7b,id:\"minecraft:snowball\",count:16},{Slot:8b,id:\"minecraft:snowball\",count:16}]}"},
+    {"pos": [2, 3, 0], "state": "minecraft:lever[face=ceiling,facing=south,powered=false]"},
+    {"pos": [2, 3, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 4, 0], "state": "minecraft:dropper[facing=west,triggered=false]"},
+    {"pos": [2, 4, 1], "state": "minecraft:dropper[facing=south,triggered=false]"},
+    {"pos": [2, 4, 2], "state": "minecraft:dropper[facing=north,triggered=false]"}
+  ],
+  "actions": [
+    {"tick": 9, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 15, "type": "use", "pos": [0, 1, 2], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [0, 1, 2], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [2, 3, 0], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [2, 3, 0], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [2, 3, 0], "face": "up"},
+    {"tick": 23, "type": "use", "pos": [1, 3, 2], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [2, 3, 0], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [2, 1, 2], "face": "up"}
+  ]
+}

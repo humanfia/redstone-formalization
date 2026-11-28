@@ -1,0 +1,26 @@
+{
+  "name": "adv-inventory-leak",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [8, 2, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 6], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:chiseled_bookshelf[facing=south,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=true,slot_5_occupied=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:book\",count:1}],last_interacted_slot:4}"},
+    {"pos": [1, 1, 4], "state": "minecraft:chiseled_bookshelf[facing=south,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=true,slot_5_occupied=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:enchanted_book\",count:1}],last_interacted_slot:4}"},
+    {"pos": [4, 1, 2], "state": "minecraft:oak_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [4, 1, 3], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:oak_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [5, 1, 3], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [6, 1, 2], "state": "minecraft:oak_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [6, 1, 3], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [1, 1, 1], "face": "south"},
+    {"tick": 2, "type": "use", "pos": [1, 1, 4], "face": "south"},
+    {"tick": 4, "type": "use", "pos": [4, 1, 3], "face": "up"},
+    {"tick": 5, "type": "use", "pos": [5, 1, 3], "face": "up"},
+    {"tick": 6, "type": "use", "pos": [6, 1, 3], "face": "up"},
+    {"tick": 10, "type": "use_item", "pos": [5, 1, 2], "face": "south", "item": "minecraft:stick"}
+  ]
+}

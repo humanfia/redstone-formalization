@@ -1,0 +1,26 @@
+{
+  "name": "lock-replace",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [9, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [9, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [1, 1, 1], "state": "minecraft:hopper[enabled=false,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:3}]}"},
+    {"pos": [2, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [4, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [4, 1, 1], "state": "minecraft:hopper[enabled=true,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:3}]}"},
+    {"pos": [5, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [7, 1, 0], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [8, 1, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"},
+    {"pos": [7, 2, 1], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:2}]}"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [1, 1, 1], "state": "minecraft:hopper[enabled=true,facing=east]"},
+    {"tick": 6, "type": "set", "pos": [4, 1, 1], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"tick": 7, "type": "set", "pos": [7, 1, 1], "state": "minecraft:hopper[enabled=true,facing=east]"},
+    {"tick": 25, "type": "set", "pos": [1, 1, 1], "state": "minecraft:hopper[enabled=false,facing=east]"},
+    {"tick": 30, "type": "use", "pos": [7, 1, 0], "face": "up"}
+  ]
+}

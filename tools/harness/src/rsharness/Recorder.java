@@ -370,6 +370,10 @@ final class Recorder {
          this.level.setRainLevel(rain ? 1.0F : 0.0F);
          this.level.setThunderLevel(thunder ? 1.0F : 0.0F);
       }
+      // Level.skyDarken is otherwise only recomputed at the start of a tick: the actions of tick 1
+      // would read the value left by the clock and the weather of the previous scenario.
+      this.level.environmentAttributes().invalidateTickCache();
+      this.level.updateSkyBrightness();
       this.level.getRandom().setSeed(0L);
       this.randValueField.setInt(this.level, 0);
       this.recentTorchToggles.clear();

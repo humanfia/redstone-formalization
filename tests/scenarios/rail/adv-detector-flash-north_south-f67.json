@@ -1,0 +1,183 @@
+{
+  "name": "adv-detector-flash-north_south-f67",
+  "ticks": 30,
+  "box": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      6,
+      3,
+      5
+    ]
+  },
+  "fill": [
+    {
+      "min": [
+        0,
+        0,
+        0
+      ],
+      "max": [
+        6,
+        0,
+        5
+      ],
+      "state": "minecraft:stone"
+    }
+  ],
+  "blocks": [
+    {
+      "pos": [
+        2,
+        1,
+        1
+      ],
+      "state": "minecraft:redstone_lamp[lit=false]"
+    },
+    {
+      "pos": [
+        2,
+        2,
+        2
+      ],
+      "state": "minecraft:redstone_lamp[lit=false]"
+    },
+    {
+      "pos": [
+        3,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        4,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        5,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        1,
+        1,
+        2
+      ],
+      "state": "minecraft:activator_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        0,
+        1,
+        2
+      ],
+      "state": "minecraft:activator_rail[powered=false,shape=east_west,waterlogged=false]"
+    },
+    {
+      "pos": [
+        2,
+        1,
+        3
+      ],
+      "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+    },
+    {
+      "pos": [
+        2,
+        1,
+        4
+      ],
+      "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+    }
+  ],
+  "actions": [
+    {
+      "tick": 3,
+      "type": "set",
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:detector_rail[powered=true,shape=north_south,waterlogged=false]",
+      "flags": 67
+    },
+    {
+      "tick": 9,
+      "type": "set",
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:air",
+      "flags": 67
+    },
+    {
+      "tick": 12,
+      "type": "set",
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:detector_rail[powered=true,shape=north_south,waterlogged=false]",
+      "flags": 579
+    },
+    {
+      "tick": 15,
+      "type": "set",
+      "pos": [
+        3,
+        2,
+        2
+      ],
+      "state": "minecraft:stone"
+    },
+    {
+      "tick": 17,
+      "type": "set",
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:detector_rail[powered=false,shape=north_south,waterlogged=false]",
+      "flags": 67
+    },
+    {
+      "tick": 20,
+      "type": "set",
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]",
+      "flags": 67
+    },
+    {
+      "tick": 23,
+      "type": "set",
+      "pos": [
+        2,
+        1,
+        2
+      ],
+      "state": "minecraft:detector_rail[powered=true,shape=north_south,waterlogged=false]",
+      "flags": 67
+    }
+  ]
+}

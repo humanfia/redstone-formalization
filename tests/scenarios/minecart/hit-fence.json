@@ -1,0 +1,18 @@
+{
+  "name": "hit-fence",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [1, 1, 4], "max": [9, 1, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [4, 1, 9], "max": [4, 1, 14], "state": "minecraft:rail[shape=north_south,waterlogged=false]"}
+  ],
+  "blocks": [
+    {"pos": [10, 1, 4], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [4, 1, 8], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [6.5, 1.0625, 4.5], "nbt": "{Motion:[0.4d,0.0d,0.0d]}"},
+    {"type": "minecraft:minecart", "pos": [4.5, 1.0625, 12.5], "nbt": "{Motion:[0.0d,0.0d,-0.3d]}"}
+  ]
+}

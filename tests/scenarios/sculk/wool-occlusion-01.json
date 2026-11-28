@@ -1,0 +1,16 @@
+{
+  "name": "wool-occlusion-01",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [6, 5, 6]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 6], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:white_wool"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

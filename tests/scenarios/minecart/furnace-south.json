@@ -1,0 +1,19 @@
+{
+  "name": "furnace-south",
+  "ticks": 70,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [1, 1, 3], "max": [14, 1, 3], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [3, 1, 9], "max": [3, 1, 12], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"min": [4, 1, 13], "max": [12, 1, 13], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 13], "state": "minecraft:rail[shape=north_east,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:furnace_minecart", "pos": [7.5, 1.0625, 3.5], "nbt": "{Motion:[0.05d,0.0d,0.0d],PushX:0.0d,PushZ:1.0d,Fuel:30s}"},
+    {"type": "minecraft:furnace_minecart", "pos": [3.5, 1.0625, 9.5], "nbt": "{Motion:[0.0d,0.0d,0.1d],PushX:0.0d,PushZ:1.0d,Fuel:30s}"},
+    {"type": "minecraft:furnace_minecart", "pos": [13.5, 1.0, 7.5], "nbt": "{Motion:[0.1d,0.0d,0.0d],PushX:1.0d,PushZ:0.0d,Fuel:30s}"}
+  ]
+}

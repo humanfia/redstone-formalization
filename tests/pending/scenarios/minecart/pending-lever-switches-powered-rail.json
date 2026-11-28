@@ -1,0 +1,22 @@
+{
+  "name": "pending-lever-switches-powered-rail",
+  "ticks": 80,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [2, 1, 4], "max": [5, 1, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [6, 1, 4], "max": [8, 1, 4], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"min": [9, 1, 4], "max": [14, 1, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "blocks": [
+    {"pos": [7, 1, 5], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [5, 1, 4], "state": "minecraft:stone"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [6.5, 1.0625, 4.5]}
+  ],
+  "actions": [
+    {"tick": 10, "type": "use", "pos": [7, 1, 5], "face": "up"},
+    {"tick": 40, "type": "use", "pos": [7, 1, 5], "face": "up"}
+  ]
+}

@@ -6,24 +6,73 @@ public import Redstone.Block.Generated.State
 /-!
 # Block entity `minecraft:lectern`
 
-The data that the model keeps of the block entity `LecternBlockEntity`.
-Nothing is modelled yet: the structure is empty and is to be filled in by the component that
-owns this block entity.
+The data that the model keeps of the block entity `LecternBlockEntity`: the book on the lectern
+and the page it is open at. Of the book only the item and the number of its pages are kept,
+which is all the comparator signal depends on.
 -/
 
 @[expose] public section
 
 namespace Redstone.BlockEntities
 
+/-- The book of a lectern (`LecternBlockEntity.book`, a non-empty stack). -/
+structure LecternBook where
+  /-- The registry name of the item. -/
+  id : String
+  /-- The number of pages of the book's `writable_book_content` or `written_book_content`
+  component, or `none` when the stack has neither (`LecternBlockEntity.hasBook` is then
+  false). -/
+  pages : Option ℕ
+  deriving DecidableEq, Repr, Inhabited
+
+namespace LecternBook
+
+/-- The book made of one item with its default components. A book and quill has an empty
+`writable_book_content`; no other item has book content by default. -/
+def ofItem (id : String) : LecternBook :=
+  ⟨id, if id = "minecraft:writable_book" then some 0 else none⟩
+
+/-- Reads a stack saved with `ItemStack.CODEC`. Only the components that differ from the
+item's defaults are saved. -/
+def ofNbt? (t : Nbt) : Option LecternBook := do
+  let id ← (t.get? "id").bind Nbt.toString?
+  let content (key : String) : Option ℕ :=
+    ((t.get? "components").bind (·.get? key)).map fun c =>
+      (((c.get? "pages").bind Nbt.toList?).getD []).length
+  match content "minecraft:written_book_content" with
+  | some n => some ⟨id, some n⟩
+  | none =>
+    match content "minecraft:writable_book_content" with
+    | some n => some ⟨id, some n⟩
+    | none => some (ofItem id)
+
+end LecternBook
+
 /-- The data of a `minecraft:lectern` block entity. -/
 structure Lectern where
+  /-- `book`: the book on the lectern, if there is one. -/
+  book : Option LecternBook
+  /-- `page`: the page the book is open at. It is `-1` for a book without pages that was loaded
+  from saved data (`Mth.clamp(page, 0, pageCount - 1)`). -/
+  page : ℤ
   deriving DecidableEq, Repr, Inhabited
 
 namespace Lectern
 
-/-- Reads the data from the block entity's saved NBT. Fields the model does not keep are
-ignored. -/
-def ofNbt? (_ : Nbt) : Option Lectern := some {}
+/-- `pageCount`: the number of pages of the book, zero when it has no book content. -/
+def pageCount (d : Lectern) : ℕ := (d.book.bind (·.pages)).getD 0
+
+/-- `hasBook()`: the stack on the lectern has book content. -/
+def hasBook (d : Lectern) : Bool := (d.book.bind (·.pages)).isSome
+
+/-- Reads the data from NBT that the server saved (`saveAdditional`): the page is taken as it
+is, since the server has already brought it into range when it loaded the book. -/
+def ofNbt? (t : Nbt) : Option Lectern :=
+  match t.get? "Book" with
+  | none => some ⟨none, 0⟩
+  | some b => do
+    let book ← LecternBook.ofNbt? b
+    some ⟨some book, t.intD "Page" 0⟩
 
 end Lectern
 

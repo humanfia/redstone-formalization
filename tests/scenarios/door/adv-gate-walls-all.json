@@ -1,0 +1,1330 @@
+{
+ "name": "adv-gate-walls-all",
+ "ticks": 14,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   24,
+   4,
+   18
+  ]
+ },
+ "fill": [],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    7
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=north,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    12
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    17
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    7
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=south,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    12
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=south,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    17
+   ],
+   "state": "minecraft:oak_fence_gate[facing=south,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=west,in_wall=false,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    7
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=west,in_wall=true,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    12
+   ],
+   "state": "minecraft:oak_fence_gate[facing=west,in_wall=false,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    17
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=west,in_wall=false,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    2,
+    2
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=east,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    2,
+    7
+   ],
+   "state": "minecraft:oak_fence_gate[facing=east,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    2,
+    12
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=east,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    2,
+    17
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=east,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    23,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    23,
+    2,
+    5
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    23,
+    2,
+    8
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    23,
+    2,
+    11
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    23,
+    2,
+    14
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=false,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:cobblestone_wall[east=low,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "state": "minecraft:mud_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    12
+   ],
+   "state": "minecraft:sulfur_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    17
+   ],
+   "state": "minecraft:cinnabar_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:mud_brick_wall[east=low,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    6
+   ],
+   "state": "minecraft:sulfur_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    7,
+    3,
+    12
+   ],
+   "state": "minecraft:cinnabar_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    17
+   ],
+   "state": "minecraft:polished_tuff_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "state": "minecraft:sulfur_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "state": "minecraft:cinnabar_wall[east=none,north=none,south=low,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    12
+   ],
+   "state": "minecraft:polished_tuff_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    17
+   ],
+   "state": "minecraft:end_stone_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "state": "minecraft:cinnabar_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    17,
+    2,
+    6
+   ],
+   "state": "minecraft:polished_tuff_wall[east=none,north=none,south=low,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    17,
+    3,
+    12
+   ],
+   "state": "minecraft:end_stone_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    17,
+    1,
+    17
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    22,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence[east=true,north=false,south=false,waterlogged=false,west=false]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    22,
+    2,
+    5
+   ],
+   "state": "minecraft:glass_pane[east=false,north=false,south=false,waterlogged=false,west=false]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    22,
+    2,
+    8
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    22,
+    2,
+    11
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    22,
+    2,
+    14
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=false,powered=false]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:mud_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=low]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    8
+   ],
+   "state": "minecraft:sulfur_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "state": "minecraft:cinnabar_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    17
+   ],
+   "state": "minecraft:polished_tuff_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:sulfur_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=low]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    8
+   ],
+   "state": "minecraft:cinnabar_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    12
+   ],
+   "state": "minecraft:polished_tuff_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    3,
+    17
+   ],
+   "state": "minecraft:end_stone_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "state": "minecraft:cinnabar_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    8
+   ],
+   "state": "minecraft:polished_tuff_wall[east=none,north=low,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    12
+   ],
+   "state": "minecraft:end_stone_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    17
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    18,
+    2,
+    2
+   ],
+   "state": "minecraft:polished_tuff_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    17,
+    2,
+    8
+   ],
+   "state": "minecraft:end_stone_brick_wall[east=none,north=low,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    17,
+    1,
+    12
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    17,
+    3,
+    17
+   ],
+   "state": "minecraft:mud_brick_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    2,
+    3,
+    12
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    17
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    7,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    7,
+    3,
+    12
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    7,
+    1,
+    17
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    12,
+    3,
+    12
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    12,
+    1,
+    17
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    17,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    17,
+    3,
+    12
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    17,
+    1,
+    17
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    22,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    22,
+    2,
+    5
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    22,
+    2,
+    8
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    22,
+    2,
+    11
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    22,
+    2,
+    14
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    7
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    12
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    17
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    7
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    12
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    17
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    7
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    12
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    17
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    17,
+    2,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    17,
+    2,
+    7
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    17,
+    2,
+    12
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    17,
+    2,
+    17
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    8
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    2,
+    3,
+    17
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    7,
+    2,
+    8
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    7,
+    1,
+    12
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    7,
+    3,
+    17
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    8
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    12,
+    1,
+    12
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    12,
+    3,
+    17
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    18,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    17,
+    2,
+    8
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    17,
+    1,
+    12
+   ],
+   "drop": false
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    17,
+    3,
+    17
+   ],
+   "drop": false
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    7
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    12
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    17
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    7
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    12
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    7,
+    2,
+    17
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    7
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    12
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    17
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    17,
+    2,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    17,
+    2,
+    7
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    17,
+    2,
+    12
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    17,
+    2,
+    17
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  }
+ ]
+}

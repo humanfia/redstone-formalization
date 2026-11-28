@@ -1,0 +1,27 @@
+{
+  "name": "hash-order-east-8_8_8",
+  "ticks": 20,
+  "box": {"min": [3, 2, 2], "max": [12, 14, 14]},
+  "blocks": [
+    {"pos": [6, 8, 8], "state": "minecraft:stone"},
+    {"pos": [7, 8, 8], "state": "minecraft:lever[face=wall,facing=east,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [9, 5, 8], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [9, 6, 8], "state": "minecraft:lever[face=ceiling,facing=north,powered=true]"},
+    {"pos": [9, 7, 8], "state": "minecraft:stone"},
+    {"pos": [9, 8, 5], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [9, 8, 6], "state": "minecraft:lever[face=wall,facing=north,powered=true]"},
+    {"pos": [9, 8, 7], "state": "minecraft:stone"},
+    {"pos": [9, 8, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 8, 9], "state": "minecraft:stone"},
+    {"pos": [9, 8, 10], "state": "minecraft:lever[face=wall,facing=south,powered=true]"},
+    {"pos": [9, 8, 11], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [9, 9, 8], "state": "minecraft:stone"},
+    {"pos": [9, 10, 8], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [9, 11, 8], "state": "minecraft:redstone_lamp[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [7, 8, 8], "face": "up"},
+    {"tick": 9, "type": "use", "pos": [7, 8, 8], "face": "up"}
+  ]
+}

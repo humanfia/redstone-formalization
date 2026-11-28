@@ -1,0 +1,12 @@
+{
+  "name": "sponge-depth",
+  "ticks": 5,
+  "box": {"min": [0, 0, 0], "max": [11, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [11, 2, 2], "state": "minecraft:stone"},
+    {"min": [2, 1, 1], "max": [10, 1, 1], "state": "minecraft:water[level=0]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [1, 1, 1], "state": "minecraft:sponge"}
+  ]
+}

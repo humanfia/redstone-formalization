@@ -1,0 +1,34 @@
+{
+  "name": "rand-door-s1-019",
+  "ticks": 24,
+  "box": {"min": [0, 0, 0], "max": [4, 5, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 2], "state": "minecraft:stone"},
+    {"pos": [0, 2, 0], "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"},
+    {"pos": [0, 2, 3], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [1, 4, 2], "state": "minecraft:stone"},
+    {"pos": [3, 1, 0], "state": "minecraft:poplar_fence_gate[facing=south,in_wall=false,open=false,powered=false]"},
+    {"pos": [3, 2, 4], "state": "minecraft:iron_door[facing=north,half=lower,hinge=right,open=false,powered=false]"},
+    {"pos": [3, 3, 4], "state": "minecraft:iron_door[facing=north,half=upper,hinge=right,open=false,powered=false]"},
+    {"pos": [3, 4, 2], "state": "minecraft:cherry_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [3, 4, 4], "state": "minecraft:stone"},
+    {"pos": [4, 1, 2], "state": "minecraft:copper_door[facing=east,half=lower,hinge=left,open=true,powered=false]"},
+    {"pos": [4, 2, 2], "state": "minecraft:copper_door[facing=east,half=upper,hinge=left,open=true,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [3, 3, 3], "state": "minecraft:crimson_fence_gate[facing=north,in_wall=false,open=false,powered=false]", "flags": 3},
+    {"tick": 4, "type": "destroy", "pos": [0, 2, 3], "drop": false},
+    {"tick": 5, "type": "use", "pos": [0, 2, 3], "face": "up"},
+    {"tick": 9, "type": "destroy", "pos": [4, 1, 2], "drop": false},
+    {"tick": 10, "type": "destroy", "pos": [2, 0, 1], "drop": false},
+    {"tick": 15, "type": "use", "pos": [3, 3, 4], "face": "east"},
+    {"tick": 15, "type": "use", "pos": [0, 2, 3], "face": "up"},
+    {"tick": 18, "type": "use", "pos": [0, 2, 3], "face": "up"},
+    {"tick": 19, "type": "use", "pos": [0, 2, 3], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [0, 2, 3], "face": "up"},
+    {"tick": 24, "type": "use", "pos": [0, 2, 0], "face": "north"}
+  ]
+}

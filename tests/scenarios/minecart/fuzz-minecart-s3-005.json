@@ -1,0 +1,51 @@
+{
+  "name": "fuzz-minecart-s3-005",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:rail[shape=ascending_south,waterlogged=false]"},
+    {"pos": [0, 1, 3], "state": "minecraft:rail[shape=north_west,waterlogged=false]"},
+    {"pos": [0, 1, 4], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:rail[shape=ascending_north,waterlogged=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:powered_rail[powered=true,shape=ascending_west,waterlogged=false]"},
+    {"pos": [0, 2, 4], "state": "minecraft:activator_rail[powered=false,shape=ascending_west,waterlogged=false]"},
+    {"pos": [0, 3, 0], "state": "minecraft:rail[shape=north_west,waterlogged=false]"},
+    {"pos": [0, 3, 1], "state": "minecraft:rail[shape=south_east,waterlogged=false]"},
+    {"pos": [0, 3, 4], "state": "minecraft:rail[shape=north_south,waterlogged=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:powered_rail[powered=true,shape=ascending_west,waterlogged=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:rail[shape=ascending_west,waterlogged=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:rail[shape=south_east,waterlogged=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:powered_rail[powered=true,shape=ascending_east,waterlogged=false]"},
+    {"pos": [1, 3, 2], "state": "minecraft:stone"},
+    {"pos": [2, 1, 1], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [2, 1, 3], "state": "minecraft:rail[shape=south_east,waterlogged=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:white_carpet"},
+    {"pos": [2, 2, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [2, 2, 2], "state": "minecraft:rail[shape=ascending_north,waterlogged=false]"},
+    {"pos": [2, 2, 3], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [2, 2, 4], "state": "minecraft:rail[shape=south_east,waterlogged=false]"},
+    {"pos": [2, 3, 0], "state": "minecraft:white_carpet"},
+    {"pos": [2, 3, 2], "state": "minecraft:powered_rail[powered=false,shape=ascending_west,waterlogged=false]"},
+    {"pos": [2, 3, 3], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 3], "state": "minecraft:powered_rail[powered=false,shape=ascending_north,waterlogged=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:rail[shape=ascending_north,waterlogged=false]"},
+    {"pos": [3, 2, 3], "state": "minecraft:stone"},
+    {"pos": [3, 2, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [3, 3, 0], "state": "minecraft:glass"},
+    {"pos": [3, 3, 2], "state": "minecraft:rail[shape=north_east,waterlogged=false]"},
+    {"pos": [4, 1, 4], "state": "minecraft:stone_slab[type=double,waterlogged=false]"},
+    {"pos": [4, 2, 0], "state": "minecraft:rail[shape=north_west,waterlogged=false]"},
+    {"pos": [4, 2, 1], "state": "minecraft:rail[shape=ascending_east,waterlogged=false]"},
+    {"pos": [4, 2, 2], "state": "minecraft:rail[shape=ascending_east,waterlogged=false]"},
+    {"pos": [4, 3, 3], "state": "minecraft:rail[shape=south_west,waterlogged=false]"},
+    {"pos": [4, 3, 4], "state": "minecraft:activator_rail[powered=false,shape=east_west,waterlogged=false]"}
+  ],
+  "entities": [{"type": "minecraft:command_block_minecart", "pos": [0.5, 1.0625, 3.5], "nbt": "{Motion:[0.0d,0.0d,-0.273d]}"}],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [3, 2, 3], "state": "minecraft:powered_rail[powered=false,shape=ascending_north,waterlogged=false]", "flags": 594}
+  ]
+}

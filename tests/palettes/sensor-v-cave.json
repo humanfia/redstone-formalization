@@ -1,0 +1,115 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {
+      "state": "minecraft:air",
+      "weight": 16
+    },
+    {
+      "state": "minecraft:stone",
+      "weight": 26
+    },
+    {
+      "state": "minecraft:glass",
+      "weight": 6
+    },
+    {
+      "state": "minecraft:redstone_lamp[lit=false]",
+      "weight": 2
+    },
+    {
+      "state": "minecraft:lever[face=*,facing=*,powered=false]",
+      "weight": 2
+    },
+    {
+      "state": "minecraft:daylight_detector[inverted=*,power=*]",
+      "weight": 10
+    },
+    {
+      "state": "minecraft:target[power=0]",
+      "weight": 1
+    },
+    {
+      "state": "minecraft:lightning_rod[facing=*,powered=*,waterlogged=false]",
+      "weight": 1
+    },
+    {
+      "state": "minecraft:exposed_lightning_rod[facing=*,powered=*,waterlogged=false]",
+      "weight": 1
+    },
+    {
+      "state": "minecraft:weathered_lightning_rod[facing=*,powered=*,waterlogged=false]",
+      "weight": 1
+    }
+  ],
+  "actions": {
+    "use": {
+      "count": [
+        6,
+        12
+      ],
+      "targets": [
+        "minecraft:lever",
+        "minecraft:daylight_detector"
+      ],
+      "faces": [
+        "up",
+        "down",
+        "north",
+        "south",
+        "west",
+        "east"
+      ]
+    },
+    "set": {
+      "count": [
+        10,
+        20
+      ],
+      "states": [
+        "minecraft:stone",
+        "minecraft:air",
+        "minecraft:air",
+        "minecraft:glass",
+        "minecraft:redstone_lamp[lit=*]",
+        "minecraft:daylight_detector[inverted=*,power=*]",
+        "minecraft:target[power=*]",
+        "minecraft:lever[face=*,facing=*,powered=*]",
+        "minecraft:lightning_rod[facing=*,powered=*,waterlogged=false]",
+        "minecraft:exposed_lightning_rod[facing=*,powered=*,waterlogged=false]",
+        "minecraft:weathered_lightning_rod[facing=*,powered=*,waterlogged=false]",
+        "minecraft:oxidized_lightning_rod[facing=*,powered=*,waterlogged=false]",
+        "minecraft:waxed_lightning_rod[facing=*,powered=*,waterlogged=false]",
+        "minecraft:waxed_exposed_lightning_rod[facing=*,powered=*,waterlogged=false]",
+        "minecraft:waxed_weathered_lightning_rod[facing=*,powered=*,waterlogged=false]",
+        "minecraft:waxed_oxidized_lightning_rod[facing=*,powered=*,waterlogged=false]"
+      ]
+    },
+    "destroy": {
+      "count": [
+        6,
+        12
+      ],
+      "targets": [
+        "minecraft:stone",
+        "minecraft:redstone_lamp",
+        "minecraft:lever",
+        "minecraft:daylight_detector",
+        "minecraft:target",
+        "minecraft:glass",
+        "minecraft:lightning_rod",
+        "minecraft:exposed_lightning_rod",
+        "minecraft:weathered_lightning_rod",
+        "minecraft:oxidized_lightning_rod",
+        "minecraft:waxed_lightning_rod",
+        "minecraft:waxed_exposed_lightning_rod",
+        "minecraft:waxed_weathered_lightning_rod",
+        "minecraft:waxed_oxidized_lightning_rod"
+      ]
+    }
+  },
+  "settings": {
+    "dayTime": 12013,
+    "advanceTime": true
+  }
+}

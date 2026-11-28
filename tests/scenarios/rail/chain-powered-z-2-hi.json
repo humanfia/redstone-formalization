@@ -1,0 +1,17 @@
+{
+  "name": "chain-powered-z-2-hi",
+  "ticks": 12,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 1], "state": "minecraft:powered_rail[powered=false,shape=north_south,waterlogged=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:powered_rail[powered=false,shape=north_south,waterlogged=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [3, 1, 2], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [3, 1, 2], "face": "up"}
+  ]
+}

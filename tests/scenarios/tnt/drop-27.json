@@ -1,0 +1,198 @@
+{
+ "name": "drop-27",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:cobblestone_wall[east=tall,north=none,south=low,up=false,waterlogged=false,west=tall]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:chorus_plant[down=false,east=true,north=false,south=false,up=true,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:glass_pane[east=true,north=false,south=false,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    3
+   ],
+   "state": "minecraft:glass_pane[east=false,north=true,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    4
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:oak_fence[east=true,north=false,south=true,waterlogged=false,west=true]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:bookshelf"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:oak_door[facing=south,half=lower,hinge=right,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    6
+   ],
+   "state": "minecraft:oak_door[facing=east,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:grindstone[face=wall,facing=south]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_planks"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    5
+   ],
+   "state": "minecraft:end_stone"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:white_wool"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:hay_block[axis=y]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=low,south=none,up=false,waterlogged=false,west=none]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.03,
+    2.458,
+    4.568
+   ],
+   "nbt": "{Motion:[-0.782d,0.247d,0.275d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    2.11,
+    4.249,
+    5.889
+   ],
+   "nbt": "{Motion:[-0.082d,0.099d,-0.087d]}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    6.109,
+    1.175,
+    3.242
+   ],
+   "nbt": "{Motion:[0.505d,-0.276d,0.22d]}"
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "v-dd-detector-walls",
+  "ticks": 90,
+  "box": {"min": [0, 0, 0], "max": [8, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 3, 4], "state": "minecraft:stone"},
+    {"min": [1, 1, 1], "max": [7, 1, 3], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [1, 2, 2], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [1, 1, 2], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [3, 3, 2], "state": "minecraft:glass"},
+    {"pos": [3, 2, 2], "state": "minecraft:daylight_detector[inverted=true,power=0]"},
+    {"pos": [3, 1, 2], "state": "minecraft:daylight_detector[inverted=true,power=0]"},
+    {"pos": [5, 1, 2], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [7, 1, 2], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [8, 1, 2], "state": "minecraft:daylight_detector[inverted=false,power=0]"},
+    {"pos": [7, 2, 2], "state": "minecraft:waxed_weathered_lightning_rod[facing=down,powered=false,waterlogged=false]"},
+    {"pos": [7, 3, 2], "state": "minecraft:lever[face=ceiling,facing=east,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 25, "type": "destroy", "pos": [1, 3, 2], "drop": false},
+    {"tick": 45, "type": "set", "pos": [8, 1, 2], "state": "minecraft:stone"},
+    {"tick": 65, "type": "destroy", "pos": [7, 3, 2], "drop": false},
+    {"tick": 66, "type": "use", "pos": [7, 1, 2], "face": "up"},
+    {"tick": 70, "type": "destroy", "pos": [7, 2, 2], "drop": false}
+  ]
+}

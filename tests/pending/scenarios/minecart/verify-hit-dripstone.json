@@ -1,0 +1,29 @@
+{
+  "name": "verify-hit-dripstone",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"},
+    {"pos": [2, 1, 6], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [3, 1, 6], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [4, 1, 6], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 6], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [6, 1, 6], "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"},
+    {"pos": [7, 1, 7], "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"},
+    {"pos": [3, 1, 11], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [4, 1, 11], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 11], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [6, 1, 11], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"pos": [7, 1, 11], "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"},
+    {"pos": [9, 1, 12], "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [1.5, 1.0625, 1.5], "nbt": "{Motion:[0.4d,0.0d,0.0d]}"}, {"type": "minecraft:minecart", "pos": [2.5, 1.0625, 6.5], "nbt": "{Motion:[0.4d,0.0d,0.0d]}"}, {"type": "minecraft:minecart", "pos": [3.5, 1.0625, 11.5], "nbt": "{Motion:[0.4d,0.0d,0.0d]}"}]
+}

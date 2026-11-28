@@ -120,6 +120,9 @@ structure Scenario where
   lo : Pos
   hi : Pos
   actions : List (ℕ × Action)
+  dayTime : ℕ
+  advanceTime : Bool
+  weather : Weather
 
 def parseAction (j : Json) : Except String (ℕ × Action) := do
   let tick ← (← j.getObjVal? "tick").getNat?
@@ -139,12 +142,26 @@ def parseAction (j : Json) : Except String (ℕ × Action) := do
 def parseScenario (j : Json) : Except String Scenario := do
   let box ← j.getObjVal? "box"
   let actions := (j.getObjVal? "actions" >>= (·.getArr?)).toOption.getD #[]
+  let settings := (j.getObjVal? "settings").toOption.getD (Json.mkObj [])
+  -- A setting that is absent has its default value; one that is present must be well formed.
+  let setting (α : Type) [Lean.FromJson α] (key : String) (default : α) : Except String α :=
+    match settings.getObjVal? key with
+    | .ok v => Lean.fromJson? v
+    | .error _ => pure default
+  let weather ← match ← setting String "weather" "clear" with
+    | "clear" => pure Weather.clear
+    | "rain" => pure Weather.rain
+    | "thunder" => pure Weather.thunder
+    | w => throw s!"not a weather: {w}"
   return {
     name := ← (← j.getObjVal? "name").getStr?
     ticks := ← (← j.getObjVal? "ticks").getNat?
     lo := ← parsePos (← box.getObjVal? "min")
     hi := ← parsePos (← box.getObjVal? "max")
-    actions := ← actions.toList.mapM parseAction }
+    actions := ← actions.toList.mapM parseAction
+    dayTime := ← setting ℕ "dayTime" 6000
+    advanceTime := ← setting Bool "advanceTime" false
+    weather }
 
 structure Frame where
   gameTime : ℕ
@@ -229,7 +246,7 @@ def normalize (s : Scenario) (l : Level) : Level :=
 
 def initialLevel (s : Scenario) (f : Frame) : Level :=
   let e := ({} : Expected).apply f
-  normalize s { Level.empty with
+  let l := normalize s { Level.empty with
     world := ⟨fun p => e.blocks.getD (Pos.key p) .AIR⟩
     blockEntities := fun p => e.blockEntities.get? (Pos.key p)
     blockEntityTickers := f.tickers
@@ -239,7 +256,11 @@ def initialLevel (s : Scenario) (f : Frame) : Level :=
     blockEvents := f.blockEvents
     entities := f.entities
     nextEntityIndex := f.entities.foldl (fun n e => max n (e.index + 1)) 0
-    gameTime := f.gameTime }
+    gameTime := f.gameTime
+    dayTime := s.dayTime
+    advanceTime := s.advanceTime
+    weather := s.weather }
+  { l with lightWorld := l.world }
 
 def applyAction (a : Action) : M Unit :=
   match a with
@@ -263,7 +284,8 @@ def compare (s : Scenario) (l : Level) (e : Expected) (f : Frame) : List String 
     let got := l.blockAt p
     if want ≠ got then out := s!"block at {showPos p}: expected {want}, got {got}" :: out
     let wantBe := e.blockEntities.get? (Pos.key p)
-    let gotBe := l.blockEntities p
+    -- A trace shows saved data only: the fields the game does not save are left out.
+    let gotBe := (l.blockEntities p).map Component.Container.savedData
     if wantBe ≠ gotBe then
       out := s!"block entity at {showPos p}: expected {repr wantBe}, got {repr gotBe}" :: out
   let tickers := l.blockEntityTickers ++ l.pendingBlockEntityTickers

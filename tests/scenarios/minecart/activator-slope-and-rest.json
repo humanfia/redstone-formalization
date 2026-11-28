@@ -1,0 +1,21 @@
+{
+  "name": "activator-slope-and-rest",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [15, 5, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [2, 1, 2], "max": [2, 1, 4], "state": "minecraft:activator_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"min": [12, 1, 2], "max": [12, 1, 4], "state": "minecraft:activator_rail[powered=true,shape=north_south,waterlogged=false]"},
+    {"min": [4, 1, 8], "max": [7, 1, 8], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "blocks": [
+    {"pos": [8, 1, 8], "state": "minecraft:activator_rail[powered=true,shape=ascending_east,waterlogged=false]"},
+    {"pos": [9, 1, 8], "state": "minecraft:stone"},
+    {"pos": [9, 2, 8], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:tnt_minecart", "pos": [2.5, 1.0625, 3.5]},
+    {"type": "minecraft:hopper_minecart", "pos": [12.5, 1.0625, 2.5]},
+    {"type": "minecraft:hopper_minecart", "pos": [5.5, 1.0625, 8.5], "nbt": "{Motion:[0.3d,0.0d,0.0d]}"}
+  ]
+}

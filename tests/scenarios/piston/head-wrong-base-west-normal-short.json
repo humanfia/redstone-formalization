@@ -1,0 +1,14 @@
+{
+  "name": "head-wrong-base-west-normal-short",
+  "ticks": 12,
+  "box": {"min": [5, 5, 5], "max": [12, 11, 11]},
+  "blocks": [
+    {"pos": [8, 8, 8], "state": "minecraft:piston_head[facing=west,short=true,type=normal]"},
+    {"pos": [9, 8, 8], "state": "minecraft:sticky_piston[extended=true,facing=west]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "set", "pos": [9, 8, 8], "state": "minecraft:piston[extended=true,facing=west]"},
+    {"tick": 6, "type": "set", "pos": [9, 8, 8], "state": "minecraft:piston[extended=false,facing=west]"},
+    {"tick": 9, "type": "destroy", "pos": [8, 8, 8], "drop": false}
+  ]
+}

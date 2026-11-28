@@ -1,0 +1,53 @@
+{
+  "name": "dust-adv-cover",
+  "ticks": 30,
+  "box": {"min": [-1, -1, -1], "max": [11, 6, 5]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [10, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [2, 1, 2], "state": "minecraft:glowstone"},
+    {"pos": [2, 2, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [3, 1, 2], "state": "minecraft:stone"},
+    {"pos": [3, 2, 2], "state": "minecraft:stone"},
+    {"pos": [3, 3, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [4, 1, 2], "state": "minecraft:glowstone"},
+    {"pos": [4, 2, 2], "state": "minecraft:glowstone"},
+    {"pos": [4, 3, 2], "state": "minecraft:glowstone"},
+    {"pos": [5, 1, 2], "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"},
+    {"pos": [5, 2, 2], "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"},
+    {"pos": [5, 3, 2], "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"},
+    {"pos": [5, 4, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [6, 1, 2], "state": "minecraft:stone"},
+    {"pos": [6, 2, 2], "state": "minecraft:stone"},
+    {"pos": [6, 3, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [7, 1, 2], "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"},
+    {"pos": [7, 2, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [8, 1, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [9, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 4, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [4, 4, 3], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"pos": [4, 3, 3], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 1, 1], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"tick": 1, "type": "set", "pos": [4, 4, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]", "flags": 3},
+    {"tick": 2, "type": "set", "pos": [5, 4, 2], "state": "minecraft:air"},
+    {"tick": 2, "type": "set", "pos": [5, 4, 2], "state": "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"},
+    {"tick": 3, "type": "use", "pos": [0, 1, 2], "face": "up"},
+    {"tick": 6, "type": "set", "pos": [2, 3, 2], "state": "minecraft:stone"},
+    {"tick": 9, "type": "set", "pos": [2, 3, 2], "state": "minecraft:air"},
+    {"tick": 11, "type": "set", "pos": [3, 4, 2], "state": "minecraft:glass"},
+    {"tick": 13, "type": "set", "pos": [3, 4, 2], "state": "minecraft:air"},
+    {"tick": 15, "type": "set", "pos": [6, 4, 2], "state": "minecraft:stone"},
+    {"tick": 17, "type": "set", "pos": [6, 4, 2], "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"},
+    {"tick": 19, "type": "set", "pos": [6, 4, 2], "state": "minecraft:air"},
+    {"tick": 21, "type": "set", "pos": [4, 5, 2], "state": "minecraft:stone"},
+    {"tick": 23, "type": "set", "pos": [4, 5, 2], "state": "minecraft:air"},
+    {"tick": 25, "type": "destroy", "pos": [3, 2, 2], "drop": false},
+    {"tick": 27, "type": "use", "pos": [0, 1, 2], "face": "up"},
+    {"tick": 28, "type": "destroy", "pos": [7, 1, 2], "drop": false}
+  ]
+}

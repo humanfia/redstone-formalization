@@ -1,0 +1,41 @@
+{
+  "name": "fuzz-items-s2-002",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:dropper[facing=up,triggered=false]"},
+    {"pos": [0, 1, 2], "state": "minecraft:dropper[facing=north,triggered=false]", "nbt": "{Items:[{Slot:2b,id:\"minecraft:oak_log\",count:39},{Slot:4b,id:\"minecraft:dirt\",count:22},{Slot:5b,id:\"minecraft:ender_pearl\",count:8},{Slot:6b,id:\"minecraft:brown_mushroom\",count:41},{Slot:8b,id:\"minecraft:brown_mushroom\",count:19}]}"},
+    {"pos": [0, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:crafter[crafting=false,orientation=down_east,triggered=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:oak_log\",count:1}],disabled_slots:[I;2]}"},
+    {"pos": [0, 2, 2], "state": "minecraft:stone"},
+    {"pos": [1, 1, 0], "state": "minecraft:stone"},
+    {"pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"pos": [1, 2, 2], "state": "minecraft:stone"},
+    {"pos": [2, 1, 0], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:stone"},
+    {"pos": [2, 2, 0], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [2, 2, 1], "state": "minecraft:dispenser[facing=north,triggered=false]"}
+  ],
+  "actions": [
+    {"tick": 7, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 15, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [2, 2, 0], "face": "up"},
+    {"tick": 19, "type": "use", "pos": [2, 2, 0], "face": "up"},
+    {"tick": 23, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 23, "type": "use", "pos": [2, 2, 0], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 28, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 36, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 39, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 39, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 45, "type": "use", "pos": [2, 2, 0], "face": "up"},
+    {"tick": 47, "type": "use", "pos": [2, 2, 0], "face": "up"},
+    {"tick": 53, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 53, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 56, "type": "use", "pos": [2, 1, 0], "face": "up"}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "conductor-down-from-west",
+  "ticks": 24,
+  "box": {"min": [3, 4, 5], "max": [11, 11, 11]},
+  "blocks": [
+    {"pos": [6, 8, 8], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [7, 8, 8], "state": "minecraft:stone"},
+    {"pos": [8, 7, 8], "state": "minecraft:glass"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=down]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [6, 8, 8], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [6, 8, 8], "face": "up"}
+  ]
+}

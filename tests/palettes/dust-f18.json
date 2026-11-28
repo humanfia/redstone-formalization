@@ -1,0 +1,89 @@
+{
+ "floor": "minecraft:stone",
+ "blocks": [
+  {
+   "state": "minecraft:air",
+   "weight": 5
+  },
+  {
+   "state": "minecraft:stone",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:glass",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:glowstone",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:target",
+   "weight": 1
+  },
+  {
+   "state": "minecraft:smooth_stone_slab[type=*]",
+   "weight": 2
+  },
+  {
+   "state": "minecraft:redstone_lamp[lit=*]",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:lever[face=*,facing=*,powered=*]",
+   "weight": 4
+  },
+  {
+   "state": "minecraft:redstone_wire[east=*,north=*,power=*,south=*,west=*]",
+   "weight": 14
+  }
+ ],
+ "actions": {
+  "use": {
+   "count": [
+    5,
+    12
+   ],
+   "targets": [
+    "minecraft:lever",
+    "minecraft:redstone_wire"
+   ]
+  },
+  "set": {
+   "count": [
+    8,
+    16
+   ],
+   "states": [
+    "minecraft:stone",
+    "minecraft:air",
+    "minecraft:air",
+    "minecraft:glass",
+    "minecraft:glowstone",
+    "minecraft:smooth_stone_slab[type=*]",
+    "minecraft:redstone_lamp[lit=*]",
+    "minecraft:lever[face=*,facing=*,powered=*]",
+    "minecraft:redstone_wire[east=*,north=*,power=*,south=*,west=*]",
+    "minecraft:redstone_wire[east=*,north=*,power=*,south=*,west=*]",
+    "minecraft:redstone_wire"
+   ],
+   "flags": 18
+  },
+  "destroy": {
+   "count": [
+    5,
+    12
+   ],
+   "targets": [
+    "minecraft:stone",
+    "minecraft:redstone_lamp",
+    "minecraft:lever",
+    "minecraft:redstone_wire",
+    "minecraft:glass",
+    "minecraft:glowstone",
+    "minecraft:smooth_stone_slab",
+    "minecraft:target"
+   ]
+  }
+ }
+}

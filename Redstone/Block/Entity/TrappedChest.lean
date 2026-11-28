@@ -1,14 +1,12 @@
 module
 
-public import Redstone.Basic.Nbt
-public import Redstone.Block.Generated.State
+public import Redstone.Block.Entity.Chest
 
 /-!
 # Block entity `minecraft:trapped_chest`
 
-The data that the model keeps of the block entity `TrappedChestBlockEntity`.
-Nothing is modelled yet: the structure is empty and is to be filled in by the component that
-owns this block entity.
+The data that the model keeps of the block entity `TrappedChestBlockEntity`. It is the data of a
+chest: 27 slots and the state of the openers counter.
 -/
 
 @[expose] public section
@@ -16,14 +14,13 @@ owns this block entity.
 namespace Redstone.BlockEntities
 
 /-- The data of a `minecraft:trapped_chest` block entity. -/
-structure TrappedChest where
-  deriving DecidableEq, Repr, Inhabited
+abbrev TrappedChest := Chest
 
 namespace TrappedChest
 
 /-- Reads the data from the block entity's saved NBT. Fields the model does not keep are
 ignored. -/
-def ofNbt? (_ : Nbt) : Option TrappedChest := some {}
+def ofNbt? (t : Nbt) : Option TrappedChest := Chest.ofNbt? t
 
 end TrappedChest
 

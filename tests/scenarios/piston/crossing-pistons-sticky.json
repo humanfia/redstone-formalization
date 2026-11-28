@@ -1,0 +1,18 @@
+{
+  "name": "crossing-pistons-sticky",
+  "ticks": 30,
+  "box": {"min": [5, 4, 4], "max": [12, 11, 11]},
+  "blocks": [
+    {"pos": [8, 7, 8], "state": "minecraft:stone"},
+    {"pos": [8, 8, 7], "state": "minecraft:sticky_piston[extended=false,facing=east]"},
+    {"pos": [8, 8, 8], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [9, 8, 7], "state": "minecraft:stone"},
+    {"pos": [9, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=north]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 8, 8], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [8, 8, 8], "face": "up"},
+    {"tick": 14, "type": "use", "pos": [8, 8, 8], "face": "up"},
+    {"tick": 15, "type": "use", "pos": [8, 8, 8], "face": "up"}
+  ]
+}

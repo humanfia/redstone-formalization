@@ -1,0 +1,12 @@
+{
+  "name": "chain-vertical-b",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [0, 4, 0]},
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [0, 2, 0], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [0, 3, 0], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [0, 4, 0], "state": "minecraft:hopper[enabled=true,facing=down]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:gold_ingot\",count:5},{Slot:1b,id:\"minecraft:snowball\",count:3}]}"},
+    {"pos": [0, 0, 0], "state": "minecraft:chest[facing=east,type=single,waterlogged=false]"}
+  ]
+}

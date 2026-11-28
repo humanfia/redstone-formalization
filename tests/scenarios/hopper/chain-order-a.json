@@ -1,0 +1,11 @@
+{
+  "name": "chain-order-a",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [2, 1, 0]},
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:hopper[enabled=true,facing=east]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:4}]}"},
+    {"pos": [1, 1, 0], "state": "minecraft:hopper[enabled=true,facing=east]"},
+    {"pos": [2, 1, 0], "state": "minecraft:hopper[enabled=true,facing=down]"},
+    {"pos": [2, 0, 0], "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"}
+  ]
+}

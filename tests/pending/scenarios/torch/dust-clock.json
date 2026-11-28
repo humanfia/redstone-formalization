@@ -1,0 +1,87 @@
+{
+ "name": "dust-clock",
+ "ticks": 260,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   5,
+   4,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    5,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_wire[east=side,north=side,power=0,south=side,west=side]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_wall_torch[facing=east,lit=true]"
+  },
+  {
+   "tick": 230,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "drop": false
+  }
+ ]
+}

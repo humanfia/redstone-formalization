@@ -1,0 +1,153 @@
+{
+ "name": "ring-clock-long",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   3,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:repeater[delay=1,facing=north,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:repeater[delay=1,facing=east,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:repeater[delay=1,facing=south,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 60,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "drop": false
+  }
+ ]
+}

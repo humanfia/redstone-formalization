@@ -1,0 +1,18 @@
+{
+  "name": "dd-shaft",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [2, 9, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"},
+    {"min": [0, 1, 0], "max": [2, 8, 2], "state": "minecraft:stone"},
+    {"min": [1, 2, 1], "max": [1, 8, 1], "state": "minecraft:glass"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:daylight_detector[inverted=true,power=0]"}
+  ],
+  "actions": [
+    {"tick": 7, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 21, "type": "set", "pos": [1, 9, 1], "state": "minecraft:stone"},
+    {"tick": 30, "type": "set", "pos": [1, 9, 1], "state": "minecraft:glass"}
+  ]
+}

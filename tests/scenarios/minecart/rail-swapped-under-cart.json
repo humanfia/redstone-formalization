@@ -1,0 +1,23 @@
+{
+  "name": "rail-swapped-under-cart",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"},
+    {"min": [1, 1, 4], "max": [14, 1, 4], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [4, 1, 8], "max": [4, 1, 14], "state": "minecraft:powered_rail[powered=true,shape=north_south,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [2.5, 1.0625, 4.5], "nbt": "{Motion:[0.4d,0.0d,0.0d]}"},
+    {"type": "minecraft:minecart", "pos": [4.5, 1.0625, 9.5], "nbt": "{Motion:[0.0d,0.0d,0.1d]}"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [6, 1, 4], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]", "flags": 594},
+    {"tick": 8, "type": "set", "pos": [4, 1, 11], "state": "minecraft:rail[shape=north_east,waterlogged=false]", "flags": 594},
+    {"tick": 8, "type": "set", "pos": [5, 1, 11], "state": "minecraft:rail[shape=east_west,waterlogged=false]", "flags": 594},
+    {"tick": 8, "type": "set", "pos": [6, 1, 11], "state": "minecraft:rail[shape=east_west,waterlogged=false]", "flags": 594},
+    {"tick": 12, "type": "set", "pos": [6, 1, 4], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]", "flags": 594},
+    {"tick": 20, "type": "set", "pos": [9, 1, 4], "state": "minecraft:air", "flags": 594},
+    {"tick": 30, "type": "set", "pos": [11, 1, 4], "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]", "flags": 594}
+  ]
+}

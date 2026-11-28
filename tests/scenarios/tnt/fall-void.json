@@ -1,0 +1,45 @@
+{
+ "name": "fall-void",
+ "ticks": 70,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   8,
+   8,
+   8
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    3,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    5.0,
+    1.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.99,
+    3.0,
+    3.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d]}"
+  }
+ ]
+}

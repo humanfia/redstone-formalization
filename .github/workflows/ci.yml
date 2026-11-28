@@ -18,4 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: No sorry, admit, native_decide or axiom
+        run: |
+          if git grep -nwE 'sorry|admit|native_decide' -- '*.lean' \
+              || git grep -nE '^[[:space:]]*(private |protected )?axiom ' -- '*.lean'; then
+            echo "::error::unfinished or unchecked proofs found"; exit 1
+          fi
       - uses: leanprover/lean-action@ba3fdfe5c4476c925da13bf11a005ddb47e47aee # v1.7.1

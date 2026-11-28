@@ -1,0 +1,1551 @@
+{
+ "name": "fuzzents-entity-physics-harsh-s21-023",
+ "ticks": 80,
+ "box": {
+  "min": [
+   -1,
+   0,
+   -1
+  ],
+  "max": [
+   6,
+   9,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    5,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    3
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:iron_chain[axis=y,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:cauldron"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:cauldron"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:damaged_anvil[facing=north]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    5
+   ],
+   "state": "minecraft:anvil[facing=south]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:end_rod[facing=south]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    2
+   ],
+   "state": "minecraft:white_concrete_powder"
+  },
+  {
+   "pos": [
+    0,
+    3,
+    4
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=south,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    0
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    1
+   ],
+   "state": "minecraft:red_sand"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    2
+   ],
+   "state": "minecraft:smooth_stone_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    3
+   ],
+   "state": "minecraft:red_sand"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    4
+   ],
+   "state": "minecraft:smooth_stone_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    0,
+    4,
+    5
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    0,
+    5,
+    0
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    0,
+    5,
+    1
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    0,
+    5,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    0,
+    5,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    0,
+    5,
+    4
+   ],
+   "state": "minecraft:anvil[facing=south]"
+  },
+  {
+   "pos": [
+    0,
+    5,
+    5
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=west,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:red_sand"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    3
+   ],
+   "state": "minecraft:damaged_anvil[facing=south]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    4
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    5
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    0
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    1
+   ],
+   "state": "minecraft:red_sand"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    3
+   ],
+   "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    4
+   ],
+   "state": "minecraft:chipped_anvil[facing=east]"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    5
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    1
+   ],
+   "state": "minecraft:flower_pot"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    2
+   ],
+   "state": "minecraft:chipped_anvil[facing=west]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    5
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    0
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    3
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    4
+   ],
+   "state": "minecraft:anvil[facing=south]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=south,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:dragon_egg"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:smooth_stone_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:iron_chain[axis=y,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    5
+   ],
+   "state": "minecraft:iron_chain[axis=z,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:end_rod[facing=up]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "state": "minecraft:lever[face=wall,facing=west,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    5
+   ],
+   "state": "minecraft:end_rod[facing=east]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    0
+   ],
+   "state": "minecraft:smooth_stone_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    1
+   ],
+   "state": "minecraft:white_concrete_powder"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    3
+   ],
+   "state": "minecraft:end_rod[facing=south]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    5
+   ],
+   "state": "minecraft:white_concrete_powder"
+  },
+  {
+   "pos": [
+    2,
+    5,
+    0
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    2,
+    5,
+    1
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    2,
+    5,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    2,
+    5,
+    3
+   ],
+   "state": "minecraft:end_rod[facing=up]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:damaged_anvil[facing=north]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:anvil[facing=north]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    5
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    5
+   ],
+   "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    0
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=south,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    1
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    4
+   ],
+   "state": "minecraft:lever[face=ceiling,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    5
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    0
+   ],
+   "state": "minecraft:white_concrete_powder"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    1
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    2
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    3
+   ],
+   "state": "minecraft:stonecutter[facing=north]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    4
+   ],
+   "state": "minecraft:anvil[facing=west]"
+  },
+  {
+   "pos": [
+    3,
+    4,
+    5
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    1
+   ],
+   "state": "minecraft:end_rod[facing=down]"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    3
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    4
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    3,
+    5,
+    5
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:iron_chain[axis=y,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    1
+   ],
+   "state": "minecraft:end_rod[facing=west]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    5
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:stonecutter[facing=west]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    1
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:damaged_anvil[facing=south]"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    5
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    1
+   ],
+   "state": "minecraft:anvil[facing=south]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    2
+   ],
+   "state": "minecraft:smooth_stone_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    3
+   ],
+   "state": "minecraft:dragon_egg"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    4
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    4,
+    4,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    4,
+    5,
+    0
+   ],
+   "state": "minecraft:white_concrete_powder"
+  },
+  {
+   "pos": [
+    4,
+    5,
+    1
+   ],
+   "state": "minecraft:damaged_anvil[facing=east]"
+  },
+  {
+   "pos": [
+    4,
+    5,
+    3
+   ],
+   "state": "minecraft:stonecutter[facing=west]"
+  },
+  {
+   "pos": [
+    4,
+    5,
+    5
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:stonecutter[facing=south]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    3
+   ],
+   "state": "minecraft:flower_pot"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:anvil[facing=west]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:dragon_egg"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    4
+   ],
+   "state": "minecraft:anvil[facing=north]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    5
+   ],
+   "state": "minecraft:dragon_egg"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    3
+   ],
+   "state": "minecraft:smooth_stone_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    4
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    5
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    2
+   ],
+   "state": "minecraft:end_rod[facing=down]"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    3
+   ],
+   "state": "minecraft:damaged_anvil[facing=north]"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    5,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    5,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    5,
+    2
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    5,
+    5,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    5,
+    4
+   ],
+   "state": "minecraft:smooth_stone_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    5,
+    5
+   ],
+   "state": "minecraft:flower_pot"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    2,
+    5,
+    0
+   ],
+   "state": "minecraft:lever[face=wall,facing=west,powered=false]"
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    0,
+    5,
+    3
+   ],
+   "drop": false
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    1
+   ],
+   "state": "minecraft:lever[face=wall,facing=east,powered=false]"
+  },
+  {
+   "tick": 13,
+   "type": "destroy",
+   "pos": [
+    1,
+    5,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    5,
+    4,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 18,
+   "type": "destroy",
+   "pos": [
+    0,
+    5,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 27,
+   "type": "set",
+   "pos": [
+    1,
+    3,
+    2
+   ],
+   "state": "minecraft:end_rod[facing=down]"
+  },
+  {
+   "tick": 34,
+   "type": "set",
+   "pos": [
+    4,
+    4,
+    4
+   ],
+   "state": "minecraft:anvil[facing=west]"
+  },
+  {
+   "tick": 35,
+   "type": "set",
+   "pos": [
+    0,
+    5,
+    5
+   ],
+   "state": "minecraft:damaged_anvil[facing=east]"
+  },
+  {
+   "tick": 38,
+   "type": "set",
+   "pos": [
+    3,
+    5,
+    3
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    2,
+    3,
+    4
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 40,
+   "type": "destroy",
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 41,
+   "type": "destroy",
+   "pos": [
+    3,
+    3,
+    5
+   ],
+   "drop": false
+  },
+  {
+   "tick": 44,
+   "type": "destroy",
+   "pos": [
+    3,
+    5,
+    5
+   ],
+   "drop": false
+  },
+  {
+   "tick": 45,
+   "type": "set",
+   "pos": [
+    4,
+    4,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 59,
+   "type": "set",
+   "pos": [
+    5,
+    3,
+    4
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 61,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:red_concrete_powder"
+  },
+  {
+   "tick": 63,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:end_rod[facing=down]"
+  },
+  {
+   "tick": 63,
+   "type": "set",
+   "pos": [
+    1,
+    5,
+    2
+   ],
+   "state": "minecraft:end_rod[facing=east]"
+  },
+  {
+   "tick": 63,
+   "type": "destroy",
+   "pos": [
+    2,
+    4,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 67,
+   "type": "destroy",
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "drop": false
+  },
+  {
+   "tick": 69,
+   "type": "destroy",
+   "pos": [
+    4,
+    4,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 70,
+   "type": "set",
+   "pos": [
+    4,
+    5,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "tick": 72,
+   "type": "destroy",
+   "pos": [
+    5,
+    3,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 72,
+   "type": "destroy",
+   "pos": [
+    5,
+    3,
+    5
+   ],
+   "drop": false
+  },
+  {
+   "tick": 73,
+   "type": "set",
+   "pos": [
+    3,
+    5,
+    1
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "tick": 78,
+   "type": "set",
+   "pos": [
+    0,
+    5,
+    1
+   ],
+   "state": "minecraft:dragon_egg"
+  },
+  {
+   "tick": 79,
+   "type": "destroy",
+   "pos": [
+    3,
+    5,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 80,
+   "type": "set",
+   "pos": [
+    3,
+    5,
+    4
+   ],
+   "state": "minecraft:air"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.33,
+    2.76,
+    0.85
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:10},Motion:[0.07d,0.09d,0.26d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.95,
+    3.34,
+    1.71
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:33},Motion:[0.14d,0.43d,-0.36d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.07,
+    4.77,
+    2.85
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:20},Motion:[0.05d,-0.01d,-0.24d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.61,
+    3.61,
+    4.51
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:14},Motion:[-0.39d,0.1d,-0.27d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.13,
+    6.78,
+    0.27
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:23},Motion:[0.22d,0.38d,0.37d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.16,
+    3.25,
+    1.77
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:10},Motion:[0.08d,0.37d,0.15d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    2.5,
+    7.35,
+    5.5
+   ],
+   "nbt": "{BlockState:\"minecraft:sand\",Time:1,Motion:[-0.14d,0.11d,0.11d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    0.5,
+    3.48,
+    2.5
+   ],
+   "nbt": "{BlockState:\"minecraft:gravel\",Time:1,Motion:[-0.07d,-0.07d,0.19d]}"
+  }
+ ]
+}

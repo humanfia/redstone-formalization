@@ -1,0 +1,42 @@
+{
+ "name": "adv-item-leaves-chunks",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   12,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.5,
+    11.0,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:cobblestone\",count:1},Motion:[0.0d,0.0d,-5.0d],NoGravity:1b}"
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+{
+ "name": "adv-unit-cube-stairs",
+ "ticks": 40,
+ "box": {
+  "min": [
+   -1,
+   -1,
+   -1
+  ],
+  "max": [
+   2,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    -1,
+    -1,
+    -1
+   ],
+   "max": [
+    2,
+    -1,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.25,
+    0.5,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1},Motion:[0.1d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.375,
+    0.5,
+    0.25
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.05d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.75,
+    1.0,
+    0.75
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.375,
+    0.625,
+    0.75
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.625,
+    0.75,
+    0.375
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.5,
+    0.25,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:ice\",count:1}}"
+  }
+ ]
+}

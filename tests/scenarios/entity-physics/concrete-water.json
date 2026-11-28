@@ -1,0 +1,26 @@
+{
+  "name": "concrete-water",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [7, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [7, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [0, 1, 1], "state": "minecraft:stone"},
+    {"pos": [1, 1, 0], "state": "minecraft:stone"},
+    {"pos": [1, 1, 2], "state": "minecraft:stone"},
+    {"pos": [1, 2, 1], "state": "minecraft:stone"},
+    {"pos": [5, 1, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [4, 1, 1], "state": "minecraft:stone"},
+    {"pos": [5, 1, 0], "state": "minecraft:stone"},
+    {"pos": [5, 1, 2], "state": "minecraft:stone"},
+    {"pos": [5, 2, 1], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [2, 4, 1], "state": "minecraft:white_concrete_powder", "flags": 3},
+    {"tick": 5, "type": "set", "pos": [6, 1, 1], "state": "minecraft:red_concrete_powder", "flags": 3},
+    {"tick": 12, "type": "set", "pos": [6, 2, 1], "state": "minecraft:stone", "flags": 3},
+    {"tick": 20, "type": "set", "pos": [3, 3, 1], "state": "minecraft:blue_concrete_powder", "flags": 3}
+  ]
+}

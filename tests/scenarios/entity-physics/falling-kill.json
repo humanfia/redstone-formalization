@@ -1,0 +1,13 @@
+{
+  "name": "falling-kill",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [2, 12, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 10, 1], "state": "minecraft:sand", "flags": 3},
+    {"tick": 2, "type": "set", "pos": [0, 11, 0], "state": "minecraft:gravel", "flags": 3},
+    {"tick": 8, "type": "kill", "entity": 0}
+  ]
+}

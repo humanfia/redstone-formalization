@@ -1,0 +1,178 @@
+{
+ "name": "adv-falling-sideways",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    6,
+    1,
+    0
+   ],
+   "max": [
+    6,
+    5,
+    6
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:smooth_stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    4.5,
+    4.0,
+    1.5
+   ],
+   "nbt": "{BlockState:\"minecraft:sand\",Time:1,Motion:[0.4d,0.1d,0.0d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    4.5,
+    3.0,
+    3.5
+   ],
+   "nbt": "{BlockState:\"minecraft:gravel\",Time:1,Motion:[0.3d,0.0d,0.3d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    2.2,
+    3.0,
+    3.4
+   ],
+   "nbt": "{BlockState:\"minecraft:red_sand\",Time:1,Motion:[0.12d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    3.5,
+    5.0,
+    1.5
+   ],
+   "nbt": "{BlockState:\"minecraft:sand\",Time:1}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    3.5,
+    5.6,
+    1.5
+   ],
+   "nbt": "{BlockState:\"minecraft:gravel\",Time:1}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    3.5,
+    6.9,
+    1.5
+   ],
+   "nbt": "{BlockState:\"minecraft:red_sand\",Time:1}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    1.0,
+    4.0,
+    4.0
+   ],
+   "nbt": "{BlockState:{id:\"minecraft:anvil\",properties:{facing:\"east\"}},Time:1,Motion:[0.0d,-0.5d,0.05d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    5.5,
+    4.0,
+    5.5
+   ],
+   "nbt": "{BlockState:\"minecraft:white_concrete_powder\",Time:1,Motion:[0.02d,0.0d,0.02d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    0.49,
+    2.0,
+    0.49
+   ],
+   "nbt": "{BlockState:\"minecraft:sand\",Time:1,Motion:[-0.3d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    1.5,
+    1.0,
+    1.5
+   ],
+   "nbt": "{BlockState:\"minecraft:gravel\",Time:1,Motion:[0.0d,0.6d,0.0d]}"
+  }
+ ]
+}

@@ -1,0 +1,183 @@
+{
+ "name": "adv-item-ice-rink",
+ "ticks": 120,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   33,
+   2,
+   33
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    33,
+    0,
+    33
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    33,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    0,
+    1,
+    33
+   ],
+   "max": [
+    33,
+    1,
+    33
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    1,
+    33
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    33,
+    1,
+    0
+   ],
+   "max": [
+    33,
+    1,
+    33
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    16,
+    1,
+    16
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    20,
+    1,
+    9
+   ],
+   "state": "minecraft:smooth_stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    20
+   ],
+   "state": "minecraft:soul_sand"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    15.5,
+    1.0,
+    15.2
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:7},Motion:[0.9d,0.0d,0.4d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    17.5,
+    1.0,
+    17.2
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:9},Motion:[-0.8d,0.0d,-0.5d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    8.5,
+    1.0,
+    15.9
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:11},Motion:[0.7d,0.0d,0.01d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    24.5,
+    1.0,
+    16.1
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:13},Motion:[-0.7d,0.0d,-0.01d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    16.1,
+    1.0,
+    30.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:5},Motion:[0.0d,0.0d,-1.2d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    15.9,
+    1.0,
+    2.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:6},Motion:[0.0d,0.0d,1.1d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.5,
+    1.0,
+    2.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:8},Motion:[1.0d,0.0d,1.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    30.5,
+    1.0,
+    30.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:10},Motion:[-1.0d,0.0d,-1.0d]}"
+  }
+ ]
+}

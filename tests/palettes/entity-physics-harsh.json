@@ -1,0 +1,32 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 16},
+    {"state": "minecraft:stone", "weight": 4},
+    {"state": "minecraft:glass", "weight": 2},
+    {"state": "minecraft:sand", "weight": 6},
+    {"state": "minecraft:gravel", "weight": 5},
+    {"state": "minecraft:red_sand", "weight": 2},
+    {"state": "minecraft:anvil[facing=*]", "weight": 3},
+    {"state": "minecraft:chipped_anvil[facing=*]", "weight": 2},
+    {"state": "minecraft:damaged_anvil[facing=*]", "weight": 2},
+    {"state": "minecraft:white_concrete_powder", "weight": 2},
+    {"state": "minecraft:dragon_egg", "weight": 2},
+    {"state": "minecraft:smooth_stone_slab[type=*]", "weight": 4},
+    {"state": "minecraft:ice", "weight": 2},
+    {"state": "minecraft:blue_ice", "weight": 1},
+    {"state": "minecraft:soul_sand", "weight": 2},
+    {"state": "minecraft:end_rod[facing=*]", "weight": 2},
+    {"state": "minecraft:iron_chain[axis=*]", "weight": 2},
+    {"state": "minecraft:flower_pot", "weight": 1},
+    {"state": "minecraft:stonecutter[facing=*]", "weight": 1},
+    {"state": "minecraft:cauldron", "weight": 1},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 4},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 3}
+  ],
+  "actions": {
+    "use": {"count": [2, 6], "targets": ["minecraft:lever"]},
+    "set": {"count": [8, 16], "states": ["minecraft:stone", "minecraft:air", "minecraft:sand", "minecraft:gravel", "minecraft:anvil[facing=*]", "minecraft:damaged_anvil[facing=*]", "minecraft:red_concrete_powder", "minecraft:dragon_egg", "minecraft:smooth_stone_slab[type=*]", "minecraft:ice", "minecraft:end_rod[facing=*]", "minecraft:lever[face=*,facing=*,powered=*]", "minecraft:redstone_lamp[lit=false]"]},
+    "destroy": {"count": [6, 12], "targets": ["minecraft:stone", "minecraft:glass", "minecraft:sand", "minecraft:gravel", "minecraft:red_sand", "minecraft:smooth_stone_slab", "minecraft:ice", "minecraft:blue_ice", "minecraft:soul_sand", "minecraft:cauldron", "minecraft:redstone_lamp", "minecraft:lever", "minecraft:anvil", "minecraft:chipped_anvil", "minecraft:end_rod", "minecraft:iron_chain", "minecraft:stonecutter"]}
+  }
+}

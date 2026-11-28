@@ -1,0 +1,29 @@
+{
+  "name": "item-between-corners",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [3, 2, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 0, 0], "state": "minecraft:ice"},
+    {"pos": [1, 0, 1], "state": "minecraft:blue_ice"},
+    {"pos": [2, 0, 2], "state": "minecraft:ice"},
+    {"pos": [0, 0, 2], "state": "minecraft:packed_ice"},
+    {"pos": [1, 0, 0], "state": "minecraft:soul_sand"},
+    {"pos": [0, 0, 1], "state": "minecraft:glass"}
+  ],
+  "entities": [
+    {"type": "minecraft:item", "pos": [1.0, 1.0, 1.0], "nbt": "{Item:{id:\"minecraft:stone\",count:1},Motion:[0.0d,0.0d,0.0d]}"},
+    {"type": "minecraft:item", "pos": [2.0, 1.0, 1.0], "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"},
+    {"type": "minecraft:item", "pos": [1.0, 1.0, 2.0], "nbt": "{Item:{id:\"minecraft:gravel\",count:1}}"},
+    {"type": "minecraft:item", "pos": [2.0, 1.0, 2.0], "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"},
+    {"type": "minecraft:item", "pos": [1.0, 1.2, 1.0], "nbt": "{Item:{id:\"minecraft:glass\",count:1},Motion:[0.001d,0.0d,0.0d]}"},
+    {"type": "minecraft:item", "pos": [2.0, 1.2, 2.0], "nbt": "{Item:{id:\"minecraft:ice\",count:1},Motion:[0.0d,0.0d,-0.001d]}"}
+  ],
+  "actions": [
+    {"tick": 20, "type": "destroy", "pos": [1, 0, 1]},
+    {"tick": 30, "type": "set", "pos": [1, 0, 1], "state": "minecraft:packed_ice", "flags": 2},
+    {"tick": 40, "type": "destroy", "pos": [0, 0, 0]}
+  ]
+}

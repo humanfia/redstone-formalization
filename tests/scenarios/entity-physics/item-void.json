@@ -1,0 +1,10 @@
+{
+  "name": "item-void",
+  "ticks": 45,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "entities": [
+    {"type": "minecraft:item", "pos": [1.5, -100.0, 1.5], "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"},
+    {"type": "minecraft:item", "pos": [0.5, -127.5, 0.5], "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"},
+    {"type": "minecraft:item", "pos": [2.5, -50.0, 2.5], "nbt": "{Item:{id:\"minecraft:gravel\",count:1}}"}
+  ]
+}

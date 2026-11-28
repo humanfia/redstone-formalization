@@ -1,0 +1,159 @@
+{
+ "name": "adv-item-ages",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   3,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.5,
+    1.0,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1},Age:5995s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    1.0,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Age:-32768s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.5,
+    1.0,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:1},Age:5999s,PickupDelay:32767s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.5,
+    2.0,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:3},Age:5990s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.6,
+    1.0,
+    0.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:4},Age:10s,PickupDelay:40s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.5,
+    2.0,
+    2.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:3},Age:-32768s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.6,
+    1.0,
+    2.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:4},Age:100s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    2.0,
+    2.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:ice\",count:3},PickupDelay:32767s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.6,
+    1.0,
+    2.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:ice\",count:4},PickupDelay:5s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.5,
+    2.5,
+    3.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:oak_log\",count:60},Age:5996s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    0.6,
+    1.0,
+    3.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:oak_log\",count:4},Age:5s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.5,
+    2.5,
+    3.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:ender_pearl\",count:10}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.6,
+    1.0,
+    3.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:ender_pearl\",count:6}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.5,
+    1.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:0}}"
+  }
+ ]
+}

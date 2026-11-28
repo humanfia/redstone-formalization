@@ -375,6 +375,9 @@ final class Recorder {
       this.level.environmentAttributes().invalidateTickCache();
       this.level.updateSkyBrightness();
       this.level.getRandom().setSeed(0L);
+      // The per-key random sequences (loot tables draw from them) are created on first use from the
+      // world seed and saved with the world: forgotten here, each one starts afresh in every scenario.
+      server.getRandomSequences().clear();
       this.randValueField.setInt(this.level, 0);
       this.recentTorchToggles.clear();
       this.entityCounter.set(0);
@@ -429,6 +432,7 @@ final class Recorder {
       }
       // The level random is reseeded after the setup, so that tick 1 starts from seed 0 whatever the setup drew.
       this.level.getRandom().setSeed(0L);
+      server.getRandomSequences().clear();
       this.recordFrame(0);
    }
 

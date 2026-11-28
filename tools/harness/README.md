@@ -70,6 +70,10 @@ nondeterminism found, and what was done:
   be shadowed on the class path.)
 * The entity id counter, `Level.randValue`, the game time and the redstone torch burn-out list
   survive from one scenario to the next: reset by reflection.
+* The random sequences of the server (`RandomSequences`, saved data: the generator each loot
+  table draws from) are created on first use and then live as long as the world, so the loot of a
+  broken `short_grass` depended on how many were broken earlier in the same run: cleared
+  (`RandomSequences.clear()`) at the start of every scenario.
 * The light engine runs on another thread: the server waits for it between ticks.
 * `Level.skyDarken` is only recomputed at the start of a tick, so after the clock and the weather
   of a scenario are set it still holds the value of the previous scenario: recomputed at once.

@@ -165,11 +165,24 @@ def modifyEntity (index : ℕ) (f : Entity → Entity) : M Unit :=
 /-- `Block.dropResources(state, level, pos, blockEntity, breaker, tool)` in a world where the
 game rule `block_drops` is off: nothing is dropped, but `Block.popResource` draws the three
 coordinates of every stack of the block's loot from the level's random number generator before
-it finds that out. A block whose loot is not a function of its state sets `Level.overflow`. -/
+it finds that out.
+
+How many stacks there are may depend on chance (`Entity.Tnt.brokenChanceLoot`): the loot table
+then draws from its own random sequence, `Level.lootSequences`, which starts from the world
+seed the first time the table is used. A block whose loot the model cannot evaluate (see
+`Entity.Tnt.brokenChanceLoot` for which) sets `Level.overflow`. -/
 def dropResources (state : Block) : M Unit :=
-  match Entity.Tnt.brokenDropStacks state with
-  | some n => modify fun l => { l with random := (·.nextDouble53.2)^[3 * n] l.random }
-  | none => setOverflow
+  let pop (n : ℕ) (l : Level) : Level := { l with random := (·.nextDouble53.2)^[3 * n] l.random }
+  match Entity.Tnt.brokenChanceLoot state with
+  | some table => modify fun l =>
+    let sequence := (l.lootSequences.lookup table.key).getD table.newSequence
+    let (n, sequence) := table.stackCount sequence
+    pop n { l with
+      lootSequences := (table.key, sequence) :: l.lootSequences.filter (·.1 != table.key) }
+  | none =>
+    match Entity.Tnt.brokenDropStacks state with
+    | some n => modify (pop n)
+    | none => setOverflow
 
 /-! ### Operations that request updates -/
 

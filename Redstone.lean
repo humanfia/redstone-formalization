@@ -6,6 +6,8 @@ public import Redstone.Basic.Signal
 public import Redstone.Basic.Box
 public import Redstone.Basic.Nbt
 public import Redstone.Basic.Random
+public import Redstone.Basic.Xoroshiro
+public import Redstone.Basic.Loot
 public import Redstone.Block.Basic
 public import Redstone.World.Basic
 public import Redstone.World.Level

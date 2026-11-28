@@ -44,11 +44,10 @@ again, and a block that cannot stay becomes air (`updateShape`), which breaks it
 * Placement (`getStateForPlacement`), and `playerWillDestroy`: players do not break blocks.
 * Drops. A block that breaks drops nothing, and `Level.dropResources` only advances the
   level's random generator by the stacks of its loot. Where the loot is a matter of chance
-  (short grass, ferns, dead bushes, tall grass, stems, ripe berry bushes) it sets
-  `Level.overflow`: the game draws that chance from a random sequence of its own
-  (`RandomSequences`), which the harness does not pin and the model does not have. The
-  scenarios `tests/pending/scenarios/entity-physics/fuzz-entity-physics-shapes-*` in which
-  short grass breaks wait for this.
+  (short grass, ferns, dead bushes, stems, ripe crops and berry bushes) the number of stacks
+  comes from the loot table's own random sequence (`Level.lootSequences`). The upper or lower
+  half of tall grass and of a large fern still sets `Level.overflow`: its loot table reads the
+  other half of the plant.
 -/
 
 @[expose] public section

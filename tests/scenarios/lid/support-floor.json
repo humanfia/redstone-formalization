@@ -1,0 +1,258 @@
+{
+ "name": "support-floor",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   30,
+   4,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=north]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=down]"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    2
+   ],
+   "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=south]"
+  },
+  {
+   "pos": [
+    10,
+    4,
+    2
+   ],
+   "state": "minecraft:stone_pressure_plate[powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=down]"
+  },
+  {
+   "pos": [
+    14,
+    4,
+    2
+   ],
+   "state": "minecraft:stone_pressure_plate[powered=false]"
+  },
+  {
+   "pos": [
+    18,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=west]"
+  },
+  {
+   "pos": [
+    18,
+    4,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    22,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=down]"
+  },
+  {
+   "pos": [
+    22,
+    4,
+    2
+   ],
+   "state": "minecraft:redstone_torch[lit=true]"
+  },
+  {
+   "pos": [
+    26,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=east]"
+  },
+  {
+   "pos": [
+    26,
+    4,
+    2
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    30,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=north]"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:barrel[facing=up,open=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    10,
+    3,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    14,
+    3,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 23,
+   "type": "use",
+   "pos": [
+    18,
+    3,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 28,
+   "type": "use",
+   "pos": [
+    22,
+    3,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 33,
+   "type": "use",
+   "pos": [
+    26,
+    3,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    30,
+    3,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 55,
+   "type": "set",
+   "pos": [
+    30,
+    4,
+    2
+   ],
+   "state": "minecraft:torch"
+  },
+  {
+   "tick": 56,
+   "type": "set",
+   "pos": [
+    29,
+    3,
+    2
+   ],
+   "state": "minecraft:wall_torch[facing=west]"
+  },
+  {
+   "tick": 65,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "face": "up"
+  }
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "name": "ender-dispenser-between",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   0,
+   0
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    0
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    0
+   ],
+   "state": "minecraft:dispenser[facing=north,triggered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    4,
+    0,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    2,
+    0,
+    0
+   ],
+   "face": "north"
+  }
+ ]
+}

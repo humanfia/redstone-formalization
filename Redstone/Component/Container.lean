@@ -3,14 +3,15 @@ module
 public import Redstone.Basic.Float32
 public import Redstone.Component.AnalogSource
 public import Redstone.Component.CookingTable
+public import Redstone.Component.ShulkerBox
 
 /-!
 # Containers
 
 Java classes: `ChestBlock`, `TrappedChestBlock`, `CopperChestBlock`, `BarrelBlock`,
-`ShulkerBoxBlock`, `AbstractFurnaceBlock`, `BrewingStandBlock`, with their block entities,
-`Container`, `CompoundContainer`, `ContainerOpenersCounter` and
-`AbstractContainerMenu.getRedstoneSignalFromContainer`.
+`ShulkerBoxBlock`, `EnderChestBlock`, `AbstractFurnaceBlock`, `BrewingStandBlock`, with their
+block entities, `Container`, `CompoundContainer`, `ContainerOpenersCounter`,
+`PlayerEnderChestContainer` and `AbstractContainerMenu.getRedstoneSignalFromContainer`.
 
 This file has two parts. The first is the view of the blocks of the level as `Container`s, as
 hoppers, droppers and crafters use them (`HopperBlockEntity.getContainerAt`, `addItem`,
@@ -19,8 +20,9 @@ access to, what may be put in and taken out, and `setChanged`, which tells the c
 around. It covers chests, barrels, shulker boxes, furnaces, brewing stands, hoppers,
 dispensers, droppers, crafters, jukeboxes, chiseled bookshelves, decorated pots, shelves and
 composters. The second part is the behaviour of the container blocks of this component: the
-signal a comparator reads, the openers counter of chests and barrels with the power a trapped
-chest gives, the furnaces and the brewing stand.
+signal a comparator reads, the openers counter of chests, barrels and ender chests with the
+power a trapped chest gives, the shulker box with its lid (`Component.ShulkerBox`), the furnaces
+and the brewing stand.
 
 ## The player
 
@@ -29,7 +31,16 @@ never closes a menu. Opening a menu first closes the menu the player had open, w
 `stopOpen` on its container. `Level.playerMenu` remembers that container. The counter of a
 chest or barrel is then set right by the tick the container schedules five ticks after it was
 opened, which looks for the players around and finds none: the player of the tests is not in the
-world, and the model has no other players.
+world, and the model has no other players. A shulker box has no such tick: it stays open until
+the player opens another menu.
+
+The menu of an ender chest shows the player's own inventory (`PlayerEnderChestContainer`), which
+remembers the chest it was opened through (`activeChest`) and opens and closes that one with the
+menu. While the player's menu is that inventory, `Level.playerMenu` holds the ender chest it was
+last opened through, which is marked (`EnderChest.menu`), and the chest's `viewed` says whether
+it is still the active chest: using an ender chest while the menu of one is open makes the new
+chest the active one first, so it is the new chest that the closing menu closes, and the new
+menu then has no active chest at all.
 
 ## What is left out
 
@@ -42,11 +53,16 @@ world, and the model has no other players.
   may be sets `Level.overflow`.
 * The experience a furnace releases when it is removed: removing a furnace that has cooked
   sets `Level.overflow`.
-* The lid of a shulker box: using a shulker box sets `Level.overflow`.
-* Ender chests, whose inventory belongs to the player: they are inert, and using one sets
-  `Level.overflow`.
+* The lid of a shulker box and entities, and blocks that do not see that a box with its lid
+  up is no full block: see `Component.ShulkerBox`.
+* The items in the ender chest inventory of the player: no block can reach them. Removing the
+  ender chest through which the player's menu was last opened, while that menu is open, sets
+  `Level.overflow`: the model then no longer knows that the player's menu is that inventory.
+* The lid of a chest or an ender chest (`ChestLidController`), which only the client moves.
 * The menus of blocks of other components. In the game, opening any menu closes the one the
-  player had open; here only the blocks of this file and the hopper do that.
+  player had open; here only the blocks of this file and the hopper do that. After the menu of
+  such a block (a dispenser, a crafter) a chest is set right by its recheck tick; a shulker box
+  stays open, and the model goes on believing that the menu of an ender chest is open.
 * Brewing: every brewing recipe asks for potion contents, a data component, so with the stacks
   of the model a brewing stand never brews. It still burns its fuel and shows its bottles.
 * A cat sitting on a chest, which blocks it.
@@ -98,7 +114,8 @@ def withItems (inv : Inventory) : BlockEntity → BlockEntity
   | be => be
 
 /-- The block entity without the data that the game does not save: the tick time of a hopper,
-the openers counter of a chest, the bottle bits a brewing stand remembers. A trace shows saved
+the openers counter of a chest, the lid of a shulker box, the bottle bits a brewing stand
+remembers. A trace shows saved
 data only, so this is what the tests compare with it. -/
 def savedData : BlockEntity → BlockEntity
   | .hopper d => .hopper { d with tickedGameTime := 0 }
@@ -106,6 +123,8 @@ def savedData : BlockEntity → BlockEntity
   | .trappedChest d => .trappedChest { d with openCount := 0, viewed := false }
   | .barrel d => .barrel { d with openCount := 0, viewed := false }
   | .brewingStand d => .brewingStand { d with lastPotionCount := none }
+  | .shulkerBox d => .shulkerBox { items := d.items }
+  | .enderChest _ => .enderChest {}
   | be => be
 
 /-- The three kinds of furnace, which differ in their recipes and in how fast they burn. -/
@@ -139,6 +158,41 @@ def mapCounted (f : BlockEntities.Chest → BlockEntities.Chest) : BlockEntity �
   | .chest d => .chest (f d)
   | .trappedChest d => .trappedChest (f d)
   | .barrel d => .barrel (f d)
+  | be => be
+
+/-- The state of a `ContainerOpenersCounter`, for the block entities that have one (a chest, a
+trapped chest, a barrel, an ender chest): its count, and whether closing the menu of the player
+of the tests will call `stopOpen` on the block entity. -/
+def counter? : BlockEntity → Option (ℤ × Bool)
+  | .chest d | .trappedChest d | .barrel d => some (d.openCount, d.viewed)
+  | .enderChest d => some (d.openCount, d.viewed)
+  | _ => none
+
+/-- The block entity with another count of its `ContainerOpenersCounter`. -/
+def withOpenCount (n : ℤ) : BlockEntity → BlockEntity
+  | .enderChest d => .enderChest { d with openCount := n }
+  | be => mapCounted (fun d => { d with openCount := n }) be
+
+/-- Closing the menu of the player of the tests will call `stopOpen` on the block entity. -/
+def viewed : BlockEntity → Bool
+  | .shulkerBox d => d.viewed
+  | be => (counter? be).any (·.2)
+
+/-- The block entity with another value of `viewed`. -/
+def withViewed (v : Bool) : BlockEntity → BlockEntity
+  | .enderChest d => .enderChest { d with viewed := v }
+  | .shulkerBox d => .shulkerBox { d with viewed := v }
+  | be => mapCounted (fun d => { d with viewed := v }) be
+
+/-- The block entity is the ender chest through which the menu of the player of the tests, the
+ender chest inventory, was last opened. -/
+def holdsEnderMenu : BlockEntity → Bool
+  | .enderChest d => d.menu
+  | _ => false
+
+/-- The block entity with another value of `EnderChest.menu`. -/
+def withEnderMenu (v : Bool) : BlockEntity → BlockEntity
+  | .enderChest d => .enderChest { d with menu := v }
   | be => be
 
 /-! ### Items -/
@@ -269,8 +323,13 @@ def hasChestEntity (l : Level) (trapped : Bool) (p : Pos) : Bool :=
   | some (.trappedChest _) => trapped
   | _ => false
 
+/-- `BlockState.isRedstoneConductor(level, pos)` as a chest asks it of the block above: a
+shulker box whose lid is not closed is no conductor (`Level.supportAttrs`). -/
+def isRedstoneConductor (l : Level) (p : Pos) : Bool :=
+  (l.blockAt p).isConductor && (l.supportAttrs p).conductor
+
 /-- `ChestBlock.isChestBlockedAt`: a conductor sits on the chest. The cat is left out. -/
-def isChestBlockedAt (l : Level) (p : Pos) : Bool := (l.blockAt (p.step .up)).isConductor
+def isChestBlockedAt (l : Level) (p : Pos) : Bool := isRedstoneConductor l (p.step .up)
 
 /-- `ChestBlock.combine(state, level, pos, ignoreBeingBlocked)`: the chest at `p`, alone or with
 its other half, or `none` when there is no block entity or the chest is blocked. The first
@@ -784,19 +843,24 @@ def addItem (fromHopper : Option Pos) (c : ContainerRef) (stack : ItemStack)
 def drawSoundPitch : M Unit := modify fun l => { l with random := l.random.nextFloat24.2 }
 
 /-- The counter's `onOpen` and `onClose`. A barrel plays a sound and shows its new state; a
-chest plays a sound unless it is the left half of a double chest. -/
+chest plays a sound unless it is the left half of a double chest; an ender chest plays a
+sound. -/
 def onOpenOrClose (state : Block) (p : Pos) (isOpen : Bool) : M Unit :=
   match state with
   | .barrel s => do
     drawSoundPitch
     discard <| Level.setBlock p (.barrel { s with «open» := isOpen })
+  | .enderChest _ => drawSoundPitch
   | _ => do
     if (chestState? state).any (·.kind ≠ .left) then drawSoundPitch
 
-/-- The counter's `openerCountChanged`. A chest sends a block event; a trapped chest also
-updates the neighbours of itself and of the block below when the count changed. A barrel does
-nothing. -/
+/-- The counter's `openerCountChanged`. A chest or an ender chest sends a block event; a trapped
+chest also updates the neighbours of itself and of the block below when the count changed. A
+barrel does nothing. -/
 def openerCountChanged (state : Block) (p : Pos) (previous current : ℤ) : M Unit := do
+  if let .enderChest _ := state then
+    Level.blockEvent p state.id 1 current
+    return
   if (chestState? state).isNone then return
   Level.blockEvent p state.id 1 current
   if let some (.trappedChest _) ← Level.getBlockEntity p then
@@ -806,12 +870,12 @@ def openerCountChanged (state : Block) (p : Pos) (previous current : ℤ) : M Un
 
 /-- The count of the counter of the container at `p`. -/
 def openCount (l : Level) (p : Pos) : ℤ :=
-  (((l.blockEntities p).bind counted?).map (·.openCount)).getD 0
+  (((l.blockEntities p).bind counter?).map (·.1)).getD 0
 
 /-- Sets the count of the counter of the container at `p`. -/
 def setOpenCount (p : Pos) (n : ℤ) : M Unit := do
   if let some be ← Level.getBlockEntity p then
-    Level.setBlockEntity p (mapCounted (fun d => { d with openCount := n }) be)
+    Level.setBlockEntity p (withOpenCount n be)
 
 /-- `ContainerOpenersCounter.incrementOpeners`, as called by `startOpen`. -/
 def incrementOpeners (p : Pos) : M Unit := do
@@ -838,7 +902,7 @@ def decrementOpeners (p : Pos) : M Unit := do
 (`recheckOpen`). It counts the players near the container that have it open; the model has
 none, so the container closes. -/
 def recheckOpeners (p : Pos) : M Unit := do
-  if ((← Level.getBlockEntity p).bind counted?).isNone then return
+  if ((← Level.getBlockEntity p).bind counter?).isNone then return
   let state ← Level.getBlock p
   let previous := openCount (← get) p
   if previous ≠ 0 then
@@ -848,15 +912,19 @@ def recheckOpeners (p : Pos) : M Unit := do
   openerCountChanged state p previous 0
 
 /-- `ServerPlayer.closeContainer()`: the menu the player had open is removed, which calls
-`stopOpen` on its container, unless that block entity is gone. -/
+`stopOpen` on its container, unless that block entity is gone. For the menu of an ender chest
+the container is the active chest, if there still is one. -/
 def closeContainer : M Unit := do
   let ps := (← get).playerMenu
   modify fun l => { l with playerMenu := [] }
   ps.forM fun p => do
     if let some be ← Level.getBlockEntity p then
-      if (counted? be).any (·.viewed) then
-        Level.setBlockEntity p (mapCounted (fun d => { d with viewed := false }) be)
-        decrementOpeners p
+      if viewed be || holdsEnderMenu be then
+        Level.setBlockEntity p (withEnderMenu false (withViewed false be))
+      if viewed be then
+        match be with
+        | .shulkerBox _ => ShulkerBox.stopOpen p
+        | _ => decrementOpeners p
 
 /-- `ServerPlayer.openMenu(provider)` for a menu that calls `startOpen` on the containers at
 `ps`: the player's previous menu is closed first. -/
@@ -867,6 +935,39 @@ def openMenu (ps : List Pos) : M Unit := do
       Level.setBlockEntity p (mapCounted (fun d => { d with viewed := true }) be)
       incrementOpeners p
   modify fun l => { l with playerMenu := ps }
+
+/-- The block entity at `p` is an ender chest. -/
+def isEnderChestAt (l : Level) (p : Pos) : Bool :=
+  match l.blockEntities p with
+  | some (.enderChest _) => true
+  | _ => false
+
+/-- The menu of the player of the tests is the ender chest inventory. -/
+def hasEnderMenu (l : Level) : Bool :=
+  l.playerMenu.any fun p => (l.blockEntities p).any holdsEnderMenu
+
+/-- What `EnderChestBlock.useWithoutItem` does with the ender chest at `p` when nothing blocks
+it: `container.setActiveChest(enderChest)`, then `player.openMenu` with a menu of the player's
+ender chest inventory.
+
+The active chest is set before the menu the player had open is closed. If that menu was the
+ender chest inventory too, closing it calls `stopOpen` on the chest at `p`, not on the chest
+it was opened through, and forgets the active chest; the new menu then opens no chest. -/
+def openEnderChest (p : Pos) : M Unit := do
+  let l ← get
+  if hasEnderMenu l then
+    l.playerMenu.forM fun q => do
+      if let some be ← Level.getBlockEntity q then
+        Level.setBlockEntity q (withEnderMenu false (withViewed false be))
+    decrementOpeners p
+    if let some be ← Level.getBlockEntity p then
+      Level.setBlockEntity p (withEnderMenu true be)
+  else
+    closeContainer
+    if let some be ← Level.getBlockEntity p then
+      Level.setBlockEntity p (withEnderMenu true (withViewed true be))
+      incrementOpeners p
+  modify fun l => { l with playerMenu := [p] }
 
 /-! ### Removal -/
 
@@ -947,16 +1048,46 @@ def barrel (self : Block) : Behaviour :=
       return true
     tick := recheckOpeners }
 
-/-- The behaviour of a shulker box. Its block entity is ticked, which does nothing while the
-box is closed; opening it is not modelled. -/
+/-- The behaviour of a shulker box. Using it opens its menu, if nothing is in the way of the
+lid (`ShulkerBoxBlock.useWithoutItem`); the menu calls `startOpen`, and the block event that
+sends sets the lid moving. Its block entity is ticked and moves the lid
+(`Component.ShulkerBox`). -/
 def shulkerBox (self : Block) : Behaviour :=
   { base self with
     analogSignal := fun l p _ => redstoneSignalAt l p
     ticksBlockEntity := true
+    blockEntityTick := ShulkerBox.tick self
+    triggerEvent := ShulkerBox.triggerEvent self
     preRemoveSideEffects := fun _ => pure ()
-    useWithoutItem := fun _ _ => do
-      Level.setOverflow
+    useWithoutItem := fun p _ => do
+      if let some d ← ShulkerBox.getData p then
+        if ← ShulkerBox.canOpen self p d then
+          closeContainer
+          if let some be ← Level.getBlockEntity p then
+            Level.setBlockEntity p (withViewed true be)
+            ShulkerBox.startOpen p
+            modify fun l => { l with playerMenu := [p] }
       return true }
+
+/-- The behaviour of an ender chest. It opens unless a conductor sits on it, counts its viewers
+like a chest (`recheckOpen` on its scheduled tick) and sends a block event for its lid, which
+only the client moves. A waterlogged one schedules a fluid tick on every shape update. -/
+def enderChest (self : Block) (waterlogged : Bool) : Behaviour :=
+  { Behaviour.inert self with
+    updateShape := fun p _ _ _ => do
+      -- `ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level))`
+      if waterlogged then Level.scheduleFluidTick p .water 5
+      pure self
+    useWithoutItem := fun p _ => do
+      let l ← get
+      if isEnderChestAt l p && !isRedstoneConductor l (p.step .up) then openEnderChest p
+      return true
+    tick := recheckOpeners
+    triggerEvent := fun p a _ => do return isEnderChestAt (← get) p && a = 1
+    preRemoveSideEffects := fun p => do
+      let l ← get
+      if l.playerMenu.contains p && (l.blockEntities p).any holdsEnderMenu then
+        Level.setOverflow }
 
 /-! ### Furnaces -/
 
@@ -1130,12 +1261,7 @@ def behaviour (self : Block) : Behaviour :=
   | .shulkerBox _ _ => shulkerBox self
   | .furnace _ | .blastFurnace _ | .smoker _ => furnace self
   | .brewingStand _ => brewingStand self
-  | .enderChest _ =>
-    -- Not modelled: its menu shows the player's own inventory, and it counts its viewers.
-    { Behaviour.inert self with
-      useWithoutItem := fun _ _ => do
-        Level.setOverflow
-        return true }
+  | .enderChest s => enderChest self s.waterlogged
   | _ =>
     match chestState? self with
     | some c => chest self c

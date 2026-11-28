@@ -1,0 +1,224 @@
+{
+ "name": "blocked-tall",
+ "ticks": 110,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   22,
+   3,
+   3
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=north]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:observer[facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=east]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "state": "minecraft:observer[facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=south]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    1
+   ],
+   "state": "minecraft:observer[facing=south,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    3
+   ],
+   "state": "minecraft:cobblestone_wall[east=none,north=none,south=none,up=true,waterlogged=false,west=none]"
+  },
+  {
+   "pos": [
+    14,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=west]"
+  },
+  {
+   "pos": [
+    15,
+    3,
+    2
+   ],
+   "state": "minecraft:observer[facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    18,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=west]"
+  },
+  {
+   "pos": [
+    19,
+    3,
+    2
+   ],
+   "state": "minecraft:observer[facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    17,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    22,
+    3,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=north]"
+  },
+  {
+   "pos": [
+    22,
+    3,
+    3
+   ],
+   "state": "minecraft:observer[facing=north,powered=false]"
+  },
+  {
+   "pos": [
+    22,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 18,
+   "type": "use",
+   "pos": [
+    6,
+    3,
+    2
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 33,
+   "type": "use",
+   "pos": [
+    10,
+    3,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 48,
+   "type": "use",
+   "pos": [
+    14,
+    3,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 63,
+   "type": "use",
+   "pos": [
+    18,
+    3,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 78,
+   "type": "use",
+   "pos": [
+    22,
+    3,
+    2
+   ],
+   "face": "south"
+  }
+ ]
+}

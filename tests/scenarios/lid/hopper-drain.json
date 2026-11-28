@@ -1,0 +1,98 @@
+{
+ "name": "hopper-drain",
+ "ticks": 100,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   4,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:lime_shulker_box[facing=north]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:redstone\",count:20},{Slot:26b,id:\"minecraft:egg\",count:5}]}"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:dirt\",count:30}]}"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:barrel[facing=up,open=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 50,
+   "type": "use",
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "face": "up"
+  }
+ ]
+}

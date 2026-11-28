@@ -1,0 +1,76 @@
+{
+ "name": "ender-waterlogged-flow",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   2,
+   1,
+   1
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "use",
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 12,
+   "type": "use",
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "face": "north"
+  }
+ ]
+}

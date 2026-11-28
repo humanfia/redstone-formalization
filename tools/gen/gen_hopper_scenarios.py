@@ -659,8 +659,8 @@ def shulker_scenarios():
     s.b((6, 1, 1), hopper(), items((0, "shulker_box", 1)))
     s.b((6, 0, 1), chest())
 
-    # Opening a shulker box is not modelled.
-    s = pending(S("shulker-open", 30))
+    # Opening a shulker box (the lid unit has more of these: tests/scenarios/lid).
+    s = S("shulker-open", 30)
     s.b((0, 0, 0), shulker())
     s.use(3, (0, 0, 0))
 

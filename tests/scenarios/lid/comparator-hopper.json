@@ -1,0 +1,141 @@
+{
+ "name": "comparator-hopper",
+ "ticks": 120,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   1,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:blue_shulker_box[facing=up]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:40},{Slot:5b,id:\"minecraft:ender_pearl\",count:3}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=south]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:64},{Slot:1b,id:\"minecraft:shulker_box\",count:1},{Slot:2b,id:\"minecraft:iron_sword\",count:1},{Slot:3b,id:\"minecraft:stone\",count:64}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:blue_shulker_box[facing=east]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:40},{Slot:5b,id:\"minecraft:ender_pearl\",count:3}]}"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=south]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:64},{Slot:1b,id:\"minecraft:shulker_box\",count:1},{Slot:2b,id:\"minecraft:iron_sword\",count:1},{Slot:3b,id:\"minecraft:stone\",count:64}]}"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    3
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "state": "minecraft:barrel[facing=up,open=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 40,
+   "type": "use",
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 90,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "face": "up"
+  }
+ ]
+}

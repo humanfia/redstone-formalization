@@ -1,0 +1,202 @@
+{
+ "name": "ender-blocked",
+ "ticks": 80,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   20,
+   2,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:ender_chest[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:ender_chest[facing=west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    2
+   ],
+   "state": "minecraft:ender_chest[facing=east,waterlogged=false]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "state": "minecraft:shulker_box[facing=up]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "state": "minecraft:ender_chest[facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    2
+   ],
+   "state": "minecraft:ender_chest[facing=south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    17,
+    2,
+    2
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]"
+  },
+  {
+   "pos": [
+    20,
+    1,
+    2
+   ],
+   "state": "minecraft:ender_chest[facing=west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    20,
+    2,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 13,
+   "type": "use",
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 23,
+   "type": "use",
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 33,
+   "type": "use",
+   "pos": [
+    11,
+    1,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 43,
+   "type": "use",
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 53,
+   "type": "use",
+   "pos": [
+    17,
+    1,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 63,
+   "type": "use",
+   "pos": [
+    20,
+    1,
+    2
+   ],
+   "face": "north"
+  }
+ ]
+}

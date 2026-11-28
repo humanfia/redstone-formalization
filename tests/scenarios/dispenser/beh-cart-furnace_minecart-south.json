@@ -1,0 +1,100 @@
+{
+ "name": "beh-cart-furnace_minecart-south",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:dispenser[facing=south,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:furnace_minecart\",count:1},{Slot:1b,id:\"minecraft:cobblestone\",count:5}]}"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    4
+   ],
+   "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    2
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

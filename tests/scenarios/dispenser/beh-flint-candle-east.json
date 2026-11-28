@@ -1,0 +1,120 @@
+{
+ "name": "beh-flint-candle-east",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:dispenser[facing=east,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:flint_and_steel\",count:1},{Slot:1b,id:\"minecraft:cobblestone\",count:5}]}"
+  },
+  {
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:candle[candles=2,lit=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 17,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 19,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

@@ -1,0 +1,84 @@
+{
+ "name": "shoot-experience_bottle-up",
+ "ticks": 14,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:dispenser[facing=up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:experience_bottle\",count:2}]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

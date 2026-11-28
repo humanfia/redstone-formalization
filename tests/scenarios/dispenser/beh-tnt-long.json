@@ -1,0 +1,64 @@
+{
+ "name": "beh-tnt-long",
+ "ticks": 100,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:dispenser[facing=east,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:tnt\",count:1}]}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

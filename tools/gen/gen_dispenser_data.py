@@ -3,9 +3,10 @@
 
     source tools/env.sh && tools/gen/gen_dispenser_data.py
 
-Reads the block dump ($MC_REPORTS/blockdump.json: items and their stack sizes), the vanilla
-item component report ($MC_REPORTS/minecraft/components/item) and the data pack of the server
-($MC_SRC/data/minecraft: recipes and item tags). Writes
+Reads the block dump ($MC_REPORTS/blockdump.json: items and their stack sizes, block names), the
+vanilla item component report ($MC_REPORTS/minecraft/components/item), the data pack of the
+server ($MC_SRC/data/minecraft: recipes, item tags and block tags) and, for the blocks that
+burn, the decompiled `FireBlock` ($MC_SRC/net/minecraft/world/level/block/FireBlock.java). Writes
 
     Redstone/Component/Dispenser/Items.lean
     Redstone/Component/Crafter/Data.lean
@@ -16,6 +17,7 @@ The output is a function of these inputs only.
 import glob
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -90,11 +92,82 @@ def gen_items():
         ("spawnEggs", "The items that have the component `minecraft:entity_data` by default.",
          [i for i in ids if "minecraft:entity_data" in comps[i]]),
     ]
+    blocks = block_ids()
+    for tag, name in BLOCK_TAGS:
+        xs = block_tag(tag)
+        assert set(xs) <= blocks, (tag, set(xs) - blocks)
+        defs.append((name, f"The block tag `#minecraft:{tag}`.", xs))
+    defs.append(("flammable", "The blocks that fire can spread to: those that `FireBlock.bootStrap` "
+                 "gives ignite\nodds (`FireBlock.canBurn`, for a state that is not waterlogged).",
+                 flammable(blocks)))
     for name, doc, xs in defs:
         out += f"\n/-- {doc} -/\ndef {name} : List String :=\n{lean_list(xs, indent=2)}\n"
+    damage = [(i, comps[i]["minecraft:max_damage"]) for i in ids
+              if "minecraft:max_damage" in comps[i]]
+    out += ("\n/-- The items that have the component `minecraft:max_damage` by default, with its "
+            "value. -/\ndef maxDamage : List (String × ℕ) :=\n  [")
+    out += ",\n   ".join(f"({lean_str(i)}, {d})" for i, d in damage) + "]\n"
     out += "\nend Redstone.Component.Dispenser.Items\n"
     write("Redstone/Component/Dispenser/Items.lean", out)
     return ids, comps
+
+
+# ---------------------------------------------------------------------------------------------
+# Blocks the behaviours of the dispenser look at
+
+# The block tags (`BlockTags`) that the behaviours test, with their Lean names.
+BLOCK_TAGS = [
+    ("candles", "candles"), ("candle_cakes", "candleCakes"), ("campfires", "campfires"),
+    ("beehives", "beehives"), ("convertible_to_mud", "convertibleToMud"),
+    ("soul_fire_base_blocks", "soulFireBaseBlocks"),
+    ("wither_summon_base_blocks", "witherSummonBaseBlocks"), ("copper", "copper"),
+]
+
+COLOURS = ["white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
+           "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"]
+
+
+def block_ids():
+    with open(os.path.join(REPORTS, "blockdump.json")) as f:
+        return {b["id"] for b in json.load(f)["blocks"]}
+
+
+def block_tag(name, seen=()):
+    """The blocks of the block tag `name` (without `#minecraft:`), in the order of the files."""
+    assert name not in seen, name
+    with open(os.path.join(DATA, "tags", "block", name + ".json")) as f:
+        values = json.load(f)["values"]
+    out = []
+    for v in values:
+        if isinstance(v, dict):
+            v = v["id"]
+        xs = block_tag(v[1:].split(":")[1], seen + (name,)) if v.startswith("#") else [v]
+        out += [x for x in xs if x not in out]
+    return out
+
+
+def flammable(blocks):
+    """The blocks registered by `FireBlock.bootStrap` (`setFlammable`), read off the source."""
+    path = os.path.join(SRC, "net", "minecraft", "world", "level", "block", "FireBlock.java")
+    with open(path) as f:
+        lines = [l.strip() for l in f if "setFlammable(" in l and "private void" not in l]
+    out = []
+    for line in lines:
+        m = re.fullmatch(r"fire\.setFlammable\(Blocks\.([A-Z0-9_]+), \d+, \d+\);", line)
+        if m:
+            names = ["minecraft:" + m.group(1).lower()]
+        else:
+            m = re.fullmatch(
+                r"Blocks\.([A-Z_]+)\.forEach\(block -> fire\.setFlammable\(block, \d+, \d+\)\);",
+                line)
+            assert m, line
+            # A block of every colour: `Blocks.WOOL` holds the blocks `<colour>_wool`, and so on.
+            names = [f"minecraft:{c}_{m.group(1).lower()}" for c in COLOURS]
+        for n in names:
+            assert n in blocks, n
+            assert n not in out, n
+            out.append(n)
+    return sorted(out)
 
 
 # ---------------------------------------------------------------------------------------------

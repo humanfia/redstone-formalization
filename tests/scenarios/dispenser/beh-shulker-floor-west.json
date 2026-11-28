@@ -1,0 +1,92 @@
+{
+ "name": "beh-shulker-floor-west",
+ "ticks": 22,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:dispenser[facing=west,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:yellow_shulker_box\",count:1}]}"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    3
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

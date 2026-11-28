@@ -1,0 +1,58 @@
+{
+  "name": "adv-pop-and-return",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [8, 3, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 2, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [1, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"pos": [3, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 2, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"pos": [5, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 2, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"},
+    {"pos": [7, 2, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [7, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:cow", "pos": [1.5, 2.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:cow", "pos": [3.5, 2.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:cow", "pos": [5.5, 2.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:cow", "pos": [7.5, 2.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "destroy", "pos": [1, 1, 1], "drop": false},
+    {"tick": 4, "type": "destroy", "pos": [3, 1, 1], "drop": false},
+    {"tick": 5, "type": "destroy", "pos": [5, 1, 1], "drop": false},
+    {"tick": 6, "type": "destroy", "pos": [7, 1, 1], "drop": false},
+    {"tick": 10, "type": "set", "pos": [1, 2, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"tick": 11, "type": "set", "pos": [3, 2, 1], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"tick": 12, "type": "set", "pos": [5, 2, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"tick": 13, "type": "set", "pos": [7, 2, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"},
+    {"tick": 20, "type": "set", "pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"tick": 21, "type": "set", "pos": [3, 1, 1], "state": "minecraft:stone"},
+    {"tick": 22, "type": "set", "pos": [5, 1, 1], "state": "minecraft:stone"},
+    {"tick": 23, "type": "set", "pos": [7, 1, 1], "state": "minecraft:stone"},
+    {"tick": 30, "type": "set", "pos": [1, 2, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"tick": 31, "type": "set", "pos": [3, 2, 1], "state": "minecraft:stone_pressure_plate[powered=false]"},
+    {"tick": 32, "type": "set", "pos": [5, 2, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"tick": 33, "type": "set", "pos": [7, 2, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=0]"},
+    {"tick": 41, "type": "destroy", "pos": [1, 2, 1], "drop": false},
+    {"tick": 42, "type": "destroy", "pos": [3, 2, 1], "drop": false},
+    {"tick": 43, "type": "destroy", "pos": [5, 2, 1], "drop": false},
+    {"tick": 44, "type": "destroy", "pos": [7, 2, 1], "drop": false},
+    {"tick": 45, "type": "set", "pos": [1, 2, 1], "state": "minecraft:oak_pressure_plate[powered=false]", "flags": 2},
+    {"tick": 46, "type": "set", "pos": [3, 2, 1], "state": "minecraft:stone_pressure_plate[powered=false]", "flags": 2},
+    {"tick": 47, "type": "set", "pos": [5, 2, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]", "flags": 2},
+    {"tick": 48, "type": "set", "pos": [7, 2, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=0]", "flags": 2}
+  ]
+}

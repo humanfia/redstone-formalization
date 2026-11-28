@@ -112,6 +112,7 @@ inductive Action
   | useItem (p : Pos) (face : Direction) (item : String)
   | set (p : Pos) (b : Block) (flags : ℕ)
   | destroy (p : Pos) (drop : Bool)
+  | kill (index : ℕ)
 
 structure Scenario where
   name : String
@@ -135,6 +136,7 @@ def parseAction (j : Json) : Except String (ℕ × Action) := do
     let flags := (j.getObjValAs? ℕ "flags").toOption.getD 3
     return (tick, .set (← pos) (← parseBlock (← (← j.getObjVal? "state").getStr?)) flags)
   | "destroy" => return (tick, .destroy (← pos) ((j.getObjValAs? Bool "drop").toOption.getD false))
+  | "kill" => return (tick, .kill (← (← j.getObjVal? "entity").getNat?))
   | _ => throw s!"the Lean runner does not support the action `{type}`"
 
 def parseScenario (j : Json) : Except String Scenario := do
@@ -266,6 +268,7 @@ def applyAction (a : Action) : M Unit :=
   | .useItem p face item => discard <| Level.useItemOn p face item
   | .set p b flags => discard <| Level.setBlock p b flags
   | .destroy p drop => discard <| Level.destroyBlock p drop
+  | .kill index => Level.removeEntity index
 
 def sortTicks (ts : List ScheduledTick) : List ScheduledTick :=
   ts.foldl (fun acc t => ScheduledTick.insertSorted t acc) []

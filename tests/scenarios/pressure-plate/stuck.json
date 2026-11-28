@@ -1,0 +1,33 @@
+{
+  "name": "stuck",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [14, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [14, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:oak_pressure_plate[powered=true]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:stone_pressure_plate[powered=true]"},
+    {"pos": [6, 1, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [9, 1, 1], "state": "minecraft:light_weighted_pressure_plate[power=7]"},
+    {"pos": [10, 1, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [12, 1, 1], "state": "minecraft:heavy_weighted_pressure_plate[power=15]"},
+    {"pos": [13, 1, 1], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [12, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:pig", "pos": [5.5, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [9.5, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 4, "type": "kill", "entity": 0},
+    {"tick": 6, "type": "set", "pos": [12, 1, 1], "state": "minecraft:air"},
+    {"tick": 9, "type": "use", "pos": [2, 1, 2], "face": "up"},
+    {"tick": 15, "type": "destroy", "pos": [1, 1, 1], "drop": false},
+    {"tick": 22, "type": "set", "pos": [9, 1, 1], "state": "minecraft:light_weighted_pressure_plate[power=0]"},
+    {"tick": 25, "type": "destroy", "pos": [5, 1, 1], "drop": false}
+  ]
+}

@@ -241,8 +241,8 @@ compares it with their traces after every tick; without arguments it runs everyt
 * The model takes its initial state from frame 0 of the trace, so it never reads `fill`,
   `blocks` or `entities`. From the scenario it uses `ticks`, `box`, `actions` and, of the
   `settings`, `dayTime`, `advanceTime` and `weather`.
-* It supports the actions `use`, `use_item`, `set` and `destroy`. A scenario with `summon` or
-  `kill` cannot be run yet.
+* It supports the actions `use`, `use_item`, `set`, `destroy` and `kill`. A scenario with
+  `summon` cannot be run yet.
 * After every tick it compares: `gameTime`; the block state and the block entity of every
   position in the box; `blockEntityTickers`; `scheduled`; `blockEvents`; and the entities.
   Block entities and entities are compared after decoding the server's NBT into the model's

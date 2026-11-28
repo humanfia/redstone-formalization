@@ -1,0 +1,49 @@
+{
+  "name": "edges",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [40, 3, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [40, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [2, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [8, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [8, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [11, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [11, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [14, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [14, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [17, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [17, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [20, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [20, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [23, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [23, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [26, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [26, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [29, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [29, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [32, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [32, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [35, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [35, 1, 2], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:pig", "pos": [1.62, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [4.61, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [7.54, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [12.379999999999999, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [15.39, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [18.46, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [20.5, 1.24, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [23.5, 1.25, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [26.5, 1.3, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [29.5, 0.11, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [32.5, 0.09, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [35.5, 2.1, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": []
+}

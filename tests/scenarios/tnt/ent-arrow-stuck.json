@@ -1,0 +1,70 @@
+{
+ "name": "ent-arrow-stuck",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   6,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    10,
+    1,
+    7
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:8}"
+  },
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    9.97,
+    1.5,
+    7.5
+   ],
+   "nbt": "{inGround:1b,pickup:1b}"
+  },
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    7.5,
+    1.03,
+    5.5
+   ],
+   "nbt": "{inGround:1b,pickup:1b}"
+  }
+ ]
+}

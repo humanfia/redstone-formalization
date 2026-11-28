@@ -1,0 +1,39 @@
+{
+ "name": "anchor-explode-glowstone-full",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   10,
+   15
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    7,
+    5,
+    7
+   ],
+   "state": "minecraft:respawn_anchor[charges=4]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    7,
+    5,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:glowstone"
+  }
+ ]
+}

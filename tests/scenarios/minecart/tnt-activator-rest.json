@@ -1,0 +1,72 @@
+{
+ "name": "tnt-activator-rest",
+ "ticks": 100,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    5,
+    1,
+    4
+   ],
+   "max": [
+    9,
+    1,
+    4
+   ],
+   "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_block"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    7.5,
+    1.0625,
+    4.5
+   ]
+  }
+ ]
+}

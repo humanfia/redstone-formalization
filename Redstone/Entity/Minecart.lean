@@ -4,6 +4,7 @@ public import Redstone.Mechanics.Tick
 public import Redstone.Entity.Minecart.Tables
 public import Redstone.Block.Generated.Items
 public import Redstone.Entity.Still
+public import Redstone.Entity.Tnt.Explosion
 
 /-!
 # Minecarts
@@ -39,7 +40,8 @@ longer a faithful image of the game, when it meets one of these:
 * a block next to the minecart's path whose collision shape depends on more than its state
   (bamboo, pointed dripstone and sulfur spikes, which are shifted by their position; scaffolding,
   powder snow, moving pistons);
-* a TNT minecart that explodes;
+* a TNT minecart that lands on a turtle egg or on pointed dripstone (what `fallOn` of these
+  blocks passes on is not modelled);
 * a command block minecart with a command on an active activator rail;
 * a hopper minecart that is enabled under a block with a block entity or a composter;
 * a movement of a block or more per tick while falling (the game then traces a ray to reset
@@ -57,9 +59,18 @@ Scenarios that wait in `tests/pending/scenarios/minecart` for one of these:
 for `pushOtherMinecart`, the boxes of entities as obstacles in `Entity.collide`, and the order
 in which `getEntities` finds entities), `fuzz-minecart-harsh-*` (a hopper or a dropper next to a
 minecart with a container; in `s12-028` it is the hopper that gives up, see
-`Redstone.Component.Hopper`), `pending-hopper-cart-under-chest`, `pending-tnt-explodes`,
+`Redstone.Component.Hopper`), `pending-hopper-cart-under-chest`,
 `verify-hit-bamboo` and `verify-hit-dripstone`. In `tests/pending/scenarios/entity-fluid`:
-`cart-lava-pool` (a minecart in lava) and `fuzz-cart-05` (a TNT minecart that explodes).
+`cart-lava-pool` (a minecart in lava) and `fuzz-cart-05` (a TNT minecart explodes among
+water; the fluid ticks of that game tick are the right ones but in another order).
+
+A TNT minecart explodes (`explode`, through `Redstone.Entity.Tnt.explode`) when its fuse runs
+out, when it runs into something at speed and when it lands after a fall of three blocks. The
+power depends on its speed and on a draw from its own generator (`Entities.Minecart.random`),
+which is seeded by the entity's id (`Entity.randomAfterUuid`). The game does not stop the tick
+of a minecart that has exploded, so neither does the model: `Entity.move` returns early for an
+entity that was removed, the blocks no longer feel it, but the checks of `MinecartTNT.tick`
+still run, and a minecart may explode twice in a tick.
 
 The helpers of the first sections (Java arithmetic, collision with block shapes, the
 supporting block) are not particular to minecarts. They are private copies, to be shared with
@@ -514,10 +525,17 @@ minecart is `0.98F` wide and `0.7F` high. -/
 def boundingBox (pos : Vec3) : AABB :=
   dims.box pos
 
-/-- Writes the minecart back into the level. -/
+/-- Writes the minecart back into the level. A minecart that has moved to another entity
+section since it was last written is put at the end of that section (`EntitySection.add`). -/
 def store : CartM Unit := do
   let c ← getThe Cart
   if c.alive then
+    let l ← level
+    if let some e := l.entity? c.index then
+      if Level.sectionOf e.base.pos != Level.sectionOf c.pos then
+        modifyThe Cart fun c =>
+          { c with d := { c.d with sectionEntry := (l.gameTime, c.index + 1) } }
+    let c ← getThe Cart
     Level.modifyEntity c.index fun e =>
       { e with base := ⟨c.pos, c.motion, c.onGround⟩, data := .minecart c.kind c.d }
 
@@ -702,8 +720,37 @@ def entityInReach (l : Level) (c : Cart) (area : AABB) : Bool :=
 
 /-! ### Moving -/
 
-/-- `MinecartTNT.explode`. Explosions are not modelled. -/
-def explode : CartM Unit := unmodelled
+/-- `MinecartTNT.explode(damageSource, speedSqr)`, with the game rule `tnt_explodes` on: an
+explosion at the minecart's position whose power is its base power (4) plus up to 1.5 times the
+speed times its speed factor (1), by a draw from the minecart's own generator; the speed counts
+up to 5. While the minecart is primed
+the explosion spares rails and the blocks under them (`Tnt.minecartTntCalculator`). The
+minecart is discarded afterwards; the game does not look whether it was already. -/
+def explode (speedSqr : Float) : CartM Unit := do
+  let c ← getThe Cart
+  let speed := min speedSqr.sqrt 5.0
+  let (n, r) := (c.d.random.getD (Entity.randomAfterUuid (c.index + 2))).nextDouble53
+  let draw := Float.ofNat n / 9007199254740992.0
+  let power :=
+    (c.d.explosionPower.toFloat + c.d.explosionSpeedFactor.toFloat * draw * 1.5 * speed).toFloat32
+  modifyData fun d => { d with random := some r }
+  StateT.lift <| Tnt.explode c.pos power false .tnt (Tnt.minecartTntCalculator (c.d.fuse > -1))
+    (some c.index) (c.index + 1)
+  StateT.lift (Level.removeEntity c.index)
+  modifyThe Cart fun c => { c with alive := false }
+
+/-- The fall distance that `Block.fallOn` of the block `onState` passes to
+`Entity.causeFallDamage` for a fall of `fallDistance`: half of it for a bed and for shelf
+mushrooms (`getFallDistanceReduction`), all of it for the other blocks, and no call at all for
+powder snow (`some none`). `none` for the blocks whose `fallOn` does something that is not
+modelled: a turtle egg may break, and pointed dripstone adds to the distance when it points
+up. -/
+def fallOnDistance (onState : Block) (fallDistance : Float) : Option (Option Float) :=
+  if onState.id == .turtle_egg || onState.id == .pointed_dripstone then none
+  else if onState.id == .powder_snow then some none
+  else if onState.id == .shelf_mushroom || onState.id.name.endsWith "_bed" then
+    some (some (fallDistance * ((1.0 : Float32) - (0.5 : Float32)).toFloat))
+  else some (some fallDistance)
 
 /-- `Entity.checkFallDamage(ya, onGround, onState, pos)`: the fall distance grows while the
 minecart falls and is reset when it lands. Landing announces `hit_ground`; a TNT minecart that
@@ -718,10 +765,18 @@ def checkFallDamage (ya : Float) (onState : Block) : CartM Unit := do
       if onState.id == .farmland then
         StateT.lift <| modify fun l => { l with random := l.random.nextFloat24.2 }
       if c.kind == .tnt then
-        let special := isBouncy onState || onState.id == .hay_block || onState.id == .honey_block
-          || onState.id == .powder_snow || onState.id == .pointed_dripstone
-        if special || c.d.fallDistance ≥ 3.0 then explode
-      withLevel (Level.gameEvent "minecraft:hit_ground" (blockPosOf c.pos))
+        -- `MinecartTNT.causeFallDamage`
+        match fallOnDistance onState c.d.fallDistance with
+        | none => unmodelled
+        | some none => pure ()
+        | some (some fallDistance) =>
+          if fallDistance ≥ 3.0 then
+            let power := fallDistance / 10.0
+            explode (power * power)
+      -- the landing is announced even when the minecart has just exploded
+      if (← getThe Cart).alive then
+        withLevel (Level.gameEvent "minecraft:hit_ground" (blockPosOf c.pos))
+      else StateT.lift (Level.gameEvent "minecraft:hit_ground" (blockPosOf c.pos))
     modifyData fun d => { d with fallDistance := 0.0 }
 
 /-- `Entity.getGravity()`: none with `NoGravity`, else `AbstractMinecart.getDefaultGravity()`,
@@ -831,6 +886,8 @@ def move (delta : Vec3) (onRails : Bool) : CartM Unit := do
   let effectPos := getOnPosLegacy l c
   let effectState := l.blockAt effectPos
   checkFallDamage movement.y effectState
+  -- `if (this.isRemoved())`: a TNT minecart that exploded on landing goes no further
+  if !(← getThe Cart).alive then return
   if (movedVertically && verticalCollision) || horizontalCollision then
     restituteMovementAfterCollisions effectState xCollision zCollision verticalCollision
       verticalCollisionBelow movement
@@ -1127,8 +1184,9 @@ def kindTick : CartM Unit := do
   match c.kind with
   | .tnt =>
     if c.d.fuse > 0 then modifyData fun d => { d with fuse := d.fuse - 1 }
-    else if c.d.fuse == 0 then explode
-    if c.d.horizontalCollision && hdistSqr c.motion ≥ (0.01 : Float32).toFloat then explode
+    else if c.d.fuse == 0 then explode (hdistSqr c.motion)
+    if c.d.horizontalCollision && hdistSqr c.motion ≥ (0.01 : Float32).toFloat then
+      explode (hdistSqr c.motion)
   | .furnace =>
     if c.d.fuel > 0 then modifyData fun d => { d with fuel := d.fuel - 1 }
     if (← getThe Cart).d.fuel ≤ 0 then
@@ -1150,6 +1208,8 @@ def cartTick : CartM Unit := do
     StateT.lift (Level.removeEntity c.index)
     modifyThe Cart fun c => { c with alive := false }
     return
+  -- `AbstractMinecart.tick`: the damage wears off
+  modifyData fun d => if d.damage > 0.0 then { d with damage := d.damage - 1.0 } else d
   checkSurroundings
   behaviorTick old yRotO
   updateFluidInteraction

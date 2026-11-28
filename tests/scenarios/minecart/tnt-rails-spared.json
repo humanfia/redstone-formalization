@@ -1,0 +1,110 @@
+{
+ "name": "tnt-rails-spared",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    1,
+    1,
+    4
+   ],
+   "max": [
+    14,
+    1,
+    4
+   ],
+   "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+  },
+  {
+   "min": [
+    7,
+    1,
+    1
+   ],
+   "max": [
+    7,
+    1,
+    14
+   ],
+   "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    6
+   ],
+   "state": "minecraft:detector_rail[powered=false,shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    3,
+    2
+   ],
+   "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    7.5,
+    1.0625,
+    4.5
+   ],
+   "nbt": "{fuse:8}"
+  }
+ ]
+}

@@ -30,6 +30,8 @@ TAGS = [
     "supports_pumpkin_stem", "supports_melon_stem", "supports_mangrove_propagule",
     "supports_hanging_mangrove_propagule", "supports_small_dripleaf", "supports_lily_pad",
     "support_override_cactus_flower", "cannot_support_seagrass",
+    "supports_crops", "overrides_mushroom_light_requirement", "maintains_farmland",
+    "prevents_nearby_leaf_decay", "snow",
 ]
 
 # The Java block classes for which `state.getBlock() instanceof C` is needed.

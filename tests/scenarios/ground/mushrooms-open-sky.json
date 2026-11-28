@@ -1,0 +1,771 @@
+{
+ "name": "mushrooms-open-sky",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   16,
+   3,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    16,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:brown_mushroom"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:red_mushroom"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:brown_mushroom"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:red_mushroom"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:crimson_nylium"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:brown_mushroom"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:crimson_nylium"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:red_mushroom"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:warped_nylium"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:brown_mushroom"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:warped_nylium"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:red_mushroom"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:brown_mushroom"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:red_mushroom"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:brown_mushroom"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:red_mushroom"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:brown_mushroom"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:red_mushroom"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    0
+   ],
+   "state": "minecraft:farmland[moisture=0]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "state": "minecraft:brown_mushroom"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "state": "minecraft:farmland[moisture=0]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "state": "minecraft:red_mushroom"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    9,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    9,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    11,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    11,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    12,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    14,
+    1,
+    0
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  }
+ ]
+}

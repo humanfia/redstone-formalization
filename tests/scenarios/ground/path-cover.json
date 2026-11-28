@@ -1,0 +1,595 @@
+{
+ "name": "path-cover",
+ "ticks": 12,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   19,
+   3,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    19,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    18,
+    1,
+    0
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  },
+  {
+   "pos": [
+    18,
+    1,
+    2
+   ],
+   "state": "minecraft:dirt_path"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:stone_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:stone_slab[type=top,waterlogged=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:torch"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_leaves[distance=7,persistent=false,waterlogged=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    16,
+    2,
+    0
+   ],
+   "state": "minecraft:wheat[age=3]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    18,
+    2,
+    0
+   ],
+   "state": "minecraft:melon_stem[age=2]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:cobweb"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:snow[layers=8]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:pumpkin"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_pressure_plate[powered=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "state": "minecraft:lantern[hanging=false,waterlogged=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    18,
+    2,
+    2
+   ],
+   "state": "minecraft:tnt[unstable=false]"
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    18,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    18,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    16,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "drop": false
+  }
+ ]
+}

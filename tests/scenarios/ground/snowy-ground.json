@@ -1,0 +1,1715 @@
+{
+ "name": "snowy-ground",
+ "ticks": 12,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   14,
+   3,
+   7
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    14,
+    0,
+    7
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    2
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    4
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    4
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    4
+   ],
+   "state": "minecraft:mycelium[snowy=false]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    6
+   ],
+   "state": "minecraft:grass_block[snowy=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:grass_block[snowy=true]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:grass_block[snowy=true]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:grass_block[snowy=true]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    6
+   ],
+   "state": "minecraft:grass_block[snowy=true]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    6
+   ],
+   "state": "minecraft:grass_block[snowy=true]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    6
+   ],
+   "state": "minecraft:grass_block[snowy=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:snow[layers=5]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:snow_block"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:powder_snow"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:snow[layers=5]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:snow_block"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:powder_snow"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:snow[layers=5]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:snow_block"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:powder_snow"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:snow[layers=1]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "state": "minecraft:snow[layers=5]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "state": "minecraft:snow_block"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:powder_snow"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    11,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    13,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    11,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    13,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    11,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    13,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    9,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    11,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    13,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:powder_snow",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:stone",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:white_carpet",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:ice",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:snow[layers=1]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:snow[layers=5]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:snow_block",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:powder_snow",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:white_carpet",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:ice",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:snow[layers=1]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:snow[layers=5]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:snow_block",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:powder_snow",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:stone",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:white_carpet",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:ice",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "state": "minecraft:snow[layers=1]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "state": "minecraft:snow[layers=5]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "state": "minecraft:snow_block",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:powder_snow",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "state": "minecraft:white_carpet",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:ice",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "state": "minecraft:snow[layers=1]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "state": "minecraft:snow[layers=5]",
+   "flags": 2
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "state": "minecraft:snow_block",
+   "flags": 2
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:snow[layers=5]",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:snow_block",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:powder_snow",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:stone",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:white_carpet",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:ice",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:snow[layers=1]",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:snow[layers=5]",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:snow_block",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:powder_snow",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:white_carpet",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:ice",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:snow[layers=1]",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:snow[layers=5]",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:snow_block",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:powder_snow",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:stone",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "state": "minecraft:white_carpet",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "state": "minecraft:ice",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "state": "minecraft:snow[layers=1]",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:snow[layers=5]",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "state": "minecraft:snow_block",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "state": "minecraft:powder_snow",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:stone",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "state": "minecraft:white_carpet",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "state": "minecraft:ice",
+   "flags": 18
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "state": "minecraft:snow[layers=1]",
+   "flags": 18
+  }
+ ]
+}

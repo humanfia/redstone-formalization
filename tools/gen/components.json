@@ -35,7 +35,7 @@
     {"module": "FallingStructure", "classes": ["ScaffoldingBlock", "PointedDripstoneBlock", "SulfurSpikeBlock", "BrushableBlock"]},
     {"module": "SpecialBlock", "classes": ["CampfireBlock", "PowderSnowBlock", "WebBlock", "NetherPortalBlock", "CarvedPumpkinBlock", "DriedGhastBlock", "TurtleEggBlock", "FrogspawnBlock", "SnifferEggBlock"]},
     {"module": "Vine", "classes": ["CactusBlock", "SugarCaneBlock", "BambooStalkBlock", "BambooSaplingBlock", "ChorusPlantBlock", "ChorusFlowerBlock", "GrowingPlantBlock", "VineBlock", "MultifaceBlock"]},
-    {"module": "Ground", "classes": ["FarmlandBlock", "PathBlock", "LeavesBlock", "SnowyBlock", "NyliumBlock", "HugeMushroomBlock", "MudBlock", "RootedDirtBlock"]},
+    {"module": "Ground", "classes": ["FarmlandBlock", "PathBlock", "LeavesBlock", "SnowyBlock", "NyliumBlock", "HugeMushroomBlock", "MudBlock", "RootedDirtBlock", "BeaconBlock", "EndGatewayBlock", "EndPortalBlock", "TrialSpawnerBlock", "VaultBlock", "AmethystBlock", "PumpkinBlock", "CraftingTableBlock", "CartographyTableBlock", "LoomBlock", "StonecutterBlock", "EnchantingTableBlock"]},
     {"module": "Fire", "classes": ["BaseFireBlock"]},
     {"module": "Loot", "classes": ["DropExperienceBlock", "InfestedBlock", "SpawnerBlock"]},
     {"module": "RandomTicked", "classes": ["WeatheringCopperFullBlock", "IceBlock", "BuddingAmethystBlock"]}

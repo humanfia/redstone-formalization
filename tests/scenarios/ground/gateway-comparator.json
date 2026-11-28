@@ -1,0 +1,365 @@
+{
+ "name": "gateway-comparator",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   2,
+   20
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    20
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:197L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:197L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:2396L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:2396L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    8
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:4795L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    8
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    10
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:4795L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    10
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    12
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:50L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    14
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:50L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    14
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    14
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    16
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:190L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    16
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    18
+   ],
+   "state": "minecraft:end_gateway",
+   "nbt": "{Age:190L}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    18
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    18
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    8
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    10
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    14
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    16
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    18
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "flags": 786
+  }
+ ]
+}

@@ -181,16 +181,10 @@ def cakeCanSurvive (l : Level) (p : Pos) : Bool := (l.blockAt (p.step .down)).at
 
 /-- `CakeBlock.updateShape` and `CandleCakeBlock.updateShape`: the cake breaks when the block
 below can no longer carry it. The game then destroys it with drops (`Block.updateOrDestroy`,
-`Level.destroyBlock(pos, true)`), and `dropResources` draws the position of the candle of a
-candle cake from the level's generator before anything else happens, even when blocks drop
-nothing; a cake drops nothing. `Level.destroyBlock` of the model does not know about drops, so
-the numbers are drawn here. (This is wrong for a shape update with the flag
-`UPDATE_SUPPRESS_DROPS`, which draws nothing.) -/
+`Level.destroyBlock(pos, true)`); the random numbers that `dropResources` draws for the candle
+of a candle cake are drawn by `Level.destroyBlock`. -/
 def cakeUpdateShape (self : Block) (p : Pos) (d : Direction) : M Block := do
-  if d = .down && !cakeCanSurvive (← get) p then
-    if let .candleCake _ _ := self then popResource
-    return .AIR
-  else return self
+  return if d = .down && !cakeCanSurvive (← get) p then .AIR else self
 
 /-- `CakeBlock.eat` for a player that can eat: one more bite, or the end of the cake. -/
 def eat (s : Blocks.Cake) (p : Pos) : M Bool := do

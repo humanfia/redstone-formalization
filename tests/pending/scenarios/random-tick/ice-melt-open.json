@@ -1,0 +1,878 @@
+{
+ "name": "ice-melt-open",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   1,
+   6
+  ]
+ },
+ "settings": {
+  "randomTickSpeed": 1000
+ },
+ "blocks": [
+  {
+   "pos": [
+    0,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    1
+   ],
+   "state": "minecraft:glowstone"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    12,
+    0,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    12,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    12,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    12,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    12,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    12,
+    0,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    12,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": []
+}

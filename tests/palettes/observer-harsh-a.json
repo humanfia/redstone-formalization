@@ -1,0 +1,15 @@
+{
+  "blocks": [
+    {"state": "minecraft:air", "weight": 3},
+    {"state": "minecraft:stone", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 3},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 2},
+    {"state": "minecraft:observer[facing=*,powered=false]", "weight": 9},
+    {"state": "minecraft:observer[facing=*,powered=true]", "weight": 2}
+  ],
+  "actions": {
+    "use": {"count": [2, 6], "targets": ["minecraft:lever"]},
+    "set": {"count": [10, 20], "states": ["minecraft:stone", "minecraft:air", "minecraft:glass", "minecraft:redstone_lamp[lit=*]", "minecraft:observer[facing=*,powered=*]", "minecraft:observer[facing=*,powered=*]", "minecraft:observer[facing=*,powered=*]"]},
+    "destroy": {"count": [5, 10], "targets": ["minecraft:stone", "minecraft:redstone_lamp", "minecraft:lever", "minecraft:observer"]}
+  }
+}

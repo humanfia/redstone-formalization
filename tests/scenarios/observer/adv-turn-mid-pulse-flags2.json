@@ -1,0 +1,169 @@
+{
+ "name": "adv-turn-mid-pulse-flags2",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   2,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=west,powered=true]",
+   "flags": 2
+  },
+  {
+   "tick": 9,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=true]",
+   "flags": 2
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=false]",
+   "flags": 2
+  },
+  {
+   "tick": 14,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  }
+ ]
+}

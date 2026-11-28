@@ -1,0 +1,105 @@
+{
+ "name": "adv-destroy-on-due-tick",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   2,
+   2
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=east,powered=false]"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:observer[facing=west,powered=true]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ]
+}

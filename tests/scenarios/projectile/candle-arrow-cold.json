@@ -35,7 +35,7 @@
     1,
     3
    ],
-   "state": "minecraft:candle[candles=4,lit=false]"
+   "state": "minecraft:candle[candles=4,lit=false,waterlogged=false]"
   }
  ],
  "entities": [

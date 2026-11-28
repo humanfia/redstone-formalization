@@ -404,7 +404,7 @@ def throwableTick (i : ℕ) : M Unit := do
 
 /-- The tick of a projectile. -/
 def tick (i : ℕ) : M Unit := do
-  let some (e, type, d) ← get? i | return
+  let some (e, type, _) ← get? i | return
   if arrowTypes.contains type then arrowTick i
   else if throwableTypes.contains type then throwableTick i
   else if restingTypes.contains type && e.base.motion == .zero then pure ()

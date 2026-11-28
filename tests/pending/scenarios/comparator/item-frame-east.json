@@ -1,0 +1,90 @@
+{
+ "name": "item-frame-east",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   3,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=east,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item_frame",
+   "pos": [
+    6.5,
+    1.5,
+    4.5
+   ],
+   "nbt": "{Facing:5b,Item:{id:\"minecraft:stone\",count:1},ItemRotation:3b}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "face": "up"
+  }
+ ]
+}

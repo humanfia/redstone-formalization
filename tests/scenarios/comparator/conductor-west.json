@@ -1,0 +1,106 @@
+{
+ "name": "conductor-west",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   3,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "state": "minecraft:lever[face=wall,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 14,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    4
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 18,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    4
+   ]
+  }
+ ]
+}

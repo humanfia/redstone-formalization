@@ -3,6 +3,7 @@ module
 public import Redstone.Basic.Direction
 public import Redstone.Basic.Pos
 public import Redstone.Basic.Signal
+public import Redstone.Basic.Float32
 public import Redstone.Basic.Box
 public import Redstone.Basic.PosMap
 public import Redstone.Basic.Nbt

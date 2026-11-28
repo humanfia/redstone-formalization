@@ -1,0 +1,44 @@
+{
+ "name": "arrow-despawn",
+ "ticks": 20,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    3.5,
+    1.05,
+    3.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.0d],inGround:1b,life:1190s}"
+  }
+ ],
+ "actions": []
+}

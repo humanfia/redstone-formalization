@@ -1,0 +1,2589 @@
+{
+ "name": "adv-gate-use-all",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   4,
+   11
+  ]
+ },
+ "fill": [],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=north,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=north,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=north,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    8
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    8
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    10
+   ],
+   "state": "minecraft:oak_fence_gate[facing=north,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    10
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=north,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_fence_gate[facing=south,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=south,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=south,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    8
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    8
+   ],
+   "state": "minecraft:oak_fence_gate[facing=south,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    10
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    10
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=south,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=west,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_fence_gate[facing=west,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=west,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=west,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=west,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=west,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=west,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=west,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    8
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=west,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    8
+   ],
+   "state": "minecraft:oak_fence_gate[facing=west,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    10
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=west,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    10
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=west,in_wall=false,open=true,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=east,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=east,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=east,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=east,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    4
+   ],
+   "state": "minecraft:crimson_fence_gate[facing=east,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=east,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    6
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=east,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    8
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=east,in_wall=false,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    8
+   ],
+   "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    10
+   ],
+   "state": "minecraft:poplar_fence_gate[facing=east,in_wall=true,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    10
+   ],
+   "state": "minecraft:bamboo_fence_gate[facing=east,in_wall=false,open=false,powered=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 2,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 3,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 4,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    2
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    4
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    6
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    8
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    10
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    2
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    4
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    6
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    8
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    10
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    2
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    4
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    6
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    8
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    10
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    3,
+    0
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    3,
+    2
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    3,
+    4
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    3,
+    6
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    3,
+    8
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    3,
+    10
+   ],
+   "state": "minecraft:glass",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 6,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    8,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    10,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    12,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    0
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    4
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    8
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 7,
+   "type": "use",
+   "pos": [
+    14,
+    2,
+    10
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    8
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    10
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    8
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    10
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    8
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    10
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    8
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    10
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    0,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    2,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    4,
+    2,
+    10
+   ],
+   "face": "east"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "face": "down"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    4
+   ],
+   "face": "north"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "face": "south"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    8
+   ],
+   "face": "west"
+  },
+  {
+   "tick": 9,
+   "type": "use",
+   "pos": [
+    6,
+    2,
+    10
+   ],
+   "face": "east"
+  }
+ ]
+}

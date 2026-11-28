@@ -1,0 +1,25 @@
+{
+  "name": "door-lever-support-destroyed",
+  "ticks": 8,
+  "box": {"min": [0, 0, 0], "max": [9, 3, 3]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [9, 0, 3], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=true,powered=true]"},
+    {"pos": [1, 2, 1], "state": "minecraft:oak_door[facing=north,half=upper,hinge=left,open=true,powered=true]"},
+    {"pos": [2, 1, 1], "state": "minecraft:stone"},
+    {"pos": [2, 2, 1], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [5, 1, 1], "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=true,powered=true]"},
+    {"pos": [5, 2, 1], "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=true,powered=true]"},
+    {"pos": [5, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [8, 1, 1], "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=true,powered=true]"},
+    {"pos": [8, 2, 1], "state": "minecraft:oak_door[facing=north,half=upper,hinge=left,open=true,powered=true]"},
+    {"pos": [8, 1, 2], "state": "minecraft:lever[face=floor,facing=north,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 3, "type": "destroy", "pos": [2, 1, 1], "drop": false},
+    {"tick": 3, "type": "destroy", "pos": [5, 0, 2], "drop": false},
+    {"tick": 3, "type": "destroy", "pos": [8, 1, 2], "drop": false}
+  ]
+}

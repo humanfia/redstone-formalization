@@ -213,9 +213,10 @@ structure Level where
   /-- The game rule `random_tick_speed`: how many blocks of every chunk section get a random
   tick in a game tick. With zero there are no random ticks. -/
   randomTickSpeed : ℕ := 0
-  /-- The game rule `block_drops`: a block that is broken drops its loot. Drops are not
-  modelled: with the rule on, `Level.dropResources` and `Level.popResource` (the drops of a
-  broken block and of an exploded one) set `overflow`. -/
+  /-- The game rule `block_drops`: a block that is broken drops its loot and its experience
+  (`Level.dropResources` and `Level.popResource`, the drops of a broken block and of an exploded
+  one). With the rule off nothing drops, and only the random numbers the game draws on the way
+  are modelled. -/
   blockDrops : Bool := false
   /-- The corners of a box that contains every block that can get a random tick. The game goes
   through the sections of the loaded chunks; the model has no chunks, so a level in which

@@ -127,10 +127,11 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Vine` | cactus, sugar cane, bamboo, chorus plants, kelp and vines, glow lichen and sculk veins | stub |
 | `Redstone.Component.Ground` | farmland, paths, leaves, grass, nylium, mushroom blocks, mud | stub |
 | `Redstone.Component.Fire` | fire and soul fire | stub |
-| `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners | stub |
+| `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners; what they release is in `Level.spawnAfterBreak` (`Redstone.Mechanics.Update`), next to the loot of every block | defined, tested |
 | `Redstone.World.Light` | the light of a cell: block light and raw brightness, for the blocks that need or shun light | stub: every cell has light 15 |
 | `Redstone.Component.RandomTicked` | copper blocks, ice, budding amethyst | stub |
-| `Redstone.Entity.Lightning`, `Redstone.Entity.Hanging`, `Redstone.Entity.ExperienceOrb` | lightning bolts, item frames, experience orbs | stub |
+| `Redstone.Entity.Lightning`, `Redstone.Entity.Hanging` | lightning bolts, item frames | stub |
+| `Redstone.Entity.ExperienceOrb` | experience orbs: falling, sliding, merging, expiring; what a broken ore or a removed furnace releases | defined, tested |
 | `Redstone.Proof.Smoke` | four small circuits proved by kernel evaluation: lever and lamp, a lever losing its support, a sticky piston, two hoppers | proved |
 | `Redstone.Contraption.PistonDoor`, `Redstone.Theorems.PistonDoor3x3` | piston doors | placeholder |
 

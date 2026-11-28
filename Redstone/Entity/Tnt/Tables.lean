@@ -1148,26 +1148,461 @@ def explosionDrops (b : Block) : Option (List (String × ℕ)) :=
   | _ =>
     some [(b.id.name, 1)]
 
+/-- `Block.getDrops` for a block that is broken with drops, without tool and
+without breaker (a block that lost its support, for instance), where
+`brokenChanceLoot` is `none`: the stacks of the block's loot table, as item and
+count. `none` when they are not a function of the block state (chance, a block
+entity, neighbouring blocks). -/
+def brokenDrops (b : Block) : Option (List (String × ℕ)) :=
+  match b.id with
+  | .gravel | .nether_gold_ore | .oak_leaves | .spruce_leaves | .birch_leaves | .jungle_leaves
+  | .acacia_leaves | .cherry_leaves | .dark_oak_leaves | .pale_oak_leaves | .mangrove_leaves
+  | .red_poplar_leaves | .orange_poplar_leaves | .yellow_poplar_leaves | .azalea_leaves
+  | .flowering_azalea_leaves | .lapis_ore | .deepslate_lapis_ore | .short_grass | .fern
+  | .dead_bush | .creaking_heart | .redstone_ore | .deepslate_redstone_ore | .glowstone
+  | .brown_mushroom_block | .red_mushroom_block | .melon | .attached_pumpkin_stem
+  | .attached_melon_stem | .pumpkin_stem | .melon_stem | .resin_clump | .player_head
+  | .player_wall_head | .sea_lantern | .tall_grass | .large_fern | .white_banner | .orange_banner
+  | .magenta_banner | .light_blue_banner | .yellow_banner | .lime_banner | .pink_banner
+  | .gray_banner | .light_gray_banner | .cyan_banner | .purple_banner | .blue_banner
+  | .brown_banner | .green_banner | .red_banner | .black_banner | .white_wall_banner
+  | .orange_wall_banner | .magenta_wall_banner | .light_blue_wall_banner | .yellow_wall_banner
+  | .lime_wall_banner | .pink_wall_banner | .gray_wall_banner | .light_gray_wall_banner
+  | .cyan_wall_banner | .purple_wall_banner | .blue_wall_banner | .brown_wall_banner
+  | .green_wall_banner | .red_wall_banner | .black_wall_banner | .chorus_plant | .shulker_box
+  | .white_shulker_box | .orange_shulker_box | .magenta_shulker_box | .light_blue_shulker_box
+  | .yellow_shulker_box | .lime_shulker_box | .pink_shulker_box | .gray_shulker_box
+  | .light_gray_shulker_box | .cyan_shulker_box | .purple_shulker_box | .blue_shulker_box
+  | .brown_shulker_box | .green_shulker_box | .red_shulker_box | .black_shulker_box
+  | .weeping_vines | .weeping_vines_plant | .twisting_vines | .twisting_vines_plant
+  | .gilded_blackstone | .copper_ore | .deepslate_copper_ore | .copper_golem_statue
+  | .exposed_copper_golem_statue | .weathered_copper_golem_statue | .oxidized_copper_golem_statue
+  | .waxed_copper_golem_statue | .waxed_exposed_copper_golem_statue
+  | .waxed_weathered_copper_golem_statue | .waxed_oxidized_copper_golem_statue | .decorated_pot =>
+    none
+  | .air | .bedrock | .water | .lava | .suspicious_sand | .suspicious_gravel | .glass | .bush
+  | .short_dry_grass | .tall_dry_grass | .seagrass | .tall_seagrass | .piston_head
+  | .moving_piston | .chiseled_bookshelf | .fire | .soul_fire | .spawner | .snow | .ice
+  | .nether_portal | .cake | .white_stained_glass | .orange_stained_glass | .magenta_stained_glass
+  | .light_blue_stained_glass | .yellow_stained_glass | .lime_stained_glass | .pink_stained_glass
+  | .gray_stained_glass | .light_gray_stained_glass | .cyan_stained_glass | .purple_stained_glass
+  | .blue_stained_glass | .brown_stained_glass | .green_stained_glass | .red_stained_glass
+  | .black_stained_glass | .infested_stone | .infested_cobblestone | .infested_stone_bricks
+  | .infested_mossy_stone_bricks | .infested_cracked_stone_bricks
+  | .infested_chiseled_stone_bricks | .mushroom_stem | .glass_pane | .vine | .glow_lichen
+  | .end_portal | .end_portal_frame | .command_block | .white_stained_glass_pane
+  | .orange_stained_glass_pane | .magenta_stained_glass_pane | .light_blue_stained_glass_pane
+  | .yellow_stained_glass_pane | .lime_stained_glass_pane | .pink_stained_glass_pane
+  | .gray_stained_glass_pane | .light_gray_stained_glass_pane | .cyan_stained_glass_pane
+  | .purple_stained_glass_pane | .blue_stained_glass_pane | .brown_stained_glass_pane
+  | .green_stained_glass_pane | .red_stained_glass_pane | .black_stained_glass_pane | .barrier
+  | .light | .packed_ice | .chorus_flower | .end_gateway | .repeating_command_block
+  | .chain_command_block | .frosted_ice | .structure_void | .turtle_egg | .dead_tube_coral
+  | .dead_brain_coral | .dead_bubble_coral | .dead_fire_coral | .dead_horn_coral | .tube_coral
+  | .brain_coral | .bubble_coral | .fire_coral | .horn_coral | .dead_tube_coral_fan
+  | .dead_brain_coral_fan | .dead_bubble_coral_fan | .dead_fire_coral_fan | .dead_horn_coral_fan
+  | .tube_coral_fan | .brain_coral_fan | .bubble_coral_fan | .fire_coral_fan | .horn_coral_fan
+  | .dead_tube_coral_wall_fan | .dead_brain_coral_wall_fan | .dead_bubble_coral_wall_fan
+  | .dead_fire_coral_wall_fan | .dead_horn_coral_wall_fan | .tube_coral_wall_fan
+  | .brain_coral_wall_fan | .bubble_coral_wall_fan | .fire_coral_wall_fan | .horn_coral_wall_fan
+  | .blue_ice | .void_air | .cave_air | .bubble_column | .nether_sprouts | .structure_block
+  | .jigsaw | .test_block | .test_instance_block | .bee_nest | .budding_amethyst
+  | .large_amethyst_bud | .medium_amethyst_bud | .small_amethyst_bud | .powder_snow
+  | .sculk_sensor | .calibrated_sculk_sensor | .sculk | .sculk_vein | .sculk_catalyst
+  | .sculk_shrieker | .small_dripleaf | .hanging_roots | .infested_deepslate | .frogspawn
+  | .reinforced_deepslate | .trial_spawner | .vault | .pale_hanging_moss =>
+    some []
+  | .bookshelf =>
+    some [("minecraft:book", 3)]
+  | .coal_ore | .deepslate_coal_ore =>
+    some [("minecraft:coal", 1)]
+  | .grass_block | .podzol | .farmland | .mycelium | .dirt_path =>
+    some [("minecraft:dirt", 1)]
+  | .kelp_plant =>
+    some [("minecraft:kelp", 1)]
+  | .wall_torch =>
+    some [("minecraft:torch", 1)]
+  | .bamboo_sapling =>
+    some [("minecraft:bamboo", 1)]
+  | .candle_cake =>
+    some [("minecraft:candle", 1)]
+  | .nether_quartz_ore =>
+    some [("minecraft:quartz", 1)]
+  | .cobweb | .tripwire =>
+    some [("minecraft:string", 1)]
+  | .diamond_ore | .deepslate_diamond_ore =>
+    some [("minecraft:diamond", 1)]
+  | .emerald_ore | .deepslate_emerald_ore =>
+    some [("minecraft:emerald", 1)]
+  | .water_cauldron | .lava_cauldron | .powder_snow_cauldron =>
+    some [("minecraft:cauldron", 1)]
+  | .campfire =>
+    some [("minecraft:charcoal", 2)]
+  | .oak_wall_sign =>
+    some [("minecraft:oak_sign", 1)]
+  | .ender_chest =>
+    some [("minecraft:obsidian", 8)]
+  | .gold_ore | .deepslate_gold_ore =>
+    some [("minecraft:raw_gold", 1)]
+  | .iron_ore | .deepslate_iron_ore =>
+    some [("minecraft:raw_iron", 1)]
+  | .redstone_wire =>
+    some [("minecraft:redstone", 1)]
+  | .snow_block =>
+    some [("minecraft:snowball", 4)]
+  | .clay =>
+    some [("minecraft:clay_ball", 4)]
+  | .soul_campfire =>
+    some [("minecraft:soul_soil", 1)]
+  | .birch_wall_sign =>
+    some [("minecraft:birch_sign", 1)]
+  | .warped_nylium | .crimson_nylium =>
+    some [("minecraft:netherrack", 1)]
+  | .red_candle_cake =>
+    some [("minecraft:red_candle", 1)]
+  | .soul_wall_torch =>
+    some [("minecraft:soul_torch", 1)]
+  | .acacia_wall_sign =>
+    some [("minecraft:acacia_sign", 1)]
+  | .bamboo_wall_sign =>
+    some [("minecraft:bamboo_sign", 1)]
+  | .blue_candle_cake =>
+    some [("minecraft:blue_candle", 1)]
+  | .cherry_wall_sign =>
+    some [("minecraft:cherry_sign", 1)]
+  | .stone =>
+    some [("minecraft:cobblestone", 1)]
+  | .cyan_candle_cake =>
+    some [("minecraft:cyan_candle", 1)]
+  | .dragon_wall_head =>
+    some [("minecraft:dragon_head", 1)]
+  | .gray_candle_cake =>
+    some [("minecraft:gray_candle", 1)]
+  | .jungle_wall_sign =>
+    some [("minecraft:jungle_sign", 1)]
+  | .lime_candle_cake =>
+    some [("minecraft:lime_candle", 1)]
+  | .piglin_wall_head =>
+    some [("minecraft:piglin_head", 1)]
+  | .pink_candle_cake =>
+    some [("minecraft:pink_candle", 1)]
+  | .poplar_wall_sign =>
+    some [("minecraft:poplar_sign", 1)]
+  | .spruce_wall_sign =>
+    some [("minecraft:spruce_sign", 1)]
+  | .warped_wall_sign =>
+    some [("minecraft:warped_sign", 1)]
+  | .zombie_wall_head =>
+    some [("minecraft:zombie_head", 1)]
+  | .big_dripleaf_stem =>
+    some [("minecraft:big_dripleaf", 1)]
+  | .black_candle_cake =>
+    some [("minecraft:black_candle", 1)]
+  | .brown_candle_cake =>
+    some [("minecraft:brown_candle", 1)]
+  | .copper_wall_torch =>
+    some [("minecraft:copper_torch", 1)]
+  | .creeper_wall_head =>
+    some [("minecraft:creeper_head", 1)]
+  | .crimson_wall_sign =>
+    some [("minecraft:crimson_sign", 1)]
+  | .green_candle_cake =>
+    some [("minecraft:green_candle", 1)]
+  | .white_candle_cake =>
+    some [("minecraft:white_candle", 1)]
+  | .dark_oak_wall_sign =>
+    some [("minecraft:dark_oak_sign", 1)]
+  | .mangrove_wall_sign =>
+    some [("minecraft:mangrove_sign", 1)]
+  | .orange_candle_cake =>
+    some [("minecraft:orange_candle", 1)]
+  | .pale_oak_wall_sign =>
+    some [("minecraft:pale_oak_sign", 1)]
+  | .purple_candle_cake =>
+    some [("minecraft:purple_candle", 1)]
+  | .yellow_candle_cake =>
+    some [("minecraft:yellow_candle", 1)]
+  | .amethyst_cluster =>
+    some [("minecraft:amethyst_shard", 2)]
+  | .magenta_candle_cake =>
+    some [("minecraft:magenta_candle", 1)]
+  | .redstone_wall_torch =>
+    some [("minecraft:redstone_torch", 1)]
+  | .skeleton_wall_skull =>
+    some [("minecraft:skeleton_skull", 1)]
+  | .oak_wall_hanging_sign =>
+    some [("minecraft:oak_hanging_sign", 1)]
+  | .deepslate =>
+    some [("minecraft:cobbled_deepslate", 1)]
+  | .light_blue_candle_cake =>
+    some [("minecraft:light_blue_candle", 1)]
+  | .light_gray_candle_cake =>
+    some [("minecraft:light_gray_candle", 1)]
+  | .torchflower_crop =>
+    some [("minecraft:torchflower_seeds", 1)]
+  | .birch_wall_hanging_sign =>
+    some [("minecraft:birch_hanging_sign", 1)]
+  | .acacia_wall_hanging_sign =>
+    some [("minecraft:acacia_hanging_sign", 1)]
+  | .bamboo_wall_hanging_sign =>
+    some [("minecraft:bamboo_hanging_sign", 1)]
+  | .cherry_wall_hanging_sign =>
+    some [("minecraft:cherry_hanging_sign", 1)]
+  | .jungle_wall_hanging_sign =>
+    some [("minecraft:jungle_hanging_sign", 1)]
+  | .poplar_wall_hanging_sign =>
+    some [("minecraft:poplar_hanging_sign", 1)]
+  | .spruce_wall_hanging_sign =>
+    some [("minecraft:spruce_hanging_sign", 1)]
+  | .warped_wall_hanging_sign =>
+    some [("minecraft:warped_hanging_sign", 1)]
+  | .crimson_wall_hanging_sign =>
+    some [("minecraft:crimson_hanging_sign", 1)]
+  | .dark_oak_wall_hanging_sign =>
+    some [("minecraft:dark_oak_hanging_sign", 1)]
+  | .fire_coral_block =>
+    some [("minecraft:dead_fire_coral_block", 1)]
+  | .horn_coral_block =>
+    some [("minecraft:dead_horn_coral_block", 1)]
+  | .tube_coral_block =>
+    some [("minecraft:dead_tube_coral_block", 1)]
+  | .mangrove_wall_hanging_sign =>
+    some [("minecraft:mangrove_hanging_sign", 1)]
+  | .pale_oak_wall_hanging_sign =>
+    some [("minecraft:pale_oak_hanging_sign", 1)]
+  | .wither_skeleton_wall_skull =>
+    some [("minecraft:wither_skeleton_skull", 1)]
+  | .brain_coral_block =>
+    some [("minecraft:dead_brain_coral_block", 1)]
+  | .bubble_coral_block =>
+    some [("minecraft:dead_bubble_coral_block", 1)]
+  | .potted_fern =>
+    some [("minecraft:flower_pot", 1), ("minecraft:fern", 1)]
+  | .potted_poppy =>
+    some [("minecraft:flower_pot", 1), ("minecraft:poppy", 1)]
+  | .potted_allium =>
+    some [("minecraft:flower_pot", 1), ("minecraft:allium", 1)]
+  | .potted_azalea_bush =>
+    some [("minecraft:flower_pot", 1), ("minecraft:azalea", 1)]
+  | .potted_bamboo =>
+    some [("minecraft:flower_pot", 1), ("minecraft:bamboo", 1)]
+  | .potted_cactus =>
+    some [("minecraft:flower_pot", 1), ("minecraft:cactus", 1)]
+  | .potted_dandelion =>
+    some [("minecraft:flower_pot", 1), ("minecraft:dandelion", 1)]
+  | .potted_dead_bush =>
+    some [("minecraft:flower_pot", 1), ("minecraft:dead_bush", 1)]
+  | .potted_red_tulip =>
+    some [("minecraft:flower_pot", 1), ("minecraft:red_tulip", 1)]
+  | .potted_cornflower =>
+    some [("minecraft:flower_pot", 1), ("minecraft:cornflower", 1)]
+  | .potted_pink_tulip =>
+    some [("minecraft:flower_pot", 1), ("minecraft:pink_tulip", 1)]
+  | .potted_azure_bluet =>
+    some [("minecraft:flower_pot", 1), ("minecraft:azure_bluet", 1)]
+  | .potted_blue_orchid =>
+    some [("minecraft:flower_pot", 1), ("minecraft:blue_orchid", 1)]
+  | .potted_oak_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:oak_sapling", 1)]
+  | .potted_oxeye_daisy =>
+    some [("minecraft:flower_pot", 1), ("minecraft:oxeye_daisy", 1)]
+  | .potted_torchflower =>
+    some [("minecraft:flower_pot", 1), ("minecraft:torchflower", 1)]
+  | .potted_white_tulip =>
+    some [("minecraft:flower_pot", 1), ("minecraft:white_tulip", 1)]
+  | .potted_wither_rose =>
+    some [("minecraft:flower_pot", 1), ("minecraft:wither_rose", 1)]
+  | .potted_orange_tulip =>
+    some [("minecraft:flower_pot", 1), ("minecraft:orange_tulip", 1)]
+  | .potted_red_mushroom =>
+    some [("minecraft:flower_pot", 1), ("minecraft:red_mushroom", 1)]
+  | .potted_warped_roots =>
+    some [("minecraft:flower_pot", 1), ("minecraft:warped_roots", 1)]
+  | .potted_birch_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:birch_sapling", 1)]
+  | .potted_crimson_roots =>
+    some [("minecraft:flower_pot", 1), ("minecraft:crimson_roots", 1)]
+  | .potted_warped_fungus =>
+    some [("minecraft:flower_pot", 1), ("minecraft:warped_fungus", 1)]
+  | .potted_acacia_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:acacia_sapling", 1)]
+  | .potted_brown_mushroom =>
+    some [("minecraft:flower_pot", 1), ("minecraft:brown_mushroom", 1)]
+  | .potted_cherry_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:cherry_sapling", 1)]
+  | .potted_crimson_fungus =>
+    some [("minecraft:flower_pot", 1), ("minecraft:crimson_fungus", 1)]
+  | .potted_jungle_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:jungle_sapling", 1)]
+  | .potted_poplar_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:poplar_sapling", 1)]
+  | .potted_spruce_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:spruce_sapling", 1)]
+  | .potted_open_eyeblossom =>
+    some [("minecraft:flower_pot", 1), ("minecraft:open_eyeblossom", 1)]
+  | .potted_dark_oak_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:dark_oak_sapling", 1)]
+  | .potted_flowering_azalea_bush =>
+    some [("minecraft:flower_pot", 1), ("minecraft:flowering_azalea", 1)]
+  | .potted_golden_dandelion =>
+    some [("minecraft:flower_pot", 1), ("minecraft:golden_dandelion", 1)]
+  | .potted_pale_oak_sapling =>
+    some [("minecraft:flower_pot", 1), ("minecraft:pale_oak_sapling", 1)]
+  | .potted_closed_eyeblossom =>
+    some [("minecraft:flower_pot", 1), ("minecraft:closed_eyeblossom", 1)]
+  | .potted_lily_of_the_valley =>
+    some [("minecraft:flower_pot", 1), ("minecraft:lily_of_the_valley", 1)]
+  | .potted_mangrove_propagule =>
+    some [("minecraft:flower_pot", 1), ("minecraft:mangrove_propagule", 1)]
+  | .nether_wart =>
+    match prop b "age" with
+    | "3" => none
+    | _ => some [(b.id.name, 1)]
+  | .mangrove_propagule =>
+    match prop b "age" with
+    | "4" => some [(b.id.name, 1)]
+    | _ => some []
+  | .sweet_berry_bush =>
+    match prop b "age" with
+    | "2" => none
+    | "3" => none
+    | _ => some []
+  | .white_bed | .orange_bed | .magenta_bed | .light_blue_bed | .yellow_bed | .lime_bed
+  | .pink_bed | .gray_bed | .light_gray_bed | .cyan_bed | .purple_bed | .blue_bed | .brown_bed
+  | .green_bed | .red_bed | .black_bed | .straw_bed =>
+    match prop b "part" with
+    | "foot" => some []
+    | _ => some [(b.id.name, 1)]
+  | .oak_door | .iron_door | .sunflower | .lilac | .rose_bush | .peony | .spruce_door
+  | .birch_door | .jungle_door | .acacia_door | .cherry_door | .dark_oak_door | .pale_oak_door
+  | .mangrove_door | .poplar_door | .bamboo_door | .pitcher_plant | .crimson_door | .warped_door
+  | .copper_door | .exposed_copper_door | .weathered_copper_door | .oxidized_copper_door
+  | .waxed_copper_door | .waxed_exposed_copper_door | .waxed_weathered_copper_door
+  | .waxed_oxidized_copper_door =>
+    match prop b "half" with
+    | "lower" => some [(b.id.name, 1)]
+    | _ => some []
+  | .carrots =>
+    match prop b "age" with
+    | "7" => none
+    | _ => some [("minecraft:carrot", 1)]
+  | .potatoes =>
+    match prop b "age" with
+    | "7" => none
+    | _ => some [("minecraft:potato", 1)]
+  | .pale_moss_carpet =>
+    match prop b "bottom" with
+    | "false" => some []
+    | _ => some [(b.id.name, 1)]
+  | .tnt =>
+    match prop b "unstable" with
+    | "false" => some [(b.id.name, 1)]
+    | _ => some []
+  | .wheat =>
+    match prop b "age" with
+    | "7" => none
+    | _ => some [("minecraft:wheat_seeds", 1)]
+  | .shelf_mushroom =>
+    match prop b "age" with
+    | "1" => some [(b.id.name, 2)]
+    | _ => some [(b.id.name, 1)]
+  | .beetroots =>
+    match prop b "age" with
+    | "3" => none
+    | _ => some [("minecraft:beetroot_seeds", 1)]
+  | .white_wool_slab | .orange_wool_slab | .magenta_wool_slab | .light_blue_wool_slab
+  | .yellow_wool_slab | .lime_wool_slab | .pink_wool_slab | .gray_wool_slab
+  | .light_gray_wool_slab | .cyan_wool_slab | .purple_wool_slab | .blue_wool_slab
+  | .brown_wool_slab | .green_wool_slab | .red_wool_slab | .black_wool_slab | .resin_brick_slab
+  | .prismarine_slab | .prismarine_brick_slab | .dark_prismarine_slab | .oak_slab | .spruce_slab
+  | .birch_slab | .jungle_slab | .acacia_slab | .cherry_slab | .dark_oak_slab | .pale_oak_slab
+  | .mangrove_slab | .poplar_slab | .bamboo_slab | .bamboo_mosaic_slab | .stone_slab
+  | .sandstone_slab | .cut_sandstone_slab | .petrified_oak_slab | .cobblestone_slab | .brick_slab
+  | .stone_brick_slab | .mud_brick_slab | .nether_brick_slab | .quartz_slab | .red_sandstone_slab
+  | .cut_red_sandstone_slab | .smooth_stone_slab | .purpur_slab | .white_concrete_slab
+  | .orange_concrete_slab | .magenta_concrete_slab | .light_blue_concrete_slab
+  | .yellow_concrete_slab | .lime_concrete_slab | .pink_concrete_slab | .gray_concrete_slab
+  | .light_gray_concrete_slab | .cyan_concrete_slab | .purple_concrete_slab | .blue_concrete_slab
+  | .brown_concrete_slab | .green_concrete_slab | .red_concrete_slab | .black_concrete_slab
+  | .polished_granite_slab | .smooth_red_sandstone_slab | .mossy_stone_brick_slab
+  | .polished_diorite_slab | .mossy_cobblestone_slab | .end_stone_brick_slab
+  | .smooth_sandstone_slab | .smooth_quartz_slab | .granite_slab | .andesite_slab
+  | .red_nether_brick_slab | .polished_andesite_slab | .diorite_slab | .crimson_slab
+  | .warped_slab | .blackstone_slab | .polished_blackstone_brick_slab | .polished_blackstone_slab
+  | .tuff_slab | .polished_tuff_slab | .tuff_brick_slab | .sulfur_slab | .polished_sulfur_slab
+  | .sulfur_brick_slab | .cinnabar_slab | .polished_cinnabar_slab | .cinnabar_brick_slab
+  | .cut_copper_slab | .exposed_cut_copper_slab | .weathered_cut_copper_slab
+  | .oxidized_cut_copper_slab | .waxed_cut_copper_slab | .waxed_exposed_cut_copper_slab
+  | .waxed_weathered_cut_copper_slab | .waxed_oxidized_cut_copper_slab | .cobbled_deepslate_slab
+  | .polished_deepslate_slab | .deepslate_tile_slab | .deepslate_brick_slab =>
+    match prop b "type" with
+    | "double" => some [(b.id.name, 2)]
+    | _ => some [(b.id.name, 1)]
+  | .cave_vines | .cave_vines_plant =>
+    match prop b "berries" with
+    | "false" => some []
+    | _ => some [("minecraft:glow_berries", 1)]
+  | .cocoa =>
+    match prop b "age" with
+    | "2" => some [("minecraft:cocoa_beans", 3)]
+    | _ => some [("minecraft:cocoa_beans", 1)]
+  | .composter =>
+    match prop b "level" with
+    | "8" => some [(b.id.name, 1), ("minecraft:bone_meal", 1)]
+    | _ => some [(b.id.name, 1)]
+  | .candle | .white_candle | .orange_candle | .magenta_candle | .light_blue_candle
+  | .yellow_candle | .lime_candle | .pink_candle | .gray_candle | .light_gray_candle
+  | .cyan_candle | .purple_candle | .blue_candle | .brown_candle | .green_candle | .red_candle
+  | .black_candle =>
+    match prop b "candles" with
+    | "2" => some [(b.id.name, 2)]
+    | "3" => some [(b.id.name, 3)]
+    | "4" => some [(b.id.name, 4)]
+    | _ => some [(b.id.name, 1)]
+  | .sea_pickle =>
+    match prop b "pickles" with
+    | "2" => some [(b.id.name, 2)]
+    | "3" => some [(b.id.name, 3)]
+    | "4" => some [(b.id.name, 4)]
+    | _ => some [(b.id.name, 1)]
+  | .pink_petals | .wildflowers =>
+    match prop b "flower_amount" with
+    | "2" => some [(b.id.name, 2)]
+    | "3" => some [(b.id.name, 3)]
+    | "4" => some [(b.id.name, 4)]
+    | _ => some [(b.id.name, 1)]
+  | .leaf_litter =>
+    match prop b "segment_amount" with
+    | "2" => some [(b.id.name, 2)]
+    | "3" => some [(b.id.name, 3)]
+    | "4" => some [(b.id.name, 4)]
+    | _ => some [(b.id.name, 1)]
+  | .pitcher_crop =>
+    match prop b "age", prop b "half" with
+    | "0", "lower" => some [("minecraft:pitcher_pod", 1)]
+    | "1", "lower" => some [("minecraft:pitcher_pod", 1)]
+    | "2", "lower" => some [("minecraft:pitcher_pod", 1)]
+    | "3", "lower" => some [("minecraft:pitcher_pod", 1)]
+    | "4", "lower" => some [("minecraft:pitcher_plant", 1)]
+    | _, _ => some []
+  | _ =>
+    some [(b.id.name, 1)]
+
 /-- The number of stacks `Block.dropResources` drops for a block that is broken
 with drops, without tool and without breaker (a block that lost its support,
 for instance), where `brokenChanceLoot` is `none`: the stacks of the block's
 loot table. `none` when that is not a function of the block state (chance, a
-block entity, neighbouring blocks), or when the block overrides
-`spawnAfterBreak`. -/
+block entity, neighbouring blocks). This is the length of `brokenDrops`. -/
 def brokenDropStacks (b : Block) : Option ℕ :=
   match b.id with
-  | .gravel | .gold_ore | .deepslate_gold_ore | .iron_ore | .deepslate_iron_ore | .coal_ore
-  | .deepslate_coal_ore | .nether_gold_ore | .oak_leaves | .spruce_leaves | .birch_leaves
-  | .jungle_leaves | .acacia_leaves | .cherry_leaves | .dark_oak_leaves | .pale_oak_leaves
-  | .mangrove_leaves | .red_poplar_leaves | .orange_poplar_leaves | .yellow_poplar_leaves
-  | .azalea_leaves | .flowering_azalea_leaves | .lapis_ore | .deepslate_lapis_ore | .short_grass
-  | .fern | .dead_bush | .spawner | .creaking_heart | .diamond_ore | .deepslate_diamond_ore
-  | .redstone_ore | .deepslate_redstone_ore | .glowstone | .infested_stone | .infested_cobblestone
-  | .infested_stone_bricks | .infested_mossy_stone_bricks | .infested_cracked_stone_bricks
-  | .infested_chiseled_stone_bricks | .brown_mushroom_block | .red_mushroom_block | .melon
-  | .attached_pumpkin_stem | .attached_melon_stem | .pumpkin_stem | .melon_stem | .emerald_ore
-  | .deepslate_emerald_ore | .player_head | .player_wall_head | .nether_quartz_ore | .sea_lantern
-  | .tall_grass | .large_fern | .white_banner | .orange_banner | .magenta_banner
+  | .gravel | .nether_gold_ore | .oak_leaves | .spruce_leaves | .birch_leaves | .jungle_leaves
+  | .acacia_leaves | .cherry_leaves | .dark_oak_leaves | .pale_oak_leaves | .mangrove_leaves
+  | .red_poplar_leaves | .orange_poplar_leaves | .yellow_poplar_leaves | .azalea_leaves
+  | .flowering_azalea_leaves | .lapis_ore | .deepslate_lapis_ore | .short_grass | .fern
+  | .dead_bush | .creaking_heart | .redstone_ore | .deepslate_redstone_ore | .glowstone
+  | .brown_mushroom_block | .red_mushroom_block | .melon | .attached_pumpkin_stem
+  | .attached_melon_stem | .pumpkin_stem | .melon_stem | .player_head | .player_wall_head
+  | .sea_lantern | .tall_grass | .large_fern | .white_banner | .orange_banner | .magenta_banner
   | .light_blue_banner | .yellow_banner | .lime_banner | .pink_banner | .gray_banner
   | .light_gray_banner | .cyan_banner | .purple_banner | .blue_banner | .brown_banner
   | .green_banner | .red_banner | .black_banner | .white_wall_banner | .orange_wall_banner
@@ -1180,40 +1615,42 @@ def brokenDropStacks (b : Block) : Option ℕ :=
   | .cyan_shulker_box | .purple_shulker_box | .blue_shulker_box | .brown_shulker_box
   | .green_shulker_box | .red_shulker_box | .black_shulker_box | .weeping_vines
   | .weeping_vines_plant | .twisting_vines | .twisting_vines_plant | .gilded_blackstone
-  | .sculk_sensor | .calibrated_sculk_sensor | .sculk | .sculk_catalyst | .sculk_shrieker
   | .copper_ore | .deepslate_copper_ore | .copper_golem_statue | .exposed_copper_golem_statue
   | .weathered_copper_golem_statue | .oxidized_copper_golem_statue | .waxed_copper_golem_statue
   | .waxed_exposed_copper_golem_statue | .waxed_weathered_copper_golem_statue
-  | .waxed_oxidized_copper_golem_statue | .infested_deepslate | .decorated_pot =>
+  | .waxed_oxidized_copper_golem_statue | .decorated_pot =>
     none
   | .air | .bedrock | .water | .lava | .suspicious_sand | .suspicious_gravel | .glass | .bush
   | .short_dry_grass | .tall_dry_grass | .seagrass | .tall_seagrass | .piston_head
-  | .moving_piston | .chiseled_bookshelf | .fire | .soul_fire | .snow | .ice | .nether_portal
-  | .cake | .white_stained_glass | .orange_stained_glass | .magenta_stained_glass
+  | .moving_piston | .chiseled_bookshelf | .fire | .soul_fire | .spawner | .snow | .ice
+  | .nether_portal | .cake | .white_stained_glass | .orange_stained_glass | .magenta_stained_glass
   | .light_blue_stained_glass | .yellow_stained_glass | .lime_stained_glass | .pink_stained_glass
   | .gray_stained_glass | .light_gray_stained_glass | .cyan_stained_glass | .purple_stained_glass
   | .blue_stained_glass | .brown_stained_glass | .green_stained_glass | .red_stained_glass
-  | .black_stained_glass | .mushroom_stem | .glass_pane | .vine | .glow_lichen | .end_portal
-  | .end_portal_frame | .command_block | .white_stained_glass_pane | .orange_stained_glass_pane
-  | .magenta_stained_glass_pane | .light_blue_stained_glass_pane | .yellow_stained_glass_pane
-  | .lime_stained_glass_pane | .pink_stained_glass_pane | .gray_stained_glass_pane
-  | .light_gray_stained_glass_pane | .cyan_stained_glass_pane | .purple_stained_glass_pane
-  | .blue_stained_glass_pane | .brown_stained_glass_pane | .green_stained_glass_pane
-  | .red_stained_glass_pane | .black_stained_glass_pane | .barrier | .light | .packed_ice
-  | .chorus_flower | .end_gateway | .repeating_command_block | .chain_command_block | .frosted_ice
-  | .structure_void | .turtle_egg | .dead_tube_coral | .dead_brain_coral | .dead_bubble_coral
-  | .dead_fire_coral | .dead_horn_coral | .tube_coral | .brain_coral | .bubble_coral | .fire_coral
-  | .horn_coral | .dead_tube_coral_fan | .dead_brain_coral_fan | .dead_bubble_coral_fan
-  | .dead_fire_coral_fan | .dead_horn_coral_fan | .tube_coral_fan | .brain_coral_fan
-  | .bubble_coral_fan | .fire_coral_fan | .horn_coral_fan | .dead_tube_coral_wall_fan
-  | .dead_brain_coral_wall_fan | .dead_bubble_coral_wall_fan | .dead_fire_coral_wall_fan
-  | .dead_horn_coral_wall_fan | .tube_coral_wall_fan | .brain_coral_wall_fan
-  | .bubble_coral_wall_fan | .fire_coral_wall_fan | .horn_coral_wall_fan | .blue_ice | .void_air
-  | .cave_air | .bubble_column | .nether_sprouts | .structure_block | .jigsaw | .test_block
-  | .test_instance_block | .bee_nest | .budding_amethyst | .large_amethyst_bud
-  | .medium_amethyst_bud | .small_amethyst_bud | .powder_snow | .sculk_vein | .small_dripleaf
-  | .hanging_roots | .frogspawn | .reinforced_deepslate | .trial_spawner | .vault
-  | .pale_hanging_moss =>
+  | .black_stained_glass | .infested_stone | .infested_cobblestone | .infested_stone_bricks
+  | .infested_mossy_stone_bricks | .infested_cracked_stone_bricks
+  | .infested_chiseled_stone_bricks | .mushroom_stem | .glass_pane | .vine | .glow_lichen
+  | .end_portal | .end_portal_frame | .command_block | .white_stained_glass_pane
+  | .orange_stained_glass_pane | .magenta_stained_glass_pane | .light_blue_stained_glass_pane
+  | .yellow_stained_glass_pane | .lime_stained_glass_pane | .pink_stained_glass_pane
+  | .gray_stained_glass_pane | .light_gray_stained_glass_pane | .cyan_stained_glass_pane
+  | .purple_stained_glass_pane | .blue_stained_glass_pane | .brown_stained_glass_pane
+  | .green_stained_glass_pane | .red_stained_glass_pane | .black_stained_glass_pane | .barrier
+  | .light | .packed_ice | .chorus_flower | .end_gateway | .repeating_command_block
+  | .chain_command_block | .frosted_ice | .structure_void | .turtle_egg | .dead_tube_coral
+  | .dead_brain_coral | .dead_bubble_coral | .dead_fire_coral | .dead_horn_coral | .tube_coral
+  | .brain_coral | .bubble_coral | .fire_coral | .horn_coral | .dead_tube_coral_fan
+  | .dead_brain_coral_fan | .dead_bubble_coral_fan | .dead_fire_coral_fan | .dead_horn_coral_fan
+  | .tube_coral_fan | .brain_coral_fan | .bubble_coral_fan | .fire_coral_fan | .horn_coral_fan
+  | .dead_tube_coral_wall_fan | .dead_brain_coral_wall_fan | .dead_bubble_coral_wall_fan
+  | .dead_fire_coral_wall_fan | .dead_horn_coral_wall_fan | .tube_coral_wall_fan
+  | .brain_coral_wall_fan | .bubble_coral_wall_fan | .fire_coral_wall_fan | .horn_coral_wall_fan
+  | .blue_ice | .void_air | .cave_air | .bubble_column | .nether_sprouts | .structure_block
+  | .jigsaw | .test_block | .test_instance_block | .bee_nest | .budding_amethyst
+  | .large_amethyst_bud | .medium_amethyst_bud | .small_amethyst_bud | .powder_snow
+  | .sculk_sensor | .calibrated_sculk_sensor | .sculk | .sculk_vein | .sculk_catalyst
+  | .sculk_shrieker | .small_dripleaf | .hanging_roots | .infested_deepslate | .frogspawn
+  | .reinforced_deepslate | .trial_spawner | .vault | .pale_hanging_moss =>
     some 0
   | .potted_torchflower | .potted_oak_sapling | .potted_spruce_sapling | .potted_birch_sapling
   | .potted_jungle_sapling | .potted_acacia_sapling | .potted_cherry_sapling
@@ -1287,11 +1724,9 @@ rolls and one entry, an item or alternatives of items, with the conditions `rand
 `table_bonus` on the items and the functions `set_count` (constant, uniform, binomial),
 `apply_bonus`, `limit_count` and `explosion_decay`: short grass, ferns, dead bushes, leaves,
 gravel, glowstone, melons, sea lanterns, mushroom blocks, ripe crops, stems, vines, chorus
-plants, gilded blackstone and the like.
+plants, gilded blackstone, the ores that drop more than one item and the like.
 
 Not evaluated, so that `Level.dropResources` sets `Level.overflow`:
-* blocks that override `spawnAfterBreak` (ores, sculk, spawners, infested blocks): they may
-  release experience or silverfish, which draws from the level's generator;
 * tall grass and large ferns, whose table reads the other half of the plant (`location_check`);
 * tables that read a block entity (`copy_components`, `dynamic`: shulker boxes, banners, heads,
   decorated pots, copper golem statues) and blocks with one item for each face (glow lichen,
@@ -1299,120 +1734,153 @@ Not evaluated, so that `Level.dropResources` sets `Level.overflow`:
 * tables with a weighted choice among several entries, with a number of rolls that is not
   constant, or with a condition that depends on chance on anything but an item.
 
-Explosions (`explosionDrops`) do not evaluate chance at all. -/
+The table is the same for a block that an explosion destroys, wherever `explosionDrops` is
+`none` (the generator checks this), so `Level.getExplosionDrops` evaluates it too. -/
 def brokenChanceLoot (b : Block) : Option ChanceLoot :=
   match b.id with
   | .weeping_vines =>
-    some ⟨"minecraft:blocks/weeping_vines", 0xc999e4df84992279, 0x53efb26f53ee37df, [⟨1, [⟨[5536482], [], 64⟩]⟩]⟩
-  | .twisting_vines =>
-    some ⟨"minecraft:blocks/twisting_vines", 0xf60dab45daa5ab18, 0xdc85972562e778ce, [⟨1, [⟨[5536482], [], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/weeping_vines", 0xc999e4df84992279, 0x53efb26f53ee37df, [⟨1, [⟨[5536482], [], 64, "minecraft:weeping_vines"⟩]⟩]⟩
   | .fern =>
-    some ⟨"minecraft:blocks/fern", 0x9a68b59cc71fa38a, 0xc7f8f78d60be503e, [⟨1, [⟨[2097152], [.uniformBonus], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/fern", 0x9a68b59cc71fa38a, 0xc7f8f78d60be503e, [⟨1, [⟨[2097152], [.uniformBonus], 64, "minecraft:wheat_seeds"⟩]⟩]⟩
+  | .twisting_vines =>
+    some ⟨"minecraft:blocks/twisting_vines", 0xf60dab45daa5ab18, 0xdc85972562e778ce, [⟨1, [⟨[5536482], [], 64, "minecraft:twisting_vines"⟩]⟩]⟩
   | .weeping_vines_plant =>
-    some ⟨"minecraft:blocks/weeping_vines_plant", 0xeea8016f5c70eca0, 0x90b731d66411302a, [⟨1, [⟨[5536482], [], 64⟩]⟩]⟩
-  | .gravel =>
-    some ⟨"minecraft:blocks/gravel", 0x2fedfb509401412f, 0x6b4882392a3638a0, [⟨1, [⟨[1677722], [], 64⟩, ⟨[], [], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/weeping_vines_plant", 0xeea8016f5c70eca0, 0x90b731d66411302a, [⟨1, [⟨[5536482], [], 64, "minecraft:weeping_vines"⟩]⟩]⟩
   | .twisting_vines_plant =>
-    some ⟨"minecraft:blocks/twisting_vines_plant", 0x305d659ae03c2366, 0x9b21a1f9e415212e, [⟨1, [⟨[5536482], [], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/twisting_vines_plant", 0x305d659ae03c2366, 0x9b21a1f9e415212e, [⟨1, [⟨[5536482], [], 64, "minecraft:twisting_vines"⟩]⟩]⟩
   | .short_grass =>
-    some ⟨"minecraft:blocks/short_grass", 0x8bbf3c7183e5ac1e, 0x0e588cdc9bfba209, [⟨1, [⟨[2097152], [.uniformBonus], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/short_grass", 0x8bbf3c7183e5ac1e, 0x0e588cdc9bfba209, [⟨1, [⟨[2097152], [.uniformBonus], 64, "minecraft:wheat_seeds"⟩]⟩]⟩
   | .dead_bush =>
-    some ⟨"minecraft:blocks/dead_bush", 0xa00e2b904f10208b, 0x61ced0c97606ee23, [⟨1, [⟨[], [.setCount false (.uniform 0 2)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/dead_bush", 0xa00e2b904f10208b, 0x61ced0c97606ee23, [⟨1, [⟨[], [.setCount false (.uniform 0 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .copper_ore =>
+    some ⟨"minecraft:blocks/copper_ore", 0x84ec7f9963f045ff, 0xf2e6fe3628667caf, [⟨1, [⟨[], [.setCount false (.uniform 2 5)], 64, "minecraft:raw_copper"⟩]⟩]⟩
+  | .lapis_ore =>
+    some ⟨"minecraft:blocks/lapis_ore", 0xf8e0e0f4cdce94b8, 0xce9a120068c3be46, [⟨1, [⟨[], [.setCount false (.uniform 4 9)], 64, "minecraft:lapis_lazuli"⟩]⟩]⟩
+  | .gravel =>
+    some ⟨"minecraft:blocks/gravel", 0x2fedfb509401412f, 0x6b4882392a3638a0, [⟨1, [⟨[1677722], [], 64, "minecraft:flint"⟩, ⟨[], [], 64, "minecraft:gravel"⟩]⟩]⟩
   | .chorus_plant =>
-    some ⟨"minecraft:blocks/chorus_plant", 0x32dde033b025ceb2, 0x495d2bf3f7ade8bb, [⟨1, [⟨[], [.setCount false (.uniform 0 1)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/chorus_plant", 0x32dde033b025ceb2, 0x495d2bf3f7ade8bb, [⟨1, [⟨[], [.setCount false (.uniform 0 1)], 64, "minecraft:chorus_fruit"⟩]⟩]⟩
   | .mangrove_leaves =>
-    some ⟨"minecraft:blocks/mangrove_leaves", 0x9888b2e0ebbe7d53, 0x55df737fab70fe71, [⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/mangrove_leaves", 0x9888b2e0ebbe7d53, 0x55df737fab70fe71, [⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .nether_gold_ore =>
+    some ⟨"minecraft:blocks/nether_gold_ore", 0x6eb088556e79b1df, 0x57b6c697a60c0670, [⟨1, [⟨[], [.setCount false (.uniform 2 6)], 64, "minecraft:gold_nugget"⟩]⟩]⟩
+  | .deepslate_copper_ore =>
+    some ⟨"minecraft:blocks/deepslate_copper_ore", 0x4456d49814764492, 0xe7dc83cca4d56add, [⟨1, [⟨[], [.setCount false (.uniform 2 5)], 64, "minecraft:raw_copper"⟩]⟩]⟩
+  | .deepslate_lapis_ore =>
+    some ⟨"minecraft:blocks/deepslate_lapis_ore", 0x0d070f2ef3141329, 0x1159d5f04eebecb9, [⟨1, [⟨[], [.setCount false (.uniform 4 9)], 64, "minecraft:lapis_lazuli"⟩]⟩]⟩
+  | .redstone_ore =>
+    some ⟨"minecraft:blocks/redstone_ore", 0x5b35e48b4773e770, 0x90f9410c911188f1, [⟨1, [⟨[], [.setCount false (.uniform 4 5), .uniformBonus], 64, "minecraft:redstone"⟩]⟩]⟩
   | .attached_melon_stem =>
-    some ⟨"minecraft:blocks/attached_melon_stem", 0x7ef517a74d77749d, 0x634cf81ec1a883bb, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/attached_melon_stem", 0x7ef517a74d77749d, 0x634cf81ec1a883bb, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
   | .attached_pumpkin_stem =>
-    some ⟨"minecraft:blocks/attached_pumpkin_stem", 0x18577caa1408cd1f, 0xf7c58fe41b44ec29, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64⟩]⟩]⟩
-  | .gilded_blackstone =>
-    some ⟨"minecraft:blocks/gilded_blackstone", 0x0aff7602ed6d3686, 0xdc32016bdbb74cfd, [⟨1, [⟨[1677722], [.setCount false (.uniform 2 5)], 64⟩, ⟨[], [], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/attached_pumpkin_stem", 0x18577caa1408cd1f, 0xf7c58fe41b44ec29, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
+  | .deepslate_redstone_ore =>
+    some ⟨"minecraft:blocks/deepslate_redstone_ore", 0xd9d67744957c1429, 0x9a42cf548408e9e0, [⟨1, [⟨[], [.setCount false (.uniform 4 5), .uniformBonus], 64, "minecraft:redstone"⟩]⟩]⟩
   | .melon =>
-    some ⟨"minecraft:blocks/melon", 0x45e0c0d79db027a8, 0xafe0a44cafba7e37, [⟨1, [⟨[], [.setCount false (.uniform 3 7), .uniformBonus, .limit none (some 9)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/melon", 0x45e0c0d79db027a8, 0xafe0a44cafba7e37, [⟨1, [⟨[], [.setCount false (.uniform 3 7), .uniformBonus, .limit none (some 9)], 64, "minecraft:melon_slice"⟩]⟩]⟩
   | .red_mushroom_block =>
-    some ⟨"minecraft:blocks/red_mushroom_block", 0x245a17efb6417bec, 0x679b8d25d5c6022d, [⟨1, [⟨[], [.setCount false (.uniform (-6) 2), .limit (some 0) none], 64⟩]⟩]⟩
-  | .birch_leaves =>
-    some ⟨"minecraft:blocks/birch_leaves", 0xf28deff6960b5a60, 0x894e85666ba780ed, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/red_mushroom_block", 0x245a17efb6417bec, 0x679b8d25d5c6022d, [⟨1, [⟨[], [.setCount false (.uniform (-6) 2), .limit (some 0) none], 64, "minecraft:red_mushroom"⟩]⟩]⟩
   | .brown_mushroom_block =>
-    some ⟨"minecraft:blocks/brown_mushroom_block", 0x91fa4b17458f0323, 0x580b19a848cd2c89, [⟨1, [⟨[], [.setCount false (.uniform (-6) 2), .limit (some 0) none], 64⟩]⟩]⟩
-  | .acacia_leaves =>
-    some ⟨"minecraft:blocks/acacia_leaves", 0xff546e958442acf1, 0xf95e1c4b073ec699, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
-  | .azalea_leaves =>
-    some ⟨"minecraft:blocks/azalea_leaves", 0xf019377ea52c964e, 0x641a1b8f5889c4ed, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
-  | .cherry_leaves =>
-    some ⟨"minecraft:blocks/cherry_leaves", 0xb502b9fae0076878, 0xdcd0fa37558121c6, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
-  | .jungle_leaves =>
-    some ⟨"minecraft:blocks/jungle_leaves", 0x298d58c3634bed3c, 0x5fd281aa02a06aa4, [⟨1, [⟨[419431], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
-  | .spruce_leaves =>
-    some ⟨"minecraft:blocks/spruce_leaves", 0x77905201c4056a90, 0x4d25b9140095c5b5, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
-  | .pale_oak_leaves =>
-    some ⟨"minecraft:blocks/pale_oak_leaves", 0x49c7de25b6924070, 0xde4af3b3a2c3f957, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
-  | .glowstone =>
-    some ⟨"minecraft:blocks/glowstone", 0x83196c8056477ab2, 0x41f5812fc482f9ac, [⟨1, [⟨[], [.setCount false (.uniform 2 4), .uniformBonus, .limit (some 1) (some 4)], 64⟩]⟩]⟩
-  | .red_poplar_leaves =>
-    some ⟨"minecraft:blocks/red_poplar_leaves", 0x94833c3450babf34, 0xdb0cded63363facf, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/brown_mushroom_block", 0x91fa4b17458f0323, 0x580b19a848cd2c89, [⟨1, [⟨[], [.setCount false (.uniform (-6) 2), .limit (some 0) none], 64, "minecraft:brown_mushroom"⟩]⟩]⟩
   | .creaking_heart =>
-    some ⟨"minecraft:blocks/creaking_heart", 0x5aca867f8632ca0f, 0xfbab199785060949, [⟨1, [⟨[], [.setCount false (.uniform 1 3), .uniformBonus, .limit none (some 9)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/creaking_heart", 0x5aca867f8632ca0f, 0xfbab199785060949, [⟨1, [⟨[], [.setCount false (.uniform 1 3), .uniformBonus, .limit none (some 9)], 64, "minecraft:resin_clump"⟩]⟩]⟩
+  | .glowstone =>
+    some ⟨"minecraft:blocks/glowstone", 0x83196c8056477ab2, 0x41f5812fc482f9ac, [⟨1, [⟨[], [.setCount false (.uniform 2 4), .uniformBonus, .limit (some 1) (some 4)], 64, "minecraft:glowstone_dust"⟩]⟩]⟩
+  | .azalea_leaves =>
+    some ⟨"minecraft:blocks/azalea_leaves", 0xf019377ea52c964e, 0x641a1b8f5889c4ed, [⟨1, [⟨[838861], [], 64, "minecraft:azalea"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
   | .sea_lantern =>
-    some ⟨"minecraft:blocks/sea_lantern", 0xad68829d4b23892c, 0x0040afc4b0b91c92, [⟨1, [⟨[], [.setCount false (.uniform 2 3), .uniformBonus, .limit (some 1) (some 5)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/sea_lantern", 0xad68829d4b23892c, 0x0040afc4b0b91c92, [⟨1, [⟨[], [.setCount false (.uniform 2 3), .uniformBonus, .limit (some 1) (some 5)], 64, "minecraft:prismarine_crystals"⟩]⟩]⟩
+  | .birch_leaves =>
+    some ⟨"minecraft:blocks/birch_leaves", 0xf28deff6960b5a60, 0x894e85666ba780ed, [⟨1, [⟨[838861], [], 64, "minecraft:birch_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .acacia_leaves =>
+    some ⟨"minecraft:blocks/acacia_leaves", 0xff546e958442acf1, 0xf95e1c4b073ec699, [⟨1, [⟨[838861], [], 64, "minecraft:acacia_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .cherry_leaves =>
+    some ⟨"minecraft:blocks/cherry_leaves", 0xb502b9fae0076878, 0xdcd0fa37558121c6, [⟨1, [⟨[838861], [], 64, "minecraft:cherry_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .jungle_leaves =>
+    some ⟨"minecraft:blocks/jungle_leaves", 0x298d58c3634bed3c, 0x5fd281aa02a06aa4, [⟨1, [⟨[419431], [], 64, "minecraft:jungle_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .spruce_leaves =>
+    some ⟨"minecraft:blocks/spruce_leaves", 0x77905201c4056a90, 0x4d25b9140095c5b5, [⟨1, [⟨[838861], [], 64, "minecraft:spruce_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .gilded_blackstone =>
+    some ⟨"minecraft:blocks/gilded_blackstone", 0x0aff7602ed6d3686, 0xdc32016bdbb74cfd, [⟨1, [⟨[1677722], [.setCount false (.uniform 2 5)], 64, "minecraft:gold_nugget"⟩, ⟨[], [], 64, "minecraft:gilded_blackstone"⟩]⟩]⟩
+  | .pale_oak_leaves =>
+    some ⟨"minecraft:blocks/pale_oak_leaves", 0x49c7de25b6924070, 0xde4af3b3a2c3f957, [⟨1, [⟨[838861], [], 64, "minecraft:pale_oak_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .red_poplar_leaves =>
+    some ⟨"minecraft:blocks/red_poplar_leaves", 0x94833c3450babf34, 0xdb0cded63363facf, [⟨1, [⟨[838861], [], 64, "minecraft:poplar_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
   | .orange_poplar_leaves =>
-    some ⟨"minecraft:blocks/orange_poplar_leaves", 0x4659eaff39de514f, 0x336e245cc0e90582, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+    some ⟨"minecraft:blocks/orange_poplar_leaves", 0x4659eaff39de514f, 0x336e245cc0e90582, [⟨1, [⟨[838861], [], 64, "minecraft:poplar_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
   | .yellow_poplar_leaves =>
-    some ⟨"minecraft:blocks/yellow_poplar_leaves", 0x9bb237d8e546942d, 0x59edb516bfcf95eb, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
-  | .flowering_azalea_leaves =>
-    some ⟨"minecraft:blocks/flowering_azalea_leaves", 0x3a64023d256a6749, 0xe3984839c1bab885, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
-  | .oak_leaves =>
-    some ⟨"minecraft:blocks/oak_leaves", 0xef6489bec2529e35, 0x1f1ab2c703aa2b5d, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩, ⟨1, [⟨[83887], [], 64⟩]⟩]⟩
-  | .wheat =>
+    some ⟨"minecraft:blocks/yellow_poplar_leaves", 0x9bb237d8e546942d, 0x59edb516bfcf95eb, [⟨1, [⟨[838861], [], 64, "minecraft:poplar_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
+  | .nether_wart =>
     match prop b "age" with
-    | "7" => some ⟨"minecraft:blocks/wheat", 0x9fa698f5eb5f5287, 0xddc12ce50a812942, [⟨1, [⟨[], [], 64⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64⟩]⟩]⟩
+    | "3" => some ⟨"minecraft:blocks/nether_wart", 0xf10d25dbbcfe8ac3, 0xd2f8de52c31d3001, [⟨1, [⟨[], [.setCount false (.uniform 2 4), .uniformBonus], 64, "minecraft:nether_wart"⟩]⟩]⟩
     | _ => none
-  | .dark_oak_leaves =>
-    some ⟨"minecraft:blocks/dark_oak_leaves", 0x591e4bdfa0e1abc9, 0x977be5db1d8ffbc1, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩, ⟨1, [⟨[83887], [], 64⟩]⟩]⟩
+  | .flowering_azalea_leaves =>
+    some ⟨"minecraft:blocks/flowering_azalea_leaves", 0x3a64023d256a6749, 0xe3984839c1bab885, [⟨1, [⟨[838861], [], 64, "minecraft:flowering_azalea"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩]⟩
   | .carrots =>
     match prop b "age" with
-    | "7" => some ⟨"minecraft:blocks/carrots", 0x13bb704d54b53096, 0xfda37b628e9c98c7, [⟨1, [⟨[], [], 64⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64⟩]⟩]⟩
+    | "7" => some ⟨"minecraft:blocks/carrots", 0x13bb704d54b53096, 0xfda37b628e9c98c7, [⟨1, [⟨[], [], 64, "minecraft:carrot"⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64, "minecraft:carrot"⟩]⟩]⟩
+    | _ => none
+  | .wheat =>
+    match prop b "age" with
+    | "7" => some ⟨"minecraft:blocks/wheat", 0x9fa698f5eb5f5287, 0xddc12ce50a812942, [⟨1, [⟨[], [], 64, "minecraft:wheat"⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64, "minecraft:wheat_seeds"⟩]⟩]⟩
     | _ => none
   | .beetroots =>
     match prop b "age" with
-    | "3" => some ⟨"minecraft:blocks/beetroots", 0x583ba9feba08f50d, 0x96aa01fe8ac675e3, [⟨1, [⟨[], [], 64⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64⟩]⟩]⟩
+    | "3" => some ⟨"minecraft:blocks/beetroots", 0x583ba9feba08f50d, 0x96aa01fe8ac675e3, [⟨1, [⟨[], [], 64, "minecraft:beetroot"⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64, "minecraft:beetroot_seeds"⟩]⟩]⟩
     | _ => none
-  | .nether_wart =>
-    match prop b "age" with
-    | "3" => some ⟨"minecraft:blocks/nether_wart", 0xf10d25dbbcfe8ac3, 0xd2f8de52c31d3001, [⟨1, [⟨[], [.setCount false (.uniform 2 4), .uniformBonus], 64⟩]⟩]⟩
-    | _ => none
+  | .oak_leaves =>
+    some ⟨"minecraft:blocks/oak_leaves", 0xef6489bec2529e35, 0x1f1ab2c703aa2b5d, [⟨1, [⟨[838861], [], 64, "minecraft:oak_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩, ⟨1, [⟨[83887], [], 64, "minecraft:apple"⟩]⟩]⟩
+  | .dark_oak_leaves =>
+    some ⟨"minecraft:blocks/dark_oak_leaves", 0x591e4bdfa0e1abc9, 0x977be5db1d8ffbc1, [⟨1, [⟨[838861], [], 64, "minecraft:dark_oak_sapling"⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64, "minecraft:stick"⟩]⟩, ⟨1, [⟨[83887], [], 64, "minecraft:apple"⟩]⟩]⟩
   | .potatoes =>
     match prop b "age" with
-    | "7" => some ⟨"minecraft:blocks/potatoes", 0xedbc0e0223e5e29e, 0xd1fcda23b4868d23, [⟨1, [⟨[], [], 64⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64⟩]⟩, ⟨1, [⟨[335545], [], 64⟩]⟩]⟩
+    | "7" => some ⟨"minecraft:blocks/potatoes", 0xedbc0e0223e5e29e, 0xd1fcda23b4868d23, [⟨1, [⟨[], [], 64, "minecraft:potato"⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64, "minecraft:potato"⟩]⟩, ⟨1, [⟨[335545], [], 64, "minecraft:poisonous_potato"⟩]⟩]⟩
     | _ => none
   | .sweet_berry_bush =>
     match prop b "age" with
-    | "2" => some ⟨"minecraft:blocks/sweet_berry_bush", 0x43d91b9af92bc74b, 0x41420935cf122c3b, [⟨1, [⟨[], [.setCount false (.uniform 1 2), .uniformBonus], 64⟩]⟩]⟩
-    | "3" => some ⟨"minecraft:blocks/sweet_berry_bush", 0x43d91b9af92bc74b, 0x41420935cf122c3b, [⟨1, [⟨[], [.setCount false (.uniform 2 3), .uniformBonus], 64⟩]⟩]⟩
+    | "2" => some ⟨"minecraft:blocks/sweet_berry_bush", 0x43d91b9af92bc74b, 0x41420935cf122c3b, [⟨1, [⟨[], [.setCount false (.uniform 1 2), .uniformBonus], 64, "minecraft:sweet_berries"⟩]⟩]⟩
+    | "3" => some ⟨"minecraft:blocks/sweet_berry_bush", 0x43d91b9af92bc74b, 0x41420935cf122c3b, [⟨1, [⟨[], [.setCount false (.uniform 2 3), .uniformBonus], 64, "minecraft:sweet_berries"⟩]⟩]⟩
     | _ => none
   | .melon_stem =>
     match prop b "age" with
-    | "1" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 2236963)], 64⟩]⟩]⟩
-    | "2" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 3355444)], 64⟩]⟩]⟩
-    | "3" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 4473925)], 64⟩]⟩]⟩
-    | "4" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 5592406)], 64⟩]⟩]⟩
-    | "5" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 6710887)], 64⟩]⟩]⟩
-    | "6" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 7829368)], 64⟩]⟩]⟩
-    | "7" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64⟩]⟩]⟩
-    | _ => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 1118482)], 64⟩]⟩]⟩
+    | "1" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 2236963)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
+    | "2" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 3355444)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
+    | "3" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 4473925)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
+    | "4" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 5592406)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
+    | "5" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 6710887)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
+    | "6" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 7829368)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
+    | "7" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
+    | _ => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 1118482)], 64, "minecraft:melon_seeds"⟩]⟩]⟩
   | .pumpkin_stem =>
     match prop b "age" with
-    | "1" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 2236963)], 64⟩]⟩]⟩
-    | "2" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 3355444)], 64⟩]⟩]⟩
-    | "3" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 4473925)], 64⟩]⟩]⟩
-    | "4" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 5592406)], 64⟩]⟩]⟩
-    | "5" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 6710887)], 64⟩]⟩]⟩
-    | "6" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 7829368)], 64⟩]⟩]⟩
-    | "7" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64⟩]⟩]⟩
-    | _ => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 1118482)], 64⟩]⟩]⟩
+    | "1" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 2236963)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
+    | "2" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 3355444)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
+    | "3" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 4473925)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
+    | "4" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 5592406)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
+    | "5" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 6710887)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
+    | "6" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 7829368)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
+    | "7" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
+    | _ => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 1118482)], 64, "minecraft:pumpkin_seeds"⟩]⟩]⟩
   | _ =>
     none
+
+/-- What the block does in `spawnAfterBreak`, which the game calls for a block that was
+broken with drops and for one an explosion destroyed. -/
+def afterBreak : BlockId → AfterBreak
+  | .gold_ore | .deepslate_gold_ore | .iron_ore | .deepslate_iron_ore | .copper_ore
+  | .deepslate_copper_ore => .experience 0
+  | .sculk => .experience 1
+  | .sculk_sensor | .calibrated_sculk_sensor | .sculk_catalyst | .sculk_shrieker => .experience 5
+  | .infested_stone | .infested_cobblestone | .infested_stone_bricks
+  | .infested_mossy_stone_bricks | .infested_cracked_stone_bricks
+  | .infested_chiseled_stone_bricks | .infested_deepslate => .infested
+  | .spawner => .spawner
+  | .nether_gold_ore => .uniformExperience 0 1
+  | .coal_ore | .deepslate_coal_ore => .uniformExperience 0 2
+  | .redstone_ore | .deepslate_redstone_ore => .uniformExperience 1 5
+  | .lapis_ore | .deepslate_lapis_ore | .nether_quartz_ore => .uniformExperience 2 5
+  | .diamond_ore | .deepslate_diamond_ore | .emerald_ore | .deepslate_emerald_ore => .uniformExperience 3 7
+  | _ => .nothing
 
 
 end Redstone.Entity.Tnt

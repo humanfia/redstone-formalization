@@ -422,6 +422,7 @@ def phys (e : Entity) : Entities.Physics :=
   match e.data with
   | .item dt => dt.phys
   | .fallingBlock dt => dt.phys
+  | .experienceOrb dt => dt.phys
   | _ => {}
 
 /-- Replaces the state `Entity.move` works with. -/
@@ -429,6 +430,7 @@ def withPhys (e : Entity) (p : Entities.Physics) : Entity :=
   match e.data with
   | .item dt => { e with data := .item { dt with phys := p } }
   | .fallingBlock dt => { e with data := .fallingBlock { dt with phys := p } }
+  | .experienceOrb dt => { e with data := .experienceOrb { dt with phys := p } }
   | _ => e
 
 /-- Changes the state `Entity.move` works with. -/

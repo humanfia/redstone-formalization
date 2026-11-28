@@ -30,7 +30,7 @@ Files: `tests/scenarios/<unit>/<name>.json` and `tests/traces/<unit>/<name>.trac
 * Random ticks are disabled (`random_tick_speed` 0), mob spawning is off (`spawn_mobs` and the
   other spawn rules false), weather is clear and does not change (`advance_weather` false), the
   day time is 6000 and does not advance (`advance_time` false), and destroyed blocks drop nothing
-  (`block_drops` false; loot tables are not modelled), unless the scenario's `settings` say
+  (`block_drops` false), unless the scenario's `settings` say
   otherwise. All other game rules have their default values; the difficulty is easy.
 * What is pinned at the start of every scenario, so that a trace depends on the scenario only
   (recording a scenario twice, alone or among others, gives byte-identical traces):

@@ -8,8 +8,8 @@ public import Redstone.Block.Entity.Inventory
 The data that the model keeps of the block entity `AbstractFurnaceBlockEntity`: the three
 slots (ingredient, fuel, result) and the burning and cooking counters.
 
-Of the map `RecipesUsed` only whether it is empty is kept: it decides whether the furnace
-releases experience when it is removed.
+The map `RecipesUsed` (how often each recipe was used since a player last took the results)
+decides how much experience the furnace releases when it is removed.
 -/
 
 @[expose] public section
@@ -31,14 +31,24 @@ structure Furnace where
   cookingTotalTime : ℤ := 0
   /-- `speedMultiplier` (`speed_multiplier`), a `float` in the game; it is 1 or 2. -/
   speedMultiplier : ℕ := 1
-  /-- `recipesUsed` (`RecipesUsed`) is not empty. -/
-  usedRecipes : Bool := false
+  /-- `recipesUsed` (`RecipesUsed`): the recipes that were used, by name, each with the number
+  of times, in the order of the names. -/
+  recipesUsed : List (String × ℕ) := []
   deriving DecidableEq, Repr
 
 namespace Furnace
 
 /-- The data of a freshly created furnace. -/
 instance : Inhabited Furnace := ⟨{}⟩
+
+/-- `recipesUsed.addTo(recipe, count)`: counts `count` more uses of the recipe named `name`.
+The list stays in the order of the names. -/
+def addRecipe : List (String × ℕ) → String → ℕ → List (String × ℕ)
+  | [], name, count => [(name, count)]
+  | (n, c) :: rest, name, count =>
+    if n == name then (n, c + count) :: rest
+    else if name < n then (name, count) :: (n, c) :: rest
+    else (n, c) :: addRecipe rest name count
 
 /-- Reads the data from the block entity's saved NBT (`loadAdditional`). Fields the model does
 not keep are ignored. A furnace whose stacks have data components is not read: its fuels and
@@ -47,10 +57,11 @@ def ofNbt? (t : Nbt) : Option Furnace := do
   if !t.plainContainer then none
   let items := Inventory.ofNbt 3 t
   if items.hasComponents then none
-  let used :=
+  let recipes : List (String × ℕ) :=
     match t.get? "RecipesUsed" with
-    | none | some (.compound []) => false
-    | _ => true
+    | some (.compound entries) =>
+      entries.foldl (fun acc (name, count) => addRecipe acc name ((count.toInt?.getD 0).toNat)) []
+    | _ => []
   return {
     items := items
     litTimeRemaining := t.intD "lit_time_remaining" 0
@@ -58,7 +69,7 @@ def ofNbt? (t : Nbt) : Option Furnace := do
     cookingTimer := t.intD "cooking_time_spent" 0
     cookingTotalTime := t.intD "cooking_total_time" 0
     speedMultiplier := ← t.speedMultiplier? "speed_multiplier"
-    usedRecipes := used }
+    recipesUsed := recipes }
 
 end Furnace
 

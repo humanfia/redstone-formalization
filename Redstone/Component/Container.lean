@@ -40,8 +40,11 @@ world, and the model has no other players.
   composter one that patches `compostable`: the model reads these from the item.
 * Containers that are entities (minecarts, boats): looking for a container where such an entity
   may be sets `Level.overflow`.
-* The experience a furnace releases when it is removed: removing a furnace that has cooked
-  sets `Level.overflow`.
+* The experience of a furnace that used more than one recipe. A furnace that is removed
+  releases the experience of the recipes it used, one recipe after the other in the order of a
+  hash map that differs from run to run; when more than one recipe has something to release
+  (experience, or a number to draw), `Level.overflow` is set. A furnace that used one recipe is
+  modelled (`awardUsedRecipes`).
 * The lid of a shulker box: using a shulker box sets `Level.overflow`.
 * Ender chests, whose inventory belongs to the player: they are inert, and using one sets
   `Level.overflow`.
@@ -154,6 +157,19 @@ def FurnaceKind.recipe? (k : FurnaceKind) (ingredient : ItemStack) : Option (Str
   | .furnace => Item.smeltingRecipes.lookup ingredient.item
   | .blastFurnace => Item.blastingRecipes.lookup ingredient.item
   | .smoker => Item.smokingRecipes.lookup ingredient.item
+
+/-- `AbstractFurnaceBlockEntity.setRecipeUsed(recipe)` for the recipe that cooks `ingredient`:
+one more use of it in `used` (`recipesUsed`). -/
+def FurnaceKind.setRecipeUsed (k : FurnaceKind) (ingredient : ItemStack)
+    (used : List (String × ℕ)) : List (String × ℕ) :=
+  let table :=
+    match k with
+    | .furnace => Item.smeltingExperience
+    | .blastFurnace => Item.blastingExperience
+    | .smoker => Item.smokingExperience
+  match table.lookup ingredient.item with
+  | some (name, _) => BlockEntities.Furnace.addRecipe used name 1
+  | none => used
 
 /-- The predicate `minecraft:block/fast_cooking`: blast furnaces and smokers burn fuel twice as
 fast and cook twice as fast. -/
@@ -1036,7 +1052,7 @@ def furnaceStep (k : FurnaceKind) (d : BlockEntities.Furnace) :
                 cookingTimer := 0
                 cookingTotalTime := totalCookTime time d.speedMultiplier
                 items := burn d.items result
-                usedRecipes := true }
+                recipesUsed := k.setRecipeUsed ingredient d.recipesUsed }
               changed := true
           else d := { d with cookingTimer := 0 }
         else d := { d with cookingTimer := 0 }
@@ -1045,6 +1061,36 @@ def furnaceStep (k : FurnaceKind) (d : BlockEntities.Furnace) :
     -- `Mth.clamp(cookingTimer - 2, 0, cookingTotalTime)`
     d := { d with cookingTimer := min (max (d.cookingTimer - 2) 0) d.cookingTotalTime }
   return (d, isLit, changed, unmodelled)
+
+/-- `AbstractFurnaceBlockEntity.createExperience(level, position, amount, value)` at the centre
+of the block at `p`, for a recipe that was used `amount` times and gives the experience whose
+`float` bits are `value`: the whole part of the product, and one more with the probability of
+its fractional part, for which a number is drawn from the level's generator unless that part
+is zero. The game rule `block_drops` is not asked. -/
+def createExperience (p : Pos) (amount value : ℕ) : M Unit := do
+  let product : Float32 := Float32.ofNat amount * Float32.ofBits value.toUInt32
+  let whole := product.floor
+  let fraction := product - whole
+  let mut reward := whole.toUInt64.toNat
+  if fraction != 0 then
+    if (← ItemDrop.nextFloat) < fraction then reward := reward + 1
+  Level.awardExperience p reward
+
+/-- `AbstractFurnaceBlockEntity.getRecipesToAwardAndPopExperience(level, Vec3.atCenterOf(pos))`
+for the recipes `used`, by name with the number of uses: every recipe releases its experience
+(`createExperience`). The game goes through the recipes in the order of a hash map of object
+identities, which is not the same in every run. That order shows as soon as two recipes have
+something to release (experience, or a number to draw), and then `Level.overflow` is set. A
+name that is not that of a cooking recipe is skipped, as in the game. -/
+def awardUsedRecipes (p : Pos) (used : List (String × ℕ)) : M Unit := do
+  let table := Item.smeltingExperience ++ Item.blastingExperience ++ Item.smokingExperience
+  let known := used.filterMap fun (name, amount) =>
+    (table.find? (·.2.1 == name)).map fun (_, _, value) => (amount, value)
+  let acts := known.filter fun (amount, value) =>
+    let product : Float32 := Float32.ofNat amount * Float32.ofBits value.toUInt32
+    product != 0
+  if acts.length > 1 then Level.setOverflow
+  acts.forM fun (amount, value) => createExperience p amount value
 
 /-- `AbstractFurnaceBlockEntity.serverTick`. -/
 def furnaceTick (self : Block) (p : Pos) : M Unit := do
@@ -1064,8 +1110,8 @@ def furnace (self : Block) : Behaviour :=
     blockEntityTick := furnaceTick self
     preRemoveSideEffects := fun p => do
       dropContents p
-      -- `getRecipesToAwardAndPopExperience`: the experience is not modelled.
-      if ((← Level.getBlockEntity p).bind furnace?).any (·.2.usedRecipes) then Level.setOverflow
+      if let some (_, d) := (← Level.getBlockEntity p).bind furnace? then
+        awardUsedRecipes p d.recipesUsed
     useWithoutItem := fun p _ => do
       if ((← Level.getBlockEntity p).bind furnace?).isSome then closeContainer
       return true }

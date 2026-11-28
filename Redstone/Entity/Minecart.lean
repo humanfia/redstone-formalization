@@ -1040,8 +1040,9 @@ def checkSurroundings : CartM Unit := do
 /-- `OldMinecartBehavior.tick` on the server. `old` and `yRotO` are the position and the yaw
 before the tick (`Entity.xo`, `zo`, `yRotO`). -/
 def behaviorTick (old : Vec3) (yRotO : Float32) : CartM Unit := do
-  -- Entity.applyGravity
-  setMotion (vadd (← getThe Cart).motion 0.0 (-0.04) 0.0)
+  -- Entity.applyGravity: `getGravity()` is zero for an entity with `NoGravity`
+  unless (← getThe Cart).d.noGravity do
+    setMotion (vadd (← getThe Cart).motion 0.0 (-0.04) 0.0)
   let c ← getThe Cart
   let l ← level
   let pos := currentBlockPosOrRailBelow l c.pos

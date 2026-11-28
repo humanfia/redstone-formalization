@@ -48,6 +48,8 @@ structure Minecart where
   hasLootTable : Bool
   /-- The command of a command block minecart (`Command`). -/
   command : String
+  /-- `Entity.isNoGravity()` (`NoGravity`): gravity does not act on the minecart. -/
+  noGravity : Bool
   /-- The vertical component of `MinecartFurnace.push`, which the game keeps but does not
   save. -/
   pushY : Float
@@ -70,7 +72,7 @@ namespace Minecart
 instance : Inhabited Minecart :=
   ⟨{ yRot := 0, xRot := 0, fallDistance := 0, flipped := false, fuse := -1, enabled := true,
      pushX := 0, pushZ := 0, fuel := 0, items := [], hasLootTable := false, command := "",
-     pushY := 0,
+     noGravity := false, pushY := 0,
      supportingPos := none, onGroundNoBlocks := false, horizontalCollision := false,
      moveDist := 0, nextStep := 1 }⟩
 
@@ -91,7 +93,7 @@ instance : BEq Minecart :=
       && a.fuse == b.fuse && a.enabled == b.enabled
       && sameDouble a.pushX b.pushX && sameDouble a.pushZ b.pushZ
       && a.fuel == b.fuel && a.items == b.items && a.hasLootTable == b.hasLootTable
-      && a.command == b.command⟩
+      && a.command == b.command && a.noGravity == b.noGravity⟩
 
 /-- The `double` at `key`, or `d` when the key is absent. -/
 def doubleD (t : Nbt) (key : String) (d : Float) : Float :=
@@ -125,7 +127,8 @@ def ofNbt? (t : Nbt) : Option Minecart := do
     fuel := t.intD "Fuel" 0
     items
     hasLootTable := (t.get? "LootTable").isSome
-    command := ((t.get? "Command").bind Nbt.toString?).getD "" }
+    command := ((t.get? "Command").bind Nbt.toString?).getD ""
+    noGravity := t.boolD "NoGravity" false }
 
 end Minecart
 

@@ -41,12 +41,27 @@ itself. One redstone tick is two game ticks.
 * `back_to_start`: after the round the blocks are those the circuit was built with.
 * For the gates with two inputs, a second round with the levers in the other order, so that all
   eight switches of one lever are covered, and `reverse_agrees`: the blocks reached for a
-  combination do not depend on the order.
+  combination do not depend on the order, and the level is at rest there.
+* For the gates with three inputs (`Mux.lean`, `And3.lean`, `Or3.lean`), a second round of
+  sixteen switches, so that all 24 switches of one lever are covered (each lever on and off,
+  for each state of the other two), and `others_agrees`, which says the same of that round.
+
+So "Settles after" in the table above is the largest delay over **all** switches of one lever
+from a level at rest.
+
+## The multiplexer glitches
+
+With both inputs on, the output of `Mux.lean` is 15 whichever input is selected, but switching
+the select lever on takes the output to 0 for two game ticks (`Mux.s_on_from_110`: the output
+after the five game ticks that follow the lever is 15, 0, 0, 15, 15). The torch of `B ∧ ¬S`
+goes out 2 game ticks after the lever and the torch of `A ∧ S` is lit after 4. Switching the
+lever off has no gap (`Mux.s_off_from_111`). This is the static hazard of the gate, stated as a
+theorem; the layout has no third product to cover it.
 
 ## What it costs
 
 Each file checked on its own on a compute node (`lean` on the file, imports included), with the
-peak resident memory. The directory is about 320 s in all. No file is heavy in the sense of
+peak resident memory. The directory is about 410 s in all. No file is heavy in the sense of
 `Redstone/Proof/README.md` (none needs 4 GB), so none is in the chain of heavy files. The time
 goes where the dust is: the gates of torches alone take 8 to 14 s, a few pieces of dust that
 change in every round cost more than all the torches.
@@ -54,13 +69,18 @@ change in every round cost more than all the torches.
 | File | Time | Peak memory |
 |---|---|---|
 | `NotSide.lean`, `NotTop.lean` | 8 s each | 1.4 GB |
-| `Nor.lean`, `Nand.lean`, `And.lean`, `And3.lean` | 11 to 14 s each | 1.4 to 1.5 GB |
+| `Nor.lean`, `Nand.lean`, `And.lean` | 11 to 14 s each | 1.4 to 1.5 GB |
 | `Implies.lean` | 17 s | 2.1 GB |
-| `Or3.lean` | 19 s | 3.0 GB |
-| `Mux.lean` | 23 s | 2.3 GB |
 | `Or.lean` | 24 to 31 s | 2.9 GB |
+| `And3.lean` | 31 s | 1.5 GB |
+| `Or3.lean` | 46 s | 3.0 GB |
 | `Xnor.lean`, `Xor.lean` | 44 s, 48 s | 2.5 to 2.6 GB |
+| `Mux.lean` | 69 s | 2.5 GB |
 | `XorComparator.lean` | 75 s | 3.4 GB |
+
+The times of the three gates with three inputs are those of the build of the whole repository
+(files side by side), where the other files take what they take alone; with one round they
+were 14, 19 and 23 s.
 
 The comparator gate was first written with its two outputs joined by eleven pieces of dust
 around the square, on the floor: 4.8 GB and several times the time. The bridge of five pieces
@@ -70,9 +90,6 @@ over the top is what the file has now.
 
 * **Switches of several levers in the same game tick**, and switches that arrive before the
   gate has settled. Every theorem here starts from a level at rest and switches one lever.
-* **The gates with three inputs** (`Mux.lean`, `And3.lean`, `Or3.lean`) have one round, the
-  Gray code through all eight combinations: 8 of the 24 switches of one lever. The truth table
-  is complete; the delays of the other 16 switches are not stated.
 * **Majority gate** of three inputs. No layout is written for it yet; it is two more products
   next to the two of `Mux.lean`, and nothing in the model stands in its way.
 * **XNOR as XOR with an inverter behind it.** `Xnor.lean` takes the XNOR signal from inside the

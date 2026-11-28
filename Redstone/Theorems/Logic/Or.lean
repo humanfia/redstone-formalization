@@ -312,7 +312,7 @@ assert_standard_axioms back_to_start
 
 /-- **The order of the levers does not matter.** The reverse round reaches, for each combination of
 the inputs, the very blocks the first round reaches, and ends with the blocks the circuit was built
-with. -/
+with; and it is at rest there, so every switch of the reverse round starts from a level at rest. -/
 theorem reverse_agrees :
     (rules.runSchedule (reverse.take 1) circuit).world =
         (rules.runSchedule (schedule.take 3) circuit).world ∧
@@ -320,8 +320,12 @@ theorem reverse_agrees :
         (rules.runSchedule (schedule.take 2) circuit).world ∧
       (rules.runSchedule (reverse.take 3) circuit).world =
         (rules.runSchedule (schedule.take 1) circuit).world ∧
-      (rules.runSchedule reverse circuit).world = circuit.world := by
-  rw [back_run_1, state_run_3, back_run_2, state_run_2, back_run_3, state_run_1, back_run]
+      (rules.runSchedule (reverse.take 4) circuit).world = circuit.world ∧
+      (rules.runSchedule (reverse.take 1) circuit).Quiescent ∧
+      (rules.runSchedule (reverse.take 2) circuit).Quiescent ∧
+      (rules.runSchedule (reverse.take 3) circuit).Quiescent ∧
+      (rules.runSchedule (reverse.take 4) circuit).Quiescent := by
+  rw [back_run_1, back_run_2, back_run_3, back_run_4, state_run_1, state_run_2, state_run_3]
   circuit_decide
 
 assert_standard_axioms reverse_agrees

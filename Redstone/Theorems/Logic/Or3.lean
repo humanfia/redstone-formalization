@@ -54,11 +54,31 @@ is already final after game tick 1 changed in the same game tick as the lever.
 | 1 1 1 | B off | 13 | 1 |
 | 1 0 1 | A off | 13 | 1 |
 | 0 0 1 | C off | 0 | 1 |
+| 0 0 0 | B on | 14 | 1 |
+| 0 1 0 | B off | 0 | 1 |
+| 0 0 0 | C on | 13 | 1 |
+| 0 0 1 | B on | 14 | 1 |
+| 0 1 1 | B off | 13 | 1 |
+| 0 0 1 | A on | 13 | 1 |
+| 1 0 1 | C off | 13 | 1 |
+| 1 0 0 | C on | 13 | 1 |
+| 1 0 1 | B on | 14 | 1 |
+| 1 1 1 | C off | 14 | 1 |
+| 1 1 0 | C on | 14 | 1 |
+| 1 1 1 | A off | 14 | 1 |
+| 0 1 1 | C off | 14 | 1 |
+| 0 1 0 | A on | 14 | 1 |
+| 1 1 0 | B off | 13 | 1 |
+| 1 0 0 | A off | 0 | 1 |
 
 The level is loaded raw with all levers off. Its blocks, with the shape and the power of every
 dust and the state of every torch, are those the model itself settles in when the circuit is
 built block by block (dust placed as a player places it); `circuit_quiescent` shows that the
 level is at rest.
+
+The two rounds together make every one of the 24 switches of one lever: each of the three levers
+on and off, for each of the four states of the other two. The second round starts each of its
+switches from a level at rest whose blocks are those of the first round (`others_agrees`).
 -/
 
 set_option Elab.async false
@@ -128,6 +148,30 @@ def schedule : Schedule :=
     .first [.use leverC .up] 1
 
 checkpoints state := schedule from circuit
+
+/-- The sixteen switches of one lever that the first round does not make: the eight of the first
+round the other way, and both ways along the four pairs of combinations the first round does not
+join. One lever at a time, 1 game ticks apart: the inputs go from 000 through 010, 000, 001, 011,
+001, 101, 100, 101, 111, 110, 111, 011, 010, 110, 100, 000. -/
+def others : Schedule :=
+  .first [.use leverB .up] 1 ++
+    .first [.use leverB .up] 1 ++
+    .first [.use leverC .up] 1 ++
+    .first [.use leverB .up] 1 ++
+    .first [.use leverB .up] 1 ++
+    .first [.use leverA .up] 1 ++
+    .first [.use leverC .up] 1 ++
+    .first [.use leverC .up] 1 ++
+    .first [.use leverB .up] 1 ++
+    .first [.use leverC .up] 1 ++
+    .first [.use leverC .up] 1 ++
+    .first [.use leverA .up] 1 ++
+    .first [.use leverC .up] 1 ++
+    .first [.use leverA .up] 1 ++
+    .first [.use leverB .up] 1 ++
+    .first [.use leverA .up] 1
+
+checkpoints rest := others from circuit
 
 /-- The circuit as built, with all levers off, is at rest. -/
 theorem circuit_quiescent : circuit.Quiescent := by circuit_decide
@@ -380,6 +424,230 @@ theorem c_off_from_001 :
 
 assert_standard_axioms c_off_from_001
 
+/-- **B goes on** (inputs 000 to 010). The lever is used before game tick 1 of the second round. The
+theorem lists the output after each of the next 1 game ticks: it is final after the first of them,
+in the game tick of the lever. -/
+theorem b_on_from_000 :
+    inputs (rules.runSchedule (others.take 1) circuit) =
+        [leverAState false, leverBState true, leverCState false] ∧
+      [output (rules.runSchedule (others.take 1) circuit)] =
+        [14] ∧
+      (rules.runSchedule (others.take 1) circuit).overflow = false := by
+  rw [rest_run_1]
+  circuit_decide
+
+assert_standard_axioms b_on_from_000
+
+/-- **B goes off** (inputs 010 to 000). The lever is used before game tick 2 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem b_off_from_010 :
+    inputs (rules.runSchedule (others.take 2) circuit) =
+        [leverAState false, leverBState false, leverCState false] ∧
+      [output (rules.runSchedule (others.take 2) circuit)] =
+        [0] ∧
+      (rules.runSchedule (others.take 2) circuit).overflow = false := by
+  rw [rest_run_2]
+  circuit_decide
+
+assert_standard_axioms b_off_from_010
+
+/-- **C goes on** (inputs 000 to 001). The lever is used before game tick 3 of the second round. The
+theorem lists the output after each of the next 1 game ticks: it is final after the first of them,
+in the game tick of the lever. -/
+theorem c_on_from_000 :
+    inputs (rules.runSchedule (others.take 3) circuit) =
+        [leverAState false, leverBState false, leverCState true] ∧
+      [output (rules.runSchedule (others.take 3) circuit)] =
+        [13] ∧
+      (rules.runSchedule (others.take 3) circuit).overflow = false := by
+  rw [rest_run_3]
+  circuit_decide
+
+assert_standard_axioms c_on_from_000
+
+/-- **B goes on** (inputs 001 to 011). The lever is used before game tick 4 of the second round. The
+theorem lists the output after each of the next 1 game ticks: it is final after the first of them,
+in the game tick of the lever. -/
+theorem b_on_from_001 :
+    inputs (rules.runSchedule (others.take 4) circuit) =
+        [leverAState false, leverBState true, leverCState true] ∧
+      [output (rules.runSchedule (others.take 4) circuit)] =
+        [14] ∧
+      (rules.runSchedule (others.take 4) circuit).overflow = false := by
+  rw [rest_run_4]
+  circuit_decide
+
+assert_standard_axioms b_on_from_001
+
+/-- **B goes off** (inputs 011 to 001). The lever is used before game tick 5 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem b_off_from_011 :
+    inputs (rules.runSchedule (others.take 5) circuit) =
+        [leverAState false, leverBState false, leverCState true] ∧
+      [output (rules.runSchedule (others.take 5) circuit)] =
+        [13] ∧
+      (rules.runSchedule (others.take 5) circuit).overflow = false := by
+  rw [rest_run_5]
+  circuit_decide
+
+assert_standard_axioms b_off_from_011
+
+/-- **A goes on** (inputs 001 to 101). The lever is used before game tick 6 of the second round. The
+theorem lists the output after each of the next 1 game ticks: it is final after the first of them,
+in the game tick of the lever. -/
+theorem a_on_from_001 :
+    inputs (rules.runSchedule (others.take 6) circuit) =
+        [leverAState true, leverBState false, leverCState true] ∧
+      [output (rules.runSchedule (others.take 6) circuit)] =
+        [13] ∧
+      (rules.runSchedule (others.take 6) circuit).overflow = false := by
+  rw [rest_run_6]
+  circuit_decide
+
+assert_standard_axioms a_on_from_001
+
+/-- **C goes off** (inputs 101 to 100). The lever is used before game tick 7 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem c_off_from_101 :
+    inputs (rules.runSchedule (others.take 7) circuit) =
+        [leverAState true, leverBState false, leverCState false] ∧
+      [output (rules.runSchedule (others.take 7) circuit)] =
+        [13] ∧
+      (rules.runSchedule (others.take 7) circuit).overflow = false := by
+  rw [rest_run_7]
+  circuit_decide
+
+assert_standard_axioms c_off_from_101
+
+/-- **C goes on** (inputs 100 to 101). The lever is used before game tick 8 of the second round. The
+theorem lists the output after each of the next 1 game ticks: it is final after the first of them,
+in the game tick of the lever. -/
+theorem c_on_from_100 :
+    inputs (rules.runSchedule (others.take 8) circuit) =
+        [leverAState true, leverBState false, leverCState true] ∧
+      [output (rules.runSchedule (others.take 8) circuit)] =
+        [13] ∧
+      (rules.runSchedule (others.take 8) circuit).overflow = false := by
+  rw [rest_run_8]
+  circuit_decide
+
+assert_standard_axioms c_on_from_100
+
+/-- **B goes on** (inputs 101 to 111). The lever is used before game tick 9 of the second round. The
+theorem lists the output after each of the next 1 game ticks: it is final after the first of them,
+in the game tick of the lever. -/
+theorem b_on_from_101 :
+    inputs (rules.runSchedule (others.take 9) circuit) =
+        [leverAState true, leverBState true, leverCState true] ∧
+      [output (rules.runSchedule (others.take 9) circuit)] =
+        [14] ∧
+      (rules.runSchedule (others.take 9) circuit).overflow = false := by
+  rw [rest_run_9]
+  circuit_decide
+
+assert_standard_axioms b_on_from_101
+
+/-- **C goes off** (inputs 111 to 110). The lever is used before game tick 10 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem c_off_from_111 :
+    inputs (rules.runSchedule (others.take 10) circuit) =
+        [leverAState true, leverBState true, leverCState false] ∧
+      [output (rules.runSchedule (others.take 10) circuit)] =
+        [14] ∧
+      (rules.runSchedule (others.take 10) circuit).overflow = false := by
+  rw [rest_run_10]
+  circuit_decide
+
+assert_standard_axioms c_off_from_111
+
+/-- **C goes on** (inputs 110 to 111). The lever is used before game tick 11 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem c_on_from_110 :
+    inputs (rules.runSchedule (others.take 11) circuit) =
+        [leverAState true, leverBState true, leverCState true] ∧
+      [output (rules.runSchedule (others.take 11) circuit)] =
+        [14] ∧
+      (rules.runSchedule (others.take 11) circuit).overflow = false := by
+  rw [rest_run_11]
+  circuit_decide
+
+assert_standard_axioms c_on_from_110
+
+/-- **A goes off** (inputs 111 to 011). The lever is used before game tick 12 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem a_off_from_111 :
+    inputs (rules.runSchedule (others.take 12) circuit) =
+        [leverAState false, leverBState true, leverCState true] ∧
+      [output (rules.runSchedule (others.take 12) circuit)] =
+        [14] ∧
+      (rules.runSchedule (others.take 12) circuit).overflow = false := by
+  rw [rest_run_12]
+  circuit_decide
+
+assert_standard_axioms a_off_from_111
+
+/-- **C goes off** (inputs 011 to 010). The lever is used before game tick 13 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem c_off_from_011 :
+    inputs (rules.runSchedule (others.take 13) circuit) =
+        [leverAState false, leverBState true, leverCState false] ∧
+      [output (rules.runSchedule (others.take 13) circuit)] =
+        [14] ∧
+      (rules.runSchedule (others.take 13) circuit).overflow = false := by
+  rw [rest_run_13]
+  circuit_decide
+
+assert_standard_axioms c_off_from_011
+
+/-- **A goes on** (inputs 010 to 110). The lever is used before game tick 14 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem a_on_from_010 :
+    inputs (rules.runSchedule (others.take 14) circuit) =
+        [leverAState true, leverBState true, leverCState false] ∧
+      [output (rules.runSchedule (others.take 14) circuit)] =
+        [14] ∧
+      (rules.runSchedule (others.take 14) circuit).overflow = false := by
+  rw [rest_run_14]
+  circuit_decide
+
+assert_standard_axioms a_on_from_010
+
+/-- **B goes off** (inputs 110 to 100). The lever is used before game tick 15 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem b_off_from_110 :
+    inputs (rules.runSchedule (others.take 15) circuit) =
+        [leverAState true, leverBState false, leverCState false] ∧
+      [output (rules.runSchedule (others.take 15) circuit)] =
+        [13] ∧
+      (rules.runSchedule (others.take 15) circuit).overflow = false := by
+  rw [rest_run_15]
+  circuit_decide
+
+assert_standard_axioms b_off_from_110
+
+/-- **A goes off** (inputs 100 to 000). The lever is used before game tick 16 of the second round.
+The theorem lists the output after each of the next 1 game ticks: it is final after the first of
+them, in the game tick of the lever. -/
+theorem a_off_from_100 :
+    inputs (rules.runSchedule (others.take 16) circuit) =
+        [leverAState false, leverBState false, leverCState false] ∧
+      [output (rules.runSchedule (others.take 16) circuit)] =
+        [0] ∧
+      (rules.runSchedule (others.take 16) circuit).overflow = false := by
+  rw [rest_run_16]
+  circuit_decide
+
+assert_standard_axioms a_off_from_100
+
 /-- **Back to the start.** After the whole round the blocks are those the circuit was built with and
 the level is at rest. -/
 theorem back_to_start :
@@ -390,5 +658,64 @@ theorem back_to_start :
   circuit_decide
 
 assert_standard_axioms back_to_start
+
+/-- **The way to a combination does not matter.** After every switch of the second round the blocks
+are the very blocks the first round reaches for that combination (those the circuit was built with
+when all levers are off), and the level is at rest, so every switch of the second round starts from
+a level at rest. -/
+theorem others_agrees :
+    (rules.runSchedule (others.take 1) circuit).world =
+        (rules.runSchedule (schedule.take 3) circuit).world ∧
+      (rules.runSchedule (others.take 2) circuit).world = circuit.world ∧
+      (rules.runSchedule (others.take 3) circuit).world =
+        (rules.runSchedule (schedule.take 7) circuit).world ∧
+      (rules.runSchedule (others.take 4) circuit).world =
+        (rules.runSchedule (schedule.take 4) circuit).world ∧
+      (rules.runSchedule (others.take 5) circuit).world =
+        (rules.runSchedule (schedule.take 7) circuit).world ∧
+      (rules.runSchedule (others.take 6) circuit).world =
+        (rules.runSchedule (schedule.take 6) circuit).world ∧
+      (rules.runSchedule (others.take 7) circuit).world =
+        (rules.runSchedule (schedule.take 1) circuit).world ∧
+      (rules.runSchedule (others.take 8) circuit).world =
+        (rules.runSchedule (schedule.take 6) circuit).world ∧
+      (rules.runSchedule (others.take 9) circuit).world =
+        (rules.runSchedule (schedule.take 5) circuit).world ∧
+      (rules.runSchedule (others.take 10) circuit).world =
+        (rules.runSchedule (schedule.take 2) circuit).world ∧
+      (rules.runSchedule (others.take 11) circuit).world =
+        (rules.runSchedule (schedule.take 5) circuit).world ∧
+      (rules.runSchedule (others.take 12) circuit).world =
+        (rules.runSchedule (schedule.take 4) circuit).world ∧
+      (rules.runSchedule (others.take 13) circuit).world =
+        (rules.runSchedule (schedule.take 3) circuit).world ∧
+      (rules.runSchedule (others.take 14) circuit).world =
+        (rules.runSchedule (schedule.take 2) circuit).world ∧
+      (rules.runSchedule (others.take 15) circuit).world =
+        (rules.runSchedule (schedule.take 1) circuit).world ∧
+      (rules.runSchedule (others.take 16) circuit).world = circuit.world ∧
+      (rules.runSchedule (others.take 1) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 2) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 3) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 4) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 5) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 6) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 7) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 8) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 9) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 10) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 11) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 12) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 13) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 14) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 15) circuit).Quiescent ∧
+      (rules.runSchedule (others.take 16) circuit).Quiescent := by
+  rw [rest_run_1, rest_run_2, rest_run_3, rest_run_4, rest_run_5, rest_run_6, rest_run_7,
+    rest_run_8, rest_run_9, rest_run_10, rest_run_11, rest_run_12, rest_run_13, rest_run_14,
+    rest_run_15, rest_run_16, state_run_1, state_run_2, state_run_3, state_run_4, state_run_5,
+    state_run_6, state_run_7]
+  circuit_decide
+
+assert_standard_axioms others_agrees
 
 end Redstone.Theorems.Logic.Or3

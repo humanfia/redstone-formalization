@@ -58,7 +58,7 @@ def connectedDirection (s : Blocks.Button) : Direction :=
 /-- `canSurvive`, that is `canAttach`: the face the button is attached to is sturdy. -/
 def canSurvive (s : Blocks.Button) (l : Level) (p : Pos) : Bool :=
   let d := (connectedDirection s).opposite
-  (l.blockAt (p.step d)).attrs.isFaceSturdy d.opposite
+  (l.supportAttrs (p.step d)).isFaceSturdy d.opposite
 
 /-- `updateNeighbours`: neighbour updates around the button and around the block it is attached
 to. -/
@@ -140,11 +140,6 @@ def button (id : Blocks.Button.Id) (s : Blocks.Button) : Behaviour :=
       return true
     affectNeighborsAfterRemoval := fun p moved => do
       if !moved && s.powered then updateNeighbours id s p
-    -- `BlockBehaviour.useItemOn` is not overridden and answers `TRY_WITH_EMPTY_HAND`, upon which
-    -- the game calls `useWithoutItem`; that always consumes the click, so the item is never used.
-    useItemOn := fun p _ _ => do
-      if !s.powered then press id s p
-      return true
     tick := fun p => do
       if s.powered then checkPressed id s p
     entityInside := fun p _ => do

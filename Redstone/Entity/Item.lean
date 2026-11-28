@@ -88,6 +88,27 @@ def spawnAtLocation (pos : Vec3) (item : String) (actor : ℕ) : M ℕ := do
       phys := { random := some r, sectionEntry := (now, actor) } }
   Level.addEntity ⟨pos, motion, false⟩ (.item data)
 
+/-- `new ItemEntity(level, x, y, z, stack)` followed by `setDeltaMovement(motion)` and
+`addFreshEntity`, as `DefaultDispenseItemBehavior.spawnItem` and `Containers.dropItemStack` do:
+`count` items of the kind named `item` appear at `pos` with the given velocity and can be
+picked up at once. The constructor draws the bobbing offset, the rotation and a velocity that
+is then replaced from the entity's own generator. `actor` is as in `spawnAtLocation`. Returns
+the index of the new entity. -/
+def spawnStack (pos motion : Vec3) (item : String) (count : ℕ) (hasComponents : Bool)
+    (actor : ℕ := 0) : M ℕ := do
+  let id := (← get).nextEntityIndex + 2
+  let r := Entity.randomAfterUuid id
+  let r := r.nextFloat24.2
+  let (yaw, r) := r.nextFloat24
+  let r := r.nextDouble53.2
+  let r := r.nextDouble53.2
+  let now := (← get).gameTime
+  let data : Entities.Item :=
+    { item := item, count := count, hasComponents := hasComponents
+      yRot := (toFloat32 yaw * 360).toBits.toNat
+      phys := { random := some r, sectionEntry := (now, actor) } }
+  Level.addEntity ⟨pos, motion, false⟩ (.item data)
+
 /-- `Entity.moveTowardsClosestSpace(x, y, z)`: an item stuck inside blocks is pushed towards
 the nearest side that is not a full block, at a random speed. -/
 def moveTowardsClosestSpace (i : ℕ) (x y z : Float) : M Unit := do

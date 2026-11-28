@@ -2,6 +2,7 @@ module
 
 public import Redstone.Mechanics.Tick
 public import Redstone.Component.Dispenser.Items
+public import Redstone.Entity.Item
 
 /-!
 # Containers, as the dispenser, the dropper and the crafter use them
@@ -19,10 +20,8 @@ reads from a container (`AbstractContainerMenu.getRedstoneSignalFromContainer`).
   composter, a minecart with a chest, ...), the model stops and sets `Level.overflow`, the flag
   that says the level is no longer a faithful image of the game. For entities this is decided
   coarsely: a container entity anywhere in the level counts.
-* A spawned item entity gets its exact position and velocity, but not the stack it holds:
-  `Entities.Item` has no fields yet. `spawnItem` and `dropItemStack` take the stack as an
-  argument that is ignored. The private random number generator of the entity (its rotation)
-  is not modelled either.
+* A spawned item entity holds the item and the count of its stack, and whether the stack has
+  components, but not the components themselves (`Entities.Item`).
 -/
 
 @[expose] public section
@@ -104,9 +103,8 @@ def centerRelative (p : Pos) (d : Direction) (distance : Float) : Vec3 :=
     Float.ofInt p.z + 0.5 + distance * n.z⟩
 
 /-- `DefaultDispenseItemBehavior.spawnItem(level, itemStack, accuracy, direction, position)`:
-an item entity thrown in the given direction. The stack is not kept (see the module
-docstring). -/
-def spawnItem (_stack : ItemStack) (accuracy : ℕ) (d : Direction) (position : Vec3) : M Unit := do
+an item entity with the stack, thrown in the given direction. -/
+def spawnItem (stack : ItemStack) (accuracy : ℕ) (d : Direction) (position : Vec3) : M Unit := do
   let y := if d.axis = .y then position.y - 0.125 else position.y - 0.15625
   let pow := (← nextDouble) * 0.1 + 0.2
   let spread := 0.0172275 * accuracy.toFloat
@@ -114,7 +112,8 @@ def spawnItem (_stack : ItemStack) (accuracy : ℕ) (d : Direction) (position : 
   let vx ← triangle (n.x * pow) spread
   let vy ← triangle 0.2 spread
   let vz ← triangle (n.z * pow) spread
-  discard <| Level.addEntity ⟨⟨position.x, y, position.z⟩, ⟨vx, vy, vz⟩, false⟩ (.item default)
+  discard <| Entity.Item.spawnStack ⟨position.x, y, position.z⟩ ⟨vx, vy, vz⟩ stack.id stack.count
+    !stack.components.isEmpty
 
 /-- The loop of `Containers.dropItemStack`: splits the stack into item entities of 10 to 30
 items, all at the same place. `fuel` bounds the number of entities; the count of the stack is
@@ -127,7 +126,7 @@ def dropItemStackLoop (pos : Vec3) : ℕ → Option ItemStack → M Unit
     let vx ← triangle 0.0 0.11485000171139836
     let vy ← triangle 0.2 0.11485000171139836
     let vz ← triangle 0.0 0.11485000171139836
-    discard <| Level.addEntity ⟨pos, ⟨vx, vy, vz⟩, false⟩ (.item default)
+    discard <| Entity.Item.spawnStack pos ⟨vx, vy, vz⟩ stack.id n !stack.components.isEmpty
     dropItemStackLoop pos fuel (stack.withCount (stack.count - n))
 
 /-- `Containers.dropItemStack(level, x, y, z, itemStack)` at a block position. The position is

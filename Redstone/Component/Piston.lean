@@ -28,12 +28,12 @@ Which blocks move is decided by `Redstone.PistonMotion.resolve`.
 * Drops: a block destroyed by a piston drops nothing (`dropResources`), and the random numbers
   that its loot table would draw from the level's generator are not drawn.
 * The shape of a moving block. In the game the collision shape of a `moving_piston`, and with
-  it whether its faces can support a lever or a torch, depends on its block entity: a base that
-  is retracting keeps the shape of the extended base, and a moved block that has arrived has
-  its own shape. In the model a `moving_piston` supports nothing (`Block.attrs`), so a block
-  attached to the back of a piston base breaks when the piston retracts, and in the game it
-  does not. Supporting it needs a notion of sturdiness that reads the level, in the components
-  that ask for support; see `tests/pending/scenarios/piston`.
+  it whether its faces can support a lever or a torch, depends on its block entity. The model
+  knows two cases (`Level.supportAttrs`): a base that is retracting supports what the extended
+  base supports, and a moved block that has arrived supports what it supports at rest. The
+  head that moves back into a retracting base, and a block half way, support nothing in the
+  model. Components that ask for support through a block state alone (dust, repeater,
+  comparator, door) still see a `moving_piston` that supports nothing.
 -/
 
 @[expose] public section

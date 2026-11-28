@@ -52,7 +52,7 @@ def canSupportCenter (l : Level) (p : Pos) (d : Direction) : Bool :=
 /-- `FaceAttachedHorizontalDirectionalBlock.canAttach(level, pos, direction)`: the neighbour of
 `p` in direction `d` has a sturdy face towards `p`. -/
 def canAttach (l : Level) (p : Pos) (d : Direction) : Bool :=
-  (l.blockAt (p.step d)).attrs.isFaceSturdy d.opposite
+  (l.supportAttrs (p.step d)).isFaceSturdy d.opposite
 
 /-- `canSurvive`: a ceiling bell needs support at the centre of the block above, any other bell
 a sturdy face of the block it is attached to. -/
@@ -130,8 +130,6 @@ def behaviour (self : Block) : Behaviour :=
           if signal then discard <| attemptToRing p none
           discard <| Level.setBlock p (.bell { s with powered := signal })
       useWithoutItem := fun p face => use s p face
-      -- `BlockBehaviour.useItemOn` asks for the empty-hand interaction, whatever the item.
-      useItemOn := fun p face _ => use s p face
       -- `BaseEntityBlock.triggerEvent` passes the event to the block entity, which accepts the
       -- ring (`BellBlockEntity.triggerEvent`).
       triggerEvent := fun p a _ => return (← Level.getBlockEntity p).isSome && a == 1

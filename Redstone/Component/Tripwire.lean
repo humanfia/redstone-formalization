@@ -54,7 +54,7 @@ def oppositeFacing : HorizontalDirection → HorizontalDirection
 /-- `TripWireHookBlock.canSurvive`: the face of the block behind the hook is sturdy. -/
 def hookCanSurvive (s : Blocks.TripWireHook) (l : Level) (p : Pos) : Bool :=
   let d := s.facing.toDirection
-  (l.blockAt (p.step d.opposite)).attrs.isFaceSturdy d
+  (l.supportAttrs (p.step d.opposite)).isFaceSturdy d
 
 /-- `TripWireHookBlock.notifyNeighbors(block, level, pos, direction)`: neighbour updates around
 the hook and around the block it hangs on. `d` is the facing of the hook. -/

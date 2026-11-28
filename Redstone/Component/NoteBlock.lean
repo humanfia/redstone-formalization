@@ -94,12 +94,10 @@ def behaviour (self : Block) : Behaviour :=
         if signal != s.powered then
           if signal then playNote s p
           discard <| Level.setBlock p (.note { s with powered := signal })
-      useItemOn := fun p face item => do
-        -- `InteractionResult.PASS`: neither the block nor the empty hand reacts.
-        if topInstrumentItems.contains item && face = .up then return false
-        -- `super.useItemOn` asks for the empty-hand interaction.
-        use s p
-        return true
+      -- `useItemOn` with a mob head on the top face answers `InteractionResult.PASS`: neither
+      -- the block nor the empty hand reacts. Otherwise `super.useItemOn` asks for the
+      -- empty-hand interaction.
+      tryEmptyHand := fun face item => !(topInstrumentItems.contains item && face = .up)
       useWithoutItem := fun p _ => do
         use s p
         return true

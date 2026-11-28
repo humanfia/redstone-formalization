@@ -81,7 +81,7 @@ centre of its top face (`Block.canSupportCenter`); for the wall torch
 (`WallTorchBlock.canSurvive`) the face it hangs on must be sturdy. -/
 def canSurvive (k : Kind) (l : Level) (p : Pos) : Bool :=
   let d := k.attachment
-  let a := (l.blockAt (p.step d)).attrs
+  let a := l.supportAttrs (p.step d)
   match k with
   | .floor _ => a.isFaceSturdyCenter d.opposite
   | .wall _ => a.isFaceSturdy d.opposite

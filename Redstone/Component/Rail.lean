@@ -87,7 +87,7 @@ def isStraight (b : Block) : Bool := !b.is .rail
 
 /-- `Block.canSupportRigidBlock(level, pos)`: the top face of the block at `p` is rigid. -/
 def canSupportRigidBlock (l : Level) (p : Pos) : Bool :=
-  (l.blockAt p).attrs.isFaceSturdyRigid .up
+  (l.supportAttrs p).isFaceSturdyRigid .up
 
 /-- `BaseRailBlock.isRail(level, pos)`. -/
 def isRailAt (l : Level) (p : Pos) : Bool := (l.blockAt p).isRail

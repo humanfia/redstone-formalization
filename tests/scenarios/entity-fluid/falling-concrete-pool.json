@@ -1,0 +1,65 @@
+{
+ "name": "falling-concrete-pool",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   9,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    3,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    1,
+    1,
+    1
+   ],
+   "max": [
+    3,
+    3,
+    3
+   ],
+   "state": "minecraft:water[level=0]"
+  }
+ ],
+ "blocks": [],
+ "entities": [
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    2.5,
+    6.0,
+    2.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:red_concrete_powder\"},Time:1}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    1.5,
+    4.5,
+    1.5
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:lime_concrete_powder\"},Time:1}"
+  }
+ ]
+}

@@ -1,5 +1,6 @@
 module
 
+public import Redstone.Basic.Float32
 public import Redstone.Entity.ItemDrop
 public import Redstone.Component.AnalogSource.ItemData
 
@@ -907,26 +908,9 @@ def jukebox (s : Blocks.Jukebox) : Behaviour :=
 /-- `ItemTags.LECTERN_BOOKS`. -/
 def lecternBooks : List String := ["minecraft:written_book", "minecraft:writable_book"]
 
-/-- The integer `e` with `2 ^ e ≤ q < 2 ^ (e + 1)`, for a positive rational `q`. -/
-def floorLog2 (q : ℚ) : ℤ :=
-  let e : ℤ := (Nat.log2 q.num.toNat : ℤ) - (Nat.log2 q.den : ℤ)
-  if (2 : ℚ) ^ e ≤ q then e else e - 1
-
-/-- The `float` nearest to a rational number that is not negative, rounding ties to even, as
-the arithmetic of the game does. Only meant for numbers in the range of normal floats. -/
-def roundFloat (q : ℚ) : ℚ :=
-  if q ≤ 0 then 0
-  else
-    let ulp : ℚ := (2 : ℚ) ^ (floorLog2 q - 23)
-    let scaled := q / ulp
-    let lower := scaled.floor
-    let rest := scaled - lower
-    let mantissa : ℤ :=
-      if rest < 1 / 2 then lower
-      else if rest > 1 / 2 then lower + 1
-      else if lower % 2 = 0 then lower
-      else lower + 1
-    mantissa * ulp
+/-- The `float` nearest to a rational number, rounding ties to even, as the arithmetic of the
+game does (`F32.roundFloat`). -/
+abbrev roundFloat (q : ℚ) : ℚ := F32.roundFloat q
 
 /-- `LecternBlockEntity.getRedstoneSignal`: `floor(page / (pageCount - 1.0F) * 14.0F)`, plus one
 if the lectern holds a book with content. The progress is 1 for a book of at most one page. -/

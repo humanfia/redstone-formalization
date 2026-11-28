@@ -155,9 +155,10 @@ Measured and left as they are:
   `:101`, `Component/Extra.lean:227`, `:231`, `Component/AnalogSource.lean:204`,
   `Component/Sensor/Light.lean:66`, and the entity files) are not on the path of the probes.
   They reduce; `Block.fluidState` is there to replace them.
-* `Container.redstoneSignal` uses `Float32` (`Component/Container.lean`), which the kernel
-  cannot evaluate. Not probed here: a comparator that reads a container is out of reach until
-  that function is exact.
+* `Container.redstoneSignal` used `Float32` (`Component/Container.lean`), which the kernel
+  cannot evaluate, so a comparator that reads a container was not probed. Since then the
+  function is exact: rational arithmetic that is rounded to single precision after each
+  operation (`Redstone/Basic/Float32.lean`), which the kernel evaluates; see below.
 * A runaway evaluation ends with `(kernel) deterministic timeout` after 10 minutes or more. It
   was not tried whether a larger `maxHeartbeats` moves that limit.
 
@@ -257,10 +258,12 @@ about a run of several ticks, and they do not reach every kind of circuit.
   arithmetic, as `Container.redstoneSignal` is to get, or an abstraction of the entity; neither
   was tried, so for them the contingency of the plan is not ruled out.
 * **Paths that `Smoke.lean` does not guard.**
-  * A comparator that reads a container goes through `Container.redstoneSignal`, which is
-    `Float32`: it is stuck in the kernel today, no smoke theorem covers it, and so CI will not
-    notice when it starts to work or stops again. The change that makes that function exact
-    should add a smoke theorem of a comparator reading a hopper.
+  * A comparator that reads a container goes through `Container.redstoneSignal`. That was
+    `Float32` when the spike was run, and stuck in the kernel. It is exact now, and
+    `comparator_reads_hopper` in `Smoke.lean` guards it: a comparator reads a hopper with four
+    stacks in it, three game ticks, and the whole of `Smoke.lean` still builds in 10 to 30
+    seconds. The same function for a chest or hopper minecart (`Minecart.containerSignal`) is
+    still `Float32`.
   * `destroyBlock` raises the game event `minecraft:block_destroy`. Without a listener only the
     list of tickers is walked and neither the name nor the position (`Float`) is forced, which
     is why the lever that loses its support is provable. A sculk sensor in the level puts the

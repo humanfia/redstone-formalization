@@ -1,0 +1,44 @@
+{
+ "name": "arrow-burning-flight",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    0.5,
+    1.5,
+    3.5
+   ],
+   "nbt": "{Motion:[0.5d,0.4d,0.0d],Fire:30s}"
+  }
+ ],
+ "actions": []
+}

@@ -12,11 +12,21 @@ An item falls under gravity, comes to rest on blocks, slides with the friction o
 under it, and merges with other items of the same kind nearby. After 6000 game ticks it
 disappears.
 
+In water and in lava an item does not fall: it rises slowly and is carried by the flow
+(`Redstone.Entity.Fluid`), twice in a tick, as it updates its fluid interaction at the start and
+at the end. Lava sets it on fire and hurts it, and so does burning; an item has 5 points of
+health and is destroyed when they are gone. Items of netherite and ancient debris are immune to
+fire.
+
 ## What is left out
 
-* Fluids: an item that touches water or lava sets `Level.overflow`.
-* Fire, damage, portals, and being picked up by players. (Hoppers pick items up: see
-  `Redstone.Component.Hopper`.)
+* Fire blocks, explosions and cactus hurting an item, portals, and being picked up by players.
+  (Hoppers pick items up: see `Redstone.Component.Hopper`.)
+* An item with data components that is hurt by fire sets `Level.overflow`: components can make
+  an item resist fire, and a container item drops its contents when destroyed.
+* The tags `Invulnerable` and `Silent`.
+* What an item that was destroyed at the start of its tick still does in that tick (the game
+  goes on with the tick of the removed entity).
 * Data components: two stacks of the same item of which one has components are not compared;
   the model sets `Level.overflow` instead of deciding whether they merge.
 * The owner of an item (`Owner`), which the game compares before merging.
@@ -30,13 +40,6 @@ disappears.
 @[expose] public section
 
 namespace Redstone.Entity.Item
-
-/-- The kind of entity an item is: 0.25 wide and high, gravity 0.04, and the block that affects
-its movement is the one `0.999999F` under it. -/
-def kind : Entity.Kind where
-  dims := ⟨Phys.f 0x3e000000, Phys.f 0x3e800000⟩
-  gravity := Phys.d 0x3fa47ae147ae147b
-  movementOffset := Phys.f 0x3f7fffef
 
 /-- The item entity with index `i`, with its data. -/
 def get? (i : ℕ) : M (Option (Entity × Entities.Item)) := do
@@ -60,6 +63,88 @@ def initialRandom (id : ℕ) : JavaRandom :=
   let r := Entity.randomAfterUuid id
   let r := r.nextFloat24.2
   r.nextFloat24.2
+
+/-- The items with the component `damage_resistant` for fire (`Item.Properties.fireResistant`),
+which `ItemEntity.fireImmune` asks for. -/
+def fireResistant (item : String) : Bool :=
+  ["minecraft:ancient_debris", "minecraft:netherite_block", "minecraft:netherite_ingot",
+    "minecraft:netherite_scrap", "minecraft:netherite_sword", "minecraft:netherite_shovel",
+    "minecraft:netherite_pickaxe", "minecraft:netherite_axe", "minecraft:netherite_hoe",
+    "minecraft:netherite_helmet", "minecraft:netherite_chestplate",
+    "minecraft:netherite_leggings", "minecraft:netherite_boots",
+    "minecraft:netherite_horse_armor", "minecraft:netherite_spear",
+    "minecraft:netherite_nautilus_armor"].contains item
+
+/-- `ItemEntity.fireImmune()`. -/
+def fireImmune (e : Entity) : Bool :=
+  match e.data with
+  | .item dt => fireResistant dt.item
+  | _ => false
+
+/-- `ItemEntity.hurtServer(level, source, damage)` for a source of fire (lava, burning): the
+item loses `damage` points of health, which is a game event, and is destroyed when none are
+left. Returns whether the item was hurt. -/
+def hurtByFire (i : ℕ) (damage : ℤ) : M Bool := do
+  let some (e, dt) ← get? i | return false
+  if dt.hasComponents then Level.setOverflow
+  if fireResistant dt.item then return false
+  let health := dt.health - damage
+  modifyData i fun dt => { dt with health := health }
+  Level.gameEvent "minecraft:entity_damage" e.base.pos.blockPos
+  if health ≤ 0 then Level.removeEntity i
+  return true
+
+/-- `Entity.lavaHurt()` for an item that is not immune to fire: lava takes 4 points of health.
+An item that is still there makes a sound every tenth tick (`shouldPlayLavaHurtSound`), whose
+pitch takes a number from the entity's generator. -/
+def lavaHurt (i : ℕ) : M Unit := do
+  if ← hurtByFire i 4 then
+    let some (e, dt) ← get? i | return
+    if e.phys.tickCount % 10 == 0 then
+      let r := ((dt.phys.random.getD (initialRandom e.id)).next 24).2
+      Level.setEntity (e.modifyPhys fun p => { p with random := some r })
+
+/-- The bits of the width of an item, the `float` 0.25. -/
+def width : UInt32 := 0x3e800000
+
+/-- The kind of entity an item is: 0.25 wide and high, gravity 0.04, and the block that affects
+its movement is the one `0.999999F` under it. -/
+def kind : Entity.Kind where
+  dims := ⟨Phys.f 0x3e000000, Phys.f 0x3e800000⟩
+  gravity := Phys.d 0x3fa47ae147ae147b
+  movementOffset := Phys.f 0x3f7fffef
+  fireImmune := fireImmune
+  lavaHurt := lavaHurt
+  initialRandom := initialRandom
+
+/-- `ItemEntity.setFluidMovement(multiplier)`, where `multiplier` is a `float`: an item in a
+fluid loses horizontal speed and rises, unless it rises fast already. -/
+def setFluidMovement (i : ℕ) (multiplier : Float) : M Unit :=
+  Level.modifyEntity i fun e =>
+    let m := e.base.motion
+    let lift := if m.y < Phys.f 0x3d75c28f then Phys.f 0x3a03126f else 0.0
+    { e with base := { e.base with motion := ⟨m.x * multiplier, m.y + lift, m.z * multiplier⟩ } }
+
+/-- The part of `Entity.baseTick` that has to do with fluids and fire, for the item with index
+`i`: the item updates its fluid interaction; a burning item that is immune to fire is put out,
+any other loses a point of health every 20 ticks unless it is in lava, and burns one tick less;
+in lava the fall distance is halved. An entity is not in lava in its first tick (`isInLava`).
+Returns what the update found. -/
+def baseTickFluids (i : ℕ) (firstTick : Bool) : M Entity.Fluid.Interaction := do
+  let found ← Level.updateFluidInteraction kind width i firstTick
+  let inLava := !firstTick && found.inLava
+  let some (e, dt) ← get? i | return found
+  let fire := e.phys.remainingFireTicks
+  if fire > 0 then
+    if fireResistant dt.item then
+      Level.setEntity (e.modifyPhys fun p => { p with remainingFireTicks := min 0 fire })
+    else
+      if fire % 20 == 0 && !inLava then discard <| hurtByFire i 1
+      Level.modifyEntity i fun e => e.modifyPhys fun p => { p with remainingFireTicks := fire - 1 }
+  if inLava then
+    Level.modifyEntity i fun e =>
+      e.modifyPhys fun p => { p with fallDistance := p.fallDistance * 0.5 }
+  return found
 
 /-- `RandomSource.nextFloat()` as a `float`. -/
 def toFloat32 (n : ℕ) : Float32 := Float32.ofNat n / 16777216
@@ -197,17 +282,26 @@ def tick (i : ℕ) : M Unit := do
   if dt.count == 0 || dt.item == "minecraft:air" then
     Level.removeEntity i
     return
-  -- `Entity.baseTick`: fluids are not modelled; below the world the entity is removed
-  Level.checkNoFluid kind i
+  -- `ServerLevel.tickNonPassenger` counts the tick before `tick()`; the first `baseTick` is
+  -- the one that finds `firstTick` set
+  let firstTick := e.phys.tickCount == 0
+  let tickCount := e.phys.tickCount + 1
+  Level.modifyEntity i fun e => e.modifyPhys fun p => { p with tickCount := tickCount }
+  -- `Entity.baseTick`: fluids and fire; below the world the entity is removed
+  let found ← baseTickFluids i firstTick
+  let some (e, dt) ← get? i | return
   if e.base.pos.y < -128 then
     Level.removeEntity i
     return
-  let tickCount := e.phys.tickCount + 1
-  Level.modifyEntity i fun e => e.modifyPhys fun p => { p with tickCount := tickCount }
   if dt.pickupDelay > 0 && dt.pickupDelay != 32767 then
     modifyData i fun dt => { dt with pickupDelay := dt.pickupDelay - 1 }
   let old := e.base.pos
-  Level.applyGravity kind i
+  let deep := Phys.f 0x3dcccccd
+  if e.phys.wasTouchingWater && found.waterHeight > deep then
+    setFluidMovement i (Phys.f 0x3f7d70a4)
+  else if found.inLava && found.lavaHeight > deep then
+    setFluidMovement i (Phys.f 0x3f733333)
+  else Level.applyGravity kind i
   -- `noPhysics`: the item is inside a block
   let some (e, _) ← get? i | return
   let box := kind.dims.box e.base.pos
@@ -241,6 +335,7 @@ def tick (i : ℕ) : M Unit := do
   let some (_, dt) ← get? i | return
   let age := if dt.age != -32768 then dt.age + 1 else dt.age
   modifyData i fun dt => { dt with age := age }
+  discard <| Level.updateFluidInteraction kind width i false
   if age ≥ 6000 then Level.removeEntity i
 
 /-- The behaviour of the entity. -/

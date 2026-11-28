@@ -355,6 +355,7 @@ final class Recorder {
       rules.set(GameRules.ADVANCE_TIME, s.advanceTime, server);
       rules.set(GameRules.RANDOM_TICK_SPEED, s.randomTickSpeed, server);
       rules.set(GameRules.BLOCK_DROPS, s.blockDrops, server);
+      rules.set(GameRules.FIRE_SPREAD_RADIUS_AROUND_PLAYER, s.fireSpreadRadiusAroundPlayer, server);
       Holder<WorldClock> clock = server.registryAccess().getOrThrow(WorldClocks.OVERWORLD);
       server.clockManager().setTotalTicks(clock, s.dayTime);
       boolean rain = !s.weather.equals("clear");

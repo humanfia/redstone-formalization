@@ -1,0 +1,201 @@
+{
+ "name": "tnt-water-levels",
+ "ticks": 45,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   18,
+   4,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    18,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    18,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=1]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=2]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=3]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=4]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=5]"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=6]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=7]"
+  },
+  {
+   "pos": [
+    17,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=8]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    1.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    3.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    5.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    9.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    11.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    13.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    15.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    17.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{fuse:200}"
+  }
+ ]
+}

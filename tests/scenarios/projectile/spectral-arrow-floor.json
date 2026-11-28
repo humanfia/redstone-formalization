@@ -1,0 +1,44 @@
+{
+ "name": "spectral-arrow-floor",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   6,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "entities": [
+  {
+   "type": "minecraft:spectral_arrow",
+   "pos": [
+    1.5,
+    2.5,
+    1.5
+   ],
+   "nbt": "{Motion:[0.3d,0.2d,0.25d]}"
+  }
+ ],
+ "actions": []
+}

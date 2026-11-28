@@ -8,7 +8,8 @@ public import Redstone.Entity.Data.Base
 
 Primed TNT (`PrimedTnt`): the fuse, the explosion power and the fall distance, which are saved
 with the entity, and two fields of `Entity` that are not saved but decide where the entity
-stands (`mainSupportingBlockPos`, `onGroundNoBlocks`).
+stands (`mainSupportingBlockPos`, `onGroundNoBlocks`), and whether it was in water at the end
+of its last tick (`wasTouchingWater`).
 
 Not kept: the displayed block state (`block_state`), the owner, `usedPortal`, the portal
 cooldown, fire and air, which have no effect on what the model covers.
@@ -31,15 +32,18 @@ structure Tnt where
   /-- `Entity.onGroundNoBlocks`: the entity was on the ground without a block under it. Not
   saved. -/
   onGroundNoBlocks : Bool
+  /-- `Entity.wasTouchingWater` (`isInWater()`): the entity was in water when it last updated
+  its fluid interaction, at the end of its tick. Not saved. -/
+  wasTouchingWater : Bool := false
   deriving Repr
 
 namespace Tnt
 
 /-- The data of a `PrimedTnt` right after its constructor: a fuse of 80 ticks and power 4. -/
-instance : Inhabited Tnt := ⟨⟨80, 0x40800000, 0.0, none, false⟩⟩
+instance : Inhabited Tnt := ⟨⟨80, 0x40800000, 0.0, none, false, false⟩⟩
 
 /-- Two primed TNT have the same data when their saved fields agree, the `double` bit for bit.
-The two fields that the game does not save are not compared. -/
+The fields that the game does not save are not compared. -/
 instance : BEq Tnt :=
   ⟨fun a b => a.fuse == b.fuse && a.explosionPower == b.explosionPower &&
     a.fallDistance.toBits == b.fallDistance.toBits⟩
@@ -61,7 +65,7 @@ def ofNbt? (nbt : Nbt) : Option Tnt :=
     match nbt.get? "fall_distance" with
     | some (.double bits) => Float.ofBits (UInt64.ofNat bits)
     | _ => 0.0
-  some ⟨nbt.intD "fuse" 80, power, fall, none, false⟩
+  some ⟨nbt.intD "fuse" 80, power, fall, none, false, false⟩
 
 end Tnt
 

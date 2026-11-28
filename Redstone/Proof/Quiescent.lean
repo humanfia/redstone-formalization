@@ -115,7 +115,7 @@ theorem step_of_quiescent {l : Level} (h : l.Quiescent) : r.step l = l.advance 1
     blockEvents, entities, nextEntityIndex, gameTime, random, lootSequences, updateStack,
     updatesAdded, updateCount, overflow, recentTorchToggles, dayTime, advanceTime, weather,
     lightWorld, playerMenu, fluidTicks, fluidTicksToRun, randValue, randomTickSpeed, blockDrops,
-    randomTickBox, randomSourceCount, blockEntityTickerStates⟩ := l
+    randomTickBox, randomSourceCount, fireSpreadRadiusAroundPlayer, blockEntityTickerStates⟩ := l
   simp only [Level.Quiescent, Level.quiescent, Bool.and_eq_true, decide_eq_true_eq,
     List.isEmpty_iff, and_assoc] at h
   obtain ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩ := h
@@ -197,7 +197,7 @@ theorem shift_shift (l : Level) (dt dc dt' dc' : ℕ) :
     blockEvents, entities, nextEntityIndex, gameTime, random, lootSequences, updateStack,
     updatesAdded, updateCount, overflow, recentTorchToggles, dayTime, advanceTime, weather,
     lightWorld, playerMenu, fluidTicks, fluidTicksToRun, randValue, randomTickSpeed, blockDrops,
-    randomTickBox, randomSourceCount, blockEntityTickerStates⟩ := l
+    randomTickBox, randomSourceCount, fireSpreadRadiusAroundPlayer, blockEntityTickerStates⟩ := l
   cases advanceTime <;>
     simp [shift, ScheduledTickOf.shift, Function.comp_def, Nat.add_assoc]
 

@@ -119,7 +119,7 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Supported`, `Connecting` | blocks that react to shape updates: carpets, snow layers, torches, plants and beds, which break without support; fences, bars and panes, walls and stairs, which join their neighbours | defined, tested |
 | `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
 | `Redstone.Entity.Geometry`, `Redstone.Entity.Touch` | the boxes of entities, and how an entity tells the blocks it steps on and passes through (`Entity.applyEffectsFromBlocks`), shared by all entity units | defined, tested |
-| `Redstone.Entity.Projectile` | arrows and other projectiles | an arrow stuck in a block is defined and tested; flight is not |
+| `Redstone.Entity.Projectile`, `Redstone.Entity.Clip` | arrows, snowballs and eggs: flight, the hit of a block, an arrow in the ground; the ray that finds the block | defined, tested; hits on entities and the other projectiles are not |
 | `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | stub |
 | `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
 | `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |

@@ -1,0 +1,221 @@
+{
+ "name": "resin-clump-faces",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:resin_clump[down=true,east=false,north=false,south=false,up=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:resin_clump[down=true,east=true,north=true,south=false,up=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    8,
+    3,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    1
+   ],
+   "state": "minecraft:resin_clump[down=true,east=false,north=false,south=false,up=true,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    11,
+    1,
+    1
+   ],
+   "state": "minecraft:resin_clump[down=false,east=false,north=false,south=false,up=false,waterlogged=false,west=false]"
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "drop": true
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    11,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "destroy",
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    11,
+    3,
+    2
+   ],
+   "state": "minecraft:resin_clump[down=false,east=false,north=false,south=false,up=false,waterlogged=false,west=true]"
+  },
+  {
+   "tick": 7,
+   "type": "destroy",
+   "pos": [
+    4,
+    0,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_leaves[distance=7,persistent=true,waterlogged=false]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    11,
+    3,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"
+  }
+ ]
+}

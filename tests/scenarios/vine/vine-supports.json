@@ -1,0 +1,239 @@
+{
+ "name": "vine-supports",
+ "ticks": 14,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   18,
+   4,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    18,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    13,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    13,
+    2,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    16,
+    2,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  },
+  {
+   "pos": [
+    16,
+    1,
+    2
+   ],
+   "state": "minecraft:vine[east=false,north=true,south=false,up=false,west=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_leaves[distance=7,persistent=true,waterlogged=false]"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_stairs[facing=south,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    13,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]"
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    16,
+    2,
+    1
+   ],
+   "state": "minecraft:soul_sand"
+  }
+ ]
+}

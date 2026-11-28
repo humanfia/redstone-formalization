@@ -1,0 +1,149 @@
+{
+ "name": "bamboo-sapling",
+ "ticks": 12,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   4,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:bamboo_sapling"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:gravel"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    1
+   ],
+   "state": "minecraft:bamboo_sapling"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:podzol[snowy=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    1
+   ],
+   "state": "minecraft:bamboo_sapling"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    1
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    1
+   ],
+   "state": "minecraft:bamboo_sapling"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    1
+   ],
+   "state": "minecraft:bamboo[age=0,leaves=none,stage=0]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    1
+   ],
+   "state": "minecraft:bamboo[age=1,leaves=none,stage=0]"
+  }
+ ]
+}

@@ -2,6 +2,7 @@ module
 
 public import Redstone.Mechanics.Tick
 public import Redstone.Entity.Minecart.Tables
+public import Redstone.Block.Generated.Items
 
 /-!
 # Minecarts
@@ -843,18 +844,13 @@ def comeOffTrack : CartM Unit := do
 
 /-! ### The load -/
 
-/-- `Container.getMaxStackSize(itemStack)`: the stack size of the item, at most 99. -/
-def maxStackSize (item : String) : ℕ :=
-  if Tables.maxStack1.contains item then 1 else if Tables.maxStack16.contains item then 16
-  else 64
-
 /-- `AbstractContainerMenu.getRedstoneSignalFromContainer` for the stacks of a minecart with
 `size` slots. -/
 def containerSignal (items : List (ℕ × String × ℕ)) (size : ℕ) : ℤ :=
   let filled := items.filter (fun (slot, _, count) => slot < size && count > 0)
   let sorted := filled.mergeSort (fun a b => a.1 ≤ b.1)
   let total : Float32 := sorted.foldl (init := 0) fun t (_, item, count) =>
-    t + (Float.ofNat count).toFloat32 / (Float.ofNat (maxStackSize item)).toFloat32
+    t + (Float.ofNat count).toFloat32 / (Float.ofNat (itemMaxStackSize item)).toFloat32
   let total := total / (Float.ofNat size).toFloat32
   floor (total * 14).toFloat + (if total > 0 then 1 else 0)
 

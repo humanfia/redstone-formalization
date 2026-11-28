@@ -1,6 +1,7 @@
 module
 
-public import Redstone.Component.Dispenser.Container
+public import Redstone.Component.Container
+public import Redstone.Component.Dispenser.Items
 
 /-!
 # Dispenser and dropper
@@ -23,8 +24,8 @@ container in front of it if there is one; otherwise the item is thrown out as an
   minecarts and projectiles. Every other item is thrown out as an item entity
   (`DefaultDispenseItemBehavior`), which is modelled.
 * Items of disabled feature sets (`ItemStack.isItemEnabled`): all items are taken as enabled.
-* Containers other than dispensers, droppers and crafters, and what an item entity holds: see
-  `Redstone.Component.Dispenser.Container`.
+* What an item entity holds: see `Redstone.ItemDrop`. The containers a dropper pushes items
+  into are those of `Redstone.Component.Container`.
 * Menus: using the block opens its menu and changes nothing in the level.
 * Sounds and particles (`levelEvent`).
 -/
@@ -33,11 +34,7 @@ container in front of it if there is one; otherwise the item is thrown out as an
 
 namespace Redstone.Component.Dispenser
 
-open Redstone.BlockEntities.Dispenser (Slots)
-
--- `Redstone.ItemStack` is the stack of the hopper unit; in this namespace the name stands for
--- the stack with components that the dispenser, the dropper and the crafter hold.
-export Redstone.BlockEntities.Dispenser (ItemStack)
+open Container ItemDrop
 
 /-- The items with a behaviour of their own in `DispenserBlock.DISPENSER_REGISTRY`
 (`DispenseItemBehavior.bootStrap`). None of these behaviours is modelled. -/
@@ -70,22 +67,33 @@ entity that an item could be put on. -/
 def getDispenseMethod (stack : ItemStack) (mobs : Bool) : DispenseMethod :=
   if registryItems.contains stack.id then .unmodelled
   -- `getDefaultDispenseMethod`
-  else if hasComponent stack "minecraft:equippable" Items.equippable then
+  else if stack.hasComponent "minecraft:equippable" Items.equippable then
     -- `EquipmentDispenseItemBehavior` falls back to the default when it finds nobody to equip.
     if mobs then .unmodelled else .default
   else if Items.sulfurCubeSwallowable.contains stack.id then
     -- `SulfurCubeBlockDispenseItemBehavior` falls back to the default without a sulfur cube.
     if mobs then .unmodelled else .default
   else if Items.spawnEggs.contains stack.id &&
-      hasComponent stack "minecraft:entity_data" Items.spawnEggs then .unmodelled
+      stack.hasComponent "minecraft:entity_data" Items.spawnEggs then .unmodelled
   else .default
 
 /-- `DefaultDispenseItemBehavior.dispense(source, dispensed)` for the dispenser or dropper
 `block` at `p` facing `facing`: one item of the stack is thrown out in front of the block.
 Returns what is left of the stack. -/
-def dispenseDefault (p : Pos) (facing : Direction) (stack : ItemStack) : M (Option ItemStack) := do
-  spawnItem { stack with count := 1 } 6 facing (centerRelative p facing 0.7)
+def dispenseDefault (p : Pos) (facing : Direction) (stack : ItemStack) : M ItemStack := do
+  spawnItem (stack.withCount 1) 6 facing (centerRelative p facing 0.7)
   return stack.withCount (stack.count - 1)
+
+/-- `DispenserBlockEntity.getRandomSlot(random)`: a uniformly random non-empty slot, drawing
+once per non-empty slot. -/
+def getRandomSlot (items : Inventory) : M (Option ℕ) := do
+  let mut slot := none
+  let mut odds := 1
+  for (stack, i) in items.zipIdx do
+    if !stack.isEmpty then
+      if (← nextInt odds) == 0 then slot := some i
+      odds := odds + 1
+  return slot
 
 /-- `DispenserBlock.dispenseFrom(level, state, pos)`. -/
 def dispenseFromDispenser (p : Pos) (facing : Direction) : M Unit := do
@@ -93,24 +101,24 @@ def dispenseFromDispenser (p : Pos) (facing : Direction) : M Unit := do
   match ← getRandomSlot be.items with
   | none => Level.gameEvent "minecraft:block_activate" p
   | some slot =>
-    let some stack := be.items.getD slot none | return
+    let stack := be.items.getItem slot
     let mobs := (← get).entities.any fun e => e.data matches .other _
     match getDispenseMethod stack mobs with
     | .unmodelled => Level.setOverflow
-    | .default => setItem p .dispenser slot (← dispenseDefault p facing stack)
+    | .default => ContainerRef.setItem (.single p) slot (← dispenseDefault p facing stack)
 
 /-- `DropperBlock.dispenseFrom(level, state, pos)`. -/
 def dispenseFromDropper (p : Pos) (facing : Direction) : M Unit := do
   let some (.dropper be) ← Level.getBlockEntity p | return
   let some slot ← getRandomSlot be.items | return
-  let some stack := be.items.getD slot none | return
-  let front := p.step facing
-  match ← containerAt front with
-  | .unmodelled => Level.setOverflow
-  | .absent => setItem p .dropper slot (← dispenseDefault p facing stack)
-  | .known block =>
-    let left ← addItem front block { stack with count := 1 }
-    setItem p .dropper slot (if left.isNone then stack.withCount (stack.count - 1) else some stack)
+  let stack := be.items.getItem slot
+  let remaining ←
+    match ← getContainerAt (p.step facing) with
+    | none => dispenseDefault p facing stack
+    | some into =>
+      let left ← addItem none into (stack.withCount 1) (some facing.opposite)
+      pure (if left.isEmpty then stack.withCount (stack.count - 1) else stack)
+  ContainerRef.setItem (.single p) slot remaining
 
 /-- The behaviour shared by `DispenserBlock` and `DropperBlock`, for the state `self` of the
 block `id` with the given properties. `withTriggered` is the state with another value of
@@ -119,7 +127,7 @@ def common (self : Block) (id : BlockId) (triggered : Bool) (withTriggered : Boo
     (dispenseFrom : Pos → M Unit) : Behaviour :=
   { Behaviour.inert self with
     analogSignal := fun l p _ =>
-      (((l.blockEntities p).bind items?).map redstoneSignalFromContainer).getD 0
+      redstoneSignalAt l p
     neighborChanged := fun p _ _ => do
       let shouldTrigger :=
         (← Level.hasNeighborSignal p) || (← Level.hasNeighborSignal (p.step .up))
@@ -130,8 +138,7 @@ def common (self : Block) (id : BlockId) (triggered : Bool) (withTriggered : Boo
         discard <| Level.setBlock p (withTriggered false) 2
     tick := dispenseFrom
     affectNeighborsAfterRemoval := fun p _ => Level.updateNeighbourForOutputSignal p id
-    preRemoveSideEffects := fun p => do
-      if let some items := (← Level.getBlockEntity p).bind items? then dropContents p items
+    preRemoveSideEffects := dropContents
     useWithoutItem := fun _ _ => return true }
 
 /-- The behaviour of the blocks of this component. -/

@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Generates the Lean tables about items that the containers need.
+"""Generates the Lean tables about fuels and cooking recipes that the containers need.
 
     python3 tools/gen/gen_items.py $MC_REPORTS/blockdump.json $MC_SRC \\
-        Redstone/Block/Entity/ItemTable.lean Redstone/Component/CookingTable.lean
+        Redstone/Component/CookingTable.lean
+
+The maximal stack sizes of the items are not here: the one table of them is
+`Redstone.itemMaxStackSize` (`Redstone/Block/Generated/Items.lean`, by `gen_blocks.py`).
 
 Sources:
 
-* the maximal stack sizes: the `items` list of the block dump (`tools/harness/run.sh dump`);
 * the cooking recipes: the recipe files of the server's built-in data pack
   (`data/minecraft/recipe/*.json`, types `smelting`, `blasting`, `smoking`), with the item tags
   of `data/minecraft/tags/item`;
@@ -60,23 +62,6 @@ def string_list(name, doc, values, per_line=2):
             for i, row in enumerate(rows)]
     out.append("]")
     return "\n".join(out) + "\n"
-
-
-def gen_item_table(dump):
-    items = dump["items"]
-    sizes = sorted({i["maxStackSize"] for i in items})
-    assert sizes == [1, 16, 64], sizes
-    one = [i["id"] for i in items if i["maxStackSize"] == 1]
-    sixteen = [i["id"] for i in items if i["maxStackSize"] == 16]
-    out = HEADER.format(imp="Mathlib.Tactic", title="Maximal stack sizes of the items")
-    out += string_list("stackSize1", "The items that do not stack.", one) + "\n"
-    out += string_list("stackSize16", "The items that stack to 16.", sixteen) + "\n"
-    out += (
-        "/-- `Item.getDefaultMaxStackSize()`: how many items of this kind fit in one stack. Every\n"
-        "item of the game stacks to 1, 16 or 64. -/\n"
-        "def maxStackSize (id : String) : ℕ :=\n"
-        "  if stackSize1.contains id then 1 else if stackSize16.contains id then 16 else 64\n")
-    return out + FOOTER
 
 
 def load_tags(src):
@@ -284,9 +269,8 @@ def gen_cooking_table(dump, src):
 
 
 def main():
-    dump_path, src, item_out, cooking_out = sys.argv[1:5]
+    dump_path, src, cooking_out = sys.argv[1:4]
     dump = json.load(open(dump_path))
-    open(item_out, "w").write(gen_item_table(dump))
     open(cooking_out, "w").write(gen_cooking_table(dump, src))
 
 

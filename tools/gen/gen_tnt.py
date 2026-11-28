@@ -586,16 +586,6 @@ def drops_table(o, dump, tnt, loot_dir, mode):
     o.append("  | _ =>")
     o.append(default)
     o.append("")
-    if broken:
-        return
-    o.append("/-- `ItemStack.getMaxStackSize` of the items that blocks drop. -/")
-    o.append("def maxStackSize : String → ℕ")
-    for size in (1, 16):
-        items = sorted(i for i in used_items if max_stack[i] == size)
-        if items:
-            o.append(match_arms(o, [json.dumps(i) for i in items]) + f" => {size}")
-    o.append("  | _ => 64")
-    o.append("")
 
 
 def main():

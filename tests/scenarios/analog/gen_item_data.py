@@ -17,7 +17,7 @@ reports = os.environ['MC_REPORTS']
 data = os.environ['MC_SRC'] + '/data/minecraft'
 out = sys.argv[1]
 
-stack1, stack16, compost, discs = [], [], [], []
+compost, discs = [], []
 weights = {'low': 30, 'low_medium': 50, 'medium': 65, 'medium_high': 85, 'always_add_one': 100}
 songs = {}
 for f in glob.glob(data + '/jukebox_song/*.json'):
@@ -29,13 +29,6 @@ for f in glob.glob(data + '/jukebox_song/*.json'):
 for f in sorted(glob.glob(reports + '/minecraft/components/item/*.json')):
     item = 'minecraft:' + f.split('/')[-1][:-5]
     comp = json.load(open(f))['components']
-    size = comp['minecraft:max_stack_size']
-    if size == 1:
-        stack1.append(item)
-    elif size == 16:
-        stack16.append(item)
-    else:
-        assert size == 64, (item, size)
     if 'minecraft:compostable' in comp:
         key = comp['minecraft:compostable']['layers']
         assert key.startswith('minecraft:compostable/'), key
@@ -85,7 +78,7 @@ public import Mathlib.Tactic
 /-!
 # Item data used by the blocks a comparator reads
 
-Tables taken from the 26.3 server: the item component reports (`max_stack_size`, `compostable`,
+Tables taken from the 26.3 server: the item component reports (`compostable`,
 `jukebox_playable`) and the data pack (`jukebox_song`, `context_int_provider/compostable`), by
 `tests/scenarios/analog/gen_item_data.py`. An item is given by its registry name with its
 default components, as in the test scenarios.
@@ -94,20 +87,6 @@ default components, as in the test scenarios.
 @[expose] public section
 
 namespace Redstone.Component.AnalogSource
-
-/-- The items whose `max_stack_size` is 1. -/
-def stackSize1 : List String :=
-  [
-%s]
-
-/-- The items whose `max_stack_size` is 16. -/
-def stackSize16 : List String :=
-  [
-%s]
-
-/-- `ItemStack.getMaxStackSize` of an item with its default components. -/
-def maxStackSize (item : String) : ℕ :=
-  if stackSize1.contains item then 1 else if stackSize16.contains item then 16 else 64
 
 /-- The items with a `compostable` component, each with the chance in percent that it adds a
 layer to a composter that is not empty (`context_int_provider/compostable/*`: `low` 30,
@@ -130,7 +109,7 @@ item, if it has one. -/
 def jukeboxSong (item : String) : Option (ℕ × ℕ) := (musicDiscs.find? (·.1 == item)).map (·.2)
 
 end Redstone.Component.AnalogSource
-''' % (strs(stack1), strs(stack16), pairs(compost, lambda x: '("%s", %d)' % x),
+''' % (pairs(compost, lambda x: '("%s", %d)' % x),
        pairs(discs, lambda x: '("%s", %d, %d)' % x))
 open(out, 'w').write(text)
-print(len(stack1), len(stack16), len(compost), len(discs))
+print(len(compost), len(discs))

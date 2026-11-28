@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Basic.Random
+public import Redstone.Basic.Loot
 public import Redstone.World.Basic
 public import Redstone.Entity.Basic
 
@@ -145,6 +146,10 @@ structure Level where
   gameTime : ℕ
   /-- The level's random number generator. -/
   random : JavaRandom
+  /-- The server's random sequences (`RandomSequences`) that have been used, by key: the
+  generator each loot table draws from. A sequence that is not in the list has not been used
+  yet, and starts from the world seed and its key (`ChanceLoot.newSequence`). -/
+  lootSequences : List (String × Xoroshiro) := []
   /-- The neighbour updater's stack; the head is the top. -/
   updateStack : List NeighborUpdate
   /-- The updates added while the top of the stack was running. -/

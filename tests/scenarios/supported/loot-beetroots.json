@@ -1,0 +1,388 @@
+{
+ "name": "loot-beetroots",
+ "ticks": 66,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   17,
+   4,
+   3
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    17,
+    0,
+    3
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:dropper[facing=up,triggered=false]",
+   "nbt": "{Items:[{Slot:4b,id:\"minecraft:stone\",count:64}]}"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=3]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=3]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=3]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=3]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=3]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=3]"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=3]"
+  },
+  {
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "state": "minecraft:beetroots[age=3]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 7,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 8,
+   "type": "kill",
+   "entity": 0
+  },
+  {
+   "tick": 10,
+   "type": "destroy",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 15,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 16,
+   "type": "kill",
+   "entity": 1
+  },
+  {
+   "tick": 18,
+   "type": "destroy",
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 23,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 24,
+   "type": "kill",
+   "entity": 2
+  },
+  {
+   "tick": 26,
+   "type": "destroy",
+   "pos": [
+    8,
+    2,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 26,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 31,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 32,
+   "type": "kill",
+   "entity": 3
+  },
+  {
+   "tick": 34,
+   "type": "destroy",
+   "pos": [
+    10,
+    2,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 34,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 39,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 40,
+   "type": "kill",
+   "entity": 4
+  },
+  {
+   "tick": 42,
+   "type": "destroy",
+   "pos": [
+    12,
+    2,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 42,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 47,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 48,
+   "type": "kill",
+   "entity": 5
+  },
+  {
+   "tick": 50,
+   "type": "destroy",
+   "pos": [
+    14,
+    2,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 50,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 55,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 56,
+   "type": "kill",
+   "entity": 6
+  },
+  {
+   "tick": 58,
+   "type": "destroy",
+   "pos": [
+    16,
+    2,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 58,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 63,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "drop": false
+  },
+  {
+   "tick": 64,
+   "type": "kill",
+   "entity": 7
+  }
+ ]
+}

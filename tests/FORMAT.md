@@ -39,6 +39,10 @@ Files: `tests/scenarios/<unit>/<name>.json` and `tests/traces/<unit>/<name>.trac
   * the level `RandomSource` (a `LegacyRandomSource`) is reseeded with `setSeed(0)` before the
     setup and **again after the setup, immediately before frame 0**: tick 1 starts from seed 0;
   * `Level.randValue` (the generator of random-tick positions) is set to 0;
+  * the server's random sequences (`RandomSequences`: one Xoroshiro generator per key, created on
+    first use from the world seed 0 and the key; a loot table draws from the sequence named after
+    it, e.g. `minecraft:blocks/short_grass`) are forgotten before the setup and again after it, so
+    every sequence starts afresh in every scenario;
   * the entity id counter is set to 0 and the player of the `use` actions is created first (it
     is never added to the world), so entity ids are the same in every run;
   * `RandomSource.create()` (the private random of every entity, among others) normally takes

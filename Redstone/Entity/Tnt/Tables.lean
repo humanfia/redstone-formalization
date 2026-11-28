@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Block.Basic
+public import Redstone.Basic.Loot
 
 /-!
 # Block tables for TNT
@@ -1168,9 +1169,10 @@ def maxStackSize : String → ℕ
 
 /-- The number of stacks `Block.dropResources` drops for a block that is broken
 with drops, without tool and without breaker (a block that lost its support,
-for instance): the stacks of the block's loot table. `none` when that is not a
-function of the block state (chance, a block entity, neighbouring blocks), or
-when the block overrides `spawnAfterBreak`. -/
+for instance), where `brokenChanceLoot` is `none`: the stacks of the block's
+loot table. `none` when that is not a function of the block state (chance, a
+block entity, neighbouring blocks), or when the block overrides
+`spawnAfterBreak`. -/
 def brokenDropStacks (b : Block) : Option ℕ :=
   match b.id with
   | .gravel | .gold_ore | .deepslate_gold_ore | .iron_ore | .deepslate_iron_ore | .coal_ore
@@ -1294,6 +1296,142 @@ def brokenDropStacks (b : Block) : Option ℕ :=
     | _ => some 0
   | _ =>
     some 1
+
+/-- The loot table of a block that is broken with drops, without tool and without breaker
+(a block that lost its support, for instance), where the table draws from its random sequence:
+what `LootTable.getRandomItems` does, with everything that does not depend on chance decided.
+`none` when the table draws nothing (then `brokenDropStacks` has the number of stacks), and
+when the model cannot evaluate it. Evaluated are tables whose pools have a constant number of
+rolls and one entry, an item or alternatives of items, with the conditions `random_chance` and
+`table_bonus` on the items and the functions `set_count` (constant, uniform, binomial),
+`apply_bonus`, `limit_count` and `explosion_decay`: short grass, ferns, dead bushes, leaves,
+gravel, glowstone, melons, sea lanterns, mushroom blocks, ripe crops, stems, vines, chorus
+plants, gilded blackstone and the like.
+
+Not evaluated, so that `Level.dropResources` sets `Level.overflow`:
+* blocks that override `spawnAfterBreak` (ores, sculk, spawners, infested blocks): they may
+  release experience or silverfish, which draws from the level's generator;
+* tall grass and large ferns, whose table reads the other half of the plant (`location_check`);
+* tables that read a block entity (`copy_components`, `dynamic`: shulker boxes, banners, heads,
+  decorated pots, copper golem statues) and blocks with one item for each face (glow lichen,
+  sculk veins, resin clumps);
+* tables with a weighted choice among several entries, with a number of rolls that is not
+  constant, or with a condition that depends on chance on anything but an item.
+
+Explosions (`explosionDrops`) do not evaluate chance at all. -/
+def brokenChanceLoot (b : Block) : Option ChanceLoot :=
+  match b.id with
+  | .weeping_vines =>
+    some ⟨"minecraft:blocks/weeping_vines", 0xc999e4df84992279, 0x53efb26f53ee37df, [⟨1, [⟨[5536482], [], 64⟩]⟩]⟩
+  | .twisting_vines =>
+    some ⟨"minecraft:blocks/twisting_vines", 0xf60dab45daa5ab18, 0xdc85972562e778ce, [⟨1, [⟨[5536482], [], 64⟩]⟩]⟩
+  | .fern =>
+    some ⟨"minecraft:blocks/fern", 0x9a68b59cc71fa38a, 0xc7f8f78d60be503e, [⟨1, [⟨[2097152], [.uniformBonus], 64⟩]⟩]⟩
+  | .weeping_vines_plant =>
+    some ⟨"minecraft:blocks/weeping_vines_plant", 0xeea8016f5c70eca0, 0x90b731d66411302a, [⟨1, [⟨[5536482], [], 64⟩]⟩]⟩
+  | .gravel =>
+    some ⟨"minecraft:blocks/gravel", 0x2fedfb509401412f, 0x6b4882392a3638a0, [⟨1, [⟨[1677722], [], 64⟩, ⟨[], [], 64⟩]⟩]⟩
+  | .twisting_vines_plant =>
+    some ⟨"minecraft:blocks/twisting_vines_plant", 0x305d659ae03c2366, 0x9b21a1f9e415212e, [⟨1, [⟨[5536482], [], 64⟩]⟩]⟩
+  | .short_grass =>
+    some ⟨"minecraft:blocks/short_grass", 0x8bbf3c7183e5ac1e, 0x0e588cdc9bfba209, [⟨1, [⟨[2097152], [.uniformBonus], 64⟩]⟩]⟩
+  | .dead_bush =>
+    some ⟨"minecraft:blocks/dead_bush", 0xa00e2b904f10208b, 0x61ced0c97606ee23, [⟨1, [⟨[], [.setCount false (.uniform 0 2)], 64⟩]⟩]⟩
+  | .chorus_plant =>
+    some ⟨"minecraft:blocks/chorus_plant", 0x32dde033b025ceb2, 0x495d2bf3f7ade8bb, [⟨1, [⟨[], [.setCount false (.uniform 0 1)], 64⟩]⟩]⟩
+  | .mangrove_leaves =>
+    some ⟨"minecraft:blocks/mangrove_leaves", 0x9888b2e0ebbe7d53, 0x55df737fab70fe71, [⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .attached_melon_stem =>
+    some ⟨"minecraft:blocks/attached_melon_stem", 0x7ef517a74d77749d, 0x634cf81ec1a883bb, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64⟩]⟩]⟩
+  | .attached_pumpkin_stem =>
+    some ⟨"minecraft:blocks/attached_pumpkin_stem", 0x18577caa1408cd1f, 0xf7c58fe41b44ec29, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64⟩]⟩]⟩
+  | .gilded_blackstone =>
+    some ⟨"minecraft:blocks/gilded_blackstone", 0x0aff7602ed6d3686, 0xdc32016bdbb74cfd, [⟨1, [⟨[1677722], [.setCount false (.uniform 2 5)], 64⟩, ⟨[], [], 64⟩]⟩]⟩
+  | .melon =>
+    some ⟨"minecraft:blocks/melon", 0x45e0c0d79db027a8, 0xafe0a44cafba7e37, [⟨1, [⟨[], [.setCount false (.uniform 3 7), .uniformBonus, .limit none (some 9)], 64⟩]⟩]⟩
+  | .red_mushroom_block =>
+    some ⟨"minecraft:blocks/red_mushroom_block", 0x245a17efb6417bec, 0x679b8d25d5c6022d, [⟨1, [⟨[], [.setCount false (.uniform (-6) 2), .limit (some 0) none], 64⟩]⟩]⟩
+  | .birch_leaves =>
+    some ⟨"minecraft:blocks/birch_leaves", 0xf28deff6960b5a60, 0x894e85666ba780ed, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .brown_mushroom_block =>
+    some ⟨"minecraft:blocks/brown_mushroom_block", 0x91fa4b17458f0323, 0x580b19a848cd2c89, [⟨1, [⟨[], [.setCount false (.uniform (-6) 2), .limit (some 0) none], 64⟩]⟩]⟩
+  | .acacia_leaves =>
+    some ⟨"minecraft:blocks/acacia_leaves", 0xff546e958442acf1, 0xf95e1c4b073ec699, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .azalea_leaves =>
+    some ⟨"minecraft:blocks/azalea_leaves", 0xf019377ea52c964e, 0x641a1b8f5889c4ed, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .cherry_leaves =>
+    some ⟨"minecraft:blocks/cherry_leaves", 0xb502b9fae0076878, 0xdcd0fa37558121c6, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .jungle_leaves =>
+    some ⟨"minecraft:blocks/jungle_leaves", 0x298d58c3634bed3c, 0x5fd281aa02a06aa4, [⟨1, [⟨[419431], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .spruce_leaves =>
+    some ⟨"minecraft:blocks/spruce_leaves", 0x77905201c4056a90, 0x4d25b9140095c5b5, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .pale_oak_leaves =>
+    some ⟨"minecraft:blocks/pale_oak_leaves", 0x49c7de25b6924070, 0xde4af3b3a2c3f957, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .glowstone =>
+    some ⟨"minecraft:blocks/glowstone", 0x83196c8056477ab2, 0x41f5812fc482f9ac, [⟨1, [⟨[], [.setCount false (.uniform 2 4), .uniformBonus, .limit (some 1) (some 4)], 64⟩]⟩]⟩
+  | .red_poplar_leaves =>
+    some ⟨"minecraft:blocks/red_poplar_leaves", 0x94833c3450babf34, 0xdb0cded63363facf, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .creaking_heart =>
+    some ⟨"minecraft:blocks/creaking_heart", 0x5aca867f8632ca0f, 0xfbab199785060949, [⟨1, [⟨[], [.setCount false (.uniform 1 3), .uniformBonus, .limit none (some 9)], 64⟩]⟩]⟩
+  | .sea_lantern =>
+    some ⟨"minecraft:blocks/sea_lantern", 0xad68829d4b23892c, 0x0040afc4b0b91c92, [⟨1, [⟨[], [.setCount false (.uniform 2 3), .uniformBonus, .limit (some 1) (some 5)], 64⟩]⟩]⟩
+  | .orange_poplar_leaves =>
+    some ⟨"minecraft:blocks/orange_poplar_leaves", 0x4659eaff39de514f, 0x336e245cc0e90582, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .yellow_poplar_leaves =>
+    some ⟨"minecraft:blocks/yellow_poplar_leaves", 0x9bb237d8e546942d, 0x59edb516bfcf95eb, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .flowering_azalea_leaves =>
+    some ⟨"minecraft:blocks/flowering_azalea_leaves", 0x3a64023d256a6749, 0xe3984839c1bab885, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩]⟩
+  | .oak_leaves =>
+    some ⟨"minecraft:blocks/oak_leaves", 0xef6489bec2529e35, 0x1f1ab2c703aa2b5d, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩, ⟨1, [⟨[83887], [], 64⟩]⟩]⟩
+  | .wheat =>
+    match prop b "age" with
+    | "7" => some ⟨"minecraft:blocks/wheat", 0x9fa698f5eb5f5287, 0xddc12ce50a812942, [⟨1, [⟨[], [], 64⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64⟩]⟩]⟩
+    | _ => none
+  | .dark_oak_leaves =>
+    some ⟨"minecraft:blocks/dark_oak_leaves", 0x591e4bdfa0e1abc9, 0x977be5db1d8ffbc1, [⟨1, [⟨[838861], [], 64⟩]⟩, ⟨1, [⟨[335545], [.setCount false (.uniform 1 2)], 64⟩]⟩, ⟨1, [⟨[83887], [], 64⟩]⟩]⟩
+  | .carrots =>
+    match prop b "age" with
+    | "7" => some ⟨"minecraft:blocks/carrots", 0x13bb704d54b53096, 0xfda37b628e9c98c7, [⟨1, [⟨[], [], 64⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64⟩]⟩]⟩
+    | _ => none
+  | .beetroots =>
+    match prop b "age" with
+    | "3" => some ⟨"minecraft:blocks/beetroots", 0x583ba9feba08f50d, 0x96aa01fe8ac675e3, [⟨1, [⟨[], [], 64⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64⟩]⟩]⟩
+    | _ => none
+  | .nether_wart =>
+    match prop b "age" with
+    | "3" => some ⟨"minecraft:blocks/nether_wart", 0xf10d25dbbcfe8ac3, 0xd2f8de52c31d3001, [⟨1, [⟨[], [.setCount false (.uniform 2 4), .uniformBonus], 64⟩]⟩]⟩
+    | _ => none
+  | .potatoes =>
+    match prop b "age" with
+    | "7" => some ⟨"minecraft:blocks/potatoes", 0xedbc0e0223e5e29e, 0xd1fcda23b4868d23, [⟨1, [⟨[], [], 64⟩]⟩, ⟨1, [⟨[], [.binomialBonus 3 9586981], 64⟩]⟩, ⟨1, [⟨[335545], [], 64⟩]⟩]⟩
+    | _ => none
+  | .sweet_berry_bush =>
+    match prop b "age" with
+    | "2" => some ⟨"minecraft:blocks/sweet_berry_bush", 0x43d91b9af92bc74b, 0x41420935cf122c3b, [⟨1, [⟨[], [.setCount false (.uniform 1 2), .uniformBonus], 64⟩]⟩]⟩
+    | "3" => some ⟨"minecraft:blocks/sweet_berry_bush", 0x43d91b9af92bc74b, 0x41420935cf122c3b, [⟨1, [⟨[], [.setCount false (.uniform 2 3), .uniformBonus], 64⟩]⟩]⟩
+    | _ => none
+  | .melon_stem =>
+    match prop b "age" with
+    | "1" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 2236963)], 64⟩]⟩]⟩
+    | "2" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 3355444)], 64⟩]⟩]⟩
+    | "3" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 4473925)], 64⟩]⟩]⟩
+    | "4" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 5592406)], 64⟩]⟩]⟩
+    | "5" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 6710887)], 64⟩]⟩]⟩
+    | "6" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 7829368)], 64⟩]⟩]⟩
+    | "7" => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64⟩]⟩]⟩
+    | _ => some ⟨"minecraft:blocks/melon_stem", 0x62431ebe50228cc5, 0xac135e509189be09, [⟨1, [⟨[], [.setCount false (.binomial 3 1118482)], 64⟩]⟩]⟩
+  | .pumpkin_stem =>
+    match prop b "age" with
+    | "1" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 2236963)], 64⟩]⟩]⟩
+    | "2" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 3355444)], 64⟩]⟩]⟩
+    | "3" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 4473925)], 64⟩]⟩]⟩
+    | "4" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 5592406)], 64⟩]⟩]⟩
+    | "5" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 6710887)], 64⟩]⟩]⟩
+    | "6" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 7829368)], 64⟩]⟩]⟩
+    | "7" => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 8947849)], 64⟩]⟩]⟩
+    | _ => some ⟨"minecraft:blocks/pumpkin_stem", 0x98521e03cce24f65, 0x4a9720817a7fe171, [⟨1, [⟨[], [.setCount false (.binomial 3 1118482)], 64⟩]⟩]⟩
+  | _ =>
+    none
 
 
 end Redstone.Entity.Tnt

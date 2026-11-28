@@ -7,7 +7,7 @@ public import Mathlib.Tactic
 
 `LegacyRandomSource`, the 48-bit linear congruential generator of `java.util.Random`. The level
 owns one (`Level.random`), and blocks draw from it, so its state is part of the state of the
-world.
+world. (The other generator of the game, `XoroshiroRandomSource`, is in `Basic/Xoroshiro.lean`.)
 -/
 
 @[expose] public section

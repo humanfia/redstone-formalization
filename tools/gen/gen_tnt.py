@@ -16,14 +16,22 @@ block is destroyed without a tool: by an explosion that does not decay drops (`e
 and by losing its support (`brokenDropStacks`). The model drops nothing, but the game draws
 random numbers for every dropped stack, so the number of stacks is part of the model.
 
+Where the loot of a broken block depends on chance, the table is not evaluated but translated
+(`brokenChanceLoot`) into the types of `Redstone/Basic/Loot.lean`, which the model evaluates
+with the table's random sequence. The hash of the key of the sequence, from which the game
+seeds it, is computed here (MD5).
+
 `--no-dump` reuses an existing `tntdump.json`.
 """
+import hashlib
 import json
 import os
+import struct
 import subprocess
 import sys
 import tempfile
 from collections import Counter
+from fractions import Fraction
 from itertools import combinations
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +40,7 @@ from gen_blocks import ident  # noqa: E402
 HEADER = """module
 
 public import Redstone.Block.Basic
+public import Redstone.Basic.Loot
 
 /-!
 # Block tables for TNT
@@ -141,6 +150,30 @@ THIS_ENTITY = [True]
 # silverfish, which draws from the level's generator.
 SPAWN_AFTER_BREAK = {"InfestedBlock", "DropExperienceBlock", "SculkCatalystBlock", "SpawnerBlock",
                      "SculkShriekerBlock", "RedStoneOreBlock", "SculkSensorBlock"}
+
+
+CHANCE_DOC = """/-- The loot table of a block that is broken with drops, without tool and without breaker
+(a block that lost its support, for instance), where the table draws from its random sequence:
+what `LootTable.getRandomItems` does, with everything that does not depend on chance decided.
+`none` when the table draws nothing (then `brokenDropStacks` has the number of stacks), and
+when the model cannot evaluate it. Evaluated are tables whose pools have a constant number of
+rolls and one entry, an item or alternatives of items, with the conditions `random_chance` and
+`table_bonus` on the items and the functions `set_count` (constant, uniform, binomial),
+`apply_bonus`, `limit_count` and `explosion_decay`: short grass, ferns, dead bushes, leaves,
+gravel, glowstone, melons, sea lanterns, mushroom blocks, ripe crops, stems, vines, chorus
+plants, gilded blackstone and the like.
+
+Not evaluated, so that `Level.dropResources` sets `Level.overflow`:
+* blocks that override `spawnAfterBreak` (ores, sculk, spawners, infested blocks): they may
+  release experience or silverfish, which draws from the level's generator;
+* tall grass and large ferns, whose table reads the other half of the plant (`location_check`);
+* tables that read a block entity (`copy_components`, `dynamic`: shulker boxes, banners, heads,
+  decorated pots, copper golem statues) and blocks with one item for each face (glow lichen,
+  sculk veins, resin clumps);
+* tables with a weighted choice among several entries, with a number of rolls that is not
+  constant, or with a condition that depends on chance on anything but an item.
+
+Explosions (`explosionDrops`) do not evaluate chance at all. -/"""
 
 
 class Unknown(Exception):
@@ -267,6 +300,171 @@ def loot_drops(table, block_id, props, max_stack):
     return out
 
 
+def threshold(p):
+    """The least `n` with `p <= n / 2 ** 24` for the `float` `p`: a draw `nextFloat()`, which is
+    a multiple of `2 ** -24`, is below `p` exactly when its numerator is below `n`."""
+    if not isinstance(p, (int, float)):
+        raise Unknown("chance")
+    exact = Fraction(struct.unpack("f", struct.pack("f", p))[0]) * 2 ** 24
+    return -((-exact.numerator) // exact.denominator)
+
+
+def chance_conditions(c, block_id, props):
+    """The conditions `c` of an entry, tested in order: False when one that does not depend on
+    chance fails before any draw, else the thresholds of those that draw."""
+    if isinstance(c, list):
+        terms = c
+    elif isinstance(c, dict) and c["type"] == "minecraft:all_of":
+        terms = c["terms"]
+    else:
+        terms = [c]
+    out = []
+    for term in terms:
+        t = term["type"].split(":", 1)[1] if isinstance(term, dict) else None
+        if t == "all_of":
+            inner = chance_conditions(term, block_id, props)
+            if inner is False:
+                if out:
+                    raise Unknown("a condition that fails after a draw")
+                return False
+            out += inner
+        elif t == "random_chance":
+            out.append(threshold(term["chance"]))
+        elif t == "table_bonus":
+            # the enchantment level of the empty tool is 0
+            out.append(threshold(term["chances"][0]))
+        elif not loot_condition(term, block_id, props):
+            if out:
+                raise Unknown("a condition that fails after a draw")
+            return False
+    return out
+
+
+def integer(v):
+    if not isinstance(v, (int, float)) or v != int(v):
+        raise Unknown("number")
+    return int(v)
+
+
+def lean_int(v):
+    return str(v) if v >= 0 else f"({v})"
+
+
+def chance_number(n):
+    """A number provider as a `LootNumber`, and whether it draws."""
+    if isinstance(n, (int, float)):
+        return f".const {lean_int(integer(n))}", False
+    t = n["type"].split(":", 1)[1]
+    if t == "constant":
+        return f".const {lean_int(integer(n['value']))}", False
+    if t == "uniform":
+        lo, hi = integer(n["min"]), integer(n["max"])
+        return f".uniform {lean_int(lo)} {lean_int(hi)}", lo < hi
+    if t == "binomial":
+        return f".binomial {integer(n['n'])} {threshold(n['p'])}", True
+    raise Unknown(t)
+
+
+def chance_functions(modifiers, block_id, props):
+    """Item functions as `LootFunction`s, and whether one of them draws."""
+    out, draws = [], False
+    for m in [modifiers] if isinstance(modifiers, dict) else modifiers:
+        # a condition that depends on chance raises `Unknown`
+        if "condition" in m and not loot_condition(m["condition"], block_id, props):
+            continue
+        t = m["type"].split(":", 1)[1]
+        if t == "explosion_decay":
+            pass  # no explosion radius
+        elif t == "set_count":
+            number, d = chance_number(m["count"])
+            out.append(f".setCount {'true' if m.get('add') else 'false'} ({number})")
+            draws |= d
+        elif t == "apply_bonus":
+            # the tool is the empty stack, so the enchantment level is 0
+            formula = m["formula"].split(":", 1)[1]
+            if formula == "uniform_bonus_count":
+                out.append(".uniformBonus")  # `nextInt(1)`: a draw that adds nothing
+                draws = True
+            elif formula == "binomial_with_bonus_count":
+                params = m["parameters"]
+                out.append(f".binomialBonus {integer(params['extra'])} "
+                           f"{threshold(params['probability'])}")
+                draws = True
+            elif formula != "ore_drops":  # which changes nothing and draws nothing at level 0
+                raise Unknown(formula)
+        elif t == "limit_count":
+            limit = m["limit"]
+            if not isinstance(limit, dict) or not all(isinstance(v, int) for v in limit.values()):
+                raise Unknown(t)
+            bound = lambda k: f"(some {lean_int(limit[k])})" if k in limit else "none"
+            out.append(f".limit {bound('min')} {bound('max')}")
+        elif t == "copy_components" and set(m["include"]) <= {"minecraft:custom_name"}:
+            pass
+        else:
+            raise Unknown(t)
+    return out, draws
+
+
+def chance_expand(entry, block_id, props):
+    """The item entries an entry may expand to, in the order in which they are tried, each with
+    the thresholds of its conditions: the first whose conditions hold is the one."""
+    t = entry["type"].split(":", 1)[1]
+    if t == "item":
+        chances = chance_conditions(entry.get("condition", []), block_id, props)
+        if chances is False:
+            return []
+        if entry.get("weight", 1) != 1:
+            raise Unknown("weight")
+        return [(chances, entry)]
+    if t == "alternatives":
+        # a condition that depends on chance raises `Unknown`
+        if "condition" in entry and not loot_condition(entry["condition"], block_id, props):
+            return []
+        out = []
+        for child in entry["children"]:
+            out += chance_expand(child, block_id, props)
+            if out and out[-1][0] == []:
+                break  # this one always holds: the rest is never reached
+        return out
+    raise Unknown(t)
+
+
+def loot_chance(table, block_id, props, max_stack):
+    """The loot of a broken block as a `ChanceLoot`, or None when it draws nothing from the
+    table's random sequence."""
+    pools, draws = [], False
+    for pool in table.get("pools", []):
+        # a condition that depends on chance raises `Unknown`
+        if "condition" in pool and not loot_condition(pool["condition"], block_id, props):
+            continue
+        if not isinstance(pool["rolls"], (int, float)) or pool.get("bonus_rolls", 0) != 0:
+            raise Unknown("rolls")
+        expanded = [e for e in (chance_expand(entry, block_id, props) for entry in pool["entries"])
+                    if e]
+        if len(expanded) > 1:
+            raise Unknown("choice")  # a weighted choice among the entries that hold
+        if not expanded or integer(pool["rolls"]) == 0:
+            continue
+        items = []
+        for chances, entry in expanded[0]:
+            functions = []
+            for modifiers in (entry.get("modifier", []), pool.get("modifier", []),
+                              table.get("modifier", [])):
+                fs, d = chance_functions(modifiers, block_id, props)
+                functions += fs
+                draws |= d
+            draws |= bool(chances)
+            items.append(f"⟨[{', '.join(map(str, chances))}], [{', '.join(functions)}], "
+                         f"{max_stack[entry['name']]}⟩")
+        pools.append(f"⟨{integer(pool['rolls'])}, [{', '.join(items)}]⟩")
+    if not draws:
+        return None
+    key = table["random_sequence"]
+    digest = hashlib.md5(key.encode()).digest()  # `RandomSupport.seedFromHashOf`
+    return (f"⟨{json.dumps(key)}, 0x{digest[:8].hex()}, 0x{digest[8:].hex()}, "
+            f"[{', '.join(pools)}]⟩")
+
+
 def match_arms(o, ids):
     """Writes the alternatives `| .a | .b` of a match arm, wrapped; the last line is returned."""
     line = "  |"
@@ -278,10 +476,13 @@ def match_arms(o, ids):
     return line[:-2]
 
 
-def drops_table(o, dump, tnt, loot_dir, broken):
-    """`explosionDrops : Block → Option (List (String × ℕ))` or, with `broken`,
-    `brokenDropStacks : Block → Option ℕ`, as a match on the block id and, where the drops
-    depend on the state, on up to three properties."""
+def drops_table(o, dump, tnt, loot_dir, mode):
+    """`explosionDrops : Block → Option (List (String × ℕ))` (mode `explosion`),
+    `brokenDropStacks : Block → Option ℕ` (mode `broken`) or
+    `brokenChanceLoot : Block → Option ChanceLoot` (mode `chance`), as a match on the block id
+    and, where the drops depend on the state, on up to three properties."""
+    broken = mode != "explosion"
+    chance = mode == "chance"
     THIS_ENTITY[0] = not broken
     max_stack = {i["id"]: i["maxStackSize"] for i in dump["items"]}
     rules = {}  # rule text -> block ids
@@ -290,6 +491,8 @@ def drops_table(o, dump, tnt, loot_dir, broken):
     def lean(drops, block_id):
         if drops is None:
             return "none"
+        if chance:
+            return "some " + drops
         if broken:
             return f"some {len(drops)}"
         for item, _ in drops:
@@ -312,7 +515,10 @@ def drops_table(o, dump, tnt, loot_dir, broken):
         for s in b["states"]:
             props = {p["name"]: p["values"][v] for p, v in zip(b["properties"], s["values"])}
             try:
-                drops = [] if table is None else loot_drops(table, b["id"], props, max_stack)
+                if chance:
+                    drops = None if table is None else loot_chance(table, b["id"], props, max_stack)
+                else:
+                    drops = [] if table is None else loot_drops(table, b["id"], props, max_stack)
             except Unknown:
                 drops = None
             if broken and SPAWN_AFTER_BREAK & set(b["classes"]):
@@ -347,13 +553,18 @@ def drops_table(o, dump, tnt, loot_dir, broken):
             rule += "    | " + ", ".join("_" for _ in keys) + " => " + common
         rules.setdefault(rule, []).append(b["id"])
 
-    if broken:
+    if chance:
+        default = "    none"
+        o.append(CHANCE_DOC)
+        o.append("def brokenChanceLoot (b : Block) : Option ChanceLoot :=")
+    elif broken:
         default = "    some 1"
         o.append("/-- The number of stacks `Block.dropResources` drops for a block that is broken")
         o.append("with drops, without tool and without breaker (a block that lost its support,")
-        o.append("for instance): the stacks of the block's loot table. `none` when that is not a")
-        o.append("function of the block state (chance, a block entity, neighbouring blocks), or")
-        o.append("when the block overrides `spawnAfterBreak`. -/")
+        o.append("for instance), where `brokenChanceLoot` is `none`: the stacks of the block's")
+        o.append("loot table. `none` when that is not a function of the block state (chance, a")
+        o.append("block entity, neighbouring blocks), or when the block overrides")
+        o.append("`spawnAfterBreak`. -/")
         o.append("def brokenDropStacks (b : Block) : Option ℕ :=")
     else:
         default = "    some [(b.id.name, 1)]"
@@ -456,8 +667,9 @@ def main():
     predicate(o, "isFenceGate", "The block is a `FenceGateBlock`.",
               [b["id"] for b in dump["blocks"] if "FenceGateBlock" in b["classes"]], known)
     loot_dir = os.path.join(os.environ["MC_SRC"], "data", "minecraft", "loot_table")
-    drops_table(o, dump, tnt, loot_dir, False)
-    drops_table(o, dump, tnt, loot_dir, True)
+    drops_table(o, dump, tnt, loot_dir, "explosion")
+    drops_table(o, dump, tnt, loot_dir, "broken")
+    drops_table(o, dump, tnt, loot_dir, "chance")
     o.append(FOOTER)
     with open(out_path, "w") as f:
         f.write("\n".join(o))

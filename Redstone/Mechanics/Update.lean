@@ -226,6 +226,32 @@ def dropResources (state : Block) (p : Pos) (be : Option BlockEntity := none) : 
   let drops ← getDrops state p be
   modify fun l => { l with random := (·.nextDouble53.2)^[3 * drops.length] l.random }
 
+/-- `BlockState.getDrops` as `BlockBehaviour.onExplosionHit` calls it: the stacks, as item and
+count, that the block `state` at `p` drops when an explosion destroys it, with the block entity
+it had. `p` and `be` are not used yet.
+
+This is for an exploded block what `getDrops` is for a broken one: the explosion
+(`Entity.Tnt.onExplosionHit`) only calls it. The loot tables are not evaluated; the stacks come
+from `Entity.Tnt.explosionDrops`, and a block whose drops that table cannot give (they depend
+on chance, on a block entity or on the neighbours) sets `Level.overflow` and gives no stack. -/
+def getExplosionDrops (state : Block) (_p : Pos) (_be : Option BlockEntity := none) :
+    M (List (String × ℕ)) :=
+  match Entity.Tnt.explosionDrops state with
+  | some drops => pure drops
+  | none => do
+    setOverflow
+    pure []
+
+/-- `Block.popResource(level, pos, stack)` for a stack of `count` of `item`, in a world where
+the game rule `block_drops` is off: nothing is dropped, but the three coordinates of the item
+entity are drawn from the level's random number generator before the game finds that out. With
+the game rule on, the stack would be dropped as an item entity at `p`, which is not modelled:
+`Level.overflow` is set. An explosion drops what it collected through this
+(`ServerExplosion.interactWithBlocks`). -/
+def popResource (_p : Pos) (_item : String) (_count : ℕ) : M Unit := do
+  if (← get).blockDrops then setOverflow
+  modify fun l => { l with random := (·.nextDouble53.2)^[3] l.random }
+
 /-! ### Operations that request updates -/
 
 /-- Adds an update to the neighbour updater (the first half of `addAndRun`). Returns whether

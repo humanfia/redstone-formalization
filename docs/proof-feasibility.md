@@ -24,8 +24,14 @@ did not work, what was changed, and the recipe that follows from it.
   clock still fails at 8 ticks when evaluated in one go.
 * **The method that works is one lemma per game tick between state literals.** Each lemma is
   checked in bounded time and memory, whatever came before: 0.06 to 1.1 s per tick for the
-  12-block sticky piston, the hopper pair and the repeater clock, at 1.5 GB. The contingency of
-  the plan (an abstract circuit semantics with simulation proofs) is not needed.
+  12-block sticky piston, the hopper pair and the repeater clock, at 1.5 GB. On this evidence
+  the contingency of the plan (an abstract circuit semantics with simulation proofs) is not
+  needed **for circuits without entities**.
+* **What the measurements do not cover** (see "What this does not show"): the per-tick lemmas
+  were checked one by one and never joined into a theorem about a run; the comparison they use
+  is not in the repository; and a level with an entity in it (an item, a minecart, primed TNT, a
+  projectile) can be neither evaluated nor checkpointed, because entities are computed in
+  `Float`. For those the question the contingency answers is still open.
 * Two things a prover must know: check the lemmas of a file **one at a time**
   (`set_option Elab.async false`), and expect **redstone dust** to be the expensive block:
   switching a 15-dust line off is 30 to 60 s and 8.9 GB for that one tick.
@@ -222,6 +228,46 @@ single tick; switching it on costs 7 s. A theorem about a long dust line pays th
 switch. Where and why the kernel spends that time was not profiled; it is the first thing to
 look at when dust circuits are proved (`Redstone/Component/Dust.lean`).
 
+## What this does not show
+
+The numbers above are evidence that the per-tick method is affordable. They are not a theorem
+about a run of several ticks, and they do not reach every kind of circuit.
+
+* **Nothing of the per-tick method is committed.** `beqL`, the lemma that makes it useful
+  (`beqL a b = true → a = b`, or equality of the fields a statement reads), the `lit%`
+  elaborator and the tick lemmas themselves existed only in untracked probe files of the spike
+  (`.lake/spike/`), so the S5 table cannot be reproduced from the repository.
+  `Redstone/Proof/Smoke.lean` uses one evaluation per theorem, over at most 3 ticks. The
+  comparison, its soundness lemma and the literal builder belong to the proof foundation
+  (`Redstone/Proof`), and its first deliverable should be those together with one end-to-end
+  theorem of the repeater clock, with the 16-tick clock probe (about 9 s) kept in
+  `Redstone/Proof/` as a regression file.
+* **The lemmas were never joined.** The spike proved isolated facts
+  `beqL (step L_k) L_{k+1} = true`. It did not derive from them a statement about the run, such
+  as `rules.runSchedule s L0 = L_n` or the state of a block after `n` ticks. That step needs
+  the soundness lemma, and whether the kernel unfolds the large literals again while rewriting
+  along the tick lemmas was not measured.
+* **Levels with entities have no route yet.** `beqL` requires both entity lists to be empty:
+  an `Entity` carries a `Vec3` of `Float`, `Level` has no `DecidableEq`, and the kernel cannot
+  compute with `Float` at all, so a tick that moves an entity is stuck however it is stated.
+  This leaves out everything that works through entities: dropped items (item sorters fed by
+  item entities, droppers and dispensers that eject), minecarts, primed TNT, projectiles, and
+  any block that breaks while `block_drops` is on. Circuits that only move items between
+  containers are not affected. Proving the others needs either entity physics in exact
+  arithmetic, as `Container.redstoneSignal` is to get, or an abstraction of the entity; neither
+  was tried, so for them the contingency of the plan is not ruled out.
+* **Paths that `Smoke.lean` does not guard.**
+  * A comparator that reads a container goes through `Container.redstoneSignal`, which is
+    `Float32`: it is stuck in the kernel today, no smoke theorem covers it, and so CI will not
+    notice when it starts to work or stops again. The change that makes that function exact
+    should add a smoke theorem of a comparator reading a hopper.
+  * `destroyBlock` raises the game event `minecraft:block_destroy`. Without a listener only the
+    list of tickers is walked and neither the name nor the position (`Float`) is forced, which
+    is why the lever that loses its support is provable. A sculk sensor in the level puts the
+    `Float` position on the path; this was not probed.
+  * A hopper that moves an item calls `itemMaxStackSize` (a scan over item names, 0.4 s) and
+    compares with `"minecraft:air"`; it reduces, and dominates the hopper ticks.
+
 ## The recipe
 
 For a theorem about a concrete circuit:
@@ -270,8 +316,9 @@ For a theorem about a concrete circuit:
 
    The statement about the circuit is then read off the last literal, or follows by rewriting
    along the lemmas once the comparison is known to imply equality. That lemma, and `beqL`
-   itself, belong to the proof foundation (`Redstone/Proof`); the spike used the comparison
-   only.
+   itself, belong to the proof foundation (`Redstone/Proof`) and are not in the repository
+   yet; the spike used the comparison only, and did not do the rewriting. Both levels must be
+   without entities.
 5. **Literals.** `Level` has `Repr`, and what it prints is a term: a world prints as
    `Redstone.World.ofList [...]`, a block entity map as `Redstone.PosMap.ofList [...]`. So
    `#eval IO.println (repr (rules.stepWith inputs L0))` prints `L1`, to be pasted. Proof fields

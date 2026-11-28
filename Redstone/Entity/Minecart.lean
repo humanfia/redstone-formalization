@@ -648,14 +648,25 @@ inductive Contact
   | unknown
   deriving DecidableEq
 
-/-- How the entity `e` and the minecart `c` can act on each other. -/
+/-- The contact of an entity kind that says for itself whether a minecart and it act on each
+other (`Entities.Lightning.touchesMinecart` and the like): `unknown` while it does not say. -/
+def Contact.ofKnown : Option Bool → Contact
+  | some true => .touching
+  | some false => .never
+  | none => .unknown
+
+/-- How the entity `e` and the minecart `c` can act on each other. The kinds that are not
+modelled yet answer in their own modules, so that the unit that models one edits only its own
+file. -/
 def contact (c : Cart) (e : Entity) : Contact :=
   match e.data with
   | .minecart _ _ => .touching
   | .item _ => if c.kind == .hopper && c.d.enabled then .touching else .never
   | .fallingBlock _ | .tnt _ => .never
   | .projectile _ _ => .unknown
-  | .lightning _ | .itemFrame _ _ | .experienceOrb _ => .unknown
+  | .lightning d => .ofKnown d.touchesMinecart
+  | .itemFrame _ d => .ofKnown d.touchesMinecart
+  | .experienceOrb d => .ofKnown d.touchesMinecart
   | .other type _ =>
     match Still.info? e with
     | none => .unknown

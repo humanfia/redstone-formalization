@@ -14,6 +14,7 @@ public import Redstone.Block.Fluid
 public import Redstone.Block.Weathering
 public import Redstone.World.Basic
 public import Redstone.World.Level
+public import Redstone.World.Light
 public import Redstone.Entity.Basic
 public import Redstone.Mechanics.Behaviour
 public import Redstone.Mechanics.Update

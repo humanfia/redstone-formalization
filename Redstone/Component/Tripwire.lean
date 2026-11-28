@@ -237,7 +237,9 @@ def entitySizeBits : EntityData → Option (UInt32 × UInt32)
         "minecraft:experience_bottle"] then
       some (0x3e800000, 0x3e800000)
     else none
-  | .lightning _ | .itemFrame _ _ | .experienceOrb _ => none
+  | .lightning d => d.sizeBits
+  | .itemFrame _ d => d.sizeBits
+  | .experienceOrb d => d.sizeBits
   | .other _ _ => none
 
 /-- The size (width, height) of an entity, as `float`s: that of its type, or, for an entity the

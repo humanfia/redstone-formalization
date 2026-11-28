@@ -128,6 +128,7 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Ground` | farmland, paths, leaves, grass, nylium, mushroom blocks, mud | stub |
 | `Redstone.Component.Fire` | fire and soul fire | stub |
 | `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners | stub |
+| `Redstone.World.Light` | the light of a cell: block light and raw brightness, for the blocks that need or shun light | stub: every cell has light 15 |
 | `Redstone.Component.RandomTicked` | copper blocks, ice, budding amethyst | stub |
 | `Redstone.Entity.Lightning`, `Redstone.Entity.Hanging`, `Redstone.Entity.ExperienceOrb` | lightning bolts, item frames, experience orbs | stub |
 | `Redstone.Proof.Smoke` | four small circuits proved by kernel evaluation: lever and lamp, a lever losing its support, a sticky piston, two hoppers | proved |

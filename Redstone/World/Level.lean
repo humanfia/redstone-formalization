@@ -214,7 +214,8 @@ structure Level where
   tick in a game tick. With zero there are no random ticks. -/
   randomTickSpeed : ℕ := 0
   /-- The game rule `block_drops`: a block that is broken drops its loot. Drops are not
-  modelled: with the rule on, `Level.dropResources` sets `overflow`. -/
+  modelled: with the rule on, `Level.dropResources` and `Level.popResource` (the drops of a
+  broken block and of an exploded one) set `overflow`. -/
   blockDrops : Bool := false
   /-- The corners of a box that contains every block that can get a random tick. The game goes
   through the sections of the loaded chunks; the model has no chunks, so a level in which

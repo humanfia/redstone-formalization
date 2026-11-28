@@ -29,6 +29,17 @@ namespace Lightning
 modelled, entities of this type are kept as `EntityData.other`. -/
 def ofNbt? (_nbt : Nbt) : Option Lightning := none
 
+/-- The size (width, height) of a lightning bolt as `float` bits (`EntityType.getDimensions`), which
+is what `Component.Tripwire.entitySize` asks for. A stub: `none`, the size is not known to the
+model. No entity is decoded into this type yet, so nothing reads it. -/
+def sizeBits (_d : Lightning) : Option (UInt32 × UInt32) := none
+
+/-- Whether a minecart and a lightning bolt whose boxes meet act on each other, which is what
+`Entity.Minecart.contact` asks for: `some true` if they do, `some false` if they never do. A
+stub: `none`, the model does not know. No entity is decoded into this type yet, so nothing
+reads it. -/
+def touchesMinecart (_d : Lightning) : Option Bool := none
+
 end Lightning
 
 end Redstone.Entities

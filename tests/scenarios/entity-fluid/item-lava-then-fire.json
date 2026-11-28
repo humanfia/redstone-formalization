@@ -1,0 +1,205 @@
+{
+ "name": "item-lava-then-fire",
+ "ticks": 90,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   9,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    6,
+    0
+   ],
+   "max": [
+    10,
+    6,
+    2
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    6,
+    1
+   ],
+   "state": "minecraft:lava[level=7]"
+  },
+  {
+   "pos": [
+    3,
+    6,
+    1
+   ],
+   "state": "minecraft:lava[level=7]"
+  },
+  {
+   "pos": [
+    5,
+    6,
+    1
+   ],
+   "state": "minecraft:lava[level=7]"
+  },
+  {
+   "pos": [
+    7,
+    6,
+    1
+   ],
+   "state": "minecraft:lava[level=7]"
+  },
+  {
+   "pos": [
+    9,
+    6,
+    1
+   ],
+   "state": "minecraft:lava[level=7]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.5,
+    8.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.5,
+    8.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:oak_planks\",count:3}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.5,
+    7.5,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:netherite_ingot\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    7.5,
+    9.0,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:paper\",count:1},Health:9s}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.5,
+    7.2,
+    1.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:coal\",count:1},Health:9s,Motion:[0.0d,-0.3d,0.0d]}"
+  }
+ ]
+}

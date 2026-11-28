@@ -3,12 +3,14 @@ module
 public import Redstone.Mechanics.Tick
 public import Redstone.Block.Generated.Shapes
 public import Redstone.Entity.Geometry
+public import Redstone.Entity.Fluid
 
 /-!
 # How an entity touches blocks
 
 Java classes: `Entity` (`applyEffectsFromBlocks`, `checkInsideBlocks`,
-`collidedWithShapeMovingFrom`), `BlockGetter` (`forEachBlockIntersectedBetween`,
+`collidedWithShapeMovingFrom`, `collidedWithFluid`), `InsideBlockEffectApplier`,
+`BlockGetter` (`forEachBlockIntersectedBetween`,
 `addCollisionsAlongTravel`, `getFurthestCorner`), `BlockPos` (`betweenClosed`,
 `betweenCornersInDirection`), `BlockBehaviour.getEntityInsideCollisionShape`.
 
@@ -27,12 +29,24 @@ The shape a block is touched by (`getEntityInsideCollisionShape`) is the full cu
 block but a few: tripwire and the end portal are touched by their outline, a filled cauldron by
 its hollow shape, powder snow by its collision shape if it has one.
 
+A block that holds a fluid is also told as a fluid, if the entity meets the box of the fluid
+(`Entity.collidedWithFluid`, `FluidState.entityInside`). Fluids do not act at once: water asks
+for the entity to be put out and lava for it to be set on fire and hurt, and these effects are
+collected (`InsideBlockEffectApplier.StepBasedCollector`) and applied when all the movements
+have been gone through, in the order of the steps of the walk and, inside a step, lava before
+water. What an effect does depends on the kind of entity, so the unit passes it in
+(`applyEffectsFromBlocks`); a unit that passes nothing sets `Level.overflow` when its entity
+meets lava.
+
 ## What is left out
 
-* Fluids (`FluidState.entityInside`, `Entity.collidedWithFluid`): the entity units set
-  `Level.overflow` when their entity comes near a fluid.
-* The effects that blocks ask for through the `InsideBlockEffectApplier` (fire, freezing,
-  extinguishing), and rain putting out a burning entity.
+* The effects that blocks, as opposed to fluids, ask for through the `InsideBlockEffectApplier`
+  (fire, freezing, the extinguishing of a filled cauldron), and rain putting out a burning
+  entity. The steps that such blocks make in the collector are kept. An entity that lava has set
+  on fire and that then meets a block that reacts to a burning entity (a cauldron of water or
+  powder snow, powder snow) sets `Level.overflow`.
+* Bubble columns, which push every entity inside them (`BubbleColumnBlock.entityInside`): an
+  entity that meets one sets `Level.overflow`.
 * The shapes of filled cauldrons and of powder snow. No reaction of these blocks is modelled,
   so they are taken as full cubes, which changes nothing.
 -/
@@ -215,34 +229,125 @@ def collidedWithBlock (dims : Dimensions) (b : Block) (p : Pos) (start stop : Ve
   | some parts =>
     (dims.box start).collidedAlongVector (stop.sub start) (parts.map (·.atBlock p))
 
+/-- `Entity.collidedWithFluid(fluidState, blockPos, from, to)`: the entity of size `dims`,
+going from `start` to `stop`, meets the fluid `s` of the block at `p`. -/
+def collidedWithFluid (l : Level) (dims : Dimensions) (s : FluidState) (p : Pos)
+    (start stop : Vec3) : Bool :=
+  !s.isEmpty && (dims.box start).collidedAlongVector (stop.sub start) [l.fluidBox p s]
+
+/-! ### The effects of fluids -/
+
+/-- An effect that a fluid asks for (`InsideBlockEffectType` and the calls that
+`LavaFluid.entityInside` queues behind one). -/
+inductive FluidEffect
+  /-- `InsideBlockEffectType.LAVA_IGNITE`: `Entity.lavaIgnite`. -/
+  | lavaIgnite
+  /-- `Entity.lavaHurt`, which lava runs after `LAVA_IGNITE`, once for every block of lava. -/
+  | lavaHurt
+  /-- `InsideBlockEffectType.EXTINGUISH`: `Entity.clearFire`. -/
+  | extinguish
+  deriving DecidableEq, Repr
+
+/-- `InsideBlockEffectApplier.StepBasedCollector`, for the effects of fluids. -/
+structure Collector where
+  /-- `lastStep`. -/
+  lastStep : ℤ := -1
+  /-- The blocks of lava met in the current step. -/
+  lava : ℕ := 0
+  /-- Water was met in the current step. -/
+  water : Bool := false
+  /-- `finalEffects`, last first. -/
+  final : List FluidEffect := []
+
+namespace Collector
+
+/-- `flushStep`: the effects of the step are queued in the order of `InsideBlockEffectType`,
+`LAVA_IGNITE` with what runs after it before `EXTINGUISH`. -/
+def flushStep (c : Collector) : Collector :=
+  let lava := if c.lava > 0 then .lavaIgnite :: List.replicate c.lava FluidEffect.lavaHurt else []
+  let water := if c.water then [FluidEffect.extinguish] else []
+  { c with lava := 0, water := false, final := (lava ++ water).reverse ++ c.final }
+
+/-- `advanceStep(step)`. -/
+def advanceStep (c : Collector) (step : ℤ) : Collector :=
+  if c.lastStep != step then { c with lastStep := step }.flushStep else c
+
+/-- `FluidState.entityInside`: water asks for `EXTINGUISH`, lava for `LAVA_IGNITE` followed by
+`lavaHurt`. (Lava also asks for `CLEAR_FREEZE`; freezing is not modelled.) -/
+def fluidInside (c : Collector) (s : FluidState) : Collector :=
+  if s.fluid.isWater then { c with water := true }
+  else if s.fluid.isLava then { c with lava := c.lava + 1 }
+  else c
+
+/-- The effects that `applyAndClear` applies, in order. -/
+def effects (c : Collector) : List FluidEffect := c.flushStep.final.reverse
+
+end Collector
+
+/-- What a unit that does not say what fluids do to its entity gets: lava, which would set the
+entity on fire and hurt it, sets `Level.overflow`; being put out by water does nothing to an
+entity that the model never sets on fire. -/
+def unmodelledFluidEffects (effects : List FluidEffect) : M Unit := do
+  if effects.any (· != .extinguish) then Level.setOverflow
+
+/-- The entity burns, as far as the model knows: `Entity.remainingFireTicks` is positive. Only
+lava sets an entity on fire in the model, and only the kinds that keep `Entities.Physics`. -/
+def burning (e : Entity) : Bool :=
+  match e.data with
+  | .item d => d.phys.remainingFireTicks > 0
+  | .fallingBlock d => d.phys.remainingFireTicks > 0
+  | _ => false
+
+/-- The blocks whose `entityInside` does something to a burning entity that the model does not
+have: a cauldron of water or of powder snow puts it out and loses a level, and powder snow is
+destroyed by it. -/
+def reactsToBurning (b : Block) : Bool :=
+  b.is .water_cauldron || b.is .powder_snow_cauldron || b.is .powder_snow
+
 /-! ### Telling the blocks -/
 
 /-- `Entity.checkInsideBlocks(from, to, effectCollector, visitedBlocks, maxMovementIterations)`
 for the entity with index `i`: the blocks on the way from `start` to `stop` that the entity
-meets, and that are not in `visited` yet, are told that the entity is inside them. The walk ends
-when the entity is gone, or at step `maxIterations`. Returns the blocks told so far and the
-number of steps made. -/
+meets, and that are not in `visited` yet, are told that the entity is inside them, and the
+fluids it meets add their effects to the collector `effects`. The walk ends when the entity is
+gone, or at step `maxIterations`. Returns the blocks told so far, the collector and the number
+of steps made. -/
 def checkInsideBlocksBetween (dims : Dimensions) (i : ℕ) (start stop : Vec3) (visited : List Pos)
-    (maxIterations : ℤ) : M (List Pos × ℤ) := do
+    (effects : Collector) (maxIterations : ℤ) : M (List Pos × Collector × ℤ) := do
   let box := (dims.box stop).deflate Phys.eps5f
   let mut visited := visited
+  let mut effects := effects
   let mut iterations : ℕ := 0
   for (p, iteration) in blocksIntersectedBetween start stop box do
     if ((← get).entity? i).isNone then break
     if (iteration : ℤ) ≥ maxIterations then break
     iterations := iteration
     let state ← Level.getBlock p
-    if !state.isAir && collidedWithBlock dims state p start stop && !visited.contains p then
-      visited := p :: visited
-      (← Level.behaviour state).entityInside p i
-  return (visited, (iterations : ℤ) + 1)
+    if !state.isAir then
+      let insideBlock := collidedWithBlock dims state p start stop
+      let fluid := state.fluidState
+      let insideFluid := collidedWithFluid (← get) dims fluid p start stop
+      if (insideBlock || insideFluid) && !visited.contains p then
+        visited := p :: visited
+        if insideBlock then
+          effects := effects.advanceStep iteration
+          if state.is .bubble_column then Level.setOverflow
+          if reactsToBurning state && (((← get).entity? i).any burning) then Level.setOverflow
+          (← Level.behaviour state).entityInside p i
+        if insideFluid then
+          effects := (effects.advanceStep iteration).fluidInside fluid
+  return (visited, effects, (iterations : ℤ) + 1)
 
 /-- `Entity.checkInsideBlocks(movements, effectCollector)` for the entity with index `i`. A
 movement that `Entity.move` made is gone through one axis after the other, in the order in which
 the movement that was asked for is resolved; any other movement in a straight line. At most 16
-steps are made for one movement; if they are used up, the blocks at its end are visited. -/
-def checkInsideBlocks (dims : Dimensions) (i : ℕ) (movements : List Movement) : M Unit := do
+steps are made for one movement; if they are used up, the blocks at its end are visited.
+Returns the effects that the fluids on the way asked for, in the order in which they are to be
+applied. -/
+def checkInsideBlocks (dims : Dimensions) (i : ℕ) (movements : List Movement) :
+    M (List FluidEffect) := do
   let mut visited : List Pos := []
+  let mut effects : Collector := {}
   for movement in movements do
     let delta := movement.stop.sub movement.start
     let mut left : ℤ := 16
@@ -259,33 +364,43 @@ def checkInsideBlocks (dims : Dimensions) (i : ℕ) (movements : List Movement) 
               | .x => ⟨pos.x + axisMove * 1.0, pos.y + axisMove * 0.0, pos.z + axisMove * 0.0⟩
               | .y => ⟨pos.x + axisMove * 0.0, pos.y + axisMove * 1.0, pos.z + axisMove * 0.0⟩
               | .z => ⟨pos.x + axisMove * 0.0, pos.y + axisMove * 0.0, pos.z + axisMove * 1.0⟩
-            let (v, used) ← checkInsideBlocksBetween dims i pos target visited left
+            let (v, c, used) ← checkInsideBlocksBetween dims i pos target visited effects left
             visited := v
+            effects := c
             left := left - used
             pos := target
       else
-        let (v, used) ← checkInsideBlocksBetween dims i movement.start movement.stop visited 16
+        let (v, c, used) ←
+          checkInsideBlocksBetween dims i movement.start movement.stop visited effects 16
         visited := v
+        effects := c
         left := left - used
     | none =>
-      let (v, used) ← checkInsideBlocksBetween dims i movement.start movement.stop visited 16
+      let (v, c, used) ←
+        checkInsideBlocksBetween dims i movement.start movement.stop visited effects 16
       visited := v
+      effects := c
       left := left - used
     if left ≤ 0 then
-      let (v, _) ← checkInsideBlocksBetween dims i movement.stop movement.stop visited 1
+      let (v, c, _) ←
+        checkInsideBlocksBetween dims i movement.stop movement.stop visited effects 1
       visited := v
+      effects := c
+  return effects.effects
 
 /-- `Entity.applyEffectsFromBlocks(movements)` for the entity with index `i`, which is of size
 `dims` and is affected by blocks (it is alive and has physics). `effectPos` is the block the
 entity stands on (`getOnPosLegacy`) if it is on the ground: that block is stepped on
 (`Block.stepOn`). Then the blocks met during the movements are told that the entity is inside
-them. -/
+them, and at the end the effects that the fluids on the way asked for are handed to
+`fluidEffects`, which applies them to the entity (`insideEffectCollector.applyAndClear`). -/
 def applyEffectsFromBlocks (dims : Dimensions) (i : ℕ) (effectPos : Option Pos)
-    (movements : List Movement) : M Unit := do
+    (movements : List Movement)
+    (fluidEffects : List FluidEffect → M Unit := unmodelledFluidEffects) : M Unit := do
   if ((← get).entity? i).isNone then return
   if let some p := effectPos then
     (← Level.behaviour (← Level.getBlock p)).stepOn p i
-  checkInsideBlocks dims i movements
+  fluidEffects (← checkInsideBlocks dims i movements)
 
 /-- The movements for which `Entity.applyEffectsFromBlocks()` applies the effects of blocks:
 those made since the last time, followed by the way from the end of the last one to where the

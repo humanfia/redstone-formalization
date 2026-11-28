@@ -1,0 +1,74 @@
+{
+ "name": "xp-edge",
+ "ticks": 120,
+ "box": {
+  "min": [
+   -2,
+   -2,
+   -2
+  ],
+  "max": [
+   6,
+   4,
+   3
+  ]
+ },
+ "settings": {
+  "blockDrops": true
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:diamond_ore"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:spawner"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "drop": true
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "drop": true
+  }
+ ]
+}

@@ -51,8 +51,6 @@ The test harness has no player in the world either; its scenarios set the rule t
 
 `tests/scenarios/fire`. Still in `tests/pending/scenarios/fire`, for what other components do:
 
-* `waterlogged`: the water of the waterlogged blocks starts to flow when the fire next to them
-  changes (`Redstone.Mechanics.Fluid` does not make fluids flow yet);
 * `burn-oak-leaves`: leaves next to a block that changes schedule a tick to find their
   distance to a log again (`LeavesBlock.updateShape`, `Redstone.Component.Ground`).
 -/

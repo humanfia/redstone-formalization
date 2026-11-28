@@ -1,0 +1,110 @@
+{
+ "name": "lava-edge-platform",
+ "ticks": 400,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   6,
+   12
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    12,
+    5,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    12
+   ],
+   "max": [
+    12,
+    5,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    5,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    12,
+    1,
+    0
+   ],
+   "max": [
+    12,
+    5,
+    12
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    5,
+    1,
+    5
+   ],
+   "max": [
+    7,
+    3,
+    7
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    6,
+    4,
+    6
+   ],
+   "state": "minecraft:lava[level=0]",
+   "flags": 3
+  }
+ ]
+}

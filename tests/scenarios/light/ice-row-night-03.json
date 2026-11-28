@@ -1,0 +1,37 @@
+{
+ "name": "ice-row-night-03",
+ "ticks": 300,
+ "box": {"min": [0, 0, 0], "max": [11, 3, 8]},
+ "settings": {"dayTime": 18000},
+ "fill": [
+  {"min": [0, 0, 0], "max": [11, 1, 8], "state": "minecraft:stone"}
+ ],
+ "blocks": [
+  {"pos": [1, 2, 1], "state": "minecraft:jack_o_lantern[facing=north]"},
+  {"pos": [1, 2, 3], "state": "minecraft:shroomlight"},
+  {"pos": [1, 2, 5], "state": "minecraft:crying_obsidian"},
+  {"pos": [1, 2, 7], "state": "minecraft:glow_lichen[down=true,east=false,north=false,south=false,up=false,waterlogged=false,west=false]"}
+ ],
+ "actions": [
+  {"tick": 1, "type": "set", "pos": [2, 1, 1], "state": "minecraft:frosted_ice[age=0]"},
+  {"tick": 2, "type": "set", "pos": [4, 1, 1], "state": "minecraft:frosted_ice[age=3]"},
+  {"tick": 3, "type": "set", "pos": [6, 1, 1], "state": "minecraft:frosted_ice[age=0]"},
+  {"tick": 4, "type": "set", "pos": [8, 1, 1], "state": "minecraft:frosted_ice[age=2]"},
+  {"tick": 5, "type": "set", "pos": [10, 1, 1], "state": "minecraft:frosted_ice[age=3]"},
+  {"tick": 6, "type": "set", "pos": [2, 1, 3], "state": "minecraft:frosted_ice[age=1]"},
+  {"tick": 7, "type": "set", "pos": [4, 1, 3], "state": "minecraft:frosted_ice[age=2]"},
+  {"tick": 8, "type": "set", "pos": [6, 1, 3], "state": "minecraft:frosted_ice[age=0]"},
+  {"tick": 9, "type": "set", "pos": [8, 1, 3], "state": "minecraft:frosted_ice[age=3]"},
+  {"tick": 10, "type": "set", "pos": [10, 1, 3], "state": "minecraft:frosted_ice[age=0]"},
+  {"tick": 11, "type": "set", "pos": [2, 1, 5], "state": "minecraft:frosted_ice[age=1]"},
+  {"tick": 12, "type": "set", "pos": [4, 1, 5], "state": "minecraft:frosted_ice[age=0]"},
+  {"tick": 13, "type": "set", "pos": [6, 1, 5], "state": "minecraft:frosted_ice[age=2]"},
+  {"tick": 14, "type": "set", "pos": [8, 1, 5], "state": "minecraft:frosted_ice[age=0]"},
+  {"tick": 15, "type": "set", "pos": [10, 1, 5], "state": "minecraft:frosted_ice[age=3]"},
+  {"tick": 16, "type": "set", "pos": [2, 1, 7], "state": "minecraft:frosted_ice[age=2]"},
+  {"tick": 17, "type": "set", "pos": [4, 1, 7], "state": "minecraft:frosted_ice[age=3]"},
+  {"tick": 18, "type": "set", "pos": [6, 1, 7], "state": "minecraft:frosted_ice[age=1]"},
+  {"tick": 19, "type": "set", "pos": [8, 1, 7], "state": "minecraft:frosted_ice[age=1]"},
+  {"tick": 20, "type": "set", "pos": [10, 1, 7], "state": "minecraft:frosted_ice[age=2]"}
+ ]
+}

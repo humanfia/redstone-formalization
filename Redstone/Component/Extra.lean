@@ -3,6 +3,7 @@ module
 public import Redstone.Mechanics.Tick
 public import Redstone.Basic.Xoroshiro
 public import Redstone.Entity.Still
+public import Redstone.World.Light
 
 /-!
 # Other blocks that react to redstone or to pistons
@@ -31,9 +32,6 @@ server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`,
 
 * Fluids do not flow in the model. A sponge that leaves water behind, or ice that melts next to
   an empty cell, is followed on the server by flowing water that the model does not have.
-* Light. `FrostedIceBlock.tick` melts only where `getMaxLocalRawBrightness` exceeds
-  `11 - age - getLightDampening`; the model takes this to hold, as it does under the open sky
-  by day. Frosted ice in the dark does not melt in the game.
 * Dimensions. Water evaporates in the Nether (`WATER_EVAPORATES`): there ice leaves air and a
   wet sponge dries when placed. The model is the Overworld.
 * `SpongeBlock`: a block that holds water without being a `BucketPickup` is skipped by the
@@ -194,10 +192,16 @@ def slightlyMelt (s : Blocks.FrostedIce) (p : Pos) : M Bool := do
     melt p
     return true
 
-/-- `FrostedIceBlock.tick`. The test on the brightness is taken to hold. -/
+/-- The test on the brightness of `FrostedIceBlock.tick`, outside the End: the light of the
+cell (`Level.maxLocalRawBrightness`, the light engine's value for this game tick) is more than
+`11 - age - getLightDampening`. Frosted ice in the dark does not melt. -/
+def brightEnoughToMelt (l : Level) (s : Blocks.FrostedIce) (p : Pos) : Bool :=
+  decide (l.maxLocalRawBrightness p + s.age.val + (Block.frostedIce s).attrs.lightDampening > 11)
+
+/-- `FrostedIceBlock.tick`. -/
 def frostedIceTick (s : Blocks.FrostedIce) (p : Pos) : M Unit := do
   let draw ← nextInt 3
-  if draw = 0 || fewerNeighboursThan (← get) p 4 then
+  if (draw = 0 || fewerNeighboursThan (← get) p 4) && brightEnoughToMelt (← get) s p then
     if ← slightlyMelt s p then
       Direction.values.forM fun d => do
         let q := p.step d

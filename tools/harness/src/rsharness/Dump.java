@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 /** Writes blockdump.json (tests/FORMAT.md, "Block dump"). Position-dependent queries use an empty BlockGetter at BlockPos.ZERO. */
@@ -123,7 +124,31 @@ final class Dump {
       return fluid.isEmpty() ? null : Recorder.formatState(fluid.createLegacyBlock());
    }
 
+   /**
+    * The shape through which light is occluded at the faces of a block ({@code LightEngine.getOcclusionShape}): empty unless the state
+    * occludes and uses its shape for light occlusion ({@code LightEngine.isEmptyShape}).
+    */
+   private static VoxelShape lightOcclusionShape(final BlockState state) {
+      return state.canOcclude() && state.useShapeForLightOcclusion() ? state.getOcclusionShape() : Shapes.empty();
+   }
+
    private String build(final ServerLevel level) {
+      // The collision, outline and support shapes are numbered first, in the order of the states, so that a shape that only occludes
+      // light gets a number after all of them.
+      for (Block block : BuiltInRegistries.BLOCK) {
+         for (BlockState state : block.getStateDefinition().getPossibleStates()) {
+            for (Supplier<VoxelShape> shape : List.<Supplier<VoxelShape>>of(
+               () -> state.getCollisionShape(EMPTY, ZERO), () -> state.getShape(EMPTY, ZERO), () -> state.getBlockSupportShape(EMPTY, ZERO)
+            )) {
+               try {
+                  this.shape(shape.get());
+               } catch (Throwable t) {
+                  // counted when the attribute is written
+               }
+            }
+         }
+      }
+
       StringBuilder blocks = new StringBuilder();
       boolean firstBlock = true;
       for (Block block : BuiltInRegistries.BLOCK) {
@@ -196,6 +221,8 @@ final class Dump {
             this.attr(blocks, "collision", () -> this.shape(state.getCollisionShape(EMPTY, ZERO)));
             this.attr(blocks, "outline", () -> this.shape(state.getShape(EMPTY, ZERO)));
             this.attr(blocks, "supportShape", () -> this.shape(state.getBlockSupportShape(EMPTY, ZERO)));
+            this.attr(blocks, "lightDampening", state::getLightDampening);
+            this.attr(blocks, "lightOcclusion", () -> this.shape(lightOcclusionShape(state)));
             blocks.append("}}");
          }
          blocks.append("]}");

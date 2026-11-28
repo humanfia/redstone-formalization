@@ -18,10 +18,10 @@ namespace Redstone
 
 namespace Block
 
-/-- The shapes that blocks have (`VoxelShape`), numbered as `Attrs.collision`, `Attrs.outline`
-and `Attrs.supportShape` number them. A shape is given by its boxes, in the order of
-`VoxelShape.forAllBoxes`; a box is six doubles `minX, minY, minZ, maxX, maxY, maxZ`, given by
-their IEEE bits, relative to the block. Shape 0 is the empty shape. -/
+/-- The shapes that blocks have (`VoxelShape`), numbered as `Attrs.collision`, `Attrs.outline`,
+`Attrs.supportShape` and `Attrs.lightOcclusion` number them. A shape is given by its boxes,
+in the order of `VoxelShape.forAllBoxes`; a box is six doubles `minX, minY, minZ, maxX, maxY,
+maxZ`, given by their IEEE bits, relative to the block. Shape 0 is the empty shape. -/
 def shapeBits : Array (Array UInt64) := #[
   #[],
   #[0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x3ff0000000000000, 0x3ff0000000000000, 0x3ff0000000000000],

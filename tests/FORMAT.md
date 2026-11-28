@@ -227,7 +227,12 @@ inventory is generated:
   up, north, south, west, east); `fluid` (the block state string of
   `state.getFluidState().createLegacyBlock()` in the canonical format, e.g.
   `minecraft:water[level=0]`; absent when the fluid state is empty);
-  `collision`, `outline`, `supportShape` (indices into `shapes`). `destroySpeed` is a hex float.
+  `collision`, `outline`, `supportShape` (indices into `shapes`); `lightDampening`
+  (`getLightDampening`); `lightOcclusion` (index into `shapes` of the shape with which the state
+  occludes light at its faces: `getOcclusionShape()` when the state has `canOcclude` and
+  `useShapeForLightOcclusion`, the empty shape otherwise, as `LightEngine.getOcclusionShape`
+  takes it). `destroySpeed` is a hex float. The collision, outline and support shapes of all
+  states are numbered before any occlusion shape.
   Queries that take a position are made at `BlockPos.ZERO` of an empty world
   (`EmptyBlockGetter`); an attribute whose query throws would be left out (none does in 26.3).
 * A shape is a list of boxes `[minX, minY, minZ, maxX, maxY, maxZ]` in hex doubles, in the order

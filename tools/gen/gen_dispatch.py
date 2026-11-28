@@ -77,7 +77,7 @@ def entityBehaviour (e : Entity) : EntityBehaviour :=
   | .tnt _ => Entity.PrimedTnt.behaviour
   | .minecart _ _ => Entity.Minecart.behaviour
   | .projectile _ _ => Entity.Projectile.behaviour
-  | .other _ => Entity.Still.behaviour e
+  | .other _ _ => Entity.Still.behaviour e
 
 /-- The rules of Minecraft, as far as they are formalized. -/
 def rules : Rules where

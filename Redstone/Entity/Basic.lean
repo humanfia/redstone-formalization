@@ -39,6 +39,25 @@ def MinecartKind.typeName : MinecartKind → String
   | .spawner => "minecraft:spawner_minecart"
   | .commandBlock => "minecraft:command_block_minecart"
 
+/-- What the model keeps of an entity it does not move, besides its type: the flags that decide
+whether and how it touches blocks. -/
+structure Entities.Other where
+  /-- `Entity.isNoGravity()` (`NoGravity`). -/
+  noGravity : Bool := false
+  /-- `ArmorStand.isMarker()` (`Marker`). -/
+  marker : Bool := false
+  /-- `ArmorStand.isSmall()` (`Small`). -/
+  small : Bool := false
+  deriving Repr, Inhabited
+
+/-- The flags are not compared with the server: the model reads them once and never changes
+them, while the game does change some (a vex gives itself `NoGravity`). -/
+instance : BEq Entities.Other := ⟨fun _ _ => true⟩
+
+/-- Reads the flags from the entity's saved NBT. -/
+def Entities.Other.ofNbt (nbt : Nbt) : Entities.Other :=
+  ⟨nbt.boolD "NoGravity" false, nbt.boolD "Marker" false, nbt.boolD "Small" false⟩
+
 /-- What an entity is, with the data particular to its kind. -/
 inductive EntityData
   | item (d : Entities.Item)
@@ -48,7 +67,7 @@ inductive EntityData
   /-- A projectile of the entity type named `type`. -/
   | projectile (type : String) (d : Entities.Projectile)
   /-- Any other entity, of the entity type named `type`. -/
-  | other (type : String)
+  | other (type : String) (d : Entities.Other := {})
   deriving BEq, Repr
 
 /-- The registry name of the entity type. -/
@@ -58,7 +77,7 @@ def EntityData.typeName : EntityData → String
   | .tnt _ => "minecraft:tnt"
   | .minecart kind _ => kind.typeName
   | .projectile type _ => type
-  | .other type => type
+  | .other type _ => type
 
 /-- The entity types kept as `EntityData.projectile`. -/
 def projectileTypes : List String :=
@@ -82,7 +101,7 @@ def EntityData.ofNbt? (type : String) (nbt : Nbt) : Option EntityData :=
   | "minecraft:command_block_minecart" => .minecart .commandBlock <$> Entities.Minecart.ofNbt? nbt
   | _ =>
     if projectileTypes.contains type then .projectile type <$> Entities.Projectile.ofNbt? nbt
-    else some (.other type)
+    else some (.other type (.ofNbt nbt))
 
 /-- An entity of the world. -/
 structure Entity where
@@ -94,5 +113,16 @@ structure Entity where
   /-- What the entity is. -/
   data : EntityData
   deriving BEq, Repr
+
+/-- `Entity.resetFallDistance()`: sets `Entity.fallDistance` to zero, for the kinds of entity
+that keep it. -/
+def Entity.resetFallDistance (e : Entity) : Entity :=
+  match e.data with
+  | .item d => { e with data := .item { d with phys := { d.phys with fallDistance := 0 } } }
+  | .fallingBlock d =>
+    { e with data := .fallingBlock { d with phys := { d.phys with fallDistance := 0 } } }
+  | .tnt d => { e with data := .tnt { d with fallDistance := 0 } }
+  | .minecart kind d => { e with data := .minecart kind { d with fallDistance := 0 } }
+  | _ => e
 
 end Redstone

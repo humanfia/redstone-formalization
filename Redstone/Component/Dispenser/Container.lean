@@ -168,7 +168,7 @@ def isUnmodelledContainer : BlockEntity → Bool
 def isContainerEntity (e : Entity) : Bool :=
   match e.data with
   | .minecart .chest _ | .minecart .hopper _ => true
-  | .other type => type.endsWith "_chest_boat" || type.endsWith "_chest_raft"
+  | .other type _ => type.endsWith "_chest_boat" || type.endsWith "_chest_raft"
   | _ => false
 
 /-- What `HopperBlockEntity.getContainerAt` finds at a position. -/

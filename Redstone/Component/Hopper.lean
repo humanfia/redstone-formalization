@@ -54,7 +54,7 @@ chest or a hopper, or a boat with a chest. -/
 def isContainerEntity (e : Entity) : Bool :=
   match e.data with
   | .minecart .chest _ | .minecart .hopper _ => true
-  | .other type => type.endsWith "chest_boat" || type.endsWith "chest_raft"
+  | .other type _ => type.endsWith "chest_boat" || type.endsWith "chest_raft"
   | _ => false
 
 /-- The bounding box of an entity, with the given half width and height, intersects the column

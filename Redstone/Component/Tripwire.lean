@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Mechanics.Tick
+public import Redstone.Entity.Still
 
 /-!
 # Tripwire and tripwire hooks
@@ -23,16 +24,17 @@ is placed, removed or changes its `powered` state.
   (`playerWillDestroy`): `Behaviour` has no hook for them. `rotate` and `mirror` are not used
   by anything modelled.
 * Sounds.
-* `entityInside` is modelled, but nothing calls it yet: the entity components are to call it
-  for an entity whose bounding box intersects the shape of the string
-  (`getEntityInsideCollisionShape`, which is `getShape`; see `entityTouches`). The behaviour does
-  not check the shape again, as in the game. Until then a string never becomes powered by
-  itself, and the scenarios with entities are in `tests/pending`.
 * The entities found by a string's scheduled tick (`Level.getEntities` in the string's shape)
-  are computed from the position of each entity and the fixed size of its entity type. The size
-  of an entity kept as `EntityData.other` is not known to the model, so if such an entity exists
-  (anywhere, and unless its type always ignores block triggers) when a string looks for
-  entities, the model sets `Level.overflow` and ignores it.
+  are computed from the position of each entity and the size of its entity type
+  (`Redstone.Entity.Still.info?` for the entities the model does not move, with what that
+  assumes: no babies, no poses). An entity whose size the model does not know (a projectile of
+  a type without a fixed size, an entity type that is not in the table), or a bat, which
+  ignores block triggers while it rests, sets `Level.overflow` when a string looks for entities
+  or is touched.
+
+`entityInside` is called by the entity units (`Redstone.Entity.Touch`), for an entity that
+meets the shape of the string (`getEntityInsideCollisionShape`, which is `getShape`) on its
+way. The behaviour does not check the shape again, as in the game.
 -/
 
 @[expose] public section
@@ -235,16 +237,23 @@ def entitySizeBits : EntityData → Option (UInt32 × UInt32)
         "minecraft:experience_bottle"] then
       some (0x3e800000, 0x3e800000)
     else none
-  | .other _ => none
+  | .other _ _ => none
+
+/-- The size (width, height) of an entity, as `float`s: that of its type, or, for an entity the
+model does not move, what `Redstone.Entity.Still.info?` gives. -/
+def entitySize (e : Entity) : Option (Float32 × Float32) :=
+  match e.data with
+  | .other _ _ => (Entity.Still.info? e).map fun info => (info.width, info.height)
+  | data => (entitySizeBits data).map fun (w, h) => (Float32.ofBits w, Float32.ofBits h)
 
 /-- Whether the bounding box of the entity (`EntityDimensions.makeBoundingBox` at its position)
 intersects the shape of the string `state` at `p` (`AABB.intersects`, with strict inequalities).
 `none` if the size of the entity is not known. The shape is the full square of the cell, from
 `1/16` to `2.5/16` high for an attached string and from `0` to `1/2` otherwise. -/
 def entityTouches (state : Blocks.TripWire) (p : Pos) (e : Entity) : Option Bool := do
-  let (wBits, hBits) ← entitySizeBits e.data
-  let w := (Float32.ofBits wBits / 2).toFloat
-  let h := (Float32.ofBits hBits).toFloat
+  let (width, height) ← entitySize e
+  let w := (width / 2).toFloat
+  let h := height.toFloat
   let x := Float.ofInt p.x
   let y := Float.ofInt p.y
   let z := Float.ofInt p.z
@@ -254,15 +263,12 @@ def entityTouches (state : Blocks.TripWire) (p : Pos) (e : Entity) : Option Bool
     && c.z - w < z + 1 && c.z + w > z
 
 /-- `Entity.isIgnoringBlockTriggers`. `none` when it depends on data the model does not keep
-(a bat, which ignores triggers while resting, and an armour stand, which does when it is a
-marker). -/
-def ignoresBlockTriggers : EntityData → Option Bool
-  | .other type =>
-    if type ∈ ["minecraft:interaction", "minecraft:block_display", "minecraft:item_display",
-        "minecraft:text_display", "minecraft:marker", "minecraft:ominous_item_spawner"] then
-      some true
-    else if type ∈ ["minecraft:bat", "minecraft:armor_stand"] then none
-    else some false
+(a bat, which ignores triggers while resting) or when the model does not know the type. -/
+def ignoresBlockTriggers (e : Entity) : Option Bool :=
+  match e.data with
+  | .other type _ =>
+    if type == "minecraft:bat" then none
+    else (Entity.Still.info? e).map (·.ignoresBlockTriggers)
   | _ => some false
 
 /-- `TripWireBlock.checkPressed(level, pos, entities)`: the string at `p` becomes powered if one
@@ -284,7 +290,7 @@ box intersects the shape of the string. Entities that ignore block triggers neve
 other entity of unknown size sets `Level.overflow` and is ignored. -/
 def checkPressed (p : Pos) : M Unit := do
   let .tripWire state ← Level.getBlock p | return
-  let candidates := (← get).entities.filter (ignoresBlockTriggers ·.data != some true)
+  let candidates := (← get).entities.filter (ignoresBlockTriggers · != some true)
   let touches := candidates.map (entityTouches state p)
   if touches.any (·.isNone) then Level.setOverflow
   checkPressedWith p (touches.contains (some true))
@@ -303,7 +309,7 @@ def wire (s : Blocks.TripWire) : Behaviour :=
     entityInside := fun p index => do
       if !s.powered && !(← get).hasScheduledTick p .tripwire then
         let some e := (← get).entity? index | return
-        match ignoresBlockTriggers e.data with
+        match ignoresBlockTriggers e with
         | some ignores => checkPressedWith p !ignores
         | none =>
           Level.setOverflow

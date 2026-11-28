@@ -15,11 +15,10 @@ sixteenth of its height above its position (`Redstone.Entity.Tnt.explode`).
 
 ## What is left out
 
-* `Block.entityInside` is not called for the blocks the entity moves through, so a primed TNT
-  does not press pressure plates or trip tripwires in the model. Blocks whose `entityInside`
-  would change the entity itself (cobweb, sweet berry bush, powder snow, bubble column, honey
-  block, the portals), and fluids, which push it (`updateFluidInteraction`), are not modelled:
-  when the entity comes near one of them the model sets `Level.overflow`.
+* Blocks whose `entityInside` would change the entity itself in a way no component models
+  (cobweb, sweet berry bush, powder snow, bubble column, the portals), and fluids, which push it
+  (`updateFluidInteraction`): when the entity comes near one of them the model sets
+  `Level.overflow`.
 * Portals (`handlePortal`), the world border, and collisions with other entities (boats,
   shulkers).
 * Collision shapes that do not depend on the block state alone; see
@@ -67,7 +66,7 @@ def getBlockSpeedFactor (l : Level) (pos : Vec3) (support : Option Pos) : Float 
 def collide (l : Level) (pos movement : Vec3) (fall : Float) : Vec3 × Bool :=
   if lengthSqr movement == 0.0 then (movement, false)
   else
-    let box := AABB.ofEntity pos
+    let box := entityBox pos
     let (shapes, unmodelled) := blockCollisions l fall (box.expandTowards movement)
     (collideWithShapes movement box shapes, unmodelled)
 
@@ -88,7 +87,7 @@ have was met. -/
 def checkSupportingBlock (l : Level) (pos movement : Vec3) (d : Entities.Tnt) (onGround : Bool) :
     Option Pos × Bool × Bool :=
   if onGround then
-    let box := AABB.ofEntity pos
+    let box := entityBox pos
     let testArea : AABB := ⟨box.minX, box.minY - 1.0e-6, box.minZ, box.maxX, box.minY, box.maxZ⟩
     let (support, bad) := findSupportingBlock l d.fallDistance pos testArea
     if support.isSome || d.onGroundNoBlocks then (support, support.isNone, bad)
@@ -126,8 +125,10 @@ def restituteMovementAfterCollisions (effectState : Block) (xCollision zCollisio
 /-- `Entity.move(MoverType.SELF, delta)` for a primed TNT with position, velocity and data as
 given, on the server: collides the movement with the blocks, moves, finds out whether the
 entity is on the ground and on which block, counts the fall, and changes the velocity for the
-collision and for the block below. Returns the new common state and data. -/
-def move (base : Entities.Base) (d : Entities.Tnt) : M (Entities.Base × Entities.Tnt) := do
+collision and for the block below. Returns the new common state and data, and the movement made
+if the entity moved (`addMovementThisTick`). -/
+def move (base : Entities.Base) (d : Entities.Tnt) :
+    M (Entities.Base × Entities.Tnt × Option Entities.Movement) := do
   let l ← get
   let delta := base.motion
   let pos := base.pos
@@ -142,6 +143,8 @@ def move (base : Entities.Base) (d : Entities.Tnt) : M (Entities.Base × Entitie
       clipFallDamageResetting l pos (vadd pos (vscale (normalize movement) checkDistance))
     if water then Level.setOverflow
     if hit then fall := 0.0
+  let made : Option Entities.Movement :=
+    if moved then some ⟨pos, vadd pos movement, some delta⟩ else none
   let pos := if moved then vadd pos movement else pos
   let xCollision := !((movement.x - delta.x).abs < wide 0x3727c5ac)
   let zCollision := !((movement.z - delta.z).abs < wide 0x3727c5ac)
@@ -172,20 +175,21 @@ def move (base : Entities.Base) (d : Entities.Tnt) : M (Entities.Base × Entitie
   let factor := getBlockSpeedFactor (← get) pos support
   motion := vmul motion factor 1.0 factor
   return (⟨pos, motion, onGround⟩,
-    { d with fallDistance := fall, supportingBlock := support, onGroundNoBlocks := noBlocks })
+    { d with fallDistance := fall, supportingBlock := support, onGroundNoBlocks := noBlocks },
+    made)
 
 /-- Whether the entity, moving from `old` to `new`, comes near a block that would act on it in
 a way the model does not have: a fluid, or a block whose `entityInside` changes the entity. -/
 def touchesUnmodelled (l : Level) (old new : Vec3) : Bool :=
-  let a := AABB.ofEntity old
-  let b := AABB.ofEntity new
+  let a := entityBox old
+  let b := entityBox new
   (intRange (floorInt (jmin a.minX b.minX)) (floorInt (jmax a.maxX b.maxX) + 1)).any fun x =>
     (intRange (floorInt (jmin a.minY b.minY)) (floorInt (jmax a.maxY b.maxY) + 1)).any fun y =>
       (intRange (floorInt (jmin a.minZ b.minZ)) (floorInt (jmax a.maxZ b.maxZ) + 1)).any fun z =>
         let block := l.blockAt ⟨x, y, z⟩
         !block.attrs.fluid.isEmpty ||
-          [BlockId.cobweb, .sweet_berry_bush, .powder_snow, .bubble_column, .honey_block,
-            .nether_portal, .end_portal, .end_gateway].contains block.id
+          [BlockId.cobweb, .sweet_berry_bush, .powder_snow, .bubble_column, .nether_portal,
+            .end_portal, .end_gateway].contains block.id
 
 /-- `PrimedTnt.tick()`. -/
 def tick (index : ℕ) : M Unit := do
@@ -193,13 +197,15 @@ def tick (index : ℕ) : M Unit := do
   let .tnt d := e.data | return
   -- `applyGravity`
   let m := e.base.motion
-  let (base, d) ← move { e.base with motion := ⟨m.x + 0.0, m.y + -0.04, m.z + 0.0⟩ } d
+  let (base, d, made) ← move { e.base with motion := ⟨m.x + 0.0, m.y + -0.04, m.z + 0.0⟩ } d
   Level.modifyEntity index fun e => { e with base := base, data := .tnt d }
   if touchesUnmodelled (← get) e.base.pos base.pos then Level.setOverflow
-  -- `applyEffectsFromBlocks`: the block below is stepped on
-  if base.onGround then
-    let effectPos := getOnPosLegacy (← get) base.pos d.supportingBlock
-    (← Level.behaviour (← Level.getBlock effectPos)).stepOn effectPos index
+  -- `applyEffectsFromBlocks`: the block below is stepped on, the blocks on the way are told
+  let l ← get
+  let effectPos :=
+    if base.onGround then some (getOnPosLegacy l base.pos d.supportingBlock) else none
+  Touch.applyEffectsFromBlocks dims index effectPos
+    (Touch.finalMovements made.toList e.base.pos base.pos)
   let some e := (← get).entity? index | return
   let .tnt d := e.data | return
   let motion := vscale e.base.motion (wide 0x3f7ae148)

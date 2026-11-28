@@ -26,7 +26,7 @@
     {"module": "Rail", "classes": ["BaseRailBlock"]},
     {"module": "Tnt", "classes": ["TntBlock"]},
     {"module": "CommandBlock", "classes": ["CommandBlock", "StructureBlock", "TestBlock"]},
-    {"module": "Extra", "classes": ["AbstractSkullBlock", "SpongeBlock", "FrostedIceBlock", "PotentSulfurBlock", "SlimeBlock", "HoneyBlock"]},
+    {"module": "Extra", "classes": ["AbstractSkullBlock", "SpongeBlock", "FrostedIceBlock", "PotentSulfurBlock", "SlimeBlock", "HoneyBlock", "RedStoneOreBlock"]},
     {"module": "FallingBlock", "classes": ["FallingBlock"]}
   ]
 }

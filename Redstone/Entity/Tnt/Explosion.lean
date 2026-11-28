@@ -156,7 +156,7 @@ distance `fall`: the share of a grid of points of its bounding box from which th
 seen. The second component tells whether the model could not decide it. -/
 def getSeenPercent (l : Level) (center position : Vec3) (fall : Float) : Float32 × Bool :=
   Id.run do
-  let bb := AABB.ofEntity position
+  let bb := entityBox position
   let xs := 1.0 / ((bb.maxX - bb.minX) * 2.0 + 1.0)
   let ys := 1.0 / ((bb.maxY - bb.minY) * 2.0 + 1.0)
   let zs := 1.0 / ((bb.maxZ - bb.minZ) * 2.0 + 1.0)

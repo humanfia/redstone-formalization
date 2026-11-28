@@ -105,7 +105,7 @@ def blockBehaviour (b : Block) : Behaviour :=
   | .wallHangingSign _ _ => .inert b
   | .lever _ => Component.Lever.behaviour b
   | .pressurePlate _ _ => Component.PressurePlate.behaviour b
-  | .redStoneOre _ _ => .inert b
+  | .redStoneOre _ _ => Component.Extra.behaviour b
   | .redstoneTorch _ => Component.Torch.behaviour b
   | .redstoneWallTorch _ => Component.Torch.behaviour b
   | .button _ _ => Component.Button.behaviour b
@@ -263,7 +263,7 @@ def entityBehaviour (e : Entity) : EntityBehaviour :=
   | .tnt _ => Entity.PrimedTnt.behaviour
   | .minecart _ _ => Entity.Minecart.behaviour
   | .projectile _ _ => Entity.Projectile.behaviour
-  | .other _ => Entity.Still.behaviour e
+  | .other _ _ => Entity.Still.behaviour e
 
 /-- The rules of Minecraft, as far as they are formalized. -/
 def rules : Rules where

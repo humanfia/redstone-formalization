@@ -49,6 +49,18 @@ and `onGround` flag, and the rest of its saved NBT. -/
 def Base.ofTrace? (pos motion : Vec3) (onGround : Bool) (_nbt : Nbt) : Option Base :=
   some ⟨pos, motion, onGround⟩
 
+/-- A movement an entity made (`Entity.Movement`): where it started, where it ended, and, for a
+movement made by `Entity.move`, the movement that was asked for, whose larger horizontal
+component decides in which order the axes are gone through. -/
+structure Movement where
+  /-- `from`. -/
+  start : Vec3
+  /-- `to`. -/
+  stop : Vec3
+  /-- `axisDependentOriginalMovement`. -/
+  original : Option Vec3 := none
+  deriving Repr, Inhabited
+
 /-- The fields of `Entity` used by `Entity.move`, besides those of `Base`. Two values are equal
 (`==`) when the fields that the game saves agree: `fallDistance` and `noGravity`. The other
 fields are not saved, so they cannot be compared with the server; they start from the values of
@@ -82,6 +94,12 @@ structure Physics where
   did it, `0` for something that happens before the entities are ticked and `i + 1` for the tick
   of the entity with index `i`. A section lists its entities in this order. Not saved. -/
   sectionEntry : ℕ × ℕ := (0, 0)
+  /-- `Entity.movementThisTick`: the movements made since the effects of blocks were last
+  applied. Not saved. -/
+  movementThisTick : List Movement := []
+  /-- `Entity.finalMovementsThisTick`: the movements for which the effects of blocks were last
+  applied. Not saved. -/
+  finalMovementsThisTick : List Movement := []
   deriving Repr, Inhabited
 
 instance : BEq Physics :=

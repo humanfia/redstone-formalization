@@ -30,7 +30,6 @@ Which entities there are, their bounding boxes and when they touch a block comes
 
 namespace Redstone.Component.PressurePlate
 
-open Redstone.Entity.Still (AABB)
 
 /-- `BlockSetType.PressurePlateSensitivity`: what a plate with a boolean state detects. -/
 inductive Sensitivity
@@ -54,7 +53,7 @@ def maxWeight : Blocks.WeightedPressurePlate.Id → ℕ
 
 /-- `TOUCH_AABB.move(pos)`: the box in which entities are counted, 14 pixels wide and 4 pixels
 high, at the bottom of the plate's cell. -/
-def touchBox (p : Pos) : AABB := (⟨0.0625, 0.0, 0.0625, 0.9375, 0.25, 0.9375⟩ : AABB).move p
+def touchBox (p : Pos) : AABB := (⟨0.0625, 0.0, 0.0625, 0.9375, 0.25, 0.9375⟩ : AABB).atBlock p
 
 /-- `getEntityCount(level, box, entityClass)`: the number of entities of the class in the box
 that are not spectators and do not ignore block triggers. -/

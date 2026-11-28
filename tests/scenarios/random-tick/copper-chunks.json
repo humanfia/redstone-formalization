@@ -1,0 +1,534 @@
+{
+ "name": "copper-chunks",
+ "ticks": 60,
+ "box": {
+  "min": [
+   -16,
+   0,
+   -16
+  ],
+  "max": [
+   26,
+   0,
+   26
+  ]
+ },
+ "settings": {
+  "randomTickSpeed": 800
+ },
+ "blocks": [
+  {
+   "pos": [
+    -16,
+    0,
+    -16
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    -16,
+    0,
+    -10
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    -16,
+    0,
+    -4
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    -16,
+    0,
+    2
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    -16,
+    0,
+    8
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    -16,
+    0,
+    14
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    -16,
+    0,
+    20
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    -16,
+    0,
+    26
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    -10,
+    0,
+    -16
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    -10,
+    0,
+    -10
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    -10,
+    0,
+    -4
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    -10,
+    0,
+    2
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    -10,
+    0,
+    8
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    -10,
+    0,
+    14
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    -10,
+    0,
+    20
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    -10,
+    0,
+    26
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    -4,
+    0,
+    -16
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    -4,
+    0,
+    -10
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    -4,
+    0,
+    -4
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    -4,
+    0,
+    2
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    -4,
+    0,
+    8
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    -4,
+    0,
+    14
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    -4,
+    0,
+    20
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    -4,
+    0,
+    26
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    -16
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    -10
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    -4
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    2
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    8
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    14
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    20
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    2,
+    0,
+    26
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    -16
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    -10
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    -4
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    2
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    14
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    20
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    8,
+    0,
+    26
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    14,
+    0,
+    -16
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    14,
+    0,
+    -10
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    14,
+    0,
+    -4
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    14,
+    0,
+    2
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    14,
+    0,
+    8
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    14,
+    0,
+    14
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    14,
+    0,
+    20
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    14,
+    0,
+    26
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    20,
+    0,
+    -16
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    20,
+    0,
+    -10
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    20,
+    0,
+    -4
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    20,
+    0,
+    2
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    20,
+    0,
+    8
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    20,
+    0,
+    14
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    20,
+    0,
+    20
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    20,
+    0,
+    26
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    26,
+    0,
+    -16
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    26,
+    0,
+    -10
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    26,
+    0,
+    -4
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    26,
+    0,
+    2
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    26,
+    0,
+    8
+   ],
+   "state": "minecraft:weathered_copper"
+  },
+  {
+   "pos": [
+    26,
+    0,
+    14
+   ],
+   "state": "minecraft:copper_block"
+  },
+  {
+   "pos": [
+    26,
+    0,
+    20
+   ],
+   "state": "minecraft:exposed_copper"
+  },
+  {
+   "pos": [
+    26,
+    0,
+    26
+   ],
+   "state": "minecraft:weathered_copper"
+  }
+ ],
+ "actions": []
+}

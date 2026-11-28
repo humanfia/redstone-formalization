@@ -1,0 +1,51 @@
+{
+ "name": "ent-hopper-cart",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   6,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    7.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{fuse:5}"
+  },
+  {
+   "type": "minecraft:hopper_minecart",
+   "pos": [
+    10.5,
+    1.0,
+    7.5
+   ],
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3},{Slot:4b,id:\"minecraft:redstone\",count:64}]}"
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "name": "tnt-fuse-moving-north",
+ "ticks": 30,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   8,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    4,
+    1,
+    1
+   ],
+   "max": [
+    4,
+    1,
+    14
+   ],
+   "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:tnt_minecart",
+   "pos": [
+    4.5,
+    1.0625,
+    12.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,-0.35d],fuse:12}"
+  }
+ ]
+}

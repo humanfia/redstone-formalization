@@ -1,0 +1,347 @@
+{
+ "name": "coral-placed",
+ "ticks": 125,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   12,
+   3,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    12,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    15
+   ],
+   "max": [
+    12,
+    2,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    2,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    12,
+    1,
+    0
+   ],
+   "max": [
+    12,
+    2,
+    15
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    11
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:tube_coral_block",
+   "flags": 3
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:tube_coral[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    8
+   ],
+   "state": "minecraft:tube_coral_fan[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    12
+   ],
+   "state": "minecraft:tube_coral_wall_fan[facing=south,waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:brain_coral_block",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:brain_coral[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    8
+   ],
+   "state": "minecraft:brain_coral_fan[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 10,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    12
+   ],
+   "state": "minecraft:brain_coral_wall_fan[facing=south,waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:bubble_coral_block",
+   "flags": 3
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:bubble_coral[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    8
+   ],
+   "state": "minecraft:bubble_coral_fan[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 15,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    12
+   ],
+   "state": "minecraft:bubble_coral_wall_fan[facing=south,waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    2
+   ],
+   "state": "minecraft:fire_coral_block",
+   "flags": 3
+  },
+  {
+   "tick": 17,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    5
+   ],
+   "state": "minecraft:fire_coral[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    8
+   ],
+   "state": "minecraft:fire_coral_fan[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    12
+   ],
+   "state": "minecraft:fire_coral_wall_fan[facing=south,waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    2
+   ],
+   "state": "minecraft:horn_coral_block",
+   "flags": 3
+  },
+  {
+   "tick": 22,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    5
+   ],
+   "state": "minecraft:horn_coral[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    8
+   ],
+   "state": "minecraft:horn_coral_fan[waterlogged=false]",
+   "flags": 3
+  },
+  {
+   "tick": 25,
+   "type": "set",
+   "pos": [
+    10,
+    1,
+    12
+   ],
+   "state": "minecraft:horn_coral_wall_fan[facing=south,waterlogged=false]",
+   "flags": 3
+  }
+ ]
+}

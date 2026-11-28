@@ -105,6 +105,12 @@ structure Physics where
   pistonDeltas : Vec3 := ⟨0, 0, 0⟩
   /-- `Entity.pistonDeltasGameTime`. Not saved. -/
   pistonDeltasGameTime : ℕ := 0
+  /-- `Entity.wasTouchingWater` (`isInWater()`): the entity was in water when it last updated
+  its fluid interaction. Not saved. -/
+  wasTouchingWater : Bool := false
+  /-- `Entity.remainingFireTicks`, saved as `Fire`. It is not compared with the server: of what
+  sets an entity on fire the model has lava only. -/
+  remainingFireTicks : ℤ := 0
   deriving Repr, Inhabited
 
 instance : BEq Physics :=
@@ -117,7 +123,8 @@ def Physics.ofNbt? (nbt : Nbt) : Option Physics :=
     match nbt.get? "fall_distance" with
     | some (.double bits) => Float.ofBits (UInt64.ofNat bits)
     | _ => 0
-  some { fallDistance := fall, noGravity := nbt.boolD "NoGravity" false }
+  some { fallDistance := fall, noGravity := nbt.boolD "NoGravity" false
+         remainingFireTicks := nbt.intD "Fire" 0 }
 
 end Entities
 

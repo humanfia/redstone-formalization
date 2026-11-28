@@ -5,7 +5,7 @@ import Redstone.Proof.Axioms
 /-!
 # Smoke test of the proof method
 
-Five small circuits, each proved by letting the Lean kernel run the model (`decide +kernel`):
+A few small circuits, each proved by letting the Lean kernel run the model (`decide +kernel`):
 the statement is a decidable fact about the level after some inputs and game ticks, and the
 kernel evaluates `Level.tick` on a concrete level to check it. Nothing is trusted but the
 kernel: the check at the end of each theorem fails the build if the proof depends on anything
@@ -14,10 +14,10 @@ besides the three standard axioms.
 This file is a regression guard for the model. Kernel evaluation only works while everything
 on the path it takes can be reduced by the kernel in reasonable time: no `Float`, no opaque or
 well-founded definitions, no string processing on the path of a block. A change to the model
-that puts such a thing on the path of a lever, a lamp, a piston, a hopper or a comparator that
-reads a container makes this file fail or slow down, long before the theorems about real
-contraptions do. The whole file is meant to build in well under three minutes; if a change
-makes it slower, the change has made every proof slower.
+that puts such a thing on the path of a lever, a lamp, a piston, a hopper, a comparator that
+reads a container or redstone dust makes this file fail or slow down, long before the theorems
+about real contraptions do. The whole file is meant to build in well under three minutes; if a
+change makes it slower, the change has made every proof slower.
 
 The measurements behind the method, and its limits, are in `docs/proof-feasibility.md`.
 
@@ -132,6 +132,71 @@ theorem hopper_moves_item :
 
 assert_standard_axioms hopper_moves_item
 
+/-! ### Several items move between two hoppers
+
+Every item a hopper moves asks for the maximal stack size of the item
+(`Redstone.itemMaxStackSize`), which is a lookup by the name of the item. These two theorems
+run that lookup, for an item that is in the table and one that is not. With a scan over the
+item names instead of the search tree on `itemKey`, a game tick of these hoppers costs about a
+third of a second more. -/
+
+/-- The number of items in each slot of the hopper at `p`. -/
+def hopperSlots (l : Level) (p : Pos) : List ℕ :=
+  match l.blockEntities p with
+  | some (.hopper d) => d.items.map (·.count)
+  | _ => []
+
+/-- Two hoppers, one on top of the other, both pointing down, with the given stacks in their
+first slots. -/
+def hopperPairWith (upper lower : ItemStack) : Level :=
+  let l := level [(⟨0, 2, 0⟩, .hopper ⟨true, .down⟩), (⟨0, 1, 0⟩, .hopper ⟨true, .down⟩)]
+  let hopper (s : ItemStack) : BlockEntity := .hopper { items := (Inventory.empty 5).setItem 0 s }
+  { l with
+    blockEntities := PosMap.ofList [(⟨0, 2, 0⟩, hopper upper), (⟨0, 1, 0⟩, hopper lower)]
+    blockEntityTickers := [⟨0, 2, 0⟩, ⟨0, 1, 0⟩] }
+
+/-- The upper hopper holds three pieces of redstone, the lower one nothing. -/
+def hopperThree : Level := hopperPairWith (.of "minecraft:redstone" 3) .empty
+
+/-- The level after `n` game ticks. -/
+def hopperThreeAfter (n : ℕ) : Level := run (.idle n) hopperThree
+
+/-- Three pieces of redstone go down one by one. The first is pushed by the upper hopper in
+the first game tick, after which both hoppers wait eight ticks; the second is pulled by the
+lower hopper in the eighth tick and the third is pushed in the ninth. They gather in one stack
+of the lower hopper. -/
+theorem hopper_moves_three_items :
+    hopperSlots (hopperThreeAfter 1) ⟨0, 2, 0⟩ = [2, 0, 0, 0, 0] ∧
+      hopperSlots (hopperThreeAfter 1) ⟨0, 1, 0⟩ = [1, 0, 0, 0, 0] ∧
+      hopperSlots (hopperThreeAfter 7) ⟨0, 1, 0⟩ = [1, 0, 0, 0, 0] ∧
+      hopperSlots (hopperThreeAfter 8) ⟨0, 2, 0⟩ = [1, 0, 0, 0, 0] ∧
+      hopperSlots (hopperThreeAfter 8) ⟨0, 1, 0⟩ = [2, 0, 0, 0, 0] ∧
+      hopperSlots (hopperThreeAfter 9) ⟨0, 2, 0⟩ = [0, 0, 0, 0, 0] ∧
+      hopperSlots (hopperThreeAfter 9) ⟨0, 1, 0⟩ = [3, 0, 0, 0, 0] ∧
+      (hopperThreeAfter 9).overflow = false := by
+  decide +kernel
+
+assert_standard_axioms hopper_moves_three_items
+
+/-- The upper hopper holds two ender pearls; the lower one holds fifteen, one short of a full
+stack of them. -/
+def hopperPearls : Level :=
+  hopperPairWith (.of "minecraft:ender_pearl" 2) (.of "minecraft:ender_pearl" 15)
+
+/-- The level after one game tick. -/
+def hopperPearlsMoved : Level := run (.idle 1) hopperPearls
+
+/-- Ender pearls stack to sixteen. In one game tick the upper hopper pushes a pearl and the
+lower one pulls the other: the first completes the stack of sixteen, and the second starts a
+new stack in the next slot. -/
+theorem hopper_fills_pearl_stack :
+    hopperSlots hopperPearlsMoved ⟨0, 2, 0⟩ = [0, 0, 0, 0, 0] ∧
+      hopperSlots hopperPearlsMoved ⟨0, 1, 0⟩ = [16, 1, 0, 0, 0] ∧
+      hopperPearlsMoved.overflow = false := by
+  decide +kernel
+
+assert_standard_axioms hopper_fills_pearl_stack
+
 /-! ### A comparator measures a hopper -/
 
 /-- The output a comparator at `p` holds in its block entity. -/
@@ -170,5 +235,45 @@ theorem comparator_reads_hopper :
   decide +kernel
 
 assert_standard_axioms comparator_reads_hopper
+
+/-! ### A line of redstone dust goes on and off -/
+
+/-- A lever on a stone floor with 15 redstone dust in a row east of it; the dust `i` cells east
+of the lever, for `i` from 1 to 15, has the power `power i`. -/
+def dustLine (on : Bool) (power : ℕ → ℕ) : Level :=
+  level <|
+    ((List.range 16).map fun x => ((⟨x, 0, 0⟩ : Pos), Block.plain .stone)) ++
+    [(⟨0, 1, 0⟩, .lever ⟨.floor, .east, on⟩)] ++
+    (List.range 15).map fun (x : ℕ) => ((⟨(x : ℤ) + 1, 1, 0⟩ : Pos),
+      Block.redstoneWire ⟨.side, .none, Fin.ofNat 16 (power (x + 1)), .none, .side⟩)
+
+/-- The line with the lever off and no power in the dust. -/
+def dustLineOff : Level := dustLine false fun _ => 0
+
+/-- The line with the lever on: the dust next to the lever has power 15, the next one 14, and
+so on down to 1 at the far end. -/
+def dustLineOn : Level := dustLine true fun i => 16 - i
+
+/-- Using the lever lights the line in the same game tick: the dust carries 15, 14, ..., 1, and
+no other block changes. The game changes a block 15 times for this, and each change sends 42
+neighbour updates. Kernel time: 3.0 s, at 2.7 GB. -/
+theorem dust_line_lights :
+    (run [[.use ⟨0, 1, 0⟩ .up]] dustLineOff).world = dustLineOn.world ∧
+      (run [[.use ⟨0, 1, 0⟩ .up]] dustLineOff).overflow = false := by
+  decide +kernel
+
+assert_standard_axioms dust_line_lights
+
+/-- Using the lever again makes the line go dark in the same game tick. This is the worst case
+of the game's wire algorithm: the power of a dust goes down by two at a time, so the dust is
+changed 64 times in all, with 2688 neighbour updates and 384 shape updates. It is the most
+expensive single tick among the circuits measured in `docs/proof-feasibility.md`. Kernel
+time: 13 s, at 5.1 GB (30 s before the changes described there). -/
+theorem dust_line_goes_dark :
+    (run [[.use ⟨0, 1, 0⟩ .up]] dustLineOn).world = dustLineOff.world ∧
+      (run [[.use ⟨0, 1, 0⟩ .up]] dustLineOn).overflow = false := by
+  decide +kernel
+
+assert_standard_axioms dust_line_goes_dark
 
 end Redstone.Proof.Smoke

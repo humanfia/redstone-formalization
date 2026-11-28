@@ -130,7 +130,11 @@ namespace Behaviour
 
 /-- The behaviour of a block that does nothing: no signal, no reaction, and the block entity
 the game creates for the block. It is the behaviour of `BlockBehaviour` itself, and the base
-that components override. -/
+that components override.
+
+A random tick is the exception: it sets `Level.overflow`. The game only gives random ticks to
+the states that do something with them (`isRandomlyTicking`), so a block that gets one and has
+no `randomTick` of its own here is a block whose random tick is not modelled. -/
 def inert (self : Block) : Behaviour where
   signal _ _ _ := 0
   ownSignal _ _ := 0
@@ -146,7 +150,7 @@ def inert (self : Block) : Behaviour where
   updateShape _ _ _ _ := pure self
   updateIndirectNeighbourShapes _ _ _ := pure ()
   tick _ := pure ()
-  randomTick _ := pure ()
+  randomTick _ := modify fun l => { l with overflow := true }
   triggerEvent _ _ _ := pure false
   useWithoutItem _ _ := pure false
   useItemOn _ _ _ := pure false
@@ -241,14 +245,19 @@ structure Rules where
 namespace Rules
 
 /-- The environment in which reactions may nest `depth` deep. At depth zero every reaction
-stops and sets `Level.overflow`. -/
+stops and sets `Level.overflow`.
+
+The behaviour of a block is looked up through `Block.pinned`, which changes nothing
+(`Block.pinned_eq`) but lets the kernel look up the behaviour of air, or of stone, once in an
+evaluation and not once for every cell that holds it: the lookup was a quarter of the kernel's
+time in a neighbour update of redstone dust (`docs/proof-feasibility.md`). -/
 def env (r : Rules) : ℕ → Env
   | 0 =>
     { block := fun b => (r.block b).exhausted
       entity := fun _ => ⟨fun _ => modify fun l => { l with overflow := true }⟩
       gameEvent := fun _ _ _ => modify fun l => { l with overflow := true } }
   | depth + 1 =>
-    { block := fun b => (r.block b).close (r.env depth)
+    { block := fun b => b.pinned fun b => (r.block b).close (r.env depth)
       entity := fun e => (r.entity e).close (r.env depth)
       gameEvent := fun n p c => (r.gameEvent n p c).run (r.env depth) }
 

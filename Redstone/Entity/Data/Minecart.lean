@@ -14,9 +14,8 @@ only; it cannot be read from a trace, so it starts with the values of a freshly 
 and is left out of the comparison. Fields that belong to one kind of minecart keep their
 default value in the others.
 
-Not kept: the hurt animation (`hurtTime`, `hurtDir`, `damage`), fire and air, the display block,
-the name, the loot table seed, the explosion parameters of a TNT minecart, the output and
-bookkeeping of a command block minecart, and whether the minecart is in water.
+Not kept: the hurt animation (`hurtTime`, `hurtDir`), fire and air, the display block,
+the name, the loot table seed, and the output and bookkeeping of a command block minecart.
 -/
 
 @[expose] public section
@@ -50,6 +49,10 @@ structure Minecart where
   command : String
   /-- `Entity.isNoGravity()` (`NoGravity`): gravity does not act on the minecart. -/
   noGravity : Bool
+  /-- `MinecartTNT.explosionPowerBase` (`explosion_power`). -/
+  explosionPower : Float32
+  /-- `MinecartTNT.explosionSpeedFactor` (`explosion_speed_factor`). -/
+  explosionSpeedFactor : Float32
   /-- The vertical component of `MinecartFurnace.push`, which the game keeps but does not
   save. -/
   pushY : Float
@@ -64,6 +67,23 @@ structure Minecart where
   /-- `Entity.nextStep`: the value of `moveDist` beyond which the next step event is due. Not
   saved. -/
   nextStep : Float32
+  /-- `VehicleEntity.getDamage()`: the damage the minecart has taken, which wears off by one a
+  game tick; a minecart with more than 40 breaks. Not saved. -/
+  damage : Float32
+  /-- `Entity.random`, the entity's own generator, once the model has drawn from it. `none`
+  stands for the generator as the constructor of the entity left it. Not saved. -/
+  random : Option JavaRandom
+  /-- When the minecart was last put into the entity section it is in, as
+  `Entities.Physics.sectionEntry`. Not saved. -/
+  sectionEntry : ℕ × ℕ
+  /-- `Entity.wasTouchingWater` (`isInWater()`): the minecart was in water when it last updated
+  its fluid interaction, after it moved. Not saved. -/
+  wasTouchingWater : Bool := false
+  /-- `Entity.firstTick`. A minecart saves it as `HasTicked` and reads it back with `false` for
+  a missing key, so a minecart that is loaded from saved data (as `/summon` and the scenarios
+  do) is never in its first tick; one that the game constructs is, until its first tick ends.
+  It is not compared with the server. -/
+  firstTick : Bool := false
   deriving Repr
 
 namespace Minecart
@@ -72,9 +92,9 @@ namespace Minecart
 instance : Inhabited Minecart :=
   ⟨{ yRot := 0, xRot := 0, fallDistance := 0, flipped := false, fuse := -1, enabled := true,
      pushX := 0, pushZ := 0, fuel := 0, items := [], hasLootTable := false, command := "",
-     noGravity := false, pushY := 0,
+     noGravity := false, explosionPower := 4, explosionSpeedFactor := 1, pushY := 0,
      supportingPos := none, onGroundNoBlocks := false, horizontalCollision := false,
-     moveDist := 0, nextStep := 1 }⟩
+     moveDist := 0, nextStep := 1, damage := 0, random := none, sectionEntry := (0, 0) }⟩
 
 /-- Two `double` values have the same bits, or are both zero. The game saves `-0.0` as `0.0`
 (`DoubleTag.valueOf` and `FloatTag.valueOf` return a shared zero tag), so the sign of a zero
@@ -93,12 +113,23 @@ instance : BEq Minecart :=
       && a.fuse == b.fuse && a.enabled == b.enabled
       && sameDouble a.pushX b.pushX && sameDouble a.pushZ b.pushZ
       && a.fuel == b.fuel && a.items == b.items && a.hasLootTable == b.hasLootTable
-      && a.command == b.command && a.noGravity == b.noGravity⟩
+      && a.command == b.command && a.noGravity == b.noGravity
+      && sameFloat a.explosionPower b.explosionPower
+      && sameFloat a.explosionSpeedFactor b.explosionSpeedFactor⟩
 
 /-- The `double` at `key`, or `d` when the key is absent. -/
 def doubleD (t : Nbt) (key : String) (d : Float) : Float :=
   match t.get? key with
   | some (.double bits) => Float.ofBits (UInt64.ofNat bits)
+  | _ => d
+
+/-- The `float` at `key` clamped to the range from 0 to 128 (`Mth.clamp`), or `d` when the key
+is absent: how `MinecartTNT` reads its explosion parameters. -/
+def explosionParameter (t : Nbt) (key : String) (d : Float32) : Float32 :=
+  match t.get? key with
+  | some (.float bits) =>
+    let v := Float32.ofBits (UInt32.ofNat bits)
+    if v < 0.0 then 0.0 else if v > 128.0 then 128.0 else v
   | _ => d
 
 /-- One entry of `Items`: the slot, the item and the count of a stack. -/
@@ -128,7 +159,10 @@ def ofNbt? (t : Nbt) : Option Minecart := do
     items
     hasLootTable := (t.get? "LootTable").isSome
     command := ((t.get? "Command").bind Nbt.toString?).getD ""
-    noGravity := t.boolD "NoGravity" false }
+    noGravity := t.boolD "NoGravity" false
+    explosionPower := explosionParameter t "explosion_power" 4
+    explosionSpeedFactor := explosionParameter t "explosion_speed_factor" 1
+    firstTick := t.boolD "HasTicked" false }
 
 end Minecart
 

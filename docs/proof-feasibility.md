@@ -34,7 +34,8 @@ did not work, what was changed, and the recipe that follows from it.
   `Float`. For those the question the contingency answers is still open.
 * Two things a prover must know: check the lemmas of a file **one at a time**
   (`set_option Elab.async false`), and expect **redstone dust** to be the expensive block:
-  switching a 15-dust line off is 30 to 60 s and 8.9 GB for that one tick.
+  switching a 15-dust line off was 30 to 60 s and 8.9 GB for that one tick. It was profiled
+  afterwards and is now 13 s and 5.1 GB; see "Redstone dust: where the kernel time went".
 
 ## How it was measured
 
@@ -151,6 +152,7 @@ Measured and left as they are:
 * String equality works in the kernel, at about 10 ms per comparison of two block or item
   names. `itemMaxStackSize` costs 0.4 s per call; it is called when a hopper moves an item, and
   dominates the hopper ticks. Making items an enumeration would remove it.
+  (Done since, without the enumeration: see "The item table" below.)
 * The other comparisons of `Attrs.fluid` with a string (`Component/Supported.lean:62`, `:67`,
   `:101`, `Component/Extra.lean:227`, `:231`, `Component/AnalogSource.lean:204`,
   `Component/Sensor/Light.lean:66`, and the entity files) are not on the path of the probes.
@@ -226,8 +228,9 @@ and the number of ticks is not limited by memory (in one evaluation, 16 ticks fi
 **Dust is the expensive block.** Switching 15 dust off is the worst case of the game's own wire
 algorithm (every dust is recomputed many times), and it costs 30 to 60 s and 8.9 GB for that
 single tick; switching it on costs 7 s. A theorem about a long dust line pays this for every
-switch. Where and why the kernel spends that time was not profiled; it is the first thing to
-look at when dust circuits are proved (`Redstone/Component/Dust.lean`).
+switch. Where and why the kernel spends that time was not profiled in the spike. It was
+afterwards: see "Redstone dust: where the kernel time went" below, which also has the numbers
+that hold now.
 
 ## What this does not show
 
@@ -270,6 +273,7 @@ about a run of several ticks, and they do not reach every kind of circuit.
     `Float` position on the path; this was not probed.
   * A hopper that moves an item calls `itemMaxStackSize` (a scan over item names, 0.4 s) and
     compares with `"minecraft:air"`; it reduces, and dominates the hopper ticks.
+    (No longer: see "The item table" below; `Smoke.lean` now guards it.)
 
 ## The recipe
 
@@ -344,10 +348,11 @@ For a theorem about a concrete circuit:
    `def L1 : Level := lit% (rules.stepWith inputs L0)` then needs no pasting. The literal is
    not trusted: it is only the right-hand side of a lemma that the kernel checks.
 6. **Budget.** Per tick-lemma, at 1.5 GB: about 0.1 s when nothing happens, 0.5 to 1 s for a
-   lever, a repeater, a piston event or a hopper moving an item. For dust: 7 s to switch 15
-   dust on, 30 to 60 s and 9 GB to switch it off; keep dust lines short or count on it. One
-   lemma per tick, one file per circuit; files are built in parallel by Lake, lemmas within a
-   file one after the other.
+   lever, a repeater, a piston event or a hopper moving an item. For dust: about 0.2 s for
+   every time a dust changes its power, which is 3 s to switch 15 dust on and 13 s and 5 GB to
+   switch them off (each dust is changed several times then); keep dust lines short or count
+   on it. One lemma per tick, one file per circuit; files are built in parallel by Lake,
+   lemmas within a file one after the other.
 7. **Axioms.** End every theorem with `assert_standard_axioms name`
    (`Redstone/Proof/Axioms.lean`). It fails the build on anything beyond `propext`,
    `Classical.choice` and `Quot.sound`.
@@ -360,7 +365,245 @@ over tens of ticks.
 
 `Redstone/Proof/Smoke.lean` is built by CI and proves, by evaluation: a lever lights a lamp; a
 lever breaks when its support is destroyed; a sticky piston extends and moves a block; an item
-moves from a hopper to the hopper below. A change to the model that puts a `Float`, an opaque
+moves from a hopper to the hopper below; three items do, one by one; a stack of ender pearls
+fills up to sixteen and the next pearl starts a new stack; a line of 15 redstone dust goes on
+and off. A change to the model that puts a `Float`, an opaque
 or well-founded definition, or string parsing on the path of a block tick makes that file fail
 or slow down. In a level without scheduled fluid ticks, with `random_tick_speed` zero and
 `block_drops` off, the block path must stay free of them.
+
+## The item table
+
+Measured after the spike, on the model at `3e6d3c3d` and on the same model with the change
+described here. `lake test` is unchanged: 9826 of 9826 scenarios.
+
+**What was slow.** `itemMaxStackSize` was two scans, `List.contains` over the 248 names of the
+items that stack to 1 and the 68 that stack to 16. The kernel has no fast strings: a string
+literal unfolds to the list of its bytes, so a scan unfolds every name of the table. And it
+was not only paid in the ticks in which an item moves: in the hopper pair of the probes the
+average over all game ticks was 0.35 s, with the slowest tick at 0.6 to 0.7 s.
+
+**What was changed.** The table is a binary search tree on a natural number
+(`Redstone/Basic/ItemKey.lean`): `itemKey` packs the bytes of the name into one number, as
+digits in base 256 below a leading 1, and the lookup compares number literals, one or two on
+each of the nine levels of the tree, which the kernel does natively. `itemKey` is injective (`itemKey_injective`), so there are no
+collisions to handle and no final comparison of names. The generator writes the list of names
+and the tree side by side (`Redstone/Block/Generated/Items.lean`, by
+`tools/gen/gen_blocks.py`), and `Redstone/Lemmas/ItemStackSize.lean` proves, for every string,
+that the lookup is a scan of the list: `itemMaxStackSize id = (itemStackSizes.lookup id).getD 64`.
+`ItemStack` still names its item by a `String`; no type changed.
+
+Primitives, each one `decide +kernel`, kernel time by the profiler (a trivial `decide +kernel`
+is about 3 ms):
+
+| Probe | Before | After |
+|---|---|---|
+| `itemMaxStackSize "minecraft:redstone" = 64` (not in the table) | 458 ms | 4.2 ms |
+| `itemMaxStackSize "minecraft:ender_pearl" = 16` | 409 ms | 3.1 ms |
+| `itemMaxStackSize "minecraft:diamond_sword" = 1` | 130 ms | 3.2 ms |
+| `(ItemStack.of "minecraft:redstone" 3).maxStackSize = 64` | 482 ms | 4.3 ms |
+| `(ItemStack.of "minecraft:redstone" 3).isEmpty = false` | 3.0 ms | 3.0 ms |
+| `isSameItemSameComponents` of two stacks of redstone | 4.6 ms | 3.8 ms |
+
+Hopper above hopper, both pointing down, the upper one with a stack in its first slot: one
+lemma per game tick between level literals, until the upper hopper is empty and for a few
+ticks more. Both hoppers move items here (the upper one pushes, the lower one pulls), two
+items every 8 ticks. The comparison is of `world`, `blockEntities`, `blockEntityTickers`,
+`gameTime`, `overflow` and the number of scheduled ticks. The times are wall time of the lemma
+commands on a compute node (4 cores, `Elab.async false`, nothing else in the job), so they
+include the elaboration of the statement, a few milliseconds per lemma:
+
+| Probe | Lemmas | Before: all, slowest | After: all, slowest |
+|---|---|---|---|
+| 1 piece of redstone | 16 | 5.5 s, 0.61 s | 0.95 s, 0.13 s |
+| 5 pieces of redstone | 48 | 17.6 s, 0.65 s | 2.9 s, 0.12 s |
+| 64 pieces of redstone | 520 | 180 s, 0.68 s | 33 s, 0.12 s |
+| 16 ender pearls (a full stack of them) | 136 | 48 s, 0.76 s | 10.8 s, 0.17 s |
+
+That is about 0.35 s per tick before and 0.06 s after, on average over all ticks. A full
+stack of 64 going through a hopper is half a minute of kernel time; the number of items no longer limits a hopper theorem. Every lemma depends on the three standard axioms
+only. What the remaining 60 ms of a hopper tick are spent on was not profiled.
+
+**The emptiness test was measured and left as it is.** `ItemStack.isEmpty` compares the name
+of the item with `"minecraft:air"`. That is a single comparison, and the kernel decides it on
+the first byte that differs (all item names start with `minecraft:`, so on the eleventh byte
+or soon after it), without unfolding the rest of the name. Comparing keys instead means computing `itemKey` of the whole
+name. Over 316 stacks of different items, each seen for the first time: 582 ms with the
+comparison of names (1.8 ms per stack), 859 ms with keys (2.7 ms per stack). For a stack the
+kernel has met before in the same evaluation both are cached (12 ms for 300 calls, either
+way). So the key would make it slower.
+
+**What this does not change.** The model still compares item names as strings wherever it
+asks whether two stacks hold the same item (`isSameItemSameComponents`), and the other tables
+indexed by item names (fuels and cooking recipes, the items a dispenser treats specially) are
+still lists of names. A comparison costs a few milliseconds and a scan costs about a
+millisecond for every name of its list; none was on the path of these probes. `itemKey` and
+`ItemTable` are there for the ones that turn out to matter. The probe files are not in the
+repository (they need the level literals and the comparison of the proof foundation). The two
+new hopper theorems of `Redstone/Proof/Smoke.lean` run the lookup in CI: they check its
+results, and like the rest of that file they have no time limit, so a lookup that became slow
+again would show as a slower build (0.25 s and 0.17 s of kernel time now), not as a failure.
+
+## Redstone dust: where the kernel time went
+
+Measured after the spike, on `origin/main` at `3e6d3c3d`, with the question the spike left
+open: why does a tick of redstone dust cost the kernel 30 times what a tick of a piston costs?
+
+### How it was measured
+
+The circuit is the line: a lever on a stone floor and `n` dust in a row. One theorem per
+switch, `decide +kernel`, `Elab.async false`, on a quiet compute node; kernel time is the
+profiler's `type checking` time of the theorem, memory the peak resident set of `lean`
+running the file (about 1.1 GB of it is the imported library).
+
+Two tools found everything below, and both work on any circuit:
+
+* `set_option diagnostics true` with `set_option diagnostics.threshold 300` makes Lean print,
+  for each theorem, how many times **the kernel** unfolded each definition
+  (`[kernel] unfolded declarations`). It is a profile by call count.
+* Counts are not time: a definition whose body is large costs more to unfold. So each
+  operation was also timed by itself: a theorem that applies it to 90 or 2000 different
+  arguments (`((List.range 2000).map f).sum = <number>`), next to one that does not.
+
+### What the kernel does with the model
+
+Three facts about the kernel explain every finding.
+
+1. **Unfolding copies.** To evaluate `f a` the kernel substitutes `a` in the body of `f`,
+   which builds anew every part of the body in which the parameter occurs. A definition that
+   is one large `match` or one large `if` tree on its argument is copied whole each time it is
+   called, however little of it is used.
+2. **A record update is a chain.** `{ l with x := v }` is `⟨l.a, l.b, …, v, …⟩`: the other
+   fields are the unevaluated projections of the old record. After `n` updates that do not
+   touch `a`, reading `a` walks through all `n` of them, and the kernel does this again on
+   every read: it remembers the value of a term only when it meets the term as a whole (as
+   the thing a `match` inspects or a projection is taken from), not when it passes it on the
+   way to the value of another term.
+3. **Results are remembered by term, not by value.** `f (l.blockAt p)` and `f (l'.blockAt q)`
+   are evaluated separately even when both blocks are air. `f (.plain .air)` twice is
+   evaluated once.
+
+### Findings
+
+Cost of one call, before the changes (kernel time):
+
+| Operation | Cost | Why |
+|---|---|---|
+| `Block.attrs b` (so `isConductor`, `isAir`, `isFaceSturdy`, ...) | 2.0 ms | `attrRecord` was one definition: a binary search over 3675 records, copied whole on every call (fact 1) |
+| `b.is id` | 0.66 ms | `Block.id` (a match over the 300 kinds of block, then one over the 760 blocks without properties) and two `BlockId.ctorIdx` (1167 cases each) |
+| `env.block b`, the behaviour of a block | 0.3 to 0.5 ms | `blockBehaviour` is a match with 300 alternatives that all mention `b`: copied whole (fact 1), for every cell that is read (fact 3) |
+| a read of a block after `n` changes of the level that changed no block | grows with `n` | fact 2: `Level.world` was unfolded 647,900 times in the tick that switches 15 dust off, for 14,102 reads. 12,000 neighbour updates in empty air did not finish within a minute |
+| `Block.AIR` | 0.06 ms | it was `Block.default .air`, a match over 1167 block ids, and every read of an empty cell gives it |
+
+The game's algorithm is what multiplies them. Each time a dust changes its power, it sends
+neighbour updates around itself and around its six neighbours: 42 updates, of which about ten
+reach dust (six of them the dust that changed), and each of those computes the power again
+(`calculateTargetStrength`: about 22 block reads and 13 signal queries); the change also sends
+6 shape updates. Lighting a line of `n ≤ 15` dust changes a block `n` times. Switching it off
+changes blocks 22, 44 and 64 times for 3, 7 and 15 dust: the power goes down by two at a time,
+so the dust `k` cells from the lever is changed `⌈(16 − k) / 2⌉` times. For 15 dust that is
+2688 neighbour updates, of which 616 reach dust and compute the power again, and 384 shape
+updates (the lever adds 12 and 6). **The kernel time is proportional to the number of
+changes**: 0.45 s for each before, 0.2 s now.
+
+### What was changed
+
+Every change leaves the functions equal to what they were; where a definition changed, a
+theorem says so. `lake test` is unchanged: 9826 of 9826 scenarios.
+
+| Change | Where | 15 dust off, kernel time with it |
+|---|---|---|
+| (before) | | 30.1 s |
+| `attrRecord` cut into definitions of three levels of the binary search each | `tools/gen/gen_blocks.py`, `Block/Generated/Attrs.lean` | 22.6 s |
+| `Level.pinWorld` (`pinWorld_eq : l.pinWorld = l`) once per step of the neighbour updater, which cuts the chain of fact 2; dust asks `isWire b` (`isWire_eq_is`), a match on the constructor, instead of `b.is .redstone_wire`; `Block.AIR` written as `.plain .air` (`AIR_eq_default`); the comparisons of `attrRecord` are `Nat.blt`, one unfolding away from `Nat.ble`, which the kernel computes natively | `Mechanics/Update.lean`, `Component/Dust.lean`, `Block/Basic.lean`, generator | 18.1 s |
+| `Rules.env` looks up the behaviour through `Block.pinned` (`pinned_eq : b.pinned f = f b`): for a block without properties, `f` is applied to the block written out, so the table is evaluated once for air and once for stone (fact 3) | `Block/Basic.lean`, `Mechanics/Behaviour.lean` | 15.7 s |
+| `Block.isConductor` through `Block.pinned` | `Block/Basic.lean` | 13.0 s |
+
+Measured and **not** kept:
+
+* In the dust component and the signal queries, each within 0.3 s of the 13.6 s of the probe
+  they were tried in: `max` computed with native arithmetic, so that the result is a number
+  and not a term to be evaluated again; the hash-set order of the dust's updates by insertion
+  sort instead of 16 filters; `canSurviveOn` testing for a hopper by constructor.
+* `World.blockAt` reading the trie at a key evaluated to a number, with the trie taken out of
+  the world first, which makes two reads of a cell of the same world the same term: the kernel
+  then walks the trie 2,711 times instead of 13,550, and the tick was slower (14.5 s).
+
+So neither the trie nor anything in `Component/Dust.lean` or `Mechanics/Power.lean` is where
+the rest of the time goes.
+
+### Numbers
+
+The probes of the spike, same files before and after (the statement lists the 16 blocks of the
+line, `overflow`, the scheduled ticks and the game time; on and off are two theorems of one
+file, so the memory is that of both):
+
+| Dust | On, before | On, after | Off, before | Off, after | Memory, before | Memory, after |
+|---|---|---|---|---|---|---|
+| 3 | 1.2 s | 0.51 s | 8.6 s | 3.9 s | 4.3 GB | 2.9 GB |
+| 7 | 3.2 s | 1.3 s | 22.1 s | 8.2 s | 7.0 GB | 4.1 GB |
+| 15 | 6.5 s | 2.9 s | 30.1 s | 13.0 s | 9.6 GB | 5.2 GB |
+
+After the changes, one theorem per file, stated as in `Redstone/Proof/Smoke.lean` (the world
+after the tick is the expected world, and `overflow = false`):
+
+| Dust | On | Off |
+|---|---|---|
+| 3 | 0.52 s, 2.1 GB | 3.9 s, 2.9 GB |
+| 7 | 1.4 s, 2.3 GB | 8.5 s, 4.1 GB |
+| 15 | 3.0 s, 2.7 GB | 13.1 s, 5.1 GB |
+
+Single operations, 90 calls on the cells around the lit line, in ms:
+
+| 90 calls of | Before | After |
+|---|---|---|
+| `blockAt`, then `isConductor` | 297 | 97 |
+| `(env.block b).signal` | 485 | 248 |
+| `signalAt` under `Dust.muted` | 511 | 201 |
+| `directSignalTo` | 801 | 339 |
+| `bestNeighborSignalAt` | 2660 | 666 |
+| `Dust.incomingWireSignal` | 1490 | 433 |
+| `Dust.targetStrength` | 3210 | 845 |
+| `Dust.connectionState` | 2330 | 991 |
+| `Dust.hashSetOrder` | 716 | 735 |
+
+The aim was 10 s and 3 GB for switching 15 dust off. **It was not reached: 13 s and 5.1 GB.**
+
+### What is left
+
+Of the 13 s, timing each kind of step by itself (the three add up to slightly more than the
+tick): about 8.5 s are the 616 neighbour updates that reach dust (13.8 ms each, of which
+9.4 ms compute the power), 2.7 s the 2084 that reach air, stone or the lever (1.3 ms each),
+and 2.5 s the 64 changes themselves, each with its six shape updates (39 ms). No single
+definition stands out any more; the kernel unfolds 3.7 million definitions in that tick, at
+3.5 µs each. What the counts show, none of it in the dust component:
+
+* **Positions.** `Pos.step` is a record update, so a position reached by a walk of steps is a
+  chain (fact 2): `Pos.z`, `Pos.y` and `Pos.x` are unfolded 210,000 times for 9,346 keys.
+  Arithmetic in `ℤ` and `Pos.key` (`Nat.pair`, with its `Decidable` comparison) are roughly
+  400,000 more. A `Pos.step` that matches on the position would cut the chain, but then
+  `p.step d` no longer unfolds for a variable `p`, which lemmas about arbitrary positions may
+  want; not done.
+* **The monads.** Each step of the updater's loop is about a dozen binds of `ReaderT` over
+  `StateT`: 450,000 unfoldings (`bind`, `pure`, `monadLift`, `Prod.casesOn`, ...).
+* **Decisions.** `ite`, `dite`, `decide`, `Bool.casesOn`: 700,000 unfoldings. Every `if` on a
+  comparison of numbers goes through its `Decidable` instance.
+* **Terms that are evaluated twice.** `max a b` gives back the term `a` or `b`, not its
+  value, and the kernel then evaluates it again without looking it up (fact 2): `signalAt` is
+  unfolded 7,392 times for 3,696 queries. The second evaluation is cheap, because everything
+  inside it is remembered; computing the maximum natively did not help.
+
+### What to keep in mind when writing the model
+
+* A function that every block read goes through must not be one large `match` or `if` on a
+  parameter that occurs in all its branches. Cut it into definitions (`attrRecord`), or make
+  the branches closed.
+* Compare blocks by constructor (`match b with | .hopper _ => …`), not by `b.is .hopper`,
+  on any path that runs for every neighbour.
+* A loop that changes the level many times without changing the world should go through
+  `Level.pinWorld`, as the neighbour updater does.
+* Apply an expensive function of a block through `Block.pinned` if it is asked of every cell.
+* A `decide +kernel` that the kernel rejects does not fail quickly: Lean then evaluates the
+  statement in the elaborator to explain the failure. Seen here with a statement about a
+  definition that had an elaboration error: for a tick of 15 dust the build ran out of 48 GB.
+  Check that the file has no other error, and the expected values with `#eval`, first.

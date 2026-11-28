@@ -1,6 +1,7 @@
 module
 
 public import Redstone.Mechanics.Tick
+public import Redstone.World.Light
 public import Redstone.Block.FaceShape
 public import Redstone.Block.Generated.Tags
 
@@ -30,14 +31,13 @@ again, and a block that cannot stay becomes air (`updateShape`), which breaks it
 * The plants whose survival depends on light keep `Behaviour.inert`: `CropBlock` (wheat,
   carrots, potatoes, beetroots, torchflower crop), `MushroomBlock` and `PitcherCropBlock` need
   `getRawBrightness`, and the model has no block light. They never pop off here.
-* Random ticks (growth, snow melting, sapling trees, spreading), bone meal and every other use
+* Random ticks of the plants (growth, sapling trees, spreading), bone meal and every other use
   of an item (`useItemOn`), and what the plants do to entities inside them (`entityInside`:
   sweet berry bushes, wither roses, lily pads under boats, eyeblossoms).
 * `EyeblossomBlock.tick`, the scheduled tick that opens and closes an eyeblossom.
 * Picking sweet berries (`SweetBerryBushBlock.useWithoutItem` at age 2 and 3) and using a bed
   (`AbstractBedBlock.useWithoutItem`: sleeping, the explosion outside the overworld) set
   `Level.overflow`.
-* The fluid tick a waterlogged block schedules on a shape update: fluids do not flow.
 * Collision shapes that come from a block entity (a moving piston, a shulker box), where a
   snow layer or a sea pickle reads the shape of the block below: the shape of the block state
   is used.
@@ -158,9 +158,16 @@ def canSurvive (self : Block) (l : Level) (p : Pos) : Bool :=
 /-! ### Shape updates -/
 
 /-- `updateShape` of `CarpetBlock`, `SnowLayerBlock`, `VegetationBlock`, `SeaPickleBlock` and
-`MangrovePropaguleBlock`: a block that cannot stay becomes air. -/
+`MangrovePropaguleBlock`: a block that cannot stay becomes air. A waterlogged sea pickle that
+stays asks for a tick of its water, and a waterlogged propagule does so in any case. -/
 def updateShape (self : Block) (p : Pos) : M Block := do
-  if canSurvive self (← get) p then return self else return .AIR
+  let logged := self.waterlogged? = some true
+  if logged && self.is .mangrove_propagule then
+    Level.scheduleFluidTick p .water Fluid.water.tickDelay
+  if canSurvive self (← get) p then
+    if logged && self.is .sea_pickle then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+    return self
+  else return .AIR
 
 /-- `BaseTorchBlock.updateShape` and `WallTorchBlock.updateShape`: the torch checks its support
 only when the update comes from the block it is attached to, in direction `attachment`. -/
@@ -249,7 +256,18 @@ def behaviour (self : Block) : Behaviour :=
   match self with
   | .bed id s => bedBehaviour self s.facing s.part fun o => .bed id { s with occupied := o }
   | .strawBed s => bedBehaviour self s.facing s.part fun o => .strawBed { s with occupied := o }
-  | .snowLayer _ | .leafLitter _ | .mangrovePropagule _ | .seaPickle _ | .sapling _ _
+  | .snowLayer _ =>
+    -- `SnowLayerBlock.randomTick`: under block light above 11 the snow melts away. Block light
+    -- is `Level.blockLight`, which is 15 everywhere until light is modelled; snow in the dark,
+    -- and a full layer, which lets no light in, stay in the game
+    -- (`tests/pending/scenarios/random-tick/snow-dark.json`, `snow-full-lit.json`).
+    { supported self with
+      randomTick := fun p => do
+        if (← get).blockLight p > 11 then
+          Level.dropResources self p
+          discard <| Level.removeBlock p false
+          Level.gameEvent "minecraft:block_destroy" p { affectedState := some self } }
+  | .leafLitter _ | .mangrovePropagule _ | .seaPickle _ | .sapling _ _
   | .netherWart _ | .stem _ _ | .flowerBed _ _ => supported self
   | .sweetBerryBush s =>
     { supported self with
@@ -269,7 +287,11 @@ def behaviour (self : Block) : Behaviour :=
   | .doublePlant _ s => doublePlant self s.half
   | .tallFlower _ s => doublePlant self s.half
   | .tallSeagrass s => doublePlant self s.half
-  | .smallDripleaf s => doublePlant self s.half
+  | .smallDripleaf s =>
+    { doublePlant self s.half with
+      updateShape := fun p d _ neighbour => do
+        if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+        doubleUpdateShape self s.half p d neighbour }
   | .plain _ =>
     if BlockClass.carpetBlock self.id ||
         (BlockClass.vegetationBlock self.id && !BlockClass.mushroomBlock self.id) then

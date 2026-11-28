@@ -1,0 +1,44 @@
+{
+  "name": "fuzz-s1-009",
+  "ticks": 240,
+  "box": {"min": [-1, 0, -1], "max": [5, 4, 5]},
+  "settings": {"fireSpreadRadiusAroundPlayer": -1},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 2], "state": "minecraft:bookshelf"},
+    {"pos": [0, 1, 3], "state": "minecraft:oak_planks"},
+    {"pos": [0, 1, 4], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 2], "state": "minecraft:oak_planks"},
+    {"pos": [0, 2, 3], "state": "minecraft:glass"},
+    {"pos": [0, 3, 1], "state": "minecraft:stone"},
+    {"pos": [0, 3, 4], "state": "minecraft:oak_slab[type=double,waterlogged=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:spruce_log[axis=z]"},
+    {"pos": [1, 3, 1], "state": "minecraft:white_wool"},
+    {"pos": [1, 3, 3], "state": "minecraft:red_carpet"},
+    {"pos": [2, 1, 3], "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:soul_sand"},
+    {"pos": [2, 2, 4], "state": "minecraft:coal_block"},
+    {"pos": [2, 3, 2], "state": "minecraft:oak_planks"},
+    {"pos": [3, 1, 2], "state": "minecraft:hay_block[axis=z]"},
+    {"pos": [3, 2, 4], "state": "minecraft:hay_block[axis=x]"},
+    {"pos": [3, 3, 1], "state": "minecraft:netherrack"},
+    {"pos": [4, 1, 4], "state": "minecraft:soul_sand"},
+    {"pos": [4, 2, 0], "state": "minecraft:white_wool"},
+    {"pos": [4, 2, 2], "state": "minecraft:spruce_log[axis=z]"},
+    {"pos": [4, 2, 3], "state": "minecraft:soul_sand"},
+    {"pos": [4, 2, 4], "state": "minecraft:oak_planks"},
+    {"pos": [4, 3, 2], "state": "minecraft:oak_planks"}
+  ],
+  "actions": [
+    {"tick": 6, "type": "set", "pos": [2, 1, 4], "state": "minecraft:fire[age=0,east=false,north=false,south=false,up=false,west=false]"},
+    {"tick": 9, "type": "set", "pos": [2, 3, 2], "state": "minecraft:stone"},
+    {"tick": 15, "type": "destroy", "pos": [4, 2, 2], "drop": false},
+    {"tick": 134, "type": "set", "pos": [0, 3, 4], "state": "minecraft:oak_planks"},
+    {"tick": 212, "type": "set", "pos": [1, 1, 2], "state": "minecraft:fire[age=13,east=false,north=false,south=false,up=false,west=false]"},
+    {"tick": 219, "type": "destroy", "pos": [0, 1, 4], "drop": false},
+    {"tick": 223, "type": "destroy", "pos": [0, 1, 4], "drop": false},
+    {"tick": 238, "type": "set", "pos": [2, 2, 3], "state": "minecraft:soul_fire"}
+  ]
+}

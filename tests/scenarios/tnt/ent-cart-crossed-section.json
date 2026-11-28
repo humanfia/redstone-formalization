@@ -1,0 +1,72 @@
+{
+ "name": "ent-cart-crossed-section",
+ "ticks": 60,
+ "box": {
+  "min": [
+   8,
+   0,
+   0
+  ],
+  "max": [
+   24,
+   6,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    8,
+    0,
+    0
+   ],
+   "max": [
+    24,
+    0,
+    15
+   ],
+   "state": "minecraft:obsidian"
+  },
+  {
+   "min": [
+    9,
+    1,
+    4
+   ],
+   "max": [
+    23,
+    1,
+    4
+   ],
+   "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:chest_minecart",
+   "pos": [
+    12.5,
+    1.0625,
+    4.5
+   ],
+   "nbt": "{Motion:[0.3d,0.0d,0.0d],Items:[{Slot:3b,id:\"minecraft:stone\",count:12}]}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    20.5,
+    1.0,
+    7.5
+   ]
+  },
+  {
+   "type": "minecraft:tnt",
+   "pos": [
+    18.5,
+    1.0,
+    6.5
+   ],
+   "nbt": "{fuse:16}"
+  }
+ ]
+}

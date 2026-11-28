@@ -1,0 +1,11 @@
+{
+  "name": "fire-natural-off",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:oak_planks"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "summon", "entity": {"type": "minecraft:lightning_bolt", "pos": [2.5, 1.0, 2.5]}}
+  ]
+}

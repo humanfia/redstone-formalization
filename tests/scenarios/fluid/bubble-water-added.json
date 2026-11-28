@@ -1,0 +1,163 @@
+{
+ "name": "bubble-water-added",
+ "ticks": 70,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   4,
+   8,
+   4
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    4,
+    0,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    4,
+    7,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    4
+   ],
+   "max": [
+    4,
+    7,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    7,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    4,
+    1,
+    0
+   ],
+   "max": [
+    4,
+    7,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    1,
+    1,
+    1
+   ],
+   "max": [
+    3,
+    6,
+    3
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    0,
+    2
+   ],
+   "state": "minecraft:soul_sand"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 30,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 31,
+   "type": "set",
+   "pos": [
+    2,
+    4,
+    2
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 50,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  }
+ ]
+}

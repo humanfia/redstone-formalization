@@ -1,0 +1,397 @@
+{
+ "name": "fuzz-water-022",
+ "ticks": 70,
+ "box": {
+  "min": [
+   0,
+   -1,
+   0
+  ],
+  "max": [
+   9,
+   5,
+   9
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    9,
+    0,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    9,
+    4,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    9
+   ],
+   "max": [
+    9,
+    4,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    4,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    9,
+    1,
+    0
+   ],
+   "max": [
+    9,
+    4,
+    9
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    -1,
+    0
+   ],
+   "max": [
+    9,
+    -1,
+    9
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:water[level=11]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:water[level=12]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    3
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:mangrove_roots[waterlogged=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    8
+   ],
+   "state": "minecraft:oak_slab[type=double,waterlogged=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_fence[east=false,north=false,south=false,waterlogged=false,west=false]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    8
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    3
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:mangrove_roots[waterlogged=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:iron_bars[east=false,north=false,south=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    3
+   ],
+   "state": "minecraft:soul_sand"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:mangrove_roots[waterlogged=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:mangrove_roots[waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    2
+   ],
+   "state": "minecraft:lightning_rod[facing=north,powered=false,waterlogged=true]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:blue_ice"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    8
+   ],
+   "state": "minecraft:oak_slab[type=double,waterlogged=true]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    8
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=true]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    8
+   ],
+   "state": "minecraft:magma_block"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    7
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 7,
+   "type": "set",
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  },
+  {
+   "tick": 26,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    4
+   ],
+   "state": "minecraft:oak_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=true]",
+   "flags": 3
+  },
+  {
+   "tick": 28,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    8
+   ],
+   "drop": false
+  },
+  {
+   "tick": 32,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  }
+ ]
+}

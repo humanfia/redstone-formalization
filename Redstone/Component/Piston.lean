@@ -33,8 +33,6 @@ that a circuit of blocks alone never computes with `double`s.
   `entity-slime-cart-up` wait in `tests/pending/scenarios/piston` for that.
 * Players: `setPlacedBy`, `PistonHeadBlock.playerWillDestroy` and `MovingPistonBlock.destroy`
   are only called when a player places or breaks a block.
-* Drops: a block destroyed by a piston drops nothing (`dropResources`), and the random numbers
-  that its loot table would draw from the level's generator are not drawn.
 * Components that ask for support through a block state alone (dust, repeater, comparator,
   door) see a `moving_piston` that supports nothing. In the game the collision shape of a
   `moving_piston`, and with it whether its faces can support a lever or a torch, depends on
@@ -165,6 +163,9 @@ def moveBlocks (id : Blocks.PistonBase.Id) (pistonPos : Pos) (direction : Direct
   let mut destroyed : List Block := []
   for pos in toDestroy.reverse do
     let state ← Level.getBlock pos
+    -- `dropResources(state, level, pos, blockEntity)`. What the block drops lies in the way of
+    -- the moving blocks, which push it (`Redstone.Entity.PistonPush`).
+    Level.dropResources state pos (← Level.peekBlockEntity pos)
     discard <| Level.setBlock pos .AIR 18
     Level.gameEvent "minecraft:block_destroy" pos
     destroyed := destroyed ++ [state]

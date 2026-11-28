@@ -1,0 +1,121 @@
+{
+ "name": "sponge-pool",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   3,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    10
+   ],
+   "max": [
+    10,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    10,
+    1,
+    0
+   ],
+   "max": [
+    10,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    1,
+    1,
+    1
+   ],
+   "max": [
+    9,
+    1,
+    9
+   ],
+   "state": "minecraft:water[level=0]"
+  }
+ ],
+ "blocks": [],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:sponge",
+   "flags": 3
+  },
+  {
+   "tick": 30,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  }
+ ]
+}

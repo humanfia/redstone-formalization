@@ -1,0 +1,454 @@
+{
+ "name": "copper-door",
+ "ticks": 70,
+ "box": {
+  "min": [
+   1,
+   0,
+   1
+  ],
+  "max": [
+   11,
+   8,
+   11
+  ]
+ },
+ "settings": {
+  "randomTickSpeed": 1000
+ },
+ "blocks": [
+  {
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    0,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=lower,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=upper,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    6,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    6,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    6,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    7,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    7,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    7,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=lower,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    1,
+    8,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    8,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    1,
+    8,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=upper,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    0,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=lower,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=upper,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    6,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    6,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    6,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    7,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    7,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    7,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=lower,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    6,
+    8,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    8,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    8,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=upper,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    0,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=lower,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    1
+   ],
+   "state": "minecraft:copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    6
+   ],
+   "state": "minecraft:exposed_copper_door[facing=east,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    2,
+    11
+   ],
+   "state": "minecraft:weathered_copper_door[facing=south,half=upper,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    11,
+    6,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    6,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    6,
+    11
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    11,
+    7,
+    1
+   ],
+   "state": "minecraft:oxidized_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    7,
+    6
+   ],
+   "state": "minecraft:waxed_copper_door[facing=east,half=lower,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    7,
+    11
+   ],
+   "state": "minecraft:waxed_exposed_copper_door[facing=south,half=lower,hinge=right,open=false,powered=true]"
+  },
+  {
+   "pos": [
+    11,
+    8,
+    1
+   ],
+   "state": "minecraft:oxidized_copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    8,
+    6
+   ],
+   "state": "minecraft:waxed_copper_door[facing=east,half=upper,hinge=left,open=true,powered=false]"
+  },
+  {
+   "pos": [
+    11,
+    8,
+    11
+   ],
+   "state": "minecraft:waxed_exposed_copper_door[facing=south,half=upper,hinge=right,open=false,powered=true]"
+  }
+ ],
+ "actions": []
+}

@@ -1,7 +1,7 @@
 module
 
-public import Redstone.Mechanics.Tick
 public import Mathlib.Data.Int.Log
+public import Redstone.Component.AnalogSource
 public import Redstone.Component.CookingTable
 
 /-!
@@ -12,11 +12,15 @@ Java classes: `ChestBlock`, `TrappedChestBlock`, `CopperChestBlock`, `BarrelBloc
 `Container`, `CompoundContainer`, `ContainerOpenersCounter` and
 `AbstractContainerMenu.getRedstoneSignalFromContainer`.
 
-This file has two parts. The first is the view of block entities as `Container`s that hoppers
-use: the slots, which of them a face gives access to, what may be put in and taken out, and
-`setChanged`, which tells the comparators around. The second is the behaviour of the container
-blocks themselves: the signal a comparator reads, the openers counter of chests and barrels
-with the power a trapped chest gives, the furnaces and the brewing stand.
+This file has two parts. The first is the view of the blocks of the level as `Container`s, as
+hoppers, droppers and crafters use them (`HopperBlockEntity.getContainerAt`, `addItem`,
+`canPlaceItemInContainer`, `canTakeItemFromContainer`): the slots, which of them a face gives
+access to, what may be put in and taken out, and `setChanged`, which tells the comparators
+around. It covers chests, barrels, shulker boxes, furnaces, brewing stands, hoppers,
+dispensers, droppers, crafters, jukeboxes, chiseled bookshelves, decorated pots, shelves and
+composters. The second part is the behaviour of the container blocks of this component: the
+signal a comparator reads, the openers counter of chests and barrels with the power a trapped
+chest gives, the furnaces and the brewing stand.
 
 ## The player
 
@@ -29,11 +33,15 @@ world, and the model has no other players.
 
 ## What is left out
 
-* Item stacks with data components, loot tables and locks (see `Redstone.ItemStack`).
-* The items a container drops when its block is removed, and the experience a furnace
-  releases: removing a container that holds something sets `Level.overflow`. An empty container
-  is removed faithfully, including the random numbers the game draws for the drops it does not
-  make.
+* Loot tables and locks (see `Redstone.ItemStack`).
+* Item stacks with data components in a furnace or a brewing stand, whose fuels and recipes
+  depend on components: such a stack is not loaded, and offering one to these blocks sets
+  `Level.overflow`. So does offering a jukebox a stack that patches `jukebox_playable`, or a
+  composter one that patches `compostable`: the model reads these from the item.
+* Containers that are entities (minecarts, boats): looking for a container where such an entity
+  may be sets `Level.overflow`.
+* The experience a furnace releases when it is removed: removing a furnace that has cooked
+  sets `Level.overflow`.
 * The lid of a shulker box: using a shulker box sets `Level.overflow`.
 * Ender chests, whose inventory belongs to the player: they are inert, and using one sets
   `Level.overflow`.
@@ -44,9 +52,6 @@ world, and the model has no other players.
 * A cat sitting on a chest, which blocks it.
 * Waterlogged chests: a shape update of one schedules a fluid tick, which the engine does not
   have, so it sets `Level.overflow`.
-* Containers of other components (dispenser, dropper, crafter, jukebox, chiseled bookshelf,
-  decorated pot, shelf, composter) are not part of the view of this file yet: a hopper that
-  meets one sets `Level.overflow`.
 -/
 
 @[expose] public section
@@ -55,13 +60,21 @@ namespace Redstone.Component.Container
 
 /-! ### Block entities as containers -/
 
-/-- The slots of a block entity that is a `Container` of this component. -/
+/-- The slots of a block entity that is a `Container`. A jukebox and a decorated pot have one
+slot (`ContainerSingleItem`). -/
 def items? : BlockEntity → Option Inventory
   | .hopper d => some d.items
   | .chest d | .trappedChest d | .barrel d => some d.items
   | .shulkerBox d => some d.items
   | .furnace d | .blastFurnace d | .smoker d => some d.items
   | .brewingStand d => some d.items
+  | .dispenser d => some d.items
+  | .dropper d => some d.items
+  | .crafter d => some d.items
+  | .chiseledBookshelf d => some d.items
+  | .shelf d => some d.items
+  | .jukebox d => some [d.record]
+  | .decoratedPot d => some [d.item]
   | _ => none
 
 /-- The block entity with other slots. -/
@@ -75,13 +88,14 @@ def withItems (inv : Inventory) : BlockEntity → BlockEntity
   | .blastFurnace d => .blastFurnace { d with items := inv }
   | .smoker d => .smoker { d with items := inv }
   | .brewingStand d => .brewingStand { d with items := inv }
+  | .dispenser d => .dispenser { d with items := inv }
+  | .dropper d => .dropper { d with items := inv }
+  | .crafter d => .crafter { d with items := inv }
+  | .chiseledBookshelf d => .chiseledBookshelf { d with items := inv }
+  | .shelf d => .shelf { d with items := inv }
+  | .jukebox d => .jukebox { d with record := inv.getItem 0 }
+  | .decoratedPot d => .decoratedPot { d with item := inv.getItem 0 }
   | be => be
-
-/-- The block entities of other components that are `Container`s in the game. -/
-def isForeignContainer : BlockEntity → Bool
-  | .dispenser _ | .dropper _ | .crafter _ | .jukebox _ | .chiseledBookshelf _
-  | .decoratedPot _ | .shelf _ => true
-  | _ => false
 
 /-- The block entity without the data that the game does not save: the tick time of a hopper,
 the openers counter of a chest, the bottle bits a brewing stand remembers. A trace shows saved
@@ -237,17 +251,24 @@ def clockWise : Direction → Direction
 def connectedDirection (c : ChestState) : Direction :=
   if c.kind = .left then clockWise c.facing else (clockWise c.facing).opposite
 
-/-- A `Container` of the world: the block entity at a position, or the `CompoundContainer` of
-the two halves of a double chest. -/
+/-- A `Container` of the world: the block entity at a position, the `CompoundContainer` of
+the two halves of a double chest, or the container that a composter in the given state makes
+of itself when it is asked for one (`ComposterBlock.getContainer`).
+
+The container of a composter lives only as long as the hopper or dropper that asked for it
+works with it. It remembers the state the composter had then, and whether it has been used
+(`changed`); it is used at most once in that time, so the model does not keep the flag. -/
 inductive ContainerRef
   | single (p : Pos)
   | double (first second : Pos)
+  | composter (p : Pos) (state : Blocks.Composter)
   deriving DecidableEq, Repr
 
 /-- The positions of the block entities that make up the container. -/
 def ContainerRef.positions : ContainerRef → List Pos
   | .single p => [p]
   | .double p q => [p, q]
+  | .composter _ _ => []
 
 /-- `entityType.getBlockEntity(level, pos)` is not null, for the block entity type of a chest
 block: there is a chest block entity of the right type at `p`. -/
@@ -286,20 +307,19 @@ def combine (l : Level) (state : Block) (p : Pos) (ignoreBeingBlocked : Bool) :
 
 /-! ### The signal a comparator reads -/
 
-/-- `AbstractContainerMenu.getRedstoneSignalFromContainer` for a container with these slots.
+/-- `AbstractContainerMenu.getRedstoneSignalFromContainer` for a container with these slots,
+each of which holds at most `limit` items: 0 for an empty container, else 1 to 15 with the
+fullness, computed in single precision as the game does. -/
+def redstoneSignal (items : Inventory) (limit : ℕ := 99) : ℕ :=
+  let total : Float32 := items.foldl (init := 0) fun acc s =>
+    if s.isEmpty then acc
+    else acc + s.count.toFloat32 / (s.containerMaxStackSize limit).toFloat32
+  let total := total / items.length.toFloat32
+  -- `Mth.lerpDiscrete(totalPercent, 0, 15)`
+  (total * 14).floor.toUInt32.toNat + (if total > 0 then 1 else 0)
 
-The game adds up `count / maxStackSize` over the slots in `float` arithmetic, divides by the
-number of slots and returns `floor(fill * 14)`, plus one unless the container is empty. Every
-stack size is 1, 16 or 64, so the sum is a multiple of 1/64 and exact; it is kept here in
-64ths. The quotient is rounded, but `14 * fill` is a whole number only when `fill` is a
-multiple of one half, which a `float` represents exactly, and otherwise stays further from a
-whole number than the rounding error. So the result is the exact one. -/
-def redstoneSignal (items : Inventory) : ℕ :=
-  let total := items.foldl (init := 0) fun acc s =>
-    if s.isEmpty then acc else acc + s.count * (64 / min 99 s.maxStackSize)
-  14 * total / (64 * items.length) + (if total > 0 then 1 else 0)
-
-/-- The slots of a container, those of a double chest one after the other. -/
+/-- The slots of a container, those of a double chest one after the other. A composter has
+none here: what it holds is its fill level. -/
 def ContainerRef.items (l : Level) (c : ContainerRef) : Inventory :=
   c.positions.flatMap fun p => ((l.blockEntities p).bind items?).getD []
 
@@ -325,156 +345,431 @@ def blockEntityChanged (p : Pos) : M Unit := do
   let state ← Level.getBlock p
   if !state.isAir then Level.updateNeighbourForOutputSignal p state.id
 
+/-- `setChanged()` of the block entity at `p`. A shelf also announces that it was used
+(`ShelfBlockEntity.setChanged`). -/
+def blockEntitySetChanged (p : Pos) : M Unit := do
+  match ← Level.getBlockEntity p with
+  | some (.shelf _) =>
+    AnalogSource.shelfSetChanged p (← Level.getBlock p).id (some "minecraft:block_activate")
+  | _ => blockEntityChanged p
+
+/-- `CrafterBlockEntity.smallerStackExist(baseSize, baseItem, baseSlot)`: a later enabled slot
+is empty or holds a smaller stack of the same item. -/
+def smallerStackExist (c : BlockEntities.Crafter) (base : ItemStack) (baseSlot : ℕ) : Bool :=
+  (List.range 9).any fun i =>
+    i > baseSlot && !c.isSlotDisabled i &&
+      let s := c.items.getItem i
+      s.isEmpty || (s.count < base.count && s.isSameItemSameComponents base)
+
+/-- The stack has a patch for a component that decides how a block of the analog unit treats
+it. The model reads these components from the item only, so it gives up. -/
+def patches (s : ItemStack) (component : String) : Bool :=
+  (s.patched? component).isSome || s.removes component
+
 namespace ContainerRef
 
-/-- `getContainerSize()`. -/
-def size (c : ContainerRef) : M ℕ := return (c.items (← get)).length
+/-- `getContainerSize()`. A composter that is ready but has not turned its compost into bone
+meal yet (level 7) is an `EmptyContainer`. -/
+def size (c : ContainerRef) : M ℕ :=
+  match c with
+  | .composter _ s => return if s.level.val = 7 then 0 else 1
+  | _ => return (c.items (← get)).length
 
 /-- The block entity that holds `slot`, and the slot's number in it
 (`CompoundContainer.getItem` and the like). -/
 def locate (c : ContainerRef) (slot : ℕ) : M (Pos × ℕ) :=
   match c with
-  | .single p => return (p, slot)
+  | .single p | .composter p _ => return (p, slot)
   | .double p q => do
     let n := (← getItems p).length
     return if slot ≥ n then (q, slot - n) else (p, slot)
 
-/-- `getItem(slot)`. -/
+/-- `getItem(slot)`. The `OutputContainer` of a full composter holds one bone meal. -/
 def getItem (c : ContainerRef) (slot : ℕ) : M ItemStack := do
+  if let .composter _ s := c then
+    return if s.level.val = 8 && slot = 0 then .of "minecraft:bone_meal" else .empty
   let (p, i) ← c.locate slot
   return (← getItems p).getItem i
 
 /-- `isEmpty()`. -/
-def isEmpty (c : ContainerRef) : M Bool := return (c.items (← get)).isEmpty
+def isEmpty (c : ContainerRef) : M Bool :=
+  match c with
+  | .composter _ s => return s.level.val ≠ 8
+  | _ => return (c.items (← get)).isEmpty
 
-/-- `setChanged()`; for a double chest, of both halves. -/
-def setChanged (c : ContainerRef) : M Unit := c.positions.forM blockEntityChanged
+/-- `Container.getMaxStackSize()`: how many items a slot holds at most. -/
+def maxStackSize (c : ContainerRef) : M ℕ := do
+  match c with
+  | .composter _ _ => return 1
+  | .double _ _ => return 99
+  | .single p =>
+    return match ← Level.getBlockEntity p with
+      | some (.jukebox _) | some (.chiseledBookshelf _) => 1
+      | _ => 99
 
-/-- The container is a `WorldlyContainer`: a shulker box, a furnace or a brewing stand. -/
+/-- `setChanged()`; for a double chest, of both halves. The `InputContainer` of a composter has
+turned what it was given into a layer by now and does nothing; its `OutputContainer` empties
+the composter, again if need be. -/
+def setChanged (c : ContainerRef) : M Unit :=
+  match c with
+  | .composter p s => do
+    if s.level.val = 8 then AnalogSource.composterEmpty s p
+  | .single p => blockEntitySetChanged p
+  | .double p q => do
+    blockEntityChanged p
+    blockEntityChanged q
+
+/-- The container is a `WorldlyContainer`: a shulker box, a furnace, a brewing stand or a
+composter. -/
 def isWorldly (c : ContainerRef) : M Bool := do
-  let .single p := c | return false
-  return match ← Level.getBlockEntity p with
-    | some (.shulkerBox _) | some (.furnace _) | some (.blastFurnace _) | some (.smoker _)
-    | some (.brewingStand _) => true
-    | _ => false
+  match c with
+  | .composter _ _ => return true
+  | .double _ _ => return false
+  | .single p =>
+    return match ← Level.getBlockEntity p with
+      | some (.shulkerBox _) | some (.furnace _) | some (.blastFurnace _) | some (.smoker _)
+      | some (.brewingStand _) => true
+      | _ => false
 
 /-- `getSlotsForFace(direction)` of a `WorldlyContainer`: the slots that can be reached through
 the given face, in the order in which they are tried. -/
 def slotsForFace (c : ContainerRef) (d : Direction) : M (List ℕ) := do
-  let .single p := c | return []
-  return match ← Level.getBlockEntity p with
-    | some (.shulkerBox _) => List.range 27
-    | some (.furnace _) | some (.blastFurnace _) | some (.smoker _) =>
-      if d = .down then [2, 1] else if d = .up then [0] else [1]
-    | some (.brewingStand _) =>
-      if d = .up then [3] else if d = .down then [0, 1, 2, 3] else [0, 1, 2, 4]
-    | _ => []
+  match c with
+  | .composter _ s =>
+    return if s.level.val = 8 then (if d = .down then [0] else [])
+      else if s.level.val < 7 then (if d = .up then [0] else [])
+      else []
+  | .double _ _ => return []
+  | .single p =>
+    return match ← Level.getBlockEntity p with
+      | some (.shulkerBox _) => List.range 27
+      | some (.furnace _) | some (.blastFurnace _) | some (.smoker _) =>
+        if d = .down then [2, 1] else if d = .up then [0] else [1]
+      | some (.brewingStand _) =>
+        if d = .up then [3] else if d = .down then [0, 1, 2, 3] else [0, 1, 2, 4]
+      | _ => []
 
 /-- `HopperBlockEntity.getSlots(container, direction)`. -/
 def slots (c : ContainerRef) (d : Direction) : M (List ℕ) := do
   if ← c.isWorldly then c.slotsForFace d else return List.range (← c.size)
 
-/-- `canPlaceItem(slot, itemStack)`. -/
+/-- `canPlaceItem(slot, itemStack)`. A furnace or a brewing stand asked about a stack with data
+components sets `Level.overflow`: what they take depends on components the model does not
+read. So does a jukebox asked about a stack that patches `jukebox_playable`. -/
 def canPlaceItem (c : ContainerRef) (slot : ℕ) (s : ItemStack) : M Bool := do
   let .single p := c | return true
   match ← Level.getBlockEntity p with
   | some (.furnace d) | some (.blastFurnace d) | some (.smoker d) =>
-    if slot = 2 then return false
+    if s.hasComponents then
+      Level.setOverflow
+      return false
+    else if slot = 2 then return false
     else if slot ≠ 1 then return true
     else
       return isCookingFuel s
         || (s.is "minecraft:bucket" && !(d.items.getItem 1).is "minecraft:bucket")
   | some (.brewingStand d) =>
-    if slot = 4 then return (Item.brewingFuels.lookup s.item).isSome
+    if s.hasComponents then
+      Level.setOverflow
+      return false
+    else if slot = 4 then return (Item.brewingFuels.lookup s.item).isSome
     else if slot = 3 then return Item.brewingReagents.contains s.item
     else return Item.brewingPotionInputs.contains s.item && (d.items.getItem slot).isEmpty
+  | some (.crafter d) =>
+    -- `CrafterBlockEntity.canPlaceItem`: not into a disabled slot or a full one, and into an
+    -- occupied slot only if no later slot would take the item first.
+    let current := d.items.getItem slot
+    if d.isSlotDisabled slot then return false
+    else if current.count ≥ current.maxStackSize then return false
+    else return current.isEmpty || !smallerStackExist d current slot
+  | some (.jukebox d) =>
+    if patches s "minecraft:jukebox_playable" then Level.setOverflow
+    return (AnalogSource.jukeboxSong s.item).isSome && (if slot = 0 then d.record.isEmpty else true)
+  | some (.chiseledBookshelf d) =>
+    -- `ListBackedContainer.canPlaceItem`, with one item per slot.
+    let current := d.items.getItem slot
+    return AnalogSource.bookshelfBooks.contains s.item
+      && (current.isEmpty || current.count < s.containerMaxStackSize 1)
+  | some (.shelf d) =>
+    let current := d.items.getItem slot
+    return current.isEmpty || current.count < s.containerMaxStackSize
   | _ => return true
 
-/-- `canPlaceItemThroughFace(slot, itemStack, direction)` of a `WorldlyContainer`. -/
-def canPlaceItemThroughFace (c : ContainerRef) (slot : ℕ) (s : ItemStack) : M Bool := do
+/-- `canPlaceItemThroughFace(slot, itemStack, direction)` of a `WorldlyContainer`. A composter
+takes what can be composted through its top, while it is not full. -/
+def canPlaceItemThroughFace (c : ContainerRef) (slot : ℕ) (s : ItemStack)
+    (d : Option Direction) : M Bool := do
+  match c with
+  | .composter _ cs =>
+    if patches s "minecraft:compostable" then Level.setOverflow
+    return cs.level.val < 7 && d = some .up && (AnalogSource.compostChance s.item).isSome
+  | .double _ _ => return true
+  | .single p =>
+    match ← Level.getBlockEntity p with
+    | some (.shulkerBox _) => return !isShulkerBoxItem s.item
+    | _ => c.canPlaceItem slot s
+
+/-- `HopperBlockEntity.canPlaceItemInContainer(container, itemStack, slot, direction)`. -/
+def canPlaceItemInContainer (c : ContainerRef) (s : ItemStack) (slot : ℕ)
+    (d : Option Direction) : M Bool := do
+  if !(← c.canPlaceItem slot s) then return false
+  if ← c.isWorldly then c.canPlaceItemThroughFace slot s d else return true
+
+/-- `canTakeItem(into, slot, itemStack)`, where `into` is the hopper with the slots `into`. A
+jukebox gives its record only to a hopper with an empty slot, and a chiseled bookshelf a book
+only to a hopper that has room for it. -/
+def canTakeItem (c : ContainerRef) (into : Inventory) (s : ItemStack) : M Bool := do
   let .single p := c | return true
-  match ← Level.getBlockEntity p with
-  | some (.shulkerBox _) => return !isShulkerBoxItem s.item
-  | _ => c.canPlaceItem slot s
+  return match ← Level.getBlockEntity p with
+    | some (.jukebox _) => into.any (·.isEmpty)
+    | some (.chiseledBookshelf _) =>
+      into.any fun t =>
+        t.isEmpty || (s.isSameItemSameComponents t && t.count + s.count ≤ t.containerMaxStackSize)
+    | _ => true
 
 /-- `canTakeItemThroughFace(slot, itemStack, direction)` of a `WorldlyContainer`. -/
 def canTakeItemThroughFace (c : ContainerRef) (slot : ℕ) (s : ItemStack) (d : Direction) :
     M Bool := do
-  let .single p := c | return true
-  return match ← Level.getBlockEntity p with
-    | some (.furnace _) | some (.blastFurnace _) | some (.smoker _) =>
-      if d = .down && slot = 1 then Item.furnaceFuelBottomTakeable.contains s.item else true
-    | some (.brewingStand _) => if slot = 3 then s.is "minecraft:glass_bottle" else true
-    | _ => true
+  match c with
+  | .composter _ cs => return cs.level.val = 8 && d = .down && s.is "minecraft:bone_meal"
+  | .double _ _ => return true
+  | .single p =>
+    return match ← Level.getBlockEntity p with
+      | some (.furnace _) | some (.blastFurnace _) | some (.smoker _) =>
+        if d = .down && slot = 1 then Item.furnaceFuelBottomTakeable.contains s.item else true
+      | some (.brewingStand _) => if slot = 3 then s.is "minecraft:glass_bottle" else true
+      | _ => true
 
-/-- `removeItem(slot, 1)`: takes one item out of a slot and returns it. Every container but the
-hopper calls `setChanged` when it gave something. -/
+/-- `HopperBlockEntity.canTakeItemFromContainer(into, from, itemStack, slot, direction)`. -/
+def canTakeItemFromContainer (c : ContainerRef) (into : Inventory) (s : ItemStack) (slot : ℕ)
+    (d : Direction) : M Bool := do
+  if !(← c.canTakeItem into s) then return false
+  if ← c.isWorldly then c.canTakeItemThroughFace slot s d else return true
+
+/-- `ChiseledBookShelfBlockEntity.updateState(slot)` after the slots of the bookshelf at `p`
+became `items`. -/
+def bookshelfUpdateState (p : Pos) (items : Inventory) (slot : ℕ) : M Unit := do
+  if let .chiseledBookShelf s ← Level.getBlock p then
+    AnalogSource.bookshelfUpdateState s p items slot
+
+/-- `removeItem(slot, 1)`: takes one item out of a slot and returns it.
+
+* A hopper and a decorated pot do nothing else; the other containers with a list of slots call
+  `setChanged` when they gave something.
+* A jukebox gives its whole stack (`splitTheItem`), and its song stops.
+* A chiseled bookshelf gives the whole stack of the slot and shows the slot as empty.
+* The `OutputContainer` of a composter gives its bone meal and empties the composter. -/
 def removeItem (c : ContainerRef) (slot : ℕ) : M ItemStack := do
+  if let .composter _ _ := c then
+    let s ← c.getItem slot
+    if !s.isEmpty then c.setChanged
+    return s
   let (p, i) ← c.locate slot
   let inv ← getItems p
   let s := inv.getItem i
   if s.isEmpty then return .empty
-  setItems p (inv.setItem i (s.withCount (s.count - 1)))
   match ← Level.getBlockEntity p with
-  | some (.hopper _) => pure ()
-  | _ => blockEntityChanged p
-  return s.withCount 1
+  | some (.jukebox _) =>
+    if let .jukebox js ← Level.getBlock p then AnalogSource.setTheItem js p .empty
+    else setItems p (inv.setItem i .empty)
+    return s
+  | some (.chiseledBookshelf _) =>
+    bookshelfUpdateState p (inv.setItem i .empty) i
+    return s
+  | some (.hopper _) | some (.decoratedPot _) =>
+    setItems p (inv.setItem i (s.withCount (s.count - 1)))
+    return s.withCount 1
+  | _ =>
+    setItems p (inv.setItem i (s.withCount (s.count - 1)))
+    blockEntitySetChanged p
+    return s.withCount 1
 
-/-- `setItem(slot, itemStack)` for a slot that is empty: puts the stack there, cut down to the
-maximal stack size. A hopper does nothing else; a furnace restarts cooking when its ingredient
-changes; every other container calls `setChanged`. -/
+/-- `setItem(slot, itemStack)` for a slot that is empty.
+
+* A container with a list of slots puts the stack there, cut down to what a slot holds, and
+  calls `setChanged`; a hopper does not call it. A crafter first enables the slot if it was
+  disabled, and a furnace restarts cooking when its ingredient changes.
+* A jukebox takes the stack as its record and plays it (`setTheItem`); a decorated pot takes
+  the stack as it is.
+* A chiseled bookshelf takes a book and shows the slot as occupied.
+* The `InputContainer` of a composter turns the item into a layer, or not, at once. -/
 def setItem (c : ContainerRef) (slot : ℕ) (s : ItemStack) : M Unit := do
+  if let .composter p cs := c then
+    if let some chance := AnalogSource.compostChance s.item then
+      if !s.isEmpty then AnalogSource.composterAddLayer cs p chance
+    return
   let (p, i) ← c.locate slot
   let inv ← getItems p
   let old := inv.getItem i
-  setItems p (inv.setItem i (s.limitSize (min 99 s.maxStackSize)))
+  let limited := s.limitSize s.containerMaxStackSize
   match ← Level.getBlockEntity p with
-  | some (.hopper _) => pure ()
+  | some (.hopper _) => setItems p (inv.setItem i limited)
+  | some (.jukebox _) =>
+    if let .jukebox js ← Level.getBlock p then AnalogSource.setTheItem js p s
+    else setItems p (inv.setItem i s)
+  | some (.decoratedPot _) => setItems p (inv.setItem i s)
+  | some (.chiseledBookshelf _) =>
+    if AnalogSource.bookshelfBooks.contains s.item then bookshelfUpdateState p (inv.setItem i s) i
+    else if s.isEmpty && !old.isEmpty then bookshelfUpdateState p (inv.setItem i .empty) i
+  | some (.crafter d) =>
+    if d.isSlotDisabled slot && d.slotCanBeDisabled slot then
+      Level.setBlockEntity p (.crafter { d with disabled := d.disabled.set slot false })
+      blockEntitySetChanged p
+    setItems p ((← getItems p).setItem i limited)
+    blockEntitySetChanged p
   | some be =>
+    setItems p (inv.setItem i limited)
     match furnace? be with
     | some (k, d) =>
-      let same := !s.isEmpty && old.isSameItem s
+      let same := !s.isEmpty && old.isSameItemSameComponents s
       if i = 0 && !same then
+        let d := { d with items := inv.setItem i limited }
         Level.setBlockEntity p
           (k.blockEntity { d with cookingTotalTime := k.totalCookTimeOf d, cookingTimer := 0 })
         blockEntityChanged p
-    | none => blockEntityChanged p
+    | none => blockEntitySetChanged p
   | none => pure ()
 
-/-- What a hopper does when the item it took out of `slot` could not be moved: the stack gets
-its count back (`itemStack.setCount(originalCount)`) and, if that count is one,
-`setItem(slot, itemStack)` is called with the very stack that is in the slot. That call does
-nothing in a hopper or a furnace and calls `setChanged` in every other container. -/
+/-- What a hopper does when the item it took out of `slot` could not be moved: the stack it
+looked at gets its count back (`itemStack.setCount(originalCount)`) and, if that count is one,
+`setItem(slot, itemStack)` is called with it.
+
+In a container with a list of slots, and in a decorated pot, the stack is still the one in the
+slot, so the slot is as before; the call of `setItem` then does nothing in a hopper, a furnace
+or a decorated pot and calls `setChanged` in the others. A jukebox and a chiseled bookshelf
+gave the stack away as a whole, so it comes back only through that call of `setItem`. The bone
+meal of a composter is lost, and the call empties the composter once more. -/
 def restoreItem (c : ContainerRef) (slot : ℕ) (s : ItemStack) : M Unit := do
+  if let .composter _ _ := c then
+    if s.count = 1 then c.setChanged
+    return
   let (p, i) ← c.locate slot
-  setItems p ((← getItems p).setItem i s)
-  if s.count = 1 then
-    match ← Level.getBlockEntity p with
-    | some (.hopper _) | some (.furnace _) | some (.blastFurnace _) | some (.smoker _) => pure ()
-    | _ => blockEntityChanged p
+  match ← Level.getBlockEntity p with
+  | some (.jukebox _) | some (.chiseledBookshelf _) => if s.count = 1 then c.setItem slot s
+  | some (.hopper _) | some (.furnace _) | some (.blastFurnace _) | some (.smoker _)
+  | some (.decoratedPot _) => setItems p ((← getItems p).setItem i s)
+  | _ =>
+    setItems p ((← getItems p).setItem i s)
+    if s.count = 1 then blockEntitySetChanged p
 
 end ContainerRef
 
+/-! ### Finding containers -/
+
 /-- `HopperBlockEntity.getBlockContainer(level, pos, state)`: the container that the block at
-`p` is, for a hopper. A chest gives the whole double chest, whether it is blocked or not. -/
+`p` is. A composter makes one for the occasion (`WorldlyContainerHolder.getContainer`); a chest
+gives the whole double chest, whether it is blocked or not. -/
 def getBlockContainer (p : Pos) : M (Option ContainerRef) := do
-  let l ← get
-  let state := l.blockAt p
-  if state.is .composter then
-    -- A `WorldlyContainerHolder`, which belongs to another component.
-    Level.setOverflow
-    return none
+  let state ← Level.getBlock p
+  if let .composter s := state then return some (.composter p s)
   if !state.hasBlockEntity then return none
-  match l.blockEntities p with
+  match ← Level.getBlockEntity p with
   | none => return none
   | some be =>
-    if isForeignContainer be then
-      Level.setOverflow
-      return none
-    else if (items? be).isNone then return none
+    if (items? be).isNone then return none
     else if (chestState? state).isSome && (counted? be).isSome then
-      return combine l state p true
+      return combine (← get) state p true
     else return some (.single p)
+
+/-- The entity is a `Container` (`EntitySelector.CONTAINER_ENTITY_SELECTOR`): a minecart with a
+chest or a hopper, or a boat with a chest. -/
+def isContainerEntity (e : Entity) : Bool :=
+  match e.data with
+  | .minecart .chest _ | .minecart .hopper _ => true
+  | .other type => type.endsWith "chest_boat" || type.endsWith "chest_raft"
+  | _ => false
+
+/-- The bounding box of an entity, with the given half width and height, intersects the column
+of `blocks` blocks that starts with the block at `p`. -/
+def intersectsColumn (e : Entity) (halfWidth height : Float) (p : Pos) (blocks : Float) : Bool :=
+  let within (a : Float) (b : ℤ) : Bool :=
+    a - halfWidth < Float.ofInt b + 1 && a + halfWidth > Float.ofInt b
+  within e.base.pos.x p.x && within e.base.pos.z p.z
+    && e.base.pos.y < Float.ofInt p.y + blocks && e.base.pos.y + height > Float.ofInt p.y
+
+/-- `HopperBlockEntity.getEntityContainer`: the container entities whose bounding box touches
+the block at `p`. They are not modelled: if there may be one, `Level.overflow` is set. The box
+assumed for the entity is at least as large as that of a minecart or a boat. -/
+def getEntityContainer (p : Pos) : M Unit := do
+  if (← get).entities.any fun e => isContainerEntity e && intersectsColumn e 0.7 0.7 p 1 then
+    Level.setOverflow
+
+/-- `HopperBlockEntity.getContainerAt(level, pos)`: the container at `p`, a block or else an
+entity. -/
+def getContainerAt (p : Pos) : M (Option ContainerRef) := do
+  let c ← getBlockContainer p
+  if c.isNone then getEntityContainer p
+  return c
+
+/-! ### Moving items into a container -/
+
+/-- The data of the hopper at `p`. -/
+def getHopper (p : Pos) : M (Option BlockEntities.Hopper) := do
+  match ← Level.getBlockEntity p with
+  | some (.hopper d) => return some d
+  | _ => return none
+
+/-- Changes the data of the hopper at `p`. -/
+def modifyHopper (p : Pos) (f : BlockEntities.Hopper → BlockEntities.Hopper) : M Unit := do
+  if let some d ← getHopper p then Level.setBlockEntity p (.hopper (f d))
+
+/-- The position of the hopper that the container is, if it is one
+(`container instanceof HopperBlockEntity`). -/
+def asHopper (c : ContainerRef) : M (Option Pos) := do
+  let .single p := c | return none
+  return (← getHopper p).map fun _ => p
+
+/-- `HopperBlockEntity.tryMoveInItem(from, container, itemStack, slot, direction)`: puts as much
+of the stack as fits into one slot of the container and returns the rest. When the container
+is a hopper that was empty, it gets a cooldown: eight ticks, or seven if it was ticked no
+earlier than the hopper the item comes from. `fromHopper` is the position of that hopper, if
+the item comes from one. -/
+def tryMoveInItem (fromHopper : Option Pos) (c : ContainerRef) (stack : ItemStack) (slot : ℕ)
+    (direction : Option Direction) : M ItemStack := do
+  let current ← c.getItem slot
+  if !(← c.canPlaceItemInContainer stack slot direction) then return stack
+  let wasEmpty ← c.isEmpty
+  let mut stack := stack
+  let mut success := false
+  if current.isEmpty then
+    c.setItem slot stack
+    stack := .empty
+    success := true
+  else if current.count ≤ current.maxStackSize && current.isSameItemSameComponents stack then
+    -- `canMergeItems`
+    let count := min stack.count (stack.maxStackSize - current.count)
+    stack := stack.withCount (stack.count - count)
+    let (p, i) ← c.locate slot
+    setItems p ((← getItems p).setItem i (current.withCount (current.count + count)))
+    success := count > 0
+  if success then
+    if wasEmpty then
+      if let some q ← asHopper c then
+        if let some h ← getHopper q then
+          if !(h.cooldownTime > 8) then
+            let fromTicked ←
+              match fromHopper with
+              | some f => pure ((← getHopper f).map (·.tickedGameTime))
+              | none => pure none
+            let skip : ℤ := if fromTicked.any (h.tickedGameTime ≥ ·) then 1 else 0
+            modifyHopper q fun h => { h with cooldownTime := 8 - skip }
+    c.setChanged
+  return stack
+
+/-- `HopperBlockEntity.addItem(from, container, itemStack, direction)`: puts the stack into the
+container, slot after slot, through the given face if there is one, and returns what did not
+fit. -/
+def addItem (fromHopper : Option Pos) (c : ContainerRef) (stack : ItemStack)
+    (direction : Option Direction) : M ItemStack := do
+  let slots ←
+    match direction with
+    | some d => if ← c.isWorldly then c.slotsForFace d else pure (List.range (← c.size))
+    | none => pure (List.range (← c.size))
+  let mut stack := stack
+  for slot in slots do
+    if stack.isEmpty then break
+    stack ← tryMoveInItem fromHopper c stack slot direction
+  return stack
 
 /-! ### The openers counter (`ContainerOpenersCounter`) -/
 
@@ -569,13 +864,8 @@ def openMenu (ps : List Pos) : M Unit := do
 /-! ### Removal -/
 
 /-- `Containers.dropContents`, called by `BlockEntity.preRemoveSideEffects` when the block of a
-container is removed. For every slot the game draws three random numbers for the place of the
-drop, then drops the stack if there is one. The drops themselves are not modelled. -/
-def dropContents (p : Pos) : M Unit := do
-  (← getItems p).forM fun s => do
-    modify fun l =>
-      { l with random := l.random.nextDouble53.2.nextDouble53.2.nextDouble53.2 }
-    if !s.isEmpty then Level.setOverflow
+container is removed: every stack becomes item entities. -/
+def dropContents (p : Pos) : M Unit := do ItemDrop.dropContents p (← getItems p)
 
 /-! ### Behaviours -/
 
@@ -674,8 +964,8 @@ def withLit (lit : Bool) : Block → Block
 def canBurn (items : Inventory) (result : ItemStack) : Bool :=
   let slot := items.getItem 2
   if slot.isEmpty then true
-  else if !slot.isSameItem result then false
-  else slot.count + result.count ≤ min 99 result.maxStackSize
+  else if !slot.isSameItemSameComponents result then false
+  else slot.count + result.count ≤ result.containerMaxStackSize
 
 /-- `AbstractFurnaceBlockEntity.consumeFuel`: uses up one item of fuel. A lava bucket leaves
 its bucket in the slot. Returns the new slots, and whether the game would have dropped the
@@ -685,7 +975,7 @@ def consumeFuel (items : Inventory) : Inventory × Bool :=
   let rest := fuel.withCount (fuel.count - 1)
   match Item.craftingRemainders.lookup fuel.item with
   | some remainder =>
-    if rest.isEmpty then (items.setItem 1 ⟨remainder, 1⟩, false) else (items.setItem 1 rest, true)
+    if rest.isEmpty then (items.setItem 1 (.of remainder), false) else (items.setItem 1 rest, true)
   | none => (items.setItem 1 rest, false)
 
 /-- `AbstractFurnaceBlockEntity.burn`: one ingredient becomes the result. A wet sponge fills an
@@ -697,7 +987,7 @@ def burn (items : Inventory) (result : ItemStack) : Inventory :=
     items.setItem 2 (if slot.isEmpty then result else slot.withCount (slot.count + result.count))
   let items :=
     if ingredient.is "minecraft:wet_sponge" && (items.getItem 1).is "minecraft:bucket" then
-      items.setItem 1 ⟨"minecraft:water_bucket", 1⟩
+      items.setItem 1 (.of "minecraft:water_bucket")
     else items
   items.setItem 0 (ingredient.withCount (ingredient.count - 1))
 
@@ -719,7 +1009,7 @@ def furnaceStep (k : FurnaceKind) (d : BlockEntities.Furnace) :
   if isLit || (!fuel.isEmpty && hasIngredient) then
     if hasIngredient then
       if let some (result, count, time) := k.recipe? ingredient then
-        let result : ItemStack := ⟨result, count⟩
+        let result : ItemStack := .of result count
         if canBurn d.items result then
           if !isLit then
             let newLitTime := k.burnDuration fuel
@@ -795,7 +1085,7 @@ def brewingStandTick (self : Block) (p : Pos) : M Unit := do
       let items ←
         match Item.craftingRemainders.lookup fuel.item with
         | some remainder =>
-          if rest.isEmpty then pure (d.items.setItem 4 ⟨remainder, 1⟩)
+          if rest.isEmpty then pure (d.items.setItem 4 (.of remainder))
           else do
             Level.setOverflow
             pure (d.items.setItem 4 rest)

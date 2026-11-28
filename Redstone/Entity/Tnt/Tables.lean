@@ -1147,25 +1147,6 @@ def explosionDrops (b : Block) : Option (List (String × ℕ)) :=
   | _ =>
     some [(b.id.name, 1)]
 
-/-- `ItemStack.getMaxStackSize` of the items that blocks drop. -/
-def maxStackSize : String → ℕ
-  | "minecraft:black_bed" | "minecraft:blue_bed" | "minecraft:brown_bed" | "minecraft:cyan_bed"
-  | "minecraft:gray_bed" | "minecraft:green_bed" | "minecraft:light_blue_bed"
-  | "minecraft:light_gray_bed" | "minecraft:lime_bed" | "minecraft:magenta_bed"
-  | "minecraft:orange_bed" | "minecraft:pink_bed" | "minecraft:purple_bed" | "minecraft:red_bed"
-  | "minecraft:white_bed" | "minecraft:yellow_bed" => 1
-  | "minecraft:acacia_hanging_sign" | "minecraft:acacia_sign" | "minecraft:bamboo_hanging_sign"
-  | "minecraft:bamboo_sign" | "minecraft:birch_hanging_sign" | "minecraft:birch_sign"
-  | "minecraft:cherry_hanging_sign" | "minecraft:cherry_sign" | "minecraft:crimson_hanging_sign"
-  | "minecraft:crimson_sign" | "minecraft:dark_oak_hanging_sign" | "minecraft:dark_oak_sign"
-  | "minecraft:jungle_hanging_sign" | "minecraft:jungle_sign" | "minecraft:mangrove_hanging_sign"
-  | "minecraft:mangrove_sign" | "minecraft:oak_hanging_sign" | "minecraft:oak_sign"
-  | "minecraft:pale_oak_hanging_sign" | "minecraft:pale_oak_sign"
-  | "minecraft:poplar_hanging_sign" | "minecraft:poplar_sign" | "minecraft:snowball"
-  | "minecraft:spruce_hanging_sign" | "minecraft:spruce_sign" | "minecraft:straw_bed"
-  | "minecraft:warped_hanging_sign" | "minecraft:warped_sign" => 16
-  | _ => 64
-
 /-- The number of stacks `Block.dropResources` drops for a block that is broken
 with drops, without tool and without breaker (a block that lost its support,
 for instance): the stacks of the block's loot table. `none` when that is not a

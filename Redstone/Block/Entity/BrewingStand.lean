@@ -39,11 +39,14 @@ namespace BrewingStand
 instance : Inhabited BrewingStand := ⟨{}⟩
 
 /-- Reads the data from the block entity's saved NBT (`loadAdditional`). Fields the model does
-not keep are ignored. -/
+not keep are ignored. A brewing stand whose stacks have data components is not read: brewing
+is about potion contents, which the model does not interpret. -/
 def ofNbt? (t : Nbt) : Option BrewingStand := do
   if !t.plainContainer then none
+  let items := Inventory.ofNbt 5 t
+  if items.hasComponents then none
   return {
-    items := ← Inventory.ofNbt? 5 t
+    items := items
     brewTime := t.intD "BrewTime" 0
     totalBrewTime := t.intD "total_brew_time" 400
     fuel := t.intD "Fuel" 0

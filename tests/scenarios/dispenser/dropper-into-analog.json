@@ -1,0 +1,910 @@
+{
+ "name": "dropper-into-analog",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   14,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    14,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    0,
+    1,
+    0
+   ],
+   "state": "minecraft:jukebox[has_record=false]"
+  },
+  {
+   "pos": [
+    0,
+    2,
+    0
+   ],
+   "state": "minecraft:dropper[facing=down,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:music_disc_cat\",count:1},{Slot:1b,id:\"minecraft:music_disc_13\",count:1}]}"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=false,slot_5_occupied=false]"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    0
+   ],
+   "state": "minecraft:dropper[facing=down,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:book\",count:3}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=false,slot_5_occupied=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    0
+   ],
+   "state": "minecraft:dropper[facing=down,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:3}]}"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    0
+   ],
+   "state": "minecraft:decorated_pot[cracked=false,facing=north,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    0
+   ],
+   "state": "minecraft:dropper[facing=down,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5}]}"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    0
+   ],
+   "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    2,
+    0
+   ],
+   "state": "minecraft:dropper[facing=down,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5}]}"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    0
+   ],
+   "state": "minecraft:chest[facing=north,type=single,waterlogged=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:dropper[facing=down,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5,components:{\"minecraft:max_stack_size\":2}}]}"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    0
+   ],
+   "state": "minecraft:hopper[enabled=true,facing=down]"
+  },
+  {
+   "pos": [
+    12,
+    2,
+    0
+   ],
+   "state": "minecraft:dropper[facing=down,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5,components:{\"minecraft:custom_name\":\"x\"}},{Slot:1b,id:\"minecraft:stone\",count:5}]}"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    1
+   ],
+   "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 11,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 13,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 18,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 21,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:redstone_block"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    0,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    4,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    8,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    10,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  },
+  {
+   "tick": 23,
+   "type": "set",
+   "pos": [
+    12,
+    3,
+    0
+   ],
+   "state": "minecraft:air"
+  }
+ ]
+}

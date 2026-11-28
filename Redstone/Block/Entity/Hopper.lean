@@ -32,7 +32,7 @@ instance : Inhabited Hopper := ⟨{}⟩
 not keep are ignored. -/
 def ofNbt? (t : Nbt) : Option Hopper := do
   if !t.plainContainer then none
-  return { items := ← Inventory.ofNbt? 5 t, cooldownTime := t.intD "TransferCooldown" (-1) }
+  return { items := Inventory.ofNbt 5 t, cooldownTime := t.intD "TransferCooldown" (-1) }
 
 end Hopper
 

@@ -124,7 +124,7 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
 | `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
 | `Redstone.Component.SpecialBlock` | campfire, powder snow, cobweb, nether portal, carved pumpkin, dried ghast, eggs | stub |
-| `Redstone.Component.Vine` | cactus, sugar cane, bamboo, chorus plants, kelp and vines, glow lichen and sculk veins | stub |
+| `Redstone.Component.Vine` | cactus, sugar cane, bamboo, chorus plants, kelp and vines, glow lichen, sculk veins and resin clumps: survival, the columns that break piece by piece, what a cactus does to items | defined, tested; growth is not |
 | `Redstone.Component.Ground` | farmland, paths, leaves, grass, nylium, mushroom blocks, mud | stub |
 | `Redstone.Component.Fire` | fire and soul fire | stub |
 | `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners | stub |

@@ -1,0 +1,331 @@
+{
+ "name": "sugar-cane-column-break",
+ "ticks": 14,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   18,
+   5,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    18,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    2,
+    4,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:sand"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    6,
+    4,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    1
+   ],
+   "state": "minecraft:grass_block[snowy=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    10,
+    4,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    1
+   ],
+   "state": "minecraft:mud"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    12,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    14,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    14,
+    3,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    14,
+    4,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 4,
+   "type": "destroy",
+   "pos": [
+    10,
+    2,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    14,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  }
+ ]
+}

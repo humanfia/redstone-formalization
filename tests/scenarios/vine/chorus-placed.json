@@ -1,0 +1,83 @@
+{
+ "name": "chorus-placed",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   4,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    7,
+    1,
+    1
+   ],
+   "state": "minecraft:end_stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:chorus_plant[down=false,east=false,north=false,south=false,up=false,west=false]"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:chorus_flower[age=0]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:chorus_flower[age=5]"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    1
+   ],
+   "state": "minecraft:chorus_flower[age=0]"
+  }
+ ]
+}

@@ -1,0 +1,220 @@
+{
+ "name": "lichen-waterlogged-cell",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   3,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    1
+   ],
+   "max": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    4,
+    1,
+    1
+   ],
+   "max": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    8,
+    1,
+    1
+   ],
+   "max": [
+    10,
+    1,
+    1
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:glow_lichen[down=true,east=true,north=false,south=false,up=true,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:sculk_vein[down=true,east=false,north=false,south=false,up=false,waterlogged=true,west=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:resin_clump[down=false,east=false,north=false,south=false,up=true,waterlogged=true,west=true]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    5,
+    0,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    1,
+    0,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=bottom,waterlogged=false]"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    9,
+    2,
+    1
+   ],
+   "state": "minecraft:oak_slab[type=top,waterlogged=false]"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_stairs[facing=east,half=bottom,shape=straight,waterlogged=false]"
+  }
+ ]
+}

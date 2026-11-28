@@ -1,0 +1,73 @@
+{
+ "name": "sugar-cane-placed",
+ "ticks": 10,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   4,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:dirt"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  }
+ ]
+}

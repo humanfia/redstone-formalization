@@ -1,0 +1,253 @@
+{
+ "name": "sugar-cane-water-gone",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   14,
+   5,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    14,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    0,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    2,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=9]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:frosted_ice[age=0]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    6,
+    3,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=9]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    1
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=0]"
+  },
+  {
+   "pos": [
+    10,
+    3,
+    1
+   ],
+   "state": "minecraft:sugar_cane[age=9]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:ice"
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    10,
+    0,
+    1
+   ],
+   "state": "minecraft:dirt"
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    3,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "tick": 6,
+   "type": "set",
+   "pos": [
+    7,
+    2,
+    1
+   ],
+   "state": "minecraft:glass"
+  }
+ ]
+}

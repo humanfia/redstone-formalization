@@ -1,0 +1,485 @@
+{
+ "name": "kelp-tank-break",
+ "ticks": 16,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   16,
+   6,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    16,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    5,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    2,
+    1,
+    1
+   ],
+   "max": [
+    2,
+    5,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    1,
+    1,
+    0
+   ],
+   "max": [
+    1,
+    5,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    1,
+    1,
+    2
+   ],
+   "max": [
+    1,
+    5,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    4,
+    1,
+    1
+   ],
+   "max": [
+    4,
+    5,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    6,
+    1,
+    1
+   ],
+   "max": [
+    6,
+    5,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    5,
+    1,
+    0
+   ],
+   "max": [
+    5,
+    5,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    5,
+    1,
+    2
+   ],
+   "max": [
+    5,
+    5,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    8,
+    1,
+    1
+   ],
+   "max": [
+    8,
+    5,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    10,
+    1,
+    1
+   ],
+   "max": [
+    10,
+    5,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    9,
+    1,
+    0
+   ],
+   "max": [
+    9,
+    5,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    9,
+    1,
+    2
+   ],
+   "max": [
+    9,
+    5,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    12,
+    1,
+    1
+   ],
+   "max": [
+    12,
+    5,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    14,
+    1,
+    1
+   ],
+   "max": [
+    14,
+    5,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    13,
+    1,
+    0
+   ],
+   "max": [
+    13,
+    5,
+    0
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "min": [
+    13,
+    1,
+    2
+   ],
+   "max": [
+    13,
+    5,
+    2
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    6,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    1,
+    3,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    1,
+    4,
+    1
+   ],
+   "state": "minecraft:kelp[age=0]"
+  },
+  {
+   "pos": [
+    1,
+    5,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    5,
+    6,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    5,
+    4,
+    1
+   ],
+   "state": "minecraft:kelp[age=5]"
+  },
+  {
+   "pos": [
+    5,
+    5,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    9,
+    6,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    9,
+    2,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    9,
+    3,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    9,
+    4,
+    1
+   ],
+   "state": "minecraft:kelp[age=10]"
+  },
+  {
+   "pos": [
+    9,
+    5,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    13,
+    6,
+    1
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    13,
+    1,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    13,
+    2,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    13,
+    3,
+    1
+   ],
+   "state": "minecraft:kelp_plant"
+  },
+  {
+   "pos": [
+    13,
+    4,
+    1
+   ],
+   "state": "minecraft:kelp[age=15]"
+  },
+  {
+   "pos": [
+    13,
+    5,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    5,
+    2,
+    1
+   ],
+   "drop": true
+  },
+  {
+   "tick": 4,
+   "type": "destroy",
+   "pos": [
+    9,
+    4,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 5,
+   "type": "set",
+   "pos": [
+    13,
+    5,
+    1
+   ],
+   "state": "minecraft:kelp[age=25]"
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    13,
+    0,
+    1
+   ],
+   "state": "minecraft:dirt"
+  }
+ ]
+}

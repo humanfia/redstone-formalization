@@ -122,7 +122,7 @@ component's module docstring says what it does not model.
 | `Redstone.Entity.Projectile` | arrows and other projectiles | an arrow stuck in a block is defined and tested; flight is not |
 | `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | stub |
 | `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
-| `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
+| `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel: distance and thickness, breaking and falling without support | defined, tested; growth and dripping (random ticks) are not |
 | `Redstone.Component.SpecialBlock` | campfire, powder snow, cobweb, nether portal, carved pumpkin, dried ghast, eggs | stub |
 | `Redstone.Component.Vine` | cactus, sugar cane, bamboo, chorus plants, kelp and vines, glow lichen and sculk veins | stub |
 | `Redstone.Component.Ground` | farmland, paths, leaves, grass, nylium, mushroom blocks, mud | stub |

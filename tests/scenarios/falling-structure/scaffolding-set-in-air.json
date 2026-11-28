@@ -1,0 +1,63 @@
+{
+ "name": "scaffolding-set-in-air",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   8,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    1,
+    2,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=7,waterlogged=false]"
+  },
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    3,
+    5,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=true,distance=7,waterlogged=false]"
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    5,
+    8,
+    1
+   ],
+   "state": "minecraft:scaffolding[bottom=false,distance=3,waterlogged=false]"
+  }
+ ]
+}

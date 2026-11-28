@@ -1,0 +1,49 @@
+{
+  "name": "fuzz-items-s5-022",
+  "ticks": 80,
+  "box": {"min": [0, 0, 0], "max": [4, 1, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{disabled_slots:[I;0,2,5,6]}"},
+    {"pos": [0, 1, 2], "state": "minecraft:dropper[facing=north,triggered=false]"},
+    {"pos": [0, 1, 3], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [0, 1, 4], "state": "minecraft:dropper[facing=east,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:milk_bucket\",count:1}]}"},
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [1, 1, 3], "state": "minecraft:dropper[facing=south,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:honey_bottle\",count:16},{Slot:1b,id:\"minecraft:red_mushroom\",count:64},{Slot:2b,id:\"minecraft:iron_block\",count:52},{Slot:3b,id:\"minecraft:stick\",count:64},{Slot:4b,id:\"minecraft:honey_bottle\",count:16},{Slot:5b,id:\"minecraft:birch_planks\",count:64},{Slot:6b,id:\"minecraft:brick\",count:64},{Slot:7b,id:\"minecraft:iron_ingot\",count:64},{Slot:8b,id:\"minecraft:oak_planks\",count:64}]}"},
+    {"pos": [1, 1, 4], "state": "minecraft:dropper[facing=north,triggered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{disabled_slots:[I;1,3,5]}"},
+    {"pos": [2, 1, 2], "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bowl\",count:4},{Slot:4b,id:\"minecraft:red_mushroom\",count:1},{Slot:8b,id:\"minecraft:brown_mushroom\",count:1}],disabled_slots:[I;5]}"},
+    {"pos": [2, 1, 3], "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]", "nbt": "{disabled_slots:[I;1,6,7]}"},
+    {"pos": [2, 1, 4], "state": "minecraft:dropper[facing=west,triggered=false]"},
+    {"pos": [3, 1, 0], "state": "minecraft:crafter[crafting=false,orientation=east_up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:iron_block\",count:21},{Slot:3b,id:\"minecraft:honey_bottle\",count:8},{Slot:5b,id:\"minecraft:brick\",count:37},{Slot:6b,id:\"minecraft:dirt\",count:39}],disabled_slots:[I;1]}"},
+    {"pos": [3, 1, 1], "state": "minecraft:dropper[facing=west,triggered=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:stone"},
+    {"pos": [3, 1, 4], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:wheat\",count:50},{Slot:1b,id:\"minecraft:cobblestone\",count:10},{Slot:3b,id:\"minecraft:oak_log\",count:49},{Slot:5b,id:\"minecraft:brick\",count:18},{Slot:7b,id:\"minecraft:iron_block\",count:42},{Slot:8b,id:\"minecraft:oak_planks\",count:45}]}"},
+    {"pos": [4, 1, 0], "state": "minecraft:crafter[crafting=false,orientation=west_up,triggered=false]", "nbt": "{Items:[{Slot:2b,id:\"minecraft:oak_log\",count:16},{Slot:7b,id:\"minecraft:red_mushroom\",count:48},{Slot:8b,id:\"minecraft:honey_bottle\",count:11}],disabled_slots:[I;0]}"},
+    {"pos": [4, 1, 1], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [4, 1, 2], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{disabled_slots:[I;5,6]}"},
+    {"pos": [4, 1, 3], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{Items:[{Slot:4b,id:\"minecraft:brown_mushroom\",count:35},{Slot:5b,id:\"minecraft:milk_bucket\",count:1},{Slot:6b,id:\"minecraft:brown_mushroom\",count:46},{Slot:7b,id:\"minecraft:red_mushroom\",count:43}],disabled_slots:[I;2]}"},
+    {"pos": [4, 1, 4], "state": "minecraft:dropper[facing=north,triggered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 32, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 40, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 42, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 53, "type": "use", "pos": [0, 1, 3], "face": "up"},
+    {"tick": 55, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 67, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 71, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 74, "type": "use", "pos": [2, 1, 0], "face": "up"}
+  ]
+}

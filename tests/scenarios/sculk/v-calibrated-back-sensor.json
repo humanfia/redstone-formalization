@@ -1,0 +1,43 @@
+{
+  "name": "v-calibrated-back-sensor",
+  "ticks": 220,
+  "box": {"min": [0, 0, 0], "max": [9, 2, 8]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [9, 0, 8], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 4], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [4, 1, 4], "state": "minecraft:calibrated_sculk_sensor[facing=west,power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [3, 1, 7], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [4, 1, 7], "state": "minecraft:calibrated_sculk_sensor[facing=east,power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [3, 1, 0], "state": "minecraft:calibrated_sculk_sensor[facing=north,power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:calibrated_sculk_sensor[facing=west,power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [8, 1, 4], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [8, 1, 7], "state": "minecraft:lever[face=floor,facing=north,powered=true]"},
+    {"pos": [8, 1, 1], "state": "minecraft:stone"},
+    {"pos": [0, 1, 7], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [0, 1, 4], "face": "up"},
+    {"tick": 2, "type": "use", "pos": [0, 1, 7], "face": "up"},
+    {"tick": 2, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [8, 1, 4], "face": "up"},
+    {"tick": 9, "type": "use", "pos": [8, 1, 7], "face": "up"},
+    {"tick": 10, "type": "destroy", "pos": [8, 1, 1], "drop": false},
+    {"tick": 70, "type": "use", "pos": [0, 1, 4], "face": "up"},
+    {"tick": 70, "type": "use", "pos": [0, 1, 7], "face": "up"},
+    {"tick": 70, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 75, "type": "use", "pos": [8, 1, 7], "face": "up"},
+    {"tick": 76, "type": "use", "pos": [8, 1, 4], "face": "up"},
+    {"tick": 140, "type": "use", "pos": [0, 1, 4], "face": "up"},
+    {"tick": 141, "type": "use", "pos": [0, 1, 7], "face": "up"},
+    {"tick": 142, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 150, "type": "use", "pos": [8, 1, 4], "face": "up"},
+    {"tick": 151, "type": "use", "pos": [8, 1, 7], "face": "up"},
+    {"tick": 152, "type": "use", "pos": [8, 1, 4], "face": "up"},
+    {"tick": 153, "type": "use", "pos": [8, 1, 7], "face": "up"}
+  ]
+}

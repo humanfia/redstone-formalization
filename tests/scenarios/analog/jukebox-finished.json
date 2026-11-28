@@ -1,0 +1,26 @@
+{
+  "name": "jukebox-finished",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [6, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 2], "state": "minecraft:jukebox[has_record=true]", "nbt": "{RecordItem:{id:\"minecraft:music_disc_11\",count:1},ticks_since_song_started:1440L}"},
+    {"pos": [3, 1, 2], "state": "minecraft:jukebox[has_record=true]", "nbt": "{RecordItem:{id:\"minecraft:music_disc_cat\",count:1}}"},
+    {"pos": [5, 1, 2], "state": "minecraft:jukebox[has_record=true]"},
+    {"pos": [1, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [1, 2, 1], "state": "minecraft:stone"},
+    {"tick": 3, "type": "set", "pos": [3, 2, 1], "state": "minecraft:stone"},
+    {"tick": 4, "type": "set", "pos": [5, 2, 1], "state": "minecraft:stone"},
+    {"tick": 6, "type": "use_item", "pos": [5, 1, 2], "face": "up", "item": "minecraft:music_disc_cat"},
+    {"tick": 7, "type": "use", "pos": [5, 1, 2], "face": "up"},
+    {"tick": 10, "type": "set", "pos": [5, 1, 2], "state": "minecraft:jukebox[has_record=false]"},
+    {"tick": 12, "type": "use_item", "pos": [5, 1, 2], "face": "up", "item": "minecraft:music_disc_5"},
+    {"tick": 20, "type": "set", "pos": [5, 1, 2], "state": "minecraft:jukebox[has_record=true]"}
+  ]
+}

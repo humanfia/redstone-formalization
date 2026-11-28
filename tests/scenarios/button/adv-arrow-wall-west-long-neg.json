@@ -1,0 +1,80 @@
+{
+ "name": "adv-arrow-wall-west-long-neg",
+ "ticks": 70,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   6,
+   4,
+   6
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    6,
+    0,
+    6
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    2,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "state": "minecraft:oak_button[face=wall,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    3
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:arrow",
+   "pos": [
+    4.01,
+    2.25,
+    3.1
+   ],
+   "nbt": "{inGround:1b}"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    3,
+    2,
+    3
+   ],
+   "face": "west"
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "door-use-item",
+  "ticks": 8,
+  "box": {"min": [0, 0, 0], "max": [11, 3, 1]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [11, 0, 1], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:oak_door[facing=north,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:oak_door[facing=north,half=upper,hinge=left,open=false,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:iron_door[facing=north,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:iron_door[facing=north,half=upper,hinge=left,open=false,powered=false]"},
+    {"pos": [4, 1, 0], "state": "minecraft:oak_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [6, 1, 0], "state": "minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [8, 1, 0], "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"},
+    {"pos": [10, 1, 0], "state": "minecraft:oxidized_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]"},
+    {"pos": [10, 2, 0], "state": "minecraft:oxidized_copper_door[facing=north,half=upper,hinge=left,open=false,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use_item", "pos": [0, 1, 0], "face": "north", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [2, 1, 0], "face": "north", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [4, 1, 0], "face": "north", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [6, 1, 0], "face": "north", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [8, 1, 0], "face": "north", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [10, 1, 0], "face": "north", "item": "minecraft:stick"},
+    {"tick": 5, "type": "use_item", "pos": [0, 1, 0], "face": "south", "item": "minecraft:stick"},
+    {"tick": 5, "type": "use_item", "pos": [2, 1, 0], "face": "south", "item": "minecraft:stick"},
+    {"tick": 5, "type": "use_item", "pos": [4, 1, 0], "face": "south", "item": "minecraft:stick"},
+    {"tick": 5, "type": "use_item", "pos": [6, 1, 0], "face": "south", "item": "minecraft:stick"},
+    {"tick": 5, "type": "use_item", "pos": [8, 1, 0], "face": "south", "item": "minecraft:stick"},
+    {"tick": 5, "type": "use_item", "pos": [10, 1, 0], "face": "south", "item": "minecraft:stick"}
+  ]
+}

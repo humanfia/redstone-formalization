@@ -1,0 +1,34 @@
+{
+  "name": "composter-ready",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:composter[level=3]"},
+    {"pos": [3, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"pos": [5, 1, 1], "state": "minecraft:composter[level=2]"},
+    {"pos": [1, 1, 3], "state": "minecraft:composter[level=8]"},
+    {"pos": [3, 1, 3], "state": "minecraft:composter[level=1]"},
+    {"pos": [5, 1, 3], "state": "minecraft:composter[level=4]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [1, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 3, "type": "set", "pos": [3, 1, 1], "state": "minecraft:composter[level=6]"},
+    {"tick": 4, "type": "set", "pos": [3, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 5, "type": "set", "pos": [5, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 6, "type": "set", "pos": [1, 1, 3], "state": "minecraft:composter[level=7]"},
+    {"tick": 7, "type": "set", "pos": [3, 1, 3], "state": "minecraft:composter[level=7]", "flags": 2},
+    {"tick": 8, "type": "set", "pos": [5, 1, 3], "state": "minecraft:composter[level=7]", "flags": 818},
+    {"tick": 14, "type": "set", "pos": [3, 1, 1], "state": "minecraft:composter[level=3]"},
+    {"tick": 15, "type": "destroy", "pos": [5, 1, 1], "drop": false},
+    {"tick": 16, "type": "set", "pos": [5, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 20, "type": "set", "pos": [3, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 30, "type": "set", "pos": [5, 1, 3], "state": "minecraft:composter[level=8]"},
+    {"tick": 31, "type": "set", "pos": [5, 1, 3], "state": "minecraft:composter[level=0]"},
+    {"tick": 40, "type": "set", "pos": [1, 1, 1], "state": "minecraft:composter[level=7]"},
+    {"tick": 41, "type": "set", "pos": [1, 1, 1], "state": "minecraft:stone"},
+    {"tick": 42, "type": "set", "pos": [1, 1, 1], "state": "minecraft:composter[level=7]", "flags": 2}
+  ]
+}

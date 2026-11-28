@@ -1,0 +1,25 @@
+{
+  "name": "adv-frame-mix",
+  "ticks": 20,
+  "box": {"min": [0, 0, 0], "max": [10, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [10, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:end_portal_frame[eye=false,facing=north]"},
+    {"pos": [2, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:end_portal_frame[eye=true,facing=west]"},
+    {"pos": [5, 1, 1], "state": "minecraft:respawn_anchor[charges=4]"},
+    {"pos": [6, 1, 1], "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:lava_cauldron"},
+    {"pos": [8, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 2, "type": "use_item", "pos": [1, 1, 1], "face": "up", "item": "minecraft:stick"},
+    {"tick": 3, "type": "use_item", "pos": [3, 1, 1], "face": "up", "item": "minecraft:stick"},
+    {"tick": 5, "type": "set", "pos": [1, 1, 1], "state": "minecraft:end_portal_frame[eye=true,facing=north]"},
+    {"tick": 8, "type": "set", "pos": [2, 1, 1], "state": "minecraft:stone"},
+    {"tick": 9, "type": "set", "pos": [6, 1, 1], "state": "minecraft:stone"}
+  ]
+}

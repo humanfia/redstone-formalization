@@ -1,0 +1,44 @@
+{
+  "name": "composter-chance-apple",
+  "ticks": 50,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:composter[level=0]"},
+    {"pos": [0, 1, 0], "state": "minecraft:composter[level=3]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 2, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 3, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 4, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 5, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 5, "type": "use_item", "pos": [0, 1, 0], "face": "up", "item": "minecraft:stick"},
+    {"tick": 6, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 7, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 8, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 9, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 10, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 10, "type": "use_item", "pos": [0, 1, 0], "face": "up", "item": "minecraft:wheat_seeds"},
+    {"tick": 11, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 12, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 13, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 14, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 15, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 15, "type": "use_item", "pos": [0, 1, 0], "face": "up", "item": "minecraft:carrot"},
+    {"tick": 16, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 17, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 18, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 19, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 20, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 20, "type": "use_item", "pos": [0, 1, 0], "face": "up", "item": "minecraft:cookie"},
+    {"tick": 21, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 22, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 23, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 24, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"},
+    {"tick": 25, "type": "use_item", "pos": [2, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 26, "type": "use_item", "pos": [2, 1, 2], "face": "up", "item": "minecraft:apple"}
+  ]
+}

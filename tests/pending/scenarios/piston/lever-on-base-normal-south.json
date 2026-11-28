@@ -1,0 +1,15 @@
+{
+  "name": "lever-on-base-normal-south",
+  "ticks": 24,
+  "box": {"min": [5, 5, 4], "max": [11, 11, 12]},
+  "blocks": [
+    {"pos": [8, 8, 7], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=south]"},
+    {"pos": [8, 8, 9], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [8, 8, 7], "face": "up"}
+  ]
+}

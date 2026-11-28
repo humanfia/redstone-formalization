@@ -1,0 +1,32 @@
+{
+  "name": "sulfur-random-024",
+  "ticks": 200,
+  "box": {"min": [0, 0, 0], "max": [9, 9, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [9, 1, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lava[level=0]"},
+    {"pos": [1, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dry]"},
+    {"pos": [4, 1, 1], "state": "minecraft:magma_block"},
+    {"pos": [4, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]", "nbt": "{countdown:4}"},
+    {"pos": [5, 3, 1], "state": "minecraft:glass"},
+    {"pos": [3, 3, 1], "state": "minecraft:glass"},
+    {"pos": [4, 3, 2], "state": "minecraft:glass"},
+    {"pos": [4, 3, 0], "state": "minecraft:glass"},
+    {"pos": [4, 3, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [5, 4, 1], "state": "minecraft:glass"},
+    {"pos": [3, 4, 1], "state": "minecraft:glass"},
+    {"pos": [4, 4, 2], "state": "minecraft:glass"},
+    {"pos": [4, 4, 0], "state": "minecraft:glass"},
+    {"pos": [4, 4, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [7, 1, 1], "state": "minecraft:lava[level=0]"},
+    {"pos": [7, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=continuous]", "nbt": "{countdown:2}"}
+  ],
+  "actions": [
+    {"tick": 25, "type": "set", "pos": [7, 1, 1], "state": "minecraft:magma_block"},
+    {"tick": 66, "type": "set", "pos": [7, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]"},
+    {"tick": 118, "type": "set", "pos": [7, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]"},
+    {"tick": 158, "type": "set", "pos": [7, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=continuous]"}
+  ]
+}

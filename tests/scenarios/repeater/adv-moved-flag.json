@@ -1,0 +1,247 @@
+{
+ "name": "adv-moved-flag",
+ "ticks": 40,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   7,
+   4,
+   7
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    7,
+    0,
+    7
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    2
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    2
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=true]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:redstone_lamp[lit=true]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    0
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    0
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:air",
+   "flags": 67
+  },
+  {
+   "tick": 3,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 8,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:repeater[delay=1,facing=west,locked=false,powered=true]",
+   "flags": 67
+  },
+  {
+   "tick": 12,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    2
+   ],
+   "state": "minecraft:repeater[delay=2,facing=west,locked=false,powered=true]",
+   "flags": 67
+  },
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    0
+   ],
+   "state": "minecraft:air",
+   "flags": 66
+  },
+  {
+   "tick": 24,
+   "type": "set",
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:stone",
+   "flags": 3
+  },
+  {
+   "tick": 28,
+   "type": "set",
+   "pos": [
+    2,
+    1,
+    5
+   ],
+   "state": "minecraft:repeater[delay=2,facing=west,locked=false,powered=false]",
+   "flags": 64
+  },
+  {
+   "tick": 30,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 31,
+   "type": "use",
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "face": "up"
+  }
+ ]
+}

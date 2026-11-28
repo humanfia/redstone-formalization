@@ -1,0 +1,23 @@
+{
+  "name": "slime-collision-up-normal",
+  "ticks": 30,
+  "box": {"min": [5, 3, 4], "max": [12, 13, 11]},
+  "blocks": [
+    {"pos": [8, 6, 8], "state": "minecraft:stone"},
+    {"pos": [8, 7, 8], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=up]"},
+    {"pos": [8, 9, 8], "state": "minecraft:glass"},
+    {"pos": [8, 10, 7], "state": "minecraft:slime_block"},
+    {"pos": [8, 10, 8], "state": "minecraft:slime_block"},
+    {"pos": [9, 9, 7], "state": "minecraft:slime_block"},
+    {"pos": [9, 9, 8], "state": "minecraft:glass"},
+    {"pos": [9, 10, 7], "state": "minecraft:slime_block"},
+    {"pos": [9, 10, 8], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 7, 8], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [8, 7, 8], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [8, 7, 8], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [8, 7, 8], "face": "up"}
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "fuzz-harsh-q-s101-001",
+  "ticks": 40,
+  "box": {"min": [1, -5, 1], "max": [29, 13, 17]},
+  "fill": [
+    {"min": [9, 3, 9], "max": [21, 3, 9], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [9, 4, 9], "state": "minecraft:honey_block"},
+    {"pos": [9, 5, 9], "state": "minecraft:sticky_piston[extended=true,facing=west]"},
+    {"pos": [10, 4, 9], "state": "minecraft:pumpkin"},
+    {"pos": [11, 4, 9], "state": "minecraft:slime_block"},
+    {"pos": [11, 5, 9], "state": "minecraft:piston[extended=false,facing=west]"},
+    {"pos": [12, 4, 9], "state": "minecraft:glass"},
+    {"pos": [12, 5, 9], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [13, 4, 9], "state": "minecraft:lever[face=ceiling,facing=north,powered=true]"},
+    {"pos": [13, 5, 9], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [14, 4, 9], "state": "minecraft:lever[face=ceiling,facing=east,powered=false]"},
+    {"pos": [14, 5, 9], "state": "minecraft:piston[extended=false,facing=down]"},
+    {"pos": [15, 4, 9], "state": "minecraft:honey_block"},
+    {"pos": [15, 5, 9], "state": "minecraft:stone"},
+    {"pos": [16, 4, 9], "state": "minecraft:piston[extended=true,facing=down]"},
+    {"pos": [16, 5, 9], "state": "minecraft:sticky_piston[extended=false,facing=west]"},
+    {"pos": [17, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=north]"},
+    {"pos": [17, 5, 9], "state": "minecraft:stone"},
+    {"pos": [18, 4, 9], "state": "minecraft:lever[face=ceiling,facing=south,powered=true]"},
+    {"pos": [18, 5, 9], "state": "minecraft:sticky_piston[extended=false,facing=west]"},
+    {"pos": [19, 4, 9], "state": "minecraft:slime_block"},
+    {"pos": [19, 5, 9], "state": "minecraft:stone"},
+    {"pos": [20, 4, 9], "state": "minecraft:honey_block"},
+    {"pos": [20, 5, 9], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [21, 4, 9], "state": "minecraft:slime_block"},
+    {"pos": [21, 5, 9], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 4, "type": "use", "pos": [14, 4, 9], "face": "down"},
+    {"tick": 8, "type": "use", "pos": [20, 5, 9], "face": "up"},
+    {"tick": 11, "type": "destroy", "pos": [12, 4, 9], "drop": false},
+    {"tick": 14, "type": "use", "pos": [12, 5, 9], "face": "north"},
+    {"tick": 14, "type": "set", "pos": [16, 5, 9], "state": "minecraft:obsidian", "flags": 3},
+    {"tick": 16, "type": "use", "pos": [20, 5, 9], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [13, 4, 9], "face": "down"},
+    {"tick": 24, "type": "use", "pos": [12, 5, 9], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [12, 5, 9], "face": "north"},
+    {"tick": 26, "type": "use", "pos": [14, 4, 9], "face": "down"},
+    {"tick": 28, "type": "use", "pos": [18, 4, 9], "face": "up"},
+    {"tick": 31, "type": "use", "pos": [18, 4, 9], "face": "up"},
+    {"tick": 32, "type": "use", "pos": [12, 5, 9], "face": "up"},
+    {"tick": 32, "type": "use", "pos": [20, 5, 9], "face": "north"},
+    {"tick": 34, "type": "use", "pos": [20, 5, 9], "face": "north"},
+    {"tick": 36, "type": "use", "pos": [13, 4, 9], "face": "north"}
+  ]
+}

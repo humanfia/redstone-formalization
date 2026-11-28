@@ -1,0 +1,18 @@
+{
+  "name": "impulse-set-same-block",
+  "ticks": 10,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:command_block[conditional=false,facing=east]", "nbt": "{Command:\"say hi\",TrackOutput:0b}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 2, "type": "set", "pos": [2, 1, 1], "state": "minecraft:command_block[conditional=true,facing=up]"},
+    {"tick": 5, "type": "use", "pos": [1, 1, 1], "face": "up"},
+    {"tick": 6, "type": "use", "pos": [1, 1, 1], "face": "up"}
+  ]
+}

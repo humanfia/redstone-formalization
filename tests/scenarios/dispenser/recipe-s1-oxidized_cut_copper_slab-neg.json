@@ -1,0 +1,70 @@
+{
+ "name": "recipe-s1-oxidized_cut_copper_slab-neg",
+ "ticks": 13,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   3,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    3,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]",
+   "nbt": "{Items:[{Slot:0b,id:\"minecraft:oxidized_cut_copper\",count:2},{Slot:1b,id:\"minecraft:oxidized_cut_copper\",count:2},{Slot:2b,id:\"minecraft:chest\",count:2}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

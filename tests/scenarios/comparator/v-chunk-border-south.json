@@ -1,0 +1,135 @@
+{
+ "name": "v-chunk-border-south",
+ "ticks": 44,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   24,
+   4,
+   24
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    24,
+    0,
+    24
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    15,
+    1,
+    7
+   ],
+   "state": "minecraft:comparator[facing=south,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:12}"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=south,mode=subtract,powered=false]"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    5
+   ],
+   "state": "minecraft:comparator[facing=south,mode=compare,powered=false]"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    5
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:5}"
+  },
+  {
+   "pos": [
+    14,
+    1,
+    6
+   ],
+   "state": "minecraft:comparator[facing=west,mode=compare,powered=true]",
+   "nbt": "{OutputSignal:7}"
+  },
+  {
+   "pos": [
+    15,
+    1,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    15,
+    2,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 15,
+   "type": "use",
+   "pos": [
+    15,
+    1,
+    5
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 21,
+   "type": "use",
+   "pos": [
+    14,
+    1,
+    6
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 30,
+   "type": "destroy",
+   "pos": [
+    15,
+    1,
+    7
+   ]
+  }
+ ]
+}

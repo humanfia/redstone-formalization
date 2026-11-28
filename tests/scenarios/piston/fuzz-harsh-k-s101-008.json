@@ -1,0 +1,48 @@
+{
+  "name": "fuzz-harsh-k-s101-008",
+  "ticks": 40,
+  "box": {"min": [-8, -8, -8], "max": [15, 9, 9]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [7, 0, 1], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=west,powered=true]"},
+    {"pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:slime_block"},
+    {"pos": [1, 1, 1], "state": "minecraft:piston[extended=true,facing=south]"},
+    {"pos": [2, 1, 0], "state": "minecraft:lever[face=floor,facing=south,powered=true]"},
+    {"pos": [2, 1, 1], "state": "minecraft:lever[face=floor,facing=south,powered=true]"},
+    {"pos": [3, 1, 0], "state": "minecraft:slime_block"},
+    {"pos": [3, 1, 1], "state": "minecraft:piston[extended=false,facing=north]"},
+    {"pos": [4, 1, 0], "state": "minecraft:piston[extended=false,facing=west]"},
+    {"pos": [4, 1, 1], "state": "minecraft:lever[face=wall,facing=west,powered=true]"},
+    {"pos": [5, 1, 0], "state": "minecraft:piston[extended=false,facing=down]"},
+    {"pos": [6, 1, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:lever[face=floor,facing=east,powered=true]"},
+    {"pos": [7, 1, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [7, 1, 1], "state": "minecraft:sticky_piston[extended=false,facing=south]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 1, 0], "face": "up"},
+    {"tick": 5, "type": "destroy", "pos": [1, 1, 0], "drop": false},
+    {"tick": 8, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 10, "type": "set", "pos": [4, 1, 1], "state": "minecraft:sticky_piston[extended=false,facing=west]", "flags": 3},
+    {"tick": 11, "type": "use", "pos": [6, 1, 1], "face": "up"},
+    {"tick": 12, "type": "set", "pos": [1, 1, 0], "state": "minecraft:sticky_piston[extended=false,facing=down]", "flags": 3},
+    {"tick": 12, "type": "set", "pos": [0, 1, 1], "state": "minecraft:stone", "flags": 3},
+    {"tick": 14, "type": "set", "pos": [0, 1, 0], "state": "minecraft:piston_head[facing=south,short=true,type=sticky]", "flags": 3},
+    {"tick": 16, "type": "set", "pos": [6, 1, 1], "state": "minecraft:obsidian", "flags": 3},
+    {"tick": 17, "type": "destroy", "pos": [1, 1, 1], "drop": false},
+    {"tick": 19, "type": "set", "pos": [2, 1, 1], "state": "minecraft:stone", "flags": 3},
+    {"tick": 21, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 21, "type": "set", "pos": [6, 1, 0], "state": "minecraft:obsidian", "flags": 3},
+    {"tick": 23, "type": "use", "pos": [2, 1, 1], "face": "north"},
+    {"tick": 25, "type": "destroy", "pos": [5, 1, 0], "drop": false},
+    {"tick": 26, "type": "set", "pos": [4, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=true]", "flags": 3},
+    {"tick": 26, "type": "destroy", "pos": [2, 1, 0], "drop": false},
+    {"tick": 28, "type": "set", "pos": [7, 1, 0], "state": "minecraft:piston[extended=false,facing=south]", "flags": 3},
+    {"tick": 30, "type": "use", "pos": [0, 1, 0], "face": "north"},
+    {"tick": 30, "type": "set", "pos": [5, 1, 0], "state": "minecraft:redstone_lamp[lit=false]", "flags": 3},
+    {"tick": 32, "type": "use", "pos": [4, 1, 1], "face": "north"}
+  ]
+}

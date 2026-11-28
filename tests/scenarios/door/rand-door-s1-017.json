@@ -1,0 +1,31 @@
+{
+  "name": "rand-door-s1-017",
+  "ticks": 32,
+  "box": {"min": [0, 0, 0], "max": [6, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:poplar_fence_gate[facing=east,in_wall=false,open=true,powered=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:lever[face=ceiling,facing=south,powered=false]"},
+    {"pos": [0, 4, 2], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:crimson_fence_gate[facing=south,in_wall=false,open=false,powered=false]"},
+    {"pos": [1, 1, 1], "state": "minecraft:cherry_trapdoor[facing=west,half=top,open=false,powered=false,waterlogged=false]"},
+    {"pos": [1, 4, 1], "state": "minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]"},
+    {"pos": [2, 4, 0], "state": "minecraft:oak_fence_gate[facing=east,in_wall=false,open=true,powered=false]"},
+    {"pos": [3, 1, 0], "state": "minecraft:lever[face=wall,facing=west,powered=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:stone"},
+    {"pos": [3, 3, 0], "state": "minecraft:lever[face=floor,facing=south,powered=false]"},
+    {"pos": [3, 3, 1], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [4, 1, 1], "state": "minecraft:cherry_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=false]"},
+    {"pos": [6, 3, 2], "state": "minecraft:lever[face=floor,facing=west,powered=false]"},
+    {"pos": [6, 4, 2], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 4, "type": "use", "pos": [0, 4, 2], "face": "up"},
+    {"tick": 7, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 17, "type": "use", "pos": [3, 1, 0], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [4, 1, 1], "face": "east"}
+  ]
+}

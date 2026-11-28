@@ -1,0 +1,20 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 5},
+    {"state": "minecraft:stone", "weight": 2},
+    {"state": "minecraft:glass", "weight": 1},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 2},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 7},
+    {"state": "minecraft:dispenser[facing=*,triggered=*]", "weight": 5},
+    {"state": "minecraft:dropper[facing=*,triggered=*]", "weight": 5},
+    {"state": "minecraft:crafter[crafting=*,orientation=*,triggered=*]", "weight": 5},
+    {"state": "minecraft:crafter[crafting=*,orientation=*,triggered=*]", "weight": 2, "nbt": "{crafting_ticks_remaining:3,disabled_slots:[I;1,2,7],triggered:1}"},
+    {"state": "minecraft:crafter[crafting=true,orientation=*,triggered=*]", "weight": 1, "nbt": "{crafting_ticks_remaining:7,triggered:0}"}
+  ],
+  "actions": {
+    "use": {"count": [10, 25], "targets": ["minecraft:lever", "minecraft:dispenser", "minecraft:dropper", "minecraft:crafter"]},
+    "set": {"count": [6, 14], "states": ["minecraft:stone", "minecraft:air", "minecraft:glass", "minecraft:redstone_lamp[lit=false]", "minecraft:lever[face=*,facing=*,powered=*]", "minecraft:dropper[facing=*,triggered=*]", "minecraft:dispenser[facing=*,triggered=*]", "minecraft:crafter[crafting=*,orientation=*,triggered=*]"]},
+    "destroy": {"count": [3, 8], "targets": ["minecraft:stone", "minecraft:redstone_lamp", "minecraft:lever", "minecraft:dispenser", "minecraft:dropper", "minecraft:crafter"]}
+  }
+}

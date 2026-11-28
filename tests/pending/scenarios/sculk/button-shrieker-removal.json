@@ -1,0 +1,36 @@
+{
+  "name": "button-shrieker-removal",
+  "ticks": 260,
+  "box": {"min": [0, 0, 0], "max": [9, 2, 7]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [9, 0, 7], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 2], "state": "minecraft:stone_button[face=floor,facing=north,powered=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]"},
+    {"pos": [5, 1, 2], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=true,shrieking=false,waterlogged=false]"},
+    {"pos": [1, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]"},
+    {"pos": [5, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]", "nbt": "{warning_level:2}"},
+    {"pos": [3, 1, 0], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=true,waterlogged=false]"},
+    {"pos": [7, 1, 2], "state": "minecraft:white_wool"},
+    {"pos": [9, 1, 2], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]"},
+    {"pos": [6, 1, 6], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [4, 1, 3], "state": "minecraft:redstone_lamp[lit=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 20, "type": "destroy", "pos": [5, 1, 2], "drop": false},
+    {"tick": 21, "type": "set", "pos": [3, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=true,shrieking=false,waterlogged=false]"},
+    {"tick": 22, "type": "set", "pos": [1, 1, 4], "state": "minecraft:stone"},
+    {"tick": 23, "type": "set", "pos": [5, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=true,shrieking=true,waterlogged=false]"},
+    {"tick": 50, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 52, "type": "use", "pos": [6, 1, 6], "face": "up"},
+    {"tick": 60, "type": "set", "pos": [1, 1, 4], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]"},
+    {"tick": 100, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 101, "type": "use", "pos": [6, 1, 6], "face": "up"},
+    {"tick": 104, "type": "destroy", "pos": [3, 1, 2], "drop": false},
+    {"tick": 150, "type": "use", "pos": [1, 1, 2], "face": "up"},
+    {"tick": 240, "type": "use", "pos": [1, 1, 2], "face": "up"}
+  ]
+}

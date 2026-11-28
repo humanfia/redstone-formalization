@@ -1,0 +1,46 @@
+{
+  "name": "fuzz-harsh-q-s101-017",
+  "ticks": 40,
+  "box": {"min": [1, -5, 1], "max": [29, 13, 17]},
+  "fill": [
+    {"min": [9, 3, 9], "max": [21, 3, 9], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [9, 4, 9], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"},
+    {"pos": [9, 5, 9], "state": "minecraft:piston[extended=false,facing=south]"},
+    {"pos": [10, 4, 9], "state": "minecraft:piston[extended=true,facing=east]"},
+    {"pos": [10, 5, 9], "state": "minecraft:lever[face=floor,facing=east,powered=true]"},
+    {"pos": [11, 4, 9], "state": "minecraft:piston_head[facing=up,short=true,type=normal]"},
+    {"pos": [11, 5, 9], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [12, 4, 9], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [12, 5, 9], "state": "minecraft:stone"},
+    {"pos": [13, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=south]"},
+    {"pos": [13, 5, 9], "state": "minecraft:obsidian"},
+    {"pos": [14, 4, 9], "state": "minecraft:slime_block"},
+    {"pos": [14, 5, 9], "state": "minecraft:sticky_piston[extended=false,facing=west]"},
+    {"pos": [15, 4, 9], "state": "minecraft:stone"},
+    {"pos": [15, 5, 9], "state": "minecraft:piston[extended=false,facing=north]"},
+    {"pos": [16, 4, 9], "state": "minecraft:piston[extended=false,facing=north]"},
+    {"pos": [16, 5, 9], "state": "minecraft:sticky_piston[extended=false,facing=down]"},
+    {"pos": [17, 4, 9], "state": "minecraft:piston[extended=false,facing=up]"},
+    {"pos": [17, 5, 9], "state": "minecraft:honey_block"},
+    {"pos": [18, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=up]"},
+    {"pos": [19, 4, 9], "state": "minecraft:sticky_piston[extended=false,facing=west]"},
+    {"pos": [19, 5, 9], "state": "minecraft:honey_block"},
+    {"pos": [20, 4, 9], "state": "minecraft:white_glazed_terracotta[facing=north]"},
+    {"pos": [20, 5, 9], "state": "minecraft:piston_head[facing=up,short=false,type=sticky]"},
+    {"pos": [21, 4, 9], "state": "minecraft:slime_block"},
+    {"pos": [21, 5, 9], "state": "minecraft:lever[face=ceiling,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use", "pos": [21, 5, 9], "face": "down"},
+    {"tick": 20, "type": "destroy", "pos": [17, 5, 9], "drop": false},
+    {"tick": 21, "type": "use", "pos": [21, 5, 9], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [21, 5, 9], "face": "up"},
+    {"tick": 32, "type": "use", "pos": [10, 5, 9], "face": "down"},
+    {"tick": 34, "type": "use", "pos": [21, 5, 9], "face": "north"},
+    {"tick": 35, "type": "destroy", "pos": [11, 5, 9], "drop": false},
+    {"tick": 36, "type": "use", "pos": [10, 5, 9], "face": "north"},
+    {"tick": 40, "type": "use", "pos": [10, 5, 9], "face": "up"}
+  ]
+}

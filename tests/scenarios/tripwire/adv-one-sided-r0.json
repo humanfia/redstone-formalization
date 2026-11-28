@@ -1,0 +1,20 @@
+{
+  "name": "adv-one-sided-r0",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [10, 5, 4]},
+  "blocks": [
+    {"pos": [4, 2, 2], "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=true]"},
+    {"pos": [5, 2, 2], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=true,south=false,west=false]"},
+    {"pos": [4, 3, 2], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [3, 2, 2], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [2, 2, 2], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [7, 2, 2], "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [8, 2, 2], "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "destroy", "pos": [5, 2, 2]},
+    {"tick": 6, "type": "set", "pos": [5, 2, 2], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"tick": 9, "type": "set", "pos": [6, 2, 2], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=true,south=false,west=false]"},
+    {"tick": 20, "type": "destroy", "pos": [7, 2, 2]}
+  ]
+}

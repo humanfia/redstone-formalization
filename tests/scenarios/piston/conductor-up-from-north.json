@@ -1,0 +1,15 @@
+{
+  "name": "conductor-up-from-north",
+  "ticks": 24,
+  "box": {"min": [5, 5, 3], "max": [11, 12, 11]},
+  "blocks": [
+    {"pos": [8, 8, 6], "state": "minecraft:lever[face=wall,facing=north,powered=false]"},
+    {"pos": [8, 8, 7], "state": "minecraft:stone"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=up]"},
+    {"pos": [8, 9, 8], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 8, 6], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [8, 8, 6], "face": "up"}
+  ]
+}

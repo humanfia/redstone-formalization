@@ -1,0 +1,14 @@
+{
+  "name": "detector-cart-exact-y-top-above",
+  "ticks": 4,
+  "box": {"min": [0, 0, 0], "max": [6, 3, 6]},
+  "blocks": [
+    {"pos": [3, 0, 3], "state": "minecraft:stone"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": ["4006000000000000", "3fd3333340000001", "400c000000000000"], "nbt": "{NoGravity:1b}"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [3, 1, 3], "state": "minecraft:detector_rail[powered=false,shape=north_south,waterlogged=false]"}
+  ]
+}

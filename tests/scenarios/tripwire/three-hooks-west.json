@@ -1,0 +1,146 @@
+{
+ "name": "three-hooks-west",
+ "ticks": 40,
+ "box": {
+  "min": [
+   2,
+   0,
+   3
+  ],
+  "max": [
+   12,
+   3,
+   5
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=false,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=false,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=false,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=false,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=false,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"
+  },
+  {
+   "pos": [
+    10,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=false,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    10,
+    2,
+    4
+   ],
+   "state": "minecraft:redstone_lamp[lit=false]"
+  },
+  {
+   "pos": [
+    11,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "set",
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    8,
+    1,
+    4
+   ]
+  },
+  {
+   "tick": 20,
+   "type": "set",
+   "pos": [
+    8,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"
+  },
+  {
+   "tick": 30,
+   "type": "destroy",
+   "pos": [
+    5,
+    1,
+    4
+   ]
+  }
+ ]
+}

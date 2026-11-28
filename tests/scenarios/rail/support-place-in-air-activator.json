@@ -1,0 +1,13 @@
+{
+  "name": "support-place-in-air-activator",
+  "ticks": 5,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [2, 2, 2], "state": "minecraft:activator_rail[powered=false,shape=north_south,waterlogged=false]"},
+    {"tick": 3, "type": "set", "pos": [2, 3, 2], "state": "minecraft:activator_rail[powered=false,shape=north_south,waterlogged=false]", "flags": 2}
+  ]
+}

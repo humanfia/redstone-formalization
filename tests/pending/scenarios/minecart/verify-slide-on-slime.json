@@ -1,0 +1,20 @@
+{
+  "name": "verify-slide-on-slime",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 7], "state": "minecraft:slime_block"},
+    {"pos": [4, 1, 7], "state": "minecraft:slime_block"},
+    {"pos": [5, 1, 7], "state": "minecraft:slime_block"},
+    {"pos": [6, 1, 7], "state": "minecraft:slime_block"},
+    {"pos": [7, 1, 7], "state": "minecraft:slime_block"},
+    {"pos": [8, 1, 7], "state": "minecraft:slime_block"},
+    {"pos": [9, 1, 7], "state": "minecraft:slime_block"},
+    {"pos": [10, 1, 7], "state": "minecraft:slime_block"},
+    {"pos": [11, 1, 7], "state": "minecraft:slime_block"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [4.5, 2.0, 7.5], "nbt": "{Motion:[0.4d,0.0d,0.1d]}"}]
+}

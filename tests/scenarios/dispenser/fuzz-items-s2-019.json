@@ -1,0 +1,41 @@
+{
+  "name": "fuzz-items-s2-019",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [2, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [2, 0, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:lever[face=floor,facing=east,powered=false]"},
+    {"pos": [0, 2, 0], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"pos": [0, 2, 1], "state": "minecraft:dropper[facing=east,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:iron_ingot\",count:48},{Slot:1b,id:\"minecraft:milk_bucket\",count:1},{Slot:2b,id:\"minecraft:stone\",count:42},{Slot:5b,id:\"minecraft:brick\",count:3},{Slot:7b,id:\"minecraft:iron_sword\",count:1,components:{\"minecraft:damage\":3}}]}"},
+    {"pos": [1, 1, 0], "state": "minecraft:crafter[crafting=false,orientation=up_east,triggered=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:ender_pearl\",count:9},{Slot:8b,id:\"minecraft:stone\",count:14}],disabled_slots:[I;0,4,5]}"},
+    {"pos": [1, 2, 0], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bowl\",count:4},{Slot:4b,id:\"minecraft:red_mushroom\",count:1},{Slot:8b,id:\"minecraft:brown_mushroom\",count:3}],disabled_slots:[I;3]}"},
+    {"pos": [1, 2, 1], "state": "minecraft:crafter[crafting=false,orientation=west_up,triggered=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:cobblestone\",count:52},{Slot:3b,id:\"minecraft:iron_block\",count:26},{Slot:4b,id:\"minecraft:dirt\",count:40},{Slot:6b,id:\"minecraft:brown_mushroom\",count:31}],disabled_slots:[I;2]}"},
+    {"pos": [1, 2, 2], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:dispenser[facing=west,triggered=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:crafter[crafting=false,orientation=south_up,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:bowl\",count:2},{Slot:4b,id:\"minecraft:red_mushroom\",count:2},{Slot:8b,id:\"minecraft:brown_mushroom\",count:2}],disabled_slots:[I;6]}"},
+    {"pos": [2, 1, 2], "state": "minecraft:dropper[facing=north,triggered=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:brown_mushroom\",count:26},{Slot:1b,id:\"minecraft:ender_pearl\",count:1},{Slot:6b,id:\"minecraft:red_mushroom\",count:33},{Slot:7b,id:\"minecraft:wheat\",count:37},{Slot:8b,id:\"minecraft:dirt\",count:9}]}"},
+    {"pos": [2, 2, 0], "state": "minecraft:dropper[facing=west,triggered=false]", "nbt": "{Items:[{Slot:5b,id:\"minecraft:dirt\",count:48},{Slot:6b,id:\"minecraft:oak_log\",count:63},{Slot:7b,id:\"minecraft:oak_planks\",count:6}]}"},
+    {"pos": [2, 2, 1], "state": "minecraft:stone"},
+    {"pos": [2, 2, 2], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 4, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 7, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 16, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 22, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 25, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 26, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 29, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [1, 2, 2], "face": "up"},
+    {"tick": 32, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 42, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 43, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 47, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 51, "type": "use", "pos": [0, 1, 1], "face": "up"},
+    {"tick": 54, "type": "use", "pos": [0, 1, 1], "face": "up"}
+  ]
+}

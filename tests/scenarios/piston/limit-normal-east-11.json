@@ -1,0 +1,25 @@
+{
+  "name": "limit-normal-east-11",
+  "ticks": 20,
+  "box": {"min": [5, 5, 3], "max": [24, 11, 11]},
+  "blocks": [
+    {"pos": [8, 8, 6], "state": "minecraft:stone"},
+    {"pos": [8, 8, 7], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:piston[extended=false,facing=east]"},
+    {"pos": [9, 8, 8], "state": "minecraft:stone"},
+    {"pos": [10, 8, 8], "state": "minecraft:stone"},
+    {"pos": [11, 8, 8], "state": "minecraft:stone"},
+    {"pos": [12, 8, 8], "state": "minecraft:stone"},
+    {"pos": [13, 8, 8], "state": "minecraft:stone"},
+    {"pos": [14, 8, 8], "state": "minecraft:stone"},
+    {"pos": [15, 8, 8], "state": "minecraft:stone"},
+    {"pos": [16, 8, 8], "state": "minecraft:stone"},
+    {"pos": [17, 8, 8], "state": "minecraft:stone"},
+    {"pos": [18, 8, 8], "state": "minecraft:stone"},
+    {"pos": [19, 8, 8], "state": "minecraft:stone"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 10, "type": "use", "pos": [8, 8, 7], "face": "up"}
+  ]
+}

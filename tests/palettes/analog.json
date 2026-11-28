@@ -1,0 +1,60 @@
+{
+  "floor": "minecraft:stone",
+  "blocks": [
+    {"state": "minecraft:air", "weight": 40},
+    {"state": "minecraft:stone", "weight": 6},
+    {"state": "minecraft:glass", "weight": 2},
+    {"state": "minecraft:redstone_lamp[lit=*]", "weight": 8},
+    {"state": "minecraft:lever[face=*,facing=*,powered=*]", "weight": 8},
+    {"state": "minecraft:cake[bites=*]", "weight": 3},
+    {"state": "minecraft:candle_cake[lit=*]", "weight": 1},
+    {"state": "minecraft:purple_candle_cake[lit=*]", "weight": 1},
+    {"state": "minecraft:cauldron", "weight": 1},
+    {"state": "minecraft:lava_cauldron", "weight": 1},
+    {"state": "minecraft:water_cauldron[level=*]", "weight": 1},
+    {"state": "minecraft:powder_snow_cauldron[level=*]", "weight": 1},
+    {"state": "minecraft:composter[level=*]", "weight": 3},
+    {"state": "minecraft:end_portal_frame[eye=*,facing=*]", "weight": 1},
+    {"state": "minecraft:beehive[facing=*,honey_level=*]", "weight": 1},
+    {"state": "minecraft:bee_nest[facing=*,honey_level=*]", "weight": 1},
+    {"state": "minecraft:chiseled_bookshelf[facing=*]", "weight": 2},
+    {"state": "minecraft:oak_shelf[facing=*,powered=*,side_chain=*,waterlogged=false]", "weight": 6},
+    {"state": "minecraft:spruce_shelf[facing=north,powered=*,side_chain=*,waterlogged=false]", "weight": 5},
+    {"state": "minecraft:decorated_pot[cracked=*,facing=*,waterlogged=false]", "weight": 2},
+    {"state": "minecraft:respawn_anchor[charges=*]", "weight": 1},
+    {"state": "minecraft:copper_golem_statue[copper_golem_pose=*,facing=*,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:waxed_oxidized_copper_golem_statue[copper_golem_pose=*,facing=*,waterlogged=false]", "weight": 1},
+    {"state": "minecraft:creaking_heart[axis=*,creaking_heart_state=uprooted,natural=*]", "weight": 2},
+    {"state": "minecraft:jukebox[has_record=false]", "weight": 3},
+    {"state": "minecraft:lectern[facing=*,has_book=false,powered=*]", "weight": 6}
+  ],
+  "actions": {
+    "use": {
+      "count": [3, 10],
+      "targets": ["minecraft:lever", "minecraft:lever", "minecraft:lever", "minecraft:cake", "minecraft:candle_cake",
+        "minecraft:purple_candle_cake", "minecraft:lectern", "minecraft:jukebox", "minecraft:chiseled_bookshelf",
+        "minecraft:decorated_pot", "minecraft:oak_shelf", "minecraft:cauldron", "minecraft:beehive"],
+      "faces": ["up", "north", "south", "west", "east"]
+    },
+    "set": {
+      "count": [1, 6],
+      "states": ["minecraft:stone", "minecraft:air", "minecraft:redstone_lamp[lit=false]",
+        "minecraft:lever[face=*,facing=*,powered=*]",
+        "minecraft:oak_shelf[facing=*,powered=*,side_chain=*,waterlogged=false]",
+        "minecraft:spruce_shelf[facing=north,powered=*,side_chain=unconnected,waterlogged=false]",
+        "minecraft:composter[level=7]", "minecraft:composter[level=6]",
+        "minecraft:lectern[facing=*,has_book=false,powered=*]", "minecraft:cake[bites=*]",
+        "minecraft:creaking_heart[axis=*,creaking_heart_state=uprooted,natural=false]",
+        "minecraft:jukebox[has_record=*]", "minecraft:chiseled_bookshelf[facing=*]",
+        "minecraft:decorated_pot[cracked=false,facing=*,waterlogged=false]",
+        "minecraft:copper_golem_statue[copper_golem_pose=*,facing=*,waterlogged=false]"]
+    },
+    "destroy": {
+      "count": [0, 4],
+      "targets": ["minecraft:stone", "minecraft:redstone_lamp", "minecraft:lever", "minecraft:cake",
+        "minecraft:oak_shelf", "minecraft:spruce_shelf", "minecraft:lectern", "minecraft:jukebox",
+        "minecraft:composter", "minecraft:chiseled_bookshelf", "minecraft:decorated_pot",
+        "minecraft:creaking_heart", "minecraft:beehive", "minecraft:copper_golem_statue"]
+    }
+  }
+}

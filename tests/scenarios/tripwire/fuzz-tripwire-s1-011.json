@@ -1,0 +1,31 @@
+{
+  "name": "fuzz-tripwire-s1-011",
+  "ticks": 30,
+  "box": {"min": [0, 0, 0], "max": [8, 1, 0]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 0], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:tripwire[attached=false,disarmed=false,east=true,north=false,powered=false,south=false,west=true]"},
+    {"pos": [1, 1, 0], "state": "minecraft:tripwire_hook[attached=true,facing=south,powered=false]"},
+    {"pos": [2, 1, 0], "state": "minecraft:tripwire[attached=true,disarmed=false,east=true,north=false,powered=true,south=false,west=false]"},
+    {"pos": [3, 1, 0], "state": "minecraft:tripwire_hook[attached=false,facing=north,powered=false]"},
+    {"pos": [4, 1, 0], "state": "minecraft:glass"},
+    {"pos": [5, 1, 0], "state": "minecraft:tripwire[attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"},
+    {"pos": [7, 1, 0], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [8, 1, 0], "state": "minecraft:tripwire_hook[attached=true,facing=east,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 5, "type": "set", "pos": [6, 1, 0], "state": "minecraft:air"},
+    {"tick": 5, "type": "destroy", "pos": [5, 1, 0], "drop": false},
+    {"tick": 8, "type": "set", "pos": [8, 1, 0], "state": "minecraft:air"},
+    {"tick": 10, "type": "set", "pos": [7, 1, 0], "state": "minecraft:air"},
+    {"tick": 13, "type": "set", "pos": [8, 1, 0], "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=true]"},
+    {"tick": 14, "type": "destroy", "pos": [2, 1, 0], "drop": false},
+    {"tick": 15, "type": "set", "pos": [5, 1, 0], "state": "minecraft:tripwire_hook[attached=false,facing=north,powered=true]"},
+    {"tick": 20, "type": "set", "pos": [7, 1, 0], "state": "minecraft:stone"},
+    {"tick": 21, "type": "destroy", "pos": [0, 1, 0], "drop": false},
+    {"tick": 24, "type": "set", "pos": [1, 1, 0], "state": "minecraft:air"},
+    {"tick": 26, "type": "destroy", "pos": [1, 1, 0], "drop": false}
+  ]
+}

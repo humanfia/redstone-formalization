@@ -1,0 +1,41 @@
+{
+  "name": "stairs-powered-south-10",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [24, 12, 24]},
+  "fill": [
+    {"min": [12, 0, 12], "max": [12, 0, 12], "state": "minecraft:stone"},
+    {"min": [12, 0, 13], "max": [12, 1, 13], "state": "minecraft:stone"},
+    {"min": [12, 0, 14], "max": [12, 2, 14], "state": "minecraft:stone"},
+    {"min": [12, 0, 15], "max": [12, 3, 15], "state": "minecraft:stone"},
+    {"min": [12, 0, 16], "max": [12, 4, 16], "state": "minecraft:stone"},
+    {"min": [12, 0, 17], "max": [12, 5, 17], "state": "minecraft:stone"},
+    {"min": [12, 0, 18], "max": [12, 6, 18], "state": "minecraft:stone"},
+    {"min": [12, 0, 19], "max": [12, 7, 19], "state": "minecraft:stone"},
+    {"min": [12, 0, 20], "max": [12, 8, 20], "state": "minecraft:stone"},
+    {"min": [12, 0, 21], "max": [12, 9, 21], "state": "minecraft:stone"},
+    {"min": [13, 0, 12], "max": [13, 0, 12], "state": "minecraft:stone"},
+    {"min": [13, 0, 21], "max": [13, 9, 21], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [12, 1, 12], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 2, 13], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 3, 14], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 4, 15], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 5, 16], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 6, 17], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 7, 18], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 8, 19], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 9, 20], "state": "minecraft:powered_rail[powered=false,shape=ascending_south,waterlogged=false]"},
+    {"pos": [12, 10, 21], "state": "minecraft:powered_rail[powered=false,shape=north_south,waterlogged=false]"},
+    {"pos": [13, 1, 12], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [13, 10, 21], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [13, 1, 12], "face": "up"},
+    {"tick": 5, "type": "use", "pos": [13, 1, 12], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [13, 10, 21], "face": "up"},
+    {"tick": 11, "type": "use", "pos": [13, 10, 21], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [13, 1, 12], "face": "up"},
+    {"tick": 15, "type": "destroy", "pos": [12, 1, 13], "drop": false}
+  ]
+}

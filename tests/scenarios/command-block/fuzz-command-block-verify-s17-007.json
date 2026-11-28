@@ -1,0 +1,48 @@
+{
+  "name": "fuzz-command-block-verify-s17-007",
+  "ticks": 24,
+  "box": {"min": [0, 0, 0], "max": [1, 4, 1]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [1, 0, 1], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=wall,facing=west,powered=true]"},
+    {"pos": [0, 1, 1], "state": "minecraft:command_block[conditional=true,facing=north]", "nbt": "{Command:\"Searge\",SuccessCount:2}"},
+    {"pos": [0, 2, 0], "state": "minecraft:command_block[conditional=false,facing=south]", "nbt": "{Command:\"say x\",TrackOutput:0b,LastExecution:4L,powered:1b}"},
+    {"pos": [0, 2, 1], "state": "minecraft:repeating_command_block[conditional=false,facing=down]", "nbt": "{Command:\"Searge\"}"},
+    {"pos": [0, 3, 0], "state": "minecraft:structure_block[mode=data]"},
+    {"pos": [0, 3, 1], "state": "minecraft:command_block[conditional=false,facing=west]", "nbt": "{Command:\"say x\",TrackOutput:0b}"},
+    {"pos": [0, 4, 0], "state": "minecraft:chain_command_block[conditional=true,facing=west]", "nbt": "{Command:\"say z\",TrackOutput:0b,auto:1b,UpdateLastExecution:0b}"},
+    {"pos": [0, 4, 1], "state": "minecraft:lever[face=ceiling,facing=west,powered=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:command_block[conditional=true,facing=east]", "nbt": "{Command:\"Searge\",SuccessCount:2}"},
+    {"pos": [1, 1, 1], "state": "minecraft:test_block[mode=accept]"},
+    {"pos": [1, 2, 0], "state": "minecraft:chain_command_block[conditional=true,facing=west]", "nbt": "{Command:\"Searge\",auto:1b}"},
+    {"pos": [1, 3, 0], "state": "minecraft:command_block[conditional=true,facing=west]", "nbt": "{Command:\"Searge\",SuccessCount:2}"},
+    {"pos": [1, 4, 1], "state": "minecraft:test_block[mode=start]", "nbt": "{mode:\"log\"}"}
+  ],
+  "actions": [
+    {"tick": 4, "type": "use", "pos": [0, 4, 1], "face": "up"},
+    {"tick": 5, "type": "set", "pos": [1, 3, 1], "state": "minecraft:test_block[mode=fail]"},
+    {"tick": 5, "type": "destroy", "pos": [0, 3, 1], "drop": false},
+    {"tick": 6, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 6, "type": "set", "pos": [0, 3, 0], "state": "minecraft:air"},
+    {"tick": 7, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 8, "type": "use", "pos": [0, 4, 1], "face": "up"},
+    {"tick": 9, "type": "destroy", "pos": [1, 1, 0], "drop": false},
+    {"tick": 10, "type": "set", "pos": [0, 2, 0], "state": "minecraft:air"},
+    {"tick": 10, "type": "destroy", "pos": [1, 3, 0], "drop": false},
+    {"tick": 11, "type": "use", "pos": [0, 4, 1], "face": "up"},
+    {"tick": 11, "type": "set", "pos": [0, 2, 1], "state": "minecraft:test_block[mode=accept]"},
+    {"tick": 12, "type": "use", "pos": [0, 4, 1], "face": "up"},
+    {"tick": 12, "type": "set", "pos": [0, 1, 0], "state": "minecraft:test_block[mode=fail]"},
+    {"tick": 12, "type": "destroy", "pos": [0, 4, 0], "drop": false},
+    {"tick": 14, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 15, "type": "destroy", "pos": [1, 1, 1], "drop": false},
+    {"tick": 16, "type": "set", "pos": [0, 1, 1], "state": "minecraft:repeating_command_block[conditional=true,facing=west]"},
+    {"tick": 18, "type": "use", "pos": [0, 4, 1], "face": "up"},
+    {"tick": 19, "type": "set", "pos": [0, 2, 1], "state": "minecraft:stone"},
+    {"tick": 20, "type": "use", "pos": [0, 4, 1], "face": "up"},
+    {"tick": 22, "type": "set", "pos": [0, 3, 1], "state": "minecraft:repeating_command_block[conditional=false,facing=south]"},
+    {"tick": 24, "type": "use", "pos": [0, 1, 0], "face": "up"}
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "basic-sticky-west",
+  "ticks": 60,
+  "box": {"min": [4, 5, 3], "max": [11, 11, 11]},
+  "blocks": [
+    {"pos": [7, 8, 8], "state": "minecraft:stone"},
+    {"pos": [8, 8, 6], "state": "minecraft:stone"},
+    {"pos": [8, 8, 7], "state": "minecraft:lever[face=wall,facing=south,powered=false]"},
+    {"pos": [8, 8, 8], "state": "minecraft:sticky_piston[extended=false,facing=west]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 12, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 20, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 21, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 30, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 32, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 40, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 43, "type": "use", "pos": [8, 8, 7], "face": "up"},
+    {"tick": 50, "type": "use", "pos": [8, 8, 7], "face": "up"}
+  ]
+}

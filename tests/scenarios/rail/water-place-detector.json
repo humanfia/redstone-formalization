@@ -1,0 +1,15 @@
+{
+  "name": "water-place-detector",
+  "ticks": 8,
+  "box": {"min": [0, 0, 0], "max": [4, 3, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 1, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [2, 1, 2], "state": "minecraft:air"},
+    {"tick": 2, "type": "set", "pos": [2, 1, 2], "state": "minecraft:detector_rail[powered=true,shape=north_south,waterlogged=true]"},
+    {"tick": 4, "type": "set", "pos": [2, 1, 2], "state": "minecraft:detector_rail[powered=true,shape=east_west,waterlogged=true]"},
+    {"tick": 6, "type": "set", "pos": [2, 1, 2], "state": "minecraft:detector_rail[powered=true,shape=east_west,waterlogged=false]"}
+  ]
+}

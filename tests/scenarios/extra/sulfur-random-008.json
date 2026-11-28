@@ -1,0 +1,18 @@
+{
+  "name": "sulfur-random-008",
+  "ticks": 200,
+  "box": {"min": [0, 0, 0], "max": [3, 9, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [3, 1, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lava[level=0]"},
+    {"pos": [1, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"},
+    {"pos": [2, 3, 1], "state": "minecraft:glass"},
+    {"pos": [0, 3, 1], "state": "minecraft:glass"},
+    {"pos": [1, 3, 2], "state": "minecraft:glass"},
+    {"pos": [1, 3, 0], "state": "minecraft:glass"},
+    {"pos": [1, 3, 1], "state": "minecraft:water[level=0]"}
+  ],
+  "actions": []
+}

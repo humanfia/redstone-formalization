@@ -1,0 +1,90 @@
+{
+ "name": "recipe-s1-mossy_cobblestone_from_moss_block-pos",
+ "ticks": 24,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   3,
+   2,
+   2
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    3,
+    0,
+    2
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    0
+   ],
+   "state": "minecraft:dropper[facing=north,triggered=false]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]",
+   "nbt": "{Items:[{Slot:3b,id:\"minecraft:cobblestone\",count:2},{Slot:6b,id:\"minecraft:moss_block\",count:1}]}"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:lever[face=floor,facing=north,powered=false]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 8,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "up"
+  },
+  {
+   "tick": 10,
+   "type": "use",
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "face": "up"
+  }
+ ]
+}

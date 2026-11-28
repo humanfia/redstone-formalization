@@ -1,0 +1,38 @@
+{
+  "name": "activator-on",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [15, 3, 31]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 31], "state": "minecraft:stone"},
+    {"min": [1, 1, 2], "max": [4, 1, 2], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [5, 1, 2], "max": [7, 1, 2], "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"min": [8, 1, 2], "max": [14, 1, 2], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [1, 1, 6], "max": [4, 1, 6], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [5, 1, 6], "max": [7, 1, 6], "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"min": [8, 1, 6], "max": [14, 1, 6], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [1, 1, 10], "max": [4, 1, 10], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [5, 1, 10], "max": [7, 1, 10], "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"min": [8, 1, 10], "max": [14, 1, 10], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [1, 1, 14], "max": [4, 1, 14], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [5, 1, 14], "max": [7, 1, 14], "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"min": [8, 1, 14], "max": [14, 1, 14], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [1, 1, 18], "max": [4, 1, 18], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [5, 1, 18], "max": [7, 1, 18], "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"min": [8, 1, 18], "max": [14, 1, 18], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [1, 1, 22], "max": [4, 1, 22], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [5, 1, 22], "max": [7, 1, 22], "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"min": [8, 1, 22], "max": [14, 1, 22], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [1, 1, 26], "max": [4, 1, 26], "state": "minecraft:rail[shape=east_west,waterlogged=false]"},
+    {"min": [5, 1, 26], "max": [7, 1, 26], "state": "minecraft:activator_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"min": [8, 1, 26], "max": [14, 1, 26], "state": "minecraft:rail[shape=east_west,waterlogged=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:minecart", "pos": [3.5, 1.0625, 2.5], "nbt": "{Motion:[0.25d,0.0d,0.0d]}"},
+    {"type": "minecraft:chest_minecart", "pos": [3.5, 1.0625, 6.5], "nbt": "{Motion:[0.25d,0.0d,0.0d]}"},
+    {"type": "minecraft:furnace_minecart", "pos": [3.5, 1.0625, 10.5], "nbt": "{Motion:[0.25d,0.0d,0.0d]}"},
+    {"type": "minecraft:tnt_minecart", "pos": [3.5, 1.0625, 14.5], "nbt": "{Motion:[0.25d,0.0d,0.0d]}"},
+    {"type": "minecraft:hopper_minecart", "pos": [3.5, 1.0625, 18.5], "nbt": "{Motion:[0.25d,0.0d,0.0d]}"},
+    {"type": "minecraft:spawner_minecart", "pos": [3.5, 1.0625, 22.5], "nbt": "{Motion:[0.25d,0.0d,0.0d]}"},
+    {"type": "minecraft:command_block_minecart", "pos": [3.5, 1.0625, 26.5], "nbt": "{Motion:[0.25d,0.0d,0.0d]}"}
+  ]
+}

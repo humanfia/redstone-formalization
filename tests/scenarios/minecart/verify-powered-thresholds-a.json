@@ -1,0 +1,27 @@
+{
+  "name": "verify-powered-thresholds-a",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [15, 4, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [15, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [4, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [6, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [8, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [10, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [11, 1, 1], "state": "minecraft:powered_rail[powered=true,shape=east_west,waterlogged=false]"},
+    {"pos": [4, 1, 9], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [5, 1, 9], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [6, 1, 9], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [7, 1, 9], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [8, 1, 9], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [9, 1, 9], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [10, 1, 9], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"},
+    {"pos": [11, 1, 9], "state": "minecraft:powered_rail[powered=false,shape=east_west,waterlogged=false]"}
+  ],
+  "entities": [{"type": "minecraft:minecart", "pos": [7.5, 1.0625, 1.5], "nbt": "{Motion:[0.010520833333333333d,0.0d,0.0d]}"}, {"type": "minecraft:minecart", "pos": [7.5, 1.0625, 9.5], "nbt": "{Motion:[0.0312d,0.0d,0.0d]}"}]
+}

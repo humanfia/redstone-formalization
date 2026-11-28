@@ -1,0 +1,15 @@
+{
+  "name": "ice-single",
+  "ticks": 520,
+  "box": {"min": [0, 0, 0], "max": [8, 2, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 1, 2], "state": "minecraft:stone"},
+    {"min": [0, 2, 0], "max": [8, 2, 2], "state": "minecraft:glass"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 1, 1], "state": "minecraft:frosted_ice[age=0]"},
+    {"tick": 2, "type": "set", "pos": [3, 1, 1], "state": "minecraft:frosted_ice[age=1]"},
+    {"tick": 3, "type": "set", "pos": [5, 1, 1], "state": "minecraft:frosted_ice[age=2]"},
+    {"tick": 4, "type": "set", "pos": [7, 1, 1], "state": "minecraft:frosted_ice[age=3]"}
+  ]
+}

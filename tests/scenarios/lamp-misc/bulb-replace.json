@@ -1,0 +1,33 @@
+{
+  "name": "bulb-replace",
+  "ticks": 16,
+  "box": {"min": [-1, -1, -1], "max": [9, 2, 5]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 1], "state": "minecraft:copper_bulb[lit=false,powered=false]"},
+    {"pos": [0, 1, 0], "state": "minecraft:lever[face=floor,facing=south,powered=true]"},
+    {"pos": [3, 1, 1], "state": "minecraft:waxed_copper_bulb[lit=false,powered=false]"},
+    {"pos": [3, 1, 0], "state": "minecraft:lever[face=floor,facing=south,powered=true]"},
+    {"pos": [6, 1, 1], "state": "minecraft:oxidized_copper_bulb[lit=false,powered=false]"},
+    {"pos": [6, 1, 0], "state": "minecraft:lever[face=floor,facing=south,powered=true]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [0, 1, 1], "state": "minecraft:copper_bulb[lit=true,powered=false]"},
+    {"tick": 2, "type": "set", "pos": [3, 1, 1], "state": "minecraft:waxed_copper_bulb[lit=true,powered=false]"},
+    {"tick": 2, "type": "set", "pos": [6, 1, 1], "state": "minecraft:oxidized_copper_bulb[lit=true,powered=false]"},
+    {"tick": 5, "type": "set", "pos": [0, 1, 1], "state": "minecraft:exposed_copper_bulb[lit=true,powered=false]"},
+    {"tick": 5, "type": "set", "pos": [3, 1, 1], "state": "minecraft:copper_bulb[lit=true,powered=false]"},
+    {"tick": 5, "type": "set", "pos": [6, 1, 1], "state": "minecraft:waxed_oxidized_copper_bulb[lit=true,powered=false]"},
+    {"tick": 8, "type": "set", "pos": [0, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 8, "type": "set", "pos": [3, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 8, "type": "set", "pos": [6, 1, 1], "state": "minecraft:redstone_lamp[lit=false]"},
+    {"tick": 11, "type": "set", "pos": [0, 1, 1], "state": "minecraft:copper_bulb[lit=false,powered=true]"},
+    {"tick": 11, "type": "set", "pos": [3, 1, 1], "state": "minecraft:waxed_copper_bulb[lit=false,powered=true]"},
+    {"tick": 11, "type": "set", "pos": [6, 1, 1], "state": "minecraft:oxidized_copper_bulb[lit=false,powered=true]"},
+    {"tick": 13, "type": "use", "pos": [0, 1, 0], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [3, 1, 0], "face": "up"},
+    {"tick": 13, "type": "use", "pos": [6, 1, 0], "face": "up"}
+  ]
+}

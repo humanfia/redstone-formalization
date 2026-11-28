@@ -1,0 +1,97 @@
+{
+ "name": "water-flat-corner",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   10,
+   3,
+   10
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    10,
+    0,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    10,
+    2,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    10
+   ],
+   "max": [
+    10,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    10,
+    1,
+    0
+   ],
+   "max": [
+    10,
+    2,
+    10
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]",
+   "flags": 3
+  }
+ ]
+}

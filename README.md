@@ -107,7 +107,7 @@ component's module docstring says what it does not model.
 | `Redstone.Mechanics.Power` | strong and weak power, conductors | defined |
 | `Redstone.Mechanics.Tick` | the phases of a game tick | defined |
 | `Redstone.Mechanics.Input` | the actions of a scenario (use, set, destroy, summon, kill) and schedules of them | defined |
-| `Redstone.Mechanics.Fluid` | what a fluid tick does: the flow of water and lava | stub |
+| `Redstone.Mechanics.Fluid` | what a fluid tick does: the flow of water and lava | defined, tested |
 | `Redstone.Mechanics.RandomTick` | the random ticks of the chunks | stub |
 | `Redstone.Mechanics.Dispatch` | which component gives each block its behaviour (generated) | defined |
 | `Redstone.Mechanics.PistonMotion` | which blocks a piston moves, and in which order | defined, tested |
@@ -120,7 +120,7 @@ component's module docstring says what it does not model.
 | `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
 | `Redstone.Entity.Geometry`, `Redstone.Entity.Touch` | the boxes of entities, and how an entity tells the blocks it steps on and passes through (`Entity.applyEffectsFromBlocks`), shared by all entity units | defined, tested |
 | `Redstone.Entity.Projectile` | arrows and other projectiles | an arrow stuck in a block is defined and tested; flight is not |
-| `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | stub |
+| `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | defined, tested; lava sets nothing on fire yet |
 | `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
 | `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
 | `Redstone.Component.SpecialBlock` | campfire, powder snow, cobweb, nether portal, carved pumpkin, dried ghast, eggs | stub |

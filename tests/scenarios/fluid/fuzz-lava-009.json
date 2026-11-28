@@ -1,0 +1,323 @@
+{
+ "name": "fuzz-lava-009",
+ "ticks": 160,
+ "box": {
+  "min": [
+   0,
+   -1,
+   0
+  ],
+  "max": [
+   8,
+   5,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    4,
+    0
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    8
+   ],
+   "max": [
+    8,
+    4,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    1,
+    0
+   ],
+   "max": [
+    0,
+    4,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    8,
+    1,
+    0
+   ],
+   "max": [
+    8,
+    4,
+    8
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    0,
+    -1,
+    0
+   ],
+   "max": [
+    8,
+    -1,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    1,
+    1,
+    2
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    7
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    1
+   ],
+   "state": "minecraft:oak_trapdoor[facing=east,half=bottom,open=true,powered=false,waterlogged=true]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    6
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    5
+   ],
+   "state": "minecraft:brain_coral[waterlogged=true]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    7
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    1
+   ],
+   "state": "minecraft:water[level=0]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:oak_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=true]"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    5
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    4,
+    1,
+    6
+   ],
+   "state": "minecraft:mangrove_roots[waterlogged=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:fire_coral_fan[waterlogged=true]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    5
+   ],
+   "state": "minecraft:glass"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    6
+   ],
+   "state": "minecraft:white_carpet"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    7
+   ],
+   "state": "minecraft:copper_grate[waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    1
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    5
+   ],
+   "state": "minecraft:torch"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    7
+   ],
+   "state": "minecraft:oak_trapdoor[facing=north,half=top,open=false,powered=false,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    2,
+    6
+   ],
+   "state": "minecraft:water[level=0]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 16,
+   "type": "set",
+   "pos": [
+    6,
+    3,
+    3
+   ],
+   "state": "minecraft:soul_sand",
+   "flags": 3
+  },
+  {
+   "tick": 20,
+   "type": "destroy",
+   "pos": [
+    3,
+    0,
+    2
+   ],
+   "drop": true
+  },
+  {
+   "tick": 52,
+   "type": "set",
+   "pos": [
+    4,
+    2,
+    4
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  },
+  {
+   "tick": 55,
+   "type": "destroy",
+   "pos": [
+    1,
+    0,
+    3
+   ],
+   "drop": true
+  },
+  {
+   "tick": 99,
+   "type": "destroy",
+   "pos": [
+    2,
+    1,
+    3
+   ],
+   "drop": false
+  },
+  {
+   "tick": 102,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    6
+   ],
+   "state": "minecraft:air",
+   "flags": 3
+  }
+ ]
+}

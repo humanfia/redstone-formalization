@@ -50,8 +50,6 @@ world, and the model has no other players.
 * Brewing: every brewing recipe asks for potion contents, a data component, so with the stacks
   of the model a brewing stand never brews. It still burns its fuel and shows its bottles.
 * A cat sitting on a chest, which blocks it.
-* Waterlogged chests: a shape update of one schedules a fluid tick, which the engine does not
-  have, so it sets `Level.overflow`.
 -/
 
 @[expose] public section
@@ -879,7 +877,7 @@ def base (self : Block) : Behaviour :=
 /-- `ChestBlock.updateShape`: a single chest joins a neighbouring half that points at it, and a
 half whose other half is gone becomes single again. A copper chest then takes the block of the
 half it is joined to (`CopperChestBlock.updateShape`). The fluid tick that a waterlogged chest
-schedules first is not part of this function: the behaviour sets `Level.overflow` for it. -/
+schedules first is not part of this function: the behaviour schedules it. -/
 def chestUpdateShape (self : Block) (c : ChestState) (d : Direction) (neighbour : Block) :
     Block :=
   let canConnect := if isCopperChest self then isCopperChest neighbour else neighbour.is self.id
@@ -920,9 +918,8 @@ def chest (self : Block) (c : ChestState) : Behaviour :=
       | some container => redstoneSignal (container.items l)
       | none => 0
     keepsBlockEntity := fun old => isCopperChest self && isCopperChest old
-    updateShape := fun _ d _ neighbour => do
-      -- `ticks.scheduleTick(pos, Fluids.WATER, ...)`: fluid ticks are not modelled.
-      if c.waterlogged then Level.setOverflow
+    updateShape := fun p d _ neighbour => do
+      if c.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
       pure (chestUpdateShape self c d neighbour)
     useWithoutItem := fun p _ => do
       if let some container := combine (← get) self p false then openMenu container.positions
@@ -1123,9 +1120,12 @@ def behaviour (self : Block) : Behaviour :=
   | .shulkerBox _ _ => shulkerBox self
   | .furnace _ | .blastFurnace _ | .smoker _ => furnace self
   | .brewingStand _ => brewingStand self
-  | .enderChest _ =>
+  | .enderChest s =>
     -- Not modelled: its menu shows the player's own inventory, and it counts its viewers.
     { Behaviour.inert self with
+      updateShape := fun p _ _ _ => do
+        if s.waterlogged then Level.scheduleFluidTick p .water Fluid.water.tickDelay
+        return self
       useWithoutItem := fun _ _ => do
         Level.setOverflow
         return true }

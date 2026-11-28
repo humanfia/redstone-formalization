@@ -26,8 +26,8 @@ Java classes: `TargetBlock`, `LightningRodBlock`, `WeatheringLightningRodBlock`,
   the same point in general. Statistics and advancements are left out. No projectile flies in
   the model yet, so nothing calls `onProjectileHit`, and `tick` cannot be reached either.
 * Lightning rod: `ownSignal`, `getDirectSignal`, `onLightningStrike`, `tick`, `onPlace`,
-  `affectNeighborsAfterRemoval`. `updateShape` only schedules a fluid tick for a waterlogged
-  rod, and fluids do not flow in the model. `randomTick` (the oxidation of copper) and the level
+  `affectNeighborsAfterRemoval`, and `updateShape`, which schedules a fluid tick for a
+  waterlogged rod. `randomTick` (the oxidation of copper) and the level
   event of a strike (particles) are left out. No lightning is modelled yet, so nothing calls
   `strike`.
 * Daylight detector: `ownSignal`, `useWithoutItem`, the ticker, `updateSignalStrength`. The sun
@@ -107,6 +107,10 @@ with the given value of `powered`. -/
 def lightningRod (id : BlockId) (facing : Direction) (powered : Bool) (state : Bool → Block) :
     Behaviour :=
   { Behaviour.inert (state powered) with
+    updateShape := fun p _ _ _ => do
+      if (state powered).waterlogged? = some true then
+        Level.scheduleFluidTick p .water Fluid.water.tickDelay
+      return state powered
     signal := fun _ _ _ => if powered then 15 else 0
     ownSignal := fun _ _ => if powered then 15 else 0
     directSignal := fun _ _ d => if powered && facing = d then 15 else 0

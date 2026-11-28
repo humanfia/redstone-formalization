@@ -23,7 +23,8 @@ by taking `kick := runUpdates`.
 
 ## What is left out
 
-* Drops: destroying a block drops nothing.
+* Drops: destroying a block drops nothing. `Level.getDrops` is where the loot of a block will
+  be computed; today it only knows how many stacks there are.
 * `setBlock` on a cell of an empty chunk section fails in the game when the new state is air.
   Here it only fails when the state does not change, which differs for the three kinds of air.
 * Light, heightmaps and points of interest.
@@ -83,7 +84,7 @@ def peekBlockEntity (p : Pos) : M (Option BlockEntity) := return (← get).block
 
 /-- Replaces the data of the block entity at `p`. -/
 def setBlockEntity (p : Pos) (be : BlockEntity) : M Unit :=
-  modify fun l => { l with blockEntities := Function.update l.blockEntities p (some be) }
+  modify fun l => { l with blockEntities := l.blockEntities.insert p be }
 
 /-- Stops ticking the block entity at `p`. -/
 def removeBlockEntityTicker (p : Pos) : M Unit :=
@@ -117,7 +118,7 @@ def getBlockEntity (p : Pos) : M (Option BlockEntity) := do
 
 /-- Removes the block entity at `p`. -/
 def removeBlockEntity (p : Pos) : M Unit := do
-  modify fun l => { l with blockEntities := Function.update l.blockEntities p none }
+  modify fun l => { l with blockEntities := l.blockEntities.erase p }
   removeBlockEntityTicker p
 
 /-! ### Scheduled ticks and block events -/
@@ -130,6 +131,16 @@ def scheduleTick (p : Pos) (block : BlockId) (delay : ℕ) (priority : TickPrior
     let t : ScheduledTick := ⟨p, block, l.gameTime + delay, priority, l.subTickCount⟩
     let l := { l with subTickCount := l.subTickCount + 1 }
     if l.hasScheduledTick p block then l else { l with ticks := l.ticks ++ [t] }
+
+/-- `scheduleTick(pos, fluid, delay)`: schedules a fluid tick. Nothing is scheduled if a tick of
+the same fluid at the same position is already waiting. The counter that orders the ticks is
+the one block ticks use (`Level.nextSubTickCount`). -/
+def scheduleFluidTick (p : Pos) (fluid : Fluid) (delay : ℕ) (priority : TickPriority := .normal) :
+    M Unit :=
+  modify fun l =>
+    let t : ScheduledFluidTick := ⟨p, fluid, l.gameTime + delay, priority, l.subTickCount⟩
+    let l := { l with subTickCount := l.subTickCount + 1 }
+    if l.hasScheduledFluidTick p fluid then l else { l with fluidTicks := l.fluidTicks ++ [t] }
 
 /-- `blockEvent(pos, block, a, b)`: queues a block event, unless the same one is queued. -/
 def blockEvent (p : Pos) (block : BlockId) (a b : ℤ) : M Unit :=
@@ -160,29 +171,60 @@ def modifyEntity (index : ℕ) (f : Entity → Entity) : M Unit :=
   modify fun l =>
     { l with entities := l.entities.map fun e => if e.index == index then f e else e }
 
+/-! ### Random sources -/
+
+/-- `RandomSource.create()`: a new random number generator, such as the one every entity has for
+itself. The game seeds it from the clock; the test harness makes the seed of the `k`-th
+generator created on the server thread `k * 0x9E3779B97F4A7C15` (`tests/FORMAT.md`), and this is
+what the model follows, counting the generators in `Level.randomSourceCount`.
+
+Nothing calls this yet. The count is only right if every place where the game creates a
+generator calls it, and the model does not do that so far: the entities it creates have no
+generator of their own. -/
+def createRandomSource : M JavaRandom :=
+  modifyGet fun l =>
+    let k := l.randomSourceCount + 1
+    (.ofSeed (k * 0x9E3779B97F4A7C15 % 2 ^ 64), { l with randomSourceCount := k })
+
 /-! ### Drops -/
 
-/-- `Block.dropResources(state, level, pos, blockEntity, breaker, tool)` in a world where the
-game rule `block_drops` is off: nothing is dropped, but `Block.popResource` draws the three
-coordinates of every stack of the block's loot from the level's random number generator before
-it finds that out.
+/-- `Block.getDrops(state, level, pos, blockEntity)`: the stacks that the block `state` at `p`
+drops when it is broken without tool and without breaker (a block that lost its support, for
+instance), with the block entity it had.
+
+The loot tables are not evaluated yet. What is known is how many stacks there are, and that is
+all `dropResources` needs while the game rule `block_drops` is off: the result has the right
+length, and every stack in it is a placeholder, `ItemStack.empty`.
 
 How many stacks there are may depend on chance (`Entity.Tnt.brokenChanceLoot`): the loot table
 then draws from its own random sequence, `Level.lootSequences`, which starts from the world
 seed the first time the table is used. A block whose loot the model cannot evaluate (see
-`Entity.Tnt.brokenChanceLoot` for which) sets `Level.overflow`. -/
-def dropResources (state : Block) : M Unit :=
-  let pop (n : ℕ) (l : Level) : Level := { l with random := (·.nextDouble53.2)^[3 * n] l.random }
+`Entity.Tnt.brokenChanceLoot` for which) sets `Level.overflow` and gives no stack. -/
+def getDrops (state : Block) (_p : Pos) (_be : Option BlockEntity := none) :
+    M (List ItemStack) :=
   match Entity.Tnt.brokenChanceLoot state with
-  | some table => modify fun l =>
+  | some table => modifyGet fun l =>
     let sequence := (l.lootSequences.lookup table.key).getD table.newSequence
     let (n, sequence) := table.stackCount sequence
-    pop n { l with
-      lootSequences := (table.key, sequence) :: l.lootSequences.filter (·.1 != table.key) }
+    (List.replicate n ItemStack.empty, { l with
+      lootSequences := (table.key, sequence) :: l.lootSequences.filter (·.1 != table.key) })
   | none =>
     match Entity.Tnt.brokenDropStacks state with
-    | some n => modify (pop n)
-    | none => setOverflow
+    | some n => pure (List.replicate n ItemStack.empty)
+    | none => do
+      setOverflow
+      pure []
+
+/-- `Block.dropResources(state, level, pos, blockEntity, breaker, tool)` in a world where the
+game rule `block_drops` is off: nothing is dropped, but `Block.popResource` draws the three
+coordinates of every stack of the block's loot (`getDrops`) from the level's random number
+generator before it finds that out. `p` is the position of the block and `be` the block entity
+it had; neither is used yet. With the game rule on, the stacks would be dropped as item
+entities, which is not modelled: `Level.overflow` is set. -/
+def dropResources (state : Block) (p : Pos) (be : Option BlockEntity := none) : M Unit := do
+  if (← get).blockDrops then setOverflow
+  let drops ← getDrops state p be
+  modify fun l => { l with random := (·.nextDouble53.2)^[3 * drops.length] l.random }
 
 /-! ### Operations that request updates -/
 
@@ -267,7 +309,9 @@ def setBlockInChunk (p : Pos) (state : Block) (flags : ℕ) : M (Option Block) :
   if !(← getBlock p).is state.id then return none
   if !flags.testBit UpdateFlag.skipOnPlace then newB.onPlace p old moved
   if state.hasBlockEntity && (← getBlock p).is state.id then
-    let valid (be : BlockEntity) := (BlockEntity.new? state.id).any (·.typeName == be.typeName)
+    -- `blockEntity.isValidBlockState(state)`: the block entity is of the type of the block's.
+    -- The types are compared by constructor, which is the same as by `typeName`.
+    let valid (be : BlockEntity) := (BlockEntity.new? state.id).any (·.ctorIdx == be.ctorIdx)
     if ((← peekBlockEntity p).any valid) then
       if newB.ticksBlockEntity then addBlockEntityTicker p else removeBlockEntityTicker p
     else
@@ -299,7 +343,7 @@ as it does in the game (`dropResources`). Returns whether a block was broken. -/
 def destroyBlock (p : Pos) (drop : Bool) (limit : ℕ := 512) : M Bool := do
   let state ← getBlock p
   if state.isAir then return false
-  if drop then dropResources state
+  if drop then dropResources state p (← peekBlockEntity p)
   let destroyed ← setBlock kick p state.fluidBlock UpdateFlag.all limit
   if destroyed then gameEvent "minecraft:block_destroy" p { affectedState := some state }
   return destroyed

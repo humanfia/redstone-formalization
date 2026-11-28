@@ -12,8 +12,8 @@ It has three parts:
    piston, observer and so on, with the block state each one carries.
 2. **Mechanics.** How the game runs them: power, neighbour and shape updates, the phases of a
    game tick, and how pistons move blocks.
-3. **Theorems.** Statements about contraptions proved against those semantics. The first target
-   is the smallest possible 3x3 piston door.
+3. **Theorems.** Statements about contraptions proved against those semantics, by letting the
+   Lean kernel evaluate the model. The first target is the smallest possible 3x3 piston door.
 
 The reference is **Minecraft: Java Edition 26.3**. The model is executable, and it is tested
 against the real 26.3 server: a scenario is run on the server and in Lean, and the two must
@@ -81,27 +81,34 @@ the harness in [tools/harness/README.md](tools/harness/README.md). Traces come f
 only. When the model disagrees with a trace, the model is wrong.
 
 The block inventory is generated from the server as well:
-`tools/harness/run.sh dump`, then `tools/gen/gen_blocks.py` and `tools/gen/gen_dispatch.py`.
+`tools/harness/run.sh dump`, then `tools/gen/gen_blocks.py`, `tools/gen/gen_fluid.py` and
+`tools/gen/gen_dispatch.py`.
 The block tags come from the server jar (`tools/gen/gen_tags.py`).
 
 ## Status
 
 The engine and every redstone component of 26.3 are defined and tested against the server:
-`lake test` replays about 9500 recorded scenarios. Scenarios on which the model still disagrees
+`lake test` replays about 9800 recorded scenarios. Scenarios on which the model still disagrees
 with the server, or which need something the model leaves out, wait in `tests/pending`; each
 component's module docstring says what it does not model.
 
 | Module | Contents | State |
 |---|---|---|
 | `Redstone.Basic.*` | directions, positions, signals, boxes, NBT, the game's random generator | defined |
+| `Redstone.Basic.PosMap` | finite maps on positions, as a canonical trie that the kernel evaluates cheaply; the representation of worlds and of the block entities | defined, proved |
 | `Redstone.Block.Generated.*` | all 1286 blocks of 26.3 with their properties, attributes, shapes, items and tags, generated from the server | defined |
 | `Redstone.Block.FaceShape` | the faces of block shapes, in exact arithmetic (`getFaceShape`, `isFaceFull`) | defined |
+| `Redstone.Block.Fluid`, `Redstone.Block.Generated.Fluid` | fluid states, and the fluid state of every block state, without strings | defined |
+| `Redstone.Block.Weathering` | the stages of copper | defined, not used yet |
 | `Redstone.Block.Entity.*` | the data of each block entity type | defined for the components below |
-| `Redstone.World.Level` | blocks, block entities, scheduled ticks, block events, entities, clock, weather | defined |
+| `Redstone.World.Level` | blocks, block entities, scheduled block and fluid ticks, block events, entities, clock, weather, the game rules for random ticks and drops | defined |
 | `Redstone.Mechanics.Behaviour` | the reactions of a block (`BlockBehaviour`) and the monad they run in | defined |
 | `Redstone.Mechanics.Update` | `setBlock`, neighbour and shape updates, the neighbour updater | defined |
 | `Redstone.Mechanics.Power` | strong and weak power, conductors | defined |
 | `Redstone.Mechanics.Tick` | the phases of a game tick | defined |
+| `Redstone.Mechanics.Input` | the actions of a scenario (use, set, destroy, summon, kill) and schedules of them | defined |
+| `Redstone.Mechanics.Fluid` | what a fluid tick does: the flow of water and lava | stub |
+| `Redstone.Mechanics.RandomTick` | the random ticks of the chunks | stub |
 | `Redstone.Mechanics.Dispatch` | which component gives each block its behaviour (generated) | defined |
 | `Redstone.Mechanics.PistonMotion` | which blocks a piston moves, and in which order | defined, tested |
 | `Redstone.Component.Dust`, `Torch`, `Repeater`, `Diode`, `Comparator`, `Observer` | wire, torches and the block of redstone, repeater, comparator, observer | defined, tested |
@@ -113,12 +120,32 @@ component's module docstring says what it does not model.
 | `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
 | `Redstone.Entity.Geometry`, `Redstone.Entity.Touch` | the boxes of entities, and how an entity tells the blocks it steps on and passes through (`Entity.applyEffectsFromBlocks`), shared by all entity units | defined, tested |
 | `Redstone.Entity.Projectile` | arrows and other projectiles | an arrow stuck in a block is defined and tested; flight is not |
+| `Redstone.Component.Fluid` | water, lava, bubble columns, coral, and the blocks that only hold water | stub |
+| `Redstone.Component.Attached` | ladders, lanterns, signs, banners, flower pots, candles and the other decorations that hang on a block | stub |
+| `Redstone.Component.FallingStructure` | scaffolding, pointed dripstone, sulfur spikes, suspicious sand and gravel | stub |
+| `Redstone.Component.SpecialBlock` | campfire, powder snow, cobweb, nether portal, carved pumpkin, dried ghast, eggs | stub |
+| `Redstone.Component.Vine` | cactus, sugar cane, bamboo, chorus plants, kelp and vines, glow lichen and sculk veins | stub |
+| `Redstone.Component.Ground` | farmland, paths, leaves, grass, nylium, mushroom blocks, mud | stub |
+| `Redstone.Component.Fire` | fire and soul fire | stub |
+| `Redstone.Component.Loot` | ores that drop experience, infested blocks, spawners | stub |
+| `Redstone.Component.RandomTicked` | copper blocks, ice, budding amethyst | stub |
+| `Redstone.Entity.Lightning`, `Redstone.Entity.Hanging`, `Redstone.Entity.ExperienceOrb` | lightning bolts, item frames, experience orbs | stub |
+| `Redstone.Proof.Smoke` | four small circuits proved by kernel evaluation: lever and lamp, a lever losing its support, a sticky piston, two hoppers | proved |
 | `Redstone.Contraption.PistonDoor`, `Redstone.Theorems.PistonDoor3x3` | piston doors | placeholder |
 
-What the model leaves out: fluids do not flow, light is modelled only as far as the daylight
-detector needs it, destroyed blocks drop nothing (the random numbers of the drops are drawn),
-every chunk is loaded, players and mobs only exist as inputs, and the experimental redstone
-wire is off. Where the model meets something it does not cover it sets `Level.overflow` instead
+A stub is a module that is registered and built but does nothing yet: its blocks are inert and
+its entities are not decoded, exactly as before it existed.
+
+Proofs live in `Redstone/Proof` (the tools), `Redstone/Lemmas` (facts about one component or
+one part of the engine), `Redstone/Theorems` and `Redstone/Contraption` (circuits). Every file
+under these four directories is built by `lake build` without being listed anywhere. How
+circuits are proved, what it costs and what does not work is in
+[docs/proof-feasibility.md](docs/proof-feasibility.md).
+
+What the model leaves out: fluids do not flow and blocks get no random ticks (the phases of the
+game tick are there, and empty), light is modelled only as far as the daylight detector needs
+it, destroyed blocks drop nothing (the random numbers of the drops are drawn), every chunk is
+loaded, players and mobs only exist as inputs, and the experimental redstone wire is off. Where the model meets something it does not cover it sets `Level.overflow` instead
 of going on with a wrong state.
 
 ## Contributing

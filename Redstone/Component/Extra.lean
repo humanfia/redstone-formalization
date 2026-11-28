@@ -105,14 +105,11 @@ def skull (self : Block) (powered : Bool) (setPowered : Bool → Block) : Behavi
 /-! ### Sponge -/
 
 /-- `getFluidState().is(FluidTags.WATER)`: the block holds water, still or flowing. -/
-def holdsWater (b : Block) : Bool := b.attrs.fluid.startsWith "minecraft:water["
+def holdsWater (b : Block) : Bool := b.fluidState.fluid.isWater
 
 /-- The state with the property `waterlogged` set to false, for a state that has it set. -/
 def drained? (b : Block) : Option Block :=
-  if b.toProps.contains ("waterlogged", "true") then
-    Block.ofProps? b.id fun k =>
-      if k = "waterlogged" then some "false" else (b.toProps.find? (·.1 == k)).map (·.2)
-  else none
+  if b.waterlogged? = some true then some (b.setWaterlogged false) else none
 
 /-- The node processor of `SpongeBlock.removeWaterBreadthFirstSearch`: removes the water at `p`.
 Returns whether the search goes on from `p` (`ACCEPT`) or not (`SKIP`). -/

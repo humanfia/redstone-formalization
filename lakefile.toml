@@ -18,6 +18,10 @@ rev = "v4.37.0-rc1"
 
 [[lean_lib]]
 name = "Redstone"
+# `Redstone.lean` imports the model. The proofs are not imported there: every file under these
+# directories is built by the default target as it is, so a new file needs no entry anywhere,
+# and the test runner does not wait for proofs.
+globs = ["Redstone", "Redstone.Proof.+", "Redstone.Lemmas.+", "Redstone.Theorems.+", "Redstone.Contraption.+"]
 
 [[lean_exe]]
 name = "difftest"

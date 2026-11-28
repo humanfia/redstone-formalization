@@ -184,7 +184,7 @@ def candleCake (id : Blocks.CandleCake.Id) (s : Blocks.CandleCake) : Behaviour :
     canSurvive := cakeCanSurvive
     updateShape := fun p d _ _ => cakeUpdateShape self p d
     -- `AbstractCandleBlock.onProjectileHit`: a burning projectile lights the candle.
-    onProjectileHit := fun _ _ _ => do
+    onProjectileHit := fun _ _ _ _ => do
       if !s.lit then unmodelled
     useWithoutItem := fun p _ => eatCake p
     useItemOn := fun p face item => do
@@ -670,7 +670,7 @@ def decoratedPot (s : Blocks.DecoratedPot) : Behaviour :=
     preRemoveSideEffects := fun p => do
       if let some d ← getPot p then ItemDrop.dropContents p [d.item]
     -- A projectile that may break blocks shatters the pot.
-    onProjectileHit := fun _ _ _ => unmodelled
+    onProjectileHit := fun _ _ _ _ => unmodelled
     triggerEvent := fun p a b => do
       -- `DecoratedPotBlockEntity.triggerEvent`: the pot wobbles, which nothing here observes.
       return (← getPot p).isSome && decide (a = 1 ∧ 0 ≤ b ∧ b < 2)

@@ -14,8 +14,8 @@ A copper bulb remembers in `powered` whether it receives a signal, and switches 
 time the signal appears. A comparator reads 15 from a lit bulb. The eight copper bulbs (four
 stages of oxidation, waxed or not) behave alike.
 
-Not modelled: the oxidation of the unwaxed bulbs (`WeatheringCopperBulbBlock.randomTick`;
-blocks have no random ticks in the model), and the sounds.
+Not modelled: the oxidation of the unwaxed bulbs (`WeatheringCopperBulbBlock.randomTick`; no
+block gets a random tick in the model yet), and the sounds.
 -/
 
 @[expose] public section

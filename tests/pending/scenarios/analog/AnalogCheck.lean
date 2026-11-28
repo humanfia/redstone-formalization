@@ -79,8 +79,9 @@ def World.apply (w : World) (frame : Json) : Except String World := do
 
 def World.level (w : World) : Level :=
   { Level.empty with
-    world := ⟨fun p => w.blocks.getD (key p) .AIR⟩
-    blockEntities := fun p => w.blockEntities.get? (key p) }
+    world := Redstone.World.ofList (w.blocks.toList.map fun ((x, y, z), b) => ((⟨x, y, z⟩ : Pos), b))
+    blockEntities := PosMap.ofList
+      (w.blockEntities.toList.map fun ((x, y, z), be) => ((⟨x, y, z⟩ : Pos), be)) }
 
 /-- `ComparatorBlock.getInputSignal` for a comparator at `c` that gets no redstone power from
 behind: the analog signal of the block behind it, or of the block behind a conductor. `none`

@@ -29,6 +29,15 @@
     {"module": "Extra", "classes": ["AbstractSkullBlock", "SpongeBlock", "FrostedIceBlock", "PotentSulfurBlock", "SlimeBlock", "HoneyBlock", "RedStoneOreBlock"]},
     {"module": "FallingBlock", "classes": ["FallingBlock"]},
     {"module": "Supported", "classes": ["CarpetBlock", "SnowLayerBlock", "TorchBlock", "VegetationBlock", "AbstractBedBlock"]},
-    {"module": "Connecting", "classes": ["FenceBlock", "IronBarsBlock", "WallBlock", "StairBlock"]}
+    {"module": "Connecting", "classes": ["FenceBlock", "IronBarsBlock", "WallBlock", "StairBlock"]},
+    {"module": "Fluid", "classes": ["LiquidBlock", "BubbleColumnBlock", "MagmaBlock", "SoulSandBlock", "SlabBlock", "ChainBlock", "WaterloggedTransparentBlock", "BarrierBlock", "LightBlock", "MangroveRootsBlock", "ConduitBlock", "HeavyCoreBlock", "CoralBlock", "BaseCoralPlantTypeBlock", "WetSpongeBlock"]},
+    {"module": "Attached", "classes": ["LadderBlock", "LanternBlock", "SignBlock", "CeilingHangingSignBlock", "WallHangingSignBlock", "AbstractBannerBlock", "FlowerPotBlock", "CandleBlock", "AmethystClusterBlock", "CocoaBlock", "HangingRootsBlock", "SporeBlossomBlock", "HangingMossBlock", "MossyCarpetBlock", "EndRodBlock", "GrindstoneBlock", "ShelfMushroomBlock"]},
+    {"module": "FallingStructure", "classes": ["ScaffoldingBlock", "PointedDripstoneBlock", "SulfurSpikeBlock", "BrushableBlock"]},
+    {"module": "SpecialBlock", "classes": ["CampfireBlock", "PowderSnowBlock", "WebBlock", "NetherPortalBlock", "CarvedPumpkinBlock", "DriedGhastBlock", "TurtleEggBlock", "FrogspawnBlock", "SnifferEggBlock"]},
+    {"module": "Vine", "classes": ["CactusBlock", "SugarCaneBlock", "BambooStalkBlock", "BambooSaplingBlock", "ChorusPlantBlock", "ChorusFlowerBlock", "GrowingPlantBlock", "VineBlock", "MultifaceBlock"]},
+    {"module": "Ground", "classes": ["FarmlandBlock", "PathBlock", "LeavesBlock", "SnowyBlock", "NyliumBlock", "HugeMushroomBlock", "MudBlock", "RootedDirtBlock"]},
+    {"module": "Fire", "classes": ["BaseFireBlock"]},
+    {"module": "Loot", "classes": ["DropExperienceBlock", "InfestedBlock", "SpawnerBlock"]},
+    {"module": "RandomTicked", "classes": ["WeatheringCopperFullBlock", "IceBlock", "BuddingAmethystBlock"]}
   ]
 }

@@ -106,7 +106,7 @@ def behaviour (self : Block) : Behaviour :=
         let some e := (← get).entity? i | return
         if s.tilt = .none && canEntityTilt p e && !(← Level.hasNeighborSignal p) then
           setTiltAndScheduleTick s p .unstable false
-      onProjectileHit := fun p _ _ => setTiltAndScheduleTick s p .full true
+      onProjectileHit := fun p _ _ _ => setTiltAndScheduleTick s p .full true
       tick := fun p => do
         if ← Level.hasNeighborSignal p then resetTilt s p
         else

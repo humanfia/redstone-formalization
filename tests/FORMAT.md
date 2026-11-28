@@ -250,10 +250,16 @@ compares it with their traces after every tick; without arguments it runs everyt
 `tests/scenarios`, which is what `lake test` and the CI do.
 
 * The model takes its initial state from frame 0 of the trace, so it never reads `fill`,
-  `blocks` or `entities`. From the scenario it uses `ticks`, `box`, `actions` and, of the
-  `settings`, `dayTime`, `advanceTime` and `weather`.
-* It supports the actions `use`, `use_item`, `set`, `destroy` and `kill`. A scenario with
-  `summon` cannot be run yet.
+  `blocks` or `entities`. From the scenario it uses `ticks`, `box`, `actions` and the
+  `settings`. The settings `randomTickSpeed` and `blockDrops` are loaded into the level, but
+  the model has neither random ticks nor drops yet, so a scenario that sets them will not
+  agree with its trace.
+* It supports all the actions; they are the inputs of the model
+  (`Redstone.Mechanics.Input`). The entity of a `summon` is read from its `type`, its `pos` and
+  its `nbt`, as the model reads an entity of a trace; what the game adds to a summoned entity
+  beyond its saved data is not modelled.
+* The scheduled fluid ticks of frame 0 (`fluidTicks`) are loaded, but fluid ticks are not
+  compared yet (`compareFluidTicks` in `Difftest.lean`): fluids do not flow in the model.
 * After every tick it compares: `gameTime`; the block state and the block entity of every
   position in the box; `blockEntityTickers`; `scheduled`; `blockEvents`; and the entities.
   Block entities and entities are compared after decoding the server's NBT into the model's

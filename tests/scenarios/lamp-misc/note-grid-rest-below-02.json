@@ -1,0 +1,31 @@
+{
+  "name": "note-grid-rest-below-02",
+  "ticks": 3,
+  "box": {"min": [-1, 0, -1], "max": [20, 4, 20]},
+  "blocks": [
+    {"pos": [0, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [2, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [4, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [6, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [8, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [10, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [12, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [14, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [16, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [18, 2, 0], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"},
+    {"pos": [2, 2, 2], "state": "minecraft:note_block[instrument=harp,note=0,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [0, 1, 0], "state": "minecraft:sculk_catalyst[bloom=false]"},
+    {"tick": 1, "type": "set", "pos": [2, 1, 0], "state": "minecraft:sculk_shrieker[can_summon=false,shrieking=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [4, 1, 0], "state": "minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [6, 1, 0], "state": "minecraft:exposed_lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [8, 1, 0], "state": "minecraft:weathered_lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [10, 1, 0], "state": "minecraft:oxidized_lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [12, 1, 0], "state": "minecraft:waxed_lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [14, 1, 0], "state": "minecraft:waxed_exposed_lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [16, 1, 0], "state": "minecraft:waxed_weathered_lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [18, 1, 0], "state": "minecraft:waxed_oxidized_lightning_rod[facing=up,powered=false,waterlogged=false]"},
+    {"tick": 1, "type": "set", "pos": [2, 1, 2], "state": "minecraft:crafter[crafting=false,orientation=north_up,triggered=false]"}
+  ]
+}

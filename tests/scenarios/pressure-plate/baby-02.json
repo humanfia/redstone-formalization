@@ -1,0 +1,33 @@
+{
+  "name": "baby-02",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [11, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [11, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 4], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 7], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 7], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 10], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 10], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 13], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 13], "state": "minecraft:oak_pressure_plate[powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:fox", "pos": [2.8865, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:fox", "pos": [8.8785, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:goat", "pos": [2.8415, 1.0, 4.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:goat", "pos": [8.8335, 1.0, 4.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:happy_ghast", "pos": [2.5915, 1.0, 7.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:happy_ghast", "pos": [8.5835, 1.0, 7.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:hoglin", "pos": [2.6915, 1.0, 10.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:hoglin", "pos": [8.6835, 1.0, 10.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:horse", "pos": [2.57773, 1.0, 13.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:horse", "pos": [8.56973, 1.0, 13.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"}
+  ],
+  "actions": []
+}

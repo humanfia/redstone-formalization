@@ -1,0 +1,33 @@
+{
+  "name": "baby-00",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [11, 3, 15]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [11, 0, 15], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 4], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 7], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 7], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 10], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 10], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 13], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 13], "state": "minecraft:oak_pressure_plate[powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:armadillo", "pos": [2.8565, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:armadillo", "pos": [8.8485, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:axolotl", "pos": [2.879, 1.0, 4.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:axolotl", "pos": [8.871, 1.0, 4.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:bee", "pos": [2.929, 1.0, 7.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:bee", "pos": [8.921, 1.0, 7.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:camel", "pos": [2.5915, 1.0, 10.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:camel", "pos": [8.5835, 1.0, 10.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:cat", "pos": [2.9165, 1.0, 13.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"},
+    {"type": "minecraft:cat", "pos": [8.9085, 1.0, 13.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000}"}
+  ],
+  "actions": []
+}

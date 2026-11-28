@@ -1,0 +1,29 @@
+{
+  "name": "baby-adults",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [11, 3, 12]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [11, 0, 12], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 4], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 7], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 7], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 10], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 10], "state": "minecraft:oak_pressure_plate[powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:horse", "pos": [2.57773, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:horse", "pos": [8.56973, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [2.8415, 1.0, 4.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:pig", "pos": [8.8335, 1.0, 4.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:wolf", "pos": [2.9165, 1.0, 7.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:wolf", "pos": [8.9085, 1.0, 7.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:zombie", "pos": [2.8215, 1.0, 10.5], "nbt": "{NoAI:1b,Invulnerable:1b}"},
+    {"type": "minecraft:zombie", "pos": [8.8135, 1.0, 10.5], "nbt": "{NoAI:1b,Invulnerable:1b}"}
+  ],
+  "actions": []
+}

@@ -26,9 +26,8 @@ Which entities there are, their bounding boxes and when they touch a block comes
 `Redstone.Entity.Still` and `Redstone.Entity.Touch`; see there for what is assumed about
 entities. Sounds are left out.
 
-Two scenarios wait in `tests/pending`: `entity-flags`, which has a baby pig, whose smaller box
-the model does not have, and `sweep-squid-00`, in which a squid out of water moves although it
-has no AI.
+One scenario waits in `tests/pending`: `sweep-squid-00`, in which a squid out of water moves
+although it has no AI.
 -/
 
 @[expose] public section

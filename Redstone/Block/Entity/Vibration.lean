@@ -73,13 +73,13 @@ def doubleBits? : Nbt → Option ℕ
   | .double bits => some bits
   | _ => none
 
-/-- The source of a saved vibration (`source`, a UUID as an int array). The UUID of the player
-of the tests is read as the player, so that the vibrations a player causes during a run compare
-equal to the server's; every other UUID is kept as `saved`. (Hence a scenario that *starts* with
-a vibration carrying the player's own UUID is read as caused by a live player, which the server
-does not do: there the UUID is looked up and not found.) -/
+/-- The source of a saved vibration (`source`, a UUID as an int array). Saved data only has the
+UUID, whoever it names: a vibration read from it is not one a live player caused, even with the
+UUID of the player of the tests (`GameEventSource.resolve`). The vibrations a player causes
+during a run are written by the server with that UUID; `VibrationInfo.saved` gives the model's
+data the same form before the two are compared. -/
 def sourceOfNbt? : Nbt → Option GameEventSource
-  | .intArray uuid => some (if uuid = GameEventSource.playerUuid then .player else .saved uuid)
+  | .intArray uuid => some (.saved uuid)
   | _ => none
 
 /-- Reads a vibration from its saved NBT (`VibrationInfo.CODEC`). The owner of a projectile is
@@ -98,6 +98,13 @@ def ofField? (t : Nbt) : Option (Option VibrationInfo) :=
   match t.get? "event" with
   | none => some none
   | some e => (ofNbt? e).map some
+
+/-- The vibration as the game saves it: of a player that caused it only the UUID is written
+(`VibrationInfo.CODEC`, `uuid`). -/
+def saved (v : VibrationInfo) : VibrationInfo :=
+  match v.source with
+  | some .player => { v with source := some (.saved GameEventSource.playerUuid) }
+  | _ => v
 
 end VibrationInfo
 
@@ -127,6 +134,12 @@ def ofField? (t : Nbt) : Option VibrationData :=
   match t.get? "listener" with
   | none => some default
   | some l => ofNbt? l
+
+/-- The data as the game saves it (`VibrationInfo.saved`). -/
+def saved (d : VibrationData) : VibrationData :=
+  { d with
+    currentVibration := d.currentVibration.map (·.saved)
+    selector := d.selector.map fun (v, tick) => (v.saved, tick) }
 
 end VibrationData
 

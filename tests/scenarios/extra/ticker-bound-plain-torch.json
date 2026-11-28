@@ -1,0 +1,42 @@
+{
+  "name": "ticker-bound-plain-torch",
+  "ticks": 130,
+  "box": {"min": [0, 0, 0], "max": [26, 5, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [26, 1, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 1], "state": "minecraft:stone"},
+    {"pos": [1, 2, 1], "state": "minecraft:stone"},
+    {"pos": [2, 2, 1], "state": "minecraft:redstone_torch[lit=true]"},
+    {"pos": [3, 2, 1], "state": "minecraft:wither_skeleton_skull[powered=true,rotation=0]"},
+    {"pos": [7, 1, 1], "state": "minecraft:stone"},
+    {"pos": [6, 2, 1], "state": "minecraft:stone"},
+    {"pos": [7, 2, 1], "state": "minecraft:redstone_torch[lit=true]"},
+    {"pos": [8, 2, 1], "state": "minecraft:wither_skeleton_skull[powered=true,rotation=0]"},
+    {"pos": [12, 1, 1], "state": "minecraft:stone"},
+    {"pos": [11, 2, 1], "state": "minecraft:stone"},
+    {"pos": [12, 2, 1], "state": "minecraft:redstone_torch[lit=true]"},
+    {"pos": [13, 2, 1], "state": "minecraft:wither_skeleton_skull[powered=true,rotation=0]"},
+    {"pos": [17, 1, 1], "state": "minecraft:stone"},
+    {"pos": [16, 2, 1], "state": "minecraft:stone"},
+    {"pos": [17, 2, 1], "state": "minecraft:redstone_torch[lit=true]"},
+    {"pos": [18, 2, 1], "state": "minecraft:wither_skeleton_skull[powered=true,rotation=0]"},
+    {"pos": [22, 1, 1], "state": "minecraft:stone"},
+    {"pos": [21, 2, 1], "state": "minecraft:stone"},
+    {"pos": [22, 2, 1], "state": "minecraft:redstone_torch[lit=true]"},
+    {"pos": [23, 2, 1], "state": "minecraft:wither_skeleton_skull[powered=true,rotation=0]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "set", "pos": [2, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]"},
+    {"tick": 2, "type": "set", "pos": [7, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dormant]"},
+    {"tick": 2, "type": "set", "pos": [12, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=continuous]"},
+    {"tick": 2, "type": "set", "pos": [17, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=wet]"},
+    {"tick": 2, "type": "set", "pos": [22, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=dry]"},
+    {"tick": 105, "type": "set", "pos": [2, 2, 0], "state": "minecraft:stone"},
+    {"tick": 105, "type": "set", "pos": [7, 2, 0], "state": "minecraft:stone"},
+    {"tick": 105, "type": "set", "pos": [12, 2, 0], "state": "minecraft:stone"},
+    {"tick": 105, "type": "set", "pos": [17, 2, 0], "state": "minecraft:stone"},
+    {"tick": 105, "type": "set", "pos": [22, 2, 0], "state": "minecraft:stone"}
+  ]
+}

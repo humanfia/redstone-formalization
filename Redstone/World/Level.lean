@@ -229,8 +229,9 @@ structure Level where
   the state at its position any more (`LevelChunk.updateBlockEntityTicker` binds the ticker
   when the block entity is added, and a ticker keeps running after the block changed to
   another state of the same block). Positions that are not listed tick with the state that is
-  there. Nothing reads or writes this field yet: every block entity ticks with the state at
-  its position. -/
+  there. Potent sulfur, whose ticker depends on its state, writes and reads this field
+  (`Redstone.Component.Extra.boundTickerState`); every other block entity ticks with the state
+  at its position. -/
   blockEntityTickerStates : List (Pos × Block) := []
   deriving Repr
 

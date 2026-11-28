@@ -27,9 +27,8 @@ clicking of activated sensors, and shrieks when a player caused it.
   shrieker), and that it is kept in the vibration. Sneaking, spectators and entities that dampen
   vibrations (`Entity.dampensVibrations`) are not modelled, nor is the owner of a projectile.
   A vibration read from saved data only has the UUID of its source, which the game looks up
-  when the vibration arrives; no entity is ever found (`GameEventSource.resolve`). The UUID of
-  the tests' player is the exception: it is read as the live player, which is wrong for a
-  scenario that starts with such a vibration (pending scenarios `v-saved-player-uuid-*`).
+  when the vibration arrives; no entity is ever found (`GameEventSource.resolve`), not even for
+  the UUID of the tests' player, who is not an entity of the server's world.
 * The shrieker never warns and never summons a warden (`canRespond` is false): the tests run
   with the game rule `spawn_wardens` off, and the warning level of a player is not part of the
   model. With that, `tryRespond` and `preRemoveSideEffects` do nothing.
@@ -310,6 +309,14 @@ def setVibrationData (be : BlockEntity) (v : VibrationData) : BlockEntity :=
   | .calibratedSculkSensor d => .calibratedSculkSensor { d with listener := v }
   | .sculkShrieker d => .sculkShrieker { d with listener := v }
   | be => be
+
+/-- The block entity as the game saves it, as far as vibrations go: a vibration caused by a
+player is written with the player's UUID (`VibrationData.saved`). A trace shows saved data
+only, so this is what the tests compare with it. -/
+def savedData (be : BlockEntity) : BlockEntity :=
+  match vibrationData? be with
+  | some d => setVibrationData be d.saved
+  | none => be
 
 /-- `User.getListenerRadius`. -/
 def listenerRadius : BlockEntity → ℕ

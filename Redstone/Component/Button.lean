@@ -65,12 +65,15 @@ def updateNeighbours (id : Blocks.Button.Id) (s : Blocks.Button) (p : Pos) : M U
   Level.updateNeighborsAt p id.toBlockId
   Level.updateNeighborsAt (p.step (connectedDirection s).opposite) id.toBlockId
 
-/-- `press`: the button goes down and its release is scheduled. -/
-def press (id : Blocks.Button.Id) (s : Blocks.Button) (p : Pos) : M Unit := do
+/-- `press(state, level, pos, player)`: the button goes down and its release is scheduled. The
+game event names the player who pressed it (`byPlayer`); an explosion presses it for nobody. -/
+def press (id : Blocks.Button.Id) (s : Blocks.Button) (p : Pos) (byPlayer : Bool := false) :
+    M Unit := do
   discard <| Level.setBlock p (.button id { s with powered := true })
   updateNeighbours id s p
   Level.scheduleTick p id.toBlockId (ticksToStayPressed id)
   Level.gameEvent "minecraft:block_activate" p
+    { sourceEntity := if byPlayer then some .player else none }
 
 /-- `getShape(state).bounds()`, the box of `makeShapes`, in sixteenths of a block: the two
 corners `(minX, minY, minZ)` and `(maxX, maxY, maxZ)`. The button is 6 wide, 4 high and 2 thick,
@@ -135,7 +138,7 @@ def button (id : Blocks.Button.Id) (s : Blocks.Button) : Behaviour :=
     directSignal := fun _ _ d => if s.powered && connectedDirection s = d then 15 else 0
     canSurvive := canSurvive s
     useWithoutItem := fun p _ => do
-      if !s.powered then press id s p
+      if !s.powered then press id s p (byPlayer := true)
       return true
     affectNeighborsAfterRemoval := fun p moved => do
       if !moved && s.powered then updateNeighbours id s p

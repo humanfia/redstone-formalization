@@ -338,6 +338,14 @@ def blockCollisions (l : Level) (box : AABB) : List PlacedShape × Bool := Id.ru
 /-- `Level.noCollision(entity, box)`, for blocks only: no collision shape overlaps `box`. -/
 def noBlockCollision (l : Level) (box : AABB) : Bool := (l.blockCollisions box).1.isEmpty
 
+/-- A block that holds a fluid touches `box`. Entities whose contact with fluids the model does
+not follow (projectiles) ask this and set `Level.overflow`. -/
+def touchesFluid (l : Level) (box : AABB) : Bool :=
+  (PlacedShape.range (Phys.floor box.minX) (Phys.floor box.maxX + 1)).any fun x =>
+    (PlacedShape.range (Phys.floor box.minY) (Phys.floor box.maxY + 1)).any fun y =>
+      (PlacedShape.range (Phys.floor box.minZ) (Phys.floor box.maxZ + 1)).any fun z =>
+        (l.blockAt ⟨x, y, z⟩).hasFluid
+
 /-- `CollisionGetter.findSupportingBlock(entity, box)`: among the blocks that collide with
 `box`, the one whose centre is closest to the position `at` of the entity. -/
 def findSupportingBlock (l : Level) (pos : Vec3) (box : AABB) : Option Pos :=

@@ -54,6 +54,13 @@ structure Entities.Other where
   marker : Bool := false
   /-- `ArmorStand.isSmall()` (`Small`). -/
   small : Bool := false
+  /-- `AgeableMob.getAge()` (`Age`): negative for a baby, which grows by one per game tick. -/
+  age : ℤ := 0
+  /-- `AgeableMob.isAgeLocked()` (`AgeLocked`): the baby does not grow. -/
+  ageLocked : Bool := false
+  /-- `IsBaby`, the flag of the mobs that are babies without an age (zombies, piglins and
+  zoglins). -/
+  isBaby : Bool := false
   deriving Repr, Inhabited
 
 /-- The flags are not compared with the server: the model reads them once and never changes
@@ -62,7 +69,12 @@ instance : BEq Entities.Other := ⟨fun _ _ => true⟩
 
 /-- Reads the flags from the entity's saved NBT. -/
 def Entities.Other.ofNbt (nbt : Nbt) : Entities.Other :=
-  ⟨nbt.boolD "NoGravity" false, nbt.boolD "Marker" false, nbt.boolD "Small" false⟩
+  { noGravity := nbt.boolD "NoGravity" false
+    marker := nbt.boolD "Marker" false
+    small := nbt.boolD "Small" false
+    age := nbt.intD "Age" 0
+    ageLocked := nbt.boolD "AgeLocked" false
+    isBaby := nbt.boolD "IsBaby" false }
 
 /-- What an entity is, with the data particular to its kind. -/
 inductive EntityData

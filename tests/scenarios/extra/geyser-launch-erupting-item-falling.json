@@ -1,0 +1,26 @@
+{
+  "name": "geyser-launch-erupting-item-falling",
+  "ticks": 60,
+  "box": {"min": [0, 0, 0], "max": [4, 16, 2]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 1, 2], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 1], "state": "minecraft:magma_block"},
+    {"pos": [2, 2, 1], "state": "minecraft:potent_sulfur[potent_sulfur_state=erupting]", "nbt": "{countdown:6}"},
+    {"pos": [1, 3, 1], "state": "minecraft:glass"},
+    {"pos": [3, 3, 1], "state": "minecraft:glass"},
+    {"pos": [2, 3, 0], "state": "minecraft:glass"},
+    {"pos": [2, 3, 2], "state": "minecraft:glass"},
+    {"pos": [2, 3, 1], "state": "minecraft:water[level=0]"},
+    {"pos": [1, 4, 1], "state": "minecraft:glass"},
+    {"pos": [3, 4, 1], "state": "minecraft:glass"},
+    {"pos": [2, 4, 0], "state": "minecraft:glass"},
+    {"pos": [2, 4, 2], "state": "minecraft:glass"},
+    {"pos": [2, 4, 1], "state": "minecraft:water[level=0]"}
+  ],
+  "entities": [
+    {"type": "minecraft:item", "pos": [2.5, 9.25, 1.5], "nbt": "{Item:{id:\"minecraft:oak_planks\",count:3},Motion:[0.0d,-0.3d,0.0d]}"}
+  ],
+  "actions": []
+}

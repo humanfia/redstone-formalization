@@ -22,7 +22,16 @@ Not modelled:
   data of skull block entities, so a player head above a note block is taken to have none, in
   which case `triggerEvent` does nothing.
 * `useItemOn` with a mob head on the top face: the game then goes on to use the item itself,
-  which places the head. Here nothing happens.
+  which places the head. Here nothing happens (pending scenario `lamp-misc/note-head-item`).
+
+The instrument a note block takes from every block of the game, above and below it, is checked
+by the scenarios `lamp-misc/note-grid-*`. Five of them, `note-grid-other-*`, wait in
+`tests/pending` for reasons that are not the note block's: some of the blocks they place do
+something by themselves that their own units have yet to model (the tickers of signs, spawners,
+beacons, end gateways, vaults, campfires and conduits, fire that goes out, the scheduled ticks
+of suspicious sand and gravel, frogspawn, sniffer eggs and coral, scaffolding that falls, and
+the random draws of a rail that breaks). `note-grid-rest-*` are the same grids without those blocks
+(`tests/palettes/note_grid_rest_gen.py`), and agree with the server.
 -/
 
 @[expose] public section

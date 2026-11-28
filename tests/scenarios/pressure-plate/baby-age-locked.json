@@ -1,0 +1,25 @@
+{
+  "name": "baby-age-locked",
+  "ticks": 25,
+  "box": {"min": [0, 0, 0], "max": [11, 3, 9]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [11, 0, 9], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [3, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 4], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 4], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [3, 1, 7], "state": "minecraft:oak_pressure_plate[powered=false]"},
+    {"pos": [9, 1, 7], "state": "minecraft:oak_pressure_plate[powered=false]"}
+  ],
+  "entities": [
+    {"type": "minecraft:cow", "pos": [2.8415, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000,AgeLocked:1b}"},
+    {"type": "minecraft:cow", "pos": [8.8335, 1.0, 1.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000,AgeLocked:1b}"},
+    {"type": "minecraft:pig", "pos": [2.8415, 1.0, 4.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000,AgeLocked:1b}"},
+    {"type": "minecraft:pig", "pos": [8.8335, 1.0, 4.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000,AgeLocked:1b}"},
+    {"type": "minecraft:villager", "pos": [2.8215, 1.0, 7.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000,AgeLocked:1b}"},
+    {"type": "minecraft:villager", "pos": [8.8135, 1.0, 7.5], "nbt": "{NoAI:1b,Invulnerable:1b,Age:-24000,AgeLocked:1b}"}
+  ],
+  "actions": []
+}

@@ -22,7 +22,10 @@ server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`,
 * Frosted ice: `onPlace`, `tick` and `neighborChanged`, with the draws from the level's random
   generator.
 * Potent sulfur: `updateShape`, `onPlace`, `triggerEvent`, which states tick their block
-  entity, and the countdown ticker that alternates `dormant` and `erupting`.
+  entity, the countdown ticker that alternates `dormant` and `erupting`, and the ticker of an
+  erupting or continuous geyser that pushes the entities above it upwards. The ticker that
+  runs is the one of the state the game bound it with (`LevelChunk.updateBlockEntityTicker`),
+  which is not always the state of the block: see `boundTickerState`.
 * Slime block: `stepOn`, which slows down an entity that walks on it.
 * Honey block: `entityInside`, which makes an entity slide down its sides.
 * Redstone ore: `stepOn`, which lights it up.
@@ -41,21 +44,22 @@ server-side tickers of `PotentSulfurBlockEntity`), `SlimeBlock`, `HoneyBlock`,
   a `SimpleWaterloggedBlock`. Whether a drained block can stay is asked of its own behaviour
   (`canSurvive`). Kelp and seagrass drop nothing; what the plants next to them do when the
   water goes is theirs to model.
-* `PotentSulfurBlockEntity`: the tickers that act on entities (`LAUNCH_ENTITY_TICKER`,
-  `SERVER_NAUSEA_EFFECT_TICKER`), the client-side tickers and `eruptionTick`. Whether a block
-  lets a geyser through is read from its collision shape in an empty world; this is wrong for
-  a moving piston, whose shape is that of its block entity. The world seed, from which the
-  phase lengths are drawn, is the constant `worldSeed`.
-* A ticker bound to another state than the block's. When sulfur is put where a block stood
-  whose removal makes a neighbour change (a powered lever next to a skull, say), the shape
-  update of that neighbour turns the new sulfur `dry` inside `LevelChunk.setBlockState`, before
-  its block entity exists; the outer call then binds the ticker of the state that was asked for
-  (`BlockEntity.setBlockState` followed by `updateBlockEntityTicker`). The game so runs the
-  countdown ticker of an `erupting` block on a `dry` one, which becomes `dormant` at the next
-  multiple of 20 ticks. The model keeps the ticker in the list, as the game does, but runs the
-  ticker of the state the block has, which for `dry` does nothing. Modelling this needs the
-  level to remember the state each ticker was bound with
-  (`tests/pending/scenarios/extra/adv-fuzz-a-020.json`).
+* `PotentSulfurBlockEntity`: the ticker that makes mobs nauseous
+  (`SERVER_NAUSEA_EFFECT_TICKER`; mob effects are not modelled), the client-side tickers and
+  `eruptionTick`. Whether a block lets a geyser through is read from its collision shape in an
+  empty world; this is wrong for a moving piston, whose shape is that of its block entity. The
+  world seed, from which the phase lengths are drawn, is the constant `worldSeed`.
+* `LAUNCH_ENTITY_TICKER` on what the model does not move. A mob, armour stand or boat that a
+  geyser pushes is no longer at rest, a projectile is not followed in flight, and an entity
+  whose bounding box the model does not know
+  (`Entity.Still.info?`) cannot be looked for: both set `Level.overflow`. Passengers and
+  flying players, which the geyser spares, do not exist in the model. A minecart above a
+  geyser is pushed like any entity, but it is then a minecart off its rails in the air, which
+  the minecart model does not follow (pending scenarios `extra/geyser-launch-*-minecart`).
+* A ticker bound without `onPlace`. The level remembers the state a sulfur ticker was bound
+  with only from `onPlace` (see `potentSulfur`); a block put with the flag that skips `onPlace`
+  (`UPDATE_SKIP_ON_PLACE`) while a shape update changes it underneath is not followed. Nothing
+  in the model places sulfur that way.
 * `WitherSkullBlock.setPlacedBy` (building a wither), `getStateForPlacement`: players do not
   place blocks.
 * `SlimeBlock.fallOn` and `HoneyBlock.fallOn`: fall damage. That pistons move the blocks
@@ -289,6 +293,111 @@ def waitingCountdownTick (s : PotentSulfurState) (p : Pos) : M Unit := do
     discard <| Level.setBlock p (.potentSulfur ⟨stateToSet⟩) 3
     if stateToSet = .dormant then Level.gameEvent "minecraft:block_deactivate" p
 
+/-- `PotentSulfurBlockEntity.getUnobstructedBlockCount(level, pos, waterBlocks)`: how many of
+the `6 * waterBlocks` blocks from `pos` upwards the geyser reaches before one stops it. -/
+def unobstructedBlockCount (l : Level) (pos : Pos) (waterBlocks : ℤ) : ℤ :=
+  go (6 * waterBlocks).toNat 0 pos
+where
+  /-- Walks up from `p`, the `i`-th block, for at most `n` more blocks. -/
+  go : ℕ → ℤ → Pos → ℤ
+    | 0, i, _ => i
+    | n + 1, i, p => if isGeyserPassable (l.blockAt p) then go n (i + 1) (p.step .up) else i
+
+/-- `Entity.checkFallDistanceAccumulation()`: an entity that does not fall fast keeps at most
+one block of fall distance. Only the kinds of entity that keep a fall distance change. -/
+def checkFallDistanceAccumulation (e : Entity) : Entity :=
+  let clamp (fallDistance : Float) : Float :=
+    if e.base.motion.y > -0.5 && fallDistance > 1.0 then 1.0 else fallDistance
+  match e.data with
+  | .item d =>
+    let phys := { d.phys with fallDistance := clamp d.phys.fallDistance }
+    { e with data := .item { d with phys := phys } }
+  | .fallingBlock d =>
+    let phys := { d.phys with fallDistance := clamp d.phys.fallDistance }
+    { e with data := .fallingBlock { d with phys := phys } }
+  | .tnt d => { e with data := .tnt { d with fallDistance := clamp d.fallDistance } }
+  | .minecart kind d =>
+    { e with data := .minecart kind { d with fallDistance := clamp d.fallDistance } }
+  | _ => e
+
+/-- `PotentSulfurBlockEntity.LAUNCH_ENTITY_TICKER`, for the sulfur at `p`: every entity in the
+column the geyser reaches is pushed upwards, unless it rises fast enough already. The column is
+the block above the sulfur, stretched upwards by one block less than the geyser reaches
+(`AABB.expandTowards`, which stretches downwards when the geyser reaches nothing).
+
+The entities are those of `getEntitiesOfClass(Entity.class, aabb, EFFECT_PREDICATE)`. The tag
+`not_affected_by_geysers` only holds the ender dragon, which the model does not have. With no
+entity in the world nothing is computed. -/
+def launchEntityTick (p : Pos) : M Unit := do
+  let l ← get
+  if l.entities.isEmpty then return
+  let some source := findNoxiousGasSourceBlock l p | return
+  let waterBlocks : ℤ := source.y - p.y - 1
+  let geyserForceHeight := unobstructedBlockCount l (p.step .up) waterBlocks
+  let aabb :=
+    (AABB.ofBlock (p.step .up)).expandTowards ⟨0.0, Phys.ofInt (geyserForceHeight - 1), 0.0⟩
+  -- `0.3F + waterBlocks * 0.1`
+  let limit := Phys.f 0x3e99999a + Phys.ofInt waterBlocks * 0.1
+  for e in l.entities do
+    let searched := Entity.Still.inSearchedSections e.base.pos aabb
+    match Entity.Still.boundingBox? e with
+    | none =>
+      -- An entity whose box the model does not know, in the sections the search looks at.
+      if searched then Level.setOverflow
+    | some box =>
+      if searched && box.intersects aabb then
+        let launched := e.base.motion.y < limit
+        Level.modifyEntity e.index fun e =>
+          let e := checkFallDistanceAccumulation e
+          if launched then
+            -- `addDeltaMovement(new Vec3(0.0, 0.2F, 0.0))`
+            { e with base := { e.base with
+                motion := ⟨e.base.motion.x + 0.0, e.base.motion.y + Phys.f 0x3e4ccccd,
+                  e.base.motion.z + 0.0⟩ } }
+          else e
+        -- Only these kinds of entity move by their velocity in the model. Any other entity
+        -- (one the model keeps at rest, a projectile in flight) would now move in the game.
+        let moves :=
+          match e.data with
+          | .item _ | .fallingBlock _ | .tnt _ | .minecart _ _ => true
+          | _ => false
+        if launched && !moves then Level.setOverflow
+
+/-- Forgets the state the ticker at `p` was bound with: it ticks with the state at `p`. -/
+def clearBoundTicker (p : Pos) : M Unit :=
+  modify fun l =>
+    if l.blockEntityTickerStates.any (·.1 == p) then
+      { l with blockEntityTickerStates := l.blockEntityTickerStates.filter (·.1 != p) }
+    else l
+
+/-- Remembers that the ticker of the block entity at `p` was bound with the state `state`,
+which is not the state at `p`. -/
+def bindTicker (p : Pos) (state : Block) : M Unit :=
+  modify fun l => { l with
+    blockEntityTickerStates := (p, state) :: l.blockEntityTickerStates.filter (·.1 != p) }
+
+/-- The state whose ticker runs for the sulfur block entity at `p`, where the block is now in
+state `s`.
+
+`LevelChunk.setBlockState(pos, state)` ends with `blockEntity.setBlockState(state)` and
+`updateBlockEntityTicker`, which asks `state.getTicker`: the ticker is the one of the state
+that was asked for. Usually that is the state at the position. It is not when the block was
+changed underneath the call: when sulfur is put where a block stood whose removal makes a
+neighbour change (a powered lever next to a skull, say), the shape update of that neighbour
+turns the new sulfur `dry` inside `setBlockState`, in a nested call that creates the block
+entity; the outer call then binds the ticker of the state it was asked for. The game so runs
+the countdown ticker of an `erupting` block on a `dry` one. The ticker itself is handed the
+state at the position (`BoundTickingBlockEntity.tick`).
+
+`onPlace` records the state in `Level.blockEntityTickerStates` when this happens. Only the
+ticker of sulfur asks for an entry, so one is only believed while the block at its position is
+potent sulfur; `onPlace` replaces or removes it whenever the ticker is bound again, and it goes
+when the block entity is removed (`preRemoveSideEffects`). -/
+def boundTickerState (l : Level) (p : Pos) (s : PotentSulfurState) : PotentSulfurState :=
+  match l.blockEntityTickerStates.lookup p with
+  | some (.potentSulfur b) => b.potent_sulfur_state
+  | _ => s
+
 /-- The behaviour of potent sulfur (`PotentSulfurBlock`). -/
 def potentSulfur (s : Blocks.PotentSulfur) : Behaviour :=
   let state := s.potent_sulfur_state
@@ -297,14 +406,24 @@ def potentSulfur (s : Blocks.PotentSulfur) : Behaviour :=
     ticksBlockEntity := state ≠ .dry
     updateShape := fun p _ _ _ => return .potentSulfur ⟨← validBlockState state p⟩
     onPlace := fun p _ _ => do
+      -- `onPlace` runs in `LevelChunk.setBlockState` just before the ticker is bound with this
+      -- state. If the block at `p` is in another state by now, the ticker and the block differ.
+      if (← Level.getBlock p) = .potentSulfur s then clearBoundTicker p
+      else bindTicker p (.potentSulfur s)
       if state = .erupting || state = .continuous then
         Level.blockEvent p .potent_sulfur 0 0
         Level.gameEvent "minecraft:block_activate" p
     -- Sets `eruptionTick`, which the model does not keep.
     triggerEvent := fun _ _ _ => return true
+    -- The block entity goes, and its ticker with it. (The game's hook does nothing.)
+    preRemoveSideEffects := clearBoundTicker
     blockEntityTick := fun p => do
-      -- The tickers that launch entities and make them nauseous are left out.
-      if state = .dormant || state = .erupting then waitingCountdownTick state p }
+      -- `getTicker`: `erupting` launches entities and then counts down, `continuous` launches
+      -- entities, `dormant` counts down (and then makes mobs nauseous, as `wet` does, which is
+      -- left out). The tickers are handed the state the block has now.
+      let bound := boundTickerState (← get) p state
+      if bound = .erupting || bound = .continuous then launchEntityTick p
+      if bound = .dormant || bound = .erupting then waitingCountdownTick state p }
 
 /-! ### Slime block -/
 

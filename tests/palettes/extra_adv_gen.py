@@ -8,8 +8,8 @@ adv-fuzz-{a,b,c}-* come from tools/fuzz.py with the palette tests/palettes/extra
     --count 25 --size 4x3x4 --ticks 65 --seed 101 --prefix adv-fuzz-a
     --count 15 --size 6x2x6 --ticks 65 --seed 102 --prefix adv-fuzz-b
     --count 10 --size 3x5x3 --ticks 125 --seed 103 --prefix adv-fuzz-c
-(adv-fuzz-a-020 is in tests/pending: see "A ticker bound to another state" in
-Redstone/Component/Extra.lean.)"""
+(adv-fuzz-a-020 binds a ticker to another state than the block's: see `boundTickerState` in
+Redstone/Component/Extra.lean, and tests/palettes/component_leftovers_gen.py for more of it.)"""
 import json, os, random, sys
 
 out = sys.argv[1]

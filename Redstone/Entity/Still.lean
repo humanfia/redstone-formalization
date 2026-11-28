@@ -21,10 +21,12 @@ entity that does not move.
 The model keeps only the type, position, velocity and `onGround` flag of these entities, so
 everything else is taken from the entity type:
 
-* the bounding box is that of the type's default dimensions: an adult, standing, unscaled
-  entity (no baby, no sleeping or sitting pose). The flags of an armour stand are kept
-  (`Entities.Other`): a small one is half as large, a marker has no size and is not detected,
-  and a marker or an armour stand without gravity does not touch blocks (`info?`);
+* the bounding box is that of the type's default dimensions: a standing, unscaled entity (no
+  sleeping or sitting pose, no `minecraft:scale` attribute). The flags of an armour stand are
+  kept (`Entities.Other`): a small one is half as large, a marker has no size and is not
+  detected, and a marker or an armour stand without gravity does not touch blocks (`info?`).
+  A baby has the size its species gives it (`babyTable`): a mob with a negative `Age`, or a
+  zombie, piglin or zoglin with `IsBaby`;
 * no entity is a spectator, and none but these armour stands has `noPhysics`;
 * a living entity runs `LivingEntity.aiStep`, which applies the effects of blocks once;
 * the entity does not move, which is true on the server only if it is kept still (`NoAI` for
@@ -37,8 +39,13 @@ everything else is taken from the entity type:
   A squid or glow squid out of water changes its velocity every tick even with `NoAI`, so the
   model does not reproduce it (pending scenario `sweep-squid-00`). A boat is not at rest
   either: its tick clears `onGround` (pending scenario `rail/detector-not-a-cart-boat`).
-* Babies, whose box is smaller by an amount that depends on the species (pending scenario
-  `pressure-plate/entity-flags`).
+* A baby that grows up. Its `Age` goes up by one per game tick (`AgeableMob.aiStep`), which is
+  modelled; at zero the game gives it the size of an adult and, if that does not fit where it
+  stands, moves it (`Entity.fudgePositionAfterSizeChange`). The model sets `Level.overflow`
+  at that tick. Feeding a baby, which makes it grow faster, needs a player.
+* Sizes that depend on other data than the age: the size of a slime, magma cube or sulfur cube
+  (`Size`), of a salmon (`type`), of a phantom (`size`), a sitting camel, a digging sniffer or
+  warden, a shulker that peeks, a standing polar bear, a long-jumping goat.
 * The parts of the ender dragon (the dragon is not in the type table at all).
 -/
 
@@ -233,6 +240,77 @@ def typeTable : List (String × UInt32 × UInt32 × Bool × Bool × ℕ) := [
     ("minecraft:fishing_bobber", 0x3e800000, 0x3e800000, false, false, 0)
   ]
 
+/-- How large the babies of an entity type are (`LivingEntity.getDefaultDimensions`). -/
+inductive BabySize
+  /-- `BABY_DIMENSIONS = EntityDimensions.scalable(width, height)`: dimensions of their own,
+  given by the bits of the two `float`s. -/
+  | dims (width height : UInt32)
+  /-- `getType().getDimensions().scale(factor)`: the dimensions of the type, scaled by the
+  `float` with the given bits. This is what `LivingEntity` does with `getAgeScale()`, and what
+  the classes do whose `BABY_DIMENSIONS` are the scaled dimensions of the type. -/
+  | scale (factor : UInt32)
+
+/-- The entity types that have babies: registry name, whether a baby is one that has the flag
+`IsBaby` (`Zombie`, `Piglin`, `Zoglin`) rather than a negative `Age` (`AgeableMob`), and the
+size of a baby. Read off the classes: `getDefaultDimensions`, `BABY_DIMENSIONS`, `getAgeScale`
+and `canBeABaby` (frogs, parrots, camel husks, zombie nautiluses, slimes and magma cubes are
+`AgeableMob`s that cannot be babies). The armour stand, whose `isBaby` is `Small`, is handled
+in `info?`. -/
+def babyTable : List (String × Bool × BabySize) := [
+    ("minecraft:armadillo", false, .scale 0x3f19999a),
+    ("minecraft:axolotl", false, .dims 0x3ec00000 0x3e570a3d),
+    ("minecraft:bee", false, .scale 0x3f000000),
+    ("minecraft:camel", false, .dims 0x3f733333 0x3fb33333),
+    ("minecraft:cat", false, .dims 0x3e99999a 0x3eb33333),
+    ("minecraft:chicken", false, .dims 0x3e99999a 0x3ecccccd),
+    ("minecraft:cow", false, .dims 0x3ee66666 0x3f333333),
+    ("minecraft:dolphin", false, .scale 0x3f266666),
+    ("minecraft:donkey", false, .scale 0x3f000000),
+    ("minecraft:drowned", true, .dims 0x3efae148 0x3f7ae148),
+    ("minecraft:fox", false, .scale 0x3f19999a),
+    ("minecraft:glow_squid", false, .dims 0x3f000000 0x3f000000),
+    ("minecraft:goat", false, .dims 0x3ee66666 0x3f266666),
+    ("minecraft:happy_ghast", false, .scale 0x3e733333),
+    ("minecraft:hoglin", false, .dims 0x3f400000 0x3f59999a),
+    ("minecraft:horse", false, .scale 0x3f333333),
+    ("minecraft:husk", true, .dims 0x3efae148 0x3f7ae148),
+    ("minecraft:llama", false, .scale 0x3f000000),
+    ("minecraft:mooshroom", false, .dims 0x3ee66666 0x3f333333),
+    ("minecraft:mule", false, .scale 0x3f000000),
+    ("minecraft:nautilus", false, .scale 0x3f000000),
+    ("minecraft:ocelot", false, .dims 0x3e99999a 0x3eb33333),
+    ("minecraft:panda", false, .scale 0x3f000000),
+    ("minecraft:pig", false, .dims 0x3ee66666 0x3ee66666),
+    ("minecraft:piglin", true, .dims 0x3efae148 0x3f7ae148),
+    ("minecraft:polar_bear", false, .dims 0x3f333333 0x3f333333),
+    ("minecraft:rabbit", false, .dims 0x3e75c28f 0x3ecccccd),
+    ("minecraft:sheep", false, .dims 0x3ee66666 0x3f266666),
+    ("minecraft:skeleton_horse", false, .scale 0x3f333333),
+    ("minecraft:sniffer", false, .scale 0x3f000000),
+    ("minecraft:squid", false, .dims 0x3f000000 0x3f000000),
+    ("minecraft:strider", false, .dims 0x3ee66666 0x3f59999a),
+    ("minecraft:trader_llama", false, .scale 0x3f000000),
+    ("minecraft:turtle", false, .scale 0x3e99999a),
+    ("minecraft:villager", false, .dims 0x3efae148 0x3f7ae148),
+    ("minecraft:wandering_trader", false, .scale 0x3f000000),
+    ("minecraft:wolf", false, .dims 0x3e99999a 0x3ed9999a),
+    ("minecraft:zoglin", true, .dims 0x3f400000 0x3f59999a),
+    ("minecraft:zombie", true, .dims 0x3efae148 0x3f7ae148),
+    ("minecraft:zombie_horse", false, .scale 0x3f333333),
+    ("minecraft:zombie_villager", true, .dims 0x3efae148 0x3f7ae148),
+    ("minecraft:zombified_piglin", true, .dims 0x3efae148 0x3f7ae148)
+  ]
+
+/-- `AgeableMob.canBeABaby()` holds for the entity type: its `Age` counts. -/
+def ages (type : String) : Bool :=
+  babyTable.any fun (name, byFlag, _) => name == type && !byFlag
+
+/-- `LivingEntity.isBaby()` for an entity of the type named `type` with the flags `d`, and if
+so, the size of the baby. -/
+def babySize? (type : String) (d : Entities.Other) : Option BabySize :=
+  (babyTable.find? (·.1 == type)).bind fun (_, byFlag, size) =>
+    if (if byFlag then d.isBaby else d.age < 0) then some size else none
+
 /-- `EntityType.getDimensions`. -/
 def TypeInfo.dims (info : TypeInfo) : Dimensions :=
   ⟨(info.width / 2.0).toFloat, info.height.toFloat⟩
@@ -242,11 +320,20 @@ def typeInfo? (type : String) : Option TypeInfo :=
   (typeTable.find? (·.1 == type)).map fun (_, w, h, living, ignores, effects) =>
     ⟨Float32.ofBits w, Float32.ofBits h, living, ignores, effects⟩
 
+/-- The dimensions of a baby of a type with the dimensions of `info`. A product of `float`s is
+a `float` (`EntityDimensions.scale`). -/
+def BabySize.apply (size : BabySize) (info : TypeInfo) : TypeInfo :=
+  match size with
+  | .dims w h => { info with width := Float32.ofBits w, height := Float32.ofBits h }
+  | .scale f =>
+    { info with width := info.width * Float32.ofBits f, height := info.height * Float32.ofBits f }
+
 /-- What the model knows about an entity: what it knows about its type, changed by the flags of
-an armour stand. A marker (`Marker`) has no size (`MARKER_DIMENSIONS`) and ignores block
-triggers; a small armour stand (`Small`) is half as large (`BABY_DIMENSIONS`); a marker or an
-armour stand without gravity (`NoGravity`) has no physics (`ArmorStand.hasPhysics`,
-`Entity.noPhysics`), so it never applies the effects of blocks. -/
+an armour stand and by the size of a baby. A marker (`Marker`) has no size
+(`MARKER_DIMENSIONS`) and ignores block triggers; a small armour stand (`Small`) is half as
+large (`BABY_DIMENSIONS`); a marker or an armour stand without gravity (`NoGravity`) has no
+physics (`ArmorStand.hasPhysics`, `Entity.noPhysics`), so it never applies the effects of
+blocks. A baby mob has the dimensions of `babyTable`. -/
 def info? (e : Entity) : Option TypeInfo :=
   match e.data, typeInfo? e.data.typeName with
   | .other "minecraft:armor_stand" d, some info =>
@@ -255,6 +342,10 @@ def info? (e : Entity) : Option TypeInfo :=
       else if d.small then { info with width := info.width * 0.5, height := info.height * 0.5 }
       else info
     some (if d.marker || d.noGravity then { info with effects := 0 } else info)
+  | .other type d, some info =>
+    match babySize? type d with
+    | some size => some (size.apply info)
+    | none => some info
   | _, info => info
 
 /-- `EntityDimensions.makeBoundingBox(x, y, z)`: the box of an entity standing at `pos`. Half
@@ -325,12 +416,28 @@ def applyEffectsFromBlocks (index : ℕ) : M Unit := do
   Touch.applyEffectsFromBlocks info.dims index (effectPos (← get) e info)
     [⟨e.base.pos, e.base.pos, none⟩]
 
+/-- The end of `AgeableMob.aiStep`: a baby that is not age-locked grows by one (`canAgeUp`),
+and the age of an adult, which is the time until it can breed again, falls to zero. A baby
+whose age reaches zero becomes an adult, with another size (`refreshDimensions`); the model
+does not follow that and sets `Level.overflow`. -/
+def ageStep (index : ℕ) : M Unit := do
+  let some e := (← get).entity? index | return
+  let .other type d := e.data | return
+  if !ages type then return
+  let age :=
+    if d.age < 0 && !d.ageLocked then d.age + 1 else if d.age > 0 then d.age - 1 else d.age
+  if age ≠ d.age then
+    Level.modifyEntity index fun e => { e with data := .other type { d with age := age } }
+    if d.age < 0 && age = 0 then Level.setOverflow
+
 /-- The behaviour of an entity the model does not move: in every game tick it applies the
-effects of the blocks it is in, as often as its class does. -/
+effects of the blocks it is in, as often as its class does, and then it ages. -/
 def behaviour (e : Entity) : EntityBehaviour :=
   ⟨fun index => do
     match info? e with
     | none => pure ()
-    | some info => (List.range info.effects).forM fun _ => applyEffectsFromBlocks index⟩
+    | some info =>
+      (List.range info.effects).forM fun _ => applyEffectsFromBlocks index
+      ageStep index⟩
 
 end Redstone.Entity.Still

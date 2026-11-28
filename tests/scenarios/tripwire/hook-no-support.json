@@ -1,0 +1,97 @@
+{
+ "name": "hook-no-support",
+ "ticks": 20,
+ "box": {
+  "min": [
+   2,
+   0,
+   3
+  ],
+  "max": [
+   8,
+   3,
+   5
+  ]
+ },
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=true,facing=east,powered=false]"
+  },
+  {
+   "pos": [
+    5,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire[attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false]"
+  },
+  {
+   "pos": [
+    5,
+    2,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:tripwire_hook[attached=true,facing=west,powered=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    4
+   ],
+   "state": "minecraft:glass"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 2,
+   "type": "destroy",
+   "pos": [
+    5,
+    2,
+    4
+   ]
+  },
+  {
+   "tick": 4,
+   "type": "set",
+   "pos": [
+    3,
+    1,
+    4
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 6,
+   "type": "destroy",
+   "pos": [
+    3,
+    1,
+    4
+   ]
+  },
+  {
+   "tick": 8,
+   "type": "destroy",
+   "pos": [
+    7,
+    1,
+    4
+   ]
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "adv-fuzz-103",
+  "ticks": 40,
+  "box": {"min": [0, 0, 0], "max": [4, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [4, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [0, 1, 0], "state": "minecraft:creaking_heart[axis=x,creaking_heart_state=uprooted,natural=false]"},
+    {"pos": [0, 1, 2], "state": "minecraft:glass"},
+    {"pos": [0, 1, 4], "state": "minecraft:lever[face=floor,facing=east,powered=true]"},
+    {"pos": [0, 2, 0], "state": "minecraft:stone"},
+    {"pos": [0, 2, 3], "state": "minecraft:creaking_heart[axis=y,creaking_heart_state=uprooted,natural=false]"},
+    {"pos": [1, 1, 0], "state": "minecraft:copper_golem_statue[copper_golem_pose=sitting,facing=north,waterlogged=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:glass"},
+    {"pos": [1, 1, 3], "state": "minecraft:respawn_anchor[charges=0]"},
+    {"pos": [1, 1, 4], "state": "minecraft:lever[face=wall,facing=east,powered=true]"},
+    {"pos": [2, 1, 0], "state": "minecraft:waxed_exposed_copper_golem_statue[copper_golem_pose=star,facing=north,waterlogged=false]"},
+    {"pos": [2, 1, 1], "state": "minecraft:oak_shelf[facing=west,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [2, 1, 3], "state": "minecraft:stone"},
+    {"pos": [2, 2, 0], "state": "minecraft:bee_nest[facing=east,honey_level=5]"},
+    {"pos": [2, 2, 2], "state": "minecraft:stone"},
+    {"pos": [2, 2, 3], "state": "minecraft:jukebox[has_record=false]"},
+    {"pos": [3, 1, 0], "state": "minecraft:creaking_heart[axis=z,creaking_heart_state=uprooted,natural=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:waxed_exposed_copper_golem_statue[copper_golem_pose=standing,facing=south,waterlogged=false]"},
+    {"pos": [3, 1, 3], "state": "minecraft:composter[level=6]"},
+    {"pos": [3, 1, 4], "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [3, 2, 1], "state": "minecraft:cake[bites=6]"},
+    {"pos": [4, 1, 3], "state": "minecraft:redstone_lamp[lit=true]"},
+    {"pos": [4, 1, 4], "state": "minecraft:stone"},
+    {"pos": [4, 2, 0], "state": "minecraft:composter[level=6]"},
+    {"pos": [4, 2, 1], "state": "minecraft:chiseled_bookshelf[facing=south,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=false,slot_5_occupied=false]"},
+    {"pos": [4, 2, 2], "state": "minecraft:chiseled_bookshelf[facing=north,slot_0_occupied=false,slot_1_occupied=false,slot_2_occupied=false,slot_3_occupied=false,slot_4_occupied=false,slot_5_occupied=false]"},
+    {"pos": [4, 2, 4], "state": "minecraft:candle_cake[lit=true]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [2, 2, 0], "face": "south", "item": "minecraft:music_disc_cat"},
+    {"tick": 2, "type": "set", "pos": [1, 2, 2], "state": "minecraft:air"},
+    {"tick": 9, "type": "use_item", "pos": [2, 1, 1], "face": "up", "item": "minecraft:bread"},
+    {"tick": 9, "type": "set", "pos": [0, 2, 4], "state": "minecraft:air"},
+    {"tick": 15, "type": "destroy", "pos": [2, 2, 3]},
+    {"tick": 16, "type": "use", "pos": [1, 1, 0], "face": "up"},
+    {"tick": 20, "type": "set", "pos": [3, 1, 3], "state": "minecraft:lectern[facing=south,has_book=false,powered=false]"},
+    {"tick": 21, "type": "use", "pos": [0, 1, 0], "face": "down"},
+    {"tick": 24, "type": "set", "pos": [3, 2, 0], "state": "minecraft:cake[bites=2]"},
+    {"tick": 27, "type": "set", "pos": [0, 1, 2], "state": "minecraft:waxed_exposed_copper_golem_statue[copper_golem_pose=star,facing=west,waterlogged=false]", "flags": 18},
+    {"tick": 29, "type": "set", "pos": [4, 1, 0], "state": "minecraft:redstone_lamp[lit=false]", "flags": 2},
+    {"tick": 33, "type": "set", "pos": [1, 2, 1], "state": "minecraft:composter[level=0]", "flags": 18},
+    {"tick": 36, "type": "destroy", "pos": [0, 2, 2]},
+    {"tick": 36, "type": "use_item", "pos": [2, 1, 1], "face": "north", "item": "minecraft:ender_pearl"}
+  ]
+}

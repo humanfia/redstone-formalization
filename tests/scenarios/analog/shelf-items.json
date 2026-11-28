@@ -1,0 +1,52 @@
+{
+  "name": "shelf-items",
+  "ticks": 16,
+  "box": {"min": [0, 0, 0], "max": [8, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [8, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 2], "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:acacia_shelf[facing=south,powered=false,side_chain=unconnected,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:apple\",count:3},{Slot:1b,id:\"minecraft:book\",count:1},{Slot:2b,id:\"minecraft:stone\",count:64}],align_items_to_bottom:0b}"},
+    {"pos": [5, 1, 2], "state": "minecraft:crimson_shelf[facing=west,powered=false,side_chain=unconnected,waterlogged=false]"},
+    {"pos": [7, 1, 2], "state": "minecraft:jungle_shelf[facing=east,powered=false,side_chain=unconnected,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:apple\",count:3},{Slot:1b,id:\"minecraft:book\",count:1},{Slot:2b,id:\"minecraft:stone\",count:64}],align_items_to_bottom:1b}"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "use_item", "pos": [1, 1, 2], "face": "north", "item": "minecraft:stick"},
+    {"tick": 1, "type": "use_item", "pos": [3, 1, 2], "face": "south", "item": "minecraft:stick"},
+    {"tick": 1, "type": "use_item", "pos": [5, 1, 2], "face": "west", "item": "minecraft:stick"},
+    {"tick": 1, "type": "use_item", "pos": [7, 1, 2], "face": "east", "item": "minecraft:stick"},
+    {"tick": 2, "type": "use_item", "pos": [1, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 2, "type": "use_item", "pos": [3, 1, 2], "face": "south", "item": "minecraft:apple"},
+    {"tick": 2, "type": "use_item", "pos": [5, 1, 2], "face": "west", "item": "minecraft:apple"},
+    {"tick": 2, "type": "use_item", "pos": [7, 1, 2], "face": "east", "item": "minecraft:apple"},
+    {"tick": 3, "type": "use_item", "pos": [1, 1, 2], "face": "south", "item": "minecraft:apple"},
+    {"tick": 3, "type": "use_item", "pos": [3, 1, 2], "face": "north", "item": "minecraft:apple"},
+    {"tick": 3, "type": "use_item", "pos": [5, 1, 2], "face": "east", "item": "minecraft:apple"},
+    {"tick": 3, "type": "use_item", "pos": [7, 1, 2], "face": "west", "item": "minecraft:apple"},
+    {"tick": 4, "type": "use_item", "pos": [1, 1, 2], "face": "up", "item": "minecraft:book"},
+    {"tick": 4, "type": "use_item", "pos": [3, 1, 2], "face": "up", "item": "minecraft:book"},
+    {"tick": 4, "type": "use_item", "pos": [5, 1, 2], "face": "up", "item": "minecraft:book"},
+    {"tick": 4, "type": "use_item", "pos": [7, 1, 2], "face": "up", "item": "minecraft:book"},
+    {"tick": 5, "type": "use", "pos": [1, 1, 2], "face": "north"},
+    {"tick": 5, "type": "use", "pos": [3, 1, 2], "face": "south"},
+    {"tick": 5, "type": "use", "pos": [5, 1, 2], "face": "west"},
+    {"tick": 5, "type": "use", "pos": [7, 1, 2], "face": "east"},
+    {"tick": 6, "type": "use_item", "pos": [1, 1, 2], "face": "north", "item": "minecraft:wooden_spear"},
+    {"tick": 6, "type": "use_item", "pos": [3, 1, 2], "face": "south", "item": "minecraft:wooden_spear"},
+    {"tick": 6, "type": "use_item", "pos": [5, 1, 2], "face": "west", "item": "minecraft:wooden_spear"},
+    {"tick": 6, "type": "use_item", "pos": [7, 1, 2], "face": "east", "item": "minecraft:wooden_spear"},
+    {"tick": 7, "type": "use_item", "pos": [1, 1, 2], "face": "north", "item": "minecraft:stick"},
+    {"tick": 7, "type": "use_item", "pos": [3, 1, 2], "face": "south", "item": "minecraft:stick"},
+    {"tick": 7, "type": "use_item", "pos": [5, 1, 2], "face": "west", "item": "minecraft:stick"},
+    {"tick": 7, "type": "use_item", "pos": [7, 1, 2], "face": "east", "item": "minecraft:stick"},
+    {"tick": 8, "type": "use_item", "pos": [1, 1, 2], "face": "east", "item": "minecraft:iron_spear"},
+    {"tick": 8, "type": "use_item", "pos": [3, 1, 2], "face": "west", "item": "minecraft:iron_spear"},
+    {"tick": 8, "type": "use_item", "pos": [5, 1, 2], "face": "north", "item": "minecraft:iron_spear"},
+    {"tick": 8, "type": "use_item", "pos": [7, 1, 2], "face": "south", "item": "minecraft:iron_spear"},
+    {"tick": 13, "type": "use_item", "pos": [1, 1, 2], "face": "north", "item": "minecraft:bucket"},
+    {"tick": 14, "type": "use_item", "pos": [3, 1, 2], "face": "south", "item": "minecraft:bucket"},
+    {"tick": 15, "type": "use_item", "pos": [5, 1, 2], "face": "west", "item": "minecraft:bucket"},
+    {"tick": 16, "type": "use_item", "pos": [7, 1, 2], "face": "east", "item": "minecraft:bucket"}
+  ]
+}

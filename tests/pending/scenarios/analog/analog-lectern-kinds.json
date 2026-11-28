@@ -1,0 +1,36 @@
+{
+  "name": "analog-lectern-kinds",
+  "ticks": 8,
+  "box": {"min": [0, 0, 0], "max": [16, 2, 5]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [16, 0, 5], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [1, 1, 1], "state": "minecraft:lectern[facing=north,has_book=false,powered=false]"},
+    {"pos": [1, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [3, 1, 1], "state": "minecraft:lectern[facing=east,has_book=true,powered=false]", "nbt": "{Book:{id:\"minecraft:writable_book\",count:1},Page:0}"},
+    {"pos": [3, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [5, 1, 1], "state": "minecraft:lectern[facing=east,has_book=true,powered=false]", "nbt": "{Book:{id:\"minecraft:written_book\",count:1},Page:0}"},
+    {"pos": [5, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [7, 1, 1], "state": "minecraft:lectern[facing=south,has_book=true,powered=false]", "nbt": "{Book:{id:\"minecraft:writable_book\",count:1,components:{\"minecraft:writable_book_content\":{pages:[]}}},Page:0}"},
+    {"pos": [7, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [9, 1, 1], "state": "minecraft:lectern[facing=west,has_book=true,powered=false]", "nbt": "{Book:{id:\"minecraft:writable_book\",count:1,components:{\"minecraft:writable_book_content\":{pages:[\"p0\"]}}},Page:0}"},
+    {"pos": [9, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [11, 1, 1], "state": "minecraft:lectern[facing=north,has_book=false,powered=false]", "nbt": "{Book:{id:\"minecraft:writable_book\",count:1,components:{\"minecraft:writable_book_content\":{pages:[\"p0\",\"p1\",\"p2\",\"p3\",\"p4\"]}}},Page:2}"},
+    {"pos": [11, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [13, 1, 1], "state": "minecraft:lectern[facing=north,has_book=true,powered=false]", "nbt": "{Book:{id:\"minecraft:written_book\",count:1,components:{\"minecraft:written_book_content\":{title:\"t\",author:\"a\",pages:[\"p0\",\"p1\",\"p2\"]}}},Page:1}"},
+    {"pos": [13, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"},
+    {"pos": [15, 1, 1], "state": "minecraft:lectern[facing=north,has_book=true,powered=false]", "nbt": "{Book:{id:\"minecraft:stick\",count:1}}"},
+    {"pos": [15, 1, 2], "state": "minecraft:comparator[facing=north,mode=compare,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 1, "type": "set", "pos": [1, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [3, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [5, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [7, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [9, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [11, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [13, 1, 3], "state": "minecraft:stone"},
+    {"tick": 1, "type": "set", "pos": [15, 1, 3], "state": "minecraft:stone"}
+  ]
+}

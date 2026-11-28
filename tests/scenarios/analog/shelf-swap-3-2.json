@@ -1,0 +1,23 @@
+{
+  "name": "shelf-swap-3-2",
+  "ticks": 12,
+  "box": {"min": [0, 0, 0], "max": [6, 2, 4]},
+  "fill": [
+    {"min": [0, 0, 0], "max": [6, 0, 4], "state": "minecraft:stone"}
+  ],
+  "blocks": [
+    {"pos": [2, 1, 2], "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:stone\",count:5},{Slot:2b,id:\"minecraft:book\",count:1}]}"},
+    {"pos": [2, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [3, 1, 2], "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]", "nbt": "{Items:[{Slot:0b,id:\"minecraft:book\",count:1},{Slot:1b,id:\"minecraft:stone\",count:5}]}"},
+    {"pos": [3, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"},
+    {"pos": [4, 1, 2], "state": "minecraft:oak_shelf[facing=north,powered=false,side_chain=unconnected,waterlogged=false]", "nbt": "{Items:[{Slot:1b,id:\"minecraft:book\",count:1},{Slot:2b,id:\"minecraft:stone\",count:5}]}"},
+    {"pos": [4, 1, 1], "state": "minecraft:lever[face=floor,facing=north,powered=false]"}
+  ],
+  "actions": [
+    {"tick": 2, "type": "use", "pos": [2, 1, 1], "face": "up"},
+    {"tick": 3, "type": "use", "pos": [3, 1, 1], "face": "up"},
+    {"tick": 4, "type": "use", "pos": [4, 1, 1], "face": "up"},
+    {"tick": 8, "type": "use_item", "pos": [4, 1, 2], "face": "north", "item": "minecraft:stick"},
+    {"tick": 9, "type": "use_item", "pos": [4, 1, 2], "face": "south", "item": "minecraft:stick"}
+  ]
+}

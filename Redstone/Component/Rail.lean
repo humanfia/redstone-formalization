@@ -18,14 +18,15 @@ through at most eight rails of the same block that are on, to one that does
 (`findPoweredRailSignal`).
 
 A detector rail looks for a minecart when it is placed and when an entity touches it
-(`entityInside`); it then stays on and looks again every 20 game ticks until it finds none.
+(`entityInside`, which the entity units call through `Redstone.Entity.Touch`); it then stays on
+and looks again every 20 game ticks until it finds none.
 
 ## What is left out
 
 * Drops (`dropResources`).
-* Who calls `entityInside`: in the game the tick of an entity does, and the minecart entity
-  (`Redstone.Entity.Minecart`) does nothing yet. Until it does, a detector rail that is off and
-  already in the world does not notice a minecart.
+* A boat on a detector rail (pending scenario `detector-not-a-cart-boat`): a boat is never at
+  rest, its tick clears `onGround` at once, and boats are not modelled
+  (`Redstone.Entity.Still`).
 * The fluid tick a waterlogged rail schedules on every shape update (`updateShape`): the model
   has no fluid ticks.
 * `getAnalogOutputSignal` of a detector rail with a command block minecart or a minecart with a

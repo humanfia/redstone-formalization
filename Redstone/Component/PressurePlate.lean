@@ -23,7 +23,12 @@ The plate gives its signal to all its neighbours, and strong power to the block 
 needs a block below whose top face supports it (`canSurvive`).
 
 Which entities there are, their bounding boxes and when they touch a block comes from
-`Redstone.Entity.Still`; see there for what is assumed about entities. Sounds are left out.
+`Redstone.Entity.Still` and `Redstone.Entity.Touch`; see there for what is assumed about
+entities. Sounds are left out.
+
+Two scenarios wait in `tests/pending`: `entity-flags`, which has a baby pig, whose smaller box
+the model does not have, and `sweep-squid-00`, in which a squid out of water moves although it
+has no AI.
 -/
 
 @[expose] public section

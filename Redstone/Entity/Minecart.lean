@@ -50,7 +50,15 @@ Hooks of other blocks that act on an entity (`Block.stepOn` of slime and of reds
 `entityInside` of honey) are theirs to model: here they are only called, through
 `Redstone.Entity.Touch`.
 
-The helpers of the first sections (Java arithmetic, boxes, collision with block shapes, the
+Scenarios that wait in `tests/pending/scenarios/minecart` for one of these:
+`pending-two-carts-collide` (two minecarts that meet: pushing needs the game's table of sines
+for `pushOtherMinecart`, the boxes of entities as obstacles in `Entity.collide`, and the order
+in which `getEntities` finds entities), `fuzz-minecart-harsh-*` (a hopper or a dropper next to a
+minecart with a container; in `s12-028` it is the hopper that gives up, see
+`Redstone.Component.Hopper`), `pending-hopper-cart-under-chest`, `pending-tnt-explodes`,
+`pending-waterlogged-rail`, `verify-hit-bamboo` and `verify-hit-dripstone`.
+
+The helpers of the first sections (Java arithmetic, collision with block shapes, the
 supporting block) are not particular to minecarts. They are private copies, to be shared with
 the other entities once the common entity physics exists.
 -/

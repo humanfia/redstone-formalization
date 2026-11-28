@@ -108,7 +108,8 @@ component's module docstring says what it does not model.
 | `Redstone.Component.Hopper`, `Container`, `CookingTable`, `Dispenser`, `Crafter`, `AnalogSource` | hoppers and containers, furnaces and the brewing stand, dispenser, dropper, crafter, and the other blocks a comparator reads | defined, tested |
 | `Redstone.Component.FallingBlock`, `Extra` | falling blocks; skulls, sponge, frosted ice, potent sulfur, slime | defined, tested |
 | `Redstone.Entity.*` | items, falling blocks, primed TNT and explosions, minecarts, entities at rest | defined, tested |
-| `Redstone.Entity.Projectile` | arrows and other projectiles | stub |
+| `Redstone.Entity.Geometry`, `Redstone.Entity.Touch` | the boxes of entities, and how an entity tells the blocks it steps on and passes through (`Entity.applyEffectsFromBlocks`), shared by all entity units | defined, tested |
+| `Redstone.Entity.Projectile` | arrows and other projectiles | an arrow stuck in a block is defined and tested; flight is not |
 | `Redstone.Contraption.PistonDoor`, `Redstone.Theorems.PistonDoor3x3` | piston doors | placeholder |
 
 What the model leaves out: fluids do not flow, light is modelled only as far as the daylight

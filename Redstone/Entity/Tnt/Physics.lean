@@ -8,7 +8,7 @@ public import Redstone.Entity.Touch
 # Geometry for primed TNT
 
 The parts of the game's entity physics that primed TNT and explosions use, in the game's own
-floating point arithmetic: bounding boxes (`AABB`), collision shapes placed in the world
+floating point arithmetic: collision shapes placed in the world
 (`VoxelShape.move`), the collision of a moving box with shapes (`VoxelShape.collide`,
 `Shapes.collide`), the block collisions around a box (`BlockCollisions`), and ray casts
 through blocks (`BlockGetter.clip`), of which only "hit or miss" is needed.

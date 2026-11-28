@@ -9,7 +9,8 @@ public import Redstone.Entity.Touch
 
 How an entity moves through the blocks of the world: `Entity.move` with `Entity.collide`,
 `Shapes.collide` and `VoxelShape.collide`, the supporting block, fall distance, the bounce of
-`restituteMovementAfterCollisions`, gravity, and the effects of the blocks an entity touches.
+`restituteMovementAfterCollisions`, gravity, and the effects of the blocks an entity touches
+(through `Redstone.Entity.Touch`).
 
 The arithmetic is that of the game: every operation on `double` and `float` values is done in
 the same order, so results agree bit for bit. Constants that are not exactly representable are

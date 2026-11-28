@@ -35,7 +35,10 @@ everything else is taken from the entity type:
 * Fluids (`FluidState.entityInside`).
 * Everything else these entities do in a tick: mobs push each other, age, burn, and so on.
   A squid or glow squid out of water changes its velocity every tick even with `NoAI`, so the
-  model does not reproduce it (pending scenario `sweep-squid-00`).
+  model does not reproduce it (pending scenario `sweep-squid-00`). A boat is not at rest
+  either: its tick clears `onGround` (pending scenario `rail/detector-not-a-cart-boat`).
+* Babies, whose box is smaller by an amount that depends on the species (pending scenario
+  `pressure-plate/entity-flags`).
 * The parts of the ender dragon (the dragon is not in the type table at all).
 -/
 

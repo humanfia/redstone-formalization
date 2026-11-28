@@ -23,12 +23,11 @@ the release tick looks for one and, if it finds one, schedules itself again.
 * Sounds.
 * `getStateForPlacement`: there are no block items.
 
-`entityInside` is defined, but nothing in the engine calls it yet: that is for the model of
-entities, which decides which blocks an entity is inside of.
-Until then the model is wrong whenever an arrow touches an unpressed wooden button. This
-includes an arrow that reaches the unpressed shape (2 thick) but not the pressed one (1 thick):
-in the game the release tick releases the button and the arrow presses it again in the same game
-tick.
+`entityInside` is called by the entity units (`Redstone.Entity.Touch`). Of the projectiles only
+an arrow that is stuck in a block is modelled (`Redstone.Entity.Projectile`), so an arrow that
+lies in a block presses a wooden button, and one that flies does not: the scenarios in which an
+arrow falls out of the wall next to a button (`adv-arrow-wall-*-short-neg`) wait in
+`tests/pending`.
 -/
 
 @[expose] public section

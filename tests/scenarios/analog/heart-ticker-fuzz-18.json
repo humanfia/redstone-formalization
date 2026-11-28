@@ -1,0 +1,1161 @@
+{
+ "name": "heart-ticker-fuzz-18",
+ "ticks": 90,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   8,
+   4,
+   8
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    8,
+    0,
+    8
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    2,
+    3,
+    2
+   ],
+   "state": "minecraft:creaking_heart[axis=z,creaking_heart_state=uprooted,natural=false]",
+   "nbt": "{creaking:[I;5,6,7,8]}"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:pale_oak_wood[axis=z]"
+  },
+  {
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "state": "minecraft:stripped_pale_oak_log[axis=z]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    5
+   ],
+   "state": "minecraft:creaking_heart[axis=z,creaking_heart_state=uprooted,natural=true]"
+  },
+  {
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:stripped_pale_oak_log[axis=z]"
+  },
+  {
+   "pos": [
+    3,
+    2,
+    6
+   ],
+   "state": "minecraft:creaking_heart[axis=y,creaking_heart_state=uprooted,natural=false]"
+  },
+  {
+   "pos": [
+    3,
+    3,
+    6
+   ],
+   "state": "minecraft:pale_oak_wood[axis=y]"
+  },
+  {
+   "pos": [
+    3,
+    1,
+    6
+   ],
+   "state": "minecraft:pale_oak_wood[axis=y]"
+  },
+  {
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "state": "minecraft:creaking_heart[axis=y,creaking_heart_state=awake,natural=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "state": "minecraft:composter[level=1]"
+  }
+ ],
+ "actions": [
+  {
+   "tick": 1,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 2,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 3,
+   "type": "destroy",
+   "pos": [
+    2,
+    3,
+    1
+   ],
+   "drop": false
+  },
+  {
+   "tick": 3,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 4,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 5,
+   "type": "destroy",
+   "pos": [
+    5,
+    2,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 5,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 6,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 7,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 8,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 9,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 10,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 11,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 12,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 13,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 14,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 15,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 16,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 17,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 18,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 19,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 20,
+   "type": "destroy",
+   "pos": [
+    3,
+    2,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 20,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 21,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 22,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 23,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 24,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 25,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 26,
+   "type": "destroy",
+   "pos": [
+    3,
+    3,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 26,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 27,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 28,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 29,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 30,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 31,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 32,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 33,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 34,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 35,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 36,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 37,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 38,
+   "type": "destroy",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "drop": false
+  },
+  {
+   "tick": 38,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 39,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 40,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 41,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 42,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 43,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 44,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 45,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 46,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 47,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 48,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 49,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 50,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 51,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 52,
+   "type": "destroy",
+   "pos": [
+    5,
+    3,
+    2
+   ],
+   "drop": false
+  },
+  {
+   "tick": 52,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 53,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 54,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 55,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 56,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 57,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 58,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 59,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 60,
+   "type": "set",
+   "pos": [
+    1,
+    1,
+    4
+   ],
+   "state": "minecraft:pale_oak_log[axis=z]"
+  },
+  {
+   "tick": 60,
+   "type": "destroy",
+   "pos": [
+    3,
+    3,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 60,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 61,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 62,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 63,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 64,
+   "type": "destroy",
+   "pos": [
+    1,
+    1,
+    6
+   ],
+   "drop": false
+  },
+  {
+   "tick": 64,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 65,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 66,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 67,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 68,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 69,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 70,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 71,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 72,
+   "type": "set",
+   "pos": [
+    2,
+    3,
+    3
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "tick": 72,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 73,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 74,
+   "type": "set",
+   "pos": [
+    3,
+    3,
+    6
+   ],
+   "state": "minecraft:pale_oak_log[axis=y]"
+  },
+  {
+   "tick": 74,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 75,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 76,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 77,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 78,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 79,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 80,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 81,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 82,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 83,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 84,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  },
+  {
+   "tick": 85,
+   "type": "use_item",
+   "pos": [
+    7,
+    1,
+    7
+   ],
+   "face": "up",
+   "item": "minecraft:wheat_seeds"
+  }
+ ]
+}

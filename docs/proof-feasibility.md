@@ -151,6 +151,7 @@ Measured and left as they are:
 * String equality works in the kernel, at about 10 ms per comparison of two block or item
   names. `itemMaxStackSize` costs 0.4 s per call; it is called when a hopper moves an item, and
   dominates the hopper ticks. Making items an enumeration would remove it.
+  (Done since, without the enumeration: see "The item table" below.)
 * The other comparisons of `Attrs.fluid` with a string (`Component/Supported.lean:62`, `:67`,
   `:101`, `Component/Extra.lean:227`, `:231`, `Component/AnalogSource.lean:204`,
   `Component/Sensor/Light.lean:66`, and the entity files) are not on the path of the probes.
@@ -267,6 +268,7 @@ about a run of several ticks, and they do not reach every kind of circuit.
     `Float` position on the path; this was not probed.
   * A hopper that moves an item calls `itemMaxStackSize` (a scan over item names, 0.4 s) and
     compares with `"minecraft:air"`; it reduces, and dominates the hopper ticks.
+    (No longer: see "The item table" below; `Smoke.lean` now guards it.)
 
 ## The recipe
 
@@ -357,7 +359,80 @@ over tens of ticks.
 
 `Redstone/Proof/Smoke.lean` is built by CI and proves, by evaluation: a lever lights a lamp; a
 lever breaks when its support is destroyed; a sticky piston extends and moves a block; an item
-moves from a hopper to the hopper below. A change to the model that puts a `Float`, an opaque
+moves from a hopper to the hopper below; three items do, one by one; a stack of ender pearls
+fills up to sixteen and the next pearl starts a new stack. A change to the model that puts a `Float`, an opaque
 or well-founded definition, or string parsing on the path of a block tick makes that file fail
 or slow down. In a level without scheduled fluid ticks, with `random_tick_speed` zero and
 `block_drops` off, the block path must stay free of them.
+
+## The item table
+
+Measured after the spike, on the model at `3e6d3c3d` and on the same model with the change
+described here. `lake test` is unchanged: 9826 of 9826 scenarios.
+
+**What was slow.** `itemMaxStackSize` was two scans, `List.contains` over the 248 names of the
+items that stack to 1 and the 68 that stack to 16. The kernel has no fast strings: a string
+literal unfolds to the list of its bytes, so a scan unfolds every name of the table. And it
+was not only paid in the ticks in which an item moves: in the hopper pair of the probes the
+average over all game ticks was 0.35 s, with the slowest tick at 0.6 to 0.7 s.
+
+**What was changed.** The table is a binary search tree on a natural number
+(`Redstone/Basic/ItemKey.lean`): `itemKey` packs the bytes of the name into one number, as
+digits in base 256 below a leading 1, and the lookup compares number literals, one or two on
+each of the nine levels of the tree, which the kernel does natively. `itemKey` is injective (`itemKey_injective`), so there are no
+collisions to handle and no final comparison of names. The generator writes the list of names
+and the tree side by side (`Redstone/Block/Generated/Items.lean`, by
+`tools/gen/gen_blocks.py`), and `Redstone/Lemmas/ItemStackSize.lean` proves, for every string,
+that the lookup is a scan of the list: `itemMaxStackSize id = (itemStackSizes.lookup id).getD 64`.
+`ItemStack` still names its item by a `String`; no type changed.
+
+Primitives, each one `decide +kernel`, kernel time by the profiler (a trivial `decide +kernel`
+is about 3 ms):
+
+| Probe | Before | After |
+|---|---|---|
+| `itemMaxStackSize "minecraft:redstone" = 64` (not in the table) | 458 ms | 4.2 ms |
+| `itemMaxStackSize "minecraft:ender_pearl" = 16` | 409 ms | 3.1 ms |
+| `itemMaxStackSize "minecraft:diamond_sword" = 1` | 130 ms | 3.2 ms |
+| `(ItemStack.of "minecraft:redstone" 3).maxStackSize = 64` | 482 ms | 4.3 ms |
+| `(ItemStack.of "minecraft:redstone" 3).isEmpty = false` | 3.0 ms | 3.0 ms |
+| `isSameItemSameComponents` of two stacks of redstone | 4.6 ms | 3.8 ms |
+
+Hopper above hopper, both pointing down, the upper one with a stack in its first slot: one
+lemma per game tick between level literals, until the upper hopper is empty and for a few
+ticks more. Both hoppers move items here (the upper one pushes, the lower one pulls), two
+items every 8 ticks. The comparison is of `world`, `blockEntities`, `blockEntityTickers`,
+`gameTime`, `overflow` and the number of scheduled ticks. The times are wall time of the lemma
+commands on a compute node (4 cores, `Elab.async false`, nothing else in the job), so they
+include the elaboration of the statement, a few milliseconds per lemma:
+
+| Probe | Lemmas | Before: all, slowest | After: all, slowest |
+|---|---|---|---|
+| 1 piece of redstone | 16 | 5.5 s, 0.61 s | 0.95 s, 0.13 s |
+| 5 pieces of redstone | 48 | 17.6 s, 0.65 s | 2.9 s, 0.12 s |
+| 64 pieces of redstone | 520 | 180 s, 0.68 s | 33 s, 0.12 s |
+| 16 ender pearls (a full stack of them) | 136 | 48 s, 0.76 s | 10.8 s, 0.17 s |
+
+That is about 0.35 s per tick before and 0.06 s after, on average over all ticks. A full
+stack of 64 going through a hopper is half a minute of kernel time; the number of items no longer limits a hopper theorem. Every lemma depends on the three standard axioms
+only. What the remaining 60 ms of a hopper tick are spent on was not profiled.
+
+**The emptiness test was measured and left as it is.** `ItemStack.isEmpty` compares the name
+of the item with `"minecraft:air"`. That is a single comparison, and the kernel decides it on
+the first byte that differs (all item names start with `minecraft:`, so on the eleventh byte
+or soon after it), without unfolding the rest of the name. Comparing keys instead means computing `itemKey` of the whole
+name. Over 316 stacks of different items, each seen for the first time: 582 ms with the
+comparison of names (1.8 ms per stack), 859 ms with keys (2.7 ms per stack). For a stack the
+kernel has met before in the same evaluation both are cached (12 ms for 300 calls, either
+way). So the key would make it slower.
+
+**What this does not change.** The model still compares item names as strings wherever it
+asks whether two stacks hold the same item (`isSameItemSameComponents`), and the other tables
+indexed by item names (fuels and cooking recipes, the items a dispenser treats specially) are
+still lists of names. A comparison costs a few milliseconds and a scan costs about a
+millisecond for every name of its list; none was on the path of these probes. `itemKey` and
+`ItemTable` are there for the ones that turn out to matter. The probe files are not in the
+repository (they need the level literals and the comparison of the proof foundation). The two
+new hopper theorems of `Redstone/Proof/Smoke.lean` run the lookup in CI: they check its
+results, and like the rest of that file they have no time limit, so a lookup that became slow
+again would show as a slower build (0.25 s and 0.17 s of kernel time now), not as a failure.

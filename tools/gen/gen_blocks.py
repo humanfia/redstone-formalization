@@ -8,6 +8,9 @@ collision shapes are read from `shapegrids.json` next to the dump, which `tools/
 writes. Everything under `Redstone/Block/Generated` is produced by this script and must not be
 edited by hand.
 
+With `--items` as a third argument only `Items.lean` is written, the table of the maximal stack
+sizes, which needs the dump alone.
+
 Blocks are grouped into *families*: blocks with the same Java class and the same properties.
 A family becomes one constructor of `Redstone.Block`, carrying the block id (when the family
 has several blocks) and a structure with one field per property. All blocks without properties
@@ -578,31 +581,71 @@ def gen_shapes(g, grids):
     return "\n".join(o) + FOOTER
 
 
+def item_key(name):
+    """`Redstone.itemKey`: the bytes of the name as digits in base 256 below a leading 1."""
+    key = 1
+    for byte in name.encode("utf-8"):
+        key = key * 256 + byte
+    return key
+
+
 def gen_items(g):
-    """`Items.lean`: the maximal stack size of every item."""
-    o = [g.header("Items", ["Mathlib.Tactic"])]
-    by_size = defaultdict(list)
-    for item in g.dump["items"]:
-        by_size[item["maxStackSize"]].append(item["id"])
-    common = max(by_size, key=lambda k: len(by_size[k]))
-    for size in sorted(by_size):
-        if size == common:
-            continue
-        o.append(f"/-- The items that stack up to {size}. -/")
-        o.append(f"def itemsStackingTo{size} : List String := [")
-        o.append(",\n".join("  " + lean_str(i) for i in by_size[size]) + "]\n")
-    o.append("/-- `Item.getDefaultMaxStackSize`: how many items of the kind named `id` fit in one stack. -/")
+    """`Items.lean`: the maximal stack size of every item.
+
+    The table is written twice: as the list of the item names that do not stack to the common
+    size, which is what a reader checks against the game, and as a binary search tree on
+    `Redstone.itemKey` of those names, which is what the model evaluates (see
+    `Redstone/Basic/ItemKey.lean`). `Redstone/Lemmas/ItemStackSize.lean` proves that the tree
+    finds exactly what a scan of the list finds, so the two cannot drift apart.
+    """
+    o = [g.header("Items", ["Redstone.Basic.ItemKey"])]
+    sizes = {item["id"]: item["maxStackSize"] for item in g.dump["items"]}
+    assert len(sizes) == len(g.dump["items"]), "an item is listed twice"
+    counts = defaultdict(int)
+    for size in sizes.values():
+        counts[size] += 1
+    common = max(counts, key=lambda k: counts[k])
+    # In ascending order of the key, which is the order of the tree's entries.
+    entries = sorted((item_key(i), i, size) for i, size in sizes.items() if size != common)
+    assert all(a[0] < b[0] for a, b in zip(entries, entries[1:])), "two items with one key"
+    o.append(f"/-- The items that do not stack up to {common}, each with the size of its stacks, in")
+    o.append("ascending order of `itemKey`: shorter names first, names of one length in the order of")
+    o.append("their bytes. -/")
+    o.append("def itemStackSizes : List (String × ℕ) := [")
+    o.append(",\n".join(f"  ({lean_str(i)}, {size})" for _, i, size in entries) + "]\n")
+
+    def tree(lo, hi, indent):
+        if lo >= hi:
+            return [f"{indent}.leaf"]
+        mid = (lo + hi) // 2
+        key, name, size = entries[mid]
+        if hi - lo == 1:
+            return [f"{indent}(.node .leaf 0x{key:x} {size} .leaf) -- {name}"]
+        return ([f"{indent}(.node"] + tree(lo, mid, indent + " ")
+                + [f"{indent} 0x{key:x} {size} -- {name}"] + tree(mid + 1, hi, indent + " ")
+                + [f"{indent})"])
+
+    o.append("/-- `itemStackSizes` as a search tree on `itemKey`. -/")
+    o.append("def itemStackSizeTable : ItemTable :=")
+    o.append("\n".join(tree(0, len(entries), "  ")) + "\n")
+    o.append("/-- `Item.getDefaultMaxStackSize`: how many items of the kind named `id` fit in one stack.")
+    o.append(f"It is the size `itemStackSizes` lists for the name, and {common} for a name that is not")
+    o.append("listed (`itemMaxStackSize_eq_lookup`). -/")
     o.append("def itemMaxStackSize (id : String) : ℕ :=")
-    for size in sorted(by_size):
-        if size != common:
-            o.append(f"  if itemsStackingTo{size}.contains id then {size} else")
-    o.append(f"  {common}\n")
+    o.append(f"  (itemStackSizeTable.find? (itemKey id)).getD {common}\n")
     return "\n".join(o) + FOOTER
 
 
 def main():
     dump_path, out = sys.argv[1], sys.argv[2]
+    if sys.argv[3:] not in ([], ["--items"]):
+        sys.exit(f"unknown arguments: {sys.argv[3:]}")
     g = Gen(json.load(open(dump_path)))
+    if sys.argv[3:] == ["--items"]:
+        # Only the item table, which needs nothing but the dump.
+        with open(f"{out}/Items.lean", "w") as f:
+            f.write(gen_items(g))
+        return
     gen_block_entities(g, out, f"{out}/../Entity")
     state = g.gen_state()  # also decides which index functions `gen_props` must emit
     attrs = g.gen_attrs()

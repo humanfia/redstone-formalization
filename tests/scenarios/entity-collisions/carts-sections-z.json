@@ -1,0 +1,81 @@
+{
+ "name": "carts-sections-z",
+ "ticks": 90,
+ "box": {
+  "min": [
+   0,
+   0,
+   8
+  ],
+  "max": [
+   15,
+   3,
+   40
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    8
+   ],
+   "max": [
+    15,
+    0,
+    40
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    4,
+    1,
+    9
+   ],
+   "max": [
+    4,
+    1,
+    39
+   ],
+   "state": "minecraft:rail[shape=north_south,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    4.5,
+    1.0625,
+    30.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.3d]}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    4.5,
+    1.0625,
+    34.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    4.5,
+    1.0625,
+    12.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.4d]}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    4.5,
+    1.0625,
+    32.4
+   ]
+  }
+ ]
+}

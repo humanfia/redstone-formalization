@@ -286,4 +286,73 @@ def box (dm : Dimensions) (p : Vec3) : AABB :=
 
 end Dimensions
 
+/-! ### Shapes that are shifted by the position of the block -/
+
+/-- The shift of the shapes of a block whose shapes depend on where it is
+(`BlockBehaviour.OffsetType.XZ`, `BlockState.getOffset(pos)`): bamboo, pointed dripstone and
+sulfur spikes stand a little off the middle of their block, by an amount that the game derives
+from the x and z of the position. -/
+structure ShapeOffset where
+  /-- `getOffset(BlockPos.ZERO)`, along x and along z: the shift that the shapes of the server's
+  shape table already carry, since they were taken from the block at the origin. -/
+  origin : Float
+  /-- The x of `getOffset(pos)`. -/
+  x : Float
+  /-- The z of `getOffset(pos)`. -/
+  z : Float
+
+namespace ShapeOffset
+
+/-- A coordinate of a shape of the shape table, as `VoxelShape.move(getOffset(pos))` gives it for
+the block at the position of the offset: the coordinate of the shape as the block defines it,
+which the shift of the table is taken off to get back (exactly: the coordinates of these shapes
+and the shift are small multiples of a power of two), plus the offset. -/
+def apply (o : ShapeOffset) (ax : Axis) (c : Float) : Float :=
+  match ax with
+  | .x => (c - o.origin) + o.x
+  | .y => c + 0.0
+  | .z => (c - o.origin) + o.z
+
+/-- A box of a shape of the shape table, shifted to where the block has it. -/
+def box (o : ShapeOffset) (b : AABB) : AABB :=
+  ⟨o.apply .x b.minX, o.apply .y b.minY, o.apply .z b.minZ,
+    o.apply .x b.maxX, o.apply .y b.maxY, o.apply .z b.maxZ⟩
+
+end ShapeOffset
+
+namespace Block
+
+/-- `Block.getMaxHorizontalOffset()` of the blocks with `OffsetType.XZ` that have a collision
+shape: a quarter of a block for bamboo (the default), an eighth for pointed dripstone and sulfur
+spikes (`SpeleothemBlock.MAX_HORIZONTAL_OFFSET`, the margin of their widest shape). The other
+blocks with an offset (flowers, grass, ...) have no collision shape. -/
+def maxHorizontalOffset? (b : Block) : Option Float :=
+  if b.is .bamboo then some 0.25
+  else if b.is .pointed_dripstone || b.is .sulfur_spike then some 0.125
+  else none
+
+/-- `Mth.getSeed(x, 0, z)`, in the arithmetic of `int` and `long`. -/
+def offsetSeed (p : Pos) : Int64 :=
+  let seed : Int64 := (Int32.ofInt p.x * 3129871).toInt64 ^^^ (Int64.ofInt p.z * 116129781)
+  let seed := seed * seed * 42317861 + seed * 11
+  seed >>> 16
+
+/-- One horizontal component of `getOffset(pos)` for `OffsetType.XZ`:
+`Mth.clamp(((float)bits / 15.0F - 0.5) * 0.5, -max, max)`, where `bits` are four bits of the
+seed. -/
+def offsetComponent (bits : Int64) (max : Float) : Float :=
+  let v := ((Float32.ofNat (bits &&& 15).toInt.toNat / 15.0).toFloat - 0.5) * 0.5
+  if v < -max then -max else Phys.min v max
+
+/-- `BlockState.getOffset(pos)` for a block whose collision shape is shifted by it, with the
+shift at the origin that the shape table carries. -/
+def shapeOffset? (b : Block) (p : Pos) : Option ShapeOffset :=
+  b.maxHorizontalOffset?.map fun max =>
+    let seed := offsetSeed p
+    { origin := offsetComponent (offsetSeed ⟨0, 0, 0⟩) max
+      x := offsetComponent seed max
+      z := offsetComponent (seed >>> 8) max }
+
+end Block
+
 end Redstone

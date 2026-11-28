@@ -1,0 +1,191 @@
+{
+ "name": "offset-far-coordinates",
+ "ticks": 50,
+ "box": {
+  "min": [
+   200,
+   0,
+   190
+  ],
+  "max": [
+   215,
+   4,
+   205
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    200,
+    0,
+    190
+   ],
+   "max": [
+    215,
+    0,
+    205
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    202,
+    1,
+    192
+   ],
+   "state": "minecraft:bamboo[age=1,leaves=none,stage=0]"
+  },
+  {
+   "pos": [
+    205,
+    1,
+    195
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=middle,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    208,
+    1,
+    198
+   ],
+   "state": "minecraft:sulfur_spike[thickness=tip,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    211,
+    1,
+    201
+   ],
+   "state": "minecraft:bamboo[age=1,leaves=none,stage=0]"
+  },
+  {
+   "pos": [
+    213,
+    1,
+    193
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=middle,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    203,
+    1,
+    203
+   ],
+   "state": "minecraft:sulfur_spike[thickness=tip,vertical_direction=up,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    202.5,
+    3.5,
+    192.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    205.5,
+    3.5,
+    195.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    208.5,
+    3.5,
+    198.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    211.5,
+    3.5,
+    201.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    213.5,
+    3.5,
+    193.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    203.5,
+    3.5,
+    203.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    202.5,
+    1.0,
+    194.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.0d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    205.5,
+    1.0,
+    197.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.0d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    208.5,
+    1.0,
+    200.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.0d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    211.5,
+    1.0,
+    203.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.0d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    213.5,
+    1.0,
+    195.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.0d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    203.5,
+    1.0,
+    205.0
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1},Motion:[0.0d,0.0d,-0.3d]}"
+  }
+ ]
+}

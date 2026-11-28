@@ -3,6 +3,7 @@ module
 public import Redstone.Mechanics.Tick
 public import Redstone.Block.Generated.Shapes
 public import Redstone.Entity.Touch
+public import Redstone.Entity.Push
 
 /-!
 # Entity physics
@@ -19,15 +20,17 @@ given by their bits.
 ## What is left out
 
 * Fluids. An entity that touches a block holding a fluid sets `Level.overflow`.
-* Collisions with other entities (boats, shulkers) and with the world border.
+* The world border. The entities that stand in the way of others (boats, shulkers) are obstacles
+  as far as `Redstone.Entity.Push` knows their boxes; see there for what sets `Level.overflow`.
 * Stepping up (`Entity.maxUpStep`), which is zero for the entities modelled here.
-* Collision shapes that depend on the entity or on the position of the block (scaffolding,
-  powder snow, bamboo, pointed dripstone, moving pistons, shulker boxes). Meeting one of these
-  sets `Level.overflow`.
+* Collision shapes that depend on the entity or on a block entity (scaffolding, powder snow,
+  moving pistons, shulker boxes). Meeting one of these sets `Level.overflow`. The shapes that
+  are shifted by the position of the block (bamboo, pointed dripstone, sulfur spikes) are
+  modelled (`Block.shapeOffset?`).
 * The box of an entity is always taken as a shape with its own coordinates. The game snaps a
   box that lies in the unit cube on multiples of one eighth to that grid, with a tolerance.
 * Blocks whose `fallOn` does more than pass the fall on to the entity (farmland, turtle eggs,
-  powder snow, pointed dripstone) set `Level.overflow` when an entity lands on them.
+  powder snow) set `Level.overflow` when an entity lands on them.
 -/
 
 @[expose] public section
@@ -70,6 +73,14 @@ def ofIndex (i : ℕ) : Shape :=
 
 /-- `VoxelShape.isEmpty`. -/
 def isEmpty (s : Shape) : Bool := s.boxes.isEmpty
+
+/-- `VoxelShape.move(state.getOffset(pos))` of a shape of the shape table: every coordinate of
+the grid and of the boxes is shifted the same way. -/
+def offset (s : Shape) (o : ShapeOffset) : Shape where
+  boxes := s.boxes.map o.box
+  xs := s.xs.map (o.apply .x)
+  ys := s.ys.map (o.apply .y)
+  zs := s.zs.map (o.apply .z)
 
 /-- The shape is `Shapes.block()`, the full cube. -/
 def isBlock (s : Shape) : Bool :=
@@ -251,11 +262,20 @@ namespace Block
 position nor on the entity. -/
 def collisionShape (b : Block) : Shape := Shape.ofIndex b.attrs.collision
 
-/-- The blocks whose collision shape depends on the position or on the entity that asks, or
-comes from a block entity. They are not modelled. -/
+/-- `BlockState.getCollisionShape(level, pos)` for a block whose collision shape does not depend
+on the entity: the shape of the table, shifted for the blocks that stand off the middle of their
+block (`Block.shapeOffset?`). -/
+def collisionShapeAt (b : Block) (p : Pos) : Shape :=
+  match b.shapeOffset? p with
+  | some o => b.collisionShape.offset o
+  | none => b.collisionShape
+
+/-- The blocks whose collision shape `Block.collisionShape` does not give: it depends on the
+position (see `collisionShapeAt` for those) or on the entity that asks, or comes from a block
+entity. -/
 def collisionUnmodelled (b : Block) : Bool :=
   b.is .scaffolding || b.is .powder_snow || b.is .bamboo || b.is .pointed_dripstone ||
-    b.is .moving_piston || b.id.name.endsWith "shulker_box"
+    b.is .sulfur_spike || b.is .moving_piston || b.id.name.endsWith "shulker_box"
 
 /-- `BlockState.isCollisionShapeFullBlock`. -/
 def isCollisionShapeFullBlock (b : Block) : Bool := b.collisionShape.isBlock
@@ -322,10 +342,13 @@ def blockCollisions (l : Level) (box : AABB) : List PlacedShape × Bool := Id.ru
     if type != 3 then
       let p : Pos := ⟨x0 + x, y0 + y, z0 + z⟩
       let state := l.blockAt p
-      if state.collisionUnmodelled then unmodelled := true
+      -- a block with an offset has no cached shape, so it counts as large
+      -- (`hasLargeCollisionShape` is `cache == null || cache.largeCollisionShape`)
+      let shifted := state.maxHorizontalOffset?.isSome
+      if state.collisionUnmodelled && !shifted then unmodelled := true
       else if state.attrs.collision != 0 then
-        let shape := state.collisionShape
-        if type == 0 || (type == 1 && shape.isLarge) then
+        let shape := state.collisionShapeAt p
+        if type == 0 || (type == 1 && (shifted || shape.isLarge)) then
           let placed : PlacedShape := ⟨shape, p⟩
           if shape.isBlock then
             if box.intersects (AABB.ofBlock p) then out := placed :: out
@@ -334,6 +357,15 @@ def blockCollisions (l : Level) (box : AABB) : List PlacedShape × Bool := Id.ru
 
 /-- `Level.noCollision(entity, box)`, for blocks only: no collision shape overlaps `box`. -/
 def noBlockCollision (l : Level) (box : AABB) : Bool := (l.blockCollisions box).1.isEmpty
+
+/-- `Level.noCollision(entity, box)` for the entity with index `source`, which is no vehicle:
+neither the collision shape of a block nor the box of an entity that can be collided with
+(`Entity.Push.entityColliders`) overlaps `box`. The second flag tells that a block or an entity
+whose collision shape is not modelled was near. The world border is left out. -/
+def noCollision (l : Level) (source : ℕ) (box : AABB) : Bool × Bool :=
+  let (blocks, unmodelled) := l.blockCollisions box
+  let (entities, unknown) := Entity.Push.entityColliders l source false box
+  (blocks.isEmpty && entities.isEmpty, unmodelled || unknown)
 
 /-- A block that holds a fluid touches `box`. -/
 def touchesFluid (l : Level) (box : AABB) : Bool :=
@@ -385,13 +417,21 @@ def collideWithShapes (movement : Vec3) (box : AABB) (shapes : List PlacedShape)
         resolved.set ax (collideShapes ax (box.move resolved) shapes axisMovement)
       else resolved
 
-/-- `Entity.collide(movement)` for an entity that cannot step up, in a world without entities
-to collide with. The flag tells that a block whose collision shape is not modelled was near. -/
-def collide (l : Level) (box : AABB) (movement : Vec3) : Vec3 × Bool :=
+/-- The shape of the box of an entity that is in the way (`Shapes.create(box)`), for a box that
+the game does not snap to the grid of a block: one cell between the faces of the box. -/
+def entityShape (box : AABB) : PlacedShape := ⟨Shape.ofBoxes [box], ⟨0, 0, 0⟩⟩
+
+/-- `Entity.collide(movement)` for the entity with index `source`, whose box is `box` and which
+cannot step up and is no vehicle: the entities in its way come first
+(`Level.getEntityCollisions`, see `Entity.Push.entityColliders`), then the blocks. The flag tells
+that a block or an entity whose collision shape is not modelled was near. -/
+def collide (l : Level) (source : ℕ) (box : AABB) (movement : Vec3) : Vec3 × Bool :=
   if movement.lengthSqr == 0 then (movement, false)
   else
-    let (shapes, unmodelled) := l.blockCollisions (box.expandTowards movement)
-    (collideWithShapes movement box shapes, unmodelled)
+    let area := box.expandTowards movement
+    let (entities, unknown) := Entity.Push.entityColliders l source false area
+    let (shapes, unmodelled) := l.blockCollisions area
+    (collideWithShapes movement box (entities.map entityShape ++ shapes), unknown || unmodelled)
 
 end Phys
 
@@ -517,12 +557,21 @@ def fallResetPossible (l : Level) (pos movement : Vec3) : Bool :=
 
 /-- The blocks that override `Block.fallOn` with more than a call of `causeFallDamage`. -/
 def fallOnUnmodelled (b : Block) : Bool :=
-  b.is .farmland || b.is .turtle_egg || b.is .powder_snow || b.is .pointed_dripstone
+  b.is .farmland || b.is .turtle_egg || b.is .powder_snow
+
+/-- The tip of a stalagmite (`PointedDripstoneBlock.fallOn`: the tip points up and the thickness
+is `TIP`). -/
+def isStalagmiteTip : Block → Bool
+  | .pointedDripstone s => s.vertical_direction == .up && s.thickness == .tip
+  | _ => false
 
 /-- The fall distance that `Block.fallOn` passes to `Entity.causeFallDamage`. Slime, hay and
-honey blocks pass it unchanged; the others reduce it by `getFallDistanceReduction`. -/
+honey blocks pass it unchanged, and the tip of a stalagmite adds two and a half blocks (and
+doubles the damage, which is not modelled); the others reduce it by
+`getFallDistanceReduction`. -/
 def fallOnDistance (b : Block) (fallDistance : Float) : Float :=
   if b.is .slime_block || b.is .hay_block || b.is .honey_block then fallDistance
+  else if isStalagmiteTip b then fallDistance + 2.5
   else
     let one : Float32 := 1
     fallDistance * (one - Float32.ofBits b.fallDistanceReductionBits).toFloat
@@ -622,7 +671,7 @@ def moveEntity (k : Entity.Kind) (i : ℕ) (delta : Vec3) : M Unit := do
           { e.modifyPhys fun p => { p with stuckSpeedMultiplier := .zero } with
             base := { e.base with motion := .zero } })
       else (delta, e)
-    let (movement, unmodelled) := Phys.collide l (k.dims.box e.base.pos) delta
+    let (movement, unmodelled) := Phys.collide l i (k.dims.box e.base.pos) delta
     if unmodelled then setOverflow
     let movementLength := movement.lengthSqr
     let moves := movementLength > Phys.eps7 || delta.lengthSqr - movementLength < Phys.eps7

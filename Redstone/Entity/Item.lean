@@ -208,13 +208,13 @@ def tick (i : ℕ) : M Unit := do
     modifyData i fun dt => { dt with pickupDelay := dt.pickupDelay - 1 }
   let old := e.base.pos
   Level.applyGravity kind i
-  -- `noPhysics`: the item is inside a block
+  -- `noPhysics`: the item is inside a block or an entity that can be collided with
   let some (e, _) ← get? i | return
   let box := kind.dims.box e.base.pos
-  let (inside, unmodelled) := (← get).blockCollisions (box.deflate Phys.eps7)
+  let (free, unmodelled) := (← get).noCollision i (box.deflate Phys.eps7)
   if unmodelled then Level.setOverflow
-  Level.modifyEntity i fun e => e.modifyPhys fun p => { p with noPhysics := !inside.isEmpty }
-  if !inside.isEmpty then
+  Level.modifyEntity i fun e => e.modifyPhys fun p => { p with noPhysics := !free }
+  if !free then
     moveTowardsClosestSpace i e.base.pos.x ((box.minY + box.maxY) / 2.0) e.base.pos.z
   let some (e, _) ← get? i | return
   if e.base.onGround && !(e.base.motion.horizontalDistanceSqr > Phys.eps5f) &&

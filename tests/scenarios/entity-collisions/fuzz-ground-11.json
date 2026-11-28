@@ -1,0 +1,60 @@
+{
+ "name": "fuzz-ground-11",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   5,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    9.75,
+    4.0,
+    4.5
+   ],
+   "nbt": "{Motion:[0.2d,0.0d,-0.05d]}"
+  },
+  {
+   "type": "minecraft:chest_minecart",
+   "pos": [
+    4.5,
+    4.0,
+    6.5
+   ],
+   "nbt": "{Motion:[0.2d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    4.0,
+    4.0,
+    4.5
+   ],
+   "nbt": "{Motion:[0.0d,0.0d,0.4d]}"
+  }
+ ]
+}

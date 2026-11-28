@@ -1,0 +1,105 @@
+{
+ "name": "fuzz-obstacle-04",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   7,
+   5,
+   7
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    7,
+    0,
+    7
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:shulker",
+   "pos": [
+    3.5,
+    1.0,
+    3.5
+   ],
+   "nbt": "{NoAI:1b}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    1.1,
+    1.0,
+    3.3
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1},Motion:[0.3d,0.2d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    4.5,
+    4.0,
+    3.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.3,
+    1.7,
+    3.6
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.5,
+    3.25,
+    3.1
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.5,
+    3.25,
+    4.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    3.6,
+    1.0,
+    5.7
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1},Motion:[0.0d,0.2d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:falling_block",
+   "pos": [
+    4.0,
+    4.0,
+    3.75
+   ],
+   "nbt": "{BlockState:{Name:\"minecraft:anvil\"},Time:1}"
+  }
+ ]
+}

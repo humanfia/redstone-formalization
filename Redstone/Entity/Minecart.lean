@@ -26,18 +26,20 @@ velocities agree with the server bit for bit.
 What is left out, and how. The model sets `Level.overflow`, which says that the level is no
 longer a faithful image of the game, when it meets one of these:
 
-* another entity that can act on the minecart, or the minecart on it, and whose box meets the
-  box in which the minecart looks for entities or the way the minecart goes (minecarts push
-  and block each other and pick up mobs, living entities and boats push minecarts, and a
-  hopper minecart collects items); see `contact`. Entities that cannot do any of this (items
-  next to a minecart that is no hopper, falling blocks, primed TNT) are ignored. A projectile
-  or an entity of unknown size within four blocks sets the flag as well;
+* an entity other than a minecart that can act on the minecart, or the minecart on it, and
+  whose box meets the box in which the minecart looks for entities or the way the minecart goes
+  (a minecart picks up mobs and boats, living entities and boats push minecarts and stand in
+  their way, and a hopper minecart collects items); see `contact`. Entities that cannot do any
+  of this (items next to a minecart that is no hopper, falling blocks, primed TNT) are ignored.
+  An armour stand only counts when it would push the minecart (`standPushes`); it is no
+  obstacle. A projectile or an entity of unknown size within four blocks sets the flag as well;
+* passengers: nothing rides a minecart in the model, and the entity that would be picked up
+  sets the flag as above;
 * a fluid in or next to the minecart's box;
 * a hopper or a dropper next to the box of a minecart with a container (hoppers pull items out
   of such a minecart and push items into it);
-* a block next to the minecart's path whose collision shape depends on more than its state
-  (bamboo, pointed dripstone and sulfur spikes, which are shifted by their position; scaffolding,
-  powder snow, moving pistons);
+* a block next to the minecart's path whose collision shape depends on the entity or on a block
+  entity (scaffolding, powder snow, moving pistons);
 * a TNT minecart that explodes;
 * a command block minecart with a command on an active activator rail;
 * a hopper minecart that is enabled under a block with a block entity or a composter;
@@ -51,13 +53,14 @@ Hooks of other blocks that act on an entity (`Block.stepOn` of slime and of reds
 `entityInside` of honey) are theirs to model: here they are only called, through
 `Redstone.Entity.Touch`.
 
-Scenarios that wait in `tests/pending/scenarios/minecart` for one of these:
-`pending-two-carts-collide` (two minecarts that meet: pushing needs the game's table of sines
-for `pushOtherMinecart`, the boxes of entities as obstacles in `Entity.collide`, and the order
-in which `getEntities` finds entities), `fuzz-minecart-harsh-*` (a hopper or a dropper next to a
-minecart with a container; in `s12-028` it is the hopper that gives up, see
-`Redstone.Component.Hopper`), `pending-hopper-cart-under-chest`, `pending-tnt-explodes`,
-`pending-waterlogged-rail`, `verify-hit-bamboo` and `verify-hit-dripstone`.
+Minecarts among themselves are modelled: they stop at each other's boxes and push each other
+at the end of their ticks (`Redstone.Entity.Push`). So are the collision shapes that are shifted
+by the position of the block (bamboo, pointed dripstone, sulfur spikes; `Block.shapeOffset?`).
+
+Scenarios that wait in `tests/pending/scenarios/minecart` for one of the things left out:
+`fuzz-minecart-harsh-*` (a hopper or a dropper next to a minecart with a container; in
+`s12-028` it is the hopper that gives up, see `Redstone.Component.Hopper`),
+`pending-hopper-cart-under-chest`, `pending-tnt-explodes` and `pending-waterlogged-rail`.
 
 The helpers of the first sections (Java arithmetic, collision with block shapes, the
 supporting block) are not particular to minecarts. They are private copies, to be shared with
@@ -201,14 +204,21 @@ def shapeAt (index : ℕ) (p : Pos) : List AABB :=
   (shapeTable.getD index []).map (·.atBlock p)
 
 /-- The collision shape of the block at `p`, as boxes in world coordinates. This is the shape
-of the block state in an empty world; shapes that depend on the entity or on a block entity are
-not modelled. -/
-def collisionBoxes (l : Level) (p : Pos) : List AABB := shapeAt (l.blockAt p).attrs.collision p
+of the block state in an empty world, shifted for the blocks that stand off the middle of their
+block (`Block.shapeOffset?`: bamboo, pointed dripstone, sulfur spikes); shapes that depend on
+the entity or on a block entity are not modelled. -/
+def collisionBoxes (l : Level) (p : Pos) : List AABB :=
+  let b := l.blockAt p
+  match b.shapeOffset? p with
+  | some o => (shapeTable.getD b.attrs.collision []).map fun box => (o.box box).atBlock p
+  | none => shapeAt b.attrs.collision p
 
-/-- `BlockState.hasLargeCollisionShape`: the collision shape reaches outside the block. -/
+/-- `BlockState.hasLargeCollisionShape`: the collision shape reaches outside the block. A block
+whose shape is shifted by its position has no cached shape and always counts as large. -/
 def hasLargeCollisionShape (b : Block) : Bool :=
-  (shapeTable.getD b.attrs.collision []).any fun s =>
-    s.minX < 0 || s.minY < 0 || s.minZ < 0 || s.maxX > 1 || s.maxY > 1 || s.maxZ > 1
+  b.maxHorizontalOffset?.isSome ||
+    (shapeTable.getD b.attrs.collision []).any fun s =>
+      s.minX < 0 || s.minY < 0 || s.minZ < 0 || s.maxX > 1 || s.maxY > 1 || s.maxZ > 1
 
 /-- The integers from `lo` to `hi`. -/
 def intRange (lo hi : ℤ) : List ℤ := (List.range (hi - lo + 1).toNat).map (lo + ·)
@@ -288,21 +298,29 @@ def gridTable : Array (Array Float × Array Float × Array Float) :=
     let (xs, ys, zs) := Tables.gridBits.getD index ([], [], [])
     (gridPlanes xs boxes .x, gridPlanes ys boxes .y, gridPlanes zs boxes .z)
 
-/-- The collision shape of the block at `p` (`VoxelShape.move`). -/
+/-- The collision shape of the block at `p` (`VoxelShape.move`), shifted first for a block that
+stands off the middle of its block (`Block.shapeOffset?`). -/
 def solidAt (l : Level) (p : Pos) : Solid :=
-  let index := (l.blockAt p).attrs.collision
+  let b := l.blockAt p
+  let index := b.attrs.collision
   let (xs, ys, zs) := gridTable.getD index (#[], #[], #[])
+  let (xs, ys, zs) :=
+    match b.shapeOffset? p with
+    | some o => (xs.map (o.apply .x), ys.map (o.apply .y), zs.map (o.apply .z))
+    | none => (xs, ys, zs)
   { xs := xs.map (· + ofInt p.x), ys := ys.map (· + ofInt p.y), zs := zs.map (· + ofInt p.z)
-    boxes := shapeAt index p }
+    boxes := collisionBoxes l p }
 
-/-- The blocks whose collision shape is not a function of the block state alone, so that the
-shape table does not have it: bamboo, pointed dripstone and sulfur spikes are shifted sideways by
-an amount that depends on their position (`BlockBehaviour.OffsetType.XZ`), scaffolding and powder
-snow carry some entities and not others, and a moving piston takes its shape from its block
-entity. -/
+/-- The shape of the box of an entity that is in the way (`Shapes.create(box)`): one cell
+between the faces of the box. -/
+def solidOfBox (box : AABB) : Solid :=
+  { xs := #[box.minX, box.maxX], ys := #[box.minY, box.maxY], zs := #[box.minZ, box.maxZ]
+    boxes := [box] }
+
+/-- The blocks whose collision shape the model does not have: scaffolding and powder snow carry
+some entities and not others, and a moving piston takes its shape from its block entity. -/
 def hasDynamicShape (b : Block) : Bool :=
-  b.id == .bamboo || b.id == .pointed_dripstone || b.id == .sulfur_spike || b.id == .scaffolding
-    || b.id == .powder_snow || b.id == .moving_piston
+  b.id == .scaffolding || b.id == .powder_snow || b.id == .moving_piston
 
 /-- One of the blocks that `BlockCollisions` looks at for `box` has a shape that is not
 modelled. -/
@@ -367,11 +385,12 @@ def collideShapes (axis : Axis) (moving : AABB) (shapes : List Solid) (distance 
     if distance.abs < 1.0E-7 then 0.0
     else collideShapes axis moving rest (collideShape axis moving s distance)
 
-/-- `Entity.collideBoundingBox` without entities: the part of `movement` that the box `aabb`
-can make among the blocks. The vertical axis is resolved first, then the horizontal axis with
-the larger movement (`Direction.axisStepOrder`). -/
-def collideBoundingBox (l : Level) (aabb : AABB) (movement : Vec3) : Vec3 :=
-  let shapes := (blockCollisions l (aabb.expandTowards movement)).map
+/-- `Entity.collideBoundingBox`: the part of `movement` that the box `aabb` can make among the
+boxes `entities` of the entities in its way, which come first, and the blocks. The vertical axis
+is resolved first, then the horizontal axis with the larger movement
+(`Direction.axisStepOrder`). -/
+def collideBoundingBox (l : Level) (entities : List AABB) (aabb : AABB) (movement : Vec3) : Vec3 :=
+  let shapes := entities.map solidOfBox ++ (blockCollisions l (aabb.expandTowards movement)).map
     fun (p, _) => solidAt l p
   if shapes.isEmpty then movement
   else
@@ -541,8 +560,13 @@ def unmodelled : CartM Unit := StateT.lift Level.setOverflow
 /-- `Entity.setDeltaMovement`. -/
 def setMotion (v : Vec3) : CartM Unit := modifyThe Cart fun c => { c with motion := v }
 
-/-- `Entity.setPos`. -/
-def setPos (v : Vec3) : CartM Unit := modifyThe Cart fun c => { c with pos := v }
+/-- `Entity.setPos`. A minecart that comes into another entity section is put at the end of
+that section (`EntitySection.add`), which `Entities.Minecart.sectionEntry` records. -/
+def setPos (v : Vec3) : CartM Unit := do
+  let now := (← level).gameTime
+  modifyThe Cart fun c =>
+    if Push.sectionOf c.pos == Push.sectionOf v then { c with pos := v }
+    else { c with pos := v, d := { c.d with sectionEntry := (now, c.index + 1) } }
 
 /-- Changes the kind-specific data. -/
 def modifyData (f : Entities.Minecart → Entities.Minecart) : CartM Unit :=
@@ -632,15 +656,17 @@ def applyEffectsFromBlocks : CartM Unit := do
 
 /-- How another entity can act on a minecart, or the minecart on it. -/
 inductive Contact
-  /-- Not at all: the entity is not pushable, cannot be collided with and is not picked up
-  (falling blocks, primed TNT, items next to a minecart that is no hopper, end crystals,
-  experience orbs, displays, ...). -/
+  /-- Not at all, or in a way that is modelled. The entity is not pushable, cannot be collided
+  with and is not picked up (falling blocks, primed TNT, items next to a minecart that is no
+  hopper, end crystals, experience orbs, displays, ...); or it is a minecart, which pushes and
+  stops this one as `Redstone.Entity.Push` says; or it is an armour stand, which is no obstacle
+  and whose push `standPushes` looks for. -/
   | never
-  /-- By touching. Minecarts push each other (`OldMinecartBehavior.pushAndPickupEntities`,
-  `AbstractMinecart.push`); a living entity and a boat push a minecart whose box meets theirs
-  (`LivingEntity.pushEntities`, `AbstractBoat.tick`), a moving empty minecart picks up a mob,
-  and all of them stop a minecart that runs into them (`AbstractMinecart.canCollideWith`, which
-  is `AbstractBoat.canVehicleCollide`). A hopper minecart that is enabled takes in the items
+  /-- By touching, in a way that is not modelled. A living entity and a boat push a minecart
+  whose box meets theirs (`LivingEntity.pushEntities`, `AbstractBoat.tick`), a moving empty
+  minecart picks up a mob or a boat (`OldMinecartBehavior.pushAndPickupEntities`), and all of
+  them stop a minecart that runs into them (`AbstractMinecart.canCollideWith`, which is
+  `AbstractBoat.canVehicleCollide`). A hopper minecart that is enabled takes in the items
   within a quarter of a block (`MinecartHopper.suckInItems`). -/
   | touching
   /-- In a way that does not depend on the boxes alone, or that the model does not know: a
@@ -660,7 +686,7 @@ modelled yet answer in their own modules, so that the unit that models one edits
 file. -/
 def contact (c : Cart) (e : Entity) : Contact :=
   match e.data with
-  | .minecart _ _ => .touching
+  | .minecart _ _ => .never
   | .item _ => if c.kind == .hopper && c.d.enabled then .touching else .never
   | .fallingBlock _ | .tnt _ => .never
   | .projectile _ _ => .unknown
@@ -671,7 +697,8 @@ def contact (c : Cart) (e : Entity) : Contact :=
     match Still.info? e with
     | none => .unknown
     | some info =>
-      if info.living || type.endsWith "_boat" || type.endsWith "_raft" then .touching
+      if type == "minecraft:armor_stand" then .never
+      else if info.living || type.endsWith "_boat" || type.endsWith "_raft" then .touching
       else if type == "minecraft:cushion" then .unknown
       else .never
 
@@ -697,6 +724,26 @@ def entityInReach (l : Level) (c : Cart) (area : AABB) : Bool :=
       | .unknown =>
         (e.base.pos.x - c.pos.x).abs < 4.0 && (e.base.pos.y - c.pos.y).abs < 4.0 &&
           (e.base.pos.z - c.pos.z).abs < 4.0
+
+/-- An armour stand pushes the minecart (`ArmorStand.pushEntities`): the minecart can be ridden,
+its box meets the box of the armour stand, and the two are no further apart than the square
+root of `0.2`. The push moves the armour stand as well, whose motion is not modelled. A marker
+and an armour stand without gravity have no physics (`ArmorStand.hasPhysics`), and
+`AbstractMinecart.push` does nothing with such an entity. An armour stand is not pushable and
+cannot be collided with, so it does nothing else to a minecart. -/
+def standPushes (l : Level) (c : Cart) : Bool :=
+  c.kind == .minecart && l.entities.any fun e =>
+    match e.data with
+    | .other "minecraft:armor_stand" d =>
+      !d.marker && !d.noGravity &&
+        match Still.boundingBox? e with
+        | some box =>
+          let xd := e.base.pos.x - c.pos.x
+          let yd := e.base.pos.y - c.pos.y
+          let zd := e.base.pos.z - c.pos.z
+          box.intersects (boundingBox c.pos) && xd * xd + yd * yd + zd * zd ≤ 0.2
+        | none => true
+    | _ => false
 
 /-! ### Moving -/
 
@@ -796,11 +843,16 @@ def move (delta : Vec3) (onRails : Bool) : CartM Unit := do
   let l ← level
   -- Entity.collide
   if dynamicShapeNear l ((boundingBox c.pos).expandTowards delta) then unmodelled
-  -- `getEntityCollisions`: the entities the minecart can run into on its way
+  -- `getEntityCollisions`: the entities the minecart can run into on its way. The minecarts
+  -- among them are obstacles; the others are not modelled
   if entityInReach l c (((boundingBox c.pos).expandTowards delta).inflate 1.0E-7 1.0E-7 1.0E-7) then
     unmodelled
+  let (entities, unknown) :=
+    Push.entityColliders l c.index true ((boundingBox c.pos).expandTowards delta)
+  if unknown then unmodelled
   let movement :=
-    if lengthSqr delta == 0.0 then delta else collideBoundingBox l (boundingBox c.pos) delta
+    if lengthSqr delta == 0.0 then delta
+    else collideBoundingBox l entities (boundingBox c.pos) delta
   let movementLength := lengthSqr movement
   if movementLength > 1.0E-7 || lengthSqr delta - movementLength < 1.0E-7 then
     if c.d.fallDistance != 0.0 && movementLength ≥ 1.0 then unmodelled
@@ -1020,10 +1072,12 @@ def blocksAround (l : Level) (c : Cart) (test : Block → Bool) : Bool :=
   (intRange (lo.x - 1) (hi.x + 1)).any fun x => (intRange (lo.y - 1) (hi.y + 1)).any
     fun y => (intRange (lo.z - 1) (hi.z + 1)).any fun z => test (l.blockAt ⟨x, y, z⟩)
 
-/-- The entity guard of `checkSurroundings`: another entity that the minecart and it can act on
-each other with is in the minecart's reach (`entityInReach` with `hitbox`). What minecarts and
-other entities do to each other is not modelled. -/
-def entityGuard (l : Level) (c : Cart) : Bool := entityInReach l c (hitbox c)
+/-- The entity guard of `checkSurroundings`: an entity that the minecart and it act on each
+other with in a way that is not modelled is in the minecart's reach (`entityInReach` with
+`hitbox`: mobs, boats, items next to a hopper minecart, entities the model knows too little
+about), or an armour stand pushes the minecart (`standPushes`). Other minecarts are not among
+them: what minecarts do to each other is modelled (`Redstone.Entity.Push`). -/
+def entityGuard (l : Level) (c : Cart) : Bool := entityInReach l c (hitbox c) || standPushes l c
 
 /-- The fluid guard of `checkSurroundings`: a fluid is in or next to the minecart's box. What
 fluids do to a minecart is not modelled. -/
@@ -1078,6 +1132,7 @@ def behaviorTick (old : Vec3) (yRotO : Float32) : CartM Unit := do
   if rotDiff < -170.0 || rotDiff ≥ 170.0 then
     modifyData fun d => { d with yRot := d.yRot + 180.0, flipped := !d.flipped }
   modifyData fun d => { d with xRot := fmod360 d.xRot, yRot := fmod360 d.yRot }
+  withLevel (Push.pushAndPickupEntities (← getThe Cart).index)
 
 /-- What the subclasses add to `tick()` after `AbstractMinecart.tick()`: the fuse of a TNT
 minecart burns down and the minecart explodes when it runs out or when the minecart runs into

@@ -1,0 +1,137 @@
+{
+ "name": "fuzz-offset-11",
+ "ticks": 50,
+ "box": {
+  "min": [
+   200,
+   0,
+   -80
+  ],
+  "max": [
+   211,
+   5,
+   -69
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    200,
+    0,
+    -80
+   ],
+   "max": [
+    211,
+    0,
+    -69
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    210,
+    1,
+    -70
+   ],
+   "state": "minecraft:bamboo[age=1,leaves=none,stage=0]"
+  },
+  {
+   "pos": [
+    202,
+    1,
+    -72
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip_merge,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    202,
+    1,
+    -74
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    203,
+    1,
+    -78
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=middle,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    205,
+    1,
+    -76
+   ],
+   "state": "minecraft:sulfur_spike[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    201,
+    1,
+    -71
+   ],
+   "state": "minecraft:sulfur_spike[thickness=base,vertical_direction=up,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    208.5,
+    1.0,
+    -69.8
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,0.05d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    202.6,
+    4.0,
+    -71.8
+   ],
+   "nbt": "{Item:{id:\"minecraft:dirt\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    202.8,
+    3.5,
+    -73.2
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    202.1,
+    1.2,
+    -77.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:gravel\",count:1},Motion:[0.3d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    205.8,
+    3.5,
+    -75.7
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    200.0,
+    1.2,
+    -70.6
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1},Motion:[0.3d,0.15d,0.0d]}"
+  }
+ ]
+}

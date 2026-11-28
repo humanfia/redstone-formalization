@@ -1,0 +1,120 @@
+{
+ "name": "fuzz-offset-00",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   50
+  ],
+  "max": [
+   11,
+   5,
+   61
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    50
+   ],
+   "max": [
+    11,
+    0,
+    61
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    9,
+    1,
+    57
+   ],
+   "state": "minecraft:sulfur_spike[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    55
+   ],
+   "state": "minecraft:sulfur_spike[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    57
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=tip_merge,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    2,
+    1,
+    60
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=frustum,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    8,
+    1,
+    58
+   ],
+   "state": "minecraft:bamboo[age=1,leaves=none,stage=0]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:chest_minecart",
+   "pos": [
+    7.5,
+    1.0,
+    57.6
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,-0.05d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.5,
+    1.0,
+    56.9
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1},Motion:[0.0d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:chest_minecart",
+   "pos": [
+    6.5,
+    1.0,
+    57.8
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,0.05d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    2.4,
+    1.0,
+    61.8
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1},Motion:[0.0d,0.15d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    8.3,
+    1.0,
+    57.2
+   ],
+   "nbt": "{Item:{id:\"minecraft:cobblestone\",count:1},Motion:[0.0d,0.15d,0.3d]}"
+  }
+ ]
+}

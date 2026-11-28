@@ -1,0 +1,63 @@
+{
+ "name": "carts-into-rest",
+ "ticks": 60,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   15,
+   3,
+   15
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    15,
+    0,
+    15
+   ],
+   "state": "minecraft:stone"
+  },
+  {
+   "min": [
+    1,
+    1,
+    4
+   ],
+   "max": [
+    14,
+    1,
+    4
+   ],
+   "state": "minecraft:rail[shape=east_west,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    3.5,
+    1.0625,
+    4.5
+   ],
+   "nbt": "{Motion:[0.4d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:minecart",
+   "pos": [
+    8.5,
+    1.0625,
+    4.5
+   ]
+  }
+ ]
+}

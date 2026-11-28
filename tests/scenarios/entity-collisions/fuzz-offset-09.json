@@ -1,0 +1,137 @@
+{
+ "name": "fuzz-offset-09",
+ "ticks": 50,
+ "box": {
+  "min": [
+   0,
+   0,
+   0
+  ],
+  "max": [
+   11,
+   5,
+   11
+  ]
+ },
+ "fill": [
+  {
+   "min": [
+    0,
+    0,
+    0
+   ],
+   "max": [
+    11,
+    0,
+    11
+   ],
+   "state": "minecraft:stone"
+  }
+ ],
+ "blocks": [
+  {
+   "pos": [
+    4,
+    1,
+    10
+   ],
+   "state": "minecraft:sulfur_spike[thickness=tip,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    10
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=frustum,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    9,
+    1,
+    2
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=middle,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    7,
+    1,
+    2
+   ],
+   "state": "minecraft:pointed_dripstone[thickness=middle,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    4
+   ],
+   "state": "minecraft:sulfur_spike[thickness=base,vertical_direction=up,waterlogged=false]"
+  },
+  {
+   "pos": [
+    6,
+    1,
+    8
+   ],
+   "state": "minecraft:sulfur_spike[thickness=tip,vertical_direction=up,waterlogged=false]"
+  }
+ ],
+ "entities": [
+  {
+   "type": "minecraft:item",
+   "pos": [
+    5.8999999999999995,
+    1.1,
+    10.7
+   ],
+   "nbt": "{Item:{id:\"minecraft:cobblestone\",count:1},Motion:[-0.3d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    8.299999999999999,
+    1.2,
+    10.7
+   ],
+   "nbt": "{Item:{id:\"minecraft:glass\",count:1},Motion:[0.3d,0.0d,0.0d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    9.2,
+    3.0,
+    2.2
+   ],
+   "nbt": "{Item:{id:\"minecraft:sand\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    7.6,
+    1.1,
+    3.5999999999999996
+   ],
+   "nbt": "{Item:{id:\"minecraft:cobblestone\",count:1},Motion:[0.0d,0.0d,-0.3d]}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.2,
+    2.75,
+    4.5
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  },
+  {
+   "type": "minecraft:item",
+   "pos": [
+    6.8,
+    4.5,
+    8.3
+   ],
+   "nbt": "{Item:{id:\"minecraft:stone\",count:1}}"
+  }
+ ]
+}

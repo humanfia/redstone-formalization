@@ -68,8 +68,7 @@ namespace `minecraft`, is triggered.
 The game's `Level.getBlockEntity` creates a missing block entity on the spot. This is
 observable: when a block replaces a powered lever, the lever's `affectNeighborsAfterRemoval`
 sends the new block a neighbour update before `LevelChunk.setBlockState` has created its block
-entity. `Level.getBlockEntity` of the model does not create anything, so this file has its own
-`getBlockEntityImmediate`.
+entity. `Level.getBlockEntity` of the model does the same.
 -/
 
 @[expose] public section
@@ -143,27 +142,12 @@ end Oracle
 
 /-! ### Block entities -/
 
-/-- `Level.getBlockEntity(pos)`, which is `LevelChunk.getBlockEntity(pos, IMMEDIATE)`: the block
-entity at `p`. If there is none although the block at `p` has one, it is created on the spot.
-This happens while a block is being placed: the reactions of the block it replaces
-(`affectNeighborsAfterRemoval`) run before `LevelChunk.setBlockState` creates the block entity
-of the new block, and they can send it a neighbour update. -/
-def getBlockEntityImmediate (p : Pos) : M (Option BlockEntity) := do
-  if let some be ← Level.getBlockEntity p then return some be
-  let state ← Level.getBlock p
-  if !state.hasBlockEntity then return none
-  let b ← Level.behaviour state
-  let some be := b.newBlockEntity | return none
-  Level.setBlockEntity p be
-  if b.ticksBlockEntity then Level.addBlockEntityTicker p
-  return some be
-
 /-! ### `CommandBlockEntity` and `BaseCommandBlock` -/
 
 /-- `level.getBlockEntity(pos) instanceof CommandBlockEntity`: the data of the command block
 entity at `p`. -/
 def getData (p : Pos) : M (Option BlockEntities.CommandBlock) := do
-  match ← getBlockEntityImmediate p with
+  match ← Level.getBlockEntity p with
   | some (.commandBlock d) => return some d
   | _ => return none
 
@@ -312,7 +296,7 @@ def command (oracle : Oracle) (id : Blocks.Command.Id) (s : Blocks.Command) : Be
 
 /-- `getServerTestBlockEntity`: the data of the test block entity at `p`. -/
 def getTestData (p : Pos) : M (Option BlockEntities.TestBlock) := do
-  match ← getBlockEntityImmediate p with
+  match ← Level.getBlockEntity p with
   | some (.testBlock d) => return some d
   | _ => return none
 
@@ -365,13 +349,13 @@ def «structure» (s : Blocks.Structure) : Behaviour :=
   { Behaviour.inert self with
     newBlockEntity := some (.structureBlock { name := "", mode := s.mode, powered := false })
     neighborChanged := fun p _ _ => do
-      let some (.structureBlock d) ← getBlockEntityImmediate p | return
+      let some (.structureBlock d) ← Level.getBlockEntity p | return
       let shouldTrigger ← Level.hasNeighborSignal p
       if shouldTrigger != d.powered then
         Level.setBlockEntity p (.structureBlock { d with powered := shouldTrigger })
         if shouldTrigger then structureTrigger d
     useWithoutItem := fun p _ => do
-      let some (.structureBlock _) ← getBlockEntityImmediate p | return false
+      let some (.structureBlock _) ← Level.getBlockEntity p | return false
       return true }
 
 /-! ### The component -/

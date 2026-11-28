@@ -78,8 +78,8 @@ def setOverflow : M Unit := modify fun l => { l with overflow := true }
 
 /-! ### Block entities -/
 
-/-- The block entity at `p`. -/
-def getBlockEntity (p : Pos) : M (Option BlockEntity) := return (← get).blockEntities p
+/-- The block entity at `p`, if there is one now (`LevelChunk.getBlockEntity(pos, CHECK)`). -/
+def peekBlockEntity (p : Pos) : M (Option BlockEntity) := return (← get).blockEntities p
 
 /-- Replaces the data of the block entity at `p`. -/
 def setBlockEntity (p : Pos) (be : BlockEntity) : M Unit :=
@@ -99,6 +99,21 @@ def addBlockEntityTicker (p : Pos) : M Unit :=
     else if l.tickingBlockEntities then
       { l with pendingBlockEntityTickers := l.pendingBlockEntityTickers ++ [p] }
     else { l with blockEntityTickers := l.blockEntityTickers ++ [p] }
+
+/-- `Level.getBlockEntity(pos)`, which is `LevelChunk.getBlockEntity(pos, IMMEDIATE)`: the block
+entity at `p`. If there is none although the block at `p` has one, it is created on the spot.
+This happens while a block is being placed: the reactions of the block it replaces
+(`affectNeighborsAfterRemoval`) run before `LevelChunk.setBlockState` creates the block entity
+of the new block, and they can send it a neighbour update. -/
+def getBlockEntity (p : Pos) : M (Option BlockEntity) := do
+  if let some be ← peekBlockEntity p then return some be
+  let state ← getBlock p
+  if !state.hasBlockEntity then return none
+  let b ← behaviour state
+  let some be := b.newBlockEntity | return none
+  setBlockEntity p be
+  if b.ticksBlockEntity then addBlockEntityTicker p
+  return some be
 
 /-- Removes the block entity at `p`. -/
 def removeBlockEntity (p : Pos) : M Unit := do
@@ -231,7 +246,7 @@ def setBlockInChunk (p : Pos) (state : Block) (flags : ℕ) : M (Option Block) :
   let oldB ← behaviour old
   let newB ← behaviour state
   if blockChanged && old.hasBlockEntity && !newB.keepsBlockEntity old then
-    if !flags.testBit UpdateFlag.skipBlockEntitySideEffects && (← getBlockEntity p).isSome then
+    if !flags.testBit UpdateFlag.skipBlockEntitySideEffects && (← peekBlockEntity p).isSome then
       oldB.preRemoveSideEffects p
     removeBlockEntity p
   if (blockChanged || state.isRail) && (flags.testBit UpdateFlag.neighbors || moved) then
@@ -240,7 +255,7 @@ def setBlockInChunk (p : Pos) (state : Block) (flags : ℕ) : M (Option Block) :
   if !flags.testBit UpdateFlag.skipOnPlace then newB.onPlace p old moved
   if state.hasBlockEntity && (← getBlock p).is state.id then
     let valid (be : BlockEntity) := (BlockEntity.new? state.id).any (·.typeName == be.typeName)
-    if ((← getBlockEntity p).any valid) then
+    if ((← peekBlockEntity p).any valid) then
       if newB.ticksBlockEntity then addBlockEntityTicker p else removeBlockEntityTicker p
     else
       removeBlockEntity p
